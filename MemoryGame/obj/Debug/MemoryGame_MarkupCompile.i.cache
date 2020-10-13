@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\obj\Debug\
+C:\Users\obalt\OneDrive\Documentos\GitHub\memory\MemoryGame\obj\Debug\
 MemoryGame
 none
 false
 DEBUG;TRACE
-C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\App.xaml
-31555255205
+C:\Users\obalt\OneDrive\Documentos\GitHub\memory\MemoryGame\App.xaml
+4-2122409821
 
-9-1235540907
+101384789957
 13-1505183044
-ChangePassword.xaml;MainWindow.xaml;Register.xaml;
+ChangePassword.xaml;JoinGame.xaml;MainWindow.xaml;Register.xaml;
 
-False
+True
 
