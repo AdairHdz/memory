@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryGame"
-        xmlns:p="clr-namespace:MemoryGame.Properties"
+        xmlns:p="clr-namespace:MemoryGame.Properties.Langs"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Login}"
         Height="512" Width="720" Style="{StaticResource backgroundPrimary}">
