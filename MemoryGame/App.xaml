@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MemoryGame"
-             StartupUri="ChangePassword.xaml">
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
 
         <Style x:Key="title" TargetType="{x:Type Label}">
@@ -89,5 +89,26 @@
         <Style x:Key="backgroundPrimary" TargetType="{x:Type Window}">
             <Setter Property="Background" Value="#26547C"></Setter>
         </Style>
+
+        <Style x:Key="IconButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0">
+                            <ContentPresenter 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>

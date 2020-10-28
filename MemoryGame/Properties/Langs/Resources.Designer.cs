@@ -61,6 +61,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Regresar.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cancelar.
         /// </summary>
         public static string Cancel {
@@ -88,11 +97,29 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Inglés (EEUUAA).
+        /// </summary>
+        public static string EnglishUSA {
+            get {
+                return ResourceManager.GetString("EnglishUSA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Registrarme.
         /// </summary>
         public static string GetRegistered {
             get {
                 return ResourceManager.GetString("GetRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Idioma.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         
@@ -156,6 +183,24 @@ namespace MemoryGame.Properties.Langs {
         public static string SaveChanges {
             get {
                 return ResourceManager.GetString("SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Configuración.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Español (MX).
+        /// </summary>
+        public static string SpanishMX {
+            get {
+                return ResourceManager.GetString("SpanishMX", resourceCulture);
             }
         }
         

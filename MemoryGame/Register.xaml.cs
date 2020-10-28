@@ -23,5 +23,17 @@ namespace MemoryGame
         {
             InitializeComponent();
         }
+
+        private void RegisterButtonClicked(object sender, RoutedEventArgs e)
+        {            
+
+        }
+
+        private void CancelButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindowView = new MainWindow();
+            mainWindowView.Show();
+            this.Close();
+        }
     }
 }

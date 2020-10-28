@@ -46,3 +46,8 @@ C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\obj\Debug\MemoryGam
 C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\obj\Debug\MemoryGame.csproj.GenerateResource.cache
 C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\obj\Debug\MemoryGame.csproj.CoreCompileInputs.cache
 C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\obj\Debug\en-US\MemoryGame.resources.dll
+C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\bin\Debug\FontAwesome.WPF.dll
+C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\bin\Debug\FontAwesome.WPF.xml
+C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\obj\Debug\MemoryGame.csproj.CopyComplete
+C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\obj\Debug\Settings.g.cs
+C:\Users\Adair Hernández\source\repos\MemoryGame\MemoryGame\obj\Debug\Settings.baml

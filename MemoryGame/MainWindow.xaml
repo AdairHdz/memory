@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemoryGame"
-        xmlns:p="clr-namespace:MemoryGame.Properties.Langs"
+        xmlns:p="clr-namespace:MemoryGame.Properties.Langs" xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Login}"
         Height="512" Width="720" Style="{StaticResource backgroundPrimary}">
@@ -22,6 +22,15 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <Button Grid.Column="3" Grid.Row="0" Style="{StaticResource IconButton}" Click="ConfigurationButtonClicked">
+            <StackPanel>
+                <fa:FontAwesome 
+                Icon="cog" Foreground="#FFFFFF"
+                FontSize="25"/>
+                <fa:FontAwesome Text="{x:Static p:Resources.Settings}" FontSize="15" Foreground="#FFFFFF"/>
+            </StackPanel>
+        </Button>
+
         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Foreground="#FFD166" HorizontalAlignment="Center" FontSize="50" VerticalAlignment="Bottom" Content="{x:Static p:Resources.Memory}"></Label>
 
 
@@ -38,9 +47,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-
             <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource buttonPrimary}" VerticalAlignment="Top" Content="{x:Static p:Resources.Login}"></Button>
-            <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource buttonPrimary}" VerticalAlignment="Top" Content="{x:Static p:Resources.GetRegistered}" Click="goToRegisterWindow"></Button>
+            <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource buttonPrimary}" VerticalAlignment="Top" Content="{x:Static p:Resources.GetRegistered}" Click="GetRegisteredButtonClicked"></Button>
         </Grid>
     </Grid>
 </Window>

@@ -26,10 +26,17 @@ namespace MemoryGame
             InitializeComponent();
         }
 
-        private void goToRegisterWindow(object sender, RoutedEventArgs e)
+        private void GetRegisteredButtonClicked(object sender, RoutedEventArgs e)
         {
             Register registerView = new Register();
             registerView.Show();
+            this.Close();
+        }
+
+        private void ConfigurationButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Settings settingsView = new Settings();
+            settingsView.Show();
             this.Close();
         }
     }
