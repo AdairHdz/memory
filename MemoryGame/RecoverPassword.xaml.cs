@@ -21,7 +21,6 @@ namespace MemoryGame
     {
         public RecoverPassword()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
         }
     }
