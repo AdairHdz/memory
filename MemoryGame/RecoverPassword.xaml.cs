@@ -15,13 +15,12 @@ using System.Windows.Shapes;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para ChangePassword.xaml
+    /// Lógica de interacción para RecoverPassword.xaml
     /// </summary>
-    public partial class ChangePassword : Window
+    public partial class RecoverPassword : Window
     {
-        public ChangePassword()
+        public RecoverPassword()
         {
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
         }
     }
