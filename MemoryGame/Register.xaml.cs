@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using ViewModel;
 
 namespace MemoryGame
 {
@@ -20,13 +10,16 @@ namespace MemoryGame
     public partial class Register : Window
     {
         public Register()
-        {
+        {            
             InitializeComponent();
+            DataContext = new RegisterViewModel();
+
         }
 
         private void RegisterButtonClicked(object sender, RoutedEventArgs e)
-        {            
-
+        {
+            
+            
         }
 
         private void CancelButtonClicked(object sender, RoutedEventArgs e)
@@ -35,5 +28,6 @@ namespace MemoryGame
             mainWindowView.Show();
             this.Close();
         }
+
     }
 }
