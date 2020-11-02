@@ -1,16 +1,12 @@
 ﻿using DataAccess.Context;
 using DataAccess.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Units_of_work
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly MemoryGameContext _context;
+        public IPlayerRepository Players { get; private set; }
 
         public UnitOfWork(MemoryGameContext context)
         {
@@ -18,7 +14,7 @@ namespace DataAccess.Units_of_work
             Players = new PlayerRepository(_context);
         }
 
-        public IPlayerRepository Players { get; private set; }
+        
 
         public int Complete()
         {

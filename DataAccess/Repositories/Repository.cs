@@ -1,12 +1,8 @@
-﻿using DataAccess.Context;
-using Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
@@ -19,7 +15,7 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public TEntity Get(int id)
+        public TEntity Get(object id)
         {
             return _context.Set<TEntity>().Find(id);
         }
