@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para JoinGame.xaml
+    /// Lógica de interacción para RecoverPassword.xaml
     /// </summary>
-    public partial class JoinGame : Window
+    public partial class MainMenu : Window
     {
-        public JoinGame()
+        public MainMenu()
         {
             InitializeComponent();
         }

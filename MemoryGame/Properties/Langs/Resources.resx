@@ -126,8 +126,11 @@
   <data name="ChangePassword" xml:space="preserve">
     <value>Cambiar contraseña</value>
   </data>
-  <data name="ChangeUsernameViewTitle" xml:space="preserve">
+  <data name="ChangeUsername" xml:space="preserve">
     <value>Cambiar nombre de usuario</value>
+  </data>
+  <data name="CreateGame" xml:space="preserve">
+    <value>Crear partida</value>
   </data>
   <data name="CurrentUsername" xml:space="preserve">
     <value>Nombre de usuario actual</value>
@@ -156,7 +159,7 @@
   <data name="Join" xml:space="preserve">
     <value>Unirse</value>
   </data>
-  <data name="JoinGameViewTitle" xml:space="preserve">
+  <data name="JoinGame" xml:space="preserve">
     <value>Unirse a partida</value>
   </data>
   <data name="Language" xml:space="preserve">
@@ -167,6 +170,9 @@
   </data>
   <data name="Login" xml:space="preserve">
     <value>Iniciar sesión</value>
+  </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Menu principal</value>
   </data>
   <data name="Memory" xml:space="preserve">
     <value>Memorama</value>
@@ -189,11 +195,11 @@
   <data name="Players" xml:space="preserve">
     <value>Jugadores</value>
   </data>
+  <data name="RecoverPassword" xml:space="preserve">
+    <value>Recuperar contraseña</value>
+  </data>
   <data name="RecoverPasswordMessage" xml:space="preserve">
     <value>Introduzca el email con el que se registró; se le proporcionará un código de verificación para recuperar su contraseña</value>
-  </data>
-  <data name="RecoverPasswordViewTitle" xml:space="preserve">
-    <value>Recuperar contraseña</value>
   </data>
   <data name="RegisterViewTitle" xml:space="preserve">
     <value>Registro</value>
@@ -207,7 +213,7 @@
   <data name="Score" xml:space="preserve">
     <value>Puntaje</value>
   </data>
-  <data name="ScoreTableViewTitle" xml:space="preserve">
+  <data name="ScoreTable" xml:space="preserve">
     <value>Table de puntajes</value>
   </data>
   <data name="SendCode" xml:space="preserve">
@@ -222,7 +228,7 @@
   <data name="Username" xml:space="preserve">
     <value>Nombre de usuario</value>
   </data>
-  <data name="WaitingRoomViewTitle" xml:space="preserve">
+  <data name="WaitingRoom" xml:space="preserve">
     <value>Sala de espera</value>
   </data>
 </root>

@@ -126,8 +126,11 @@
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>
-  <data name="ChangeUsernameViewTitle" xml:space="preserve">
+  <data name="ChangeUsername" xml:space="preserve">
     <value>Change username</value>
+  </data>
+  <data name="CreateGame" xml:space="preserve">
+    <value>Create game</value>
   </data>
   <data name="CurrentUsername" xml:space="preserve">
     <value>Current username</value>
@@ -168,6 +171,9 @@
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Main menu</value>
+  </data>
   <data name="Memory" xml:space="preserve">
     <value>Memory</value>
   </data>
@@ -189,11 +195,11 @@
   <data name="Players" xml:space="preserve">
     <value>Players</value>
   </data>
+  <data name="RecoverPassword" xml:space="preserve">
+    <value>Recover password</value>
+  </data>
   <data name="RecoverPasswordMessage" xml:space="preserve">
     <value>Enter the email you signed up with; a verification code will be provided to reset your password</value>
-  </data>
-  <data name="RecoverPasswordViewTitle" xml:space="preserve">
-    <value>Recover password</value>
   </data>
   <data name="RegisterViewTitle" xml:space="preserve">
     <value>Register</value>
@@ -207,7 +213,7 @@
   <data name="Score" xml:space="preserve">
     <value>Score</value>
   </data>
-  <data name="ScoreTableViewTitle" xml:space="preserve">
+  <data name="ScoreTable" xml:space="preserve">
     <value>Score table</value>
   </data>
   <data name="SendCode" xml:space="preserve">
@@ -222,7 +228,7 @@
   <data name="Username" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="WaitingRoomViewTitle" xml:space="preserve">
+  <data name="WaitingRoom" xml:space="preserve">
     <value>Waiting room</value>
   </data>
 </root>
