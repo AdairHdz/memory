@@ -225,6 +225,9 @@
   <data name="SpanishMX" xml:space="preserve">
     <value>Español (MX)</value>
   </data>
+  <data name="Start" xml:space="preserve">
+    <value>Comenzar</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Nombre de usuario</value>
   </data>

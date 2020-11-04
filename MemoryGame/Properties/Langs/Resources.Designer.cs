@@ -385,6 +385,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Comenzar.
+        /// </summary>
+        public static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nombre de usuario.
         /// </summary>
         public static string Username {
