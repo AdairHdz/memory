@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para JoinGame.xaml
+    /// Lógica de interacción para WaitingRoom.xaml
     /// </summary>
-    public partial class JoinGame : Window
+    public partial class WaitingRoom : Window
     {
-        public JoinGame()
+        public WaitingRoom()
         {
             InitializeComponent();
-        }
-
-        private void BackButtonClicked(object sender, RoutedEventArgs e)
-        {
-            MainMenu mainMenuView = new MainMenu();
-            mainMenuView.Show();
-            this.Close();
         }
     }
 }
