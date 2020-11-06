@@ -10,6 +10,11 @@
             <Setter Property="FontSize" Value="50"/>
         </Style>
 
+        <Style x:Key="infoLabel" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="25"/>
+        </Style>
+
         <Style x:Key="buttonPrimary" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#06D6A0"></Setter>
             <Setter Property="Foreground" Value="#FFF"></Setter>
@@ -76,6 +81,10 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <Style x:Key="dataGridHeader" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
 
         <Style x:Key="foregroundPrimaryColor" TargetType="{x:Type Label}">

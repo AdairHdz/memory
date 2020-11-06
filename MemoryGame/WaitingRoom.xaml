@@ -39,6 +39,39 @@
                Style="{StaticResource title}" Content="{x:Static p:Resources.WaitingRoom}">
         </Label>
 
+        <DataGrid Grid.ColumnSpan="3" Grid.Column="3" HorizontalAlignment="Left" 
+                  Height="157" Margin="93.8,47.8,0,0" Grid.Row="3" Grid.RowSpan="5" 
+                  VerticalAlignment="Top" Width="189">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                        HeaderStyle="{StaticResource dataGridHeader}"
+                        Header="{x:Static p:Resources.Players}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Grid.Column="4" Grid.Row="2"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               Style="{StaticResource infoLabel}"
+               Content="{x:Static p:Resources.Deck}"
+               
+               Margin="8.8,39,9.6,10" Grid.RowSpan="2" Height="47" Width="76">
+        </Label>
+
+        <Label Name="deckLbl" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="2"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               Style="{StaticResource infoLabel}" 
+               Content="Nombre" Margin="89.4,39,25.8,10" Grid.RowSpan="2" Height="47" Width="168">
+        </Label>
+
+        <Label Grid.Column="6" Grid.Row="4"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               Style="{StaticResource infoLabel}"
+               Content="{x:Static p:Resources.Host}"
+               
+               Margin="7.8,21,76,26.4" Grid.RowSpan="2" Height="47" Width="105" Grid.ColumnSpan="2">
+        </Label>
+
         <Button Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="4" VerticalAlignment="Center" 
                 Style="{StaticResource buttonSecondary}" 
                 Content="{x:Static p:Resources.Exit}" Grid.RowSpan="2" 
