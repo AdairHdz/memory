@@ -250,6 +250,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nuevo nombre de usuario.
+        /// </summary>
+        public static string NewUsername {
+            get {
+                return ResourceManager.GetString("NewUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Número de jugadores.
         /// </summary>
         public static string NumberOfPlayers {

@@ -12,7 +12,12 @@
 
         <Style x:Key="infoLabel" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style x:Key="usernameLabel" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="#FFD166"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
 
         <Style x:Key="buttonPrimary" TargetType="{x:Type Button}">

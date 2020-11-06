@@ -180,6 +180,9 @@
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
+  <data name="NewUsername" xml:space="preserve">
+    <value>New username</value>
+  </data>
   <data name="NumberOfPlayers" xml:space="preserve">
     <value>Number of players</value>
   </data>
