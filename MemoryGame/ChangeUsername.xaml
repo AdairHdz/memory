@@ -34,12 +34,13 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="2" Grid.ColumnSpan="6" Grid.Row="1" Grid.RowSpan="2"
+        <Label Grid.Column="1" Grid.ColumnSpan="8" Grid.Row="1" Grid.RowSpan="2"
                HorizontalAlignment="Center" VerticalAlignment="Center"
-               Style="{StaticResource title}" Content="{x:Static p:Resources.ChangeUsername}">
+               Style="{StaticResource title}" Content="{x:Static p:Resources.ChangeUsername}" 
+               Margin="63,10,64.8,10" Width="627">
         </Label>
 
-        <Grid Grid.Column="3" Grid.ColumnSpan="5" Grid.Row="3" Grid.RowSpan="6" Margin="0.267,0,93.733,29">
+        <Grid Grid.Column="2" Grid.ColumnSpan="5" Grid.Row="3" Grid.RowSpan="6" Margin="93.8,0,0,47">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
                     <GradientStop Color="#EF476F" Offset="0.0"/>
@@ -68,28 +69,35 @@
             <Label Grid.Column="1" Grid.ColumnSpan="4"
                    Style="{StaticResource infoLabel}"
                    HorizontalAlignment="Center"
-                   Content="{x:Static p:Resources.CurrentUsername}" Margin="68.6,10,65.2,44.4" Grid.RowSpan="3" Width="183"/>
+                   Content="{x:Static p:Resources.CurrentUsername}" 
+                   Margin="68.6,10,65.2,44.4" Grid.RowSpan="3" Width="183"/>
 
             <Label Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2"
                    Style="{StaticResource usernameLabel}"
                    HorizontalAlignment="Center"
                    Content="Nombre"/>
 
-            <Label Grid.Row="2" Grid.ColumnSpan="4"
-                   Style="{StaticResource infoLabel}"
-                   Content="{x:Static p:Resources.NewUsername}" Margin="30,38.2,42,9.8" Grid.RowSpan="2"/>
+            <TextBox Grid.ColumnSpan="4" Grid.Row="3" Grid.Column="1" 
+                     Margin="55.6,11.8,54,24.2" 
+                     Name="TextBoxNewUsername" Grid.RowSpan="2"
+                     LostFocus="TextBoxNewUsername_LostFocus"/>
 
-            <TextBox Grid.ColumnSpan="5" Grid.Row="3" 
-                     Margin="30,31,0.2,5.4" 
-                     Name="TextBoxEmail" Grid.RowSpan="2"/>
+            <TextBox Grid.ColumnSpan="4" Grid.Row="3" Grid.Column="1"
+                     Margin="55.6,11.8,54,24.2" 
+                     Name="waterMarkText" Grid.RowSpan="2"
+                     GotFocus="waterMarkText_GotFocus"
+                     Style="{StaticResource watermarkTextbox}"
+                     Text="{x:Static p:Resources.NewUsername}"/>
 
             <Button Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2" 
                     Style="{StaticResource buttonPrimary}"
-                    Content="{x:Static p:Resources.SaveChanges}" Margin="0.4,3.4,0,0.2" Grid.RowSpan="2"/>
+                    Content="{x:Static p:Resources.SaveChanges}" 
+                    Margin="0.4,3.4,0,0.2" Grid.RowSpan="2"/>
 
             <Button Grid.Column="2" Grid.Row="7" Grid.ColumnSpan="2"
                     Style="{StaticResource buttonSecondary}"
-                    Content="{x:Static p:Resources.Cancel}" Margin="0.4,12.4,0,-32"/>
+                    Content="{x:Static p:Resources.Cancel}" 
+                    Margin="0.4,12.4,0,-32"/>
         </Grid>
     </Grid>
 </Window>

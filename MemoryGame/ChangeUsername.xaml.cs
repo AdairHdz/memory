@@ -24,5 +24,21 @@ namespace MemoryGame
         {
             InitializeComponent();
         }
+
+        private void TextBoxNewUsername_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TextBoxNewUsername.Text))
+            {
+                TextBoxNewUsername.Visibility = System.Windows.Visibility.Collapsed;
+                waterMarkText.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
+
+        private void waterMarkText_GotFocus(object sender, RoutedEventArgs e)
+        {
+            waterMarkText.Visibility = System.Windows.Visibility.Collapsed;
+            TextBoxNewUsername.Visibility = System.Windows.Visibility.Visible;
+            TextBoxNewUsername.Focus();
+        }
     }
 }
