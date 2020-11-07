@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActivationToken.xaml.cs">
+      <DependentUpon>ActivationToken.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,10 @@
     <Compile Include="WaitingRoom.xaml.cs">
       <DependentUpon>WaitingRoom.xaml</DependentUpon>
     </Compile>
+    <Page Include="ActivationToken.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

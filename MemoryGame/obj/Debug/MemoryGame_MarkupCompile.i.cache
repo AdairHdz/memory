@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\obalt\OneDrive\Documentos\GitHub\memory\MemoryGame\App.xaml
-12-1693941204
+13-2136152418
 
-18-1440092091
+19-1152100707
 141724711711
-ChangePassword.xaml;ChangeUsername.xaml;CreateGame.xaml;JoinGame.xaml;Login.xaml;MainWindow.xaml;MainMenu.xaml;RecoverPassword.xaml;Register.xaml;ScoreTable.xaml;Settings.xaml;WaitingRoom.xaml;
+ActivationToken.xaml;ChangePassword.xaml;ChangeUsername.xaml;CreateGame.xaml;JoinGame.xaml;Login.xaml;MainWindow.xaml;MainMenu.xaml;RecoverPassword.xaml;Register.xaml;ScoreTable.xaml;Settings.xaml;WaitingRoom.xaml;
 
 True
 

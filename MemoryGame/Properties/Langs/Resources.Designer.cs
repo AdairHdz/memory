@@ -61,6 +61,24 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese el código que recibió.
+        /// </summary>
+        public static string ActivateTokenMessage {
+            get {
+                return ResourceManager.GetString("ActivateTokenMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Codigo de activación.
+        /// </summary>
+        public static string ActivationToken {
+            get {
+                return ResourceManager.GetString("ActivationToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Regresar.
         /// </summary>
         public static string Back {
@@ -273,6 +291,15 @@ namespace MemoryGame.Properties.Langs {
         public static string NumberOfPlayers {
             get {
                 return ResourceManager.GetString("NumberOfPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Aceptar.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
