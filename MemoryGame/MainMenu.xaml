@@ -1,0 +1,57 @@
+﻿<Window x:Class="MemoryGame.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MemoryGame"
+        xmlns:p="clr-namespace:MemoryGame.Properties.Langs"
+        mc:Ignorable="d"
+        Style="{StaticResource backgroundPrimary}"
+        Title="{x:Static p:Resources.MainMenu}" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="2" Grid.ColumnSpan="6" Grid.Row="1" Grid.RowSpan="2"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               Style="{StaticResource title}" Content="{x:Static p:Resources.Memory}">
+        </Label>
+
+        <Button Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                    Style="{StaticResource buttonPrimary}"
+                    Content="{x:Static p:Resources.CreateGame}"
+                    Click="CreateGameButtonClicked"/>
+
+        <Button Grid.Column="4" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                    Style="{StaticResource buttonPrimary}"
+                    Content="{x:Static p:Resources.JoinGame}" Grid.RowSpan="2"
+                    Click="JoinGameButtonClicked"/>
+
+        <Button Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                    Style="{StaticResource buttonPrimary}"
+                    Content="{x:Static p:Resources.ScoreTable}"
+                    Click="ScoreTableButtonClicked"/>
+    </Grid>
+</Window>

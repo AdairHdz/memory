@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivateTokenMessage" xml:space="preserve">
+    <value>Enter the code you received</value>
+  </data>
+  <data name="ActivationToken" xml:space="preserve">
+    <value>Activation code</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
@@ -126,8 +132,11 @@
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>
-  <data name="ChangeUsernameViewTitle" xml:space="preserve">
+  <data name="ChangeUsername" xml:space="preserve">
     <value>Change username</value>
+  </data>
+  <data name="CreateGame" xml:space="preserve">
+    <value>Create game</value>
   </data>
   <data name="CurrentUsername" xml:space="preserve">
     <value>Current username</value>
@@ -147,6 +156,9 @@
   <data name="ExpelPlayer" xml:space="preserve">
     <value>Expel player</value>
   </data>
+  <data name="ForgotPasswordMessage" xml:space="preserve">
+    <value>Have you forgotten your password?</value>
+  </data>
   <data name="GetRegistered" xml:space="preserve">
     <value>Get registered</value>
   </data>
@@ -156,7 +168,7 @@
   <data name="Join" xml:space="preserve">
     <value>Join</value>
   </data>
-  <data name="JoinGameViewTitle" xml:space="preserve">
+  <data name="JoinGame" xml:space="preserve">
     <value>Join game</value>
   </data>
   <data name="Language" xml:space="preserve">
@@ -168,14 +180,23 @@
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Main menu</value>
+  </data>
   <data name="Memory" xml:space="preserve">
     <value>Memory</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
+  <data name="NewUsername" xml:space="preserve">
+    <value>New username</value>
+  </data>
   <data name="NumberOfPlayers" xml:space="preserve">
     <value>Number of players</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
   </data>
   <data name="OldPassword" xml:space="preserve">
     <value>Old password</value>
@@ -189,11 +210,14 @@
   <data name="Players" xml:space="preserve">
     <value>Players</value>
   </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="RecoverPassword" xml:space="preserve">
+    <value>Recover password</value>
+  </data>
   <data name="RecoverPasswordMessage" xml:space="preserve">
     <value>Enter the email you signed up with; a verification code will be provided to reset your password</value>
-  </data>
-  <data name="RecoverPasswordViewTitle" xml:space="preserve">
-    <value>Recover password</value>
   </data>
   <data name="RegisterViewTitle" xml:space="preserve">
     <value>Register</value>
@@ -207,7 +231,7 @@
   <data name="Score" xml:space="preserve">
     <value>Score</value>
   </data>
-  <data name="ScoreTableViewTitle" xml:space="preserve">
+  <data name="ScoreTable" xml:space="preserve">
     <value>Score table</value>
   </data>
   <data name="SendCode" xml:space="preserve">
@@ -219,10 +243,13 @@
   <data name="SpanishMX" xml:space="preserve">
     <value>Spanish (MX)</value>
   </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="WaitingRoomViewTitle" xml:space="preserve">
+  <data name="WaitingRoom" xml:space="preserve">
     <value>Waiting room</value>
   </data>
 </root>

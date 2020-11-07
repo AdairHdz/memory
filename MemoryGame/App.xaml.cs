@@ -1,5 +1,4 @@
-﻿using MemoryGame.Startup;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,7 +16,7 @@ namespace MemoryGame
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            
+
         }
         //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru-RU");
     }
