@@ -1,6 +1,9 @@
 ﻿using DataAccess.Context;
 using DataAccess.Units_of_work;
+using MemoryGameService;
 using Models;
+using System;
+using System.Runtime.InteropServices;
 using System.Windows.Input;
 using ViewModel.Commands;
 
@@ -25,13 +28,17 @@ namespace ViewModel
         }
 
         public void SavePlayer()
-        {            
+        {
+            MemoryGameService.MemoryGameService client = new MemoryGameService.MemoryGameService();
+            client.hasAccessRights(Player.EmailAddress, "123");
+            /*
             Player.Password = "123";
             Player.TotalScore = 0;
             Player.EmailWasVerified = false;            
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             unitOfWork.Players.Add(Player);            
             unitOfWork.Complete();
+            */
         }
     }
 }
