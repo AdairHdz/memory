@@ -39,5 +39,12 @@ namespace MemoryGame
             settingsView.Show();
             this.Close();
         }
+
+        private void LoginButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Login settingsView = new Login();
+            settingsView.Show();
+            this.Close();
+        }
     }
 }

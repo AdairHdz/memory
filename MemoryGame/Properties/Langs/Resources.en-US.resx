@@ -150,6 +150,9 @@
   <data name="ExpelPlayer" xml:space="preserve">
     <value>Expel player</value>
   </data>
+  <data name="ForgotPasswordMessage" xml:space="preserve">
+    <value>Have you forgotten your password?</value>
+  </data>
   <data name="GetRegistered" xml:space="preserve">
     <value>Get registered</value>
   </data>
@@ -159,7 +162,7 @@
   <data name="Join" xml:space="preserve">
     <value>Join</value>
   </data>
-  <data name="JoinGameViewTitle" xml:space="preserve">
+  <data name="JoinGame" xml:space="preserve">
     <value>Join game</value>
   </data>
   <data name="Language" xml:space="preserve">

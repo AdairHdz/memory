@@ -150,6 +150,9 @@
   <data name="ExpelPlayer" xml:space="preserve">
     <value>Expulsar jugador</value>
   </data>
+  <data name="ForgotPasswordMessage" xml:space="preserve">
+    <value>¿Has olvidado tu contraseña?</value>
+  </data>
   <data name="GetRegistered" xml:space="preserve">
     <value>Registrarme</value>
   </data>

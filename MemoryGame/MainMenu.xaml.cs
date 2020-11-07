@@ -23,5 +23,26 @@ namespace MemoryGame
         {
             InitializeComponent();
         }
+
+        private void CreateGameButtonClicked(object sender, RoutedEventArgs e)
+        {
+            CreateGame settingsView = new CreateGame();
+            settingsView.Show();
+            this.Close();
+        }
+
+        private void JoinGameButtonClicked(object sender, RoutedEventArgs e)
+        {
+            JoinGame settingsView = new JoinGame();
+            settingsView.Show();
+            this.Close();
+        }
+
+        private void ScoreTableButtonClicked(object sender, RoutedEventArgs e)
+        {
+            RecoverPassword settingsView = new RecoverPassword();
+            settingsView.Show();
+            this.Close();
+        }
     }
 }

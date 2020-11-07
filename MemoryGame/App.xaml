@@ -20,6 +20,18 @@
             <Setter Property="FontSize" Value="18"/>
         </Style>
 
+        <Style x:Key="linkLabel" TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" TextDecorations="Underline"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="buttonPrimary" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#06D6A0"></Setter>
             <Setter Property="Foreground" Value="#FFF"></Setter>

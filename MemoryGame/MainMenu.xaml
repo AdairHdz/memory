@@ -41,14 +41,17 @@
 
         <Button Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center"
                     Style="{StaticResource buttonPrimary}"
-                    Content="{x:Static p:Resources.CreateGame}" Grid.RowSpan="2"/>
+                    Content="{x:Static p:Resources.CreateGame}"
+                    Click="CreateGameButtonClicked"/>
 
-        <Button Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Center"
+        <Button Grid.Column="4" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center"
                     Style="{StaticResource buttonPrimary}"
-                    Content="{x:Static p:Resources.JoinGame}" Grid.RowSpan="2"/>
+                    Content="{x:Static p:Resources.JoinGame}" Grid.RowSpan="2"
+                    Click="JoinGameButtonClicked"/>
 
-        <Button Grid.Column="4" Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Center"
+        <Button Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Center"
                     Style="{StaticResource buttonPrimary}"
-                    Content="{x:Static p:Resources.ScoreTable}" Grid.RowSpan="2"/>
+                    Content="{x:Static p:Resources.ScoreTable}"
+                    Click="ScoreTableButtonClicked"/>
     </Grid>
 </Window>
