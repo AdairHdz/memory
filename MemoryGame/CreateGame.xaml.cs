@@ -18,18 +18,11 @@ namespace MemoryGame
     /// <summary>
     /// Lógica de interacción para JoinGame.xaml
     /// </summary>
-    public partial class JoinGame : Window
+    public partial class CreateGame : Window
     {
-        public JoinGame()
+        public CreateGame()
         {
             InitializeComponent();
-        }
-
-        private void BackButtonClicked(object sender, RoutedEventArgs e)
-        {
-            MainMenu mainMenuView = new MainMenu();
-            mainMenuView.Show();
-            this.Close();
         }
     }
 }

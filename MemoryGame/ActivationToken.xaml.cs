@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para JoinGame.xaml
+    /// Lógica de interacción para ActivationToken.xaml
     /// </summary>
-    public partial class JoinGame : Window
+    public partial class ActivationToken : Window
     {
-        public JoinGame()
+        public ActivationToken()
         {
             InitializeComponent();
-        }
-
-        private void BackButtonClicked(object sender, RoutedEventArgs e)
-        {
-            MainMenu mainMenuView = new MainMenu();
-            mainMenuView.Show();
-            this.Close();
         }
     }
 }

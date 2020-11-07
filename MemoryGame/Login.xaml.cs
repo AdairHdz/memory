@@ -16,19 +16,26 @@ using System.Windows.Shapes;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para JoinGame.xaml
+    /// Lógica de interacción para Login.xaml
     /// </summary>
-    public partial class JoinGame : Window
+    public partial class Login : Window
     {
-        public JoinGame()
+        public Login()
         {
             InitializeComponent();
         }
 
-        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        private void CancelButtonClicked(object sender, RoutedEventArgs e)
         {
-            MainMenu mainMenuView = new MainMenu();
-            mainMenuView.Show();
+            MainWindow mainWindowView = new MainWindow();
+            mainWindowView.Show();
+            this.Close();
+        }
+
+        private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
+        {
+            RecoverPassword recoverPasswordView = new RecoverPassword();
+            recoverPasswordView.Show();
             this.Close();
         }
     }
