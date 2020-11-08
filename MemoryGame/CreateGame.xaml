@@ -73,4 +73,4 @@
                 Style="{StaticResource buttonSecondary}" 
                 Content="{x:Static p:Resources.Back}" Grid.RowSpan="2"></Button>
     </Grid>
-</Window>
+    </Window>

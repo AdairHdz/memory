@@ -59,7 +59,7 @@
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
 
-            <Label Content="{x:Static p:Resources.Language}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"></Label>
+            <Label Content="{x:Static p:Resources.Language}" Style="{StaticResource infoLabel}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"></Label>
             <ComboBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2">
                 <ComboBoxItem Name="ComboBoxItemSpanishMX" Content="{x:Static p:Resources.SpanishMX}"/>
                 <ComboBoxItem Name="ComboBoxItemEnglishUSA" Content="{x:Static p:Resources.EnglishUSA}"/>

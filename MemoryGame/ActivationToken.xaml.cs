@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para JoinGame.xaml
+    /// Lógica de interacción para ActivationToken.xaml
     /// </summary>
-    public partial class CreateGame : Window
+    public partial class ActivationToken : Window
     {
-        public CreateGame()
+        public ActivationToken()
         {
             InitializeComponent();
         }

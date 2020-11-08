@@ -34,8 +34,8 @@ namespace MemoryGame
 
         private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
         {
-            RecoverPassword mainWindowView = new RecoverPassword();
-            mainWindowView.Show();
+            RecoverPassword recoverPasswordView = new RecoverPassword();
+            recoverPasswordView.Show();
             this.Close();
         }
     }
