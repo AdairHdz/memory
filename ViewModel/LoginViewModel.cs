@@ -1,36 +1,38 @@
-﻿using DataAccess.Context;
-using DataAccess.Units_of_work;
-using MemoryGameService;
+﻿using DataAccess.Units_of_work;
 using Models;
 using System;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ViewModel.Commands;
 
 namespace ViewModel
 {
-    public class RegisterViewModel
-    {        
+    public class LoginViewModel
+    {
         public Player Player { get; set; }
-        public ICommand RegisterCommand { get; private set; }
+        public ICommand LoginCommand { get; private set; }
+
         public bool CanUpdate
         {
             get
             {
                 return true;
-            }                        
+            }
         }
 
-        public RegisterViewModel()
+        public LoginViewModel()
         {
             Player = new Player();
-            RegisterCommand = new PlayerRegisterCommand(this);
+            LoginCommand = new LoginCommand(this);
         }
 
-        public void SavePlayer()
-        {
-            MemoryGameService.MemoryGameService client = new MemoryGameService.MemoryGameService();
-            client.HasAccessRights(Player.EmailAddress, "123");
+        public void Login()
+        {            
+            MemoryGameService.MemoryGameService client = new MemoryGameService.MemoryGameService();                        
+            Console.WriteLine(client.HasAccessRights(Player.Username, "123"));
             /*
             Player.Password = "123";
             Player.TotalScore = 0;
@@ -40,5 +42,6 @@ namespace ViewModel
             unitOfWork.Complete();
             */
         }
+
     }
 }

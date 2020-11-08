@@ -30,7 +30,7 @@ namespace ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            _viewModel.SavePlayer();
+            
         }
     }
 }

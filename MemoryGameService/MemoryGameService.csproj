@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAccessibilityService.cs" />
+    <Compile Include="ICommunicationService.cs" />
     <Compile Include="IMemoryGameService.cs" />
     <Compile Include="MemoryGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

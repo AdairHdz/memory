@@ -1,5 +1,6 @@
 ﻿using DataAccess.Context;
 using DataAccess.Units_of_work;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,23 @@ using System.Threading.Tasks;
 
 namespace MemoryGameService
 {
-    public class MemoryGameService : IMemoryGameService
+    public class MemoryGameService : IMemoryGameService, ICommunicationService, IAccessibilityService
     {
-        public bool hasAccessRights(string email, string password)
+        public string GetMessage()
         {
-            var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.EmailAddress == email && x.Password == password);
-            var p = player.First();
-            Console.WriteLine(p.TotalScore);
-            Console.WriteLine(p.EmailAddress + ":D");
-            return true;
+            throw new NotImplementedException();
+        }
+
+        public bool HasAccessRights(string username, string password)
+        {
+            var unitOfWork = new UnitOfWork(new MemoryGameContext());          
+            Player player = (Player)unitOfWork.Players.Find(x => x.Username == username && x.Password == password);
+            return player != null;
+        }
+
+        public void SendMessage(string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

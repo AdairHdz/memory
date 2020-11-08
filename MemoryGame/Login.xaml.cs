@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModel;
 
 namespace MemoryGame
 {
@@ -23,20 +24,8 @@ namespace MemoryGame
         public Login()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel();
         }
 
-        private void CancelButtonClicked(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindowView = new MainWindow();
-            mainWindowView.Show();
-            this.Close();
-        }
-
-        private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
-        {
-            RecoverPassword recoverPasswordView = new RecoverPassword();
-            recoverPasswordView.Show();
-            this.Close();
-        }
     }
 }
