@@ -1,6 +1,10 @@
-﻿using MemoryGame.ViewModels;
+﻿using System;
+using System.Security;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using Utilities;
 
 namespace MemoryGame
 {
@@ -12,14 +16,30 @@ namespace MemoryGame
         public Register()
         {            
             InitializeComponent();
-            DataContext = new RegisterViewModel();
 
         }
 
         private void RegisterButtonClicked(object sender, RoutedEventArgs e)
         {
-            
-            
+
+            if (RegisterPlayer())
+            {
+                MessageBox.Show("Jugador registrado");
+            }
+            else
+            {
+                MessageBox.Show("Jugador NO registrado");
+            }
+        }
+
+        private bool RegisterPlayer()
+        {
+            string email = TextBoxEmail.Text;
+            string username = TextBoxUsername.Text;
+            string password = MD5Encryption.Encrypt(PasswordBoxPassword.Password);
+            MemoryGameService.AccessibilityServiceClient client =
+                new MemoryGameService.AccessibilityServiceClient();
+            return client.RegisterNewPlayer(email, username, password);
         }
 
         private void CancelButtonClicked(object sender, RoutedEventArgs e)

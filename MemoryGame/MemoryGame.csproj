@@ -94,8 +94,6 @@
     <Compile Include="Views\ChangeUsername.xaml.cs">
       <DependentUpon>ChangeUsername.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\LoginCommand.cs" />
-    <Compile Include="Commands\PlayerRegisterCommand.cs" />
     <Compile Include="Connected Services\MemoryGameService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,10 +128,6 @@
     <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Startup\Bootstrapper.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\RegisterViewModel.cs" />
-    <Compile Include="ViewModels\WaitingRoomViewModel.cs" />
     <Compile Include="Views\WaitingRoom.xaml.cs">
       <DependentUpon>WaitingRoom.xaml</DependentUpon>
     </Compile>
@@ -247,6 +241,10 @@
     <ProjectReference Include="..\MemoryGameService\MemoryGameService.csproj">
       <Project>{cfbd5fe1-14cd-4cb1-94a7-a21a145f4190}</Project>
       <Name>MemoryGameService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{8D5E6426-5270-4595-A701-0769DBB13FA7}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

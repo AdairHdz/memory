@@ -20,6 +20,12 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
         System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse")]
+        bool RegisterNewPlayer(string emailAddress, string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse")]
+        System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password) {
             return base.Channel.HasAccessRightsAsync(username, password);
+        }
+        
+        public bool RegisterNewPlayer(string emailAddress, string username, string password) {
+            return base.Channel.RegisterNewPlayer(emailAddress, username, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password) {
+            return base.Channel.RegisterNewPlayerAsync(emailAddress, username, password);
         }
     }
     

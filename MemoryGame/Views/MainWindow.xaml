@@ -47,7 +47,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource buttonPrimary}" VerticalAlignment="Top" Content="{x:Static p:Resources.Login}"></Button>
+            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource buttonPrimary}" VerticalAlignment="Top" Content="{x:Static p:Resources.Login}" Click="LoginButtonClicked"></Button>
             <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource buttonPrimary}" VerticalAlignment="Top" Content="{x:Static p:Resources.GetRegistered}" Click="GetRegisteredButtonClicked"></Button>
         </Grid>
     </Grid>

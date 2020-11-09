@@ -1,5 +1,4 @@
-﻿using MemoryGame.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Utilities;
 
 namespace MemoryGame
 {
@@ -24,9 +23,39 @@ namespace MemoryGame
     {
         public Login()
         {
-            InitializeComponent();
-            DataContext = new LoginViewModel();
+            InitializeComponent();          
+        }        
+
+        public bool LoginIsValid()
+        {
+            MemoryGameService.AccessibilityServiceClient client = 
+                new MemoryGameService.AccessibilityServiceClient();
+
+            string encryptedPassword = MD5Encryption.Encrypt(PasswordBoxPassword.Password);
+            string username = TextBoxUsername.Text;
+
+            return client.HasAccessRights(username, encryptedPassword);
         }
 
+
+
+        public void GoToMainMenu()
+        {
+            MainMenu mainMenuView = new MainMenu();
+            mainMenuView.Show();
+            this.Close();
+        }
+
+        private void LoginButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (LoginIsValid())
+            {
+                GoToMainMenu();
+            }
+            else
+            {
+                MessageBox.Show("No existe el usuario (a esto hay que volverlo un resource)");
+            }
+        }
     }
 }

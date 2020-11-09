@@ -33,10 +33,19 @@ namespace MemoryGame
             this.Close();
         }
 
+
+
         private void ConfigurationButtonClicked(object sender, RoutedEventArgs e)
         {
             Settings settingsView = new Settings();
             settingsView.Show();
+            this.Close();
+        }
+
+        private void LoginButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Login loginView = new Login();
+            loginView.Show();
             this.Close();
         }
     }

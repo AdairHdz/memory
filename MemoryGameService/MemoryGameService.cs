@@ -1,4 +1,5 @@
 ﻿using DataAccess.Context;
+using DataAccess.Models;
 using DataAccess.Units_of_work;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,21 @@ namespace MemoryGameService
         public void GetActivePlayers()
         {            
             List<string> activePlayers = new List<string>();
-            activePlayers.Add("Adair");
-            activePlayers.Add("Omar");
+            activePlayers.Add(DateTime.Now.ToString());
             OperationContext.Current.GetCallbackChannel<IMemoryGameCallback>().ShowActivePlayers(activePlayers);            
+        }
+
+        public bool RegisterNewPlayer(string emailAddress, string username, string password)
+        {
+            Player newPlayer = new Player();
+            newPlayer.EmailAddress = emailAddress;
+            newPlayer.Username = username;
+            newPlayer.Password = password;
+            newPlayer.TotalScore = 0;
+            newPlayer.EmailWasVerified = false;
+            var unityOfWork = new UnitOfWork(new MemoryGameContext());
+            unityOfWork.Players.Add(newPlayer);
+            return unityOfWork.Complete() == 1;
         }
     }
 }
