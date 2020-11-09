@@ -4,6 +4,7 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,14 @@ namespace MemoryGameService
         public void SendMessage(string message)
         {
             throw new NotImplementedException();
+        }
+
+        public void GetActivePlayers()
+        {
+            List<string> activePlayers = new List<string>();
+            activePlayers.Add("Adair");
+            activePlayers.Add("Omar");
+            OperationContext.Current.GetCallbackChannel<IMemoryGameCallback>().ShowActivePlayers(activePlayers);            
         }
     }
 }

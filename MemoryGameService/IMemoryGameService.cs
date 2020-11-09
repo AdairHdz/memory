@@ -7,9 +7,17 @@ using System.Threading.Tasks;
 
 namespace MemoryGameService
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IMemoryGameCallback))]
     public interface IMemoryGameService
     {
+        [OperationContract]
+        void GetActivePlayers();
         
+    }
+
+    public interface IMemoryGameCallback
+    {
+        [OperationContract]
+        void ShowActivePlayers(List<string> activePlayers);
     }
 }

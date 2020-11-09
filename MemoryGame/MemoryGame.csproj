@@ -233,6 +233,10 @@
       <Project>{65CAD0DA-BE2F-42EC-A9D7-6C05F2B1C143}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MemoryGameService\MemoryGameService.csproj">
+      <Project>{cfbd5fe1-14cd-4cb1-94a7-a21a145f4190}</Project>
+      <Name>MemoryGameService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
       <Project>{B5C89AAE-38B6-4EC2-B358-3554B8DDA468}</Project>
       <Name>ViewModel</Name>

@@ -15,7 +15,7 @@ namespace MemoryGameServiceHost
             {
                 host.Open();
                 Console.WriteLine("Server started @ " + DateTime.Now.ToString());
-                Console.ReadKey();
+                Console.ReadKey();                
             }
         }
     }
