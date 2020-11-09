@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models
+namespace DataAccess.Models
 {
     public class Thematic
     {

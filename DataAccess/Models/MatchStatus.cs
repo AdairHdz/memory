@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace DataAccess.Models
 {
     public enum MatchStatus
     {

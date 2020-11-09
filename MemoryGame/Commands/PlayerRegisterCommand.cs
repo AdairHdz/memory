@@ -1,7 +1,8 @@
-﻿using System;
+﻿using MemoryGame.ViewModels;
+using System;
 using System.Windows.Input;
 
-namespace ViewModel.Commands
+namespace MemoryGame.Commands
 {
     public class PlayerRegisterCommand : ICommand
     {

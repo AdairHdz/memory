@@ -1,5 +1,5 @@
 ﻿using DataAccess.Context;
-using Models;
+using DataAccess.Models;
 using System;
 
 namespace DataAccess.Repositories

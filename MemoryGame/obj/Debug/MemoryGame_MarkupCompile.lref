@@ -1,16 +1,16 @@
 ﻿
 FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\App.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\ActivationToken.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\ChangePassword.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\ChangeUsername.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\CreateGame.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\JoinGame.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Login.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\MainMenu.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\MainWindow.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\RecoverPassword.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Register.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\ScoreTable.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Settings.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\WaitingRoom.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ActivationToken.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ChangePassword.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ChangeUsername.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\CreateGame.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\JoinGame.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\Login.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\MainMenu.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\MainWindow.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\RecoverPassword.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\Register.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ScoreTable.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\Settings.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\WaitingRoom.xaml;;
 

@@ -123,17 +123,17 @@ namespace MemoryGame.MemoryGameService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IMemoryGameService", CallbackContract=typeof(MemoryGame.MemoryGameService.IMemoryGameServiceCallback))]
     public interface IMemoryGameService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMemoryGameService/GetActivePlayers", ReplyAction="http://tempuri.org/IMemoryGameService/GetActivePlayersResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMemoryGameService/GetActivePlayers")]
         void GetActivePlayers();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMemoryGameService/GetActivePlayers", ReplyAction="http://tempuri.org/IMemoryGameService/GetActivePlayersResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMemoryGameService/GetActivePlayers")]
         System.Threading.Tasks.Task GetActivePlayersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IMemoryGameServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMemoryGameService/ShowActivePlayers", ReplyAction="http://tempuri.org/IMemoryGameService/ShowActivePlayersResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMemoryGameService/ShowActivePlayers")]
         void ShowActivePlayers(string[] activePlayers);
     }
     

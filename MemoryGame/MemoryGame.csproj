@@ -85,30 +85,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ActivationToken.xaml.cs">
+    <Compile Include="Views\ActivationToken.xaml.cs">
       <DependentUpon>ActivationToken.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChangePassword.xaml.cs">
+    <Compile Include="Views\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChangeUsername.xaml.cs">
+    <Compile Include="Views\ChangeUsername.xaml.cs">
       <DependentUpon>ChangeUsername.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\LoginCommand.cs" />
+    <Compile Include="Commands\PlayerRegisterCommand.cs" />
     <Compile Include="Connected Services\MemoryGameService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="CreateGame.xaml.cs">
+    <Compile Include="Views\CreateGame.xaml.cs">
       <DependentUpon>CreateGame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="JoinGame.xaml.cs">
+    <Compile Include="Views\JoinGame.xaml.cs">
       <DependentUpon>JoinGame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Login.xaml.cs">
+    <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu.xaml.cs">
+    <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Langs\Resources.en-US.Designer.cs">
@@ -116,51 +118,54 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="RecoverPassword.xaml.cs">
+    <Compile Include="Views\RecoverPassword.xaml.cs">
       <DependentUpon>RecoverPassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Register.xaml.cs">
+    <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScoreTable.xaml.cs">
+    <Compile Include="Views\ScoreTable.xaml.cs">
       <DependentUpon>ScoreTable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings.xaml.cs">
+    <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Startup\Bootstrapper.cs" />
-    <Compile Include="WaitingRoom.xaml.cs">
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\WaitingRoomViewModel.cs" />
+    <Compile Include="Views\WaitingRoom.xaml.cs">
       <DependentUpon>WaitingRoom.xaml</DependentUpon>
     </Compile>
-    <Page Include="ActivationToken.xaml">
+    <Page Include="Views\ActivationToken.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChangePassword.xaml">
+    <Page Include="Views\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChangeUsername.xaml">
+    <Page Include="Views\ChangeUsername.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateGame.xaml">
+    <Page Include="Views\CreateGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="JoinGame.xaml">
+    <Page Include="Views\JoinGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login.xaml">
+    <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainMenu.xaml">
+    <Page Include="Views\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -168,27 +173,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RecoverPassword.xaml">
+    <Page Include="Views\RecoverPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Register.xaml">
+    <Page Include="Views\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ScoreTable.xaml">
+    <Page Include="Views\ScoreTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Settings.xaml">
+    <Page Include="Views\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WaitingRoom.xaml">
+    <Page Include="Views\WaitingRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,6 +223,12 @@
     <None Include="Connected Services\MemoryGameService\item.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\MemoryGameService\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MemoryGameService\item11.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\MemoryGameService\MemoryGameService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -236,10 +247,6 @@
     <ProjectReference Include="..\MemoryGameService\MemoryGameService.csproj">
       <Project>{cfbd5fe1-14cd-4cb1-94a7-a21a145f4190}</Project>
       <Name>MemoryGameService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
-      <Project>{B5C89AAE-38B6-4EC2-B358-3554B8DDA468}</Project>
-      <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

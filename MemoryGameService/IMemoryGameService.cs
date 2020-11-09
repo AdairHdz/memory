@@ -10,14 +10,14 @@ namespace MemoryGameService
     [ServiceContract(CallbackContract = typeof(IMemoryGameCallback))]
     public interface IMemoryGameService
     {
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void GetActivePlayers();
         
     }
 
     public interface IMemoryGameCallback
     {
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void ShowActivePlayers(List<string> activePlayers);
     }
 }

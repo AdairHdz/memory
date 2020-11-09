@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Adair Hernández\source\repos\memory\MemoryGame\App.xaml
-13-2136152418
+131993619007
 
-20-106662144
-132-1041187251
-ActivationToken.xaml;ChangePassword.xaml;ChangeUsername.xaml;CreateGame.xaml;JoinGame.xaml;Login.xaml;MainMenu.xaml;MainWindow.xaml;RecoverPassword.xaml;Register.xaml;ScoreTable.xaml;Settings.xaml;WaitingRoom.xaml;
+25-557750237
+131-359515948
+Views\ActivationToken.xaml;Views\ChangePassword.xaml;Views\ChangeUsername.xaml;Views\CreateGame.xaml;Views\JoinGame.xaml;Views\Login.xaml;Views\MainMenu.xaml;Views\MainWindow.xaml;Views\RecoverPassword.xaml;Views\Register.xaml;Views\ScoreTable.xaml;Views\Settings.xaml;Views\WaitingRoom.xaml;
 
 False
 

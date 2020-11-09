@@ -52,6 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MemoryGameContext.cs" />
+    <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\CardDeck.cs" />
+    <Compile Include="Models\Match.cs" />
+    <Compile Include="Models\MatchStatus.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Thematic.cs" />
+    <Compile Include="Models\Winner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IPlayerRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -63,12 +70,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{04DCFF4D-EDD6-4E12-A21D-DE24054440AB}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

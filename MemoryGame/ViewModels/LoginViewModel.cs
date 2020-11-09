@@ -1,14 +1,15 @@
-﻿using DataAccess.Units_of_work;
-using Models;
+﻿using DataAccess.Models;
+using DataAccess.Units_of_work;
+using MemoryGame.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using ViewModel.Commands;
 
-namespace ViewModel
+
+namespace MemoryGame.ViewModels
 {
     public class LoginViewModel
     {
@@ -30,9 +31,11 @@ namespace ViewModel
         }
 
         public void Login()
-        {            
-            MemoryGameService.MemoryGameService client = new MemoryGameService.MemoryGameService();                        
+        {
+            MemoryGameService.AccessibilityServiceClient client = new MemoryGameService.AccessibilityServiceClient();
             Console.WriteLine(client.HasAccessRights(Player.Username, "123"));
+            //MemoryGameService.MemoryGameServiceClient client = new MemoryGameService.MemoryGameServiceClient();
+            //Console.WriteLine(client.HasAccessRights(Player.Username, "123"));
             /*
             Player.Password = "123";
             Player.TotalScore = 0;

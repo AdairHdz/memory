@@ -1,13 +1,15 @@
 ﻿using DataAccess.Context;
+using DataAccess.Models;
 using DataAccess.Units_of_work;
+using MemoryGame.Commands;
 using MemoryGameService;
-using Models;
+
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
-using ViewModel.Commands;
 
-namespace ViewModel
+
+namespace MemoryGame.ViewModels
 {
     public class RegisterViewModel
     {        
@@ -29,8 +31,7 @@ namespace ViewModel
 
         public void SavePlayer()
         {
-            MemoryGameService.MemoryGameService client = new MemoryGameService.MemoryGameService();
-            client.HasAccessRights(Player.EmailAddress, "123");
+            
             /*
             Player.Password = "123";
             Player.TotalScore = 0;

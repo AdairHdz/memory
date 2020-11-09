@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using MemoryGame.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
-using ViewModel;
 
 namespace MemoryGame
 {
