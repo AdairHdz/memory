@@ -187,4 +187,51 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.GetActivePlayersAsync();
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IMailingService")]
+    public interface IMailingService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendCode", ReplyAction="http://tempuri.org/IMailingService/SendCodeResponse")]
+        void SendCode(string name, string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendCode", ReplyAction="http://tempuri.org/IMailingService/SendCodeResponse")]
+        System.Threading.Tasks.Task SendCodeAsync(string name, string emailAddress);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMailingServiceChannel : MemoryGame.MemoryGameService.IMailingService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class MailingServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGameService.IMailingService>, MemoryGame.MemoryGameService.IMailingService {
+        
+        public MailingServiceClient() {
+        }
+        
+        public MailingServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public MailingServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MailingServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MailingServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public void SendCode(string name, string emailAddress) {
+            base.Channel.SendCode(name, emailAddress);
+        }
+        
+        public System.Threading.Tasks.Task SendCodeAsync(string name, string emailAddress) {
+            return base.Channel.SendCodeAsync(name, emailAddress);
+        }
+    }
 }

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="IAccessibilityService.cs" />
     <Compile Include="ICommunicationService.cs" />
+    <Compile Include="IMailingService.cs" />
     <Compile Include="IMemoryGameService.cs" />
     <Compile Include="MemoryGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +53,10 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{65CAD0DA-BE2F-42EC-A9D7-6C05F2B1C143}</Project>
       <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{8D5E6426-5270-4595-A701-0769DBB13FA7}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,10 +7,13 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Utilities;
 
 namespace MemoryGameService
 {
-    public class MemoryGameService : IMemoryGameService, ICommunicationService, IAccessibilityService
+    public class MemoryGameService : IMemoryGameService, 
+        ICommunicationService, IAccessibilityService,
+        IMailingService
     {
         public string GetMessage()
         {
@@ -46,7 +49,15 @@ namespace MemoryGameService
             newPlayer.EmailWasVerified = false;
             var unityOfWork = new UnitOfWork(new MemoryGameContext());
             unityOfWork.Players.Add(newPlayer);
-            return unityOfWork.Complete() == 1;
+            return unityOfWork.Complete() == 1;            
+        }
+
+        public void SendCode(string name, string emailAddress)
+        {            
+            MailTemplate mt = new MailTemplate();
+            mt.SetReceiver(name, emailAddress);
+            mt.SetMessage("Bienvenido", "Has sido registrado en el juego");
+            mt.Send();
         }
     }
 }

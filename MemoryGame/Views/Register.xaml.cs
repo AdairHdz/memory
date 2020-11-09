@@ -24,6 +24,7 @@ namespace MemoryGame
 
             if (RegisterPlayer())
             {
+                SendRegistrationCode();
                 MessageBox.Show("Jugador registrado");
             }
             else
@@ -47,6 +48,13 @@ namespace MemoryGame
             MainWindow mainWindowView = new MainWindow();
             mainWindowView.Show();
             this.Close();
+        }
+
+        private void SendRegistrationCode()
+        {
+            MemoryGameService.MailingServiceClient client = 
+                new MemoryGameService.MailingServiceClient();
+            client.SendCode(TextBoxUsername.Text, TextBoxEmail.Text);
         }
 
     }

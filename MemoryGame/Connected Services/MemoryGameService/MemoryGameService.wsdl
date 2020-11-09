@@ -87,6 +87,35 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IMailingService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -124,6 +153,12 @@
   <wsdl:message name="IMemoryGameService_ShowActivePlayers_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ShowActivePlayers" />
   </wsdl:message>
+  <wsdl:message name="IMailingService_SendCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendCode" />
+  </wsdl:message>
+  <wsdl:message name="IMailingService_SendCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendCodeResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAccessibilityService">
     <wsdl:operation name="HasAccessRights">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRights" message="tns:IAccessibilityService_HasAccessRights_InputMessage" />
@@ -150,6 +185,12 @@
     </wsdl:operation>
     <wsdl:operation name="ShowActivePlayers">
       <wsdl:output wsaw:Action="http://tempuri.org/IMemoryGameService/ShowActivePlayers" message="tns:IMemoryGameService_ShowActivePlayers_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IMailingService">
+    <wsdl:operation name="SendCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMailingService/SendCode" message="tns:IMailingService_SendCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMailingService/SendCodeResponse" message="tns:IMailingService_SendCode_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IAccessibilityService" type="tns:IAccessibilityService">
@@ -212,6 +253,19 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IMailingService" type="tns:IMailingService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMailingService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="SendCode">
+      <soap12:operation soapAction="http://tempuri.org/IMailingService/SendCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="MemoryGameService">
     <wsdl:port name="NetTcpBinding_IAccessibilityService" binding="tns:NetTcpBinding_IAccessibilityService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
@@ -232,6 +286,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMemoryGameService" binding="tns:NetTcpBinding_IMemoryGameService">
+      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IMailingService" binding="tns:NetTcpBinding_IMailingService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
