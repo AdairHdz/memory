@@ -22,10 +22,10 @@ namespace MemoryGame.MemoryGameService {
         System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse")]
-        bool RegisterNewPlayer(string emailAddress, string username, string password);
+        bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse")]
-        System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password);
+        System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password, string verificationToken);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,12 +63,12 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.HasAccessRightsAsync(username, password);
         }
         
-        public bool RegisterNewPlayer(string emailAddress, string username, string password) {
-            return base.Channel.RegisterNewPlayer(emailAddress, username, password);
+        public bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken) {
+            return base.Channel.RegisterNewPlayer(emailAddress, username, password, verificationToken);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password) {
-            return base.Channel.RegisterNewPlayerAsync(emailAddress, username, password);
+        public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password, string verificationToken) {
+            return base.Channel.RegisterNewPlayerAsync(emailAddress, username, password, verificationToken);
         }
     }
     
@@ -192,11 +192,11 @@ namespace MemoryGame.MemoryGameService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IMailingService")]
     public interface IMailingService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendCode", ReplyAction="http://tempuri.org/IMailingService/SendCodeResponse")]
-        void SendCode(string name, string emailAddress);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendVerificationToken", ReplyAction="http://tempuri.org/IMailingService/SendVerificationTokenResponse")]
+        void SendVerificationToken(string name, string emailAddress, string verificationToken);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendCode", ReplyAction="http://tempuri.org/IMailingService/SendCodeResponse")]
-        System.Threading.Tasks.Task SendCodeAsync(string name, string emailAddress);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendVerificationToken", ReplyAction="http://tempuri.org/IMailingService/SendVerificationTokenResponse")]
+        System.Threading.Tasks.Task SendVerificationTokenAsync(string name, string emailAddress, string verificationToken);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -226,12 +226,59 @@ namespace MemoryGame.MemoryGameService {
                 base(binding, remoteAddress) {
         }
         
-        public void SendCode(string name, string emailAddress) {
-            base.Channel.SendCode(name, emailAddress);
+        public void SendVerificationToken(string name, string emailAddress, string verificationToken) {
+            base.Channel.SendVerificationToken(name, emailAddress, verificationToken);
         }
         
-        public System.Threading.Tasks.Task SendCodeAsync(string name, string emailAddress) {
-            return base.Channel.SendCodeAsync(name, emailAddress);
+        public System.Threading.Tasks.Task SendVerificationTokenAsync(string name, string emailAddress, string verificationToken) {
+            return base.Channel.SendVerificationTokenAsync(name, emailAddress, verificationToken);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.ITokenGenerator")]
+    public interface ITokenGenerator {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITokenGenerator/GenerateToken", ReplyAction="http://tempuri.org/ITokenGenerator/GenerateTokenResponse")]
+        string GenerateToken(int length);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITokenGenerator/GenerateToken", ReplyAction="http://tempuri.org/ITokenGenerator/GenerateTokenResponse")]
+        System.Threading.Tasks.Task<string> GenerateTokenAsync(int length);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ITokenGeneratorChannel : MemoryGame.MemoryGameService.ITokenGenerator, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class TokenGeneratorClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGameService.ITokenGenerator>, MemoryGame.MemoryGameService.ITokenGenerator {
+        
+        public TokenGeneratorClient() {
+        }
+        
+        public TokenGeneratorClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public TokenGeneratorClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public TokenGeneratorClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public TokenGeneratorClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public string GenerateToken(int length) {
+            return base.Channel.GenerateToken(length);
+        }
+        
+        public System.Threading.Tasks.Task<string> GenerateTokenAsync(int length) {
+            return base.Channel.GenerateTokenAsync(length);
         }
     }
 }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace MemoryGameService
 {
     [ServiceContract]
-    public interface IMailingService
+    public interface ITokenGenerator
     {
         [OperationContract]
-        void SendVerificationToken(string name, string emailAddress, string verificationToken);
+        string GenerateToken(int length);
     }
 }

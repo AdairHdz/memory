@@ -13,15 +13,17 @@ namespace MemoryGame
     /// </summary>
     public partial class Register : Window
     {
+
+        private string _verificationToken;
+
         public Register()
         {            
             InitializeComponent();
-
         }
 
         private void RegisterButtonClicked(object sender, RoutedEventArgs e)
         {
-
+            GenerateVerificationToken();
             if (RegisterPlayer())
             {
                 SendRegistrationCode();
@@ -40,7 +42,7 @@ namespace MemoryGame
             string password = MD5Encryption.Encrypt(PasswordBoxPassword.Password);
             MemoryGameService.AccessibilityServiceClient client =
                 new MemoryGameService.AccessibilityServiceClient();
-            return client.RegisterNewPlayer(email, username, password);
+            return client.RegisterNewPlayer(email, username, password, _verificationToken);
         }
 
         private void CancelButtonClicked(object sender, RoutedEventArgs e)
@@ -50,11 +52,18 @@ namespace MemoryGame
             this.Close();
         }
 
+        private void GenerateVerificationToken()
+        {
+            MemoryGameService.TokenGeneratorClient client =
+                new MemoryGameService.TokenGeneratorClient();
+            _verificationToken = client.GenerateToken(6);
+        }
+
         private void SendRegistrationCode()
         {
             MemoryGameService.MailingServiceClient client = 
                 new MemoryGameService.MailingServiceClient();
-            client.SendCode(TextBoxUsername.Text, TextBoxEmail.Text);
+            client.SendVerificationToken(TextBoxUsername.Text, TextBoxEmail.Text, _verificationToken);
         }
 
     }

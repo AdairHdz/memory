@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ServiceModel;
 
 namespace MemoryGameService
 {
@@ -13,6 +8,6 @@ namespace MemoryGameService
         [OperationContract]
         bool HasAccessRights(string username, string password);
         [OperationContract]
-        bool RegisterNewPlayer(string emailAddress, string username, string password);
+        bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken);
     }
 }

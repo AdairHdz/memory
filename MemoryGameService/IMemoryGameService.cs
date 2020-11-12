@@ -11,8 +11,7 @@ namespace MemoryGameService
     public interface IMemoryGameService
     {
         [OperationContract(IsOneWay = true)]
-        void GetActivePlayers();
-        
+        void GetActivePlayers();        
     }
 
     public interface IMemoryGameCallback

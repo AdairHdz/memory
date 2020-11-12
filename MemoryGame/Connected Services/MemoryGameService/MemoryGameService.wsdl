@@ -116,6 +116,35 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_ITokenGenerator_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -153,11 +182,17 @@
   <wsdl:message name="IMemoryGameService_ShowActivePlayers_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ShowActivePlayers" />
   </wsdl:message>
-  <wsdl:message name="IMailingService_SendCode_InputMessage">
-    <wsdl:part name="parameters" element="tns:SendCode" />
+  <wsdl:message name="IMailingService_SendVerificationToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendVerificationToken" />
   </wsdl:message>
-  <wsdl:message name="IMailingService_SendCode_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SendCodeResponse" />
+  <wsdl:message name="IMailingService_SendVerificationToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendVerificationTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITokenGenerator_GenerateToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateToken" />
+  </wsdl:message>
+  <wsdl:message name="ITokenGenerator_GenerateToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateTokenResponse" />
   </wsdl:message>
   <wsdl:portType name="IAccessibilityService">
     <wsdl:operation name="HasAccessRights">
@@ -188,9 +223,15 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMailingService">
-    <wsdl:operation name="SendCode">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMailingService/SendCode" message="tns:IMailingService_SendCode_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMailingService/SendCodeResponse" message="tns:IMailingService_SendCode_OutputMessage" />
+    <wsdl:operation name="SendVerificationToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMailingService/SendVerificationToken" message="tns:IMailingService_SendVerificationToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMailingService/SendVerificationTokenResponse" message="tns:IMailingService_SendVerificationToken_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ITokenGenerator">
+    <wsdl:operation name="GenerateToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITokenGenerator/GenerateToken" message="tns:ITokenGenerator_GenerateToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITokenGenerator/GenerateTokenResponse" message="tns:ITokenGenerator_GenerateToken_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IAccessibilityService" type="tns:IAccessibilityService">
@@ -256,8 +297,21 @@
   <wsdl:binding name="NetTcpBinding_IMailingService" type="tns:IMailingService">
     <wsp:PolicyReference URI="#NetTcpBinding_IMailingService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="SendCode">
-      <soap12:operation soapAction="http://tempuri.org/IMailingService/SendCode" style="document" />
+    <wsdl:operation name="SendVerificationToken">
+      <soap12:operation soapAction="http://tempuri.org/IMailingService/SendVerificationToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_ITokenGenerator" type="tns:ITokenGenerator">
+    <wsp:PolicyReference URI="#NetTcpBinding_ITokenGenerator_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GenerateToken">
+      <soap12:operation soapAction="http://tempuri.org/ITokenGenerator/GenerateToken" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -295,6 +349,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMailingService" binding="tns:NetTcpBinding_IMailingService">
+      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_ITokenGenerator" binding="tns:NetTcpBinding_ITokenGenerator">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>

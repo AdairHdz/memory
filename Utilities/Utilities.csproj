@@ -54,6 +54,7 @@
     <Compile Include="MailTemplate.cs" />
     <Compile Include="MD5Encryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

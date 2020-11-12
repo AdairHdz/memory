@@ -46,6 +46,7 @@
     <Compile Include="ICommunicationService.cs" />
     <Compile Include="IMailingService.cs" />
     <Compile Include="IMemoryGameService.cs" />
+    <Compile Include="ITokenGenerator.cs" />
     <Compile Include="MemoryGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
