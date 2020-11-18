@@ -143,20 +143,27 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.ICommunicationService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.ICommunicationService", CallbackContract=typeof(MemoryGame.Proxy.ICommunicationServiceCallback))]
     public interface ICommunicationService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/SendMessage", ReplyAction="http://tempuri.org/ICommunicationService/SendMessageResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/Join")]
+        void Join(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/Join")]
+        System.Threading.Tasks.Task JoinAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/SendMessage")]
         void SendMessage(string message);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/SendMessage", ReplyAction="http://tempuri.org/ICommunicationService/SendMessageResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/SendMessage")]
         System.Threading.Tasks.Task SendMessageAsync(string message);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICommunicationServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/GetMessage", ReplyAction="http://tempuri.org/ICommunicationService/GetMessageResponse")]
-        string GetMessage();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/GetMessage", ReplyAction="http://tempuri.org/ICommunicationService/GetMessageResponse")]
-        System.Threading.Tasks.Task<string> GetMessageAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/ReciveMessage", ReplyAction="http://tempuri.org/ICommunicationService/ReciveMessageResponse")]
+        void ReciveMessage(string username, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -165,25 +172,34 @@ namespace MemoryGame.Proxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CommunicationServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.ICommunicationService>, MemoryGame.Proxy.ICommunicationService {
+    public partial class CommunicationServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.Proxy.ICommunicationService>, MemoryGame.Proxy.ICommunicationService {
         
-        public CommunicationServiceClient() {
+        public CommunicationServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public CommunicationServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public CommunicationServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public CommunicationServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public CommunicationServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public CommunicationServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public CommunicationServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public CommunicationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public CommunicationServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void Join(string username) {
+            base.Channel.Join(username);
+        }
+        
+        public System.Threading.Tasks.Task JoinAsync(string username) {
+            return base.Channel.JoinAsync(username);
         }
         
         public void SendMessage(string message) {
@@ -192,14 +208,6 @@ namespace MemoryGame.Proxy {
         
         public System.Threading.Tasks.Task SendMessageAsync(string message) {
             return base.Channel.SendMessageAsync(message);
-        }
-        
-        public string GetMessage() {
-            return base.Channel.GetMessage();
-        }
-        
-        public System.Threading.Tasks.Task<string> GetMessageAsync() {
-            return base.Channel.GetMessageAsync();
         }
     }
     

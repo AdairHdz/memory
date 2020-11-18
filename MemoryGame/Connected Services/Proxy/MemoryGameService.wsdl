@@ -194,17 +194,17 @@
   <wsdl:message name="IAccessibilityService_AssignNewVerificationToken_OutputMessage">
     <wsdl:part name="parameters" element="tns:AssignNewVerificationTokenResponse" />
   </wsdl:message>
+  <wsdl:message name="ICommunicationService_Join_InputMessage">
+    <wsdl:part name="parameters" element="tns:Join" />
+  </wsdl:message>
   <wsdl:message name="ICommunicationService_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
   </wsdl:message>
-  <wsdl:message name="ICommunicationService_SendMessage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  <wsdl:message name="ICommunicationService_ReciveMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReciveMessage" />
   </wsdl:message>
-  <wsdl:message name="ICommunicationService_GetMessage_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetMessage" />
-  </wsdl:message>
-  <wsdl:message name="ICommunicationService_GetMessage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetMessageResponse" />
+  <wsdl:message name="ICommunicationService_ReciveMessage_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReciveMessageResponse" />
   </wsdl:message>
   <wsdl:message name="IMemoryGameService_GetActivePlayers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetActivePlayers" />
@@ -255,13 +255,15 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICommunicationService">
+    <wsdl:operation name="Join">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/Join" message="tns:ICommunicationService_Join_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/SendMessage" message="tns:ICommunicationService_SendMessage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/SendMessageResponse" message="tns:ICommunicationService_SendMessage_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetMessage">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/GetMessage" message="tns:ICommunicationService_GetMessage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/GetMessageResponse" message="tns:ICommunicationService_GetMessage_OutputMessage" />
+    <wsdl:operation name="ReciveMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/ReciveMessage" message="tns:ICommunicationService_ReciveMessage_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/ReciveMessageResponse" message="tns:ICommunicationService_ReciveMessage_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMemoryGameService">
@@ -354,17 +356,20 @@
   <wsdl:binding name="NetTcpBinding_ICommunicationService" type="tns:ICommunicationService">
     <wsp:PolicyReference URI="#NetTcpBinding_ICommunicationService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Join">
+      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/Join" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="SendMessage">
       <soap12:operation soapAction="http://tempuri.org/ICommunicationService/SendMessage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetMessage">
-      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/GetMessage" style="document" />
+    <wsdl:operation name="ReciveMessage">
+      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/ReciveMessage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

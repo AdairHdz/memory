@@ -24,7 +24,7 @@ namespace MemoryGame
     {
         private Proxy.CommunicationServiceClient server = null;
         private InstanceContext context = null;
-        Sesion playerSesion = Sesion.getSesionData;
+        Sesion playerSesion = Sesion.getSesion;
         public Chat()
         {
             InitializeComponent();
@@ -49,18 +49,19 @@ namespace MemoryGame
                 server.SendMessage(message);
             }
 
-            string format = "\nTu: " + message;
+            //string format = "\nTu: " + message;
+            string format = playerSesion.Username + ": " + message;
             ChatBox.AppendText(format);
             ChatBox.ScrollToEnd();
             TextBoxMessageContent.Clear();
         }
 
-        /*private void EnterKeyPressed (object sender, KeyEventArgs e)
+        private void EnterKeyPressed (object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 SendMessageClickedButton(this, new RoutedEventArgs());
             }
-        }*/
+        }
     }
 }

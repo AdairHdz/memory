@@ -10,7 +10,7 @@ namespace DataAccess.Models
         public string Username { get; set; }
 
         private Sesion() { }
-        public static Sesion getSesionData
+        public static Sesion getSesion
         {
             get
             {
