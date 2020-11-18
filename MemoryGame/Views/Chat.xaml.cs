@@ -20,7 +20,7 @@ namespace MemoryGame
     /// <summary>
     /// Lógica de interacción para Chat.xaml
     /// </summary>
-    public partial class Chat : Window, Proxy.ICommunicationServiceCallBcack
+    public partial class Chat : Window, Proxy.ICommunicationServiceCallback
     {
         private Proxy.CommunicationServiceClient server = null;
         private InstanceContext context = null;
