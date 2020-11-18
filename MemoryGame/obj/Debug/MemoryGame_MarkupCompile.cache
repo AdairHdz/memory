@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\
+C:\Users\obalt\OneDrive\Documentos\MemoryGame\memory\MemoryGame\obj\Debug\
 MemoryGame
 none
 false
 DEBUG;TRACE
-C:\Users\Adair Hernández\source\repos\memory\MemoryGame\App.xaml
-131993619007
+C:\Users\obalt\OneDrive\Documentos\MemoryGame\memory\MemoryGame\App.xaml
+14657380161
 
-1926938701
-13292755
-Views\ActivationToken.xaml;Views\ChangePassword.xaml;Views\ChangeUsername.xaml;Views\CreateGame.xaml;Views\JoinGame.xaml;Views\Login.xaml;Views\MainMenu.xaml;Views\MainWindow.xaml;Views\RecoverPassword.xaml;Views\Register.xaml;Views\ScoreTable.xaml;Views\Settings.xaml;Views\WaitingRoom.xaml;
+20-2071557065
+132-2136352897
+Views\ActivationToken.xaml;Views\ChangePassword.xaml;Views\ChangeUsername.xaml;Views\Chat.xaml;Views\CreateGame.xaml;Views\JoinGame.xaml;Views\Login.xaml;Views\MainMenu.xaml;Views\MainWindow.xaml;Views\RecoverPassword.xaml;Views\Register.xaml;Views\ScoreTable.xaml;Views\Settings.xaml;Views\WaitingRoom.xaml;
 
-False
+True
 

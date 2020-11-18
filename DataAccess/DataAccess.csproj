@@ -57,6 +57,7 @@
     <Compile Include="Models\Match.cs" />
     <Compile Include="Models\MatchStatus.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Sesion.cs" />
     <Compile Include="Models\Thematic.cs" />
     <Compile Include="Models\Winner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
