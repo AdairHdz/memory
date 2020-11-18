@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace MemoryGameService
 {
-    [ServiceContract]
+
+    [ServiceContract(CallbackContract = typeof(IChatClient))]
     public interface ICommunicationService
     {
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
+        void Join(string username);
+
+        [OperationContract(IsOneWay = true)]
         void SendMessage(string message);
-        [OperationContract]
-        string GetMessage();
     }
 }

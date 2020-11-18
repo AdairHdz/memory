@@ -13,14 +13,41 @@ using Utilities;
 
 namespace MemoryGameService
 {
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single,
+        InstanceContextMode = InstanceContextMode.Single)]
     public class MemoryGameService : IMemoryGameService, 
         ICommunicationService, IAccessibilityService,
         IMailingService, ITokenGenerator, IDataValidationService,
         IScoreService
     {
+        
+        Dictionary<IChatClient, string> players = new Dictionary<IChatClient, string>();
         public string GetMessage()
         {
             throw new NotImplementedException();
+        }
+        public void SendMessage(string message)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
+            string player;
+            if (!players.TryGetValue(connection, out player))
+            {
+                return;
+            }
+            foreach (var other in players.Keys)
+            {
+                if (other == connection)
+                {
+                    continue;
+                }
+                other.ReciveMessage(player, message);
+            }
+
+        }
+        public void Join(string username)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
+            players[connection] = username;
         }
 
         public bool HasAccessRights(string username, string password)
@@ -30,11 +57,6 @@ namespace MemoryGameService
             int matches = player.Count();
             unitOfWork.Dispose();
             return matches == 1;
-        }
-
-        public void SendMessage(string message)
-        {
-            throw new NotImplementedException();
         }
 
         public void GetActivePlayers()

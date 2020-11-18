@@ -48,6 +48,7 @@
     <Compile Include="DataValidators\IPlayerValidator.cs" />
     <Compile Include="DataValidators\PlayerValidator.cs" />
     <Compile Include="IAccessibilityService.cs" />
+    <Compile Include="IChatClient.cs" />
     <Compile Include="ICommunicationService.cs" />
     <Compile Include="IDataValidationService.cs" />
     <Compile Include="IMailingService.cs" />

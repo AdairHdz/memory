@@ -85,6 +85,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\Proxy\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Views\ActivationToken.xaml.cs">
       <DependentUpon>ActivationToken.xaml</DependentUpon>
     </Compile>
@@ -98,6 +103,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chat.xaml.cs">
+      <DependentUpon>Chat.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateGame.xaml.cs">
       <DependentUpon>CreateGame.xaml</DependentUpon>
@@ -140,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ChangeUsername.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,6 +236,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\MemoryGameService\MemoryGameService.wsdl" />
+    <None Include="Connected Services\Proxy\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Proxy\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Proxy\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Proxy\MemoryGameService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DataAccess.Models.Player.datasource" />
     <None Include="Properties\Settings.settings">
@@ -253,6 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\MemoryGameService\" />
+    <WCFMetadataStorage Include="Connected Services\Proxy\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\MemoryGameService\item.disco" />
@@ -265,6 +288,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\MemoryGameService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Proxy\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Proxy\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Proxy\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

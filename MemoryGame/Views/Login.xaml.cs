@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Utilities;
+using DataAccess.Models;
 
 namespace MemoryGame
 {
@@ -50,6 +51,8 @@ namespace MemoryGame
         {
             if (LoginIsValid())
             {
+                Sesion playerSesion = Sesion.getSesion;
+                playerSesion.Username = TextBoxUsername.Text;
                 GoToMainMenu();
             }
             else
