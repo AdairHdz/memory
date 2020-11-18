@@ -237,6 +237,9 @@
   <data name="SendCode" xml:space="preserve">
     <value>Send code</value>
   </data>
+  <data name="SendNewCode" xml:space="preserve">
+    <value>Send new code</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>

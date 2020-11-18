@@ -14,7 +14,7 @@ namespace MemoryGameService
 {
     public class MemoryGameService : IMemoryGameService, 
         ICommunicationService, IAccessibilityService,
-        IMailingService, ITokenGenerator
+        IMailingService, ITokenGenerator, IDataValidationService
     {
         public string GetMessage()
         {
@@ -25,7 +25,9 @@ namespace MemoryGameService
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());          
             var player = unitOfWork.Players.Find(x => x.Username == username && x.Password == password);
-            return player.Count() == 1;
+            int matches = player.Count();
+            unitOfWork.Dispose();
+            return matches == 1;
         }
 
         public void SendMessage(string message)
@@ -42,25 +44,31 @@ namespace MemoryGameService
 
         public bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken)
         {
+            
             var u = new UnitOfWork(new MemoryGameContext());
             var players = u.Players.GetAll();
             foreach(var player in players)
             {
-                Console.WriteLine(player.VerificationToken);
+                u.Players.Remove(player);
             }
-            /*
-            Player newPlayer = new Player();
-            newPlayer.EmailAddress = emailAddress;
-            newPlayer.Username = username;
-            newPlayer.Password = password;
-            newPlayer.TotalScore = 0;
-            newPlayer.EmailWasVerified = false;
-            newPlayer.VerificationToken = verificationToken;
+            u.Complete();
+            u.Dispose();
+            
+            Player newPlayer = new Player()
+            {
+                EmailAddress = emailAddress,
+                Username = username,
+                Password = password,
+                TotalScore = 0,
+                EmailWasVerified = false,
+                VerificationToken = verificationToken
+
+            };
             var unityOfWork = new UnitOfWork(new MemoryGameContext());
             unityOfWork.Players.Add(newPlayer);
-            return unityOfWork.Complete() == 1;            
-            */
-            return true;
+            int playerWasRegistered = unityOfWork.Complete();
+            unityOfWork.Dispose();
+            return playerWasRegistered == 1;
         }
 
         public void SendVerificationToken(string name, string emailAddress, string verificationToken)
@@ -78,6 +86,59 @@ namespace MemoryGameService
             token = token.Replace("-", "");
             token = token.Substring(0, length);
             return token;
+        }
+
+        public bool EmailAddressIsAvailable(string emailAddress)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Get(emailAddress);
+            unitOfWork.Dispose();
+            return player == null;
+        }
+
+        public bool UserNameIsAvailable(string username)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Find(playerToFind => playerToFind.Username == username);            
+            int playersWhichHaveThatUserName = player.Count();
+            unitOfWork.Dispose();
+            return playersWhichHaveThatUserName == 0;
+        }
+
+        public bool VerifyToken(string emailAddress, string verificationToken)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Find(playerToFind => playerToFind.EmailAddress == 
+            emailAddress && playerToFind.VerificationToken == verificationToken);
+            int matches = player.Count();
+            unitOfWork.Dispose();
+            return matches == 1;
+        }
+
+        public bool SetAccountAsVerified(string emailAddress)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Get(emailAddress);
+            player.EmailWasVerified = true;
+            int rowsModified = unitOfWork.Complete();
+            unitOfWork.Dispose();
+            return rowsModified == 1;
+        }
+
+        public bool AssignNewVerificationToken(string emailAddress, string verificationToken)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Get(emailAddress);
+            player.VerificationToken = verificationToken;
+            int rowsModified = unitOfWork.Complete();
+            unitOfWork.Dispose();
+            return rowsModified == 1;
+        }
+
+        public bool ValidateRegisterForm(string emailAddress, string username, string password)
+        {
+
+            throw new NotImplementedException();
         }
     }
 }

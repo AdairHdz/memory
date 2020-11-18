@@ -421,6 +421,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Enviar nuevo código.
+        /// </summary>
+        public static string SendNewCode {
+            get {
+                return ResourceManager.GetString("SendNewCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Configuración.
         /// </summary>
         public static string Settings {

@@ -164,6 +164,36 @@
   <wsdl:message name="IAccessibilityService_RegisterNewPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterNewPlayerResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccessibilityService_EmailAddressIsAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmailAddressIsAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_EmailAddressIsAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmailAddressIsAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_UserNameIsAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserNameIsAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_UserNameIsAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserNameIsAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_VerifyToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyToken" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_VerifyToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_SetAccountAsVerified_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAccountAsVerified" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_SetAccountAsVerified_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAccountAsVerifiedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_AssignNewVerificationToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssignNewVerificationToken" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_AssignNewVerificationToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssignNewVerificationTokenResponse" />
+  </wsdl:message>
   <wsdl:message name="ICommunicationService_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
   </wsdl:message>
@@ -202,6 +232,26 @@
     <wsdl:operation name="RegisterNewPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer" message="tns:IAccessibilityService_RegisterNewPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse" message="tns:IAccessibilityService_RegisterNewPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmailAddressIsAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailable" message="tns:IAccessibilityService_EmailAddressIsAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailableResponse" message="tns:IAccessibilityService_EmailAddressIsAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserNameIsAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/UserNameIsAvailable" message="tns:IAccessibilityService_UserNameIsAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/UserNameIsAvailableResponse" message="tns:IAccessibilityService_UserNameIsAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/VerifyToken" message="tns:IAccessibilityService_VerifyToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/VerifyTokenResponse" message="tns:IAccessibilityService_VerifyToken_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountAsVerified">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/SetAccountAsVerified" message="tns:IAccessibilityService_SetAccountAsVerified_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/SetAccountAsVerifiedResponse" message="tns:IAccessibilityService_SetAccountAsVerified_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignNewVerificationToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken" message="tns:IAccessibilityService_AssignNewVerificationToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationTokenResponse" message="tns:IAccessibilityService_AssignNewVerificationToken_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICommunicationService">
@@ -248,6 +298,51 @@
     </wsdl:operation>
     <wsdl:operation name="RegisterNewPlayer">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EmailAddressIsAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameIsAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/UserNameIsAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyToken">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/VerifyToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAccountAsVerified">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/SetAccountAsVerified" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignNewVerificationToken">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

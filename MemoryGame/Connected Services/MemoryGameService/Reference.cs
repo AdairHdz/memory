@@ -26,6 +26,36 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse")]
         System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password, string verificationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailable", ReplyAction="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailableResponse")]
+        bool EmailAddressIsAvailable(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailable", ReplyAction="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailableResponse")]
+        System.Threading.Tasks.Task<bool> EmailAddressIsAvailableAsync(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/UserNameIsAvailable", ReplyAction="http://tempuri.org/IAccessibilityService/UserNameIsAvailableResponse")]
+        bool UserNameIsAvailable(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/UserNameIsAvailable", ReplyAction="http://tempuri.org/IAccessibilityService/UserNameIsAvailableResponse")]
+        System.Threading.Tasks.Task<bool> UserNameIsAvailableAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/VerifyToken", ReplyAction="http://tempuri.org/IAccessibilityService/VerifyTokenResponse")]
+        bool VerifyToken(string emailAddress, string verificationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/VerifyToken", ReplyAction="http://tempuri.org/IAccessibilityService/VerifyTokenResponse")]
+        System.Threading.Tasks.Task<bool> VerifyTokenAsync(string emailAddress, string verificationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/SetAccountAsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/SetAccountAsVerifiedResponse")]
+        bool SetAccountAsVerified(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/SetAccountAsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/SetAccountAsVerifiedResponse")]
+        System.Threading.Tasks.Task<bool> SetAccountAsVerifiedAsync(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken", ReplyAction="http://tempuri.org/IAccessibilityService/AssignNewVerificationTokenResponse")]
+        bool AssignNewVerificationToken(string emailAddress, string verificationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken", ReplyAction="http://tempuri.org/IAccessibilityService/AssignNewVerificationTokenResponse")]
+        System.Threading.Tasks.Task<bool> AssignNewVerificationTokenAsync(string emailAddress, string verificationToken);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +99,46 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password, string verificationToken) {
             return base.Channel.RegisterNewPlayerAsync(emailAddress, username, password, verificationToken);
+        }
+        
+        public bool EmailAddressIsAvailable(string emailAddress) {
+            return base.Channel.EmailAddressIsAvailable(emailAddress);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EmailAddressIsAvailableAsync(string emailAddress) {
+            return base.Channel.EmailAddressIsAvailableAsync(emailAddress);
+        }
+        
+        public bool UserNameIsAvailable(string username) {
+            return base.Channel.UserNameIsAvailable(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UserNameIsAvailableAsync(string username) {
+            return base.Channel.UserNameIsAvailableAsync(username);
+        }
+        
+        public bool VerifyToken(string emailAddress, string verificationToken) {
+            return base.Channel.VerifyToken(emailAddress, verificationToken);
+        }
+        
+        public System.Threading.Tasks.Task<bool> VerifyTokenAsync(string emailAddress, string verificationToken) {
+            return base.Channel.VerifyTokenAsync(emailAddress, verificationToken);
+        }
+        
+        public bool SetAccountAsVerified(string emailAddress) {
+            return base.Channel.SetAccountAsVerified(emailAddress);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SetAccountAsVerifiedAsync(string emailAddress) {
+            return base.Channel.SetAccountAsVerifiedAsync(emailAddress);
+        }
+        
+        public bool AssignNewVerificationToken(string emailAddress, string verificationToken) {
+            return base.Channel.AssignNewVerificationToken(emailAddress, verificationToken);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AssignNewVerificationTokenAsync(string emailAddress, string verificationToken) {
+            return base.Channel.AssignNewVerificationTokenAsync(emailAddress, verificationToken);
         }
     }
     

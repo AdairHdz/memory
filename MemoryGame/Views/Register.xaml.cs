@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemoryGame.MemoryGameService;
+using System;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
@@ -14,34 +15,70 @@ namespace MemoryGame
     public partial class Register : Window
     {
 
-        private string _verificationToken;
-
+        private string _verificationToken;        
         public Register()
         {            
             InitializeComponent();
         }
 
+        private bool EmailAddressIsAvailable()
+        {
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+            bool emailAddressIsAvailable = 
+                client.EmailAddressIsAvailable(TextBoxEmail.Text);
+            //return emailAddressIsAvailable;
+            return true;
+        }
+
+        private bool UsernameIsAvailable()
+        {
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+            bool usernameIsAvailable = client.UserNameIsAvailable(TextBoxUsername.Text);
+            //return usernameIsAvailable;
+            return true;
+        }
+
         private void RegisterButtonClicked(object sender, RoutedEventArgs e)
         {
-            GenerateVerificationToken();
-            if (RegisterPlayer())
+            
+            
+            if (EmailAddressIsAvailable())
             {
-                SendRegistrationCode();
-                MessageBox.Show("Jugador registrado");
+                if (UsernameIsAvailable())
+                {
+                    GenerateVerificationToken();
+                    if (PlayerWasSuccessfullyRegistered())
+                    {
+                        SendVerificationCode();
+                        ActivationToken activationTokenWindow =
+                            new ActivationToken(TextBoxEmail.Text, TextBoxUsername.Text);                        
+                        activationTokenWindow.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error en el registro");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El nombre de usuario proporcionado ya se encuentra ocupado");
+                }
+                
             }
             else
             {
-                MessageBox.Show("Jugador NO registrado");
+                MessageBox.Show("El email proporcionado ya se encuentra ocupado");
             }
+            
         }
 
-        private bool RegisterPlayer()
+        private bool PlayerWasSuccessfullyRegistered()
         {
             string email = TextBoxEmail.Text;
             string username = TextBoxUsername.Text;
             string password = MD5Encryption.Encrypt(PasswordBoxPassword.Password);
             MemoryGameService.AccessibilityServiceClient client =
-                new MemoryGameService.AccessibilityServiceClient();
+                new MemoryGameService.AccessibilityServiceClient();            
             return client.RegisterNewPlayer(email, username, password, _verificationToken);
         }
 
@@ -59,12 +96,14 @@ namespace MemoryGame
             _verificationToken = client.GenerateToken(6);
         }
 
-        private void SendRegistrationCode()
+        private void SendVerificationCode()
         {
             MemoryGameService.MailingServiceClient client = 
                 new MemoryGameService.MailingServiceClient();
             client.SendVerificationToken(TextBoxUsername.Text, TextBoxEmail.Text, _verificationToken);
         }
+
+        
 
     }
 }
