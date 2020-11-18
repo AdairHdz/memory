@@ -23,6 +23,21 @@ namespace MemoryGame
         public ScoreTable()
         {
             InitializeComponent();
+            GetBestScores();
         }
+
+        private void GetBestScores()
+        {
+            MemoryGameService.ScoreServiceClient client =
+                new MemoryGameService.ScoreServiceClient();
+            string[] names = client.GetPlayersWithBestScore(10);
+            for(int i = 0; i < names.Length; i++)
+            {
+                
+                Console.WriteLine("PUNTAJEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE" + names[i]);
+            }
+        }
+
+        
     }
 }

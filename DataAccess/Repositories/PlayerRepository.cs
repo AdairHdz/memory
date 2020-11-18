@@ -1,6 +1,8 @@
 ﻿using DataAccess.Context;
 using DataAccess.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccess.Repositories
 {
@@ -17,9 +19,11 @@ namespace DataAccess.Repositories
             
         }
 
-        public void DoSomething()
+        public IEnumerable<Player> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
         {
-            Console.WriteLine("Jelou");
+            IEnumerable<Player> players = MemoryGameContext.Players
+                .OrderByDescending(player => player.TotalScore).Take(numberOfPlayersToBeRetrieved);
+            return players;
         }
     }
 }

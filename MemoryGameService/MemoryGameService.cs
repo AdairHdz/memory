@@ -1,6 +1,7 @@
 ﻿using DataAccess.Context;
 using DataAccess.Models;
 using DataAccess.Units_of_work;
+using MemoryGameService.DataValidators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace MemoryGameService
 {
     public class MemoryGameService : IMemoryGameService, 
         ICommunicationService, IAccessibilityService,
-        IMailingService, ITokenGenerator, IDataValidationService
+        IMailingService, ITokenGenerator, IDataValidationService,
+        IScoreService
     {
         public string GetMessage()
         {
@@ -137,8 +139,22 @@ namespace MemoryGameService
 
         public bool ValidateRegisterForm(string emailAddress, string username, string password)
         {
+            PlayerValidator playerValidator = new PlayerValidator();
+            bool isValidData = playerValidator.Validate(emailAddress, username, password);
+            return isValidData;
+        }
 
-            throw new NotImplementedException();
+        public string[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            IEnumerable<Player> players = 
+                unitOfWork.Players.GetPlayersWithBestScore(numberOfPlayersToBeRetrieved);
+            string[] names = new string[numberOfPlayersToBeRetrieved];
+            foreach(var player in players)
+            {
+                names.Append(player.Username);
+            }
+            return names;
         }
     }
 }

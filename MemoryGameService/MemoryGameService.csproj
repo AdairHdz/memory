@@ -45,12 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataValidators\IPlayerValidator.cs" />
     <Compile Include="DataValidators\PlayerValidator.cs" />
     <Compile Include="IAccessibilityService.cs" />
     <Compile Include="ICommunicationService.cs" />
     <Compile Include="IDataValidationService.cs" />
     <Compile Include="IMailingService.cs" />
     <Compile Include="IMemoryGameService.cs" />
+    <Compile Include="IScoreService.cs" />
     <Compile Include="ITokenGenerator.cs" />
     <Compile Include="MemoryGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

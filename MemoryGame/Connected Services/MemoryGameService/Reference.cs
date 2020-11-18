@@ -351,4 +351,98 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.GenerateTokenAsync(length);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IDataValidationService")]
+    public interface IDataValidationService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataValidationService/ValidateRegisterForm", ReplyAction="http://tempuri.org/IDataValidationService/ValidateRegisterFormResponse")]
+        bool ValidateRegisterForm(string emailAddress, string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataValidationService/ValidateRegisterForm", ReplyAction="http://tempuri.org/IDataValidationService/ValidateRegisterFormResponse")]
+        System.Threading.Tasks.Task<bool> ValidateRegisterFormAsync(string emailAddress, string username, string password);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IDataValidationServiceChannel : MemoryGame.MemoryGameService.IDataValidationService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DataValidationServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGameService.IDataValidationService>, MemoryGame.MemoryGameService.IDataValidationService {
+        
+        public DataValidationServiceClient() {
+        }
+        
+        public DataValidationServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public DataValidationServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DataValidationServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DataValidationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public bool ValidateRegisterForm(string emailAddress, string username, string password) {
+            return base.Channel.ValidateRegisterForm(emailAddress, username, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ValidateRegisterFormAsync(string emailAddress, string username, string password) {
+            return base.Channel.ValidateRegisterFormAsync(emailAddress, username, password);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IScoreService")]
+    public interface IScoreService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IScoreService/GetPlayersWithBestScore", ReplyAction="http://tempuri.org/IScoreService/GetPlayersWithBestScoreResponse")]
+        string[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IScoreService/GetPlayersWithBestScore", ReplyAction="http://tempuri.org/IScoreService/GetPlayersWithBestScoreResponse")]
+        System.Threading.Tasks.Task<string[]> GetPlayersWithBestScoreAsync(int numberOfPlayersToBeRetrieved);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IScoreServiceChannel : MemoryGame.MemoryGameService.IScoreService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ScoreServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGameService.IScoreService>, MemoryGame.MemoryGameService.IScoreService {
+        
+        public ScoreServiceClient() {
+        }
+        
+        public ScoreServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public ScoreServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ScoreServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ScoreServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public string[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved) {
+            return base.Channel.GetPlayersWithBestScore(numberOfPlayersToBeRetrieved);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetPlayersWithBestScoreAsync(int numberOfPlayersToBeRetrieved) {
+            return base.Channel.GetPlayersWithBestScoreAsync(numberOfPlayersToBeRetrieved);
+        }
+    }
 }

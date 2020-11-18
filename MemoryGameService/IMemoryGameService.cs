@@ -19,4 +19,5 @@ namespace MemoryGameService
         [OperationContract(IsOneWay = true)]
         void ShowActivePlayers(List<string> activePlayers);
     }
+
 }
