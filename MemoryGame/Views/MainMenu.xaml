@@ -7,7 +7,8 @@
         xmlns:p="clr-namespace:MemoryGame.Properties.Langs"
         mc:Ignorable="d"
         Style="{StaticResource backgroundPrimary}"
-        Title="{x:Static p:Resources.MainMenu}" Height="450" Width="800">
+        Title="{x:Static p:Resources.MainMenu}" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

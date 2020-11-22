@@ -42,6 +42,10 @@ namespace MemoryGame
                 if (AccountWasSuccessfullyVerified())
                 {
                     MessageBox.Show("Cuenta activada exitosamente");
+
+                    Login loginView = new Login();
+                    loginView.Show();
+                    this.Close();
                 }
                 else
                 {
@@ -87,6 +91,11 @@ namespace MemoryGame
             return client.SetAccountAsVerified(_emailAddress);
         }
 
-        
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindowView = new MainWindow();
+            mainWindowView.Show();
+            this.Close();
+        }
     }
 }

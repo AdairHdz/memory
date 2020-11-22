@@ -24,7 +24,7 @@ namespace MemoryGame
     {
         private Proxy.CommunicationServiceClient server = null;
         private InstanceContext context = null;
-        Sesion playerSesion = Sesion.getSesion;
+        Sesion playerSesion = Sesion.GetSesion;
         public Chat()
         {
             InitializeComponent();
@@ -50,7 +50,7 @@ namespace MemoryGame
             }
 
             //string format = "\nTu: " + message;
-            string format = playerSesion.Username + ": " + message;
+            string format = "\n" + playerSesion.Username + ": " + message;
             ChatBox.AppendText(format);
             ChatBox.ScrollToEnd();
             TextBoxMessageContent.Clear();

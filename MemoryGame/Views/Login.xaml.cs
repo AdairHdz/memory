@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MemoryGame.MemoryGameService;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Utilities;
 using DataAccess.Models;
 
@@ -24,13 +12,12 @@ namespace MemoryGame
     {
         public Login()
         {
-            InitializeComponent();          
-        }        
+            InitializeComponent();
+        }
 
         public bool LoginIsValid()
         {
-            MemoryGameService.AccessibilityServiceClient client = 
-                new MemoryGameService.AccessibilityServiceClient();
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
 
             string encryptedPassword = MD5Encryption.Encrypt(PasswordBoxPassword.Password);
             string username = TextBoxUsername.Text;
@@ -38,6 +25,14 @@ namespace MemoryGame
             return client.HasAccessRights(username, encryptedPassword);
         }
 
+        public bool EmailIsVerified()
+        {
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+
+            string username = TextBoxUsername.Text;
+
+            return client.IsVerified(username);
+        }
 
 
         public void GoToMainMenu()
@@ -47,18 +42,53 @@ namespace MemoryGame
             this.Close();
         }
 
+        public string GetUserEmailAdress()
+        {
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+
+            string username = TextBoxUsername.Text;
+
+            return client.GetUserEmailAddress(username);
+        }
+
         private void LoginButtonClicked(object sender, RoutedEventArgs e)
         {
             if (LoginIsValid())
             {
-                Sesion playerSesion = Sesion.getSesion;
-                playerSesion.Username = TextBoxUsername.Text;
-                GoToMainMenu();
+                if (EmailIsVerified())
+                {
+                    Sesion playerSesion = Sesion.GetSesion;
+                    playerSesion.Username = TextBoxUsername.Text;
+                    playerSesion.EmailAddress = GetUserEmailAdress();
+                    GoToMainMenu();
+                }
+                else
+                {
+                    ActivationToken activationTokenWindow =
+                            new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
+
+                    activationTokenWindow.Show();
+                    this.Close();
+                }
             }
             else
             {
                 MessageBox.Show("No existe el usuario (a esto hay que volverlo un resource)");
             }
+        }
+
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindowView = new MainWindow();
+            mainWindowView.Show();
+            this.Close();
+        }
+
+        private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
+        {
+            RecoverPassword mainWindowView = new RecoverPassword();
+            mainWindowView.Show();
+            this.Close();
         }
     }
 }

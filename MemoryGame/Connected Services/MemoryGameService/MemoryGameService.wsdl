@@ -216,6 +216,12 @@
   <wsdl:message name="IAccessibilityService_HasAccessRights_OutputMessage">
     <wsdl:part name="parameters" element="tns:HasAccessRightsResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccessibilityService_IsVerified_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsVerified" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_IsVerified_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsVerifiedResponse" />
+  </wsdl:message>
   <wsdl:message name="IAccessibilityService_RegisterNewPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterNewPlayer" />
   </wsdl:message>
@@ -251,6 +257,30 @@
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_AssignNewVerificationToken_OutputMessage">
     <wsdl:part name="parameters" element="tns:AssignNewVerificationTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUserEmailAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserEmailAddress" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUserEmailAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserEmailAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsername" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_ItsRegistered_InputMessage">
+    <wsdl:part name="parameters" element="tns:ItsRegistered" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_ItsRegistered_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ItsRegisteredResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_SetNewPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetNewPassword" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_SetNewPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetNewPasswordResponse" />
   </wsdl:message>
   <wsdl:message name="ICommunicationService_Join_InputMessage">
     <wsdl:part name="parameters" element="tns:Join" />
@@ -299,6 +329,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRights" message="tns:IAccessibilityService_HasAccessRights_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse" message="tns:IAccessibilityService_HasAccessRights_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="IsVerified">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerified" message="tns:IAccessibilityService_IsVerified_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerifiedResponse" message="tns:IAccessibilityService_IsVerified_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RegisterNewPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer" message="tns:IAccessibilityService_RegisterNewPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse" message="tns:IAccessibilityService_RegisterNewPlayer_OutputMessage" />
@@ -322,6 +356,22 @@
     <wsdl:operation name="AssignNewVerificationToken">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken" message="tns:IAccessibilityService_AssignNewVerificationToken_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationTokenResponse" message="tns:IAccessibilityService_AssignNewVerificationToken_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserEmailAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress" message="tns:IAccessibilityService_GetUserEmailAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse" message="tns:IAccessibilityService_GetUserEmailAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsername" message="tns:IAccessibilityService_GetUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameResponse" message="tns:IAccessibilityService_GetUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ItsRegistered">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegistered" message="tns:IAccessibilityService_ItsRegistered_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse" message="tns:IAccessibilityService_ItsRegistered_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetNewPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/SetNewPassword" message="tns:IAccessibilityService_SetNewPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/SetNewPasswordResponse" message="tns:IAccessibilityService_SetNewPassword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICommunicationService">
@@ -380,6 +430,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsVerified">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/IsVerified" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RegisterNewPlayer">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayer" style="document" />
       <wsdl:input>
@@ -427,6 +486,42 @@
     </wsdl:operation>
     <wsdl:operation name="AssignNewVerificationToken">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserEmailAddress">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsername">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItsRegistered">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/ItsRegistered" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetNewPassword">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/SetNewPassword" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -534,7 +629,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -543,7 +638,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -552,7 +647,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -561,7 +656,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -570,7 +665,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -579,7 +674,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -588,7 +683,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

@@ -5,20 +5,20 @@ namespace DataAccess.Models
 {
     public class Sesion
     {
-        private static Sesion playerSesion = null;
+        private static Sesion _playerSesion = null;
         public string EmailAddress { get; set; }
         public string Username { get; set; }
 
         private Sesion() { }
-        public static Sesion getSesion
+        public static Sesion GetSesion
         {
             get
             {
-                if (playerSesion == null)
+                if (_playerSesion == null)
                 {
-                    playerSesion = new Sesion();
+                    _playerSesion = new Sesion();
                 }
-                return playerSesion;
+                return _playerSesion;
             }
         }
     }

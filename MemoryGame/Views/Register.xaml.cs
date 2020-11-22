@@ -64,6 +64,7 @@ namespace MemoryGame
                             ActivationToken activationTokenWindow =
                                 new ActivationToken(_emailAddress, _username);
                             activationTokenWindow.Show();
+                            this.Close();
                         }
                         else
                         {

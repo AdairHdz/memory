@@ -59,6 +59,15 @@ namespace MemoryGameService
             return matches == 1;
         }
 
+        public bool IsVerified(string username)
+        {
+            var unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Find(x => x.Username == username && x.EmailWasVerified == true);
+            int matches = player.Count();
+            unitOfWork.Dispose();
+            return matches == 1;
+        }
+
         public void GetActivePlayers()
         {            
             List<string> activePlayers = new List<string>();
@@ -177,6 +186,43 @@ namespace MemoryGameService
                 names.Append(player.Username);
             }
             return names;
+        }
+
+        public string GetUserEmailAddress(string username)
+        {
+            var unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Find(x => x.Username == username);
+            string emailAddress = player.ElementAt(0).EmailAddress;
+            unitOfWork.Dispose();
+            return emailAddress;
+        }
+
+        public string GetUsername(string emailAdress)
+        {
+            var unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Get(emailAdress);
+            string username = player.Username;
+            unitOfWork.Dispose();
+            return username;
+        }
+
+        public bool ItsRegistered(string emailAddress)
+        {
+            var unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Find(x => x.EmailAddress == emailAddress);
+            int matches = player.Count();
+            unitOfWork.Dispose();
+            return matches == 1;
+        }
+
+        public bool SetNewPassword(string emailAddress, string password)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Get(emailAddress);
+            player.Password = password;
+            int rowsModified = unitOfWork.Complete();
+            unitOfWork.Dispose();
+            return rowsModified == 1;
         }
     }
 }

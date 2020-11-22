@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:MemoryGame"
         xmlns:p="clr-namespace:MemoryGame.Properties.Langs"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.RegisterViewTitle}"
-        Height="450" Width="800" Style="{StaticResource backgroundPrimary}">
+        Title="{x:Static p:Resources.Login}"
+        Height="450" Width="800" Style="{StaticResource backgroundPrimary}" 
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -85,8 +86,8 @@
             <Label Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="5"
                    HorizontalAlignment="Center"
                    Style="{StaticResource linkLabel}"                   
-                   Content="Da error"                   
-                   />
+                   Content="{x:Static p:Resources.ForgotPasswordMessage}"
+                   MouseLeftButtonDown="RecoverPasswordLabelClicked"/>
 
             <Button Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="8" 
                     Style="{StaticResource buttonPrimary}" 
@@ -96,7 +97,8 @@
 
             <Button Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="9" 
                     Style="{StaticResource buttonSecondary}" 
-                    Content="{x:Static p:Resources.Back}" ></Button>
+                    Content="{x:Static p:Resources.Back}"
+                    Click="BackButtonClicked"></Button>
         </Grid>
     </Grid>
 </Window>

@@ -7,7 +7,8 @@
         xmlns:p="clr-namespace:MemoryGame.Properties.Langs" xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Login}"
-        Height="512" Width="720" Style="{StaticResource backgroundPrimary}">
+        Height="512" Width="720" Style="{StaticResource backgroundPrimary}"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

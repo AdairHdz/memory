@@ -222,6 +222,9 @@
   <data name="RegisterViewTitle" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Restore password</value>
+  </data>
   <data name="ResumeGame" xml:space="preserve">
     <value>Resume game</value>
   </data>
