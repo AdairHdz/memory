@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.9.3.0\lib\net461\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -42,7 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataValidators\IPlayerValidator.cs" />
+    <Compile Include="DataValidators\PlayerValidator.cs" />
+    <Compile Include="IAccessibilityService.cs" />
+    <Compile Include="IChatClient.cs" />
+    <Compile Include="ICommunicationService.cs" />
+    <Compile Include="IDataValidationService.cs" />
+    <Compile Include="IMailingService.cs" />
     <Compile Include="IMemoryGameService.cs" />
+    <Compile Include="IScoreService.cs" />
+    <Compile Include="ITokenGenerator.cs" />
     <Compile Include="MemoryGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,10 +63,13 @@
       <Project>{65CAD0DA-BE2F-42EC-A9D7-6C05F2B1C143}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{04DCFF4D-EDD6-4E12-A21D-DE24054440AB}</Project>
-      <Name>Models</Name>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{8D5E6426-5270-4595-A701-0769DBB13FA7}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

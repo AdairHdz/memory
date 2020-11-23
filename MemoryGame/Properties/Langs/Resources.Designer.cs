@@ -376,6 +376,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Restablecer contraseña.
+        /// </summary>
+        public static string RestorePassword {
+            get {
+                return ResourceManager.GetString("RestorePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Regresar a partida.
         /// </summary>
         public static string ResumeGame {
@@ -417,6 +426,15 @@ namespace MemoryGame.Properties.Langs {
         public static string SendCode {
             get {
                 return ResourceManager.GetString("SendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enviar nuevo código.
+        /// </summary>
+        public static string SendNewCode {
+            get {
+                return ResourceManager.GetString("SendNewCode", resourceCulture);
             }
         }
         

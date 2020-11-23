@@ -222,6 +222,9 @@
   <data name="RegisterViewTitle" xml:space="preserve">
     <value>Registro</value>
   </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Restablecer contraseña</value>
+  </data>
   <data name="ResumeGame" xml:space="preserve">
     <value>Regresar a partida</value>
   </data>
@@ -236,6 +239,9 @@
   </data>
   <data name="SendCode" xml:space="preserve">
     <value>Enviar código</value>
+  </data>
+  <data name="SendNewCode" xml:space="preserve">
+    <value>Enviar nuevo código</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Configuración</value>

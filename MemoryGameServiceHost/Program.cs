@@ -12,10 +12,10 @@ namespace MemoryGameServiceHost
         static void Main(string[] args)
         {
             using(ServiceHost host = new ServiceHost(typeof(MemoryGameService.MemoryGameService)))
-            {
-                host.Open();
+            {                
+                host.Open();                
                 Console.WriteLine("Server started @ " + DateTime.Now.ToString());
-                Console.ReadKey();
+                Console.ReadKey();                
             }
         }
     }

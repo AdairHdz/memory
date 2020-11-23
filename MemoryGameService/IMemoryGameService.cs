@@ -7,10 +7,17 @@ using System.Threading.Tasks;
 
 namespace MemoryGameService
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IMemoryGameCallback))]
     public interface IMemoryGameService
     {
-        [OperationContract]
-        bool hasAccessRights(string email, string password);
+        [OperationContract(IsOneWay = true)]
+        void GetActivePlayers();        
     }
+
+    public interface IMemoryGameCallback
+    {
+        [OperationContract(IsOneWay = true)]
+        void ShowActivePlayers(List<string> activePlayers);
+    }
+
 }
