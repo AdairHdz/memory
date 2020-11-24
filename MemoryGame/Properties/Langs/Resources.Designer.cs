@@ -97,6 +97,24 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrió un error al intentar aplicar los cambios. Por favor, intente más tarde.
+        /// </summary>
+        public static string ChangeLanguageSettingsError {
+            get {
+                return ResourceManager.GetString("ChangeLanguageSettingsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cambios guardados correctamente.
+        /// </summary>
+        public static string ChangeLanguageSettingsSuccess {
+            get {
+                return ResourceManager.GetString("ChangeLanguageSettingsSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cambiar contraseña.
         /// </summary>
         public static string ChangePassword {

@@ -61,12 +61,12 @@
             </Grid.RowDefinitions>
 
             <Label Content="{x:Static p:Resources.Language}" Style="{StaticResource infoLabel}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"></Label>
-            <ComboBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2">
-                <ComboBoxItem Name="ComboBoxItemSpanishMX" Content="{x:Static p:Resources.SpanishMX}"/>
-                <ComboBoxItem Name="ComboBoxItemEnglishUSA" Content="{x:Static p:Resources.EnglishUSA}"/>
+            <ComboBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Name="ComboBoxLanguageSelection">
+                <ComboBoxItem Name="ComboBoxItemSpanishMX" IsSelected="True" Tag="es-MX" Content="{x:Static p:Resources.SpanishMX}"/>
+                <ComboBoxItem Name="ComboBoxItemEnglishUSA"  Tag="en-US"  Content="{x:Static p:Resources.EnglishUSA}"/>
             </ComboBox>
 
-            <Button Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" Style="{StaticResource buttonPrimary}" Content="{x:Static p:Resources.SaveChanges}" Margin="0,0,0,10"></Button>
+            <Button Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" Style="{StaticResource buttonPrimary}" Content="{x:Static p:Resources.SaveChanges}" Margin="0,0,0,10" Click="SaveChangesButtonClicked"></Button>
             <Button Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="5" Style="{StaticResource buttonSecondary}" Content="{x:Static p:Resources.Back}" Click="BackButtonClicked"></Button>
         </Grid>
 
