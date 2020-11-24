@@ -17,8 +17,7 @@ namespace MemoryGame
     {
         protected override void OnStartup(StartupEventArgs e)
         {            
-            
-            
+                        
         }
 
     }

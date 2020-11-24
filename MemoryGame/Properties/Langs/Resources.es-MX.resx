@@ -129,6 +129,12 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="ChangeLanguageSettingsError" xml:space="preserve">
+    <value>Ocurrió un error al intentar aplicar los cambios. Por favor, intente más tarde</value>
+  </data>
+  <data name="ChangeLanguageSettingsSuccess" xml:space="preserve">
+    <value>Cambios guardados correctamente</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Cambiar contraseña</value>
   </data>

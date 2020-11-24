@@ -19,18 +19,33 @@ namespace MemoryGame
 
         public void SaveChangesButtonClicked(object sender, RoutedEventArgs e)
         {            
-            _selectedTag = ((ComboBoxItem)ComboBoxLanguageSelection.SelectedItem).Tag.ToString();
-            Properties.Settings.Default.LanguageSettings = _selectedTag;
-            Properties.Settings.Default.Save();
-            var culture = new CultureInfo(_selectedTag);
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;                        
+            _selectedTag = ((ComboBoxItem)ComboBoxLanguageSelection.SelectedItem).Tag.ToString();            
+            try
+            {
+                var culture = new CultureInfo(_selectedTag);
+                Thread.CurrentThread.CurrentCulture = culture;
+                Thread.CurrentThread.CurrentUICulture = culture;
+                Properties.Settings.Default.LanguageSettings = _selectedTag;
+                Properties.Settings.Default.Save();
+                MessageBox.Show(Properties.Langs.Resources.ChangeLanguageSettingsSuccess);
+            }
+            catch (CultureNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ChangeLanguageSettingsError);
+            }
+            
+            GoToMainWindow();
         }
 
         public void BackButtonClicked(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindowView = new MainWindow();
-            mainWindowView.Show();
+            GoToMainWindow();
+        }
+
+        private void GoToMainWindow()
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
             this.Close();
         }
     }
