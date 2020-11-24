@@ -20,9 +20,11 @@ namespace MemoryGame
         public void SaveChangesButtonClicked(object sender, RoutedEventArgs e)
         {            
             _selectedTag = ((ComboBoxItem)ComboBoxLanguageSelection.SelectedItem).Tag.ToString();
+            Properties.Settings.Default.LanguageSettings = _selectedTag;
+            Properties.Settings.Default.Save();
             var culture = new CultureInfo(_selectedTag);
             Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;            
+            Thread.CurrentThread.CurrentUICulture = culture;                        
         }
 
         public void BackButtonClicked(object sender, RoutedEventArgs e)

@@ -16,9 +16,9 @@ namespace MemoryGame
     public partial class App : Application
     {
         protected override void OnStartup(StartupEventArgs e)
-        {
-            CultureInfo operativeSystemLanguage = CultureInfo.InstalledUICulture;
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(operativeSystemLanguage.Name);
+        {            
+            
+            
         }
 
     }
