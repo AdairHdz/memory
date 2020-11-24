@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,8 +17,9 @@ namespace MemoryGame
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-
+            CultureInfo operativeSystemLanguage = CultureInfo.InstalledUICulture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(operativeSystemLanguage.Name);
         }
-        //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru-RU");
+
     }
 }
