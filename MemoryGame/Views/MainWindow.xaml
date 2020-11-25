@@ -32,7 +32,11 @@
             </StackPanel>
         </Button>
 
-        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Foreground="#FFD166" HorizontalAlignment="Center" FontSize="50" VerticalAlignment="Bottom" Content="{x:Static p:Resources.Memory}"></Label>
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
+               Foreground="#FFD166" HorizontalAlignment="Center"
+               FontFamily="Fonts/ReenieBeanie-Regular.ttf" 
+               FontSize="50" VerticalAlignment="Bottom" 
+               Content="{x:Static p:Resources.Memory}"></Label>
 
 
 

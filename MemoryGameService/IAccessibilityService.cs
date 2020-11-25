@@ -29,5 +29,7 @@ namespace MemoryGameService
         bool ItsRegistered(string emailAddress);
         [OperationContract]
         bool SetNewPassword(string emailAddress, string password);
+        [OperationContract]
+        bool ChangeUsername(string emailAddress, string newUsername);
     }
 }

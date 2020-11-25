@@ -224,5 +224,15 @@ namespace MemoryGameService
             unitOfWork.Dispose();
             return rowsModified == 1;
         }
+
+        public bool ChangeUsername(string emailAddress, string newUsername)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Get(emailAddress);
+            player.Username = newUsername;
+            int rowsModified = unitOfWork.Complete();
+            unitOfWork.Dispose();
+            return rowsModified == 1;
+        }
     }
 }
