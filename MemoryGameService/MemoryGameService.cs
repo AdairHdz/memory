@@ -1,5 +1,5 @@
-﻿using DataAccess.Context;
-using DataAccess.Models;
+﻿using DataAccess;
+using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGameService.DataValidators;
 using System;
@@ -53,7 +53,7 @@ namespace MemoryGameService
         public bool HasAccessRights(string username, string password)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());          
-            var player = unitOfWork.Players.Find(x => x.Username == username && x.Password == password);
+            var player = unitOfWork.Players.Find(x => x.UserName == username && x.Password == password);
             int matches = player.Count();
             unitOfWork.Dispose();
             return matches == 1;
@@ -62,7 +62,7 @@ namespace MemoryGameService
         public bool IsVerified(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.Username == username && x.EmailWasVerified == true);
+            var player = unitOfWork.Players.Find(x => x.UserName == username && x.EmailWasVerified == true);
             int matches = player.Count();
             unitOfWork.Dispose();
             return matches == 1;
@@ -90,11 +90,11 @@ namespace MemoryGameService
             Player newPlayer = new Player()
             {
                 EmailAddress = emailAddress,
-                Username = username,
+                UserName = username,
                 Password = password,
                 TotalScore = 0,
                 EmailWasVerified = false,
-                VerificationToken = verificationToken
+                ActivationToken = verificationToken
 
             };
             var unityOfWork = new UnitOfWork(new MemoryGameContext());
@@ -132,7 +132,7 @@ namespace MemoryGameService
         public bool UserNameIsAvailable(string username)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(playerToFind => playerToFind.Username == username);            
+            var player = unitOfWork.Players.Find(playerToFind => playerToFind.UserName == username);            
             int playersWhichHaveThatUserName = player.Count();
             unitOfWork.Dispose();
             return playersWhichHaveThatUserName == 0;
@@ -142,7 +142,7 @@ namespace MemoryGameService
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             var player = unitOfWork.Players.Find(playerToFind => playerToFind.EmailAddress == 
-            emailAddress && playerToFind.VerificationToken == verificationToken);
+            emailAddress && playerToFind.ActivationToken == verificationToken);
             int matches = player.Count();
             unitOfWork.Dispose();
             return matches == 1;
@@ -162,7 +162,7 @@ namespace MemoryGameService
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             var player = unitOfWork.Players.Get(emailAddress);
-            player.VerificationToken = verificationToken;
+            player.ActivationToken = verificationToken;
             int rowsModified = unitOfWork.Complete();
             unitOfWork.Dispose();
             return rowsModified == 1;
@@ -183,7 +183,7 @@ namespace MemoryGameService
             string[] names = new string[numberOfPlayersToBeRetrieved];
             foreach(var player in players)
             {
-                names.Append(player.Username);
+                names.Append(player.UserName);
             }
             return names;
         }
@@ -191,7 +191,7 @@ namespace MemoryGameService
         public string GetUserEmailAddress(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.Username == username);
+            var player = unitOfWork.Players.Find(x => x.UserName == username);
             string emailAddress = player.ElementAt(0).EmailAddress;
             unitOfWork.Dispose();
             return emailAddress;
@@ -201,7 +201,7 @@ namespace MemoryGameService
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             var player = unitOfWork.Players.Get(emailAdress);
-            string username = player.Username;
+            string username = player.UserName;
             unitOfWork.Dispose();
             return username;
         }
@@ -229,7 +229,7 @@ namespace MemoryGameService
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             var player = unitOfWork.Players.Get(emailAddress);
-            player.Username = newUsername;
+            player.UserName = newUsername;
             int rowsModified = unitOfWork.Complete();
             unitOfWork.Dispose();
             return rowsModified == 1;

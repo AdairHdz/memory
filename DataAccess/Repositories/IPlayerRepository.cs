@@ -1,10 +1,10 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.Entities;
 using System.Collections.Generic;
 
 namespace DataAccess.Repositories
 {
-    public interface IPlayerRepository : IRepository<Player>
+    public interface IPlayerRepository : IRepository<Entities.Player>
     {       
-        IEnumerable<Player> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
+        IEnumerable<Entities.Player> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
     }
 }

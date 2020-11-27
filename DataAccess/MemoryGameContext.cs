@@ -1,34 +1,51 @@
-﻿using DataAccess.Models;
-using System.Data.Entity;
-
-
-namespace DataAccess.Context
+namespace DataAccess
 {
-    public class MemoryGameContext : DbContext
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+    using DataAccess.Entities;
+
+    public partial class MemoryGameContext : DbContext
     {
-
-        public MemoryGameContext():base("default")
+        public MemoryGameContext()
+            : base("name=MemoryGame")
         {
-
+            var ensureDllIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
 
-        public DbSet<Card> Cards { get; set; }
-        public DbSet<CardDeck> CardDecks { get; set; }
-        public DbSet<Match> Matches { get; set; }
-        public DbSet<Player> Players { get; set; }
-        public DbSet<Thematic> Thematics { get; set; }
-        //public DbSet<Winner> Winners { get; set; }
+        public virtual DbSet<CardDeck> CardDecks { get; set; }
+        public virtual DbSet<Card> Cards { get; set; }
+        public virtual DbSet<Match> Matches { get; set; }
+        public virtual DbSet<Player> Players { get; set; }
+        public virtual DbSet<Winner> Winners { get; set; }
 
-        private void FixEfProviderServicesProblem()
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer'
-            // for the 'System.Data.SqlClient' ADO.NET provider could not be loaded. 
-            // Make sure the provider assembly is available to the running application. 
-            // See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
-            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-        }
+            modelBuilder.Entity<CardDeck>()
+                .HasMany(e => e.Cards)
+                .WithRequired(e => e.CardDecks)
+                .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<CardDeck>()
+                .HasMany(e => e.Matches)
+                .WithRequired(e => e.CardDecks)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Match>()
+                .HasMany(e => e.Winners)
+                .WithRequired(e => e.Matches)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Player>()
+                .HasMany(e => e.Winners)
+                .WithRequired(e => e.Players)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Player>()
+                .HasMany(e => e.Matches)
+                .WithMany(e => e.Players)
+                .Map(m => m.ToTable("MatchesPlayed").MapLeftKey("EmailAddress").MapRightKey("MatchId"));
+        }
     }
-
-
 }
