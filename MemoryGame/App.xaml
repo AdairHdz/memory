@@ -8,6 +8,7 @@
         <Style x:Key="title" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="#FFD166"/>
             <Setter Property="FontSize" Value="50"/>
+            <Setter Property="TextElement.FontFamily" Value="/Fonts/#ReenieBeanie"/>
         </Style>
 
         <Style x:Key="infoLabel" TargetType="{x:Type Label}">
