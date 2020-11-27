@@ -1,7 +1,7 @@
 ﻿using MemoryGame.MemoryGameService;
 using System.Windows;
 using Utilities;
-using DataAccess.Models;
+using DataAccess.Entities;
 
 namespace MemoryGame
 {

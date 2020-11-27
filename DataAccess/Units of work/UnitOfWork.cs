@@ -1,5 +1,4 @@
-﻿using DataAccess.Context;
-using DataAccess.Repositories;
+﻿using DataAccess.Repositories;
 
 namespace DataAccess.Units_of_work
 {
