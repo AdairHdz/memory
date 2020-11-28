@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
+using MemoryGameService.Contracts;
 using MemoryGameService.DataValidators;
 using System;
 using System.Collections.Generic;

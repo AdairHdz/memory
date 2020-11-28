@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MemoryGame.Proxy {
+namespace MemoryGame.MemoryGame {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IAccessibilityService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGame.IAccessibilityService")]
     public interface IAccessibilityService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
@@ -28,10 +28,10 @@ namespace MemoryGame.Proxy {
         System.Threading.Tasks.Task<bool> IsVerifiedAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse")]
-        bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken);
+        bool RegisterNewPlayer(MemoryGameService.DataTransferObjects.PlayerDTO playerDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse")]
-        System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password, string verificationToken);
+        System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(MemoryGameService.DataTransferObjects.PlayerDTO playerDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailable", ReplyAction="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailableResponse")]
         bool EmailAddressIsAvailable(string emailAddress);
@@ -95,12 +95,12 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IAccessibilityServiceChannel : MemoryGame.Proxy.IAccessibilityService, System.ServiceModel.IClientChannel {
+    public interface IAccessibilityServiceChannel : MemoryGame.MemoryGame.IAccessibilityService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class AccessibilityServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.IAccessibilityService>, MemoryGame.Proxy.IAccessibilityService {
+    public partial class AccessibilityServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGame.IAccessibilityService>, MemoryGame.MemoryGame.IAccessibilityService {
         
         public AccessibilityServiceClient() {
         }
@@ -137,12 +137,12 @@ namespace MemoryGame.Proxy {
             return base.Channel.IsVerifiedAsync(username);
         }
         
-        public bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken) {
-            return base.Channel.RegisterNewPlayer(emailAddress, username, password, verificationToken);
+        public bool RegisterNewPlayer(MemoryGameService.DataTransferObjects.PlayerDTO playerDTO) {
+            return base.Channel.RegisterNewPlayer(playerDTO);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password, string verificationToken) {
-            return base.Channel.RegisterNewPlayerAsync(emailAddress, username, password, verificationToken);
+        public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(MemoryGameService.DataTransferObjects.PlayerDTO playerDTO) {
+            return base.Channel.RegisterNewPlayerAsync(playerDTO);
         }
         
         public bool EmailAddressIsAvailable(string emailAddress) {
@@ -227,7 +227,7 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.ICommunicationService", CallbackContract=typeof(MemoryGame.Proxy.ICommunicationServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGame.ICommunicationService", CallbackContract=typeof(MemoryGame.MemoryGame.ICommunicationServiceCallback))]
     public interface ICommunicationService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/Join")]
@@ -251,12 +251,12 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ICommunicationServiceChannel : MemoryGame.Proxy.ICommunicationService, System.ServiceModel.IClientChannel {
+    public interface ICommunicationServiceChannel : MemoryGame.MemoryGame.ICommunicationService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CommunicationServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.Proxy.ICommunicationService>, MemoryGame.Proxy.ICommunicationService {
+    public partial class CommunicationServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.MemoryGame.ICommunicationService>, MemoryGame.MemoryGame.ICommunicationService {
         
         public CommunicationServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -296,7 +296,7 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IMemoryGameService", CallbackContract=typeof(MemoryGame.Proxy.IMemoryGameServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGame.IMemoryGameService", CallbackContract=typeof(MemoryGame.MemoryGame.IMemoryGameServiceCallback))]
     public interface IMemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMemoryGameService/GetActivePlayers")]
@@ -314,12 +314,12 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMemoryGameServiceChannel : MemoryGame.Proxy.IMemoryGameService, System.ServiceModel.IClientChannel {
+    public interface IMemoryGameServiceChannel : MemoryGame.MemoryGame.IMemoryGameService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MemoryGameServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.Proxy.IMemoryGameService>, MemoryGame.Proxy.IMemoryGameService {
+    public partial class MemoryGameServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.MemoryGame.IMemoryGameService>, MemoryGame.MemoryGame.IMemoryGameService {
         
         public MemoryGameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -351,7 +351,7 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IMailingService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGame.IMailingService")]
     public interface IMailingService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendVerificationToken", ReplyAction="http://tempuri.org/IMailingService/SendVerificationTokenResponse")]
@@ -362,12 +362,12 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMailingServiceChannel : MemoryGame.Proxy.IMailingService, System.ServiceModel.IClientChannel {
+    public interface IMailingServiceChannel : MemoryGame.MemoryGame.IMailingService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MailingServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.IMailingService>, MemoryGame.Proxy.IMailingService {
+    public partial class MailingServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGame.IMailingService>, MemoryGame.MemoryGame.IMailingService {
         
         public MailingServiceClient() {
         }
@@ -398,7 +398,7 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.ITokenGenerator")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGame.ITokenGenerator")]
     public interface ITokenGenerator {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITokenGenerator/GenerateToken", ReplyAction="http://tempuri.org/ITokenGenerator/GenerateTokenResponse")]
@@ -409,12 +409,12 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ITokenGeneratorChannel : MemoryGame.Proxy.ITokenGenerator, System.ServiceModel.IClientChannel {
+    public interface ITokenGeneratorChannel : MemoryGame.MemoryGame.ITokenGenerator, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class TokenGeneratorClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.ITokenGenerator>, MemoryGame.Proxy.ITokenGenerator {
+    public partial class TokenGeneratorClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGame.ITokenGenerator>, MemoryGame.MemoryGame.ITokenGenerator {
         
         public TokenGeneratorClient() {
         }
@@ -445,7 +445,7 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IDataValidationService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGame.IDataValidationService")]
     public interface IDataValidationService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataValidationService/ValidateRegisterForm", ReplyAction="http://tempuri.org/IDataValidationService/ValidateRegisterFormResponse")]
@@ -456,12 +456,12 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDataValidationServiceChannel : MemoryGame.Proxy.IDataValidationService, System.ServiceModel.IClientChannel {
+    public interface IDataValidationServiceChannel : MemoryGame.MemoryGame.IDataValidationService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DataValidationServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.IDataValidationService>, MemoryGame.Proxy.IDataValidationService {
+    public partial class DataValidationServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGame.IDataValidationService>, MemoryGame.MemoryGame.IDataValidationService {
         
         public DataValidationServiceClient() {
         }
@@ -492,7 +492,7 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IScoreService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGame.IScoreService")]
     public interface IScoreService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IScoreService/GetPlayersWithBestScore", ReplyAction="http://tempuri.org/IScoreService/GetPlayersWithBestScoreResponse")]
@@ -503,12 +503,12 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IScoreServiceChannel : MemoryGame.Proxy.IScoreService, System.ServiceModel.IClientChannel {
+    public interface IScoreServiceChannel : MemoryGame.MemoryGame.IScoreService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ScoreServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.IScoreService>, MemoryGame.Proxy.IScoreService {
+    public partial class ScoreServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGame.IScoreService>, MemoryGame.MemoryGame.IScoreService {
         
         public ScoreServiceClient() {
         }

@@ -47,14 +47,14 @@
   <ItemGroup>
     <Compile Include="DataValidators\IPlayerValidator.cs" />
     <Compile Include="DataValidators\PlayerValidator.cs" />
-    <Compile Include="IAccessibilityService.cs" />
-    <Compile Include="IChatClient.cs" />
-    <Compile Include="ICommunicationService.cs" />
-    <Compile Include="IDataValidationService.cs" />
-    <Compile Include="IMailingService.cs" />
-    <Compile Include="IMemoryGameService.cs" />
-    <Compile Include="IScoreService.cs" />
-    <Compile Include="ITokenGenerator.cs" />
+    <Compile Include="Contracts\IAccessibilityService.cs" />
+    <Compile Include="Contracts\IChatClient.cs" />
+    <Compile Include="Contracts\ICommunicationService.cs" />
+    <Compile Include="Contracts\IDataValidationService.cs" />
+    <Compile Include="Contracts\IMailingService.cs" />
+    <Compile Include="Contracts\IMemoryGameService.cs" />
+    <Compile Include="Contracts\IScoreService.cs" />
+    <Compile Include="Contracts\ITokenGenerator.cs" />
     <Compile Include="MemoryGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

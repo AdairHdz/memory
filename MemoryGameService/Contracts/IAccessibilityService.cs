@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
 
-namespace MemoryGameService
+namespace MemoryGameService.Contracts
 {
     [ServiceContract]
     public interface IAccessibilityService

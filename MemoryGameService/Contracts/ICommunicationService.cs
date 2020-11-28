@@ -5,7 +5,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MemoryGameService
+namespace MemoryGameService.Contracts
 {
 
     [ServiceContract(CallbackContract = typeof(IChatClient))]
