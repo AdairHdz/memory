@@ -20,25 +20,25 @@ namespace MemoryGame
         private string _username;
         private string _password;
         private string _encryptedPassword;
-        private string _verificationToken;        
+        private string _verificationToken;
+        private MemoryGameService.PlayerRegistryServiceClient _playerRegistryServiceClient;
         public Register()
         {            
             InitializeComponent();
+            _playerRegistryServiceClient = new MemoryGameService.PlayerRegistryServiceClient();
         }
 
         private bool EmailAddressIsAvailable()
-        {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-            bool emailAddressIsAvailable = 
-                client.EmailAddressIsAvailable(_emailAddress);
+        {            
+            bool emailAddressIsAvailable =
+                _playerRegistryServiceClient.EmailAddressIsAvailable(_emailAddress);
             //return emailAddressIsAvailable;
             return true;
         }
 
         private bool UsernameIsAvailable()
-        {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-            bool usernameIsAvailable = client.UserNameIsAvailable(_username);
+        {            
+            bool usernameIsAvailable = _playerRegistryServiceClient.UserNameIsAvailable(_username);
             //return usernameIsAvailable;
             return true;
         }
@@ -90,10 +90,8 @@ namespace MemoryGame
         }
 
         private bool PlayerWasSuccessfullyRegistered()
-        {            
-            MemoryGameService.AccessibilityServiceClient client =
-                new MemoryGameService.AccessibilityServiceClient();            
-            return client.RegisterNewPlayer(_emailAddress, _username, _encryptedPassword, _verificationToken);
+        {                                  
+            return _playerRegistryServiceClient.RegisterNewPlayer(_emailAddress, _username, _encryptedPassword, _verificationToken);
         }
 
         private void CancelButtonClicked(object sender, RoutedEventArgs e)

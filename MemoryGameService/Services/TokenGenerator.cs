@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MemoryGameService.Services
 {
-    public partial class TokenGenerator : ITokenGenerator
+    public partial class MemoryGameService : ITokenGenerator
     {
         public string GenerateToken(int length)
         {

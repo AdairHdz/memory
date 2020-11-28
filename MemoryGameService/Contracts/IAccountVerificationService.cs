@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MemoryGameService.Contracts
 {
+    [ServiceContract]
     public interface IAccountVerificationService
     {
         [OperationContract]

@@ -87,9 +87,9 @@ namespace MemoryGame
 
         private bool UsernameIsAvailable()
         {
-            MemoryGameService.AccessibilityServiceClient accessibilityServiceClient =
-                new MemoryGameService.AccessibilityServiceClient();
-            return accessibilityServiceClient.UserNameIsAvailable(_newUsername);
+            MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
+                new MemoryGameService.PlayerRegistryServiceClient();
+            return playerRegistryServiceClient.UserNameIsAvailable(_newUsername);
         }
 
         private bool UsernameIsValid()
@@ -99,9 +99,9 @@ namespace MemoryGame
 
         private bool ChangeUserName()
         {            
-            MemoryGameService.AccessibilityServiceClient accessibilityServiceClient =
-                new MemoryGameService.AccessibilityServiceClient();
-            return accessibilityServiceClient.ChangeUsername(_userEmailAddress, _newUsername);
+            MemoryGameService.AccountModifiabilityServiceClient accountModifiabilityServiceClient =
+                new MemoryGameService.AccountModifiabilityServiceClient();
+            return accountModifiabilityServiceClient.ChangeUsername(_userEmailAddress, _newUsername);
         }
 
         private void GoToMainWindow()

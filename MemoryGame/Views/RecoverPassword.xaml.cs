@@ -51,9 +51,9 @@ namespace MemoryGame
                 new MailingServiceClient();
             client.SendVerificationToken(GetUsername(), TextBoxEmail.Text, _verificationToken);
 
-            AccessibilityServiceClient accesibilityServiceClient =
-                new AccessibilityServiceClient();
-            accesibilityServiceClient.AssignNewVerificationToken(TextBoxEmail.Text, _verificationToken);
+            AccountVerificationServiceClient accountVerificationServiceClient =
+                new AccountVerificationServiceClient();
+            accountVerificationServiceClient.AssignNewVerificationToken(TextBoxEmail.Text, _verificationToken);
         }
 
         private void SendCodeButtonClicked(object sender, RoutedEventArgs e)
