@@ -11,7 +11,7 @@ namespace MemoryGameServiceHost
     {
         static void Main(string[] args)
         {
-            using(ServiceHost host = new ServiceHost(typeof(MemoryGameService.MemoryGameService)))
+            using(ServiceHost host = new ServiceHost(typeof(MemoryGameService.Services.MemoryGameService)))
             {                
                 host.Open();                
                 Console.WriteLine("Server started @ " + DateTime.Now.ToString());

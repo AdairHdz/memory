@@ -9,7 +9,7 @@ namespace MemoryGameService.DataValidators
     {
         public PlayerValidator()
         {
-            RuleFor(player => player.EmailAddress).Cascade(CascadeMode.Stop).Matches("[a-zA-Z]+[0-9]*@[a-z]+\\.[a-z]+\\.?[a-z]*");
+            RuleFor(player => player.EmailAddress).Cascade(CascadeMode.Stop).Matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
             RuleFor(player => player.UserName).Cascade(CascadeMode.Stop).NotEmpty().MinimumLength(1);
             RuleFor(player => player.Password).Cascade(CascadeMode.Stop).Matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
         }
