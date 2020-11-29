@@ -20,10 +20,12 @@ namespace MemoryGame
     /// </summary>
     public partial class ScoreTable : Window
     {
+        private MemoryGameService.DataTransferObjects.PlayerScoreDTO[] _playersWithBestScores;
         public ScoreTable()
         {
             InitializeComponent();
             GetBestScores();
+            PopulateTableWithBestScores();
         }
 
         private void GetBestScores()
@@ -31,10 +33,25 @@ namespace MemoryGame
             MemoryGameService.ScoreServiceClient client =
                 new MemoryGameService.ScoreServiceClient();
 
-            List<MemoryGameService.DataTransferObjects.PlayerCredentialsDTO> playersWithBestScores =
-                client.GetPlayersWithBestScore(10);
+             _playersWithBestScores = client.GetPlayersWithBestScore(10);
 
-            
+
+        }
+
+        private void PopulateTableWithBestScores()
+        {
+            ScoreDataGrid.DataContext = _playersWithBestScores;
+            ScoreDataGrid.AutoGenerateColumns = false;
+
+            /*
+            for (int i = 0; i < _playersWithBestScores.Length; i++)
+            {
+                string username = _playersWithBestScores[i].Username;
+                ScoreDataGrid.Items.Add(
+                    _playersWithBestScores[i]
+                );
+            }
+            */
         }
 
         

@@ -67,10 +67,10 @@ namespace MemoryGame
                     Sesion playerSesion = Sesion.GetSesion;
                     playerSesion.Username = TextBoxUsername.Text;
                     playerSesion.EmailAddress = GetUserEmailAdress();
-                    ChangeUsername changeUserNameWindow = new ChangeUsername();
-                    changeUserNameWindow.Show();
-                    this.Close();
-                    //GoToMainMenu();
+                    //ChangeUsername changeUserNameWindow = new ChangeUsername();
+                    //changeUserNameWindow.Show();
+                    //this.Close();
+                    GoToMainMenu();
                 }
                 else
                 {

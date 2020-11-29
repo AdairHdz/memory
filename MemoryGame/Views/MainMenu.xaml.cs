@@ -40,7 +40,7 @@ namespace MemoryGame
 
         private void ScoreTableButtonClicked(object sender, RoutedEventArgs e)
         {
-            Chat scoreTableView = new Chat();
+            ScoreTable scoreTableView = new ScoreTable();
             scoreTableView.Show();
             this.Close();
         }
