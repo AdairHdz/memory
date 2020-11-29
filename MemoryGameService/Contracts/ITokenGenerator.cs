@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using System.ServiceModel;
 
-namespace MemoryGameService
+namespace MemoryGameService.Contracts
 {
     [ServiceContract]
-    public interface IChatClient
+    public interface ITokenGenerator
     {
         [OperationContract]
-        void ReciveMessage(string username, string message);
-
+        string GenerateToken(int length);
     }
 }

@@ -86,6 +86,12 @@ namespace MemoryGame.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccessibilityService/SetNewPasswordResponse")]
         System.Threading.Tasks.Task<bool> SetNewPasswordAsync(string emailAddress, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccessibilityService/ChangeUsernameResponse")]
+        bool ChangeUsername(string emailAddress, string newUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccessibilityService/ChangeUsernameResponse")]
+        System.Threading.Tasks.Task<bool> ChangeUsernameAsync(string emailAddress, string newUsername);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -209,6 +215,14 @@ namespace MemoryGame.Proxy {
         
         public System.Threading.Tasks.Task<bool> SetNewPasswordAsync(string emailAddress, string password) {
             return base.Channel.SetNewPasswordAsync(emailAddress, password);
+        }
+        
+        public bool ChangeUsername(string emailAddress, string newUsername) {
+            return base.Channel.ChangeUsername(emailAddress, newUsername);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ChangeUsernameAsync(string emailAddress, string newUsername) {
+            return base.Channel.ChangeUsernameAsync(emailAddress, newUsername);
         }
     }
     

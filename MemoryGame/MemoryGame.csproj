@@ -85,16 +85,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\MemoryGameService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\Proxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="InputValidation\RegistryValidation\EmailAddressAvailabilityValidationRule.cs" />
+    <Compile Include="InputValidation\RegistryValidation\EmailAddressValidationRule.cs" />
+    <Compile Include="InputValidation\RegistryValidation\IRegistryRule.cs" />
+    <Compile Include="InputValidation\RegistryValidation\PasswordValidationRule.cs" />
+    <Compile Include="InputValidation\RegistryValidation\UsernameAvailabilityValidationRule.cs" />
+    <Compile Include="InputValidation\RegistryValidation\UsernameValidationRule.cs" />
+    <Compile Include="InputValidation\RegistryValidation\RegistryData.cs" />
+    <Compile Include="InputValidation\ValidationRuleResult.cs" />
     <Compile Include="Properties\Langs\Resources.es-MX.Designer.cs">
       <DependentUpon>Resources.es-MX.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Utilities\TokenManager.cs" />
     <Compile Include="Views\ActivationToken.xaml.cs">
       <DependentUpon>ActivationToken.xaml</DependentUpon>
     </Compile>
@@ -103,11 +117,6 @@
     </Compile>
     <Compile Include="Views\ChangeUsername.xaml.cs">
       <DependentUpon>ChangeUsername.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\MemoryGameService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Views\Chat.xaml.cs">
       <DependentUpon>Chat.xaml</DependentUpon>
@@ -248,7 +257,7 @@
     <None Include="Connected Services\MemoryGameService\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\MemoryGameService\item11.xsd">
+    <None Include="Connected Services\MemoryGameService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\MemoryGameService\MemoryGameService.wsdl" />
@@ -264,6 +273,13 @@
     <None Include="Connected Services\Proxy\MemoryGameService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DataAccess.Models.Player.datasource" />
+    <None Include="Connected Services\MemoryGameService\item.disco" />
+    <None Include="Connected Services\MemoryGameService\configuration91.svcinfo" />
+    <None Include="Connected Services\MemoryGameService\configuration.svcinfo" />
+    <None Include="Connected Services\MemoryGameService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Fonts\ReenieBeanie-Regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -295,21 +311,6 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\MemoryGameService\" />
     <WCFMetadataStorage Include="Connected Services\Proxy\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MemoryGameService\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MemoryGameService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MemoryGameService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MemoryGameService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\Proxy\configuration91.svcinfo" />

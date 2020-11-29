@@ -1,16 +1,17 @@
-﻿using System;
+﻿using DataAccess.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MemoryGameService
+namespace MemoryGameService.Contracts
 {
     [ServiceContract]
-    public interface ITokenGenerator
+    public interface IScoreService
     {
         [OperationContract]
-        string GenerateToken(int length);
+        string[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
     }
 }

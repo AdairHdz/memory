@@ -1,17 +1,16 @@
-﻿using DataAccess.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MemoryGameService
+namespace MemoryGameService.Contracts
 {
     [ServiceContract]
-    public interface IScoreService
+    public interface IDataValidationService
     {
         [OperationContract]
-        string[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
+        bool ValidateRegisterForm(string emailAddress, string username, string password);
     }
 }

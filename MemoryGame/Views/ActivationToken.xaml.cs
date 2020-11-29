@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace MemoryGame
 {
@@ -65,9 +52,9 @@ namespace MemoryGame
                 new MemoryGameService.TokenGeneratorClient();
             string newToken = tokenGeneratorClient.GenerateToken(6);
 
-            MemoryGameService.AccessibilityServiceClient accesibilityServiceClient =
-                new MemoryGameService.AccessibilityServiceClient();
-            accesibilityServiceClient.AssignNewVerificationToken(_emailAddress, newToken);
+            MemoryGameService.AccountVerificationServiceClient accountVerificationServiceClient =
+                new MemoryGameService.AccountVerificationServiceClient();
+            accountVerificationServiceClient.AssignNewVerificationToken(_emailAddress, newToken);
 
             MemoryGameService.MailingServiceClient mailingServiceClient =
                 new MemoryGameService.MailingServiceClient();
@@ -79,16 +66,16 @@ namespace MemoryGame
 
         private bool TokenIsCorrect()
         {
-            MemoryGameService.AccessibilityServiceClient client =
-                new MemoryGameService.AccessibilityServiceClient();
-            return client.VerifyToken(_emailAddress, TextBoxToken.Text);
+            MemoryGameService.AccountVerificationServiceClient accountVerificationServiceClient =
+                new MemoryGameService.AccountVerificationServiceClient();
+            return accountVerificationServiceClient.VerifyToken(_emailAddress, TextBoxToken.Text);
         }
 
         private bool AccountWasSuccessfullyVerified()
         {
-            MemoryGameService.AccessibilityServiceClient client =
-                new MemoryGameService.AccessibilityServiceClient();
-            return client.SetAccountAsVerified(_emailAddress);
+            MemoryGameService.AccountVerificationServiceClient accountVerificationServiceClient =
+                new MemoryGameService.AccountVerificationServiceClient();
+            return accountVerificationServiceClient.SetAccountAsVerified(_emailAddress);
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)

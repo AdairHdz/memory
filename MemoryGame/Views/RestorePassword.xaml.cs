@@ -25,12 +25,12 @@ namespace MemoryGame
 
         public bool SetNewPassword()
         {
-            AccessibilityServiceClient client =
-                new AccessibilityServiceClient();
+            AccountModifiabilityServiceClient accountModifiabilityServiceClient =
+                new AccountModifiabilityServiceClient();
 
             string password = MD5Encryption.Encrypt(NewPasswordBox.Password);
 
-            return client.SetNewPassword(_emailAddress, password);
+            return accountModifiabilityServiceClient.SetNewPassword(_emailAddress, password);
         }
 
         private void OkButtonClicked(object sender, RoutedEventArgs e)
@@ -65,9 +65,9 @@ namespace MemoryGame
                 new TokenGeneratorClient();
             string newToken = tokenGeneratorClient.GenerateToken(6);
 
-            AccessibilityServiceClient accesibilityServiceClient =
-                new AccessibilityServiceClient();
-            accesibilityServiceClient.AssignNewVerificationToken(_emailAddress, newToken);
+            AccountVerificationServiceClient accountVerificationServiceClient =
+                new AccountVerificationServiceClient();
+            accountVerificationServiceClient.AssignNewVerificationToken(_emailAddress, newToken);
 
             MailingServiceClient mailingServiceClient =
                 new MailingServiceClient();
@@ -79,9 +79,9 @@ namespace MemoryGame
 
         private bool TokenIsCorrect()
         {
-            AccessibilityServiceClient client =
-                new AccessibilityServiceClient();
-            return client.VerifyToken(_emailAddress, TextBoxToken.Text);
+            AccountVerificationServiceClient accountVerificationServiceClient =
+                new AccountVerificationServiceClient();
+            return accountVerificationServiceClient.VerifyToken(_emailAddress, TextBoxToken.Text);
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)

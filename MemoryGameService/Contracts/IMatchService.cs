@@ -5,16 +5,16 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MemoryGameService
+namespace MemoryGameService.Contracts
 {
-    [ServiceContract(CallbackContract = typeof(IMemoryGameCallback))]
-    public interface IMemoryGameService
+    [ServiceContract(CallbackContract = typeof(IMatchServiceCallback))]
+    public interface IMatchService
     {
         [OperationContract(IsOneWay = true)]
         void GetActivePlayers();        
     }
 
-    public interface IMemoryGameCallback
+    public interface IMatchServiceCallback
     {
         [OperationContract(IsOneWay = true)]
         void ShowActivePlayers(List<string> activePlayers);
