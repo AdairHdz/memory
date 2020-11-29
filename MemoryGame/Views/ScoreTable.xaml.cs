@@ -30,12 +30,11 @@ namespace MemoryGame
         {
             MemoryGameService.ScoreServiceClient client =
                 new MemoryGameService.ScoreServiceClient();
-            string[] names = client.GetPlayersWithBestScore(10);
-            for(int i = 0; i < names.Length; i++)
-            {
-                
-                Console.WriteLine("PUNTAJEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE" + names[i]);
-            }
+
+            List<MemoryGameService.DataTransferObjects.PlayerCredentialsDTO> playersWithBestScores =
+                client.GetPlayersWithBestScore(10);
+
+            
         }
 
         

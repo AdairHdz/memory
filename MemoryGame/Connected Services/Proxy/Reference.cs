@@ -16,10 +16,10 @@ namespace MemoryGame.Proxy {
     public interface IAccessibilityService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
-        bool HasAccessRights(string username, string password);
+        bool HasAccessRights(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
-        System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password);
+        System.Threading.Tasks.Task<bool> HasAccessRightsAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/IsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/IsVerifiedResponse")]
         bool IsVerified(string username);
@@ -27,41 +27,11 @@ namespace MemoryGame.Proxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/IsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/IsVerifiedResponse")]
         System.Threading.Tasks.Task<bool> IsVerifiedAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse")]
-        bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ItsRegistered", ReplyAction="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse")]
+        bool ItsRegistered(string emailAddress);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse")]
-        System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password, string verificationToken);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailable", ReplyAction="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailableResponse")]
-        bool EmailAddressIsAvailable(string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailable", ReplyAction="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailableResponse")]
-        System.Threading.Tasks.Task<bool> EmailAddressIsAvailableAsync(string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/UserNameIsAvailable", ReplyAction="http://tempuri.org/IAccessibilityService/UserNameIsAvailableResponse")]
-        bool UserNameIsAvailable(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/UserNameIsAvailable", ReplyAction="http://tempuri.org/IAccessibilityService/UserNameIsAvailableResponse")]
-        System.Threading.Tasks.Task<bool> UserNameIsAvailableAsync(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/VerifyToken", ReplyAction="http://tempuri.org/IAccessibilityService/VerifyTokenResponse")]
-        bool VerifyToken(string emailAddress, string verificationToken);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/VerifyToken", ReplyAction="http://tempuri.org/IAccessibilityService/VerifyTokenResponse")]
-        System.Threading.Tasks.Task<bool> VerifyTokenAsync(string emailAddress, string verificationToken);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/SetAccountAsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/SetAccountAsVerifiedResponse")]
-        bool SetAccountAsVerified(string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/SetAccountAsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/SetAccountAsVerifiedResponse")]
-        System.Threading.Tasks.Task<bool> SetAccountAsVerifiedAsync(string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken", ReplyAction="http://tempuri.org/IAccessibilityService/AssignNewVerificationTokenResponse")]
-        bool AssignNewVerificationToken(string emailAddress, string verificationToken);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken", ReplyAction="http://tempuri.org/IAccessibilityService/AssignNewVerificationTokenResponse")]
-        System.Threading.Tasks.Task<bool> AssignNewVerificationTokenAsync(string emailAddress, string verificationToken);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ItsRegistered", ReplyAction="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse")]
+        System.Threading.Tasks.Task<bool> ItsRegisteredAsync(string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress", ReplyAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse")]
         string GetUserEmailAddress(string username);
@@ -74,24 +44,6 @@ namespace MemoryGame.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
         System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ItsRegistered", ReplyAction="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse")]
-        bool ItsRegistered(string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ItsRegistered", ReplyAction="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse")]
-        System.Threading.Tasks.Task<bool> ItsRegisteredAsync(string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccessibilityService/SetNewPasswordResponse")]
-        bool SetNewPassword(string emailAddress, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccessibilityService/SetNewPasswordResponse")]
-        System.Threading.Tasks.Task<bool> SetNewPasswordAsync(string emailAddress, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccessibilityService/ChangeUsernameResponse")]
-        bool ChangeUsername(string emailAddress, string newUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccessibilityService/ChangeUsernameResponse")]
-        System.Threading.Tasks.Task<bool> ChangeUsernameAsync(string emailAddress, string newUsername);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -121,12 +73,12 @@ namespace MemoryGame.Proxy {
                 base(binding, remoteAddress) {
         }
         
-        public bool HasAccessRights(string username, string password) {
-            return base.Channel.HasAccessRights(username, password);
+        public bool HasAccessRights(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
+            return base.Channel.HasAccessRights(playerCredentialsDTO);
         }
         
-        public System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password) {
-            return base.Channel.HasAccessRightsAsync(username, password);
+        public System.Threading.Tasks.Task<bool> HasAccessRightsAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
+            return base.Channel.HasAccessRightsAsync(playerCredentialsDTO);
         }
         
         public bool IsVerified(string username) {
@@ -137,36 +89,142 @@ namespace MemoryGame.Proxy {
             return base.Channel.IsVerifiedAsync(username);
         }
         
-        public bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken) {
-            return base.Channel.RegisterNewPlayer(emailAddress, username, password, verificationToken);
+        public bool ItsRegistered(string emailAddress) {
+            return base.Channel.ItsRegistered(emailAddress);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(string emailAddress, string username, string password, string verificationToken) {
-            return base.Channel.RegisterNewPlayerAsync(emailAddress, username, password, verificationToken);
+        public System.Threading.Tasks.Task<bool> ItsRegisteredAsync(string emailAddress) {
+            return base.Channel.ItsRegisteredAsync(emailAddress);
         }
         
-        public bool EmailAddressIsAvailable(string emailAddress) {
-            return base.Channel.EmailAddressIsAvailable(emailAddress);
+        public string GetUserEmailAddress(string username) {
+            return base.Channel.GetUserEmailAddress(username);
         }
         
-        public System.Threading.Tasks.Task<bool> EmailAddressIsAvailableAsync(string emailAddress) {
-            return base.Channel.EmailAddressIsAvailableAsync(emailAddress);
+        public System.Threading.Tasks.Task<string> GetUserEmailAddressAsync(string username) {
+            return base.Channel.GetUserEmailAddressAsync(username);
         }
         
-        public bool UserNameIsAvailable(string username) {
-            return base.Channel.UserNameIsAvailable(username);
+        public string GetUsername(string emailAddress) {
+            return base.Channel.GetUsername(emailAddress);
         }
         
-        public System.Threading.Tasks.Task<bool> UserNameIsAvailableAsync(string username) {
-            return base.Channel.UserNameIsAvailableAsync(username);
+        public System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress) {
+            return base.Channel.GetUsernameAsync(emailAddress);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IAccountModifiabilityService")]
+    public interface IAccountModifiabilityService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
+        bool SetNewPassword(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
+        System.Threading.Tasks.Task<bool> SetNewPasswordAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse")]
+        bool ChangeUsername(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse")]
+        System.Threading.Tasks.Task<bool> ChangeUsernameAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IAccountModifiabilityServiceChannel : MemoryGame.Proxy.IAccountModifiabilityService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AccountModifiabilityServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.IAccountModifiabilityService>, MemoryGame.Proxy.IAccountModifiabilityService {
+        
+        public AccountModifiabilityServiceClient() {
         }
         
-        public bool VerifyToken(string emailAddress, string verificationToken) {
-            return base.Channel.VerifyToken(emailAddress, verificationToken);
+        public AccountModifiabilityServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
         }
         
-        public System.Threading.Tasks.Task<bool> VerifyTokenAsync(string emailAddress, string verificationToken) {
-            return base.Channel.VerifyTokenAsync(emailAddress, verificationToken);
+        public AccountModifiabilityServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AccountModifiabilityServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AccountModifiabilityServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public bool SetNewPassword(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
+            return base.Channel.SetNewPassword(playerCredentialsDTO);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SetNewPasswordAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
+            return base.Channel.SetNewPasswordAsync(playerCredentialsDTO);
+        }
+        
+        public bool ChangeUsername(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
+            return base.Channel.ChangeUsername(playerCredentialsDTO);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ChangeUsernameAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
+            return base.Channel.ChangeUsernameAsync(playerCredentialsDTO);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IAccountVerificationService")]
+    public interface IAccountVerificationService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/SetAccountAsVerified", ReplyAction="http://tempuri.org/IAccountVerificationService/SetAccountAsVerifiedResponse")]
+        bool SetAccountAsVerified(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/SetAccountAsVerified", ReplyAction="http://tempuri.org/IAccountVerificationService/SetAccountAsVerifiedResponse")]
+        System.Threading.Tasks.Task<bool> SetAccountAsVerifiedAsync(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/AssignNewVerificationToken", ReplyAction="http://tempuri.org/IAccountVerificationService/AssignNewVerificationTokenResponse" +
+            "")]
+        bool AssignNewVerificationToken(string emailAddress, string verificationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/AssignNewVerificationToken", ReplyAction="http://tempuri.org/IAccountVerificationService/AssignNewVerificationTokenResponse" +
+            "")]
+        System.Threading.Tasks.Task<bool> AssignNewVerificationTokenAsync(string emailAddress, string verificationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/VerifyToken", ReplyAction="http://tempuri.org/IAccountVerificationService/VerifyTokenResponse")]
+        bool VerifyToken(string emailAddress, string verificationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/VerifyToken", ReplyAction="http://tempuri.org/IAccountVerificationService/VerifyTokenResponse")]
+        System.Threading.Tasks.Task<bool> VerifyTokenAsync(string emailAddress, string verificationToken);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IAccountVerificationServiceChannel : MemoryGame.Proxy.IAccountVerificationService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AccountVerificationServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.IAccountVerificationService>, MemoryGame.Proxy.IAccountVerificationService {
+        
+        public AccountVerificationServiceClient() {
+        }
+        
+        public AccountVerificationServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public AccountVerificationServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AccountVerificationServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AccountVerificationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
         }
         
         public bool SetAccountAsVerified(string emailAddress) {
@@ -185,44 +243,12 @@ namespace MemoryGame.Proxy {
             return base.Channel.AssignNewVerificationTokenAsync(emailAddress, verificationToken);
         }
         
-        public string GetUserEmailAddress(string username) {
-            return base.Channel.GetUserEmailAddress(username);
+        public bool VerifyToken(string emailAddress, string verificationToken) {
+            return base.Channel.VerifyToken(emailAddress, verificationToken);
         }
         
-        public System.Threading.Tasks.Task<string> GetUserEmailAddressAsync(string username) {
-            return base.Channel.GetUserEmailAddressAsync(username);
-        }
-        
-        public string GetUsername(string emailAddress) {
-            return base.Channel.GetUsername(emailAddress);
-        }
-        
-        public System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress) {
-            return base.Channel.GetUsernameAsync(emailAddress);
-        }
-        
-        public bool ItsRegistered(string emailAddress) {
-            return base.Channel.ItsRegistered(emailAddress);
-        }
-        
-        public System.Threading.Tasks.Task<bool> ItsRegisteredAsync(string emailAddress) {
-            return base.Channel.ItsRegisteredAsync(emailAddress);
-        }
-        
-        public bool SetNewPassword(string emailAddress, string password) {
-            return base.Channel.SetNewPassword(emailAddress, password);
-        }
-        
-        public System.Threading.Tasks.Task<bool> SetNewPasswordAsync(string emailAddress, string password) {
-            return base.Channel.SetNewPasswordAsync(emailAddress, password);
-        }
-        
-        public bool ChangeUsername(string emailAddress, string newUsername) {
-            return base.Channel.ChangeUsername(emailAddress, newUsername);
-        }
-        
-        public System.Threading.Tasks.Task<bool> ChangeUsernameAsync(string emailAddress, string newUsername) {
-            return base.Channel.ChangeUsernameAsync(emailAddress, newUsername);
+        public System.Threading.Tasks.Task<bool> VerifyTokenAsync(string emailAddress, string verificationToken) {
+            return base.Channel.VerifyTokenAsync(emailAddress, verificationToken);
         }
     }
     
@@ -296,61 +322,6 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IMemoryGameService", CallbackContract=typeof(MemoryGame.Proxy.IMemoryGameServiceCallback))]
-    public interface IMemoryGameService {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMemoryGameService/GetActivePlayers")]
-        void GetActivePlayers();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMemoryGameService/GetActivePlayers")]
-        System.Threading.Tasks.Task GetActivePlayersAsync();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMemoryGameServiceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMemoryGameService/ShowActivePlayers")]
-        void ShowActivePlayers(string[] activePlayers);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMemoryGameServiceChannel : MemoryGame.Proxy.IMemoryGameService, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MemoryGameServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.Proxy.IMemoryGameService>, MemoryGame.Proxy.IMemoryGameService {
-        
-        public MemoryGameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
-        }
-        
-        public MemoryGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
-        }
-        
-        public MemoryGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public MemoryGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public MemoryGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
-        }
-        
-        public void GetActivePlayers() {
-            base.Channel.GetActivePlayers();
-        }
-        
-        public System.Threading.Tasks.Task GetActivePlayersAsync() {
-            return base.Channel.GetActivePlayersAsync();
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IMailingService")]
     public interface IMailingService {
         
@@ -394,6 +365,61 @@ namespace MemoryGame.Proxy {
         
         public System.Threading.Tasks.Task SendVerificationTokenAsync(string name, string emailAddress, string verificationToken) {
             return base.Channel.SendVerificationTokenAsync(name, emailAddress, verificationToken);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IMatchService", CallbackContract=typeof(MemoryGame.Proxy.IMatchServiceCallback))]
+    public interface IMatchService {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/GetActivePlayers")]
+        void GetActivePlayers();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/GetActivePlayers")]
+        System.Threading.Tasks.Task GetActivePlayersAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMatchServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ShowActivePlayers")]
+        void ShowActivePlayers(string[] activePlayers);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMatchServiceChannel : MemoryGame.Proxy.IMatchService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class MatchServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.Proxy.IMatchService>, MemoryGame.Proxy.IMatchService {
+        
+        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void GetActivePlayers() {
+            base.Channel.GetActivePlayers();
+        }
+        
+        public System.Threading.Tasks.Task GetActivePlayersAsync() {
+            return base.Channel.GetActivePlayersAsync();
         }
     }
     
@@ -445,61 +471,14 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IDataValidationService")]
-    public interface IDataValidationService {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataValidationService/ValidateRegisterForm", ReplyAction="http://tempuri.org/IDataValidationService/ValidateRegisterFormResponse")]
-        bool ValidateRegisterForm(string emailAddress, string username, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataValidationService/ValidateRegisterForm", ReplyAction="http://tempuri.org/IDataValidationService/ValidateRegisterFormResponse")]
-        System.Threading.Tasks.Task<bool> ValidateRegisterFormAsync(string emailAddress, string username, string password);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDataValidationServiceChannel : MemoryGame.Proxy.IDataValidationService, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DataValidationServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.IDataValidationService>, MemoryGame.Proxy.IDataValidationService {
-        
-        public DataValidationServiceClient() {
-        }
-        
-        public DataValidationServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public DataValidationServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public DataValidationServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public DataValidationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        public bool ValidateRegisterForm(string emailAddress, string username, string password) {
-            return base.Channel.ValidateRegisterForm(emailAddress, username, password);
-        }
-        
-        public System.Threading.Tasks.Task<bool> ValidateRegisterFormAsync(string emailAddress, string username, string password) {
-            return base.Channel.ValidateRegisterFormAsync(emailAddress, username, password);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IScoreService")]
     public interface IScoreService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IScoreService/GetPlayersWithBestScore", ReplyAction="http://tempuri.org/IScoreService/GetPlayersWithBestScoreResponse")]
-        string[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
+        MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IScoreService/GetPlayersWithBestScore", ReplyAction="http://tempuri.org/IScoreService/GetPlayersWithBestScoreResponse")]
-        System.Threading.Tasks.Task<string[]> GetPlayersWithBestScoreAsync(int numberOfPlayersToBeRetrieved);
+        System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO[]> GetPlayersWithBestScoreAsync(int numberOfPlayersToBeRetrieved);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -529,12 +508,87 @@ namespace MemoryGame.Proxy {
                 base(binding, remoteAddress) {
         }
         
-        public string[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved) {
+        public MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved) {
             return base.Channel.GetPlayersWithBestScore(numberOfPlayersToBeRetrieved);
         }
         
-        public System.Threading.Tasks.Task<string[]> GetPlayersWithBestScoreAsync(int numberOfPlayersToBeRetrieved) {
+        public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO[]> GetPlayersWithBestScoreAsync(int numberOfPlayersToBeRetrieved) {
             return base.Channel.GetPlayersWithBestScoreAsync(numberOfPlayersToBeRetrieved);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IPlayerRegistryService")]
+    public interface IPlayerRegistryService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse")]
+        bool RegisterNewPlayer(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse")]
+        System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailable", ReplyAction="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailableResponse")]
+        bool EmailAddressIsAvailable(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailable", ReplyAction="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailableResponse")]
+        System.Threading.Tasks.Task<bool> EmailAddressIsAvailableAsync(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailable", ReplyAction="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailableResponse")]
+        bool UserNameIsAvailable(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailable", ReplyAction="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailableResponse")]
+        System.Threading.Tasks.Task<bool> UserNameIsAvailableAsync(string username);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPlayerRegistryServiceChannel : MemoryGame.Proxy.IPlayerRegistryService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PlayerRegistryServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.IPlayerRegistryService>, MemoryGame.Proxy.IPlayerRegistryService {
+        
+        public PlayerRegistryServiceClient() {
+        }
+        
+        public PlayerRegistryServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public PlayerRegistryServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PlayerRegistryServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PlayerRegistryServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public bool RegisterNewPlayer(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO) {
+            return base.Channel.RegisterNewPlayer(playerDTO);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO) {
+            return base.Channel.RegisterNewPlayerAsync(playerDTO);
+        }
+        
+        public bool EmailAddressIsAvailable(string emailAddress) {
+            return base.Channel.EmailAddressIsAvailable(emailAddress);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EmailAddressIsAvailableAsync(string emailAddress) {
+            return base.Channel.EmailAddressIsAvailableAsync(emailAddress);
+        }
+        
+        public bool UserNameIsAvailable(string username) {
+            return base.Channel.UserNameIsAvailable(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UserNameIsAvailableAsync(string username) {
+            return base.Channel.UserNameIsAvailableAsync(username);
         }
     }
 }

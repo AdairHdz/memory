@@ -1,7 +1,9 @@
 ﻿using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
+using MemoryGameService.DataTransferObjectMappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +14,25 @@ namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IScoreService
     {
-        public string[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
+        List<PlayerScoreDTO> IScoreService.GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            IEnumerable<Player> players =
+            IEnumerable<Player> playerEntities =
                 unitOfWork.Players.GetPlayersWithBestScore(numberOfPlayersToBeRetrieved);
-            string[] names = new string[numberOfPlayersToBeRetrieved];
-            foreach (var player in players)
+
+            List<PlayerScoreDTO> playersWithBestScores = MapFromEntitiesToDTOs(playerEntities);
+            return playersWithBestScores;
+        }
+
+        private List<PlayerScoreDTO> MapFromEntitiesToDTOs(IEnumerable<Player> listOfEntities)
+        {
+            List<PlayerScoreDTO> playersWithBestScores = new List<PlayerScoreDTO>();
+            foreach (Player player in listOfEntities)
             {
-                names.Append(player.UserName);
+                PlayerScoreDTO playerScoreDTO = PlayerScoreMapper.createDTO(player);
+                playersWithBestScores.Add(playerScoreDTO);
             }
-            return names;
+            return playersWithBestScores;
         }
     }
 }

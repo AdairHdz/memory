@@ -16,7 +16,7 @@ namespace MemoryGame.InputValidation.RegistryValidation
             bool emailAddressIsAvailable =
                 _playerRegistryServiceClient.EmailAddressIsAvailable(emailAddress);
 
-            if (emailAddressIsAvailable)
+            if (!emailAddressIsAvailable)
             {
                 return new ValidationRuleResult(ValidationRuleResult.ERROR, "El email ingresado" +
                     "ya se encuentra registrado en nuestra base de datos");

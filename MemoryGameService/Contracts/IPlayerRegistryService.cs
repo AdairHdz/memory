@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -11,7 +12,7 @@ namespace MemoryGameService.Contracts
     public interface IPlayerRegistryService
     {
         [OperationContract]
-        bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken);
+        bool RegisterNewPlayer(PlayerDTO playerDTO);
         [OperationContract]
         bool EmailAddressIsAvailable(string emailAddress);
         [OperationContract]

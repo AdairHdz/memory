@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -11,8 +12,8 @@ namespace MemoryGameService.Contracts
     public interface IAccountModifiabilityService
     {
         [OperationContract]
-        bool SetNewPassword(string emailAddress, string password);
+        bool SetNewPassword(PlayerCredentialsDTO playerCredentialsDTO);
         [OperationContract]
-        bool ChangeUsername(string emailAddress, string newUsername);
+        bool ChangeUsername(PlayerCredentialsDTO playerCredentialsDTO);
     }
 }

@@ -116,8 +116,17 @@ namespace MemoryGame
         {
             MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
                 new MemoryGameService.PlayerRegistryServiceClient();
-            return playerRegistryServiceClient.RegisterNewPlayer(_registryData.EmailAddress, _registryData.Username,
-                _registryData.Password, _verificationToken);
+
+            MemoryGameService.DataTransferObjects.PlayerDTO playerDTO =
+                new MemoryGameService.DataTransferObjects.PlayerDTO()
+                {
+                    Username = _registryData.Username,
+                    EmailAddress = _registryData.EmailAddress,
+                    Password = _registryData.Password,
+                    VerificationToken = _verificationToken
+                };
+            
+            return playerRegistryServiceClient.RegisterNewPlayer(playerDTO);
         }
 
         private void GoToActivationTokenWindow()

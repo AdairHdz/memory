@@ -2,28 +2,23 @@
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGameService.Contracts;
+using MemoryGameService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 
 namespace MemoryGameService.Services
-{
+{    
     public partial class MemoryGameService : IPlayerRegistryService
     {
-        public bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken)
+        public bool RegisterNewPlayer(PlayerDTO playerDTO)
         {
-            Player newPlayer = new Player()
-            {
-                EmailAddress = emailAddress,
-                UserName = username,
-                Password = password,
-                TotalScore = 0,
-                EmailWasVerified = false,
-                ActivationToken = verificationToken
-
-            };
+            Player newPlayer = PlayerMapper.CreateEntity(playerDTO);
+            newPlayer.EmailWasVerified = false;
+            newPlayer.TotalScore = 0;
             var unityOfWork = new UnitOfWork(new MemoryGameContext());
             unityOfWork.Players.Add(newPlayer);
             int playerWasRegistered = unityOfWork.Complete();
@@ -47,5 +42,7 @@ namespace MemoryGameService.Services
             unitOfWork.Dispose();
             return playersWhichHaveThatUserName == 0;
         }
+
+
     }
 }

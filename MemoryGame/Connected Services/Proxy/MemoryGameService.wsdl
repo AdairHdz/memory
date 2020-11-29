@@ -29,7 +29,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_ICommunicationService_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_IAccountModifiabilityService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -58,7 +58,36 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IMemoryGameService_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_IAccountVerificationService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_ICommunicationService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -116,7 +145,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_ITokenGenerator_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_IMatchService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -145,7 +174,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IDataValidationService_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_ITokenGenerator_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -203,11 +232,41 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IPlayerRegistryService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IAccessibilityService_HasAccessRights_InputMessage">
@@ -222,41 +281,11 @@
   <wsdl:message name="IAccessibilityService_IsVerified_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsVerifiedResponse" />
   </wsdl:message>
-  <wsdl:message name="IAccessibilityService_RegisterNewPlayer_InputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterNewPlayer" />
+  <wsdl:message name="IAccessibilityService_ItsRegistered_InputMessage">
+    <wsdl:part name="parameters" element="tns:ItsRegistered" />
   </wsdl:message>
-  <wsdl:message name="IAccessibilityService_RegisterNewPlayer_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterNewPlayerResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_EmailAddressIsAvailable_InputMessage">
-    <wsdl:part name="parameters" element="tns:EmailAddressIsAvailable" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_EmailAddressIsAvailable_OutputMessage">
-    <wsdl:part name="parameters" element="tns:EmailAddressIsAvailableResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_UserNameIsAvailable_InputMessage">
-    <wsdl:part name="parameters" element="tns:UserNameIsAvailable" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_UserNameIsAvailable_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UserNameIsAvailableResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_VerifyToken_InputMessage">
-    <wsdl:part name="parameters" element="tns:VerifyToken" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_VerifyToken_OutputMessage">
-    <wsdl:part name="parameters" element="tns:VerifyTokenResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_SetAccountAsVerified_InputMessage">
-    <wsdl:part name="parameters" element="tns:SetAccountAsVerified" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_SetAccountAsVerified_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SetAccountAsVerifiedResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_AssignNewVerificationToken_InputMessage">
-    <wsdl:part name="parameters" element="tns:AssignNewVerificationToken" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_AssignNewVerificationToken_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AssignNewVerificationTokenResponse" />
+  <wsdl:message name="IAccessibilityService_ItsRegistered_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ItsRegisteredResponse" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetUserEmailAddress_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUserEmailAddress" />
@@ -270,23 +299,35 @@
   <wsdl:message name="IAccessibilityService_GetUsername_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUsernameResponse" />
   </wsdl:message>
-  <wsdl:message name="IAccessibilityService_ItsRegistered_InputMessage">
-    <wsdl:part name="parameters" element="tns:ItsRegistered" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_ItsRegistered_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ItsRegisteredResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_SetNewPassword_InputMessage">
+  <wsdl:message name="IAccountModifiabilityService_SetNewPassword_InputMessage">
     <wsdl:part name="parameters" element="tns:SetNewPassword" />
   </wsdl:message>
-  <wsdl:message name="IAccessibilityService_SetNewPassword_OutputMessage">
+  <wsdl:message name="IAccountModifiabilityService_SetNewPassword_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetNewPasswordResponse" />
   </wsdl:message>
-  <wsdl:message name="IAccessibilityService_ChangeUsername_InputMessage">
+  <wsdl:message name="IAccountModifiabilityService_ChangeUsername_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangeUsername" />
   </wsdl:message>
-  <wsdl:message name="IAccessibilityService_ChangeUsername_OutputMessage">
+  <wsdl:message name="IAccountModifiabilityService_ChangeUsername_OutputMessage">
     <wsdl:part name="parameters" element="tns:ChangeUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_SetAccountAsVerified_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAccountAsVerified" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_SetAccountAsVerified_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAccountAsVerifiedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_AssignNewVerificationToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssignNewVerificationToken" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_AssignNewVerificationToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssignNewVerificationTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_VerifyToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyToken" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_VerifyToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyTokenResponse" />
   </wsdl:message>
   <wsdl:message name="ICommunicationService_Join_InputMessage">
     <wsdl:part name="parameters" element="tns:Join" />
@@ -300,17 +341,17 @@
   <wsdl:message name="ICommunicationService_ReciveMessage_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveMessageResponse" />
   </wsdl:message>
-  <wsdl:message name="IMemoryGameService_GetActivePlayers_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetActivePlayers" />
-  </wsdl:message>
-  <wsdl:message name="IMemoryGameService_ShowActivePlayers_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ShowActivePlayers" />
-  </wsdl:message>
   <wsdl:message name="IMailingService_SendVerificationToken_InputMessage">
     <wsdl:part name="parameters" element="tns:SendVerificationToken" />
   </wsdl:message>
   <wsdl:message name="IMailingService_SendVerificationToken_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendVerificationTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_GetActivePlayers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetActivePlayers" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_ShowActivePlayers_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ShowActivePlayers" />
   </wsdl:message>
   <wsdl:message name="ITokenGenerator_GenerateToken_InputMessage">
     <wsdl:part name="parameters" element="tns:GenerateToken" />
@@ -318,17 +359,29 @@
   <wsdl:message name="ITokenGenerator_GenerateToken_OutputMessage">
     <wsdl:part name="parameters" element="tns:GenerateTokenResponse" />
   </wsdl:message>
-  <wsdl:message name="IDataValidationService_ValidateRegisterForm_InputMessage">
-    <wsdl:part name="parameters" element="tns:ValidateRegisterForm" />
-  </wsdl:message>
-  <wsdl:message name="IDataValidationService_ValidateRegisterForm_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ValidateRegisterFormResponse" />
-  </wsdl:message>
   <wsdl:message name="IScoreService_GetPlayersWithBestScore_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayersWithBestScore" />
   </wsdl:message>
   <wsdl:message name="IScoreService_GetPlayersWithBestScore_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayersWithBestScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerRegistryService_RegisterNewPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterNewPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerRegistryService_RegisterNewPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterNewPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerRegistryService_EmailAddressIsAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmailAddressIsAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerRegistryService_EmailAddressIsAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmailAddressIsAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerRegistryService_UserNameIsAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserNameIsAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerRegistryService_UserNameIsAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserNameIsAvailableResponse" />
   </wsdl:message>
   <wsdl:portType name="IAccessibilityService">
     <wsdl:operation name="HasAccessRights">
@@ -339,29 +392,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerified" message="tns:IAccessibilityService_IsVerified_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerifiedResponse" message="tns:IAccessibilityService_IsVerified_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RegisterNewPlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayer" message="tns:IAccessibilityService_RegisterNewPlayer_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/RegisterNewPlayerResponse" message="tns:IAccessibilityService_RegisterNewPlayer_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="EmailAddressIsAvailable">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailable" message="tns:IAccessibilityService_EmailAddressIsAvailable_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailableResponse" message="tns:IAccessibilityService_EmailAddressIsAvailable_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UserNameIsAvailable">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/UserNameIsAvailable" message="tns:IAccessibilityService_UserNameIsAvailable_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/UserNameIsAvailableResponse" message="tns:IAccessibilityService_UserNameIsAvailable_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="VerifyToken">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/VerifyToken" message="tns:IAccessibilityService_VerifyToken_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/VerifyTokenResponse" message="tns:IAccessibilityService_VerifyToken_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="SetAccountAsVerified">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/SetAccountAsVerified" message="tns:IAccessibilityService_SetAccountAsVerified_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/SetAccountAsVerifiedResponse" message="tns:IAccessibilityService_SetAccountAsVerified_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="AssignNewVerificationToken">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken" message="tns:IAccessibilityService_AssignNewVerificationToken_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/AssignNewVerificationTokenResponse" message="tns:IAccessibilityService_AssignNewVerificationToken_OutputMessage" />
+    <wsdl:operation name="ItsRegistered">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegistered" message="tns:IAccessibilityService_ItsRegistered_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse" message="tns:IAccessibilityService_ItsRegistered_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUserEmailAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress" message="tns:IAccessibilityService_GetUserEmailAddress_InputMessage" />
@@ -371,17 +404,29 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsername" message="tns:IAccessibilityService_GetUsername_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameResponse" message="tns:IAccessibilityService_GetUsername_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ItsRegistered">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegistered" message="tns:IAccessibilityService_ItsRegistered_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse" message="tns:IAccessibilityService_ItsRegistered_OutputMessage" />
-    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IAccountModifiabilityService">
     <wsdl:operation name="SetNewPassword">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/SetNewPassword" message="tns:IAccessibilityService_SetNewPassword_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/SetNewPasswordResponse" message="tns:IAccessibilityService_SetNewPassword_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword" message="tns:IAccountModifiabilityService_SetNewPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse" message="tns:IAccountModifiabilityService_SetNewPassword_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ChangeUsername">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/ChangeUsername" message="tns:IAccessibilityService_ChangeUsername_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/ChangeUsernameResponse" message="tns:IAccessibilityService_ChangeUsername_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername" message="tns:IAccountModifiabilityService_ChangeUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse" message="tns:IAccountModifiabilityService_ChangeUsername_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IAccountVerificationService">
+    <wsdl:operation name="SetAccountAsVerified">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/SetAccountAsVerified" message="tns:IAccountVerificationService_SetAccountAsVerified_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/SetAccountAsVerifiedResponse" message="tns:IAccountVerificationService_SetAccountAsVerified_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignNewVerificationToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/AssignNewVerificationToken" message="tns:IAccountVerificationService_AssignNewVerificationToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/AssignNewVerificationTokenResponse" message="tns:IAccountVerificationService_AssignNewVerificationToken_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyToken" message="tns:IAccountVerificationService_VerifyToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyTokenResponse" message="tns:IAccountVerificationService_VerifyToken_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICommunicationService">
@@ -396,18 +441,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/ReciveMessageResponse" message="tns:ICommunicationService_ReciveMessage_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="IMemoryGameService">
-    <wsdl:operation name="GetActivePlayers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMemoryGameService/GetActivePlayers" message="tns:IMemoryGameService_GetActivePlayers_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ShowActivePlayers">
-      <wsdl:output wsaw:Action="http://tempuri.org/IMemoryGameService/ShowActivePlayers" message="tns:IMemoryGameService_ShowActivePlayers_OutputCallbackMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
   <wsdl:portType name="IMailingService">
     <wsdl:operation name="SendVerificationToken">
       <wsdl:input wsaw:Action="http://tempuri.org/IMailingService/SendVerificationToken" message="tns:IMailingService_SendVerificationToken_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMailingService/SendVerificationTokenResponse" message="tns:IMailingService_SendVerificationToken_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IMatchService">
+    <wsdl:operation name="GetActivePlayers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/GetActivePlayers" message="tns:IMatchService_GetActivePlayers_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowActivePlayers">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/ShowActivePlayers" message="tns:IMatchService_ShowActivePlayers_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ITokenGenerator">
@@ -416,16 +461,24 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ITokenGenerator/GenerateTokenResponse" message="tns:ITokenGenerator_GenerateToken_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="IDataValidationService">
-    <wsdl:operation name="ValidateRegisterForm">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDataValidationService/ValidateRegisterForm" message="tns:IDataValidationService_ValidateRegisterForm_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDataValidationService/ValidateRegisterFormResponse" message="tns:IDataValidationService_ValidateRegisterForm_OutputMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
   <wsdl:portType name="IScoreService">
     <wsdl:operation name="GetPlayersWithBestScore">
       <wsdl:input wsaw:Action="http://tempuri.org/IScoreService/GetPlayersWithBestScore" message="tns:IScoreService_GetPlayersWithBestScore_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IScoreService/GetPlayersWithBestScoreResponse" message="tns:IScoreService_GetPlayersWithBestScore_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IPlayerRegistryService">
+    <wsdl:operation name="RegisterNewPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer" message="tns:IPlayerRegistryService_RegisterNewPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse" message="tns:IPlayerRegistryService_RegisterNewPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmailAddressIsAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailable" message="tns:IPlayerRegistryService_EmailAddressIsAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailableResponse" message="tns:IPlayerRegistryService_EmailAddressIsAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserNameIsAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailable" message="tns:IPlayerRegistryService_UserNameIsAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailableResponse" message="tns:IPlayerRegistryService_UserNameIsAvailable_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IAccessibilityService" type="tns:IAccessibilityService">
@@ -449,53 +502,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RegisterNewPlayer">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/RegisterNewPlayer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EmailAddressIsAvailable">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/EmailAddressIsAvailable" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UserNameIsAvailable">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/UserNameIsAvailable" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="VerifyToken">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/VerifyToken" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SetAccountAsVerified">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/SetAccountAsVerified" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="AssignNewVerificationToken">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/AssignNewVerificationToken" style="document" />
+    <wsdl:operation name="ItsRegistered">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/ItsRegistered" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -521,17 +529,12 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ItsRegistered">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/ItsRegistered" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IAccountModifiabilityService" type="tns:IAccountModifiabilityService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IAccountModifiabilityService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="SetNewPassword">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/SetNewPassword" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IAccountModifiabilityService/SetNewPassword" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -540,7 +543,38 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ChangeUsername">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/ChangeUsername" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IAccountVerificationService" type="tns:IAccountVerificationService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IAccountVerificationService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="SetAccountAsVerified">
+      <soap12:operation soapAction="http://tempuri.org/IAccountVerificationService/SetAccountAsVerified" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignNewVerificationToken">
+      <soap12:operation soapAction="http://tempuri.org/IAccountVerificationService/AssignNewVerificationToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyToken">
+      <soap12:operation soapAction="http://tempuri.org/IAccountVerificationService/VerifyToken" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -574,22 +608,6 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IMemoryGameService" type="tns:IMemoryGameService">
-    <wsp:PolicyReference URI="#NetTcpBinding_IMemoryGameService_policy" />
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="GetActivePlayers">
-      <soap12:operation soapAction="http://tempuri.org/IMemoryGameService/GetActivePlayers" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="ShowActivePlayers">
-      <soap12:operation soapAction="http://tempuri.org/IMemoryGameService/ShowActivePlayers" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IMailingService" type="tns:IMailingService">
     <wsp:PolicyReference URI="#NetTcpBinding_IMailingService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
@@ -603,24 +621,27 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_ITokenGenerator" type="tns:ITokenGenerator">
-    <wsp:PolicyReference URI="#NetTcpBinding_ITokenGenerator_policy" />
+  <wsdl:binding name="NetTcpBinding_IMatchService" type="tns:IMatchService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMatchService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="GenerateToken">
-      <soap12:operation soapAction="http://tempuri.org/ITokenGenerator/GenerateToken" style="document" />
+    <wsdl:operation name="GetActivePlayers">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/GetActivePlayers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ShowActivePlayers">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/ShowActivePlayers" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IDataValidationService" type="tns:IDataValidationService">
-    <wsp:PolicyReference URI="#NetTcpBinding_IDataValidationService_policy" />
+  <wsdl:binding name="NetTcpBinding_ITokenGenerator" type="tns:ITokenGenerator">
+    <wsp:PolicyReference URI="#NetTcpBinding_ITokenGenerator_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="ValidateRegisterForm">
-      <soap12:operation soapAction="http://tempuri.org/IDataValidationService/ValidateRegisterForm" style="document" />
+    <wsdl:operation name="GenerateToken">
+      <soap12:operation soapAction="http://tempuri.org/ITokenGenerator/GenerateToken" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -642,8 +663,57 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IPlayerRegistryService" type="tns:IPlayerRegistryService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPlayerRegistryService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="RegisterNewPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EmailAddressIsAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameIsAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="MemoryGameService">
     <wsdl:port name="NetTcpBinding_IAccessibilityService" binding="tns:NetTcpBinding_IAccessibilityService">
+      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IAccountModifiabilityService" binding="tns:NetTcpBinding_IAccountModifiabilityService">
+      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IAccountVerificationService" binding="tns:NetTcpBinding_IAccountVerificationService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
@@ -661,7 +731,7 @@
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IMemoryGameService" binding="tns:NetTcpBinding_IMemoryGameService">
+    <wsdl:port name="NetTcpBinding_IMailingService" binding="tns:NetTcpBinding_IMailingService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
@@ -670,7 +740,7 @@
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IMailingService" binding="tns:NetTcpBinding_IMailingService">
+    <wsdl:port name="NetTcpBinding_IMatchService" binding="tns:NetTcpBinding_IMatchService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
@@ -688,7 +758,7 @@
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IDataValidationService" binding="tns:NetTcpBinding_IDataValidationService">
+    <wsdl:port name="NetTcpBinding_IScoreService" binding="tns:NetTcpBinding_IScoreService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
@@ -697,7 +767,7 @@
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IScoreService" binding="tns:NetTcpBinding_IScoreService">
+    <wsdl:port name="NetTcpBinding_IPlayerRegistryService" binding="tns:NetTcpBinding_IPlayerRegistryService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
