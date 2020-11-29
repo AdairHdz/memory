@@ -14,16 +14,6 @@ namespace MemoryGameService.Services
     {
         public bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken)
         {
-
-            var u = new UnitOfWork(new MemoryGameContext());
-            var players = u.Players.GetAll();
-            foreach (var player in players)
-            {
-                u.Players.Remove(player);
-            }
-            u.Complete();
-            u.Dispose();
-
             Player newPlayer = new Player()
             {
                 EmailAddress = emailAddress,

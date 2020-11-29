@@ -1,10 +1,8 @@
-﻿using MemoryGame.MemoryGameService;
-using System;
-using System.Security;
-using System.Security.Cryptography;
-using System.Text;
+﻿using MemoryGame.InputValidation;
+using MemoryGame.InputValidation.RegistryValidation;
+using MemoryGame.Utilities;
+using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using Utilities;
 
 namespace MemoryGame
@@ -16,82 +14,95 @@ namespace MemoryGame
 
     public partial class Register : Window
     {
-        private string _emailAddress;
-        private string _username;
-        private string _password;
-        private string _encryptedPassword;
         private string _verificationToken;
-        private MemoryGameService.PlayerRegistryServiceClient _playerRegistryServiceClient;
+        private RegistryData _registryData;
+        private List<IRegistryRule> _rules;
+        private List<ValidationRuleResult> _validationResultErrors;
+
+
         public Register()
         {            
             InitializeComponent();
-            _playerRegistryServiceClient = new MemoryGameService.PlayerRegistryServiceClient();
+            SetFormValidation();
         }
 
-        private bool EmailAddressIsAvailable()
-        {            
-            bool emailAddressIsAvailable =
-                _playerRegistryServiceClient.EmailAddressIsAvailable(_emailAddress);
-            //return emailAddressIsAvailable;
-            return true;
+        private void SetFormValidation()
+        {
+            _rules = new List<IRegistryRule>();
+            _rules.Add(new UsernameValidationRule());
+            _rules.Add(new EmailAddressValidationRule());
+            _rules.Add(new PasswordValidationRule());
+            _rules.Add(new EmailAddressAvailabilityValidationRule());
+            _rules.Add(new UsernameAvailabilityValidationRule());
         }
 
-        private bool UsernameIsAvailable()
-        {            
-            bool usernameIsAvailable = _playerRegistryServiceClient.UserNameIsAvailable(_username);
-            //return usernameIsAvailable;
-            return true;
+        private void ObtainValidationErrors()
+        {
+            _validationResultErrors = new List<ValidationRuleResult>();
+            foreach (IRegistryRule rule in _rules)
+            {
+                ValidationRuleResult validationRuleResult = rule.Validate(_registryData);
+                if (validationRuleResult.Status == ValidationRuleResult.ERROR)
+                {
+                    _validationResultErrors.Add(validationRuleResult);
+                }
+            }
+        }
+
+        private void ShowErrorMessage()
+        {
+            foreach (ValidationRuleResult validationRuleResult
+                in _validationResultErrors)
+            {
+                MessageBox.Show(validationRuleResult.Message);
+                return;
+            }
+        }
+
+        private bool ValidationPassed()
+        {
+            ObtainValidationErrors();
+            if (_validationResultErrors.Count == 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         private void RegisterButtonClicked(object sender, RoutedEventArgs e)
         {
-
-            _emailAddress = TextBoxEmail.Text;
-            _username = TextBoxUsername.Text;
-            _password = PasswordBoxPassword.Password;
-
-            if (isValidData())
+            _registryData = new RegistryData()
             {
-                _encryptedPassword = MD5Encryption.Encrypt(_password);
-                if (EmailAddressIsAvailable())
-                {
-                    if (UsernameIsAvailable())
-                    {
-                        GenerateVerificationToken();
-                        if (PlayerWasSuccessfullyRegistered())
-                        {
-                            SendVerificationCode();
-                            ActivationToken activationTokenWindow =
-                                new ActivationToken(_emailAddress, _username);
-                            activationTokenWindow.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error en el registro");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("El nombre de usuario proporcionado ya se encuentra ocupado");
-                    }
+                EmailAddress = TextBoxEmail.Text,
+                Username = TextBoxUsername.Text,
+                Password = PasswordBoxPassword.Password
+            };
 
+            if (ValidationPassed())
+            {
+                _registryData.Password = MD5Encryption.Encrypt(_registryData.Password);
+                _verificationToken = TokenManager.GenerateVerificationToken();
+
+                if (PlayerWasSuccessfullyRegistered())
+                {
+                    SendVerificationToken();
+                    GoToActivationTokenWindow();
                 }
                 else
                 {
-                    MessageBox.Show("El email proporcionado ya se encuentra ocupado");
-                }
+                    MessageBox.Show("Error al registrar");
+                }                
             }
             else
             {
-                MessageBox.Show("Datos no válidos");
-            }
-            
+                ShowErrorMessage();
+            }                       
         }
 
-        private bool PlayerWasSuccessfullyRegistered()
-        {                                  
-            return _playerRegistryServiceClient.RegisterNewPlayer(_emailAddress, _username, _encryptedPassword, _verificationToken);
+        private void SendVerificationToken()
+        {
+            TokenManager.SendVerificationToken(_registryData.Username,
+                    _registryData.EmailAddress, _verificationToken);
         }
 
         private void CancelButtonClicked(object sender, RoutedEventArgs e)
@@ -101,26 +112,20 @@ namespace MemoryGame
             this.Close();
         }
 
-        private void GenerateVerificationToken()
+        private bool PlayerWasSuccessfullyRegistered()
         {
-            MemoryGameService.TokenGeneratorClient client =
-                new MemoryGameService.TokenGeneratorClient();
-            _verificationToken = client.GenerateToken(6);
+            MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
+                new MemoryGameService.PlayerRegistryServiceClient();
+            return playerRegistryServiceClient.RegisterNewPlayer(_registryData.EmailAddress, _registryData.Username,
+                _registryData.Password, _verificationToken);
         }
 
-        private void SendVerificationCode()
+        private void GoToActivationTokenWindow()
         {
-            MemoryGameService.MailingServiceClient client = 
-                new MemoryGameService.MailingServiceClient();
-            client.SendVerificationToken(_username, _emailAddress, _verificationToken);
+            ActivationToken activationTokenWindow =
+                new ActivationToken(_registryData.EmailAddress, _registryData.Username);
+            activationTokenWindow.Show();
+            this.Close();
         }
-
-        private bool isValidData()
-        {                        
-            MemoryGameService.DataValidationServiceClient client =
-                new MemoryGameService.DataValidationServiceClient();
-            return client.ValidateRegisterForm(_emailAddress, _username, _password);
-        }
-
     }
 }
