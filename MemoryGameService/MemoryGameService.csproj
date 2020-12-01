@@ -49,9 +49,11 @@
     <Compile Include="Contracts\IAccountModifiabilityService.cs" />
     <Compile Include="Contracts\IAccountVerificationService.cs" />
     <Compile Include="Contracts\IPlayerRegistryService.cs" />
+    <Compile Include="Contracts\IShufflingCardService.cs" />
     <Compile Include="DataTransferObjectMappers\PlayerCredentialsMapper.cs" />
     <Compile Include="DataTransferObjectMappers\PlayerMapper.cs" />
     <Compile Include="DataTransferObjectMappers\PlayerScoreMapper.cs" />
+    <Compile Include="DataTransferObjects\CardDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerCredentialsDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerScoreDTO.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Services\MatchService.cs" />
     <Compile Include="Services\PlayerRegistryService.cs" />
     <Compile Include="Services\ScoreService.cs" />
+    <Compile Include="Services\ShufflingCardService.cs" />
     <Compile Include="Services\TokenGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

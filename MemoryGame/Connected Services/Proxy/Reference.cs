@@ -591,4 +591,51 @@ namespace MemoryGame.Proxy {
             return base.Channel.UserNameIsAvailableAsync(username);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IShufflingCardService")]
+    public interface IShufflingCardService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IShufflingCardService/ShuffleCards", ReplyAction="http://tempuri.org/IShufflingCardService/ShuffleCardsResponse")]
+        MemoryGame.MemoryGameService.DataTransferObjects.CardDTO[] ShuffleCards();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IShufflingCardService/ShuffleCards", ReplyAction="http://tempuri.org/IShufflingCardService/ShuffleCardsResponse")]
+        System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDTO[]> ShuffleCardsAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IShufflingCardServiceChannel : MemoryGame.Proxy.IShufflingCardService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ShufflingCardServiceClient : System.ServiceModel.ClientBase<MemoryGame.Proxy.IShufflingCardService>, MemoryGame.Proxy.IShufflingCardService {
+        
+        public ShufflingCardServiceClient() {
+        }
+        
+        public ShufflingCardServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public ShufflingCardServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ShufflingCardServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ShufflingCardServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public MemoryGame.MemoryGameService.DataTransferObjects.CardDTO[] ShuffleCards() {
+            return base.Channel.ShuffleCards();
+        }
+        
+        public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDTO[]> ShuffleCardsAsync() {
+            return base.Channel.ShuffleCardsAsync();
+        }
+    }
 }

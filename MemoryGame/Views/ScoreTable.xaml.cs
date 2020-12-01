@@ -19,41 +19,46 @@ namespace MemoryGame
     /// Lógica de interacción para ScoreTable.xaml
     /// </summary>
     public partial class ScoreTable : Window
-    {
-        private MemoryGameService.DataTransferObjects.PlayerScoreDTO[] _playersWithBestScores;
+    {        
         public ScoreTable()
         {
             InitializeComponent();
-            GetBestScores();
             PopulateTableWithBestScores();
         }
 
-        private void GetBestScores()
+        private MemoryGameService.DataTransferObjects.PlayerScoreDTO[] GetBestScores()
         {
             MemoryGameService.ScoreServiceClient client =
                 new MemoryGameService.ScoreServiceClient();
 
-             _playersWithBestScores = client.GetPlayersWithBestScore(10);
-
-
+            return client.GetPlayersWithBestScore(10);
         }
+
 
         private void PopulateTableWithBestScores()
         {
-            ScoreDataGrid.DataContext = _playersWithBestScores;
-            ScoreDataGrid.AutoGenerateColumns = false;
-
-            /*
-            for (int i = 0; i < _playersWithBestScores.Length; i++)
+            MemoryGameService.DataTransferObjects.PlayerScoreDTO[] playerScoreDTOs;
+            playerScoreDTOs = GetBestScores();
+            for(int i = 0; i < playerScoreDTOs.Length; i++)
             {
-                string username = _playersWithBestScores[i].Username;
-                ScoreDataGrid.Items.Add(
-                    _playersWithBestScores[i]
-                );
+                PlayerScore playerScore = new PlayerScore();
+                var data = new PlayerScore
+                {
+                    Username = playerScoreDTOs[i].Username,
+                    Score = playerScoreDTOs[i].TotalScore
+                };
+                ScoreDataGrid.Items.Add(data);
             }
-            */
         }
 
-        
+        class PlayerScore
+        {
+            public string Username { get; set; }
+            public int Score { get; set; }
+        }
     }
+
+
+
 }
+

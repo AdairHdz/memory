@@ -30,4 +30,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerDTO" nillable="true" type="tns:PlayerDTO" />
+  <xs:complexType name="ArrayOfCardDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CardDTO" nillable="true" type="tns:CardDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCardDTO" nillable="true" type="tns:ArrayOfCardDTO" />
+  <xs:complexType name="CardDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CardDTO" nillable="true" type="tns:CardDTO" />
 </xs:schema>

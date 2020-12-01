@@ -12,7 +12,6 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
     {
         [DataMember]
         public int CardId { get; set; }
-        [DataMember]
         public string FrontImage { get; set; }
     }
 }

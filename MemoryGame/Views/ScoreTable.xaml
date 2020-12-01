@@ -73,10 +73,12 @@
                     <DataGridTextColumn 
                         HeaderStyle="{StaticResource dataGridHeader}"
                         Header="{x:Static p:Resources.Username}" Width="150"
-                        x:Name="DataGridTextColumnUsername"/>
+                        x:Name="DataGridTextColumnUsername"
+                        Binding="{Binding Username}"/>
                     <DataGridTextColumn
                         HeaderStyle="{StaticResource dataGridHeader}"
-                        Header="{x:Static p:Resources.Points}" Width="*"/>
+                        Header="{x:Static p:Resources.Points}" Width="*"
+                        Binding="{Binding Score}"/>
                 </DataGrid.Columns>
                 
             </DataGrid>
