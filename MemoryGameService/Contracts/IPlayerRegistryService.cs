@@ -11,9 +11,9 @@ namespace MemoryGameService.Contracts
 {
     [ServiceContract]
     public interface IPlayerRegistryService
-    {
-        [FaultContract(typeof(EndpointNotFoundFault))]
+    {        
         [OperationContract]
+        [FaultContract(typeof(EndpointNotFoundFault))]
         bool RegisterNewPlayer(PlayerDTO playerDTO);
         [OperationContract]
         bool EmailAddressIsAvailable(string emailAddress);

@@ -131,12 +131,9 @@ namespace MemoryGame
             try
             {
                 playerWasSucessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO);
-            }catch(FaultException<MemoryGameService.Faults.EndpointNotFoundFault> faultException)
+            }catch(FaultException faultException)
             {
-                MessageBox.Show(faultException.Detail.Error);
-            }catch(FaultException ex)
-            {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(faultException.Message);
             }
             return playerWasSucessfullyRegistered;
         }

@@ -11,23 +11,18 @@ using System.Threading.Tasks;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using System.ServiceModel;
 using MemoryGame.MemoryGameService.Faults;
+using System.Net.Sockets;
 
 namespace MemoryGameService.Services
 {    
     public partial class MemoryGameService : IPlayerRegistryService
     {
         public bool RegisterNewPlayer(PlayerDTO playerDTO)
-        {            
+        {
+            /*
             try
             {
-                Player newPlayer = PlayerMapper.CreateEntity(playerDTO);
-                newPlayer.EmailWasVerified = false;
-                newPlayer.TotalScore = 0;
-                var unityOfWork = new UnitOfWork(new MemoryGameContext());
-                unityOfWork.Players.Add(newPlayer);
-                int playerWasRegistered = unityOfWork.Complete();
-                unityOfWork.Dispose();
-                return playerWasRegistered == 1;
+
             }
             catch (EndpointNotFoundException)
             {
@@ -36,7 +31,22 @@ namespace MemoryGameService.Services
                 endpointNotFoundFault.Details = "Detalles (falta hacerlo un resource)";
                 throw new FaultException<EndpointNotFoundFault>(endpointNotFoundFault);
             }
-
+            catch (SocketException)
+            {
+                EndpointNotFoundFault endpointNotFoundFault = new EndpointNotFoundFault();
+                endpointNotFoundFault.Error = "Endpoint no encontrado (falta hacerlo un resource)";
+                endpointNotFoundFault.Details = "Detalles (falta hacerlo un resource)";
+                throw new FaultException<EndpointNotFoundFault>(endpointNotFoundFault);
+            }
+            */
+            Player newPlayer = PlayerMapper.CreateEntity(playerDTO);
+            newPlayer.EmailWasVerified = false;
+            newPlayer.TotalScore = 0;
+            var unityOfWork = new UnitOfWork(new MemoryGameContext());
+            unityOfWork.Players.Add(newPlayer);
+            int playerWasRegistered = unityOfWork.Complete();
+            unityOfWork.Dispose();
+            return playerWasRegistered == 1;
         }
 
         public bool EmailAddressIsAvailable(string emailAddress)
