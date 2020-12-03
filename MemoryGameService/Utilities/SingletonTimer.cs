@@ -20,11 +20,20 @@ namespace MemoryGameService.Utilities
         {
             if(_timer == null)
             {
-                _timer = new Timer(1000);
+                _timer = new Timer();
+                _timer.Elapsed += null;
+                _timer.Interval = 1000;
                 _timer.Enabled = true;
-                _timer.AutoReset = false;                
+                _timer.Start();
+                //_timer.Enabled = true;
+                //_timer.AutoReset = false;                
             }
             return _timer;
+        }
+
+        void HandleElapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Console.WriteLine(DateTime.Now.ToString());
         }
 
     }

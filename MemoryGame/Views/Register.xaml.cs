@@ -33,8 +33,8 @@ namespace MemoryGame
             _rules.Add(new UsernameValidationRule());
             _rules.Add(new EmailAddressValidationRule());
             _rules.Add(new PasswordValidationRule());
-            //_rules.Add(new EmailAddressAvailabilityValidationRule());
-            //_rules.Add(new UsernameAvailabilityValidationRule());
+            _rules.Add(new EmailAddressAvailabilityValidationRule());
+            _rules.Add(new UsernameAvailabilityValidationRule());
         }
 
         private void ObtainValidationErrors()
@@ -82,7 +82,7 @@ namespace MemoryGame
             if (ValidationPassed())
             {
                 _registryData.Password = MD5Encryption.Encrypt(_registryData.Password);
-                //_verificationToken = TokenManager.GenerateVerificationToken();
+                _verificationToken = TokenManager.GenerateVerificationToken();
 
                 if (PlayerWasSuccessfullyRegistered())
                 {
@@ -124,8 +124,7 @@ namespace MemoryGame
                     Username = _registryData.Username,
                     EmailAddress = _registryData.EmailAddress,
                     Password = _registryData.Password,
-                    //VerificationToken = _verificationToken
-                    VerificationToken = "123456"
+                    VerificationToken = _verificationToken
                 };
             bool playerWasSucessfullyRegistered = false;
             try

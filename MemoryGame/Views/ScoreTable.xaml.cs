@@ -24,6 +24,7 @@ namespace MemoryGame
         {
             InitializeComponent();
             PopulateTableWithBestScores();
+            
         }
 
         private MemoryGameService.DataTransferObjects.PlayerScoreDTO[] GetBestScores()

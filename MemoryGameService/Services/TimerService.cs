@@ -13,19 +13,12 @@ namespace MemoryGameService.Services
     //[ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
     public partial class MemoryGameService : ITimerService
     {
-        private int _timerValue = 50;
-
         public void UpdateTimer()
         {
-            Timer timer = SingletonTimer.GetInstance();
-            timer.Start();
-            timer.Elapsed += (sender, e) =>
-            {
-                OperationContext.Current.GetCallbackChannel<ITimerServiceCallback>().DisplayTimerValue(30);
-                _timerValue--;                
-            };
-            
-            
+            Timer timer = SingletonTimer.GetInstance();            
+            OperationContext.Current.GetCallbackChannel<ITimerServiceCallback>().DisplayTimerValue(30);
+
+
 
         }
     }
