@@ -1,4 +1,5 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.MemoryGameService.Faults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace MemoryGameService.Contracts
     [ServiceContract]
     public interface IPlayerRegistryService
     {
+        [FaultContract(typeof(EndpointNotFoundFault))]
         [OperationContract]
         bool RegisterNewPlayer(PlayerDTO playerDTO);
         [OperationContract]

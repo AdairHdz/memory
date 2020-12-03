@@ -174,6 +174,35 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_ITimerService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_ITokenGenerator_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -296,6 +325,7 @@
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IAccessibilityService_HasAccessRights_InputMessage">
@@ -382,6 +412,12 @@
   <wsdl:message name="IMatchService_ShowActivePlayers_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ShowActivePlayers" />
   </wsdl:message>
+  <wsdl:message name="ITimerService_UpdateTimer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTimer" />
+  </wsdl:message>
+  <wsdl:message name="ITimerService_DisplayTimerValue_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:DisplayTimerValue" />
+  </wsdl:message>
   <wsdl:message name="ITokenGenerator_GenerateToken_InputMessage">
     <wsdl:part name="parameters" element="tns:GenerateToken" />
   </wsdl:message>
@@ -399,6 +435,9 @@
   </wsdl:message>
   <wsdl:message name="IPlayerRegistryService_RegisterNewPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterNewPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerRegistryService_RegisterNewPlayer_EndpointNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q1:EndpointNotFoundFault" />
   </wsdl:message>
   <wsdl:message name="IPlayerRegistryService_EmailAddressIsAvailable_InputMessage">
     <wsdl:part name="parameters" element="tns:EmailAddressIsAvailable" />
@@ -490,6 +529,14 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/ShowActivePlayers" message="tns:IMatchService_ShowActivePlayers_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="ITimerService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateTimer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITimerService/UpdateTimer" message="tns:ITimerService_UpdateTimer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DisplayTimerValue">
+      <wsdl:output wsaw:Action="http://tempuri.org/ITimerService/DisplayTimerValue" message="tns:ITimerService_DisplayTimerValue_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
   <wsdl:portType name="ITokenGenerator">
     <wsdl:operation name="GenerateToken">
       <wsdl:input wsaw:Action="http://tempuri.org/ITokenGenerator/GenerateToken" message="tns:ITokenGenerator_GenerateToken_InputMessage" />
@@ -506,6 +553,7 @@
     <wsdl:operation name="RegisterNewPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer" message="tns:IPlayerRegistryService_RegisterNewPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse" message="tns:IPlayerRegistryService_RegisterNewPlayer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerEndpointNotFoundFaultFault" name="EndpointNotFoundFaultFault" message="tns:IPlayerRegistryService_RegisterNewPlayer_EndpointNotFoundFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="EmailAddressIsAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailable" message="tns:IPlayerRegistryService_EmailAddressIsAvailable_InputMessage" />
@@ -678,6 +726,22 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_ITimerService" type="tns:ITimerService">
+    <wsp:PolicyReference URI="#NetTcpBinding_ITimerService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="UpdateTimer">
+      <soap12:operation soapAction="http://tempuri.org/ITimerService/UpdateTimer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DisplayTimerValue">
+      <soap12:operation soapAction="http://tempuri.org/ITimerService/DisplayTimerValue" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ITokenGenerator" type="tns:ITokenGenerator">
     <wsp:PolicyReference URI="#NetTcpBinding_ITokenGenerator_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
@@ -715,6 +779,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="EndpointNotFoundFaultFault">
+        <soap12:fault use="literal" name="EndpointNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="EmailAddressIsAvailable">
       <soap12:operation soapAction="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailable" style="document" />
@@ -795,6 +862,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMatchService" binding="tns:NetTcpBinding_IMatchService">
+      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_ITimerService" binding="tns:NetTcpBinding_ITimerService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>

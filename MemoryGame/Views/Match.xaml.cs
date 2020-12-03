@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,12 +18,18 @@ namespace MemoryGame.Views
     /// <summary>
     /// Lógica de interacción para Match.xaml
     /// </summary>
-    public partial class Match : Window
+    [CallbackBehavior(UseSynchronizationContext = false)]
+    public partial class Match : Window, MemoryGameService.ITimerServiceCallback
     {
+        private InstanceContext _context = null;
+        private MemoryGameService.TimerServiceClient timerServiceClient;
 
         public Match()
         {
             InitializeComponent();
+            _context = new InstanceContext(this);
+            timerServiceClient = new MemoryGameService.TimerServiceClient(_context);
+            /*
             MemoryGameService.ShufflingCardServiceClient shufflingCardServiceClient =
                 new MemoryGameService.ShufflingCardServiceClient();
             MemoryGameService.DataTransferObjects.CardDTO[] cardsDTO =
@@ -35,19 +42,13 @@ namespace MemoryGame.Views
             {
                 list += cardsDTO[i].CardId + ", ";
             }
-            MessageBox.Show(list);
+            */
+            timerServiceClient.UpdateTimer();
         }
 
-        private void CreateRectangles()
+        public void DisplayTimerValue(int timerValue)
         {
-            int[] cards = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            for (int i = 0; i < cards.Length; i++)
-            {
-
-
-
-
-            }
+            MessageBox.Show("Valor: " + timerValue);
         }
     }
 }

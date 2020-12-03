@@ -197,6 +197,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="UpdateTimer">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayTimerValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="timerValue" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GenerateToken">
     <xs:complexType>
       <xs:sequence>
