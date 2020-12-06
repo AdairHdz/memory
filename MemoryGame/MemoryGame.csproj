@@ -302,6 +302,7 @@
     <Content Include="Fonts\ReenieBeanie-Regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGameService.DataTransferObjects.CardDTO.datasource" />
@@ -321,6 +322,7 @@
     <ProjectReference Include="..\MemoryGameService\MemoryGameService.csproj">
       <Project>{cfbd5fe1-14cd-4cb1-94a7-a21a145f4190}</Project>
       <Name>MemoryGameService</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{8D5E6426-5270-4595-A701-0769DBB13FA7}</Project>

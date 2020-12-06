@@ -29,6 +29,35 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_ICardDeckRetrieverService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_IAccountModifiabilityService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -290,35 +319,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IShufflingCardService_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
-        <wsaw:UsingAddressing />
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -357,6 +357,12 @@
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetUsername_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardDeckAndCards" />
+  </wsdl:message>
+  <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardDeckAndCardsResponse" />
   </wsdl:message>
   <wsdl:message name="IAccountModifiabilityService_SetNewPassword_InputMessage">
     <wsdl:part name="parameters" element="tns:SetNewPassword" />
@@ -451,12 +457,6 @@
   <wsdl:message name="IPlayerRegistryService_UserNameIsAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:UserNameIsAvailableResponse" />
   </wsdl:message>
-  <wsdl:message name="IShufflingCardService_ShuffleCards_InputMessage">
-    <wsdl:part name="parameters" element="tns:ShuffleCards" />
-  </wsdl:message>
-  <wsdl:message name="IShufflingCardService_ShuffleCards_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ShuffleCardsResponse" />
-  </wsdl:message>
   <wsdl:portType name="IAccessibilityService">
     <wsdl:operation name="HasAccessRights">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRights" message="tns:IAccessibilityService_HasAccessRights_InputMessage" />
@@ -477,6 +477,12 @@
     <wsdl:operation name="GetUsername">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsername" message="tns:IAccessibilityService_GetUsername_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameResponse" message="tns:IAccessibilityService_GetUsername_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ICardDeckRetrieverService">
+    <wsdl:operation name="GetCardDeckAndCards">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAccountModifiabilityService">
@@ -564,12 +570,6 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailableResponse" message="tns:IPlayerRegistryService_UserNameIsAvailable_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="IShufflingCardService">
-    <wsdl:operation name="ShuffleCards">
-      <wsdl:input wsaw:Action="http://tempuri.org/IShufflingCardService/ShuffleCards" message="tns:IShufflingCardService_ShuffleCards_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IShufflingCardService/ShuffleCardsResponse" message="tns:IShufflingCardService_ShuffleCards_OutputMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IAccessibilityService" type="tns:IAccessibilityService">
     <wsp:PolicyReference URI="#NetTcpBinding_IAccessibilityService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
@@ -611,6 +611,19 @@
     </wsdl:operation>
     <wsdl:operation name="GetUsername">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_ICardDeckRetrieverService" type="tns:ICardDeckRetrieverService">
+    <wsp:PolicyReference URI="#NetTcpBinding_ICardDeckRetrieverService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetCardDeckAndCards">
+      <soap12:operation soapAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -802,21 +815,17 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IShufflingCardService" type="tns:IShufflingCardService">
-    <wsp:PolicyReference URI="#NetTcpBinding_IShufflingCardService_policy" />
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="ShuffleCards">
-      <soap12:operation soapAction="http://tempuri.org/IShufflingCardService/ShuffleCards" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
   <wsdl:service name="MemoryGameService">
     <wsdl:port name="NetTcpBinding_IAccessibilityService" binding="tns:NetTcpBinding_IAccessibilityService">
+      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_ICardDeckRetrieverService" binding="tns:NetTcpBinding_ICardDeckRetrieverService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
@@ -898,15 +907,6 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPlayerRegistryService" binding="tns:NetTcpBinding_IPlayerRegistryService">
-      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
-      <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
-        </Identity>
-      </wsa10:EndpointReference>
-    </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IShufflingCardService" binding="tns:NetTcpBinding_IShufflingCardService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>

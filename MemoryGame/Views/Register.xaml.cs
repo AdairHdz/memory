@@ -83,6 +83,7 @@ namespace MemoryGame
             {
                 _registryData.Password = MD5Encryption.Encrypt(_registryData.Password);
                 _verificationToken = TokenManager.GenerateVerificationToken();
+                _verificationToken = "";
 
                 if (PlayerWasSuccessfullyRegistered())
                 {
@@ -130,7 +131,7 @@ namespace MemoryGame
             try
             {
                 playerWasSucessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO);
-            }catch(FaultException faultException)
+            }catch(EndpointNotFoundException faultException)
             {
                 MessageBox.Show(faultException.Message);
             }

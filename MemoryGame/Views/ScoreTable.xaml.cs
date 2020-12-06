@@ -52,6 +52,12 @@ namespace MemoryGame
             }
         }
 
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MainMenu mainMenuView = new MainMenu();
+            mainMenuView.Show();
+            this.Close();
+        }
         class PlayerScore
         {
             public string Username { get; set; }

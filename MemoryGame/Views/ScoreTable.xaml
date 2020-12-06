@@ -85,7 +85,8 @@
         </Grid>
 
         <Button Grid.Column="1" Grid.Row="9" 
-                    Style="{StaticResource buttonSecondary}" 
+                    Style="{StaticResource buttonSecondary}"
+                    Click="BackButtonClicked"
                     Content="{x:Static p:Resources.Back}" 
                     Margin="99.6,3.2,99.6,3.6" Grid.ColumnSpan="2"/>
     </Grid>

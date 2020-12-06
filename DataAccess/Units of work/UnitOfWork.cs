@@ -6,11 +6,13 @@ namespace DataAccess.Units_of_work
     {
         private readonly MemoryGameContext _context;
         public IPlayerRepository Players { get; private set; }
+        public ICardDeckRepository CardDecks { get; private set; }
 
         public UnitOfWork(MemoryGameContext context)
         {
             _context = context;
             Players = new PlayerRepository(_context);
+            CardDecks = new CardDeckRepository(_context);
         }
 
         

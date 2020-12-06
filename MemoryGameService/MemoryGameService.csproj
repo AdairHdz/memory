@@ -48,13 +48,16 @@
   <ItemGroup>
     <Compile Include="Contracts\IAccountModifiabilityService.cs" />
     <Compile Include="Contracts\IAccountVerificationService.cs" />
+    <Compile Include="Contracts\ICardDeckRetrieverService.cs" />
     <Compile Include="Contracts\IPlayerRegistryService.cs" />
-    <Compile Include="Contracts\IShufflingCardService.cs" />
     <Compile Include="Contracts\ITimerInitializerService.cs" />
     <Compile Include="Contracts\ITimerService.cs" />
+    <Compile Include="DataTransferObjectMappers\CardDeckMapper.cs" />
+    <Compile Include="DataTransferObjectMappers\CardMapper.cs" />
     <Compile Include="DataTransferObjectMappers\PlayerCredentialsMapper.cs" />
     <Compile Include="DataTransferObjectMappers\PlayerMapper.cs" />
     <Compile Include="DataTransferObjectMappers\PlayerScoreMapper.cs" />
+    <Compile Include="DataTransferObjects\CardDeckDTO.cs" />
     <Compile Include="DataTransferObjects\CardDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerCredentialsDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerDTO.cs" />
@@ -76,13 +79,13 @@
     <Compile Include="Services\AccesibilityService.cs" />
     <Compile Include="Services\AccountModifiabilityService.cs" />
     <Compile Include="Services\AccountVerificationService.cs" />
+    <Compile Include="Services\CardDeckRetrieverService.cs" />
     <Compile Include="Services\CommunicationService.cs" />
     <Compile Include="Services\MailingService.cs" />
     <Compile Include="Services\MatchService.cs" />
     <Compile Include="Services\MemoryGameService.cs" />
     <Compile Include="Services\PlayerRegistryService.cs" />
     <Compile Include="Services\ScoreService.cs" />
-    <Compile Include="Services\ShufflingCardService.cs" />
     <Compile Include="Services\TimerInitializerService.cs" />
     <Compile Include="Services\TimerService.cs" />
     <Compile Include="Services\TokenGenerator.cs" />
@@ -101,6 +104,41 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image11.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\backimage.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -115,6 +115,53 @@ namespace MemoryGame.MemoryGameService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.ICardDeckRetrieverService")]
+    public interface ICardDeckRetrieverService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse")]
+        MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO GetCardDeckAndCards(int cardDeckId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse")]
+        System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO> GetCardDeckAndCardsAsync(int cardDeckId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICardDeckRetrieverServiceChannel : MemoryGame.MemoryGameService.ICardDeckRetrieverService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CardDeckRetrieverServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGameService.ICardDeckRetrieverService>, MemoryGame.MemoryGameService.ICardDeckRetrieverService {
+        
+        public CardDeckRetrieverServiceClient() {
+        }
+        
+        public CardDeckRetrieverServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CardDeckRetrieverServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CardDeckRetrieverServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CardDeckRetrieverServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO GetCardDeckAndCards(int cardDeckId) {
+            return base.Channel.GetCardDeckAndCards(cardDeckId);
+        }
+        
+        public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO> GetCardDeckAndCardsAsync(int cardDeckId) {
+            return base.Channel.GetCardDeckAndCardsAsync(cardDeckId);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IAccountModifiabilityService")]
     public interface IAccountModifiabilityService {
         
@@ -646,53 +693,6 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task<bool> UserNameIsAvailableAsync(string username) {
             return base.Channel.UserNameIsAvailableAsync(username);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IShufflingCardService")]
-    public interface IShufflingCardService {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IShufflingCardService/ShuffleCards", ReplyAction="http://tempuri.org/IShufflingCardService/ShuffleCardsResponse")]
-        MemoryGame.MemoryGameService.DataTransferObjects.CardDTO[] ShuffleCards();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IShufflingCardService/ShuffleCards", ReplyAction="http://tempuri.org/IShufflingCardService/ShuffleCardsResponse")]
-        System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDTO[]> ShuffleCardsAsync();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IShufflingCardServiceChannel : MemoryGame.MemoryGameService.IShufflingCardService, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ShufflingCardServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGameService.IShufflingCardService>, MemoryGame.MemoryGameService.IShufflingCardService {
-        
-        public ShufflingCardServiceClient() {
-        }
-        
-        public ShufflingCardServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public ShufflingCardServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ShufflingCardServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ShufflingCardServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        public MemoryGame.MemoryGameService.DataTransferObjects.CardDTO[] ShuffleCards() {
-            return base.Channel.ShuffleCards();
-        }
-        
-        public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDTO[]> ShuffleCardsAsync() {
-            return base.Channel.ShuffleCardsAsync();
         }
     }
 }

@@ -38,11 +38,10 @@
         <Rectangle Fill="#EF476F" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"></Rectangle>
         <Rectangle Fill="#EF476F" Grid.Row="8" Grid.Column="7" Grid.ColumnSpan="2"></Rectangle>
 
-        <DataGrid Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="5" Name="CardsGrid">
+        <!--<DataGrid Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="5" Name="CardsGrid">
             <CheckBox >Hola</CheckBox>
-        </DataGrid>
-
-        <Grid >
+        </DataGrid>-->
+        <Grid Grid.Column="2" Grid.Row="2" Grid.RowSpan="5" Grid.ColumnSpan="5" Name="GameBoardGrid">
             <Grid.RowDefinitions>
                 <!--<RowDefinition/>
                 <RowDefinition/>
@@ -58,36 +57,33 @@
                 <ColumnDefinition/>-->
             </Grid.ColumnDefinitions>
 
+            <!--<Image Source="pack://application:,,,/MemoryGameService;component/CardDecks/backimage.jpg" Grid.Row="0" Grid.Column="1" Margin="8"></Image>-->
+            <!--<Image Source="pack://application:,,,/MemoryGameService;component/CardDecks/1/image1.jpg" Grid.Row="0" Grid.Column="0" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardDecks/1/image2.jpg" Grid.Row="0" Grid.Column="1" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image3.jpg" Grid.Row="0" Grid.Column="2" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image4.jpg" Grid.Row="0" Grid.Column="3" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image5.jpg" Grid.Row="0" Grid.Column="4" Margin="8"></Image>
 
-            <!--<Rectangle Fill="#EF476D" Grid.Row="0" Grid.Column="0" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="0" Grid.Column="1" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="0" Grid.Column="2" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="0" Grid.Column="3" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="0" Grid.Column="4" Margin="8"></Rectangle>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image6.jpg" Grid.Row="1" Grid.Column="0" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image7.jpg" Grid.Row="1" Grid.Column="1" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image8.jpg" Grid.Row="1" Grid.Column="2" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image9.jpg" Grid.Row="1" Grid.Column="3" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image10.jpg" Grid.Row="1" Grid.Column="4" Margin="8"></Image>
 
-            <Rectangle Fill="#EF476D" Grid.Row="1" Grid.Column="0" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="1" Grid.Column="1" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="1" Grid.Column="2" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="1" Grid.Column="3" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="1" Grid.Column="4" Margin="8"></Rectangle>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image11.jpg" Grid.Row="2" Grid.Column="0" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image1.jpg" Grid.Row="2" Grid.Column="1" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image2.jpg" Grid.Row="2" Grid.Column="2" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image3.jpg" Grid.Row="2" Grid.Column="3" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image4.jpg" Grid.Row="2" Grid.Column="4" Margin="8"></Image>
 
-            <Rectangle Fill="#EF476D" Grid.Row="2" Grid.Column="0" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="2" Grid.Column="1" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="2" Grid.Column="2" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="2" Grid.Column="3" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="2" Grid.Column="4" Margin="8"></Rectangle>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image5.jpg" Grid.Row="3" Grid.Column="0" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image6.jpg" Grid.Row="3" Grid.Column="1" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image7.jpg" Grid.Row="3" Grid.Column="2" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image8.jpg" Grid.Row="3" Grid.Column="3" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image9.jpg" Grid.Row="3" Grid.Column="4" Margin="8"></Image>
 
-            <Rectangle Fill="#EF476D" Grid.Row="3" Grid.Column="0" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="3" Grid.Column="1" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="3" Grid.Column="2" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="3" Grid.Column="3" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="3" Grid.Column="4" Margin="8"></Rectangle>
-
-            <Rectangle Fill="#EF476D" Grid.Row="4" Grid.Column="0" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="4" Grid.Column="1" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="4" Grid.Column="2" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="4" Grid.Column="3" Margin="8"></Rectangle>
-            <Rectangle Fill="#EF476D" Grid.Row="4" Grid.Column="4" Margin="8"></Rectangle>-->
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image10.jpg" Grid.Row="4" Grid.Column="0" Margin="8"></Image>
+            <Image Source="pack://application:,,,/MemoryGameService;component/CardsImages/image11.jpg" Grid.Row="4" Grid.Column="1" Margin="8"></Image>-->
 
         </Grid>
 
