@@ -1,4 +1,5 @@
 ﻿using DataAccess.Entities;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace MemoryGameService.Contracts
     public interface IScoreService
     {
         [OperationContract]
-        string[] GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
+        List<PlayerScoreDTO> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using System.ServiceModel;
 
 namespace MemoryGameService.Contracts
 {
@@ -6,7 +7,7 @@ namespace MemoryGameService.Contracts
     public interface IAccessibilityService
     {
         [OperationContract]
-        bool HasAccessRights(string username, string password);
+        bool HasAccessRights(PlayerCredentialsDTO playerCredentialsDTO);
         [OperationContract]
         bool IsVerified(string username);
         [OperationContract]

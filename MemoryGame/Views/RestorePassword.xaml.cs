@@ -25,12 +25,19 @@ namespace MemoryGame
 
         public bool SetNewPassword()
         {
+            string password = MD5Encryption.Encrypt(NewPasswordBox.Password);
+
             AccountModifiabilityServiceClient accountModifiabilityServiceClient =
                 new AccountModifiabilityServiceClient();
 
-            string password = MD5Encryption.Encrypt(NewPasswordBox.Password);
-
-            return accountModifiabilityServiceClient.SetNewPassword(_emailAddress, password);
+            MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO =
+                new MemoryGameService.DataTransferObjects.PlayerCredentialsDTO()
+                {
+                    EmailAddress = _emailAddress,
+                    Password = password
+                };
+            
+            return accountModifiabilityServiceClient.SetNewPassword(playerCredentialsDTO);
         }
 
         private void OkButtonClicked(object sender, RoutedEventArgs e)

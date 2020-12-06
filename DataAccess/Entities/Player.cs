@@ -16,7 +16,7 @@ namespace DataAccess.Entities
         }
 
         [Key]
-        [StringLength(100)]
+        [StringLength(254)]
         public string EmailAddress { get; set; }
 
         [Required]

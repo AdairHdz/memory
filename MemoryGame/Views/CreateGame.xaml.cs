@@ -24,5 +24,12 @@ namespace MemoryGame
         {
             InitializeComponent();
         }
+
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MainMenu mainMenuView = new MainMenu();
+            mainMenuView.Show();
+            this.Close();
+        }
     }
 }

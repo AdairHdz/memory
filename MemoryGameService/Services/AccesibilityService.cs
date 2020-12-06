@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using System;
 using System.Collections.Generic;
@@ -30,8 +31,11 @@ namespace MemoryGameService.Services
             return username;
         }
 
-        public bool HasAccessRights(string username, string password)
+        public bool HasAccessRights(PlayerCredentialsDTO playerCredentialsDTO)
         {
+            string username = playerCredentialsDTO.Username;
+            string password = playerCredentialsDTO.Password;
+
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             var player = unitOfWork.Players.Find(x => x.UserName == username && x.Password == password);
             int matches = player.Count();

@@ -2,6 +2,7 @@
 using MemoryGame.InputValidation.RegistryValidation;
 using MemoryGame.Utilities;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 using Utilities;
 
@@ -82,6 +83,7 @@ namespace MemoryGame
             {
                 _registryData.Password = MD5Encryption.Encrypt(_registryData.Password);
                 _verificationToken = TokenManager.GenerateVerificationToken();
+                _verificationToken = "";
 
                 if (PlayerWasSuccessfullyRegistered())
                 {
@@ -116,8 +118,24 @@ namespace MemoryGame
         {
             MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
                 new MemoryGameService.PlayerRegistryServiceClient();
-            return playerRegistryServiceClient.RegisterNewPlayer(_registryData.EmailAddress, _registryData.Username,
-                _registryData.Password, _verificationToken);
+
+            MemoryGameService.DataTransferObjects.PlayerDTO playerDTO =
+                new MemoryGameService.DataTransferObjects.PlayerDTO()
+                {
+                    Username = _registryData.Username,
+                    EmailAddress = _registryData.EmailAddress,
+                    Password = _registryData.Password,
+                    VerificationToken = _verificationToken
+                };
+            bool playerWasSucessfullyRegistered = false;
+            try
+            {
+                playerWasSucessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO);
+            }catch(EndpointNotFoundException faultException)
+            {
+                MessageBox.Show(faultException.Message);
+            }
+            return playerWasSucessfullyRegistered;
         }
 
         private void GoToActivationTokenWindow()

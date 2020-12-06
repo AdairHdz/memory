@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.MemoryGameService.Faults;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -9,9 +11,10 @@ namespace MemoryGameService.Contracts
 {
     [ServiceContract]
     public interface IPlayerRegistryService
-    {
+    {        
         [OperationContract]
-        bool RegisterNewPlayer(string emailAddress, string username, string password, string verificationToken);
+        [FaultContract(typeof(EndpointNotFoundFault))]
+        bool RegisterNewPlayer(PlayerDTO playerDTO);
         [OperationContract]
         bool EmailAddressIsAvailable(string emailAddress);
         [OperationContract]

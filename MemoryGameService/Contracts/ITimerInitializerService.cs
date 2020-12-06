@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace MemoryGameService.Contracts
 {
     [ServiceContract]
-    public interface IDataValidationService
+    public interface ITimerInitializerService
     {
         [OperationContract]
-        bool ValidateRegisterForm(string emailAddress, string username, string password);
+        void InitializeTimer();
     }
 }

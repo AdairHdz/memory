@@ -16,14 +16,16 @@ namespace MemoryGame.InputValidation.RegistryValidation
         public ValidationRuleResult Validate(RegistryData registrationData)
         {
             _password = registrationData.Password;
-            if(!HasAtLeastOneSpecialCharacter()
-                || !HasAtLeastOneCapitalLetter()
-                || !HasAtLeastOneLowercaseLetter()
-                || !IsBetween8And25CharactersLength())
+            if(HasAtLeastOneSpecialCharacter()
+                && HasAtLeastOneCapitalLetter()
+                && HasAtLeastOneLowercaseLetter()
+                && IsBetween8And25CharactersLength()
+                && HasAtLeastOneNumericCharacter())
             {
-                return new ValidationRuleResult(ValidationRuleResult.ERROR, "Contraseña inválida");
+                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
-            return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+
+            return new ValidationRuleResult(ValidationRuleResult.ERROR, "Contraseña inválida");
         }
 
         private bool HasAtLeastOneSpecialCharacter()
@@ -36,6 +38,13 @@ namespace MemoryGame.InputValidation.RegistryValidation
         private bool HasAtLeastOneCapitalLetter()
         {
             _regularExpression = new Regex("[A-Z+]");
+            _matches = _regularExpression.Matches(_password);
+            return _matches.Count >= 1;
+        }
+
+        private bool HasAtLeastOneNumericCharacter()
+        {
+            _regularExpression = new Regex("[0-9]");
             _matches = _regularExpression.Matches(_password);
             return _matches.Count >= 1;
         }

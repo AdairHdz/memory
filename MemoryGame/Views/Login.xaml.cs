@@ -22,7 +22,14 @@ namespace MemoryGame
             string encryptedPassword = MD5Encryption.Encrypt(PasswordBoxPassword.Password);
             string username = TextBoxUsername.Text;
 
-            return client.HasAccessRights(username, encryptedPassword);
+            MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO =
+                new MemoryGameService.DataTransferObjects.PlayerCredentialsDTO()
+                {
+                    Username = username,
+                    Password = encryptedPassword
+                };
+
+            return client.HasAccessRights(playerCredentialsDTO);
         }
 
         public bool EmailIsVerified()
@@ -60,10 +67,10 @@ namespace MemoryGame
                     Sesion playerSesion = Sesion.GetSesion;
                     playerSesion.Username = TextBoxUsername.Text;
                     playerSesion.EmailAddress = GetUserEmailAdress();
-                    ChangeUsername changeUserNameWindow = new ChangeUsername();
-                    changeUserNameWindow.Show();
-                    this.Close();
-                    //GoToMainMenu();
+                    //ChangeUsername changeUserNameWindow = new ChangeUsername();
+                    //changeUserNameWindow.Show();
+                    //this.Close();
+                    GoToMainMenu();
                 }
                 else
                 {

@@ -101,7 +101,15 @@ namespace MemoryGame
         {            
             MemoryGameService.AccountModifiabilityServiceClient accountModifiabilityServiceClient =
                 new MemoryGameService.AccountModifiabilityServiceClient();
-            return accountModifiabilityServiceClient.ChangeUsername(_userEmailAddress, _newUsername);
+
+            MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO =
+                new MemoryGameService.DataTransferObjects.PlayerCredentialsDTO()
+                {
+                    Username = _newUsername,
+                    EmailAddress = _userEmailAddress
+                };
+
+            return accountModifiabilityServiceClient.ChangeUsername(playerCredentialsDTO);            
         }
 
         private void GoToMainWindow()

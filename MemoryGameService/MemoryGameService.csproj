@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,28 +48,48 @@
   <ItemGroup>
     <Compile Include="Contracts\IAccountModifiabilityService.cs" />
     <Compile Include="Contracts\IAccountVerificationService.cs" />
+    <Compile Include="Contracts\ICardDeckRetrieverService.cs" />
     <Compile Include="Contracts\IPlayerRegistryService.cs" />
+    <Compile Include="Contracts\ITimerInitializerService.cs" />
+    <Compile Include="Contracts\ITimerService.cs" />
+    <Compile Include="DataTransferObjectMappers\CardDeckMapper.cs" />
+    <Compile Include="DataTransferObjectMappers\CardMapper.cs" />
+    <Compile Include="DataTransferObjectMappers\PlayerCredentialsMapper.cs" />
+    <Compile Include="DataTransferObjectMappers\PlayerMapper.cs" />
+    <Compile Include="DataTransferObjectMappers\PlayerScoreMapper.cs" />
+    <Compile Include="DataTransferObjects\CardDeckDTO.cs" />
+    <Compile Include="DataTransferObjects\CardDTO.cs" />
+    <Compile Include="DataTransferObjects\PlayerCredentialsDTO.cs" />
+    <Compile Include="DataTransferObjects\PlayerDTO.cs" />
+    <Compile Include="DataTransferObjects\PlayerScoreDTO.cs" />
+    <Compile Include="DataTransferObjects\TurnTimerDTO.cs" />
     <Compile Include="DataValidators\IPlayerValidator.cs" />
     <Compile Include="DataValidators\PlayerValidator.cs" />
     <Compile Include="Contracts\IAccessibilityService.cs" />
     <Compile Include="Contracts\IChatClient.cs" />
     <Compile Include="Contracts\ICommunicationService.cs" />
-    <Compile Include="Contracts\IDataValidationService.cs" />
     <Compile Include="Contracts\IMailingService.cs" />
     <Compile Include="Contracts\IMatchService.cs" />
     <Compile Include="Contracts\IScoreService.cs" />
     <Compile Include="Contracts\ITokenGenerator.cs" />
+    <Compile Include="Faults\EndpointNotFoundFault.cs" />
+    <Compile Include="GlobalErrorHandler.cs" />
+    <Compile Include="GlobalErrorHandlerBehaviorAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccesibilityService.cs" />
     <Compile Include="Services\AccountModifiabilityService.cs" />
     <Compile Include="Services\AccountVerificationService.cs" />
+    <Compile Include="Services\CardDeckRetrieverService.cs" />
     <Compile Include="Services\CommunicationService.cs" />
-    <Compile Include="Services\DataValidationService.cs" />
     <Compile Include="Services\MailingService.cs" />
     <Compile Include="Services\MatchService.cs" />
+    <Compile Include="Services\MemoryGameService.cs" />
     <Compile Include="Services\PlayerRegistryService.cs" />
     <Compile Include="Services\ScoreService.cs" />
+    <Compile Include="Services\TimerInitializerService.cs" />
+    <Compile Include="Services\TimerService.cs" />
     <Compile Include="Services\TokenGenerator.cs" />
+    <Compile Include="Utilities\SingletonTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
@@ -83,6 +104,41 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image11.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\1\image9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="CardDecks\backimage.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
