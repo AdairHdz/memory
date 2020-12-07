@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MemoryGame.Views
 {
@@ -75,7 +67,7 @@ namespace MemoryGame.Views
             int rowIndex = 0;
             int columnIndex = 0;
             int columnCount = GameBoardGrid.ColumnDefinitions.Count;
-            IList<MemoryGameService.DataTransferObjects.CardDTO> cards = _cardDeck.Cards;
+            IList<MemoryGameService.DataTransferObjects.CardDto> cards = _cardDeck.Cards;
             for (int numberOfActualCard = 0; numberOfActualCard < cards.Count; numberOfActualCard++)
             {
                 if(columnIndex >= columnCount)
@@ -84,7 +76,7 @@ namespace MemoryGame.Views
                     rowIndex++;
                 }
 
-                MemoryGameService.DataTransferObjects.CardDTO actualCard = _cardDeck.Cards[numberOfActualCard];
+                MemoryGameService.DataTransferObjects.CardDto actualCard = _cardDeck.Cards[numberOfActualCard];
                 string frontImageOfActualCard = actualCard.FrontImage;
 
                 var imageSource = new BitmapImage(new Uri("pack://application:,,,/MemoryGameService;component/" + frontImageOfActualCard));

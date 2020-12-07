@@ -1,13 +1,8 @@
 ﻿using DataAccess;
-using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryGameService.Services
 {
@@ -22,10 +17,10 @@ namespace MemoryGameService.Services
             return emailAddress;
         }
 
-        public string GetUsername(string emailAdress)
+        public string GetUsername(string emailAddress)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Get(emailAdress);
+            var player = unitOfWork.Players.Get(emailAddress);
             string username = player.UserName;
             unitOfWork.Dispose();
             return username;
@@ -46,7 +41,7 @@ namespace MemoryGameService.Services
         public bool IsVerified(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.UserName == username && x.EmailWasVerified == true);
+            var player = unitOfWork.Players.Find(x => x.UserName == username && x.EmailWasVerified);
             int matches = player.Count();
             unitOfWork.Dispose();
             return matches == 1;

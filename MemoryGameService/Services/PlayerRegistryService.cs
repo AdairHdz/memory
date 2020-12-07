@@ -2,19 +2,11 @@
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGameService.Contracts;
-using MemoryGameService;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MemoryGame.MemoryGameService.DataTransferObjects;
-using System.ServiceModel;
-using MemoryGame.MemoryGameService.Faults;
-using System.Net.Sockets;
 
 namespace MemoryGameService.Services
-{    
+{
     public partial class MemoryGameService : IPlayerRegistryService
     {
         public bool RegisterNewPlayer(PlayerDTO playerDTO)

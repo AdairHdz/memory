@@ -1,11 +1,7 @@
 ﻿using DataAccess;
 using DataAccess.Units_of_work;
 using MemoryGameService.Contracts;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryGameService.Services
 {

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MemoryGame.InputValidation.RegistryValidation
+﻿namespace MemoryGame.InputValidation.RegistryValidation
 {
     public class EmailAddressAvailabilityValidationRule : IRegistryRule
     {
         private string _emailAddress;
-        public ValidationRuleResult Validate(RegistryData data)
+        public ValidationRuleResult Validate(RegistryData registryData)
         {
-            _emailAddress = data.EmailAddress;
+            _emailAddress = registryData.EmailAddress;
 
             if (EmailAddressIsAvailable())
             {

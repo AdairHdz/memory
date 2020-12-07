@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
@@ -19,6 +15,6 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         [DataMember]
         public int NumberOfPairs { get; set; }
         [DataMember]
-        public IList<CardDTO> Cards { get; set; }
+        public IList<CardDto> Cards { get; set; }
     }
 }

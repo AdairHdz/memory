@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace MemoryGame.InputValidation.RegistryValidation
 {
@@ -13,9 +7,9 @@ namespace MemoryGame.InputValidation.RegistryValidation
         private string _password;
         private Regex _regularExpression;
         private MatchCollection _matches;
-        public ValidationRuleResult Validate(RegistryData registrationData)
+        public ValidationRuleResult Validate(RegistryData registryData)
         {
-            _password = registrationData.Password;
+            _password = registryData.Password;
             if(HasAtLeastOneSpecialCharacter()
                 && HasAtLeastOneCapitalLetter()
                 && HasAtLeastOneLowercaseLetter()

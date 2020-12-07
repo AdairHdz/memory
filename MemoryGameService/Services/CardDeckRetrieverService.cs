@@ -7,8 +7,6 @@ using MemoryGameService.DataTransferObjectMappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryGameService.Services
 {
@@ -31,17 +29,17 @@ namespace MemoryGameService.Services
              */
             foreach(Card actualCard in cards)
             {
-                CardDTO cardDTO = CardMapper.CreateDTO(actualCard);
+                CardDto cardDTO = CardMapper.CreateDTO(actualCard);
                 _cardDeckDTO.Cards.Add(cardDTO);
                 _cardDeckDTO.Cards.Add(cardDTO);
             }
 
-            IList<CardDTO> cardss = _cardDeckDTO.Cards;
+            IList<CardDto> cardss = _cardDeckDTO.Cards;
             int lastIndex = cardss.Count() - 1;
             while (lastIndex > 0)
             {
                 int randomIndex = GenerateRandomNumberBetweenRange(0, lastIndex);
-                CardDTO auxiliaryContainer = cardss[lastIndex];
+                CardDto auxiliaryContainer = cardss[lastIndex];
                 cardss[lastIndex] = cardss[randomIndex];
                 cardss[randomIndex] = auxiliaryContainer;
                 lastIndex--;
@@ -51,12 +49,12 @@ namespace MemoryGameService.Services
 
         private void ShuffleCards()
         {
-            IList<CardDTO> cards = _cardDeckDTO.Cards;
+            IList<CardDto> cards = _cardDeckDTO.Cards;
             int lastIndex = cards.Count() - 1;
             while (lastIndex > 0)
             {
                 int randomIndex = GenerateRandomNumberBetweenRange(0, lastIndex);
-                CardDTO auxiliaryContainer = cards[lastIndex];
+                CardDto auxiliaryContainer = cards[lastIndex];
                 cards[lastIndex] = cards[randomIndex];
                 cards[randomIndex] = auxiliaryContainer;
                 lastIndex--;

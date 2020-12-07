@@ -1,11 +1,6 @@
-﻿using DataAccess.Entities;
-using MemoryGame.MemoryGameService.DataTransferObjects;
-using System;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryGameService.Contracts
 {
