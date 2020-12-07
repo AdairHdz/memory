@@ -1,18 +1,13 @@
 ﻿using DataAccess.Entities;
 using MemoryGame.MemoryGameService.DataTransferObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryGameService.DataTransferObjectMappers
 {
-    public class CardMapper
+    public static class CardMapper
     {
-        public static CardDTO CreateDTO(Card card)
+        public static CardDto CreateDTO(Card card)
         {
-            CardDTO cardDto = new CardDTO()
+            CardDto cardDto = new CardDto()
             {
                 CardId = card.CardId,
                 FrontImage = card.FrontImage
@@ -21,7 +16,7 @@ namespace MemoryGameService.DataTransferObjectMappers
             return cardDto;
         }
 
-        public static Card CreateEntity(CardDTO cardDto)
+        public static Card CreateEntity(CardDto cardDto)
         {
             Card card = new Card()
             {

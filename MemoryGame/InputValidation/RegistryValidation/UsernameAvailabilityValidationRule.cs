@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MemoryGame.InputValidation.RegistryValidation
+﻿namespace MemoryGame.InputValidation.RegistryValidation
 {
     public class UsernameAvailabilityValidationRule : IRegistryRule
     {
         private string _username;
-        public ValidationRuleResult Validate(RegistryData data)
+        public ValidationRuleResult Validate(RegistryData registryData)
         {
-            _username = data.Username;
+            _username = registryData.Username;
 
             if (UsernameIsAvailable())
             {

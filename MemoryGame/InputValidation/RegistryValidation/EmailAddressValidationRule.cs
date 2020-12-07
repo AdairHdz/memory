@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace MemoryGame.InputValidation.RegistryValidation
-{    
+{
     public class EmailAddressValidationRule : IRegistryRule
     {
-        private Regex _regularExpression;
         private string _emailAddress;
 
         public ValidationRuleResult Validate(RegistryData registryData)
@@ -25,8 +19,8 @@ namespace MemoryGame.InputValidation.RegistryValidation
 
         private bool HasValidFormat()
         {
-            _regularExpression = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-            bool hasValidFormat = _regularExpression.IsMatch(_emailAddress);
+            Regex regularExpression = new Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+            bool hasValidFormat = regularExpression.IsMatch(_emailAddress);
             return hasValidFormat;
         }
 

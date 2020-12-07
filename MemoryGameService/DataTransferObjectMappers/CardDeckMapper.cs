@@ -1,14 +1,10 @@
 ﻿using DataAccess.Entities;
 using MemoryGame.MemoryGameService.DataTransferObjects;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryGameService.DataTransferObjectMappers
 {
-    public class CardDeckMapper
+    public static class CardDeckMapper
     {
         public static CardDeckDTO CreateDTO(CardDeck cardDeckEntity)
         {
@@ -18,7 +14,7 @@ namespace MemoryGameService.DataTransferObjectMappers
                 Name = cardDeckEntity.Name,
                 BackImage = cardDeckEntity.BackImage,
                 NumberOfPairs = cardDeckEntity.NumberOfPairs,
-                Cards = new List<CardDTO>()
+                Cards = new List<CardDto>()
             };
 
             return cardDeckDTO;
