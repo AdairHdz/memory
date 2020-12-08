@@ -89,6 +89,7 @@
     <Compile Include="Services\TimerInitializerService.cs" />
     <Compile Include="Services\TimerService.cs" />
     <Compile Include="Services\TokenGenerator.cs" />
+    <Compile Include="Utilities\CardShuffler.cs" />
     <Compile Include="Utilities\SingletonTimer.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,7 @@ namespace MemoryGameService.Services
     public partial class MemoryGameService : ICardDeckRetrieverService
     {
         private CardDeckDTO _cardDeckDTO;
+        private IEnumerable<Card> _cards;
         public CardDeckDTO GetCardDeckAndCards(int cardDeckId)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -20,31 +21,28 @@ namespace MemoryGameService.Services
 
             _cardDeckDTO = CardDeckMapper.CreateDTO(cardDeck);
 
-            IEnumerable<Card> cards = cardDeck.Cards;
+            _cards = cardDeck.Cards;
 
             /**
-             * Se añade dos veces la misma carta para formar el par.
-             * Esto con la finalidad de evitar almacenar la misma carta 2 veces en
-             * la base de datos
+             * This code is adding the same set of cards Twice.
+             * This is becausa this way I don't need to store each pair of cards
+             * in the database (it would be a waste of storage)
              */
-            foreach(Card actualCard in cards)
+            PopulateCardDeckDtoWithCards();
+            PopulateCardDeckDtoWithCards();
+
+            ShuffleCards();
+
+            return _cardDeckDTO;
+        }
+
+        private void PopulateCardDeckDtoWithCards()
+        {
+            foreach (Card actualCard in _cards)
             {
                 CardDto cardDTO = CardMapper.CreateDTO(actualCard);
                 _cardDeckDTO.Cards.Add(cardDTO);
-                _cardDeckDTO.Cards.Add(cardDTO);
             }
-
-            IList<CardDto> cardss = _cardDeckDTO.Cards;
-            int lastIndex = cardss.Count() - 1;
-            while (lastIndex > 0)
-            {
-                int randomIndex = GenerateRandomNumberBetweenRange(0, lastIndex);
-                CardDto auxiliaryContainer = cardss[lastIndex];
-                cardss[lastIndex] = cardss[randomIndex];
-                cardss[randomIndex] = auxiliaryContainer;
-                lastIndex--;
-            }
-            return _cardDeckDTO;
         }
 
         private void ShuffleCards()
