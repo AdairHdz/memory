@@ -2,19 +2,23 @@
 
 namespace MemoryGame.InputValidation.RegistryValidation
 {
-    public class UsernameValidationRule : IRegistryRule
+    public class UsernameValidationRule : ValidationRule
     {
         private string _username;
-        public ValidationRuleResult Validate(RegistryData registryData)
+
+        public UsernameValidationRule(string username)
         {
-            _username = registryData.Username;
-            
-            if(HasValidFormat() && IsBetween4And16CharactersLength())
+            _username = username;
+        }
+
+        protected override void SetValidationRuleResult()
+        {
+            if (HasValidFormat() && IsBetween4And16CharactersLength())
             {
-                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+                ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
-            return new ValidationRuleResult(ValidationRuleResult.ERROR,
-                Properties.Langs.Resources.UsernameIsInvalid);            
+            ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.ERROR,
+                Properties.Langs.Resources.UsernameIsInvalid);
         }
 
         private bool HasValidFormat()

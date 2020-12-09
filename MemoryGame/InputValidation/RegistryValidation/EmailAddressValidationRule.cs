@@ -2,20 +2,23 @@
 
 namespace MemoryGame.InputValidation.RegistryValidation
 {
-    public class EmailAddressValidationRule : IRegistryRule
+    public class EmailAddressValidationRule : ValidationRule
     {
         private string _emailAddress;
 
-        public ValidationRuleResult Validate(RegistryData registryData)
+        public EmailAddressValidationRule(string emailAddress)
         {
-            _emailAddress = registryData.EmailAddress;
-            
+            _emailAddress = emailAddress;
+        }
+
+        protected override void SetValidationRuleResult()
+        {
             if (HasValidFormat() && IsLessOrEqualsThan254CharactersLength())
             {
-                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+                ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
-            return new ValidationRuleResult(ValidationRuleResult.ERROR,
-                Properties.Langs.Resources.EmailAddressIsInvalid);            
+            ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.ERROR,
+                Properties.Langs.Resources.EmailAddressIsInvalid);
         }
 
         private bool HasValidFormat()

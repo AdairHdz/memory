@@ -2,25 +2,15 @@
 
 namespace MemoryGame.InputValidation.RegistryValidation
 {
-    public class PasswordValidationRule : IRegistryRule
+    public class PasswordValidationRule : ValidationRule
     {
         private string _password;
         private Regex _regularExpression;
         private MatchCollection _matches;
-        public ValidationRuleResult Validate(RegistryData registryData)
-        {
-            _password = registryData.Password;
-            if(HasAtLeastOneSpecialCharacter()
-                && HasAtLeastOneCapitalLetter()
-                && HasAtLeastOneLowercaseLetter()
-                && IsBetween8And25CharactersLength()
-                && HasAtLeastOneNumericCharacter())
-            {
-                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
-            }
 
-            return new ValidationRuleResult(ValidationRuleResult.ERROR,
-                Properties.Langs.Resources.PasswordIsInvalid);
+        public PasswordValidationRule(string password)
+        {
+            _password = password;
         }
 
         private bool HasAtLeastOneSpecialCharacter()
@@ -54,6 +44,20 @@ namespace MemoryGame.InputValidation.RegistryValidation
         private bool IsBetween8And25CharactersLength()
         {
             return _password.Length >= 8 && _password.Length <= 25;
+        }
+        protected override void SetValidationRuleResult()
+        {
+            if (HasAtLeastOneSpecialCharacter()
+                && HasAtLeastOneCapitalLetter()
+                && HasAtLeastOneLowercaseLetter()
+                && IsBetween8And25CharactersLength()
+                && HasAtLeastOneNumericCharacter())
+            {
+                ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+            }
+
+            ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.ERROR,
+                Properties.Langs.Resources.PasswordIsInvalid);
         }
     }
 }

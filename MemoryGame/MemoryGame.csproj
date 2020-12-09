@@ -95,13 +95,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="InputValidation\IValidationRule.cs" />
     <Compile Include="InputValidation\RegistryValidation\EmailAddressAvailabilityValidationRule.cs" />
     <Compile Include="InputValidation\RegistryValidation\EmailAddressValidationRule.cs" />
     <Compile Include="InputValidation\RegistryValidation\IRegistryRule.cs" />
     <Compile Include="InputValidation\RegistryValidation\PasswordValidationRule.cs" />
+    <Compile Include="InputValidation\RegistryValidation\RegistryRuleSet.cs" />
     <Compile Include="InputValidation\RegistryValidation\UsernameAvailabilityValidationRule.cs" />
     <Compile Include="InputValidation\RegistryValidation\UsernameValidationRule.cs" />
     <Compile Include="InputValidation\RegistryValidation\RegistryData.cs" />
+    <Compile Include="InputValidation\IRuleSet.cs" />
+    <Compile Include="InputValidation\RuleSet.cs" />
+    <Compile Include="InputValidation\ValidationRule.cs" />
     <Compile Include="InputValidation\ValidationRuleResult.cs" />
     <Compile Include="Properties\Langs\Resources.es-MX.Designer.cs">
       <DependentUpon>Resources.es-MX.resx</DependentUpon>

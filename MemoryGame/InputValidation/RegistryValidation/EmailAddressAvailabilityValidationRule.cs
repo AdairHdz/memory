@@ -1,18 +1,33 @@
 ﻿namespace MemoryGame.InputValidation.RegistryValidation
 {
-    public class EmailAddressAvailabilityValidationRule : IRegistryRule
+    public class EmailAddressAvailabilityValidationRule : IValidationRule
     {
         private string _emailAddress;
-        public ValidationRuleResult Validate(RegistryData registryData)
+        private ValidationRuleResult _validationRuleResult;
+        public EmailAddressAvailabilityValidationRule(string emailAddress)
         {
-            _emailAddress = registryData.EmailAddress;
+            _emailAddress = emailAddress;
+            SetValidationRuleResult();
+        }
 
+
+        public bool Validate()
+        {
+            if(_validationRuleResult.Status == ValidationRuleResult.SUCCESS)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void SetValidationRuleResult()
+        {
             if (EmailAddressIsAvailable())
             {
-                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+                _validationRuleResult = new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
 
-            return new ValidationRuleResult(ValidationRuleResult.ERROR, 
+            _validationRuleResult = new ValidationRuleResult(ValidationRuleResult.ERROR,
                 Properties.Langs.Resources.EmailAddressIsTaken);
         }
 
@@ -25,6 +40,11 @@
                 playerRegistryServiceClient.EmailAddressIsAvailable(_emailAddress);
 
             return emailAddressIsAvailable;
+        }
+
+        public ValidationRuleResult GetValidationRuleResult()
+        {
+            return _validationRuleResult;
         }
     }
 }

@@ -103,6 +103,7 @@
     <Compile Include="DataAccessLayerTests\PlayerTest.cs" />
     <Compile Include="InputValidationTests\EmailAddressValidationRuleTest.cs" />
     <Compile Include="InputValidationTests\PasswordValidationRuleTest.cs" />
+    <Compile Include="InputValidationTests\RegistryRuleSetTest.cs" />
     <Compile Include="InputValidationTests\UsernameValidationRuleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
