@@ -11,12 +11,11 @@ namespace UnitTests.InputValidationTests
 {
     [TestClass]
     public class PasswordValidationRuleTest
-    {
-        private PasswordValidationRule _passwordValidationRule;
+    {        
 
         public PasswordValidationRuleTest()
         {
-            _passwordValidationRule = new PasswordValidationRule();
+            
         }
 
         [TestMethod]
@@ -28,14 +27,10 @@ namespace UnitTests.InputValidationTests
         [DataRow("AIOPU68?H91jeje")]
         public void PasswordValidationReturnsTrue(string password)
         {
-            RegistryData registryData = new RegistryData()
-            {
-                Password = password
-            };
-            
-            ValidationRuleResult validationRuleResult = _passwordValidationRule.Validate(registryData);
-            bool isValid = validationRuleResult.Status == ValidationRuleResult.SUCCESS;
-            Assert.IsTrue(isValid);
+            PasswordValidationRule passwordValidationRule = new PasswordValidationRule(password);
+            bool expected = true;
+            bool actual = passwordValidationRule.Validate();
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -49,14 +44,11 @@ namespace UnitTests.InputValidationTests
         [DataRow("holaComoestasGracias%$")]
         public void PasswordValidationReturnsFalse(string password)
         {
-            RegistryData registryData = new RegistryData()
-            {
-                Password = password
-            };
 
-            ValidationRuleResult validationRuleResult = _passwordValidationRule.Validate(registryData);
-            bool isValid = validationRuleResult.Status == ValidationRuleResult.SUCCESS;
-            Assert.IsFalse(isValid);
+            PasswordValidationRule passwordValidationRule = new PasswordValidationRule(password);
+            bool expected = false;
+            bool actual = passwordValidationRule.Validate();
+            Assert.AreEqual(expected, actual);
 
         }
     }

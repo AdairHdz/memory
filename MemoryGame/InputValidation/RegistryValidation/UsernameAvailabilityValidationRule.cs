@@ -1,6 +1,6 @@
 ﻿namespace MemoryGame.InputValidation.RegistryValidation
 {
-    public class UsernameAvailabilityValidationRule : ValidationRule
+    public class UsernameAvailabilityValidationRule : IValidationRule
     {
         private string _username;
 
@@ -9,14 +9,24 @@
             _username = username;
         }
 
-        protected override void SetValidationRuleResult()
+        public ValidationRuleResult GetValidationRuleResult()
         {
             if (UsernameIsAvailable())
             {
-                ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
-            ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.ERROR,
+            return new ValidationRuleResult(ValidationRuleResult.ERROR,
                 Properties.Langs.Resources.UsernameIsTaken);
+        }
+
+        public bool Validate()
+        {
+            ValidationRuleResult validationRuleResult = GetValidationRuleResult();
+            if (validationRuleResult.Status == ValidationRuleResult.SUCCESS)
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool UsernameIsAvailable()

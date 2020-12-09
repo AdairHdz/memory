@@ -2,7 +2,7 @@
 
 namespace MemoryGame.InputValidation.RegistryValidation
 {
-    public class EmailAddressValidationRule : ValidationRule
+    public class EmailAddressValidationRule : IValidationRule
     {
         private string _emailAddress;
 
@@ -11,14 +11,24 @@ namespace MemoryGame.InputValidation.RegistryValidation
             _emailAddress = emailAddress;
         }
 
-        protected override void SetValidationRuleResult()
+        public ValidationRuleResult GetValidationRuleResult()
         {
             if (HasValidFormat() && IsLessOrEqualsThan254CharactersLength())
             {
-                ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
-            ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.ERROR,
+            return new ValidationRuleResult(ValidationRuleResult.ERROR,
                 Properties.Langs.Resources.EmailAddressIsInvalid);
+        }
+
+        public bool Validate()
+        {
+            ValidationRuleResult validationRuleResult = GetValidationRuleResult();
+            if(validationRuleResult.Status == ValidationRuleResult.SUCCESS)
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool HasValidFormat()

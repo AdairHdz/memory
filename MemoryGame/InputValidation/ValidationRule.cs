@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MemoryGame.InputValidation
+﻿namespace MemoryGame.InputValidation
 {
     public abstract class ValidationRule
     {
-        public ValidationRuleResult ValidationRuleResult { get; set; }
+        protected ValidationRuleResult _validationRuleResult;
 
         public ValidationRule()
         {
@@ -18,12 +12,16 @@ namespace MemoryGame.InputValidation
         protected abstract void SetValidationRuleResult();
         public bool Validate()
         {
-            if (ValidationRuleResult.Status == ValidationRuleResult.SUCCESS)
+            if (_validationRuleResult.Status == ValidationRuleResult.SUCCESS)
             {
                 return true;
             }
             return false;
         }
-
+        
+        public ValidationRuleResult GetValidationRuleResult()
+        {
+            return _validationRuleResult;
+        }
     }
 }

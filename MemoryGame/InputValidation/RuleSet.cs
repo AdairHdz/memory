@@ -8,45 +8,18 @@ namespace MemoryGame.InputValidation
 {
     public class RuleSet
     {
-        public List<ValidationRule> ValidationRules { get; set; }
-        public List<ValidationRuleResult> ValidationResultErrors
-        {
-            get
-            {
-                LookForValidationErrors();
-                return ValidationResultErrors;
-            }
-            set
-            {
-                ValidationResultErrors = value;
-            }
-        }
+        public List<IValidationRule> ValidationRules { get; set; }
+        private List<ValidationRuleResult> _validationResultErrors;
 
         public RuleSet()
         {
-            ValidationRules = new List<ValidationRule>();
-            ValidationResultErrors = new List<ValidationRuleResult>();
+            ValidationRules = new List<IValidationRule>();
+            _validationResultErrors = new List<ValidationRuleResult>();
         }
 
-        public void AddValidationRule(ValidationRule validationRule)
+        public void AddValidationRule(IValidationRule validationRule)
         {
             ValidationRules.Add(validationRule);
-        }
-
-        public bool AllValidationRulesHavePassed()
-        {
-            LookForValidationErrors();
-            if (ValidationResultErrors.Count == 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public List<ValidationRuleResult> GetValidationResultErrors()
-        {
-            LookForValidationErrors();
-            return ValidationResultErrors;
         }
 
         private void LookForValidationErrors()
@@ -57,14 +30,32 @@ namespace MemoryGame.InputValidation
                 ValidationRuleResult validationRuleResult = rule.GetValidationRuleResult();
                 if (validationRuleResult.Status == ValidationRuleResult.ERROR)
                 {
-                    ValidationResultErrors.Add(validationRuleResult);
+                    _validationResultErrors.Add(validationRuleResult);
                 }
             }
         }
 
+        public bool AllValidationRulesHavePassed()
+        {
+            LookForValidationErrors();
+            if (_validationResultErrors.Count == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public List<ValidationRuleResult> GetValidationResultErrors()
+        {
+            LookForValidationErrors();
+            return _validationResultErrors;
+        }
+
+
+
         private void ClearValidationErrorsList()
         {
-            ValidationResultErrors.Clear();
+            _validationResultErrors.Clear();
         }
     }
 }

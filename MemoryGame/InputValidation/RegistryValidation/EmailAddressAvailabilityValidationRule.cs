@@ -7,7 +7,7 @@
         public EmailAddressAvailabilityValidationRule(string emailAddress)
         {
             _emailAddress = emailAddress;
-            SetValidationRuleResult();
+            //SetValidationRuleResult();
         }
 
 
@@ -44,7 +44,13 @@
 
         public ValidationRuleResult GetValidationRuleResult()
         {
-            return _validationRuleResult;
+            if (EmailAddressIsAvailable())
+            {
+                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+            }
+
+            return new ValidationRuleResult(ValidationRuleResult.ERROR,
+                Properties.Langs.Resources.EmailAddressIsTaken);
         }
     }
 }

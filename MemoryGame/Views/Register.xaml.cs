@@ -16,7 +16,7 @@ namespace MemoryGame
     public partial class Register : Window
     {
         private string _username, _emailAddress, _verificationToken, _password;      
-        private IRuleSet _ruleSet;
+        private RuleSet _ruleSet;
         public Register()
         {            
             InitializeComponent();
@@ -24,14 +24,12 @@ namespace MemoryGame
 
         private void SetFormValidation()
         {
-            _ruleSet = new RegistryRuleSet();
-            //_ruleSet.AddValidationRule(new EmailAddressValidationRule(_emailAddress));
+            _ruleSet = new RuleSet();
+            _ruleSet.AddValidationRule(new UsernameValidationRule(_username));
+            _ruleSet.AddValidationRule(new EmailAddressValidationRule(_emailAddress));
+            _ruleSet.AddValidationRule(new PasswordValidationRule(_password));
             _ruleSet.AddValidationRule(new EmailAddressAvailabilityValidationRule(_emailAddress));
-            //_ruleSet.AddValidationRule(new PasswordValidationRule(_password));
-            //_ruleSet.AddValidationRule(new UsernameValidationRule(_username));
-            //_ruleSet.AddValidationRule(new EmailAddressValidationRule(_username));
-            _ruleSet.AddValidationRule(new EmailAddressAvailabilityValidationRule(_emailAddress));
-            //_ruleSet.AddValidationRule(new UsernameAvailabilityValidationRule(_username));
+            _ruleSet.AddValidationRule(new UsernameAvailabilityValidationRule(_username));
         }
 
         private void ShowErrorMessage()

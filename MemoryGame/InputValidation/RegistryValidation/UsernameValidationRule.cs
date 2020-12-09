@@ -6,7 +6,7 @@ namespace MemoryGame.InputValidation.RegistryValidation
     {
         private string _username;
 
-        public UsernameValidationRule(string username)
+        public UsernameValidationRule(string username) :base()
         {
             _username = username;
         }
@@ -15,11 +15,13 @@ namespace MemoryGame.InputValidation.RegistryValidation
         {
             if (HasValidFormat() && IsBetween4And16CharactersLength())
             {
-                ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+                _validationRuleResult = new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
-            ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.ERROR,
+            _validationRuleResult = new ValidationRuleResult(ValidationRuleResult.ERROR,
                 Properties.Langs.Resources.UsernameIsInvalid);
         }
+
+
 
         private bool HasValidFormat()
         {

@@ -2,7 +2,7 @@
 
 namespace MemoryGame.InputValidation.RegistryValidation
 {
-    public class PasswordValidationRule : ValidationRule
+    public class PasswordValidationRule : IValidationRule
     {
         private string _password;
         private Regex _regularExpression;
@@ -45,7 +45,19 @@ namespace MemoryGame.InputValidation.RegistryValidation
         {
             return _password.Length >= 8 && _password.Length <= 25;
         }
-        protected override void SetValidationRuleResult()
+
+
+        public bool Validate()
+        {
+            ValidationRuleResult validationRuleResult = GetValidationRuleResult();
+            if (validationRuleResult.Status == ValidationRuleResult.SUCCESS)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public ValidationRuleResult GetValidationRuleResult()
         {
             if (HasAtLeastOneSpecialCharacter()
                 && HasAtLeastOneCapitalLetter()
@@ -53,10 +65,10 @@ namespace MemoryGame.InputValidation.RegistryValidation
                 && IsBetween8And25CharactersLength()
                 && HasAtLeastOneNumericCharacter())
             {
-                ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.SUCCESS);
+                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
 
-            ValidationRuleResult = new ValidationRuleResult(ValidationRuleResult.ERROR,
+            return new ValidationRuleResult(ValidationRuleResult.ERROR,
                 Properties.Langs.Resources.PasswordIsInvalid);
         }
     }
