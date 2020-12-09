@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountVerificationError" xml:space="preserve">
+    <value>Lo sentimos. Ha ocurrido un error y no hemos podido verificar tu cuenta. Por favor, intenta más tarde</value>
+  </data>
+  <data name="AccountVerificationSuccess" xml:space="preserve">
+    <value>Cuenta verificada de forma exitosa. Ahora podrá iniciar sesión</value>
+  </data>
   <data name="ActivateTokenMessage" xml:space="preserve">
     <value>Ingrese el código que recibió</value>
   </data>
@@ -152,6 +158,12 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>Correo electrónico</value>
+  </data>
+  <data name="EmailAddressIsInvalid" xml:space="preserve">
+    <value>El email introducido tiene un formato no válido</value>
+  </data>
+  <data name="EmailAddressIsTaken" xml:space="preserve">
+    <value>El email proporcionado ya se encuentra ocupado por otro jugador. Favor de intentar con uno diferente</value>
   </data>
   <data name="EnglishUSA" xml:space="preserve">
     <value>Inglés (EEUUAA)</value>
@@ -192,11 +204,23 @@
   <data name="Memory" xml:space="preserve">
     <value>Memorama</value>
   </data>
+  <data name="NewCodeSentMessage" xml:space="preserve">
+    <value>Se ha enviado un nuevo código de verificación a su dirección de correo electrónico.</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Nueva contraseña</value>
   </data>
   <data name="NewUsername" xml:space="preserve">
     <value>Nuevo nombre de usuario</value>
+  </data>
+  <data name="NonMatchingCredentials" xml:space="preserve">
+    <value>Usuario no encontrado. Por favor verifique que el nombre de usuario y la contraseña que ingresó son las correctas.</value>
+  </data>
+  <data name="NonMatchingVerificationCode" xml:space="preserve">
+    <value>Error. El código que ha introducido no coincide con el código que le enviamos. Por favor, verifique que ha introducido el código correcto e intente nuevamente</value>
+  </data>
+  <data name="NonRegisteredEmail" xml:space="preserve">
+    <value>Por favor asegúrese de haber ingresado un email previamente registrado</value>
   </data>
   <data name="NumberOfPlayers" xml:space="preserve">
     <value>Número de jugadores</value>
@@ -213,6 +237,9 @@
   <data name="Password" xml:space="preserve">
     <value>Contraseña</value>
   </data>
+  <data name="PasswordIsInvalid" xml:space="preserve">
+    <value>La contraseña que ingresó no es segura. Por favor, asegúrese de que su contraseña contiene al menos un caracter especial, una letra minúscula, una letra mayúscula y un número. Además, asegúrese de que su contraseña tiene entre 8 y 25 caracteres</value>
+  </data>
   <data name="Players" xml:space="preserve">
     <value>Jugadores</value>
   </data>
@@ -227,6 +254,9 @@
   </data>
   <data name="RegisterViewTitle" xml:space="preserve">
     <value>Registro</value>
+  </data>
+  <data name="RegistryError" xml:space="preserve">
+    <value>Ocurrió un error al realizar el registro. Por favor, reintente más tarde</value>
   </data>
   <data name="RestorePassword" xml:space="preserve">
     <value>Restablecer contraseña</value>
@@ -260,6 +290,21 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Nombre de usuario</value>
+  </data>
+  <data name="UsernameEmptyFieldMessage" xml:space="preserve">
+    <value>Por favor asegúrese de llenar el campo e intente nuevamente</value>
+  </data>
+  <data name="UsernameIsInvalid" xml:space="preserve">
+    <value>El nombre de usuario que ha introducido no es válido</value>
+  </data>
+  <data name="UsernameIsTaken" xml:space="preserve">
+    <value>El nombre de usuario elegido ya se encuentra ocupado por otro jugador. Favor de intentar con uno diferente</value>
+  </data>
+  <data name="UsernameUpdatedError" xml:space="preserve">
+    <value>Ocurrió un error al registrar el nuevo nombre de usuario. Por favor, reintente más tarde</value>
+  </data>
+  <data name="UsernameUpdatedSuccessfully" xml:space="preserve">
+    <value>Nombre de usuario actualizado de forma exitosa</value>
   </data>
   <data name="WaitingRoom" xml:space="preserve">
     <value>Sala de espera</value>

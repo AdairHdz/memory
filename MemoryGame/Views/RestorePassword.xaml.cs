@@ -61,7 +61,7 @@ namespace MemoryGame
             }
             else
             {
-                MessageBox.Show("El código introducido no concuerda con el que enviamos a su correo electrónico");
+                MessageBox.Show(Properties.Langs.Resources.NonMatchingVerificationCode);
             }
         }
 
@@ -80,7 +80,7 @@ namespace MemoryGame
                 new MailingServiceClient();
             mailingServiceClient.SendVerificationToken(_username, _emailAddress, newToken);
 
-            MessageBox.Show("Nuevo código enviado");
+            MessageBox.Show(Properties.Langs.Resources.NewCodeSentMessage);
 
         }
 

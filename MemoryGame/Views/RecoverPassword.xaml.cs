@@ -69,7 +69,7 @@ namespace MemoryGame
             }
             else
             {
-                MessageBox.Show("El email proporcionado no se encuentra registrado");
+                MessageBox.Show(Properties.Langs.Resources.NonRegisteredEmail);
             }
 
         }

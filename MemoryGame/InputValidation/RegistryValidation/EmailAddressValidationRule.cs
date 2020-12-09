@@ -14,7 +14,8 @@ namespace MemoryGame.InputValidation.RegistryValidation
             {
                 return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
-            return new ValidationRuleResult(ValidationRuleResult.ERROR, "Email inválido");            
+            return new ValidationRuleResult(ValidationRuleResult.ERROR,
+                Properties.Langs.Resources.EmailAddressIsInvalid);            
         }
 
         private bool HasValidFormat()

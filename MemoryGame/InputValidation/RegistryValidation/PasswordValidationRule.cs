@@ -19,7 +19,8 @@ namespace MemoryGame.InputValidation.RegistryValidation
                 return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
 
-            return new ValidationRuleResult(ValidationRuleResult.ERROR, "Contraseña inválida");
+            return new ValidationRuleResult(ValidationRuleResult.ERROR,
+                Properties.Langs.Resources.PasswordIsInvalid);
         }
 
         private bool HasAtLeastOneSpecialCharacter()

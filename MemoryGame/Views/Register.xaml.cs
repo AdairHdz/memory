@@ -83,7 +83,6 @@ namespace MemoryGame
             {
                 _registryData.Password = MD5Encryption.Encrypt(_registryData.Password);
                 _verificationToken = TokenManager.GenerateVerificationToken();
-                _verificationToken = "";
 
                 if (PlayerWasSuccessfullyRegistered())
                 {
@@ -92,7 +91,7 @@ namespace MemoryGame
                 }
                 else
                 {
-                    MessageBox.Show("Error al registrar");
+                    MessageBox.Show(Properties.Langs.Resources.RegistryError);
                 }                
             }
             else

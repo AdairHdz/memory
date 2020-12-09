@@ -80,7 +80,7 @@ namespace MemoryGame
             }
             else
             {
-                MessageBox.Show("No existe el usuario (a esto hay que volverlo un resource)");
+                MessageBox.Show(Properties.Langs.Resources.NonMatchingCredentials);
             }
         }
 

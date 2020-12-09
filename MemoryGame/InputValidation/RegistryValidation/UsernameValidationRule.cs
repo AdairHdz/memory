@@ -13,7 +13,8 @@ namespace MemoryGame.InputValidation.RegistryValidation
             {
                 return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
-            return new ValidationRuleResult(ValidationRuleResult.ERROR, "Nombre de usuario inválido");            
+            return new ValidationRuleResult(ValidationRuleResult.ERROR,
+                Properties.Langs.Resources.UsernameIsInvalid);            
         }
 
         private bool HasValidFormat()

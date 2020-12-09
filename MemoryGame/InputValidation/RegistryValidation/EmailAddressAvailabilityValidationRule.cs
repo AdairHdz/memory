@@ -12,8 +12,8 @@
                 return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
 
-            return new ValidationRuleResult(ValidationRuleResult.ERROR, "El email ingresado" +
-                "ya se encuentra registrado en nuestra base de datos");
+            return new ValidationRuleResult(ValidationRuleResult.ERROR, 
+                Properties.Langs.Resources.EmailAddressIsTaken);
         }
 
         private bool EmailAddressIsAvailable()

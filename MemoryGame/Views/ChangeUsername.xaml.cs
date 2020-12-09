@@ -51,23 +51,23 @@ namespace MemoryGame
                 {
                     if (ChangeUserName())
                     {
-                        MessageBox.Show("Nombre de usuario actualizado de forma exitosa");
+                        MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedSuccessfully);
                         GoToMainWindow();
                     }
                     else
                     {
-                        MessageBox.Show("Ocurrió un error al registrar el nuevo nombre de usuario. Por favor, reintente más tarde.");
+                        MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedError);
                     }
                     
                 }
                 else
                 {
-                    MessageBox.Show("El nombre de usuario elegido ya se encuentra ocupado por otro jugador. Favor de intentar con uno diferente");
+                    MessageBox.Show(Properties.Langs.Resources.UsernameIsTaken);
                 }
             }
             else
             {
-                MessageBox.Show("Por favor asegúrese de lenar el campo e intente nuevamente");
+                MessageBox.Show(Properties.Langs.Resources.UsernameEmptyFieldMessage);
             }
             
         }

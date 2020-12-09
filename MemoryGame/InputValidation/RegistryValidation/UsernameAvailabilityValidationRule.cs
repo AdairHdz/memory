@@ -11,7 +11,8 @@
             {
                 return new ValidationRuleResult(ValidationRuleResult.SUCCESS);                
             }
-            return new ValidationRuleResult(ValidationRuleResult.ERROR, "El nombre de usuario no está disponible");
+            return new ValidationRuleResult(ValidationRuleResult.ERROR,
+                Properties.Langs.Resources.UsernameIsTaken);
         }
 
         private bool UsernameIsAvailable()
