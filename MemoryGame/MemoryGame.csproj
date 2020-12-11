@@ -95,6 +95,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="InputValidation\GenericValidations\NonEmptyFieldValidation.cs" />
     <Compile Include="InputValidation\IValidationRule.cs" />
     <Compile Include="InputValidation\RegistryValidation\EmailAddressAvailabilityValidationRule.cs" />
     <Compile Include="InputValidation\RegistryValidation\EmailAddressValidationRule.cs" />

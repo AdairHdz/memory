@@ -165,6 +165,9 @@
   <data name="EmailAddressIsTaken" xml:space="preserve">
     <value>The email address you have entered is already taken. Please try again with a different email address</value>
   </data>
+  <data name="EmptyField" xml:space="preserve">
+    <value>Please make sure you have entered the required data and try again</value>
+  </data>
   <data name="EnglishUSA" xml:space="preserve">
     <value>English (USA)</value>
   </data>

@@ -1,4 +1,7 @@
 ﻿using DataAccess.Entities;
+using MemoryGame.InputValidation;
+using MemoryGame.InputValidation.RegistryValidation;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace MemoryGame
@@ -10,12 +13,21 @@ namespace MemoryGame
     {
         private string _userEmailAddress;
         private string _newUsername;
+        private RuleSet _ruleSet;
+
         public ChangeUsername()
         {
             InitializeComponent();
             Sesion userSession = Sesion.GetSesion;
             _userEmailAddress = userSession.EmailAddress;      
             LabelOldUsername.Content = GetOldUsername();
+        }
+
+        private void SetFormValidation()
+        {
+            _ruleSet = new RuleSet();
+            _ruleSet.AddValidationRule(new UsernameValidationRule(_newUsername));
+            _ruleSet.AddValidationRule(new UsernameAvailabilityValidationRule(_newUsername));
         }
 
         private void TextBoxNewUsername_LostFocus(object sender, RoutedEventArgs e)
@@ -45,43 +57,34 @@ namespace MemoryGame
         {
             
             _newUsername = TextBoxNewUsername.Text;
-            if (UsernameIsValid())
+            SetFormValidation();
+            if (_ruleSet.AllValidationRulesHavePassed())
             {
-                if (UsernameIsAvailable())
+                if (ChangeUserName())
                 {
-                    if (ChangeUserName())
-                    {
-                        MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedSuccessfully);
-                        GoToMainWindow();
-                    }
-                    else
-                    {
-                        MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedError);
-                    }
-                    
+                    MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedSuccessfully);
+                    GoToMainWindow();
                 }
                 else
                 {
-                    MessageBox.Show(Properties.Langs.Resources.UsernameIsTaken);
+                    MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedError);
                 }
             }
             else
             {
-                MessageBox.Show(Properties.Langs.Resources.UsernameEmptyFieldMessage);
-            }
-            
+                ShowErrorMessage();
+            }           
         }
 
-        private bool UsernameIsAvailable()
+        private void ShowErrorMessage()
         {
-            MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
-                new MemoryGameService.PlayerRegistryServiceClient();
-            return playerRegistryServiceClient.UserNameIsAvailable(_newUsername);
-        }
-
-        private bool UsernameIsValid()
-        {             
-            return _newUsername.Length > 0;            
+            List<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
+            foreach (ValidationRuleResult validationRuleResult
+                in validationResultErrors)
+            {
+                MessageBox.Show(validationRuleResult.Message);
+                return;
+            }
         }
 
         private bool ChangeUserName()

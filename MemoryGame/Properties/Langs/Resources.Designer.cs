@@ -205,6 +205,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Por favor segúrese de haber llenado los campos solicitados e intente nuevamente.
+        /// </summary>
+        public static string EmptyField {
+            get {
+                return ResourceManager.GetString("EmptyField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Inglés (EEUUAA).
         /// </summary>
         public static string EnglishUSA {

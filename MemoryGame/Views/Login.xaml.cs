@@ -2,6 +2,9 @@
 using System.Windows;
 using Utilities;
 using DataAccess.Entities;
+using MemoryGame.InputValidation;
+using MemoryGame.InputValidation.GenericValidations;
+using System.Collections.Generic;
 
 namespace MemoryGame
 {
@@ -10,9 +13,37 @@ namespace MemoryGame
     /// </summary>
     public partial class Login : Window
     {
+        private RuleSet _ruleSet;
+        private string _username, _password;
+
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void GetDataFromFields()
+        {
+            _username = TextBoxUsername.Text;
+            _password = PasswordBoxPassword.Password;
+        }
+
+        private void SetFormValidation()
+        {
+            GetDataFromFields();
+            _ruleSet = new RuleSet();
+            _ruleSet.AddValidationRule(new NonEmptyFieldValidation(_username));
+            _ruleSet.AddValidationRule(new NonEmptyFieldValidation(_password));
+        }
+
+        private void ShowErrorMessage()
+        {
+            List<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
+            foreach (ValidationRuleResult validationRuleResult
+                in validationResultErrors)
+            {
+                MessageBox.Show(validationRuleResult.Message);
+                return;
+            }
         }
 
         public bool LoginIsValid()
@@ -60,28 +91,37 @@ namespace MemoryGame
 
         private void LoginButtonClicked(object sender, RoutedEventArgs e)
         {
-            if (LoginIsValid())
+            SetFormValidation();
+            if (_ruleSet.AllValidationRulesHavePassed())
             {
-                if (EmailIsVerified())
+                if (LoginIsValid())
                 {
-                    Sesion playerSesion = Sesion.GetSesion;
-                    playerSesion.Username = TextBoxUsername.Text;
-                    playerSesion.EmailAddress = GetUserEmailAdress();
-                    GoToMainMenu();
+                    if (EmailIsVerified())
+                    {
+                        Sesion playerSesion = Sesion.GetSesion;
+                        playerSesion.Username = TextBoxUsername.Text;
+                        playerSesion.EmailAddress = GetUserEmailAdress();
+                        GoToMainMenu();
+                    }
+                    else
+                    {
+                        ActivationToken activationTokenWindow =
+                                new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
+
+                        activationTokenWindow.Show();
+                        this.Close();
+                    }
                 }
                 else
                 {
-                    ActivationToken activationTokenWindow =
-                            new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
-
-                    activationTokenWindow.Show();
-                    this.Close();
+                    MessageBox.Show(Properties.Langs.Resources.NonMatchingCredentials);
                 }
             }
             else
             {
-                MessageBox.Show(Properties.Langs.Resources.NonMatchingCredentials);
+                ShowErrorMessage();
             }
+
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)

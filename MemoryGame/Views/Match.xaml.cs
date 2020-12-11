@@ -46,8 +46,6 @@ namespace MemoryGame.Views
             
             //Comportamiento extraño. Ceiling no funciona
             int numberOfRequiredRows = (int)Math.Ceiling(Convert.ToDouble(numberOfCards / numberOfColumnsDrawn)) + 1;
-            Console.WriteLine("ROWS: " + numberOfRequiredRows);
-            Console.WriteLine("CARTAS: " + numberOfCards);
             for (int i = 0; i < numberOfRequiredRows; i++)
             {
                 GameBoardGrid.RowDefinitions.Add(new RowDefinition());
@@ -68,6 +66,8 @@ namespace MemoryGame.Views
             int columnIndex = 0;
             int columnCount = GameBoardGrid.ColumnDefinitions.Count;
             IList<MemoryGameService.DataTransferObjects.CardDto> cards = _cardDeck.Cards;
+            string backImageOfCards = _cardDeck.BackImage;
+            BitmapImage backImage = new BitmapImage(new Uri("pack://application:,,,/MemoryGameService;component/" + backImageOfCards));
             for (int numberOfActualCard = 0; numberOfActualCard < cards.Count; numberOfActualCard++)
             {
                 if(columnIndex >= columnCount)
@@ -77,13 +77,16 @@ namespace MemoryGame.Views
                 }
 
                 MemoryGameService.DataTransferObjects.CardDto actualCard = _cardDeck.Cards[numberOfActualCard];
+                
                 string frontImageOfActualCard = actualCard.FrontImage;
 
-                var imageSource = new BitmapImage(new Uri("pack://application:,,,/MemoryGameService;component/" + frontImageOfActualCard));
 
+                BitmapImage frontImage = new BitmapImage(new Uri("pack://application:,,,/MemoryGameService;component/" + frontImageOfActualCard));
                 ImageCard imageCard = new ImageCard()
                 {
-                    Source = imageSource,
+                    FrontImage = frontImage,
+                    BackImage = backImage,
+                    Source = backImage,
                     CardId = actualCard.CardId
                 };
 
@@ -103,13 +106,18 @@ namespace MemoryGame.Views
 
         private void GetClickedCard(object sender, EventArgs e)
         {
-            int cardId = ((ImageCard)sender).CardId;
-            MessageBox.Show(cardId + "");
+            ImageCard cardClicked = ((ImageCard)sender);
+            if(cardClicked.Source != cardClicked.FrontImage)
+            {
+                cardClicked.Source = cardClicked.FrontImage;
+            }            
         }
 
         private class ImageCard : Image
         {
             public int CardId { set; get; }
+            public BitmapImage FrontImage { get; set; }
+            public BitmapImage BackImage { get; set; }
         }
     }
 }

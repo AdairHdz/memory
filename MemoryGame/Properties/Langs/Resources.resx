@@ -165,6 +165,9 @@
   <data name="EmailAddressIsTaken" xml:space="preserve">
     <value>El email proporcionado ya se encuentra ocupado por otro jugador. Favor de intentar con uno diferente</value>
   </data>
+  <data name="EmptyField" xml:space="preserve">
+    <value>Por favor segúrese de haber llenado los campos solicitados e intente nuevamente</value>
+  </data>
   <data name="EnglishUSA" xml:space="preserve">
     <value>Inglés (EEUUAA)</value>
   </data>

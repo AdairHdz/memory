@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
+using MemoryGame.InputValidation;
+using MemoryGame.InputValidation.RegistryValidation;
 using MemoryGame.MemoryGameService;
 
 namespace MemoryGame
@@ -9,9 +12,28 @@ namespace MemoryGame
     public partial class RecoverPassword : Window
     {
         private string _verificationToken;
+        private RuleSet _ruleSet;
+        private string _emailAddress;
         public RecoverPassword()
         {
             InitializeComponent();
+        }
+
+        private void SetFormValidation()
+        {
+            _ruleSet = new RuleSet();
+            _ruleSet.AddValidationRule(new EmailAddressValidationRule(_emailAddress));
+        }
+
+        private void ShowErrorMessage()
+        {
+            List<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
+            foreach (ValidationRuleResult validationRuleResult
+                in validationResultErrors)
+            {
+                MessageBox.Show(validationRuleResult.Message);
+                return;
+            }
         }
 
         private void CancelButtonClicked(object sender, RoutedEventArgs e)
@@ -24,19 +46,13 @@ namespace MemoryGame
         private bool EmailIsRegistered()
         {
             AccessibilityServiceClient client = new AccessibilityServiceClient();
-
-            string emailAddress = TextBoxEmail.Text;
-
-            return client.ItsRegistered(emailAddress);
+            return client.ItsRegistered(_emailAddress);
         }
 
         private string GetUsername()
         {
             AccessibilityServiceClient client = new AccessibilityServiceClient();
-
-            string emailAddress = TextBoxEmail.Text;
-
-            return client.GetUsername(emailAddress);
+            return client.GetUsername(_emailAddress);
         }
 
         private void GenerateVerificationToken()
@@ -49,7 +65,7 @@ namespace MemoryGame
         {
             MailingServiceClient client =
                 new MailingServiceClient();
-            client.SendVerificationToken(GetUsername(), TextBoxEmail.Text, _verificationToken);
+            client.SendVerificationToken(GetUsername(), _emailAddress, _verificationToken);
 
             AccountVerificationServiceClient accountVerificationServiceClient =
                 new AccountVerificationServiceClient();
@@ -58,20 +74,28 @@ namespace MemoryGame
 
         private void SendCodeButtonClicked(object sender, RoutedEventArgs e)
         {
-            if (EmailIsRegistered())
+            _emailAddress = TextBoxEmail.Text;
+            SetFormValidation();
+            if (_ruleSet.AllValidationRulesHavePassed())
             {
-                GenerateVerificationToken();
-                SendVerificationCode();
-                RestorePassword restorePasswordWindow =
-                    new RestorePassword(TextBoxEmail.Text, GetUsername());
-                restorePasswordWindow.Show();
-                this.Close();
+                if (EmailIsRegistered())
+                {
+                    GenerateVerificationToken();
+                    SendVerificationCode();
+                    RestorePassword restorePasswordWindow =
+                        new RestorePassword(_emailAddress, GetUsername());
+                    restorePasswordWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(Properties.Langs.Resources.NonRegisteredEmail);
+                }
             }
             else
             {
-                MessageBox.Show(Properties.Langs.Resources.NonRegisteredEmail);
+                ShowErrorMessage();
             }
-
         }
 
     }

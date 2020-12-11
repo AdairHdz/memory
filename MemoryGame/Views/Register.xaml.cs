@@ -2,7 +2,6 @@
 using MemoryGame.InputValidation.RegistryValidation;
 using MemoryGame.Utilities;
 using System.Collections.Generic;
-using System.ServiceModel;
 using System.Windows;
 using Utilities;
 
@@ -62,7 +61,6 @@ namespace MemoryGame
             if (_ruleSet.AllValidationRulesHavePassed())
             {
                 GenerateToken();
-
                 if (PlayerWasSuccessfullyRegistered())
                 {
                     SendVerificationToken();
