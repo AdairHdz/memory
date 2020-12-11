@@ -28,7 +28,7 @@ namespace MemoryGame
             {
                 if (AccountWasSuccessfullyVerified())
                 {
-                    MessageBox.Show("Cuenta activada exitosamente");
+                    MessageBox.Show(Properties.Langs.Resources.AccountVerificationSuccess);
 
                     Login loginView = new Login();
                     loginView.Show();
@@ -36,12 +36,12 @@ namespace MemoryGame
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo activar la cuenta");
+                    MessageBox.Show(Properties.Langs.Resources.AccountVerificationError);
                 }
             }
             else
             {
-                MessageBox.Show("El código introducido no concuerda con el que enviamos a su correo electrónico");
+                MessageBox.Show(Properties.Langs.Resources.NonMatchingVerificationCode);
             }
         }
         
@@ -60,7 +60,7 @@ namespace MemoryGame
                 new MemoryGameService.MailingServiceClient();
             mailingServiceClient.SendVerificationToken(_username, _emailAddress, newToken);
 
-            MessageBox.Show("Nuevo código enviado");
+            MessageBox.Show(Properties.Langs.Resources.NewCodeSentMessage);
 
         }
 

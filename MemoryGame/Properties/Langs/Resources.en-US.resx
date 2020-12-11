@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountVerificationError" xml:space="preserve">
+    <value>We are sorry. There was an error and we were not able to verify your account. Please, try again later</value>
+  </data>
+  <data name="AccountVerificationSuccess" xml:space="preserve">
+    <value>Your account has been verified. Now you will be able to log in</value>
+  </data>
   <data name="ActivateTokenMessage" xml:space="preserve">
     <value>Enter the code you received</value>
   </data>
@@ -152,6 +158,15 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="EmailAddressIsInvalid" xml:space="preserve">
+    <value>The email address you have entered has an invalid format</value>
+  </data>
+  <data name="EmailAddressIsTaken" xml:space="preserve">
+    <value>The email address you have entered is already taken. Please try again with a different email address</value>
+  </data>
+  <data name="EmptyField" xml:space="preserve">
+    <value>Please make sure you have entered the required data and try again</value>
   </data>
   <data name="EnglishUSA" xml:space="preserve">
     <value>English (USA)</value>
@@ -192,11 +207,23 @@
   <data name="Memory" xml:space="preserve">
     <value>Memory</value>
   </data>
+  <data name="NewCodeSentMessage" xml:space="preserve">
+    <value>We have emailed you a new verification code</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
   <data name="NewUsername" xml:space="preserve">
     <value>New username</value>
+  </data>
+  <data name="NonMatchingCredentials" xml:space="preserve">
+    <value>User not found. Please make sure that the username and password you have entered are the correct ones.</value>
+  </data>
+  <data name="NonMatchingVerificationCode" xml:space="preserve">
+    <value>There was an error. The code you have entered doesn't match with the one we have sent to you. Please, make sure that you have introduced the right code and try again</value>
+  </data>
+  <data name="NonRegisteredEmail" xml:space="preserve">
+    <value>Please make sure that you have entered an email address that has been previously registered</value>
   </data>
   <data name="NumberOfPlayers" xml:space="preserve">
     <value>Number of players</value>
@@ -213,6 +240,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordIsInvalid" xml:space="preserve">
+    <value>The password you have entered is too weak. Please make sure that your password contains at least one capital letter, one lowercase letter, a number and an special character. Also make your that your password's lenght is between 8 and 25 characters long</value>
+  </data>
   <data name="Players" xml:space="preserve">
     <value>Players</value>
   </data>
@@ -227,6 +257,9 @@
   </data>
   <data name="RegisterViewTitle" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="RegistryError" xml:space="preserve">
+    <value>There was an error while trying to complete your registration. Please, try again later</value>
   </data>
   <data name="RestorePassword" xml:space="preserve">
     <value>Restore password</value>
@@ -260,6 +293,21 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="UsernameEmptyFieldMessage" xml:space="preserve">
+    <value>Please make sure you have filled the required field and try again</value>
+  </data>
+  <data name="UsernameIsInvalid" xml:space="preserve">
+    <value>The username you have entered is invalid</value>
+  </data>
+  <data name="UsernameIsTaken" xml:space="preserve">
+    <value>The username you have chosen is already taken. Please, try with a different username</value>
+  </data>
+  <data name="UsernameUpdatedError" xml:space="preserve">
+    <value>There was an error while trying to change your username. Please, try again later</value>
+  </data>
+  <data name="UsernameUpdatedSuccessfully" xml:space="preserve">
+    <value>Your username has been updated successfully</value>
   </data>
   <data name="WaitingRoom" xml:space="preserve">
     <value>Waiting room</value>

@@ -61,6 +61,24 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Lo sentimos. Ha ocurrido un error y no hemos podido verificar tu cuenta. Por favor, intenta más tarde.
+        /// </summary>
+        public static string AccountVerificationError {
+            get {
+                return ResourceManager.GetString("AccountVerificationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cuenta verificada de forma exitosa. Ahora podrá iniciar sesión.
+        /// </summary>
+        public static string AccountVerificationSuccess {
+            get {
+                return ResourceManager.GetString("AccountVerificationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ingrese el código que recibió.
         /// </summary>
         public static string ActivateTokenMessage {
@@ -165,6 +183,33 @@ namespace MemoryGame.Properties.Langs {
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El email introducido tiene un formato no válido.
+        /// </summary>
+        public static string EmailAddressIsInvalid {
+            get {
+                return ResourceManager.GetString("EmailAddressIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El email proporcionado ya se encuentra ocupado por otro jugador. Favor de intentar con uno diferente.
+        /// </summary>
+        public static string EmailAddressIsTaken {
+            get {
+                return ResourceManager.GetString("EmailAddressIsTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor segúrese de haber llenado los campos solicitados e intente nuevamente.
+        /// </summary>
+        public static string EmptyField {
+            get {
+                return ResourceManager.GetString("EmptyField", resourceCulture);
             }
         }
         
@@ -286,6 +331,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Se ha enviado un nuevo código de verificación a su dirección de correo electrónico..
+        /// </summary>
+        public static string NewCodeSentMessage {
+            get {
+                return ResourceManager.GetString("NewCodeSentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nueva contraseña.
         /// </summary>
         public static string NewPassword {
@@ -300,6 +354,33 @@ namespace MemoryGame.Properties.Langs {
         public static string NewUsername {
             get {
                 return ResourceManager.GetString("NewUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Usuario no encontrado. Por favor verifique que el nombre de usuario y la contraseña que ingresó son las correctas..
+        /// </summary>
+        public static string NonMatchingCredentials {
+            get {
+                return ResourceManager.GetString("NonMatchingCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error. El código que ha introducido no coincide con el código que le enviamos. Por favor, verifique que ha introducido el código correcto e intente nuevamente.
+        /// </summary>
+        public static string NonMatchingVerificationCode {
+            get {
+                return ResourceManager.GetString("NonMatchingVerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor asegúrese de haber ingresado un email previamente registrado.
+        /// </summary>
+        public static string NonRegisteredEmail {
+            get {
+                return ResourceManager.GetString("NonRegisteredEmail", resourceCulture);
             }
         }
         
@@ -349,6 +430,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña que ingresó no es segura. Por favor, asegúrese de que su contraseña contiene al menos un caracter especial, una letra minúscula, una letra mayúscula y un número. Además, asegúrese de que su contraseña tiene entre 8 y 25 caracteres.
+        /// </summary>
+        public static string PasswordIsInvalid {
+            get {
+                return ResourceManager.GetString("PasswordIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Jugadores.
         /// </summary>
         public static string Players {
@@ -390,6 +480,15 @@ namespace MemoryGame.Properties.Langs {
         public static string RegisterViewTitle {
             get {
                 return ResourceManager.GetString("RegisterViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrió un error al realizar el registro. Por favor, reintente más tarde.
+        /// </summary>
+        public static string RegistryError {
+            get {
+                return ResourceManager.GetString("RegistryError", resourceCulture);
             }
         }
         
@@ -489,6 +588,51 @@ namespace MemoryGame.Properties.Langs {
         public static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor asegúrese de llenar el campo e intente nuevamente.
+        /// </summary>
+        public static string UsernameEmptyFieldMessage {
+            get {
+                return ResourceManager.GetString("UsernameEmptyFieldMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nombre de usuario que ha introducido no es válido.
+        /// </summary>
+        public static string UsernameIsInvalid {
+            get {
+                return ResourceManager.GetString("UsernameIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nombre de usuario elegido ya se encuentra ocupado por otro jugador. Favor de intentar con uno diferente.
+        /// </summary>
+        public static string UsernameIsTaken {
+            get {
+                return ResourceManager.GetString("UsernameIsTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrió un error al registrar el nuevo nombre de usuario. Por favor, reintente más tarde.
+        /// </summary>
+        public static string UsernameUpdatedError {
+            get {
+                return ResourceManager.GetString("UsernameUpdatedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre de usuario actualizado de forma exitosa.
+        /// </summary>
+        public static string UsernameUpdatedSuccessfully {
+            get {
+                return ResourceManager.GetString("UsernameUpdatedSuccessfully", resourceCulture);
             }
         }
         

@@ -27,15 +27,11 @@ namespace UnitTests.InputValidationTests
             "qw@hotmail.com")]
         public void EmailAddressValidationReturnsTrue(string emailAddress)
         {
-            RegistryData registryData = new RegistryData()
-            {
-                EmailAddress = emailAddress
-            };
 
-            EmailAddressValidationRule emailAddressValidationRule = new EmailAddressValidationRule();
-            ValidationRuleResult validationRuleResult = emailAddressValidationRule.Validate(registryData);
-            bool isValid = validationRuleResult.Status == ValidationRuleResult.SUCCESS;
-            Assert.IsTrue(isValid);
+            EmailAddressValidationRule emailAddressValidationRule = new EmailAddressValidationRule(emailAddress);            
+            bool expected = true;
+            bool actual = emailAddressValidationRule.Validate();            
+            Assert.AreEqual(expected, actual);
         }
     }
 }

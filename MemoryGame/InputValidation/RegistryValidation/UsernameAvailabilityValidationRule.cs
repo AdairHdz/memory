@@ -1,17 +1,32 @@
 ﻿namespace MemoryGame.InputValidation.RegistryValidation
 {
-    public class UsernameAvailabilityValidationRule : IRegistryRule
+    public class UsernameAvailabilityValidationRule : IValidationRule
     {
         private string _username;
-        public ValidationRuleResult Validate(RegistryData registryData)
-        {
-            _username = registryData.Username;
 
+        public UsernameAvailabilityValidationRule(string username)
+        {
+            _username = username;
+        }
+
+        public ValidationRuleResult GetValidationRuleResult()
+        {
             if (UsernameIsAvailable())
             {
-                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);                
+                return new ValidationRuleResult(ValidationRuleResult.SUCCESS);
             }
-            return new ValidationRuleResult(ValidationRuleResult.ERROR, "El nombre de usuario no está disponible");
+            return new ValidationRuleResult(ValidationRuleResult.ERROR,
+                Properties.Langs.Resources.UsernameIsTaken);
+        }
+
+        public bool Validate()
+        {
+            ValidationRuleResult validationRuleResult = GetValidationRuleResult();
+            if (validationRuleResult.Status == ValidationRuleResult.SUCCESS)
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool UsernameIsAvailable()

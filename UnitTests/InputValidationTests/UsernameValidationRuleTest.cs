@@ -19,15 +19,12 @@ namespace UnitTests.InputValidationTests
         [DataRow("AdairBenjamin@16")]
         public void UsernameValidationReturnsTrue(string username)
         {
-            RegistryData registryData = new RegistryData()
-            {
-                Username = username
-            };
 
-            UsernameValidationRule usernameValidationRule = new UsernameValidationRule();
-            ValidationRuleResult validationRuleResult = usernameValidationRule.Validate(registryData);
-            bool isValid = validationRuleResult.Status == ValidationRuleResult.SUCCESS;
-            Assert.IsTrue(isValid);
+            UsernameValidationRule usernameValidationRule = new UsernameValidationRule(username);
+            bool expected = true;
+            bool actual = usernameValidationRule.Validate();
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }

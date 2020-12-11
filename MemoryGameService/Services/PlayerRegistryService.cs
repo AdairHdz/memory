@@ -11,26 +11,6 @@ namespace MemoryGameService.Services
     {
         public bool RegisterNewPlayer(PlayerDTO playerDTO)
         {
-            /*
-            try
-            {
-
-            }
-            catch (EndpointNotFoundException)
-            {
-                EndpointNotFoundFault endpointNotFoundFault = new EndpointNotFoundFault();
-                endpointNotFoundFault.Error = "Endpoint no encontrado (falta hacerlo un resource)";
-                endpointNotFoundFault.Details = "Detalles (falta hacerlo un resource)";
-                throw new FaultException<EndpointNotFoundFault>(endpointNotFoundFault);
-            }
-            catch (SocketException)
-            {
-                EndpointNotFoundFault endpointNotFoundFault = new EndpointNotFoundFault();
-                endpointNotFoundFault.Error = "Endpoint no encontrado (falta hacerlo un resource)";
-                endpointNotFoundFault.Details = "Detalles (falta hacerlo un resource)";
-                throw new FaultException<EndpointNotFoundFault>(endpointNotFoundFault);
-            }
-            */
             Player newPlayer = PlayerMapper.CreateEntity(playerDTO);
             newPlayer.EmailWasVerified = false;
             newPlayer.TotalScore = 0;
