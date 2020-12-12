@@ -5,9 +5,9 @@ using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single,
-       InstanceContextMode = InstanceContextMode.Single)]
-    public partial class LobbyService : IJoinGameService, IWaitingRoomService
+    /*[ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single,
+       InstanceContextMode = InstanceContextMode.Single)]*/
+    public partial class MemoryGameService : IJoinGameService, IWaitingRoomService
     {
         private Dictionary<string, GameSettings> _games = new Dictionary<string, GameSettings>();
         private Dictionary<IJoinGameServiceCallback, string> _playersLookingForJoinGame = new Dictionary<IJoinGameServiceCallback, string>();

@@ -9,9 +9,12 @@ namespace MemoryGameService.Utilities
 
         private Dictionary<IWaitingRoomServiceCallback, string> members;
 
+        public bool MatchWasStarted { get; set; }
+
         public GameSettings()
         {
-            members = new Dictionary<IWaitingRoomServiceCallback, string>();
+            this.members = new Dictionary<IWaitingRoomServiceCallback, string>();
+            this.MatchWasStarted = false;
         }
 
 
