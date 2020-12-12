@@ -12,25 +12,25 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="BackImage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CardDeckId" type="xs:int" />
-      <xs:element minOccurs="0" name="Cards" nillable="true" type="tns:ArrayOfCardDTO" />
+      <xs:element minOccurs="0" name="Cards" nillable="true" type="tns:ArrayOfCardDto" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NumberOfPairs" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CardDeckDTO" nillable="true" type="tns:CardDeckDTO" />
-  <xs:complexType name="ArrayOfCardDTO">
+  <xs:complexType name="ArrayOfCardDto">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="CardDTO" nillable="true" type="tns:CardDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CardDto" nillable="true" type="tns:CardDto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfCardDTO" nillable="true" type="tns:ArrayOfCardDTO" />
-  <xs:complexType name="CardDTO">
+  <xs:element name="ArrayOfCardDto" nillable="true" type="tns:ArrayOfCardDto" />
+  <xs:complexType name="CardDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="CardId" type="xs:int" />
       <xs:element minOccurs="0" name="FrontImage" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="CardDTO" nillable="true" type="tns:CardDTO" />
+  <xs:element name="CardDto" nillable="true" type="tns:CardDto" />
   <xs:complexType name="ArrayOfPlayerScoreDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerScoreDTO" nillable="true" type="tns:PlayerScoreDTO" />

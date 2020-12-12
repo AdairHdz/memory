@@ -695,4 +695,213 @@ namespace MemoryGame.Proxy {
             return base.Channel.UserNameIsAvailableAsync(username);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IJoinGameService", CallbackContract=typeof(MemoryGame.Proxy.IJoinGameServiceCallback))]
+    public interface IJoinGameService {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/JoinGameLobby")]
+        void JoinGameLobby(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/JoinGameLobby")]
+        System.Threading.Tasks.Task JoinGameLobbyAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/LeaveGameLobby")]
+        void LeaveGameLobby();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/LeaveGameLobby")]
+        System.Threading.Tasks.Task LeaveGameLobbyAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/RecoverAvailableGames")]
+        void RecoverAvailableGames();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/RecoverAvailableGames")]
+        System.Threading.Tasks.Task RecoverAvailableGamesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJoinGameService/AskForJoinGame", ReplyAction="http://tempuri.org/IJoinGameService/AskForJoinGameResponse")]
+        bool AskForJoinGame(string gameHostUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJoinGameService/AskForJoinGame", ReplyAction="http://tempuri.org/IJoinGameService/AskForJoinGameResponse")]
+        System.Threading.Tasks.Task<bool> AskForJoinGameAsync(string gameHostUsername);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJoinGameServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/NewGameCreated")]
+        void NewGameCreated(string gameHostUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/ReciveAvailableGames")]
+        void ReciveAvailableGames(string gameHostUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/RemoveGameFromList")]
+        void RemoveGameFromList(string gameHostUsername);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IJoinGameServiceChannel : MemoryGame.Proxy.IJoinGameService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class JoinGameServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.Proxy.IJoinGameService>, MemoryGame.Proxy.IJoinGameService {
+        
+        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void JoinGameLobby(string username) {
+            base.Channel.JoinGameLobby(username);
+        }
+        
+        public System.Threading.Tasks.Task JoinGameLobbyAsync(string username) {
+            return base.Channel.JoinGameLobbyAsync(username);
+        }
+        
+        public void LeaveGameLobby() {
+            base.Channel.LeaveGameLobby();
+        }
+        
+        public System.Threading.Tasks.Task LeaveGameLobbyAsync() {
+            return base.Channel.LeaveGameLobbyAsync();
+        }
+        
+        public void RecoverAvailableGames() {
+            base.Channel.RecoverAvailableGames();
+        }
+        
+        public System.Threading.Tasks.Task RecoverAvailableGamesAsync() {
+            return base.Channel.RecoverAvailableGamesAsync();
+        }
+        
+        public bool AskForJoinGame(string gameHostUsername) {
+            return base.Channel.AskForJoinGame(gameHostUsername);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AskForJoinGameAsync(string gameHostUsername) {
+            return base.Channel.AskForJoinGameAsync(gameHostUsername);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IWaitingRoomService", CallbackContract=typeof(MemoryGame.Proxy.IWaitingRoomServiceCallback))]
+    public interface IWaitingRoomService {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/CreateGame")]
+        void CreateGame(string username, int maxNumOfPlayers);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/CreateGame")]
+        System.Threading.Tasks.Task CreateGameAsync(string username, int maxNumOfPlayers);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/RecoverGameMembers")]
+        void RecoverGameMembers(string gameHostUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/RecoverGameMembers")]
+        System.Threading.Tasks.Task RecoverGameMembersAsync(string gameHostUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/JoinGame")]
+        void JoinGame(string gameHostUsername, string newPlayerUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/JoinGame")]
+        System.Threading.Tasks.Task JoinGameAsync(string gameHostUsername, string newPlayerUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/LeaveGame")]
+        void LeaveGame(string gameHostUsername, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/LeaveGame")]
+        System.Threading.Tasks.Task LeaveGameAsync(string gameHostUsername, string username);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IWaitingRoomServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/NewPlayerJoined")]
+        void NewPlayerJoined(string newPlayerUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/ReciveGameMembers")]
+        void ReciveGameMembers(string memberUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/HostLeaveGame")]
+        void HostLeaveGame();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/PlayerLeaveGame")]
+        void PlayerLeaveGame(string playerUsername);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IWaitingRoomServiceChannel : MemoryGame.Proxy.IWaitingRoomService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class WaitingRoomServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.Proxy.IWaitingRoomService>, MemoryGame.Proxy.IWaitingRoomService {
+        
+        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void CreateGame(string username, int maxNumOfPlayers) {
+            base.Channel.CreateGame(username, maxNumOfPlayers);
+        }
+        
+        public System.Threading.Tasks.Task CreateGameAsync(string username, int maxNumOfPlayers) {
+            return base.Channel.CreateGameAsync(username, maxNumOfPlayers);
+        }
+        
+        public void RecoverGameMembers(string gameHostUsername) {
+            base.Channel.RecoverGameMembers(gameHostUsername);
+        }
+        
+        public System.Threading.Tasks.Task RecoverGameMembersAsync(string gameHostUsername) {
+            return base.Channel.RecoverGameMembersAsync(gameHostUsername);
+        }
+        
+        public void JoinGame(string gameHostUsername, string newPlayerUsername) {
+            base.Channel.JoinGame(gameHostUsername, newPlayerUsername);
+        }
+        
+        public System.Threading.Tasks.Task JoinGameAsync(string gameHostUsername, string newPlayerUsername) {
+            return base.Channel.JoinGameAsync(gameHostUsername, newPlayerUsername);
+        }
+        
+        public void LeaveGame(string gameHostUsername, string username) {
+            base.Channel.LeaveGame(gameHostUsername, username);
+        }
+        
+        public System.Threading.Tasks.Task LeaveGameAsync(string gameHostUsername, string username) {
+            return base.Channel.LeaveGameAsync(gameHostUsername, username);
+        }
+    }
 }
