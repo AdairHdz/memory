@@ -551,6 +551,9 @@
   <wsdl:message name="IWaitingRoomService_LeaveGame_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveGame" />
   </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_StarGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:StarGame" />
+  </wsdl:message>
   <wsdl:message name="IWaitingRoomService_NewPlayerJoined_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NewPlayerJoined" />
   </wsdl:message>
@@ -562,6 +565,9 @@
   </wsdl:message>
   <wsdl:message name="IWaitingRoomService_PlayerLeaveGame_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerLeaveGame" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_GameStarted_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameStarted" />
   </wsdl:message>
   <wsdl:portType name="IAccessibilityService">
     <wsdl:operation name="HasAccessRights">
@@ -713,6 +719,9 @@
     <wsdl:operation name="LeaveGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/LeaveGame" message="tns:IWaitingRoomService_LeaveGame_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="StarGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/StarGame" message="tns:IWaitingRoomService_StarGame_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NewPlayerJoined">
       <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/NewPlayerJoined" message="tns:IWaitingRoomService_NewPlayerJoined_OutputCallbackMessage" />
     </wsdl:operation>
@@ -724,6 +733,9 @@
     </wsdl:operation>
     <wsdl:operation name="PlayerLeaveGame">
       <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/PlayerLeaveGame" message="tns:IWaitingRoomService_PlayerLeaveGame_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GameStarted">
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/GameStarted" message="tns:IWaitingRoomService_GameStarted_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IAccessibilityService" type="tns:IAccessibilityService">
@@ -1047,6 +1059,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="StarGame">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/StarGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="NewPlayerJoined">
       <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/NewPlayerJoined" style="document" />
       <wsdl:output>
@@ -1067,6 +1085,12 @@
     </wsdl:operation>
     <wsdl:operation name="PlayerLeaveGame">
       <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/PlayerLeaveGame" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameStarted">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/GameStarted" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

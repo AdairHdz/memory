@@ -62,6 +62,6 @@
                 Name="StarButton"
                 Style="{StaticResource buttonPrimary}" 
                 Content="{x:Static p:Resources.Start}" Grid.RowSpan="2"
-                Click="LeaveButtonClicked"/>
+                Click="StartButtonClicked"/>
     </Grid>
 </Window>

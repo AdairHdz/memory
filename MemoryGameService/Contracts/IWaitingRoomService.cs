@@ -13,6 +13,8 @@ namespace MemoryGameService.Contracts
         void JoinGame(string gameHostUsername, string newPlayerUsername);
         [OperationContract(IsOneWay = true)]
         void LeaveGame(string gameHostUsername, string username);
+        [OperationContract(IsOneWay = true)]
+        void StarGame(string gameHostUsername);
     }
 
     [ServiceContract]
@@ -26,5 +28,7 @@ namespace MemoryGameService.Contracts
         void HostLeaveGame();
         [OperationContract(IsOneWay = true)]
         void PlayerLeaveGame(string playerUsername);
+        [OperationContract(IsOneWay = true)]
+        void GameStarted();
     }
 }

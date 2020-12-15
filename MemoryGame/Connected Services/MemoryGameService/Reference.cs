@@ -826,6 +826,12 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/LeaveGame")]
         System.Threading.Tasks.Task LeaveGameAsync(string gameHostUsername, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/StarGame")]
+        void StarGame(string gameHostUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/StarGame")]
+        System.Threading.Tasks.Task StarGameAsync(string gameHostUsername);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -842,6 +848,9 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/PlayerLeaveGame")]
         void PlayerLeaveGame(string playerUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/GameStarted")]
+        void GameStarted();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -902,6 +911,14 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task LeaveGameAsync(string gameHostUsername, string username) {
             return base.Channel.LeaveGameAsync(gameHostUsername, username);
+        }
+        
+        public void StarGame(string gameHostUsername) {
+            base.Channel.StarGame(gameHostUsername);
+        }
+        
+        public System.Threading.Tasks.Task StarGameAsync(string gameHostUsername) {
+            return base.Channel.StarGameAsync(gameHostUsername);
         }
     }
 }

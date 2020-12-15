@@ -250,6 +250,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La partida esta llena, espera a que haya un lugar disponible o ingresa a otra partida.
+        /// </summary>
+        public static string FullGameMessage {
+            get {
+                return ResourceManager.GetString("FullGameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Registrarme.
         /// </summary>
         public static string GetRegistered {

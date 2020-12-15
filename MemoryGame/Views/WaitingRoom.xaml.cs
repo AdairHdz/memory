@@ -59,6 +59,13 @@ namespace MemoryGame
             players.Add(memberUsername);
         }
 
+        public void GameStarted()
+        {
+            Chat matchView = new Chat();
+            matchView.Show();
+            this.Close();
+        }
+
         public void LeaveButtonClicked(object sender, RoutedEventArgs e)
         {
             server.LeaveGame(gameHostUsername, playerSesion.Username);
@@ -74,6 +81,14 @@ namespace MemoryGame
                 joinGameView.Show();
                 this.Close();
             }
+        }
+
+        public void StartButtonClicked(object sender, RoutedEventArgs e)
+        {
+            server.StarGame(gameHostUsername);
+            Chat matchView = new Chat();
+            matchView.Show();
+            this.Close();
         }
     }
 }

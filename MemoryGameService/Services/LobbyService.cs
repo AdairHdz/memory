@@ -19,9 +19,9 @@ namespace MemoryGameService.Services
             gameSettings.addToMembersDictionary(connection, username);
             gameSettings.NumberOfPlayers = numOfPlayers;
             _games.Add(username, gameSettings);
-            foreach (var other in _playersLookingForJoinGame.Keys)
+            foreach (var playerJoinGameConnection in _playersLookingForJoinGame.Keys)
             {
-                other.NewGameCreated(username);
+                playerJoinGameConnection.NewGameCreated(username);
             }
         }
 
@@ -48,9 +48,9 @@ namespace MemoryGameService.Services
             GameSettings gameSettings = new GameSettings();
             _games.TryGetValue(gameHostUsername, out gameSettings);
             Dictionary<IWaitingRoomServiceCallback, string> _members = gameSettings.getMembersDictionary();
-            foreach (var other in _members.Keys)
+            foreach (var playerConnection in _members.Keys)
             {
-                other.NewPlayerJoined(newPlayerUsername);
+                playerConnection.NewPlayerJoined(newPlayerUsername);
             }
             gameSettings.addToMembersDictionary(connection, newPlayerUsername);
         }
@@ -64,28 +64,28 @@ namespace MemoryGameService.Services
             if (gameHostUsername == username)
             {
 
-                foreach (var player in _members.Keys)
+                foreach (var playerConnection in _members.Keys)
                 {
-                    if (player == connection)
+                    if (playerConnection == connection)
                     {
                         continue;
                     }
-                    player.HostLeaveGame();
+                    playerConnection.HostLeaveGame();
                 }
                 _games.Remove(gameHostUsername);
 
-                foreach (var other in _playersLookingForJoinGame.Keys)
+                foreach (var playerJoinGameConnection in _playersLookingForJoinGame.Keys)
                 {
-                    other.RemoveGameFromList(gameHostUsername);
+                    playerJoinGameConnection.RemoveGameFromList(gameHostUsername);
                 }
             }
             else
             {
                 _members.Remove(connection);
                 gameSettings.setMembersDictionary(_members);
-                foreach (var player in _members.Keys)
+                foreach (var playerConnection in _members.Keys)
                 {
-                    player.PlayerLeaveGame(username);
+                    playerConnection.PlayerLeaveGame(username);
                 }
             }
         }
@@ -105,9 +105,14 @@ namespace MemoryGameService.Services
         public void RecoverAvailableGames()
         {
             var connection = OperationContext.Current.GetCallbackChannel<IJoinGameServiceCallback>();
+            GameSettings gameSettings;;
             foreach (var gameHost in _games.Keys)
             {
-                connection.ReciveAvailableGames(gameHost);
+                _games.TryGetValue(gameHost, out gameSettings);
+                if(gameSettings.MatchWasStarted == false)
+                {
+                    connection.ReciveAvailableGames(gameHost);
+                }               
             }
         }
 
@@ -120,6 +125,27 @@ namespace MemoryGameService.Services
             foreach (var playerUsername in _members.Values)
             {
                 connection.ReciveGameMembers(playerUsername);
+            }
+        }
+
+        public void StarGame(string gameHostUsername)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IWaitingRoomServiceCallback>();
+            GameSettings gameSettings = new GameSettings();
+            _games.TryGetValue(gameHostUsername, out gameSettings);
+            Dictionary<IWaitingRoomServiceCallback, string> _members = gameSettings.getMembersDictionary();
+            foreach (var playerConnection in _members.Keys)
+            {
+                if (playerConnection == connection)
+                {
+                    continue;
+                }
+                playerConnection.GameStarted();
+            }
+            gameSettings.MatchWasStarted = true;
+            foreach (var playerJoinGameConnection in _playersLookingForJoinGame.Keys)
+            {
+                playerJoinGameConnection.RemoveGameFromList(gameHostUsername);
             }
         }
     }

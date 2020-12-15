@@ -61,7 +61,7 @@ namespace MemoryGame
             }
             else
             {
-                MessageBox.Show("La partida esta llena, espera a que se abra un lugar o ingresa a otra partida");
+                MessageBox.Show(Properties.Langs.Resources.FullGameMessage);
             }
         }
     }
