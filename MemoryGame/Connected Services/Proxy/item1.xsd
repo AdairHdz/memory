@@ -195,6 +195,8 @@
   <xs:element name="NotifyCardWasUncovered">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="backImage" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="frontImage" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="cardId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -202,6 +204,8 @@
   <xs:element name="UncoverCard">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="backImage" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="frontImage" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="cardId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>

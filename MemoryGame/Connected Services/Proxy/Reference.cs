@@ -330,17 +330,17 @@ namespace MemoryGame.Proxy {
         System.Threading.Tasks.Task UnsubscribeAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered")]
-        void NotifyCardWasUncovered(int cardId);
+        void NotifyCardWasUncovered(string backImage, string frontImage, int cardId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered")]
-        System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(int cardId);
+        System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(string backImage, string frontImage, int cardId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ICardUncoveringServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/UncoverCard")]
-        void UncoverCard(int cardId);
+        void UncoverCard(string backImage, string frontImage, int cardId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -387,12 +387,12 @@ namespace MemoryGame.Proxy {
             return base.Channel.UnsubscribeAsync();
         }
         
-        public void NotifyCardWasUncovered(int cardId) {
-            base.Channel.NotifyCardWasUncovered(cardId);
+        public void NotifyCardWasUncovered(string backImage, string frontImage, int cardId) {
+            base.Channel.NotifyCardWasUncovered(backImage, frontImage, cardId);
         }
         
-        public System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(int cardId) {
-            return base.Channel.NotifyCardWasUncoveredAsync(cardId);
+        public System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(string backImage, string frontImage, int cardId) {
+            return base.Channel.NotifyCardWasUncoveredAsync(backImage, frontImage, cardId);
         }
     }
     

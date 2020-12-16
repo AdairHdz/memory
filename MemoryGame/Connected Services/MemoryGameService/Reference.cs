@@ -330,17 +330,17 @@ namespace MemoryGame.MemoryGameService {
         System.Threading.Tasks.Task UnsubscribeAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered")]
-        void NotifyCardWasUncovered(int cardId);
+        void NotifyCardWasUncovered(int cardIndex);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered")]
-        System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(int cardId);
+        System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(int cardIndex);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ICardUncoveringServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/UncoverCard")]
-        void UncoverCard(int cardId);
+        void UncoverCard(int cardIndex);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -387,12 +387,12 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.UnsubscribeAsync();
         }
         
-        public void NotifyCardWasUncovered(int cardId) {
-            base.Channel.NotifyCardWasUncovered(cardId);
+        public void NotifyCardWasUncovered(int cardIndex) {
+            base.Channel.NotifyCardWasUncovered(cardIndex);
         }
         
-        public System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(int cardId) {
-            return base.Channel.NotifyCardWasUncoveredAsync(cardId);
+        public System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(int cardIndex) {
+            return base.Channel.NotifyCardWasUncoveredAsync(cardIndex);
         }
     }
     

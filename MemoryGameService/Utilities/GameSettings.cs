@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 
 namespace MemoryGameService.Utilities
@@ -6,7 +7,7 @@ namespace MemoryGameService.Utilities
     class GameSettings
     {
         public int NumberOfPlayers { get; set; }
-
+        public CardDeckDTO CardDeckDto { get; set; }
         private Dictionary<IWaitingRoomServiceCallback, string> members;
 
         public bool MatchWasStarted { get; set; }

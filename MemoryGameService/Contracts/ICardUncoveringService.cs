@@ -11,12 +11,12 @@ namespace MemoryGameService.Contracts
         [OperationContract(IsOneWay = false, IsInitiating = true)]
         void Unsubscribe();
         [OperationContract(IsOneWay = true)]
-        void NotifyCardWasUncovered(int cardId);
+        void NotifyCardWasUncovered(int cardIndex);
     }
 
     public interface ICardUncoveringCallback
     {
         [OperationContract(IsOneWay = true)]
-        void UncoverCard(int cardId);
+        void UncoverCard(int cardIndex);
     }
 }

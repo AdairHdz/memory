@@ -134,6 +134,11 @@ namespace MemoryGameService.Services
             GameSettings gameSettings = new GameSettings();
             _games.TryGetValue(gameHostUsername, out gameSettings);
             Dictionary<IWaitingRoomServiceCallback, string> _members = gameSettings.getMembersDictionary();
+
+            //MemoryGameService c = new MemoryGameService();
+            //_cardDeckDTO = c.GetCardDeckAndCards(1);
+            
+
             foreach (var playerConnection in _members.Keys)
             {
                 if (playerConnection == connection)

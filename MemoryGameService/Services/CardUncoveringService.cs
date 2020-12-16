@@ -5,7 +5,7 @@ using System.ServiceModel;
 namespace MemoryGameService.Services
 {    
     public class CardUncoveredEventArgs : EventArgs {
-        public int CardId { get; set; }
+        public int CardIndex { get; set; }
     }
 
     public partial class MemoryGameService : ICardUncoveringService
@@ -27,12 +27,12 @@ namespace MemoryGameService.Services
         {
             CardUncoveredEvent -= _cardUncoveredHandler;
         }
-        public void NotifyCardWasUncovered(int cardId)
+        public void NotifyCardWasUncovered(int cardIndex)
         {
             CardUncoveredEventArgs eventArguments =
                 new CardUncoveredEventArgs
-            {
-                CardId = cardId
+            {                
+                CardIndex = cardIndex
             };
             CardUncoveredEvent(this, eventArguments);
         }
@@ -40,7 +40,7 @@ namespace MemoryGameService.Services
         public void CardUncoveredHandler(object sender,
             CardUncoveredEventArgs eventArguments)
         {
-            _callback.UncoverCard(eventArguments.CardId);
+            _callback.UncoverCard(eventArguments.CardIndex);
         }
     }
 }
