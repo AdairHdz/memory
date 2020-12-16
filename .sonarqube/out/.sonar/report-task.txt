@@ -1,0 +1,6 @@
+projectKey=my:memoryGame
+serverUrl=http://localhost:9000
+serverVersion=8.5.1.38104
+dashboardUrl=http://localhost:9000/dashboard?id=my%3AmemoryGame
+ceTaskId=AXY7Jii_ywV6LMVrrFlH
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXY7Jii_ywV6LMVrrFlH

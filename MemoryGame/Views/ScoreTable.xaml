@@ -1,0 +1,93 @@
+﻿<Window x:Class="MemoryGame.ScoreTable"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MemoryGame"
+        xmlns:p="clr-namespace:MemoryGame.Properties.Langs"
+        mc:Ignorable="d"
+        Style="{StaticResource backgroundPrimary}"
+        Title="{x:Static p:Resources.ScoreTable}" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" 
+               Style="{StaticResource title}"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               Content="{x:Static p:Resources.ScoreTable}"></Label>
+
+
+        <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="7">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                    <GradientStop Color="#EF476F" Offset="0.0"/>
+                    <GradientStop Color="#FF84A1" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left" 
+                  Height="190" Margin="0,32.6,0,0" Grid.Row="1" Grid.RowSpan="9" 
+                  VerticalAlignment="Top" Width="238" Name="ScoreDataGrid" CanUserSortColumns="False">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        HeaderStyle="{StaticResource dataGridHeader}"
+                        Header="{x:Static p:Resources.Username}" Width="150"
+                        x:Name="DataGridTextColumnUsername"
+                        Binding="{Binding Username}"/>
+                    <DataGridTextColumn
+                        HeaderStyle="{StaticResource dataGridHeader}"
+                        Header="{x:Static p:Resources.Points}" Width="*"
+                        Binding="{Binding Score}"/>
+                </DataGrid.Columns>
+                
+            </DataGrid>
+        </Grid>
+
+        <Button Grid.Column="1" Grid.Row="9" 
+                    Style="{StaticResource buttonSecondary}"
+                    Click="BackButtonClicked"
+                    Content="{x:Static p:Resources.Back}" 
+                    Margin="99.6,3.2,99.6,3.6" Grid.ColumnSpan="2"/>
+    </Grid>
+    </Window>

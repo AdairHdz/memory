@@ -1,10 +1,10 @@
-﻿using DataAccess.Context;
-using Models;
-using System;
+﻿using DataAccess.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class PlayerRepository : Repository<Player>, IPlayerRepository
+    public class PlayerRepository : Repository<Entities.Player>, IPlayerRepository
     {
 
         public MemoryGameContext MemoryGameContext
@@ -17,9 +17,11 @@ namespace DataAccess.Repositories
             
         }
 
-        public void DoSomething()
+        public IEnumerable<Entities.Player> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
         {
-            Console.WriteLine("Jelou");
+            IEnumerable<Player> players = MemoryGameContext.Players
+                .OrderByDescending(player => player.TotalScore).Take(numberOfPlayersToBeRetrieved);
+            return players;
         }
     }
 }

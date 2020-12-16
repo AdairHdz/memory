@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace DataAccess.Repositories
 {
@@ -25,7 +24,7 @@ namespace DataAccess.Repositories
             return _context.Set<TEntity>().ToList();
         }
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
         {
             return _context.Set<TEntity>().Where(predicate);
         }

@@ -34,6 +34,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,19 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Commands\PlayerRegisterCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{65CAD0DA-BE2F-42EC-A9D7-6C05F2B1C143}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{04DCFF4D-EDD6-4E12-A21D-DE24054440AB}</Project>
-      <Name>Models</Name>
+    <ProjectReference Include="..\MemoryGameService\MemoryGameService.csproj">
+      <Project>{CFBD5FE1-14CD-4CB1-94A7-A21A145F4190}</Project>
+      <Name>MemoryGameService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,82 @@
+﻿<Window x:Class="MemoryGame.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MemoryGame"
+        xmlns:p="clr-namespace:MemoryGame.Properties.Langs"
+        mc:Ignorable="d"
+        Title="{x:Static p:Resources.RegisterViewTitle}"
+        Height="450" Width="800" Style="{StaticResource backgroundPrimary}"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" 
+               Style="{StaticResource title}"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               Content="{x:Static p:Resources.RegisterViewTitle}"></Label>
+
+
+        <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="8">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                    <GradientStop Color="#EF476F" Offset="0.0"/>
+                    <GradientStop Color="#FF84A1" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="{x:Static p:Resources.Username}" Style="{StaticResource infoLabel}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"></Label>
+            <TextBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Margin="0 0 0 5" Name="TextBoxUsername"></TextBox>
+
+            <Label Content="{x:Static p:Resources.Email}" Style="{StaticResource infoLabel}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"></Label>
+            <TextBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" Margin="0 0 0 5" Name="TextBoxEmail"></TextBox>
+
+            <Label Content="{x:Static p:Resources.Password}" Style="{StaticResource infoLabel}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2"></Label>
+            <PasswordBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6" Margin="0 0 0 5" Name="PasswordBoxPassword"></PasswordBox>
+
+            <Button Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="8" Style="{StaticResource buttonPrimary}" Content="{x:Static p:Resources.GetRegistered}"  Click="RegisterButtonClicked" Margin="0,0,0,10"></Button>
+            <Button Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="9" Style="{StaticResource buttonSecondary}" Content="{x:Static p:Resources.Cancel}" Click="CancelButtonClicked"></Button>
+        </Grid>
+    </Grid>
+</Window>

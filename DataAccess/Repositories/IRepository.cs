@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace DataAccess.Repositories
 {
@@ -8,7 +7,7 @@ namespace DataAccess.Repositories
     {
         TEntity Get(object id);
         IEnumerable<TEntity> GetAll();
-        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        IEnumerable<TEntity> Find(Func<TEntity, bool> predicate);
 
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
