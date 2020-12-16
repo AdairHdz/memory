@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddingCardDeck : IMigrationMetadata
+    public sealed partial class CreatingDataBase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddingCardDeck));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatingDataBase));
         
         string IMigrationMetadata.Id
         {
-            get { return "202012040439359_AddingCardDeck"; }
+            get { return "202012120742505_CreatingDataBase"; }
         }
         
         string IMigrationMetadata.Source

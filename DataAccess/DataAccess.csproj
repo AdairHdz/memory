@@ -34,9 +34,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -53,17 +60,9 @@
     <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\Sesion.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Migrations\202012040439359_AddingCardDeck.cs" />
-    <Compile Include="Migrations\202012040439359_AddingCardDeck.designer.cs">
-      <DependentUpon>202012040439359_AddingCardDeck.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012040456441_SolvingExepto.cs" />
-    <Compile Include="Migrations\202012040456441_SolvingExepto.designer.cs">
-      <DependentUpon>202012040456441_SolvingExepto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012040500490_SolveExcption.cs" />
-    <Compile Include="Migrations\202012040500490_SolveExcption.designer.cs">
-      <DependentUpon>202012040500490_SolveExcption.cs</DependentUpon>
+    <Compile Include="Migrations\202012120742505_CreatingDataBase.cs" />
+    <Compile Include="Migrations\202012120742505_CreatingDataBase.designer.cs">
+      <DependentUpon>202012120742505_CreatingDataBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,14 +81,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012040439359_AddingCardDeck.resx">
-      <DependentUpon>202012040439359_AddingCardDeck.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012040456441_SolvingExepto.resx">
-      <DependentUpon>202012040456441_SolvingExepto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012040500490_SolveExcption.resx">
-      <DependentUpon>202012040500490_SolveExcption.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012120742505_CreatingDataBase.resx">
+      <DependentUpon>202012120742505_CreatingDataBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

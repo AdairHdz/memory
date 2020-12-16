@@ -319,6 +319,64 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IJoinGameService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IWaitingRoomService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -463,6 +521,60 @@
   <wsdl:message name="IPlayerRegistryService_UserNameIsAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:UserNameIsAvailableResponse" />
   </wsdl:message>
+  <wsdl:message name="IJoinGameService_JoinGameLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGameLobby" />
+  </wsdl:message>
+  <wsdl:message name="IJoinGameService_LeaveGameLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveGameLobby" />
+  </wsdl:message>
+  <wsdl:message name="IJoinGameService_RecoverAvailableGames_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverAvailableGames" />
+  </wsdl:message>
+  <wsdl:message name="IJoinGameService_AskForJoinGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:AskForJoinGame" />
+  </wsdl:message>
+  <wsdl:message name="IJoinGameService_AskForJoinGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AskForJoinGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IJoinGameService_NewGameCreated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NewGameCreated" />
+  </wsdl:message>
+  <wsdl:message name="IJoinGameService_ReciveAvailableGames_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReciveAvailableGames" />
+  </wsdl:message>
+  <wsdl:message name="IJoinGameService_RemoveGameFromList_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RemoveGameFromList" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_CreateGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGame" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_RecoverGameMembers_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverGameMembers" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_JoinGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGame" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_LeaveGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveGame" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_StarGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:StarGame" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_NewPlayerJoined_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NewPlayerJoined" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_ReciveGameMembers_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReciveGameMembers" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_HostLeaveGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:HostLeaveGame" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_PlayerLeaveGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeaveGame" />
+  </wsdl:message>
+  <wsdl:message name="IWaitingRoomService_GameStarted_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameStarted" />
+  </wsdl:message>
   <wsdl:portType name="IAccessibilityService">
     <wsdl:operation name="HasAccessRights">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRights" message="tns:IAccessibilityService_HasAccessRights_InputMessage" />
@@ -578,6 +690,62 @@
     <wsdl:operation name="UserNameIsAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailable" message="tns:IPlayerRegistryService_UserNameIsAvailable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailableResponse" message="tns:IPlayerRegistryService_UserNameIsAvailable_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IJoinGameService">
+    <wsdl:operation name="JoinGameLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJoinGameService/JoinGameLobby" message="tns:IJoinGameService_JoinGameLobby_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveGameLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJoinGameService/LeaveGameLobby" message="tns:IJoinGameService_LeaveGameLobby_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecoverAvailableGames">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJoinGameService/RecoverAvailableGames" message="tns:IJoinGameService_RecoverAvailableGames_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AskForJoinGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IJoinGameService/AskForJoinGame" message="tns:IJoinGameService_AskForJoinGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IJoinGameService/AskForJoinGameResponse" message="tns:IJoinGameService_AskForJoinGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NewGameCreated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJoinGameService/NewGameCreated" message="tns:IJoinGameService_NewGameCreated_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReciveAvailableGames">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJoinGameService/ReciveAvailableGames" message="tns:IJoinGameService_ReciveAvailableGames_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveGameFromList">
+      <wsdl:output wsaw:Action="http://tempuri.org/IJoinGameService/RemoveGameFromList" message="tns:IJoinGameService_RemoveGameFromList_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IWaitingRoomService">
+    <wsdl:operation name="CreateGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/CreateGame" message="tns:IWaitingRoomService_CreateGame_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecoverGameMembers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/RecoverGameMembers" message="tns:IWaitingRoomService_RecoverGameMembers_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JoinGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/JoinGame" message="tns:IWaitingRoomService_JoinGame_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/LeaveGame" message="tns:IWaitingRoomService_LeaveGame_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StarGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/StarGame" message="tns:IWaitingRoomService_StarGame_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NewPlayerJoined">
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/NewPlayerJoined" message="tns:IWaitingRoomService_NewPlayerJoined_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReciveGameMembers">
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/ReciveGameMembers" message="tns:IWaitingRoomService_ReciveGameMembers_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HostLeaveGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/HostLeaveGame" message="tns:IWaitingRoomService_HostLeaveGame_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeaveGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/PlayerLeaveGame" message="tns:IWaitingRoomService_PlayerLeaveGame_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GameStarted">
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/GameStarted" message="tns:IWaitingRoomService_GameStarted_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IAccessibilityService" type="tns:IAccessibilityService">
@@ -834,13 +1002,126 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IJoinGameService" type="tns:IJoinGameService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IJoinGameService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="JoinGameLobby">
+      <soap12:operation soapAction="http://tempuri.org/IJoinGameService/JoinGameLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveGameLobby">
+      <soap12:operation soapAction="http://tempuri.org/IJoinGameService/LeaveGameLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverAvailableGames">
+      <soap12:operation soapAction="http://tempuri.org/IJoinGameService/RecoverAvailableGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="AskForJoinGame">
+      <soap12:operation soapAction="http://tempuri.org/IJoinGameService/AskForJoinGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewGameCreated">
+      <soap12:operation soapAction="http://tempuri.org/IJoinGameService/NewGameCreated" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReciveAvailableGames">
+      <soap12:operation soapAction="http://tempuri.org/IJoinGameService/ReciveAvailableGames" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveGameFromList">
+      <soap12:operation soapAction="http://tempuri.org/IJoinGameService/RemoveGameFromList" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IWaitingRoomService" type="tns:IWaitingRoomService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IWaitingRoomService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CreateGame">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/CreateGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverGameMembers">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/RecoverGameMembers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="JoinGame">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/JoinGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveGame">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/LeaveGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="StarGame">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/StarGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NewPlayerJoined">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/NewPlayerJoined" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReciveGameMembers">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/ReciveGameMembers" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HostLeaveGame">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/HostLeaveGame" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeaveGame">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/PlayerLeaveGame" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameStarted">
+      <soap12:operation soapAction="http://tempuri.org/IWaitingRoomService/GameStarted" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="MemoryGameService">
     <wsdl:port name="NetTcpBinding_IAccessibilityService" binding="tns:NetTcpBinding_IAccessibilityService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -849,7 +1130,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -858,7 +1139,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -867,7 +1148,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -876,7 +1157,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -885,7 +1166,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -894,7 +1175,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -903,7 +1184,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -912,7 +1193,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -921,7 +1202,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -930,7 +1211,25 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IJoinGameService" binding="tns:NetTcpBinding_IJoinGameService">
+      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IWaitingRoomService" binding="tns:NetTcpBinding_IWaitingRoomService">
+      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
