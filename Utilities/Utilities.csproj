@@ -67,6 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BCryptHashGenerator.cs" />
+    <Compile Include="IEncryption.cs" />
     <Compile Include="MailTemplate.cs" />
     <Compile Include="MD5Encryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

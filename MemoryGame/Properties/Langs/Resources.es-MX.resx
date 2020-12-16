@@ -180,6 +180,9 @@
   <data name="ForgotPasswordMessage" xml:space="preserve">
     <value>¿Has olvidado tu contraseña?</value>
   </data>
+  <data name="FullGameMessage" xml:space="preserve">
+    <value>La partida esta llena, espera a que haya un lugar disponible o ingresa a otra partida</value>
+  </data>
   <data name="GetRegistered" xml:space="preserve">
     <value>Registrarme</value>
   </data>

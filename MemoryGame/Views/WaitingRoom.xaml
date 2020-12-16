@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:MemoryGame"
         xmlns:p="clr-namespace:MemoryGame.Properties.Langs"
         mc:Ignorable="d"
-        Title="WaitingRoom" Height="450" Width="800">
+        Style="{StaticResource backgroundPrimary}"
+        Title="{x:Static p:Resources.WaitingRoom}" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -35,35 +37,31 @@
 
         <Label Grid.Column="2" Grid.ColumnSpan="6" Grid.Row="1" Grid.RowSpan="2"
                HorizontalAlignment="Center" VerticalAlignment="Center"
-               Style="{StaticResource title}" Content="DaError">
+               Style="{StaticResource title}" Content="{x:Static p:Resources.WaitingRoom}">
         </Label>
 
         <DataGrid Grid.ColumnSpan="4" Grid.Column="3"
-                  Grid.Row="4" Grid.RowSpan="3"
-                  Margin="30 0 30 0">
-
+                  Grid.Row="3" Grid.RowSpan="3"
+                  Margin="30 0 30 0"
+                  Name="WaitingRoomDataGrid"
+                  AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     HeaderStyle="{StaticResource dataGridHeader}" 
-                    Header="{x:Static p:Resources.Host}" Width="150"/>
-                <DataGridTextColumn
-                    HeaderStyle="{StaticResource dataGridHeader}" 
-                    Header="{x:Static p:Resources.NumberOfPlayers}" Width="*"/>
+                    Header="{x:Static p:Resources.Players}" Width="*"
+                    Binding="{Binding}"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Grid.Column="4" Grid.Row="3"
-               HorizontalAlignment="Center" VerticalAlignment="Center"
-               Style="{StaticResource infoLabel}"
-               Content="{x:Static p:Resources.Deck}"/>
-
-        <Label Name="deckLbl" Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="2" 
-               VerticalAlignment="Center"
-               Style="{StaticResource infoLabel}" 
-               Content="Nombre"/>
-
-        <Button Grid.Column="4" Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Center" 
+        <Button Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Center" 
                 Style="{StaticResource buttonSecondary}" 
-                Content="{x:Static p:Resources.Exit}" Grid.RowSpan="2"/>
+                Content="{x:Static p:Resources.Exit}" Grid.RowSpan="2"
+                Click="LeaveButtonClicked"/>
+
+        <Button Grid.Column="4" Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                Name="StarButton"
+                Style="{StaticResource buttonPrimary}" 
+                Content="{x:Static p:Resources.Start}" Grid.RowSpan="2"
+                Click="StartButtonClicked"/>
     </Grid>
 </Window>

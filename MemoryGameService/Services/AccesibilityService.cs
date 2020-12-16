@@ -2,6 +2,7 @@
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
+using MemoryGameService.DataTransferObjectMappers;
 using System.Linq;
 
 namespace MemoryGameService.Services
@@ -54,6 +55,15 @@ namespace MemoryGameService.Services
             int matches = player.Count();
             unitOfWork.Dispose();
             return matches == 1;
+        }
+
+        public PlayerCredentialsDTO GetPlayerCredentials(string username)
+        {
+            var unitOfWork = new UnitOfWork(new MemoryGameContext());
+            var player = unitOfWork.Players.Find(x => x.UserName == username).First();
+
+            PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(player);
+            return playerCredentials;
         }
     }
 }

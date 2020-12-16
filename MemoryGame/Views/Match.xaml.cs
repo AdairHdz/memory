@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemoryGame.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows;
@@ -11,16 +12,19 @@ namespace MemoryGame.Views
     /// Lógica de interacción para Match.xaml
     /// </summary>
     //[CallbackBehavior(UseSynchronizationContext = false)]
-    public partial class Match : Window//, MemoryGameService.ITimerServiceCallback
+    public partial class Match : Window, MemoryGameService.ITimerServiceCallback
     {
+        public int TimerValue { get; set; } = 60;
         private InstanceContext _context = null;
-        //private MemoryGameService.TimerServiceClient timerServiceClient;
+        private MemoryGameService.TimerServiceClient _timerServiceClient;
         private MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck;
         public Match()
         {
             InitializeComponent();
             DrawGameBoard();
             _context = new InstanceContext(this);
+            _timerServiceClient = new MemoryGameService.TimerServiceClient(_context);
+            _timerServiceClient.UpdateTimer();
         }
 
         private void LoadCardDeck()
@@ -101,7 +105,7 @@ namespace MemoryGame.Views
 
         public void DisplayTimerValue(int timerValue)
         {
-            MessageBox.Show("Valor: " + timerValue);
+            TimerLabel.Content = timerValue;            
         }
 
         private void GetClickedCard(object sender, EventArgs e)

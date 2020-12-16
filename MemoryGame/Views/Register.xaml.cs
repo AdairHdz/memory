@@ -92,6 +92,8 @@ namespace MemoryGame
 
         private bool PlayerWasSuccessfullyRegistered()
         {
+            BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
+
             MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
                 new MemoryGameService.PlayerRegistryServiceClient();
 
@@ -100,7 +102,7 @@ namespace MemoryGame
                 {
                     Username = _username,
                     EmailAddress = _emailAddress,
-                    Password = MD5Encryption.Encrypt(PasswordBoxPassword.Password),
+                    Password = hashGenerator.GenerateEncryptedString(_password),
                     VerificationToken = _verificationToken
                 };
             

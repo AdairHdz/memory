@@ -72,6 +72,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPlayerCredentials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPlayerCredentialsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayerCredentialsResult" nillable="true" type="q2:PlayerCredentialsDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetCardDeckAndCards">
     <xs:complexType>
       <xs:sequence>
@@ -82,14 +96,14 @@
   <xs:element name="GetCardDeckAndCardsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetCardDeckAndCardsResult" nillable="true" type="q2:CardDeckDTO" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetCardDeckAndCardsResult" nillable="true" type="q3:CardDeckDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SetNewPassword">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerCredentialsDTO" nillable="true" type="q3:PlayerCredentialsDTO" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerCredentialsDTO" nillable="true" type="q4:PlayerCredentialsDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -103,7 +117,7 @@
   <xs:element name="ChangeUsername">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerCredentialsDTO" nillable="true" type="q4:PlayerCredentialsDTO" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerCredentialsDTO" nillable="true" type="q5:PlayerCredentialsDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -207,7 +221,7 @@
   <xs:element name="ShowActivePlayers">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="activePlayers" nillable="true" type="q5:ArrayOfstring" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="activePlayers" nillable="true" type="q6:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -247,14 +261,14 @@
   <xs:element name="GetPlayersWithBestScoreResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersWithBestScoreResult" nillable="true" type="q6:ArrayOfPlayerScoreDTO" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersWithBestScoreResult" nillable="true" type="q7:ArrayOfPlayerScoreDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RegisterNewPlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerDTO" nillable="true" type="q7:PlayerDTO" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerDTO" nillable="true" type="q8:PlayerDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -291,6 +305,127 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="UserNameIsAvailableResult" type="xs:boolean" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JoinGameLobby">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeaveGameLobby">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverAvailableGames">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AskForJoinGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameHostUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AskForJoinGameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AskForJoinGameResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewGameCreated">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameHostUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveAvailableGames">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameHostUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveGameFromList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameHostUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="maxNumOfPlayers" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverGameMembers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameHostUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JoinGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameHostUsername" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newPlayerUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeaveGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameHostUsername" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StarGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameHostUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewPlayerJoined">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="newPlayerUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReciveGameMembers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="memberUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HostLeaveGame">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlayerLeaveGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="playerUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GameStarted">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

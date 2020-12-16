@@ -42,32 +42,30 @@
 
         <DataGrid Grid.ColumnSpan="4" Grid.Column="3" HorizontalAlignment="Left" 
                   Grid.Row="3" Grid.RowSpan="4"
-                  Margin="30 0 30 0">
+                  Margin="20 0 20 0"
+                  Name="GamesDataGrid"
+                  AutoGenerateColumns="False">
 
             <DataGrid.Columns>
                 <DataGridTextColumn
                     HeaderStyle="{StaticResource dataGridHeader}" 
-                    Header="{x:Static p:Resources.Host}" Width="150"/>
-                <DataGridTextColumn
-                    HeaderStyle="{StaticResource dataGridHeader}" 
-                    Header="{x:Static p:Resources.NumberOfPlayers}" Width="*"/>
+                    Header="{x:Static p:Resources.Host}" Width="*"
+                    Binding="{Binding}"/>
             </DataGrid.Columns>
         </DataGrid>
-
 
         <Button Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="2" 
                 VerticalAlignment="Center"
                 Margin="10 0 0 0"
                 Style="{StaticResource buttonPrimary}"
-                Content="{x:Static p:Resources.Join}" Grid.RowSpan="2"></Button>
+                Content="{x:Static p:Resources.Join}" Grid.RowSpan="2"
+                Click="JoinButtonClicked"></Button>
 
         <Button Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" 
                 VerticalAlignment="Center" 
                 Margin="0 0 10 0"
                 Style="{StaticResource buttonSecondary}" 
-                Content="{x:Static p:Resources.Back}" Grid.RowSpan="2" Click="BackButtonClicked">
-        </Button>
-
-
+                Content="{x:Static p:Resources.Back}" Grid.RowSpan="2"
+                Click="BackButtonClicked"></Button>
     </Grid>
 </Window>
