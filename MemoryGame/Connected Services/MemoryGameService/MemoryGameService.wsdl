@@ -358,6 +358,12 @@
   <wsdl:message name="IAccessibilityService_GetUsername_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUsernameResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetPlayerCredentials_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerCredentials" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetPlayerCredentials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerCredentialsResponse" />
+  </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDeckAndCards" />
   </wsdl:message>
@@ -477,6 +483,10 @@
     <wsdl:operation name="GetUsername">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsername" message="tns:IAccessibilityService_GetUsername_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameResponse" message="tns:IAccessibilityService_GetUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerCredentials">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials" message="tns:IAccessibilityService_GetPlayerCredentials_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse" message="tns:IAccessibilityService_GetPlayerCredentials_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICardDeckRetrieverService">
@@ -611,6 +621,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUsername">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerCredentials">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentials" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

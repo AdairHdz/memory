@@ -44,6 +44,12 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
         System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
+        MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO GetPlayerCredentials(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
+        System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO> GetPlayerCredentialsAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress) {
             return base.Channel.GetUsernameAsync(emailAddress);
+        }
+        
+        public MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO GetPlayerCredentials(string username) {
+            return base.Channel.GetPlayerCredentials(username);
+        }
+        
+        public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO> GetPlayerCredentialsAsync(string username) {
+            return base.Channel.GetPlayerCredentialsAsync(username);
         }
     }
     

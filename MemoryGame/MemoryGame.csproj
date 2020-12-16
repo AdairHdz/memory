@@ -310,6 +310,7 @@
     </Content>
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDTO.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGameService.DataTransferObjects.CardDTO.datasource" />
     <None Include="Properties\Settings.settings">

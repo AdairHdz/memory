@@ -10,6 +10,7 @@ namespace MemoryGameService.Contracts
         void UpdateTimer();
     }
 
+    [ServiceContract]
     public interface ITimerServiceCallback
     {
         [OperationContract(IsOneWay = true)]

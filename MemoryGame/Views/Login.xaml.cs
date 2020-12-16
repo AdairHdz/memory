@@ -5,6 +5,9 @@ using DataAccess.Entities;
 using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.GenericValidations;
 using System.Collections.Generic;
+using MemoryGame.MemoryGameService.DataTransferObjects;
+using System.ServiceModel;
+using System;
 
 namespace MemoryGame
 {
@@ -15,9 +18,9 @@ namespace MemoryGame
     {
         private RuleSet _ruleSet;
         private string _username, _password;
-
+        
         public Login()
-        {
+        {            
             InitializeComponent();
         }
 
@@ -49,18 +52,13 @@ namespace MemoryGame
         public bool LoginIsValid()
         {
             AccessibilityServiceClient client = new AccessibilityServiceClient();
+            BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
 
-            string encryptedPassword = MD5Encryption.Encrypt(PasswordBoxPassword.Password);
-            string username = TextBoxUsername.Text;
+            PlayerCredentialsDTO playerCredentials = client.GetPlayerCredentials(_username);
 
-            MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO =
-                new MemoryGameService.DataTransferObjects.PlayerCredentialsDTO()
-                {
-                    Username = username,
-                    Password = encryptedPassword
-                };
+            bool isMatch = hashGenerator.Match(_password, playerCredentials.Password);
 
-            return client.HasAccessRights(playerCredentialsDTO);
+            return isMatch;
         }
 
         public bool EmailIsVerified()
