@@ -314,6 +314,89 @@ namespace MemoryGame.Proxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.ICardUncoveringService", CallbackContract=typeof(MemoryGame.Proxy.ICardUncoveringServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface ICardUncoveringService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Subscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/SubscribeResponse")]
+        void Subscribe();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Subscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/SubscribeResponse")]
+        System.Threading.Tasks.Task SubscribeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Unsubscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/UnsubscribeResponse")]
+        void Unsubscribe();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Unsubscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/UnsubscribeResponse")]
+        System.Threading.Tasks.Task UnsubscribeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered")]
+        void NotifyCardWasUncovered(int cardId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered")]
+        System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(int cardId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICardUncoveringServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/UncoverCard")]
+        void UncoverCard(int cardId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICardUncoveringServiceChannel : MemoryGame.Proxy.ICardUncoveringService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CardUncoveringServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.Proxy.ICardUncoveringService>, MemoryGame.Proxy.ICardUncoveringService {
+        
+        public CardUncoveringServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public CardUncoveringServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public CardUncoveringServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CardUncoveringServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CardUncoveringServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void Subscribe() {
+            base.Channel.Subscribe();
+        }
+        
+        public System.Threading.Tasks.Task SubscribeAsync() {
+            return base.Channel.SubscribeAsync();
+        }
+        
+        public void Unsubscribe() {
+            base.Channel.Unsubscribe();
+        }
+        
+        public System.Threading.Tasks.Task UnsubscribeAsync() {
+            return base.Channel.UnsubscribeAsync();
+        }
+        
+        public void NotifyCardWasUncovered(int cardId) {
+            base.Channel.NotifyCardWasUncovered(cardId);
+        }
+        
+        public System.Threading.Tasks.Task NotifyCardWasUncoveredAsync(int cardId) {
+            return base.Channel.NotifyCardWasUncoveredAsync(cardId);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.ICommunicationService", CallbackContract=typeof(MemoryGame.Proxy.ICommunicationServiceCallback))]
     public interface ICommunicationService {
         

@@ -59,6 +59,7 @@
     <Compile Include="Contracts\IAccountModifiabilityService.cs" />
     <Compile Include="Contracts\IAccountVerificationService.cs" />
     <Compile Include="Contracts\ICardDeckRetrieverService.cs" />
+    <Compile Include="Contracts\ICardUncoveringService.cs" />
     <Compile Include="Contracts\IJoinGameService.cs" />
     <Compile Include="Contracts\IPlayerRegistryService.cs" />
     <Compile Include="Contracts\ITimerInitializerService.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Services\AccountModifiabilityService.cs" />
     <Compile Include="Services\AccountVerificationService.cs" />
     <Compile Include="Services\CardDeckRetrieverService.cs" />
+    <Compile Include="Services\CardUncoveringService.cs" />
     <Compile Include="Services\CommunicationService.cs" />
     <Compile Include="Services\LobbyService.cs" />
     <Compile Include="Services\MailingService.cs" />

@@ -116,6 +116,35 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_ICardUncoveringService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_ICommunicationService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -458,6 +487,24 @@
   <wsdl:message name="IAccountVerificationService_VerifyToken_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerifyTokenResponse" />
   </wsdl:message>
+  <wsdl:message name="ICardUncoveringService_Subscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Subscribe" />
+  </wsdl:message>
+  <wsdl:message name="ICardUncoveringService_Subscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICardUncoveringService_Unsubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Unsubscribe" />
+  </wsdl:message>
+  <wsdl:message name="ICardUncoveringService_Unsubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICardUncoveringService_NotifyCardWasUncovered_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyCardWasUncovered" />
+  </wsdl:message>
+  <wsdl:message name="ICardUncoveringService_UncoverCard_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UncoverCard" />
+  </wsdl:message>
   <wsdl:message name="ICommunicationService_Join_InputMessage">
     <wsdl:part name="parameters" element="tns:Join" />
   </wsdl:message>
@@ -629,6 +676,22 @@
     <wsdl:operation name="VerifyToken">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyToken" message="tns:IAccountVerificationService_VerifyToken_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyTokenResponse" message="tns:IAccountVerificationService_VerifyToken_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="ICardUncoveringService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Subscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/Subscribe" message="tns:ICardUncoveringService_Subscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/SubscribeResponse" message="tns:ICardUncoveringService_Subscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Unsubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/Unsubscribe" message="tns:ICardUncoveringService_Unsubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/UnsubscribeResponse" message="tns:ICardUncoveringService_Unsubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NotifyCardWasUncovered">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered" message="tns:ICardUncoveringService_NotifyCardWasUncovered_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UncoverCard">
+      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/UncoverCard" message="tns:ICardUncoveringService_UncoverCard_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICommunicationService">
@@ -867,6 +930,40 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_ICardUncoveringService" type="tns:ICardUncoveringService">
+    <wsp:PolicyReference URI="#NetTcpBinding_ICardUncoveringService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Subscribe">
+      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/Subscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/Unsubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyCardWasUncovered">
+      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UncoverCard">
+      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/UncoverCard" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1121,7 +1218,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1130,7 +1227,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1139,7 +1236,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1148,7 +1245,16 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_ICardUncoveringService" binding="tns:NetTcpBinding_ICardUncoveringService">
+      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1157,7 +1263,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1166,7 +1272,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1175,7 +1281,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1184,7 +1290,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1193,7 +1299,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1202,7 +1308,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1211,7 +1317,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1220,7 +1326,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1229,7 +1335,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

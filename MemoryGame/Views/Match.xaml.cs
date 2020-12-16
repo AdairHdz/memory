@@ -12,18 +12,22 @@ namespace MemoryGame.Views
     /// Lógica de interacción para Match.xaml
     /// </summary>
     //[CallbackBehavior(UseSynchronizationContext = false)]
-    public partial class Match : Window, MemoryGameService.ITimerServiceCallback
+    public partial class Match : Window, MemoryGameService.ITimerServiceCallback,
+        MemoryGameService.ICardUncoveringServiceCallback
     {
         public int TimerValue { get; set; } = 60;
         private InstanceContext _context = null;
         private MemoryGameService.TimerServiceClient _timerServiceClient;
         private MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck;
+        private MemoryGameService.CardUncoveringServiceClient _cardUncoveringService;    
         public Match()
         {
             InitializeComponent();
             DrawGameBoard();
             _context = new InstanceContext(this);
             _timerServiceClient = new MemoryGameService.TimerServiceClient(_context);
+            _cardUncoveringService = new MemoryGameService.CardUncoveringServiceClient(_context);
+            _cardUncoveringService.Subscribe();
             _timerServiceClient.UpdateTimer();
         }
 
@@ -114,7 +118,13 @@ namespace MemoryGame.Views
             if(cardClicked.Source != cardClicked.FrontImage)
             {
                 cardClicked.Source = cardClicked.FrontImage;
+                _cardUncoveringService.NotifyCardWasUncovered(cardClicked.CardId);
             }            
+        }
+
+        public void UncoverCard(int cardId)
+        {
+            MessageBox.Show("Id de la carta descubierta: " + cardId);
         }
 
         private class ImageCard : Image
