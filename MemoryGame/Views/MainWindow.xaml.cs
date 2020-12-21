@@ -15,9 +15,12 @@ namespace MemoryGame
 
         private void GetRegisteredButtonClicked(object sender, RoutedEventArgs e)
         {
-            Register registerView = new Register();
+            /*Register registerView = new Register();
             registerView.Show();
-            this.Close();
+            this.Close();*/
+
+            GameOptions registerView = new GameOptions();
+            registerView.Show();
         }
 
 

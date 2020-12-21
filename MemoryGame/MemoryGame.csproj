@@ -140,6 +140,12 @@
     <Compile Include="Views\CreateGame.xaml.cs">
       <DependentUpon>CreateGame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ExpelPlayer.xaml.cs">
+      <DependentUpon>ExpelPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GameOptions.xaml.cs">
+      <DependentUpon>GameOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\JoinGame.xaml.cs">
       <DependentUpon>JoinGame.xaml</DependentUpon>
     </Compile>
@@ -192,6 +198,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExpelPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GameOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
