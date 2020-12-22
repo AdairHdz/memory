@@ -40,9 +40,9 @@ namespace MemoryGame.Views
                 new MemoryGameService.CardDeckRetrieverServiceClient();
 
             _cardDeck = cardDeckRetrieverServiceClient.GetCardDeckAndCards(1);           
-        }
+        }      
 
-        private void DrawGameBoard()
+            private void DrawGameBoard()
         {
             LoadCardDeck();
             DrawColumns();
@@ -157,6 +157,12 @@ namespace MemoryGame.Views
             public BitmapImage FrontImage { get; set; }
             public BitmapImage BackImage { get; set; }
             public CardDto CardDto { get; set; }
+        }
+
+        private void OptionsButtonClicked(object sender, RoutedEventArgs e)
+        {
+            GameOptions registerView = new GameOptions();
+            registerView.Show();
         }
     }
 }
