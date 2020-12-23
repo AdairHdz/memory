@@ -318,10 +318,10 @@ namespace MemoryGame.MemoryGameService {
     public interface ICardUncoveringService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Subscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/SubscribeResponse")]
-        void Subscribe();
+        void Subscribe(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Subscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/SubscribeResponse")]
-        System.Threading.Tasks.Task SubscribeAsync();
+        System.Threading.Tasks.Task SubscribeAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Unsubscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/UnsubscribeResponse")]
         void Unsubscribe();
@@ -371,12 +371,12 @@ namespace MemoryGame.MemoryGameService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Subscribe() {
-            base.Channel.Subscribe();
+        public void Subscribe(string username) {
+            base.Channel.Subscribe(username);
         }
         
-        public System.Threading.Tasks.Task SubscribeAsync() {
-            return base.Channel.SubscribeAsync();
+        public System.Threading.Tasks.Task SubscribeAsync(string username) {
+            return base.Channel.SubscribeAsync(username);
         }
         
         public void Unsubscribe() {
@@ -947,7 +947,7 @@ namespace MemoryGame.MemoryGameService {
         void PlayerLeaveGame(string playerUsername);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/GameStarted")]
-        void GameStarted();
+        void GameStarted(MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO cardDeckDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

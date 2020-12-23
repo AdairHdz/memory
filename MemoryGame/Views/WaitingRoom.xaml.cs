@@ -2,15 +2,16 @@
 using System.ServiceModel;
 using DataAccess.Entities;
 using System.Collections.ObjectModel;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 
 namespace MemoryGame
 {
     /// <summary>
     /// Lógica de interacción para WaitingRoom.xaml
     /// </summary>
-    public partial class WaitingRoom : Window, Proxy.IWaitingRoomServiceCallback
+    public partial class WaitingRoom : Window, MemoryGameService.IWaitingRoomServiceCallback
     {
-        private Proxy.WaitingRoomServiceClient server = null;
+        private MemoryGameService.WaitingRoomServiceClient server = null;
         private InstanceContext context = null;
         Sesion playerSesion = Sesion.GetSesion;
         public ObservableCollection<string> players = new ObservableCollection<string>();
@@ -20,7 +21,7 @@ namespace MemoryGame
         {
             InitializeComponent();
             context = new InstanceContext(this);
-            server = new Proxy.WaitingRoomServiceClient(context);
+            server = new MemoryGameService.WaitingRoomServiceClient(context);
             WaitingRoomDataGrid.ItemsSource = players;
             this.gameHostUsername = gameHostUsername;
             this.isHost = isHost;
@@ -59,9 +60,12 @@ namespace MemoryGame
             players.Add(memberUsername);
         }
 
-        public void GameStarted()
+        public void GameStarted(CardDeckDTO cardDeckDto)
         {
-            Chat matchView = new Chat();
+            Views.Match matchView = new Views.Match()
+            {
+                _cardDeck = cardDeckDto
+            };
             matchView.Show();
             this.Close();
         }
@@ -86,9 +90,6 @@ namespace MemoryGame
         public void StartButtonClicked(object sender, RoutedEventArgs e)
         {
             server.StarGame(gameHostUsername);
-            Chat matchView = new Chat();
-            matchView.Show();
-            this.Close();
         }
     }
 }

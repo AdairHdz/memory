@@ -4,8 +4,8 @@ using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single,
-       InstanceContextMode = InstanceContextMode.Single)]
+    //[ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single,
+       //InstanceContextMode = InstanceContextMode.Single)]
     public partial class MemoryGameService : ICommunicationService
     {
         private Dictionary<IChatClient, string> _players = new Dictionary<IChatClient, string>();

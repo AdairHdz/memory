@@ -135,17 +135,18 @@ namespace MemoryGameService.Services
             _games.TryGetValue(gameHostUsername, out gameSettings);
             Dictionary<IWaitingRoomServiceCallback, string> _members = gameSettings.getMembersDictionary();
 
-            //MemoryGameService c = new MemoryGameService();
-            //_cardDeckDTO = c.GetCardDeckAndCards(1);
+            MemoryGameService c = new MemoryGameService();
+            _cardDeckDTO = c.GetCardDeckAndCards(1);
             
 
             foreach (var playerConnection in _members.Keys)
             {
-                if (playerConnection == connection)
+                /*if (playerConnection == connection)
                 {
                     continue;
                 }
-                playerConnection.GameStarted();
+                */
+                playerConnection.GameStarted(_cardDeckDTO);
             }
             gameSettings.MatchWasStarted = true;
             foreach (var playerJoinGameConnection in _playersLookingForJoinGame.Keys)

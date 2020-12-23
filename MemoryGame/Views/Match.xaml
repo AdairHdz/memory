@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MemoryGame.Views"
         xmlns:p="clr-namespace:MemoryGame.Properties.Langs" 
         mc:Ignorable="d"
+        Loaded="WindowLoaded"
         Title="Match"
         Height="1024" Width="1440" Style="{StaticResource backgroundPrimary}">
     <Grid>

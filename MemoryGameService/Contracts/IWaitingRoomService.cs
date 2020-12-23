@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using System.ServiceModel;
 
 namespace MemoryGameService.Contracts
 {
@@ -29,6 +30,6 @@ namespace MemoryGameService.Contracts
         [OperationContract(IsOneWay = true)]
         void PlayerLeaveGame(string playerUsername);
         [OperationContract(IsOneWay = true)]
-        void GameStarted();
+        void GameStarted(CardDeckDTO cardDeckDto);
     }
 }

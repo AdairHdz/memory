@@ -1,4 +1,5 @@
-﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+﻿using DataAccess.Entities;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGame.Utilities;
 using System;
 using System.Collections.Generic;
@@ -19,19 +20,12 @@ namespace MemoryGame.Views
         public int TimerValue { get; set; } = 60;
         private InstanceContext _context = null;
         private MemoryGameService.TimerServiceClient _timerServiceClient;
-        private MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck;
+        public MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck { get; set; }
         private MemoryGameService.CardUncoveringServiceClient _cardUncoveringService;
         private List<ImageCard> _imageCards;
         public Match()
         {
             InitializeComponent();            
-            _imageCards = new List<ImageCard>();
-            DrawGameBoard();
-            _context = new InstanceContext(this);
-            _timerServiceClient = new MemoryGameService.TimerServiceClient(_context);
-            _cardUncoveringService = new MemoryGameService.CardUncoveringServiceClient(_context);
-            _cardUncoveringService.Subscribe();
-            _timerServiceClient.UpdateTimer();
         }
 
         private void LoadCardDeck()
@@ -163,6 +157,17 @@ namespace MemoryGame.Views
         {
             GameOptions registerView = new GameOptions();
             registerView.Show();
+        }
+
+        private void WindowLoaded(object sender, EventArgs e)
+        {
+            _imageCards = new List<ImageCard>();
+            _context = new InstanceContext(this);
+            _timerServiceClient = new MemoryGameService.TimerServiceClient(_context);
+            _cardUncoveringService = new MemoryGameService.CardUncoveringServiceClient(_context);
+            _cardUncoveringService.Subscribe(Sesion.GetSesion.Username);
+            //_timerServiceClient.UpdateTimer();
+            DrawGameBoard();
         }
     }
 }
