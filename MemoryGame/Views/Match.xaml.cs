@@ -165,7 +165,7 @@ namespace MemoryGame.Views
             _context = new InstanceContext(this);
             _timerServiceClient = new MemoryGameService.TimerServiceClient(_context);
             _cardUncoveringService = new MemoryGameService.CardUncoveringServiceClient(_context);
-            _cardUncoveringService.Subscribe(Sesion.GetSesion.Username);
+            _cardUncoveringService.SubscribeToCardUncoveringService();
             //_timerServiceClient.UpdateTimer();
             DrawGameBoard();
         }

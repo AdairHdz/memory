@@ -5,8 +5,10 @@ namespace MemoryGameService.Contracts
     [ServiceContract]
     public interface IChatClient
     {
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void ReciveMessage(string username, string message);
+        [OperationContract(IsOneWay = true)]
+        void NotifyUserHasEnteredTheChat(string username);
 
     }
 }

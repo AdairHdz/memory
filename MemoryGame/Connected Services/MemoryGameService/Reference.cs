@@ -317,17 +317,21 @@ namespace MemoryGame.MemoryGameService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.ICardUncoveringService", CallbackContract=typeof(MemoryGame.MemoryGameService.ICardUncoveringServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface ICardUncoveringService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Subscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/SubscribeResponse")]
-        void Subscribe(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringService", ReplyAction="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringServiceRespons" +
+            "e")]
+        void SubscribeToCardUncoveringService();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Subscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/SubscribeResponse")]
-        System.Threading.Tasks.Task SubscribeAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringService", ReplyAction="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringServiceRespons" +
+            "e")]
+        System.Threading.Tasks.Task SubscribeToCardUncoveringServiceAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Unsubscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/UnsubscribeResponse")]
-        void Unsubscribe();
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringService", ReplyAction="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringServiceRes" +
+            "ponse")]
+        void UnsubscribeFromCardUncoveringService();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardUncoveringService/Unsubscribe", ReplyAction="http://tempuri.org/ICardUncoveringService/UnsubscribeResponse")]
-        System.Threading.Tasks.Task UnsubscribeAsync();
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringService", ReplyAction="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringServiceRes" +
+            "ponse")]
+        System.Threading.Tasks.Task UnsubscribeFromCardUncoveringServiceAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered")]
         void NotifyCardWasUncovered(int cardIndex);
@@ -371,20 +375,20 @@ namespace MemoryGame.MemoryGameService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Subscribe(string username) {
-            base.Channel.Subscribe(username);
+        public void SubscribeToCardUncoveringService() {
+            base.Channel.SubscribeToCardUncoveringService();
         }
         
-        public System.Threading.Tasks.Task SubscribeAsync(string username) {
-            return base.Channel.SubscribeAsync(username);
+        public System.Threading.Tasks.Task SubscribeToCardUncoveringServiceAsync() {
+            return base.Channel.SubscribeToCardUncoveringServiceAsync();
         }
         
-        public void Unsubscribe() {
-            base.Channel.Unsubscribe();
+        public void UnsubscribeFromCardUncoveringService() {
+            base.Channel.UnsubscribeFromCardUncoveringService();
         }
         
-        public System.Threading.Tasks.Task UnsubscribeAsync() {
-            return base.Channel.UnsubscribeAsync();
+        public System.Threading.Tasks.Task UnsubscribeFromCardUncoveringServiceAsync() {
+            return base.Channel.UnsubscribeFromCardUncoveringServiceAsync();
         }
         
         public void NotifyCardWasUncovered(int cardIndex) {
@@ -397,27 +401,38 @@ namespace MemoryGame.MemoryGameService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.ICommunicationService", CallbackContract=typeof(MemoryGame.MemoryGameService.ICommunicationServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.ICommunicationService", CallbackContract=typeof(MemoryGame.MemoryGameService.ICommunicationServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface ICommunicationService {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/Join")]
-        void Join(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/SubscribeToCommunicationService", ReplyAction="http://tempuri.org/ICommunicationService/SubscribeToCommunicationServiceResponse")]
+        void SubscribeToCommunicationService(string username);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/Join")]
-        System.Threading.Tasks.Task JoinAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/SubscribeToCommunicationService", ReplyAction="http://tempuri.org/ICommunicationService/SubscribeToCommunicationServiceResponse")]
+        System.Threading.Tasks.Task SubscribeToCommunicationServiceAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationService", ReplyAction="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationServiceRespo" +
+            "nse")]
+        void UnsubscribeFromCommunicationService();
+        
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationService", ReplyAction="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationServiceRespo" +
+            "nse")]
+        System.Threading.Tasks.Task UnsubscribeFromCommunicationServiceAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/SendMessage")]
-        void SendMessage(string message);
+        void SendMessage(string sender, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(string message);
+        System.Threading.Tasks.Task SendMessageAsync(string sender, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ICommunicationServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/ReciveMessage", ReplyAction="http://tempuri.org/ICommunicationService/ReciveMessageResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/ReciveMessage")]
         void ReciveMessage(string username, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/NotifyUserHasEnteredTheChat")]
+        void NotifyUserHasEnteredTheChat(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -448,20 +463,28 @@ namespace MemoryGame.MemoryGameService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Join(string username) {
-            base.Channel.Join(username);
+        public void SubscribeToCommunicationService(string username) {
+            base.Channel.SubscribeToCommunicationService(username);
         }
         
-        public System.Threading.Tasks.Task JoinAsync(string username) {
-            return base.Channel.JoinAsync(username);
+        public System.Threading.Tasks.Task SubscribeToCommunicationServiceAsync(string username) {
+            return base.Channel.SubscribeToCommunicationServiceAsync(username);
         }
         
-        public void SendMessage(string message) {
-            base.Channel.SendMessage(message);
+        public void UnsubscribeFromCommunicationService() {
+            base.Channel.UnsubscribeFromCommunicationService();
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(string message) {
-            return base.Channel.SendMessageAsync(message);
+        public System.Threading.Tasks.Task UnsubscribeFromCommunicationServiceAsync() {
+            return base.Channel.UnsubscribeFromCommunicationServiceAsync();
+        }
+        
+        public void SendMessage(string sender, string message) {
+            base.Channel.SendMessage(sender, message);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageAsync(string sender, string message) {
+            return base.Channel.SendMessageAsync(sender, message);
         }
     }
     
@@ -794,7 +817,7 @@ namespace MemoryGame.MemoryGameService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IJoinGameService", CallbackContract=typeof(MemoryGame.MemoryGameService.IJoinGameServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IJoinGameService", CallbackContract=typeof(MemoryGame.MemoryGameService.IJoinGameServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IJoinGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/JoinGameLobby")]
@@ -897,7 +920,7 @@ namespace MemoryGame.MemoryGameService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IWaitingRoomService", CallbackContract=typeof(MemoryGame.MemoryGameService.IWaitingRoomServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IWaitingRoomService", CallbackContract=typeof(MemoryGame.MemoryGameService.IWaitingRoomServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IWaitingRoomService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/CreateGame")]

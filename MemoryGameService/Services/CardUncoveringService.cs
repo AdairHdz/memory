@@ -8,8 +8,7 @@ namespace MemoryGameService.Services
     public class CardUncoveredEventArgs : EventArgs {
         public int CardIndex { get; set; }
     }
-
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
+    
     public partial class MemoryGameService : ICardUncoveringService
     {
         public static event CardUncoveredEventHandler CardUncoveredEvent;
@@ -17,18 +16,15 @@ namespace MemoryGameService.Services
             CardUncoveredEventArgs eventArguments);
         ICardUncoveringCallback _callback = null;
         CardUncoveredEventHandler _cardUncoveredHandler = null;
-        private Dictionary<ICardUncoveringCallback, string> _cardUncoveringServiceConsumers = new Dictionary<ICardUncoveringCallback, string>();
-
         
-        public void Subscribe(string username)
+        public void SubscribeToCardUncoveringService()
         {
             _callback = OperationContext.Current.GetCallbackChannel<ICardUncoveringCallback>();
             _cardUncoveredHandler = new CardUncoveredEventHandler(CardUncoveredHandler);
             CardUncoveredEvent += _cardUncoveredHandler;
-            _cardUncoveringServiceConsumers.Add(_callback, username);
         }
 
-        public void Unsubscribe()
+        public void UnsubscribeFromCardUncoveringService()
         {
             CardUncoveredEvent -= _cardUncoveredHandler;
         }

@@ -487,17 +487,17 @@
   <wsdl:message name="IAccountVerificationService_VerifyToken_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerifyTokenResponse" />
   </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_Subscribe_InputMessage">
-    <wsdl:part name="parameters" element="tns:Subscribe" />
+  <wsdl:message name="ICardUncoveringService_SubscribeToCardUncoveringService_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeToCardUncoveringService" />
   </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_Subscribe_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  <wsdl:message name="ICardUncoveringService_SubscribeToCardUncoveringService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeToCardUncoveringServiceResponse" />
   </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_Unsubscribe_InputMessage">
-    <wsdl:part name="parameters" element="tns:Unsubscribe" />
+  <wsdl:message name="ICardUncoveringService_UnsubscribeFromCardUncoveringService_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeFromCardUncoveringService" />
   </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_Unsubscribe_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UnsubscribeResponse" />
+  <wsdl:message name="ICardUncoveringService_UnsubscribeFromCardUncoveringService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeFromCardUncoveringServiceResponse" />
   </wsdl:message>
   <wsdl:message name="ICardUncoveringService_NotifyCardWasUncovered_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyCardWasUncovered" />
@@ -505,8 +505,17 @@
   <wsdl:message name="ICardUncoveringService_UncoverCard_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UncoverCard" />
   </wsdl:message>
-  <wsdl:message name="ICommunicationService_Join_InputMessage">
-    <wsdl:part name="parameters" element="tns:Join" />
+  <wsdl:message name="ICommunicationService_SubscribeToCommunicationService_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeToCommunicationService" />
+  </wsdl:message>
+  <wsdl:message name="ICommunicationService_SubscribeToCommunicationService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeToCommunicationServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommunicationService_UnsubscribeFromCommunicationService_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeFromCommunicationService" />
+  </wsdl:message>
+  <wsdl:message name="ICommunicationService_UnsubscribeFromCommunicationService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeFromCommunicationServiceResponse" />
   </wsdl:message>
   <wsdl:message name="ICommunicationService_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
@@ -514,8 +523,8 @@
   <wsdl:message name="ICommunicationService_ReciveMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReciveMessage" />
   </wsdl:message>
-  <wsdl:message name="ICommunicationService_ReciveMessage_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveMessageResponse" />
+  <wsdl:message name="ICommunicationService_NotifyUserHasEnteredTheChat_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyUserHasEnteredTheChat" />
   </wsdl:message>
   <wsdl:message name="IMailingService_SendVerificationToken_InputMessage">
     <wsdl:part name="parameters" element="tns:SendVerificationToken" />
@@ -679,13 +688,13 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="ICardUncoveringService">
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Subscribe">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/Subscribe" message="tns:ICardUncoveringService_Subscribe_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/SubscribeResponse" message="tns:ICardUncoveringService_Subscribe_OutputMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SubscribeToCardUncoveringService">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringService" message="tns:ICardUncoveringService_SubscribeToCardUncoveringService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringServiceResponse" message="tns:ICardUncoveringService_SubscribeToCardUncoveringService_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Unsubscribe">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/Unsubscribe" message="tns:ICardUncoveringService_Unsubscribe_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/UnsubscribeResponse" message="tns:ICardUncoveringService_Unsubscribe_OutputMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="true" name="UnsubscribeFromCardUncoveringService">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringService" message="tns:ICardUncoveringService_UnsubscribeFromCardUncoveringService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringServiceResponse" message="tns:ICardUncoveringService_UnsubscribeFromCardUncoveringService_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NotifyCardWasUncovered">
       <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered" message="tns:ICardUncoveringService_NotifyCardWasUncovered_InputMessage" />
@@ -694,16 +703,23 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/UncoverCard" message="tns:ICardUncoveringService_UncoverCard_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="ICommunicationService">
-    <wsdl:operation name="Join">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/Join" message="tns:ICommunicationService_Join_InputMessage" />
+  <wsdl:portType msc:usingSession="true" name="ICommunicationService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SubscribeToCommunicationService">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/SubscribeToCommunicationService" message="tns:ICommunicationService_SubscribeToCommunicationService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/SubscribeToCommunicationServiceResponse" message="tns:ICommunicationService_SubscribeToCommunicationService_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SendMessage">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="true" name="UnsubscribeFromCommunicationService">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationService" message="tns:ICommunicationService_UnsubscribeFromCommunicationService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationServiceResponse" message="tns:ICommunicationService_UnsubscribeFromCommunicationService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/SendMessage" message="tns:ICommunicationService_SendMessage_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveMessage">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReciveMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/ReciveMessage" message="tns:ICommunicationService_ReciveMessage_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/ReciveMessageResponse" message="tns:ICommunicationService_ReciveMessage_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NotifyUserHasEnteredTheChat">
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/NotifyUserHasEnteredTheChat" message="tns:ICommunicationService_NotifyUserHasEnteredTheChat_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMailingService">
@@ -755,59 +771,59 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerRegistryService/UserNameIsAvailableResponse" message="tns:IPlayerRegistryService_UserNameIsAvailable_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="IJoinGameService">
-    <wsdl:operation name="JoinGameLobby">
+  <wsdl:portType msc:usingSession="true" name="IJoinGameService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="JoinGameLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IJoinGameService/JoinGameLobby" message="tns:IJoinGameService_JoinGameLobby_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="LeaveGameLobby">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="LeaveGameLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IJoinGameService/LeaveGameLobby" message="tns:IJoinGameService_LeaveGameLobby_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RecoverAvailableGames">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RecoverAvailableGames">
       <wsdl:input wsaw:Action="http://tempuri.org/IJoinGameService/RecoverAvailableGames" message="tns:IJoinGameService_RecoverAvailableGames_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AskForJoinGame">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AskForJoinGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IJoinGameService/AskForJoinGame" message="tns:IJoinGameService_AskForJoinGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IJoinGameService/AskForJoinGameResponse" message="tns:IJoinGameService_AskForJoinGame_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NewGameCreated">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewGameCreated">
       <wsdl:output wsaw:Action="http://tempuri.org/IJoinGameService/NewGameCreated" message="tns:IJoinGameService_NewGameCreated_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveAvailableGames">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReciveAvailableGames">
       <wsdl:output wsaw:Action="http://tempuri.org/IJoinGameService/ReciveAvailableGames" message="tns:IJoinGameService_ReciveAvailableGames_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RemoveGameFromList">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RemoveGameFromList">
       <wsdl:output wsaw:Action="http://tempuri.org/IJoinGameService/RemoveGameFromList" message="tns:IJoinGameService_RemoveGameFromList_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="IWaitingRoomService">
-    <wsdl:operation name="CreateGame">
+  <wsdl:portType msc:usingSession="true" name="IWaitingRoomService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CreateGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/CreateGame" message="tns:IWaitingRoomService_CreateGame_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RecoverGameMembers">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RecoverGameMembers">
       <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/RecoverGameMembers" message="tns:IWaitingRoomService_RecoverGameMembers_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="JoinGame">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="JoinGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/JoinGame" message="tns:IWaitingRoomService_JoinGame_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="LeaveGame">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="LeaveGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/LeaveGame" message="tns:IWaitingRoomService_LeaveGame_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="StarGame">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="StarGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IWaitingRoomService/StarGame" message="tns:IWaitingRoomService_StarGame_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NewPlayerJoined">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewPlayerJoined">
       <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/NewPlayerJoined" message="tns:IWaitingRoomService_NewPlayerJoined_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReciveGameMembers">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReciveGameMembers">
       <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/ReciveGameMembers" message="tns:IWaitingRoomService_ReciveGameMembers_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="HostLeaveGame">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="HostLeaveGame">
       <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/HostLeaveGame" message="tns:IWaitingRoomService_HostLeaveGame_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="PlayerLeaveGame">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlayerLeaveGame">
       <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/PlayerLeaveGame" message="tns:IWaitingRoomService_PlayerLeaveGame_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GameStarted">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GameStarted">
       <wsdl:output wsaw:Action="http://tempuri.org/IWaitingRoomService/GameStarted" message="tns:IWaitingRoomService_GameStarted_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
@@ -938,8 +954,8 @@
   <wsdl:binding name="NetTcpBinding_ICardUncoveringService" type="tns:ICardUncoveringService">
     <wsp:PolicyReference URI="#NetTcpBinding_ICardUncoveringService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="Subscribe">
-      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/Subscribe" style="document" />
+    <wsdl:operation name="SubscribeToCardUncoveringService">
+      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringService" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -947,8 +963,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Unsubscribe">
-      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/Unsubscribe" style="document" />
+    <wsdl:operation name="UnsubscribeFromCardUncoveringService">
+      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringService" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -972,11 +988,23 @@
   <wsdl:binding name="NetTcpBinding_ICommunicationService" type="tns:ICommunicationService">
     <wsp:PolicyReference URI="#NetTcpBinding_ICommunicationService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="Join">
-      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/Join" style="document" />
+    <wsdl:operation name="SubscribeToCommunicationService">
+      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/SubscribeToCommunicationService" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnsubscribeFromCommunicationService">
+      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SendMessage">
       <soap12:operation soapAction="http://tempuri.org/ICommunicationService/SendMessage" style="document" />
@@ -986,9 +1014,12 @@
     </wsdl:operation>
     <wsdl:operation name="ReciveMessage">
       <soap12:operation soapAction="http://tempuri.org/ICommunicationService/ReciveMessage" style="document" />
-      <wsdl:input>
+      <wsdl:output>
         <soap12:body use="literal" />
-      </wsdl:input>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyUserHasEnteredTheChat">
+      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/NotifyUserHasEnteredTheChat" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

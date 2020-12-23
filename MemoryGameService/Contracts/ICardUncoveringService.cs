@@ -7,9 +7,9 @@ namespace MemoryGameService.Contracts
     public interface ICardUncoveringService
     {
         [OperationContract(IsOneWay = false, IsInitiating = true)]
-        void Subscribe(string username);
+        void SubscribeToCardUncoveringService();
         [OperationContract(IsOneWay = false, IsTerminating = true)]
-        void Unsubscribe();
+        void UnsubscribeFromCardUncoveringService();
         [OperationContract(IsOneWay = true)]
         void NotifyCardWasUncovered(int cardIndex);
     }

@@ -3,7 +3,8 @@ using System.ServiceModel;
 
 namespace MemoryGameService.Contracts
 {
-    [ServiceContract(CallbackContract = typeof(IWaitingRoomServiceCallback))]
+    [ServiceContract(SessionMode = SessionMode.Required,
+        CallbackContract = typeof(IWaitingRoomServiceCallback))]
     public interface IWaitingRoomService
     {
         [OperationContract(IsOneWay = true)]

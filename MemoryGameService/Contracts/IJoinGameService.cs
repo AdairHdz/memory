@@ -2,7 +2,8 @@
 
 namespace MemoryGameService.Contracts
 {
-    [ServiceContract(CallbackContract = typeof(IJoinGameServiceCallback))]
+    [ServiceContract(SessionMode = SessionMode.Required,
+        CallbackContract = typeof(IJoinGameServiceCallback))]
     public interface IJoinGameService
     {
         [OperationContract(IsOneWay = true)]

@@ -6,8 +6,6 @@ using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.GenericValidations;
 using System.Collections.Generic;
 using MemoryGame.MemoryGameService.DataTransferObjects;
-using System.ServiceModel;
-using System;
 
 namespace MemoryGame
 {
@@ -73,7 +71,7 @@ namespace MemoryGame
 
         public void GoToMainMenu()
         {
-            MainMenu mainMenuView = new MainMenu();
+            Chat mainMenuView = new Chat();
             mainMenuView.Show();
             this.Close();
         }

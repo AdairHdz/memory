@@ -172,24 +172,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Subscribe">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SubscribeResponse">
+  <xs:element name="SubscribeToCardUncoveringService">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="Unsubscribe">
+  <xs:element name="SubscribeToCardUncoveringServiceResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="UnsubscribeResponse">
+  <xs:element name="UnsubscribeFromCardUncoveringService">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnsubscribeFromCardUncoveringServiceResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -208,16 +206,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Join">
+  <xs:element name="SubscribeToCommunicationService">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SubscribeToCommunicationServiceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnsubscribeFromCommunicationService">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnsubscribeFromCommunicationServiceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SendMessage">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="sender" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -230,9 +244,11 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ReciveMessageResponse">
+  <xs:element name="NotifyUserHasEnteredTheChat">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendVerificationToken">
