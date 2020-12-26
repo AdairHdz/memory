@@ -41,16 +41,17 @@
         </Label>
 
         <DataGrid Grid.ColumnSpan="4" Grid.Column="3" HorizontalAlignment="Left" 
-                  Grid.Row="3" Grid.RowSpan="4"
-                  Margin="20 0 20 0"
+                  Grid.Row="3" Grid.RowSpan="4"                  
                   Name="GamesDataGrid"
-                  AutoGenerateColumns="False">
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  ItemsSource="{Binding Path=Matches}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn
                     HeaderStyle="{StaticResource dataGridHeader}" 
-                    Header="{x:Static p:Resources.Host}" Width="*"
-                    Binding="{Binding}"/>
+                    Header="{x:Static p:Resources.Host}" Width="*"                    
+                    Binding="{Binding Host}"/>
             </DataGrid.Columns>
         </DataGrid>
 

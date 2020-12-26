@@ -24,9 +24,17 @@ namespace MemoryGame
 
         public void CreateGameButtonClicked(object sender, RoutedEventArgs e)
         {
-            bool isHost = true;
             int numberOfPlayers = Int32.Parse(ComboBoxNumberOfPlayers.SelectedItem.ToString());
-            WaitingRoom waitingRoomView = new WaitingRoom(isHost, playerSesion.Username, numberOfPlayers);
+            MemoryGameService.DataTransferObjects.GameMatchDto matchSettingsDto =
+                new MemoryGameService.DataTransferObjects.GameMatchDto()
+                {
+                    MaxNumberOfPlayers = numberOfPlayers,
+                    Host = Sesion.GetSesion.Username,
+                    HasStarted = false
+                };
+            WaitingRoom waitingRoomView = new WaitingRoom(){
+                _gameMatchDto = matchSettingsDto
+            };
             waitingRoomView.Show();
             this.Close();
         }

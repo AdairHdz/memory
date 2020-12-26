@@ -31,6 +31,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CardDto" nillable="true" type="tns:CardDto" />
+  <xs:complexType name="GameMatchDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardDeckDto" nillable="true" type="tns:CardDeckDTO" />
+      <xs:element minOccurs="0" name="HasStarted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MaxNumberOfPlayers" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GameMatchDto" nillable="true" type="tns:GameMatchDto" />
+  <xs:complexType name="ArrayOfGameMatchDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GameMatchDto" nillable="true" type="tns:GameMatchDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGameMatchDto" nillable="true" type="tns:ArrayOfGameMatchDto" />
   <xs:complexType name="ArrayOfPlayerScoreDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerScoreDTO" nillable="true" type="tns:PlayerScoreDTO" />

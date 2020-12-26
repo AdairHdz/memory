@@ -61,6 +61,9 @@
     <Compile Include="Contracts\ICardDeckRetrieverService.cs" />
     <Compile Include="Contracts\ICardUncoveringService.cs" />
     <Compile Include="Contracts\IJoinGameService.cs" />
+    <Compile Include="Contracts\ILobbyService.cs" />
+    <Compile Include="Contracts\IMatchCreatorService.cs" />
+    <Compile Include="Contracts\IMatchDiscoveryService.cs" />
     <Compile Include="Contracts\IPlayerRegistryService.cs" />
     <Compile Include="Contracts\ITimerInitializerService.cs" />
     <Compile Include="Contracts\ITimerService.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="DataTransferObjectMappers\PlayerScoreMapper.cs" />
     <Compile Include="DataTransferObjects\CardDeckDTO.cs" />
     <Compile Include="DataTransferObjects\CardDto.cs" />
+    <Compile Include="DataTransferObjects\GameMatchDto.cs" />
     <Compile Include="DataTransferObjects\PlayerCredentialsDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerScoreDTO.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="Services\CommunicationService.cs" />
     <Compile Include="Services\LobbyService.cs" />
     <Compile Include="Services\MailingService.cs" />
+    <Compile Include="Services\MatchDiscoveryService.cs" />
     <Compile Include="Services\MatchService.cs" />
     <Compile Include="Services\MemoryGameService.cs" />
     <Compile Include="Services\PlayerRegistryService.cs" />

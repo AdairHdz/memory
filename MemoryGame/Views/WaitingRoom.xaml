@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Style="{StaticResource backgroundPrimary}"
         Title="{x:Static p:Resources.WaitingRoom}" Height="450" Width="800"
+        Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>

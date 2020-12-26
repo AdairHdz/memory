@@ -2,66 +2,63 @@
 using System.ServiceModel;
 using DataAccess.Entities;
 using System.Collections.ObjectModel;
+using MemoryGame.MemoryGameService;
+using MemoryGame.MemoryGameService.DataTransferObjects;
+using System;
 
 namespace MemoryGame
 {
     /// <summary>
     /// Lógica de interacción para JoinGame.xaml
     /// </summary>
-    public partial class JoinGame : Window, Proxy.IJoinGameServiceCallback
+    public partial class JoinGame : Window, IMatchDiscoveryServiceCallback
     {
-        private Proxy.JoinGameServiceClient server = null;
+        private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient = null;
         private InstanceContext context = null;
         Sesion playerSesion = Sesion.GetSesion;
-        public ObservableCollection<string> matches = new ObservableCollection<string>();
+        public ObservableCollection<GameMatchDto> Matches = new ObservableCollection<GameMatchDto>();
 
 
         public JoinGame()
         {
             InitializeComponent();
             context = new InstanceContext(this);
-            server = new Proxy.JoinGameServiceClient(context);
-            GamesDataGrid.ItemsSource = matches;
-            server.JoinGameLobby(playerSesion.Username);
-            server.RecoverAvailableGames();
+            _matchDiscoveryServiceClient = new MemoryGameService.MatchDiscoveryServiceClient(context);
+            _matchDiscoveryServiceClient.DiscoverActiveMatches();
+            GamesDataGrid.ItemsSource = Matches;
         }
-
-        public void NewGameCreated(string gameHostUsername)
-        {
-            matches.Add(gameHostUsername);
-        }
-
-        public void ReciveAvailableGames(string gameHostUsername)
-        {
-            matches.Add(gameHostUsername);
-        }
-
-        public void RemoveGameFromList(string gameHostUsername)
-        {
-            matches.Remove(gameHostUsername);
-        }
-
         private void BackButtonClicked(object sender, RoutedEventArgs e)
         {
             MainMenu mainMenuView = new MainMenu();
             mainMenuView.Show();
             this.Close();
         }
-
+        
         private void JoinButtonClicked(object sender, RoutedEventArgs e)
         {
-            string hostUsername = GamesDataGrid.SelectedItem.ToString();
-            bool isHost = false;
-            bool gameIsAvailable = server.AskForJoinGame(hostUsername);
-            if (gameIsAvailable)
+            GameMatchDto gameMatchDto = (GameMatchDto)GamesDataGrid.SelectedItem;
+            MessageBox.Show(gameMatchDto.Host);
+            bool canJoinToGame = _matchDiscoveryServiceClient.CanJoin(gameMatchDto);
+            if (canJoinToGame)
             {
-                WaitingRoom mainMenuView = new WaitingRoom(isHost, hostUsername, 0);
+                WaitingRoom mainMenuView = new WaitingRoom()
+                {
+                    _gameMatchDto = gameMatchDto
+                };
                 mainMenuView.Show();
                 this.Close();
             }
             else
             {
                 MessageBox.Show(Properties.Langs.Resources.FullGameMessage);
+            }
+        }
+
+        public void ShowActiveMatches(GameMatchDto[] matches)
+        {
+            for(int i = 0; i < matches.Length; i++)
+            {
+                Matches.Add(matches[i]);
             }
         }
     }

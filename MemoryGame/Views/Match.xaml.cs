@@ -1,6 +1,4 @@
-﻿using DataAccess.Entities;
-using MemoryGame.MemoryGameService.DataTransferObjects;
-using MemoryGame.Utilities;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -20,7 +18,7 @@ namespace MemoryGame.Views
         public int TimerValue { get; set; } = 60;
         private InstanceContext _context = null;
         private MemoryGameService.TimerServiceClient _timerServiceClient;
-        public MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck { get; set; }
+        public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
         private MemoryGameService.CardUncoveringServiceClient _cardUncoveringService;
         private List<ImageCard> _imageCards;
         public Match()
@@ -33,7 +31,7 @@ namespace MemoryGame.Views
             MemoryGameService.CardDeckRetrieverServiceClient cardDeckRetrieverServiceClient =
                 new MemoryGameService.CardDeckRetrieverServiceClient();
 
-            _cardDeck = cardDeckRetrieverServiceClient.GetCardDeckAndCards(1);           
+            CardDeck = cardDeckRetrieverServiceClient.GetCardDeckAndCards(1);           
         }      
 
             private void DrawGameBoard()
@@ -46,7 +44,7 @@ namespace MemoryGame.Views
 
         private void DrawRows()
         {
-            int numberOfCards = _cardDeck.Cards.Count;
+            int numberOfCards = CardDeck.Cards.Count;
             int numberOfColumnsDrawn = GameBoardGrid.ColumnDefinitions.Count;
             
             //Comportamiento extraño. Ceiling no funciona
@@ -91,13 +89,13 @@ namespace MemoryGame.Views
 
         private void PopulateImageCards()
         {
-            IList<MemoryGameService.DataTransferObjects.CardDto> cards = _cardDeck.Cards;
-            string backImageOfCards = _cardDeck.BackImage;
+            IList<MemoryGameService.DataTransferObjects.CardDto> cards = CardDeck.Cards;
+            string backImageOfCards = CardDeck.BackImage;
             BitmapImage backImage = new BitmapImage(new Uri("pack://application:,,,/MemoryGameService;component/" + backImageOfCards));
 
             for (int numberOfActualCard = 0; numberOfActualCard < cards.Count; numberOfActualCard++)
             {
-                MemoryGameService.DataTransferObjects.CardDto actualCard = _cardDeck.Cards[numberOfActualCard];
+                MemoryGameService.DataTransferObjects.CardDto actualCard = CardDeck.Cards[numberOfActualCard];
 
                 string frontImageOfActualCard = actualCard.FrontImage;
 
