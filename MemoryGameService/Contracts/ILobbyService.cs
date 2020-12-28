@@ -9,9 +9,9 @@ namespace MemoryGameService.Contracts
     public interface ILobbyService
     {
         [OperationContract(IsOneWay = true)]
-        void JoinLobby(string host, string username);
+        void JoinLobby(LobbyRequestDto lobbyRequestDto);
         [OperationContract(IsOneWay = true)]
-        void LeaveLobby(string host, string username);
+        void LeaveLobby(LobbyRequestDto lobbyRequestDto);
         [OperationContract(IsOneWay = true)]
         void CreateNewMatch(GameMatchDto gameMatchDto);
         [OperationContract(IsOneWay = true)]

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace MemoryGame.Views
@@ -21,9 +22,66 @@ namespace MemoryGame.Views
         public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
         private MemoryGameService.CardUncoveringServiceClient _cardUncoveringService;
         private List<ImageCard> _imageCards;
+        private List<string> _players;
+        private int _numberOfMovementsAllowed = 2;
+        private bool _isPlayerTurn = false;
         public Match()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            _players = new List<string>();
+            _players.Add("AdairHz");
+            _players.Add("Baltix2K");
+            _players.Add("Bataco");
+            _players.Add("Navys230");
+        }
+
+        private void DrawPlayersNames()
+        {
+            int rowIndex = 0;
+            int columnIndex = 0;
+            
+            foreach(string playerName in _players)
+            {
+                Grid usernameContainer = new Grid()
+                {
+                    Background = new SolidColorBrush(Color.FromRgb(239, 71, 111))
+                    
+                };
+
+
+
+                TextBlock username = new TextBlock()
+                {
+                    Text = playerName,
+                    Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    FontSize = 20,
+                    TextTrimming = TextTrimming.CharacterEllipsis
+                };
+
+                Grid.SetColumn(username, 0);
+                Grid.SetRow(username, 0);
+                usernameContainer.Children.Add(username);
+
+                Grid.SetColumn(usernameContainer, rowIndex);
+                Grid.SetRow(usernameContainer, columnIndex);
+                //Grid.SetColumnSpan(usernameContainer, 2);
+                MainGrid.Children.Add(usernameContainer);
+
+                if(columnIndex == 8)
+                {
+                    rowIndex = 8;
+                    columnIndex = 0;
+                }
+                else
+                {
+                    columnIndex = 8;
+                }
+                
+
+
+            }
         }
 
         private void LoadCardDeck()
@@ -122,24 +180,20 @@ namespace MemoryGame.Views
         private void GetClickedCard(object sender, EventArgs e)
         {
             ImageCard cardClicked = ((ImageCard)sender);
-            /*if (cardClicked.Source != cardClicked.FrontImage)
-            {
+            bool cardHasNotBeenFlipped = cardClicked.Source != cardClicked.FrontImage;
+            bool playerStillHasMovements = _numberOfMovementsAllowed > 0;
 
-            }
-            */
-            int cardIndex = _imageCards.IndexOf(cardClicked);
-            _cardUncoveringService
-                .NotifyCardWasUncovered(cardIndex);
+            if (cardHasNotBeenFlipped && playerStillHasMovements)
+            {
+                int cardIndex = _imageCards.IndexOf(cardClicked);
+                _cardUncoveringService
+                    .NotifyCardWasUncovered(cardIndex);
+                _numberOfMovementsAllowed--;
+            }            
         }
 
         public void UncoverCard(int cardIndex)
         {
-            /**
-             * Esto solo destapa la carta en uno de los clientes.
-             * Seguramente tiene que ver con que cada cliente tiene un diferente
-             * orden de las cartas. Modificar Game Settings para que allí se pase el mazo y poder verificar
-             * que este método funcione como debería
-             */
             _imageCards[cardIndex].Source = _imageCards[cardIndex].FrontImage;
         }
 
@@ -165,6 +219,7 @@ namespace MemoryGame.Views
             _cardUncoveringService = new MemoryGameService.CardUncoveringServiceClient(_context);
             _cardUncoveringService.SubscribeToCardUncoveringService();
             //_timerServiceClient.UpdateTimer();
+            DrawPlayersNames();
             DrawGameBoard();
         }
     }

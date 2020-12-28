@@ -21,6 +21,8 @@ namespace MemoryGame
         public WaitingRoom()
         {
             InitializeComponent();
+            context = new InstanceContext(this);
+            _lobbyServiceClient = new MemoryGameService.LobbyServiceClient(context);
         }
 
         public void LeaveButtonClicked(object sender, RoutedEventArgs e)
@@ -28,14 +30,19 @@ namespace MemoryGame
             if (isHost)
             {
                 _lobbyServiceClient.DeleteMatch(_gameMatchDto);
-                _lobbyServiceClient.LeaveLobby(_gameMatchDto.Host, playerSesion.Username);
+                //_lobbyServiceClient.LeaveLobby(_gameMatchDto.Host, playerSesion.Username);
                 MainMenu mainMenuView = new MainMenu();
                 mainMenuView.Show();
                 this.Close();
             }
             else
             {
-                _lobbyServiceClient.LeaveLobby(_gameMatchDto.Host, playerSesion.Username);
+                LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
+                {
+                    Host = _gameMatchDto.Host,
+                    Username = playerSesion.Username
+                };
+                _lobbyServiceClient.LeaveLobby(lobbyRequestDto);
                 JoinGame joinGameView = new JoinGame();
                 joinGameView.Show();
                 this.Close();
@@ -49,7 +56,6 @@ namespace MemoryGame
 
         public void NotifyNewPlayerEntered(string username)
         {
-            MessageBox.Show("Callback reached from " + playerSesion.Username);
             players.Add(username);
         }
 
@@ -60,10 +66,6 @@ namespace MemoryGame
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {            
-            context = new InstanceContext(this);
-            _lobbyServiceClient = new MemoryGameService.LobbyServiceClient(context);
-            MessageBox.Show(context + "");
-            MessageBox.Show(_lobbyServiceClient.State.ToString());
             IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersFromMatch(_gameMatchDto);
             players.AddRange(activePlayers);
             WaitingRoomDataGrid.ItemsSource = players;
@@ -76,7 +78,12 @@ namespace MemoryGame
             {
                 StarButton.Visibility = System.Windows.Visibility.Collapsed;
             }
-            _lobbyServiceClient.JoinLobby(_gameMatchDto.Host, playerSesion.Username);
+            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
+            {
+                Host = _gameMatchDto.Host,
+                Username = playerSesion.Username
+            };
+            _lobbyServiceClient.JoinLobby(lobbyRequestDto);
         }
     }
 }

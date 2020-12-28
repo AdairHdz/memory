@@ -32,6 +32,8 @@ namespace MemoryGameService.Services
             _matches.Remove(gameMatch);
         }
 
+
+
         public IList<string> GetActivePlayersFromMatch(GameMatchDto gameMatchDto)
         {
             IList<string> activePlayersFromMatch = new List<string>();
@@ -46,31 +48,53 @@ namespace MemoryGameService.Services
             return activePlayersFromMatch;
         }
 
-        public void JoinLobby(string host, string username)
+        public void JoinLobby(LobbyRequestDto lobbyRequestDto)
         {
-            foreach(var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    match.AddNewPlayer(username);
-                    var channel = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>();
-                    channel.NotifyNewPlayerEntered(username);
-                    break;
-                }
-            }
-        }
-
-        public void LeaveLobby(string host, string username)
-        {
+            //gameMatch podría ser null si no encuentra la partida. Refactorizar
+            lobbyRequestDto.Connection = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>(); ;
+            GameMatchDto gameMatch = null;
+            string host = lobbyRequestDto.Host;
+            string username = lobbyRequestDto.Username;
             foreach (var match in _matches)
             {
                 if (match.Host.Equals(host))
                 {
-                    match.RemovePlayer(username);
-                    var channel = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>();
-                    channel.NotifyPlayerLeft(username);
-                    break;
+                    gameMatch = match;
+                    break;                                      
                 }
+            }
+
+            gameMatch.AddNewPlayer(lobbyRequestDto);
+            IList<LobbyRequestDto> requests = gameMatch.GetLobbyRequests();
+            foreach (var request in requests)
+            {
+                var channel = request.Connection;
+                channel.NotifyNewPlayerEntered(username);
+            }
+        }
+
+        public void LeaveLobby(LobbyRequestDto lobbyRequestDto)
+        {
+            //gameMatch podría ser null si no encuentra la partida. Refactorizar
+            lobbyRequestDto.Connection = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>();
+            GameMatchDto gameMatch = null;
+            string host = lobbyRequestDto.Host;
+            string username = lobbyRequestDto.Username;
+            foreach (var match in _matches)
+            {
+                if (match.Host.Equals(host))
+                {
+                    gameMatch = match;
+                    break;                                      
+                }
+            }
+
+            gameMatch.RemovePlayer(lobbyRequestDto);
+            IList<LobbyRequestDto> requests = gameMatch.GetLobbyRequests();
+            foreach (var request in requests)
+            {
+                var channel = request.Connection;
+                channel.NotifyPlayerLeft(username);
             }
         }
     }

@@ -76,6 +76,7 @@
     <Compile Include="DataTransferObjects\CardDeckDTO.cs" />
     <Compile Include="DataTransferObjects\CardDto.cs" />
     <Compile Include="DataTransferObjects\GameMatchDto.cs" />
+    <Compile Include="DataTransferObjects\LobbyRequestDto.cs" />
     <Compile Include="DataTransferObjects\PlayerCredentialsDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerScoreDTO.cs" />

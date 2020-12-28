@@ -71,7 +71,7 @@ namespace MemoryGame
 
         public void GoToMainMenu()
         {
-            Chat mainMenuView = new Chat();
+            MainMenu mainMenuView = new MainMenu();
             mainMenuView.Show();
             this.Close();
         }

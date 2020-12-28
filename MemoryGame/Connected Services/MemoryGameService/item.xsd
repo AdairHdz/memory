@@ -31,6 +31,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CardDto" nillable="true" type="tns:CardDto" />
+  <xs:complexType name="LobbyRequestDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Connection" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LobbyRequestDto" nillable="true" type="tns:LobbyRequestDto" />
   <xs:complexType name="GameMatchDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="CardDeckDto" nillable="true" type="tns:CardDeckDTO" />

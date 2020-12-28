@@ -9,21 +9,22 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         public string Host { get; set; }
         public bool HasStarted { get; set; }
 
-        private IList<string> _players;
+        //private IList<string> _players;
+        private IList<LobbyRequestDto> _players;
 
         public GameMatchDto()
         {
-            _players = new List<string>();            
+            _players = new List<LobbyRequestDto>();            
         }
 
-        public void AddNewPlayer(string username)
+        public void AddNewPlayer(LobbyRequestDto lobbyRequestDto)
         {
-            _players.Add(username);
+            _players.Add(lobbyRequestDto);
         }
 
-        public void RemovePlayer(string username)
+        public void RemovePlayer(LobbyRequestDto lobbyRequestDto)
         {
-            _players.Remove(username);
+            _players.Remove(lobbyRequestDto);
         }
 
         public int GetNumberOfPlayersConnected()
@@ -32,6 +33,16 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         }
 
         public IList<string> GetPlayers()
+        {
+            IList<string> playersNames = new List<string>();
+            foreach(var player in _players)
+            {
+                playersNames.Add(player.Username);
+            }
+            return playersNames;
+        }
+
+        public IList<LobbyRequestDto> GetLobbyRequests()
         {
             return _players;
         }
