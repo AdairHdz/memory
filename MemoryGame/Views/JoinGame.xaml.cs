@@ -16,7 +16,7 @@ namespace MemoryGame
         private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient = null;
         private InstanceContext context = null;
         Sesion playerSesion = Sesion.GetSesion;
-        public ObservableCollection<GameMatchDto> Matches = new ObservableCollection<GameMatchDto>();
+        public ObservableCollection<GameMatchConfigDto> Matches = new ObservableCollection<GameMatchConfigDto>();
 
 
         public JoinGame()
@@ -36,7 +36,7 @@ namespace MemoryGame
         
         private void JoinButtonClicked(object sender, RoutedEventArgs e)
         {
-            GameMatchDto gameMatchDto = (GameMatchDto)GamesDataGrid.SelectedItem;
+            GameMatchConfigDto gameMatchDto = (GameMatchConfigDto)GamesDataGrid.SelectedItem;
             MessageBox.Show(gameMatchDto.Host);
             bool canJoinToGame = _matchDiscoveryServiceClient.CanJoin(gameMatchDto);
             if (canJoinToGame)
@@ -54,7 +54,7 @@ namespace MemoryGame
             }
         }
 
-        public void ShowActiveMatches(GameMatchDto[] matches)
+        public void ShowActiveMatches(GameMatchConfigDto[] matches)
         {
             for(int i = 0; i < matches.Length; i++)
             {

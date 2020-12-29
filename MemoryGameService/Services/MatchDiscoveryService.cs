@@ -7,7 +7,7 @@ namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IMatchDiscoveryService
     {
-        public bool CanJoin(GameMatchDto gameMatchDto)
+        public bool CanJoin(GameMatchConfigDto gameMatchDto)
         {
             int numberOfPlayersConnectedToMatch = gameMatchDto.GetNumberOfPlayersConnected();
             int numberOfPlayersRequired = gameMatchDto.MaxNumberOfPlayers;
@@ -29,7 +29,7 @@ namespace MemoryGameService.Services
         public void DiscoverActiveMatches()
         {
             //_matches is located at LobbyService
-            IList<GameMatchDto> matches = _matches;
+            IList<GameMatchConfigDto> matches = _matches;
             var channel = OperationContext.Current.GetCallbackChannel<IMatchDiscoveryServiceCallback>();
             channel.ShowActiveMatches(_matches);
         }

@@ -22,17 +22,13 @@ namespace MemoryGame.Views
         public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
         private MemoryGameService.CardUncoveringServiceClient _cardUncoveringService;
         private List<ImageCard> _imageCards;
-        private List<string> _players;
         private int _numberOfMovementsAllowed = 2;
         private bool _isPlayerTurn = false;
-        public Match()
+        private IList<PlayerInMatchDto> _players;
+        public Match(IList<PlayerInMatchDto> playersInMatchDtos)
         {
             InitializeComponent();
-            _players = new List<string>();
-            _players.Add("AdairHz");
-            _players.Add("Baltix2K");
-            _players.Add("Bataco");
-            _players.Add("Navys230");
+            _players = playersInMatchDtos;
         }
 
         private void DrawPlayersNames()
@@ -40,7 +36,7 @@ namespace MemoryGame.Views
             int rowIndex = 0;
             int columnIndex = 0;
             
-            foreach(string playerName in _players)
+            foreach(var player in _players)
             {
                 Grid usernameContainer = new Grid()
                 {
@@ -52,7 +48,7 @@ namespace MemoryGame.Views
 
                 TextBlock username = new TextBlock()
                 {
-                    Text = playerName,
+                    Text = player.Username,
                     Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
                     VerticalAlignment = VerticalAlignment.Center,
                     HorizontalAlignment = HorizontalAlignment.Center,

@@ -17,7 +17,7 @@ namespace MemoryGame
         Sesion playerSesion = Sesion.GetSesion;
         public ObservableCollection<string> players = new ObservableCollection<string>();
         bool isHost = false;
-        public GameMatchDto _gameMatchDto { get; set; }
+        public GameMatchConfigDto _gameMatchDto { get; set; }
         public WaitingRoom()
         {
             InitializeComponent();
@@ -26,32 +26,23 @@ namespace MemoryGame
         }
 
         public void LeaveButtonClicked(object sender, RoutedEventArgs e)
-        {            
-            if (isHost)
+        {
+            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
             {
-                _lobbyServiceClient.DeleteMatch(_gameMatchDto);
-                //_lobbyServiceClient.LeaveLobby(_gameMatchDto.Host, playerSesion.Username);
-                MainMenu mainMenuView = new MainMenu();
-                mainMenuView.Show();
-                this.Close();
-            }
-            else
-            {
-                LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
-                {
-                    Host = _gameMatchDto.Host,
-                    Username = playerSesion.Username
-                };
-                _lobbyServiceClient.LeaveLobby(lobbyRequestDto);
-                JoinGame joinGameView = new JoinGame();
-                joinGameView.Show();
-                this.Close();
-            }            
+                Host = _gameMatchDto.Host,
+                Username = playerSesion.Username
+            };
+            _lobbyServiceClient.LeaveLobby(lobbyRequestDto);            
         }
 
         public void StartButtonClicked(object sender, RoutedEventArgs e)
-        {            
-            //server.StarGame(gameHostUsername);
+        {
+            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
+            {
+                Host = _gameMatchDto.Host,
+                Username = playerSesion.Username
+            };
+            _lobbyServiceClient.StartGame(lobbyRequestDto);
         }
 
         public void NotifyNewPlayerEntered(string username)
@@ -62,6 +53,18 @@ namespace MemoryGame
         public void NotifyPlayerLeft(string username)
         {
             players.Remove(username);
+            if (_gameMatchDto.Host.Equals(username))
+            {
+                MainMenu mainMenuView = new MainMenu();
+                mainMenuView.Show();
+                this.Close();
+            }
+            else
+            {
+                JoinGame joinGameView = new JoinGame();
+                joinGameView.Show();
+                this.Close();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -84,6 +87,24 @@ namespace MemoryGame
                 Username = playerSesion.Username
             };
             _lobbyServiceClient.JoinLobby(lobbyRequestDto);
+        }
+
+        public void TakePlayersToMatchView()
+        {
+            IList<PlayerInMatchDto> playersInMatchDtos = new List<PlayerInMatchDto>();
+            foreach(var player in players)
+            {
+                PlayerInMatchDto playerToBeIncludedInMatch = new PlayerInMatchDto()
+                {
+                    Username = player.ToString(),
+                    Score = 0
+                };
+
+                playersInMatchDtos.Add(playerToBeIncludedInMatch);
+            }
+            Views.Match matchView = new Views.Match(playersInMatchDtos);
+            matchView.Show();
+            this.Close();
         }
     }
 }

@@ -25,8 +25,8 @@ namespace MemoryGame
         public void CreateGameButtonClicked(object sender, RoutedEventArgs e)
         {
             int numberOfPlayers = Int32.Parse(ComboBoxNumberOfPlayers.SelectedItem.ToString());
-            MemoryGameService.DataTransferObjects.GameMatchDto matchSettingsDto =
-                new MemoryGameService.DataTransferObjects.GameMatchDto()
+            MemoryGameService.DataTransferObjects.GameMatchConfigDto matchSettingsDto =
+                new MemoryGameService.DataTransferObjects.GameMatchConfigDto()
                 {
                     MaxNumberOfPlayers = numberOfPlayers,
                     Host = Sesion.GetSesion.Username,

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MemoryGameService.DataTransferObjects;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace MemoryGameService.Contracts
@@ -7,13 +8,16 @@ namespace MemoryGameService.Contracts
     public interface IMatchService
     {
         [OperationContract(IsOneWay = true)]
-        void GetActivePlayers();        
+        void NotifyCardWasUncoveredd(PlayerTurnDto playerTurnDto);
+        [OperationContract(IsOneWay = true)]
+        void EnterMatch(PlayerTurnDto playerTurnDto);
     }
 
+    [ServiceContract]
     public interface IMatchServiceCallback
     {
         [OperationContract(IsOneWay = true)]
-        void ShowActivePlayers(List<string> activePlayers);
+        void UncoverCardd(PlayerTurnDto playerTurnDto);
     }
 
 }

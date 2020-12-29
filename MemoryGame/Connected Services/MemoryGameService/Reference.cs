@@ -497,8 +497,8 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.CardDto[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.CardDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO))]
@@ -514,8 +514,8 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.CardDto[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.CardDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO))]
@@ -527,22 +527,39 @@ namespace MemoryGame.MemoryGameService {
         System.Threading.Tasks.Task LeaveLobbyAsync(MemoryGame.MemoryGameService.DataTransferObjects.LobbyRequestDto lobbyRequestDto);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/CreateNewMatch")]
-        void CreateNewMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto);
+        void CreateNewMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/CreateNewMatch")]
-        System.Threading.Tasks.Task CreateNewMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto);
+        System.Threading.Tasks.Task CreateNewMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/DeleteMatch")]
-        void DeleteMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto);
+        void DeleteMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/DeleteMatch")]
-        System.Threading.Tasks.Task DeleteMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto);
+        System.Threading.Tasks.Task DeleteMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetActivePlayersFromMatch", ReplyAction="http://tempuri.org/ILobbyService/GetActivePlayersFromMatchResponse")]
-        string[] GetActivePlayersFromMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto);
+        string[] GetActivePlayersFromMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetActivePlayersFromMatch", ReplyAction="http://tempuri.org/ILobbyService/GetActivePlayersFromMatchResponse")]
-        System.Threading.Tasks.Task<string[]> GetActivePlayersFromMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto);
+        System.Threading.Tasks.Task<string[]> GetActivePlayersFromMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/StartGame")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.CardDto[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.CardDto))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.EndpointNotFoundFault))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
+        void StartGame(MemoryGame.MemoryGameService.DataTransferObjects.LobbyRequestDto lobbyRequestDto);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/StartGame")]
+        System.Threading.Tasks.Task StartGameAsync(MemoryGame.MemoryGameService.DataTransferObjects.LobbyRequestDto lobbyRequestDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -553,6 +570,9 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/NotifyPlayerLeft")]
         void NotifyPlayerLeft(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/TakePlayersToMatchView")]
+        void TakePlayersToMatchView();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -599,28 +619,36 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.LeaveLobbyAsync(lobbyRequestDto);
         }
         
-        public void CreateNewMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto) {
+        public void CreateNewMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto) {
             base.Channel.CreateNewMatch(gameMatchDto);
         }
         
-        public System.Threading.Tasks.Task CreateNewMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto) {
+        public System.Threading.Tasks.Task CreateNewMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto) {
             return base.Channel.CreateNewMatchAsync(gameMatchDto);
         }
         
-        public void DeleteMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto) {
+        public void DeleteMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto) {
             base.Channel.DeleteMatch(gameMatchDto);
         }
         
-        public System.Threading.Tasks.Task DeleteMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto) {
+        public System.Threading.Tasks.Task DeleteMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto) {
             return base.Channel.DeleteMatchAsync(gameMatchDto);
         }
         
-        public string[] GetActivePlayersFromMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto) {
+        public string[] GetActivePlayersFromMatch(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto) {
             return base.Channel.GetActivePlayersFromMatch(gameMatchDto);
         }
         
-        public System.Threading.Tasks.Task<string[]> GetActivePlayersFromMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto) {
+        public System.Threading.Tasks.Task<string[]> GetActivePlayersFromMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto) {
             return base.Channel.GetActivePlayersFromMatchAsync(gameMatchDto);
+        }
+        
+        public void StartGame(MemoryGame.MemoryGameService.DataTransferObjects.LobbyRequestDto lobbyRequestDto) {
+            base.Channel.StartGame(lobbyRequestDto);
+        }
+        
+        public System.Threading.Tasks.Task StartGameAsync(MemoryGame.MemoryGameService.DataTransferObjects.LobbyRequestDto lobbyRequestDto) {
+            return base.Channel.StartGameAsync(lobbyRequestDto);
         }
     }
     
@@ -682,17 +710,17 @@ namespace MemoryGame.MemoryGameService {
         System.Threading.Tasks.Task DiscoverActiveMatchesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchDiscoveryService/CanJoin", ReplyAction="http://tempuri.org/IMatchDiscoveryService/CanJoinResponse")]
-        bool CanJoin(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto);
+        bool CanJoin(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchDiscoveryService/CanJoin", ReplyAction="http://tempuri.org/IMatchDiscoveryService/CanJoinResponse")]
-        System.Threading.Tasks.Task<bool> CanJoinAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto);
+        System.Threading.Tasks.Task<bool> CanJoinAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IMatchDiscoveryServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchDiscoveryService/ShowActiveMatches")]
-        void ShowActiveMatches(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto[] matches);
+        void ShowActiveMatches(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto[] matches);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -731,67 +759,12 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.DiscoverActiveMatchesAsync();
         }
         
-        public bool CanJoin(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto) {
+        public bool CanJoin(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto) {
             return base.Channel.CanJoin(gameMatchDto);
         }
         
-        public System.Threading.Tasks.Task<bool> CanJoinAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto) {
+        public System.Threading.Tasks.Task<bool> CanJoinAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto gameMatchDto) {
             return base.Channel.CanJoinAsync(gameMatchDto);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IMatchService", CallbackContract=typeof(MemoryGame.MemoryGameService.IMatchServiceCallback))]
-    public interface IMatchService {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/GetActivePlayers")]
-        void GetActivePlayers();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/GetActivePlayers")]
-        System.Threading.Tasks.Task GetActivePlayersAsync();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMatchServiceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ShowActivePlayers")]
-        void ShowActivePlayers(string[] activePlayers);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMatchServiceChannel : MemoryGame.MemoryGameService.IMatchService, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MatchServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.MemoryGameService.IMatchService>, MemoryGame.MemoryGameService.IMatchService {
-        
-        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
-        }
-        
-        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
-        }
-        
-        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public MatchServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
-        }
-        
-        public void GetActivePlayers() {
-            base.Channel.GetActivePlayers();
-        }
-        
-        public System.Threading.Tasks.Task GetActivePlayersAsync() {
-            return base.Channel.GetActivePlayersAsync();
         }
     }
     

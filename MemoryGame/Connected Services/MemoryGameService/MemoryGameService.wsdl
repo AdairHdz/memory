@@ -261,35 +261,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IMatchService_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
-        <wsaw:UsingAddressing />
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_ITimerService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -544,11 +515,17 @@
   <wsdl:message name="ILobbyService_GetActivePlayersFromMatch_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetActivePlayersFromMatchResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobbyService_StartGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartGame" />
+  </wsdl:message>
   <wsdl:message name="ILobbyService_NotifyNewPlayerEntered_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyNewPlayerEntered" />
   </wsdl:message>
   <wsdl:message name="ILobbyService_NotifyPlayerLeft_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyPlayerLeft" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyService_TakePlayersToMatchView_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:TakePlayersToMatchView" />
   </wsdl:message>
   <wsdl:message name="IMailingService_SendVerificationToken_InputMessage">
     <wsdl:part name="parameters" element="tns:SendVerificationToken" />
@@ -567,12 +544,6 @@
   </wsdl:message>
   <wsdl:message name="IMatchDiscoveryService_ShowActiveMatches_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ShowActiveMatches" />
-  </wsdl:message>
-  <wsdl:message name="IMatchService_GetActivePlayers_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetActivePlayers" />
-  </wsdl:message>
-  <wsdl:message name="IMatchService_ShowActivePlayers_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ShowActivePlayers" />
   </wsdl:message>
   <wsdl:message name="ITimerService_UpdateTimer_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateTimer" />
@@ -721,11 +692,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/GetActivePlayersFromMatch" message="tns:ILobbyService_GetActivePlayersFromMatch_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/GetActivePlayersFromMatchResponse" message="tns:ILobbyService_GetActivePlayersFromMatch_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="StartGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/StartGame" message="tns:ILobbyService_StartGame_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NotifyNewPlayerEntered">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/NotifyNewPlayerEntered" message="tns:ILobbyService_NotifyNewPlayerEntered_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NotifyPlayerLeft">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/NotifyPlayerLeft" message="tns:ILobbyService_NotifyPlayerLeft_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="TakePlayersToMatchView">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/TakePlayersToMatchView" message="tns:ILobbyService_TakePlayersToMatchView_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMailingService">
@@ -744,14 +721,6 @@
     </wsdl:operation>
     <wsdl:operation name="ShowActiveMatches">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchDiscoveryService/ShowActiveMatches" message="tns:IMatchDiscoveryService_ShowActiveMatches_OutputCallbackMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:portType name="IMatchService">
-    <wsdl:operation name="GetActivePlayers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/GetActivePlayers" message="tns:IMatchService_GetActivePlayers_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ShowActivePlayers">
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/ShowActivePlayers" message="tns:IMatchService_ShowActivePlayers_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="ITimerService">
@@ -1023,6 +992,12 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyService/StartGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="NotifyNewPlayerEntered">
       <soap12:operation soapAction="http://tempuri.org/ILobbyService/NotifyNewPlayerEntered" style="document" />
       <wsdl:output>
@@ -1031,6 +1006,12 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyPlayerLeft">
       <soap12:operation soapAction="http://tempuri.org/ILobbyService/NotifyPlayerLeft" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TakePlayersToMatchView">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyService/TakePlayersToMatchView" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1069,22 +1050,6 @@
     </wsdl:operation>
     <wsdl:operation name="ShowActiveMatches">
       <soap12:operation soapAction="http://tempuri.org/IMatchDiscoveryService/ShowActiveMatches" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IMatchService" type="tns:IMatchService">
-    <wsp:PolicyReference URI="#NetTcpBinding_IMatchService_policy" />
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="GetActivePlayers">
-      <soap12:operation soapAction="http://tempuri.org/IMatchService/GetActivePlayers" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="ShowActivePlayers">
-      <soap12:operation soapAction="http://tempuri.org/IMatchService/ShowActivePlayers" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1240,15 +1205,6 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMatchDiscoveryService" binding="tns:NetTcpBinding_IMatchDiscoveryService">
-      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
-      <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
-        </Identity>
-      </wsa10:EndpointReference>
-    </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IMatchService" binding="tns:NetTcpBinding_IMatchService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>

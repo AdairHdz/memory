@@ -14,12 +14,12 @@ namespace MemoryGameService.Contracts
         [OperationContract(IsOneWay = true)]
         void DiscoverActiveMatches();
         [OperationContract]
-        bool CanJoin(GameMatchDto gameMatchDto);
+        bool CanJoin(GameMatchConfigDto gameMatchDto);
     }
     [ServiceContract]
     public interface IMatchDiscoveryServiceCallback
     {
         [OperationContract(IsOneWay = true)]
-        void ShowActiveMatches(IList<GameMatchDto> matches);
+        void ShowActiveMatches(IList<GameMatchConfigDto> matches);
     }
 }

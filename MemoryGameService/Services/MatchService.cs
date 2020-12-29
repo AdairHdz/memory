@@ -1,17 +1,33 @@
-﻿using MemoryGameService.Contracts;
-using System;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGameService.Contracts;
+using MemoryGameService.DataTransferObjects;
 using System.Collections.Generic;
-using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IMatchService
     {
-        public void GetActivePlayers()
+        /**
+         * Host: string
+         * Username: string
+         * HasFormedAPair: bool
+         * CardIndex: int
+         * */
+
+        private IList<PlayerTurnDto> _playersTurnDtos = new List<PlayerTurnDto>();
+
+        public void EnterMatch(PlayerTurnDto playerTurnDto)
         {
-            List<string> activePlayers = new List<string>();
-            activePlayers.Add(DateTime.Now.ToString());
-            OperationContext.Current.GetCallbackChannel<IMatchServiceCallback>().ShowActivePlayers(activePlayers);
+            _playersTurnDtos.Add(playerTurnDto);
+        }
+
+        public void NotifyCardWasUncoveredd(PlayerTurnDto playerTurnDto)
+        {
+            string host = playerTurnDto.Host;
+            GameMatchConfigDto gameMatch = GetMatch(host);
+            
+
+            throw new System.NotImplementedException();
         }
     }
 }
