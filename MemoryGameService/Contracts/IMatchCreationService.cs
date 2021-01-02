@@ -9,11 +9,9 @@ using System.Threading.Tasks;
 namespace MemoryGameService.Contracts
 {
     [ServiceContract]
-    public interface IMatchDiscoveryService
+    public interface IMatchCreationService
     {
-        [OperationContract]
-        IList<GameMatchConfigDto> GetActiveMatches();
-        [OperationContract]
-        bool CanJoin(string matchHost);
+        [OperationContract(IsOneWay = true)]
+        void CreateNewMatch(GameMatchConfigDto gameMatchDto);
     }
 }

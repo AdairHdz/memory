@@ -6,6 +6,7 @@ using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.GenericValidations;
 using System.Collections.Generic;
 using MemoryGame.MemoryGameService.DataTransferObjects;
+using System.ServiceModel;
 
 namespace MemoryGame
 {
@@ -49,23 +50,21 @@ namespace MemoryGame
 
         public bool LoginIsValid()
         {
+            bool isMatch = false;
             AccessibilityServiceClient client = new AccessibilityServiceClient();
             BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
-
             PlayerCredentialsDTO playerCredentials = client.GetPlayerCredentials(_username);
-
-            bool isMatch = hashGenerator.Match(_password, playerCredentials.Password);
-
+            isMatch = hashGenerator.Match(_password, playerCredentials.Password);
             return isMatch;
         }
 
         public bool EmailIsVerified()
         {
+            bool emailIsVerified = false;
             AccessibilityServiceClient client = new AccessibilityServiceClient();
-
             string username = TextBoxUsername.Text;
-
-            return client.IsVerified(username);
+            emailIsVerified = client.IsVerified(username);
+            return emailIsVerified;
         }
 
 
@@ -78,11 +77,49 @@ namespace MemoryGame
 
         public string GetUserEmailAdress()
         {
+            string emailAddress = "";
             AccessibilityServiceClient client = new AccessibilityServiceClient();
-
             string username = TextBoxUsername.Text;
+            emailAddress = client.GetUserEmailAddress(username);
+            return emailAddress;
+        }
 
-            return client.GetUserEmailAddress(username);
+        private void LoginUser()
+        {
+            try
+            {
+                TryLoginUser();
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+        }
+
+        private void TryLoginUser()
+        {
+            if (LoginIsValid())
+            {
+                if (EmailIsVerified())
+                {
+                    Sesion playerSesion = Sesion.GetSesion;
+                    playerSesion.Username = TextBoxUsername.Text;
+                    playerSesion.EmailAddress = GetUserEmailAdress();
+                    GoToMainMenu();
+                }
+                else
+                {
+                    ActivationToken activationTokenWindow =
+                            new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
+
+                    activationTokenWindow.Show();
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show(Properties.Langs.Resources.NonMatchingCredentials);
+            }
         }
 
         private void LoginButtonClicked(object sender, RoutedEventArgs e)
@@ -90,46 +127,29 @@ namespace MemoryGame
             SetFormValidation();
             if (_ruleSet.AllValidationRulesHavePassed())
             {
-                if (LoginIsValid())
-                {
-                    if (EmailIsVerified())
-                    {
-                        Sesion playerSesion = Sesion.GetSesion;
-                        playerSesion.Username = TextBoxUsername.Text;
-                        playerSesion.EmailAddress = GetUserEmailAdress();
-                        GoToMainMenu();
-                    }
-                    else
-                    {
-                        ActivationToken activationTokenWindow =
-                                new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
-
-                        activationTokenWindow.Show();
-                        this.Close();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(Properties.Langs.Resources.NonMatchingCredentials);
-                }
+                LoginUser();
             }
             else
             {
                 ShowErrorMessage();
             }
-
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindowView = new MainWindow();
-            mainWindowView.Show();
-            this.Close();
+            RedirectToMainWindowView();
         }
 
         private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
         {
             RecoverPassword mainWindowView = new RecoverPassword();
+            mainWindowView.Show();
+            this.Close();
+        }
+
+        private void RedirectToMainWindowView()
+        {
+            MainWindow mainWindowView = new MainWindow();
             mainWindowView.Show();
             this.Close();
         }

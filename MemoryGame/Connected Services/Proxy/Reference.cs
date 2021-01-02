@@ -719,10 +719,6 @@ namespace MemoryGame.Proxy {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.IPlayerRegistryService")]
     public interface IPlayerRegistryService {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.EndpointNotFoundFault), Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerEndpointNotFoundFaultF" +
-            "ault", Name="EndpointNotFoundFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool RegisterNewPlayer(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse")]

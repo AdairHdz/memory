@@ -12,14 +12,12 @@ namespace MemoryGameService.Contracts
         void JoinLobby(LobbyRequestDto lobbyRequestDto);
         [OperationContract(IsOneWay = true)]
         void LeaveLobby(LobbyRequestDto lobbyRequestDto);
-        [OperationContract(IsOneWay = true)]
-        void CreateNewMatch(GameMatchConfigDto gameMatchDto);
-        [OperationContract(IsOneWay = true)]
-        void DeleteMatch(GameMatchConfigDto gameMatchDto);
         [OperationContract]
-        IList<string> GetActivePlayersFromMatch(GameMatchConfigDto gameMatchDto);
+        IList<string> GetActivePlayersInLobby(GameMatchConfigDto gameMatchDto);
         [OperationContract(IsOneWay = true)]
-        void StartGame(LobbyRequestDto lobbyRequestDto);
+        void StartGame(GameMatchConfigDto gameMatchDto);
+        [OperationContract(IsOneWay = true)]
+        void DeleteMatch(string matchHost);
     }
 
     [ServiceContract]
@@ -30,6 +28,8 @@ namespace MemoryGameService.Contracts
         [OperationContract(IsOneWay = true)]
         void NotifyPlayerLeft(string username);
         [OperationContract(IsOneWay = true)]
-        void TakePlayersToMatchView();
+        void TakePlayersToMatchView(IList<string> playersInMatch);
+        [OperationContract(IsOneWay = true)]
+        void TakePlayersOutOfLobby();
     }
 }

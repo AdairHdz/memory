@@ -285,6 +285,9 @@
   <data name="SendNewCode" xml:space="preserve">
     <value>Enviar nuevo código</value>
   </data>
+  <data name="ServerConnectionLost" xml:space="preserve">
+    <value>Se perdió la conexión con el servidor</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Configuración</value>
   </data>

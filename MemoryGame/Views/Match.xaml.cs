@@ -1,7 +1,9 @@
-﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+﻿using DataAccess.Entities;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,59 +15,75 @@ namespace MemoryGame.Views
     /// Lógica de interacción para Match.xaml
     /// </summary>
     //[CallbackBehavior(UseSynchronizationContext = false)]
-    public partial class Match : Window, MemoryGameService.ITimerServiceCallback,
-        MemoryGameService.ICardUncoveringServiceCallback
+    public partial class Match : Window, MemoryGameService.IMatchServiceCallback
     {
-        public int TimerValue { get; set; } = 60;
+        
         private InstanceContext _context = null;
-        private MemoryGameService.TimerServiceClient _timerServiceClient;
+        private MemoryGameService.MatchServiceClient _matchServiceClient;
         public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
-        private MemoryGameService.CardUncoveringServiceClient _cardUncoveringService;
         private List<ImageCard> _imageCards;
-        private int _numberOfMovementsAllowed = 2;
-        private bool _isPlayerTurn = false;
-        private IList<PlayerInMatchDto> _players;
-        public Match(IList<PlayerInMatchDto> playersInMatchDtos)
+        private int _numberOfMovementsAllowed;
+        private IList<ImageCard> _cardsFlippedInCurrentTurn = new List<ImageCard>();
+        private IList<ImageCard> _cardsFlippedInTotal = new List<ImageCard>();
+        private int _score;
+        bool _playerHasFormedAPair = false;
+        public string[] Players { get; set; }
+        public string MatchHost { get; set; }
+        public Match()
         {
             InitializeComponent();
-            _players = playersInMatchDtos;
+            _imageCards = new List<ImageCard>();
+            _context = new InstanceContext(this);            
+            _matchServiceClient = new MemoryGameService.MatchServiceClient(_context);
+            _numberOfMovementsAllowed = 0;
+            _score = 0;
         }
 
         private void DrawPlayersNames()
         {
             int rowIndex = 0;
             int columnIndex = 0;
-            
-            foreach(var player in _players)
+
+            foreach (var player in Players)
             {
                 Grid usernameContainer = new Grid()
                 {
                     Background = new SolidColorBrush(Color.FromRgb(239, 71, 111))
-                    
+
                 };
-
-
 
                 TextBlock username = new TextBlock()
                 {
-                    Text = player.Username,
+                    Text = player,
                     Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
-                    VerticalAlignment = VerticalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Top,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     FontSize = 20,
+                    TextTrimming = TextTrimming.CharacterEllipsis
+                };
+
+                TextBlock score = new TextBlock()
+                {
+                    Text = "Puntaje: " + _score,
+                    Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
+                    VerticalAlignment = VerticalAlignment.Bottom,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    FontSize = 15,
                     TextTrimming = TextTrimming.CharacterEllipsis
                 };
 
                 Grid.SetColumn(username, 0);
                 Grid.SetRow(username, 0);
                 usernameContainer.Children.Add(username);
+                Grid.SetColumn(score, 0);
+                Grid.SetRow(score, 1);
+                usernameContainer.Children.Add(score);
 
                 Grid.SetColumn(usernameContainer, rowIndex);
                 Grid.SetRow(usernameContainer, columnIndex);
-                //Grid.SetColumnSpan(usernameContainer, 2);
                 MainGrid.Children.Add(usernameContainer);
 
-                if(columnIndex == 8)
+                if (columnIndex == 8)
                 {
                     rowIndex = 8;
                     columnIndex = 0;
@@ -73,27 +91,23 @@ namespace MemoryGame.Views
                 else
                 {
                     columnIndex = 8;
-                }
-                
-
-
+                }                
             }
         }
 
-        private void LoadCardDeck()
+        private void DrawGameBoard()
         {
-            MemoryGameService.CardDeckRetrieverServiceClient cardDeckRetrieverServiceClient =
-                new MemoryGameService.CardDeckRetrieverServiceClient();
-
-            CardDeck = cardDeckRetrieverServiceClient.GetCardDeckAndCards(1);           
-        }      
-
-            private void DrawGameBoard()
-        {
-            LoadCardDeck();
             DrawColumns();
             DrawRows();
             DrawImages();
+        }
+
+        private void DrawColumns()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                GameBoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
         }
 
         private void DrawRows()
@@ -106,14 +120,6 @@ namespace MemoryGame.Views
             for (int i = 0; i < numberOfRequiredRows; i++)
             {
                 GameBoardGrid.RowDefinitions.Add(new RowDefinition());
-            }
-        }
-
-        private void DrawColumns()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                GameBoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
         }
 
@@ -145,7 +151,7 @@ namespace MemoryGame.Views
         {
             IList<MemoryGameService.DataTransferObjects.CardDto> cards = CardDeck.Cards;
             string backImageOfCards = CardDeck.BackImage;
-            BitmapImage backImage = new BitmapImage(new Uri("pack://application:,,,/MemoryGameService;component/" + backImageOfCards));
+            BitmapImage backImage = new BitmapImage(new Uri(backImageOfCards));
 
             for (int numberOfActualCard = 0; numberOfActualCard < cards.Count; numberOfActualCard++)
             {
@@ -154,7 +160,7 @@ namespace MemoryGame.Views
                 string frontImageOfActualCard = actualCard.FrontImage;
 
 
-                BitmapImage frontImage = new BitmapImage(new Uri("pack://application:,,,/MemoryGameService;component/" + frontImageOfActualCard));
+                BitmapImage frontImage = new BitmapImage(new Uri(frontImageOfActualCard));
                 ImageCard imageCard = new ImageCard()
                 {
                     FrontImage = frontImage,
@@ -168,29 +174,60 @@ namespace MemoryGame.Views
 
         }
 
-        public void DisplayTimerValue(int timerValue)
-        {
-            TimerLabel.Content = timerValue;            
-        }
-
         private void GetClickedCard(object sender, EventArgs e)
         {
             ImageCard cardClicked = ((ImageCard)sender);
             bool cardHasNotBeenFlipped = cardClicked.Source != cardClicked.FrontImage;
             bool playerStillHasMovements = _numberOfMovementsAllowed > 0;
-
+            
             if (cardHasNotBeenFlipped && playerStillHasMovements)
             {
-                int cardIndex = _imageCards.IndexOf(cardClicked);
-                _cardUncoveringService
-                    .NotifyCardWasUncovered(cardIndex);
                 _numberOfMovementsAllowed--;
+                int cardIndex = _imageCards.IndexOf(cardClicked);
+
+                _cardsFlippedInCurrentTurn.Add(cardClicked);
+                
+                PlayerMovementDto playerMovementDto = new PlayerMovementDto()
+                {
+                    Host = MatchHost,
+                    Username = Sesion.GetSesion.Username,
+                    CardIndex = cardIndex,
+                    MovementsLeft = _numberOfMovementsAllowed,
+                    HasFormedAPair = _playerHasFormedAPair
+                };
+
+                _matchServiceClient.NotifyCardWasUncoveredd(playerMovementDto);
+
+                if (_numberOfMovementsAllowed == 0)
+                {
+                    if (HasFormedAPair())
+                    {
+                        _numberOfMovementsAllowed = 2;
+                        _playerHasFormedAPair = true;
+                        _score += 100;
+                        
+                    }
+
+                    CardPairDto cardPairDto = new CardPairDto()
+                    {
+                        IndexOfCard1 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[0]),
+                        IndexOfCard2 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[1]),
+                        BothCardsAreEqual = _playerHasFormedAPair
+                    };
+                    _matchServiceClient.PassTurnToNextPlayer(MatchHost, Sesion.GetSesion.Username, cardPairDto);
+                    _playerHasFormedAPair = false;
+                    _cardsFlippedInCurrentTurn.Clear();
+                }                
             }            
         }
 
-        public void UncoverCard(int cardIndex)
+        private bool HasFormedAPair()
         {
-            _imageCards[cardIndex].Source = _imageCards[cardIndex].FrontImage;
+            if (_cardsFlippedInCurrentTurn[0].CardId == _cardsFlippedInCurrentTurn[1].CardId)
+            {
+                return true;
+            }
+            return false;
         }
 
         public class ImageCard : Image
@@ -208,15 +245,64 @@ namespace MemoryGame.Views
         }
 
         private void WindowLoaded(object sender, EventArgs e)
-        {
-            _imageCards = new List<ImageCard>();
-            _context = new InstanceContext(this);
-            _timerServiceClient = new MemoryGameService.TimerServiceClient(_context);
-            _cardUncoveringService = new MemoryGameService.CardUncoveringServiceClient(_context);
-            _cardUncoveringService.SubscribeToCardUncoveringService();
-            //_timerServiceClient.UpdateTimer();
+        {            
             DrawPlayersNames();
             DrawGameBoard();
+            if (MatchHost.Equals(Sesion.GetSesion.Username))
+            {
+                _numberOfMovementsAllowed = 2;
+            }
+            else
+            {
+                _numberOfMovementsAllowed = 0;
+            }
+            TurnLabel.Content = "Es turno de: " + MatchHost;
+            _matchServiceClient.EnterMatch(MatchHost, Sesion.GetSesion.Username);
+        }
+
+        public void UncoverCardd(int cardIndex)
+        {
+            _imageCards[cardIndex].Source = _imageCards[cardIndex].FrontImage;
+        }
+
+        private async void FlipBothCardsAgain(CardPairDto cardPairDto)
+        {
+            await Task.Delay(1000);
+            _imageCards[cardPairDto.IndexOfCard1].Source = _imageCards[cardPairDto.IndexOfCard1].BackImage;
+            _imageCards[cardPairDto.IndexOfCard2].Source = _imageCards[cardPairDto.IndexOfCard2].BackImage;
+        }
+
+        public void NotifyTurnHasBeenPassed(string username, CardPairDto cardPairDto)
+        {
+            TurnLabel.Content = "Es turno de: " + username;
+
+            if (Sesion.GetSesion.Username.Equals(username))
+            {
+                _numberOfMovementsAllowed = 2;
+            }
+
+            if (cardPairDto.BothCardsAreEqual)
+            {
+                ImageCard imageCard1 = _imageCards[cardPairDto.IndexOfCard1];
+                ImageCard imageCard2 = _imageCards[cardPairDto.IndexOfCard2];
+                _cardsFlippedInTotal.Add(imageCard1);
+                _cardsFlippedInTotal.Add(imageCard2);
+            }
+            else
+            {
+                FlipBothCardsAgain(cardPairDto);
+            }
+
+            if(_cardsFlippedInTotal.Count == _imageCards.Count)
+            {
+                _matchServiceClient.NotifyMatchHasEnded(MatchHost);
+            }
+
+        }
+
+        public void ShowWinners(string winner)
+        {
+            MessageBox.Show(winner + " ha ganado");
         }
     }
 }

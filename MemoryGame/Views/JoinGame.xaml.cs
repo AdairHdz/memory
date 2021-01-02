@@ -11,20 +11,17 @@ namespace MemoryGame
     /// <summary>
     /// Lógica de interacción para JoinGame.xaml
     /// </summary>
-    public partial class JoinGame : Window, IMatchDiscoveryServiceCallback
+    public partial class JoinGame : Window
     {
         private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient = null;
-        private InstanceContext context = null;
         Sesion playerSesion = Sesion.GetSesion;
         public ObservableCollection<GameMatchConfigDto> Matches = new ObservableCollection<GameMatchConfigDto>();
-
 
         public JoinGame()
         {
             InitializeComponent();
-            context = new InstanceContext(this);
-            _matchDiscoveryServiceClient = new MemoryGameService.MatchDiscoveryServiceClient(context);
-            _matchDiscoveryServiceClient.DiscoverActiveMatches();
+            _matchDiscoveryServiceClient = new MemoryGameService.MatchDiscoveryServiceClient();
+            Matches.AddRange(_matchDiscoveryServiceClient.GetActiveMatches());
             GamesDataGrid.ItemsSource = Matches;
         }
         private void BackButtonClicked(object sender, RoutedEventArgs e)
@@ -37,8 +34,8 @@ namespace MemoryGame
         private void JoinButtonClicked(object sender, RoutedEventArgs e)
         {
             GameMatchConfigDto gameMatchDto = (GameMatchConfigDto)GamesDataGrid.SelectedItem;
-            MessageBox.Show(gameMatchDto.Host);
-            bool canJoinToGame = _matchDiscoveryServiceClient.CanJoin(gameMatchDto);
+            string matchHost = gameMatchDto.Host;
+            bool canJoinToGame = _matchDiscoveryServiceClient.CanJoin(matchHost);
             if (canJoinToGame)
             {
                 WaitingRoom mainMenuView = new WaitingRoom()
@@ -51,14 +48,6 @@ namespace MemoryGame
             else
             {
                 MessageBox.Show(Properties.Langs.Resources.FullGameMessage);
-            }
-        }
-
-        public void ShowActiveMatches(GameMatchConfigDto[] matches)
-        {
-            for(int i = 0; i < matches.Length; i++)
-            {
-                Matches.Add(matches[i]);
             }
         }
     }

@@ -300,9 +300,6 @@
     <None Include="Connected Services\MemoryGameService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\MemoryGameService\item4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\MemoryGameService\MemoryGameService.wsdl" />
     <None Include="Connected Services\Proxy\item.xsd">
       <SubType>Designer</SubType>
@@ -334,7 +331,9 @@
     </Content>
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDTO.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatchDto.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGameService.DataTransferObjects.CardDTO.datasource" />
     <None Include="Properties\Settings.settings">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemoryGameService.Utilities;
+using System;
 using System.Collections.Generic;
 
 namespace MemoryGame.MemoryGameService.DataTransferObjects
@@ -9,48 +10,77 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         public CardDeckDTO CardDeckDto { get; set; }
         public string Host { get; set; }
         public bool HasStarted { get; set; }
-
-        private IList<LobbyRequestDto> _requests;
+        private IList<PlayerInMatchDto> _players { get; set; }
+        public MatchLobbyDto Lobby { get; set; }
 
         public GameMatchConfigDto()
         {
-            _requests = new List<LobbyRequestDto>();            
+            Lobby = new MatchLobbyDto();
+            _players = new List<PlayerInMatchDto>();
         }
 
-        public void AddLobbyRequest(LobbyRequestDto lobbyRequestDto)
+        public IList<LobbyRequestDto> GetPlayersConnectedToLobby()
         {
-            _requests.Add(lobbyRequestDto);
+            IList<LobbyRequestDto> lobbyRequests = Lobby.GetLobbyRequests();
+            return lobbyRequests;
         }
 
-        public void RemoveLobbyRequest(LobbyRequestDto lobbyRequestDto)
+        public IList<PlayerInMatchDto> GetPlayersConnectedToMatch()
+        {            
+            return _players;
+        }
+
+        public IList<string> GetUsernamesOfPlayersConnectedToLobby()
         {
-            foreach(var lobbyRequest in _requests)
+            IList<string> usernamesOfPlayersConnectedToLobby = new List<string>();
+            IList<LobbyRequestDto> lobbyRequests = Lobby.GetLobbyRequests();
+            foreach(var request in lobbyRequests)
             {
-                if (lobbyRequest.Username.Equals(lobbyRequestDto.Username))
-                {
-                    _requests.Remove(lobbyRequest);
-                }
-            }            
-        }
-
-        public int GetNumberOfPlayersConnected()
-        {
-            return _requests.Count;
-        }
-
-        public IList<string> GetPlayers()
-        {
-            IList<string> playersNames = new List<string>();
-            foreach(var player in _requests)
-            {
-                playersNames.Add(player.Username);
+                usernamesOfPlayersConnectedToLobby.Add(request.Username);
             }
-            return playersNames;
+            return usernamesOfPlayersConnectedToLobby;
         }
 
-        public IList<LobbyRequestDto> GetLobbyRequests()
+        public IList<string> GetUsernamesOfPlayersConnectedToMatch()
         {
-            return _requests;
+            IList<string> usernamesOfPlayersConnectedToMatch = new List<string>();
+            foreach(var player in _players)
+            {
+                usernamesOfPlayersConnectedToMatch.Add(player.Username);
+            }
+            return usernamesOfPlayersConnectedToMatch;
+        }
+
+        public void AddPlayer(PlayerInMatchDto player)
+        {
+            _players.Add(player);
+        }
+
+        public PlayerInMatchDto GetPlayer(string username)
+        {
+            foreach(var player in _players)
+            {
+                if (player.Username.Equals(username))
+                {
+                    return player;
+                }                
+            }
+            //No se encontró al jugador. Hacer excepción personalizada
+            throw new Exception("");
+        }
+
+        public PlayerInMatchDto GetPlayerWithBestScore()
+        {
+            PlayerInMatchDto playerWithBestScore = _players[0];
+
+            for(int currentIndex = 0; currentIndex < _players.Count - 1; currentIndex++)
+            {
+                if(playerWithBestScore.Score < _players[currentIndex + 1].Score)
+                {
+                    playerWithBestScore = _players[currentIndex + 1];
+                }
+            }
+            return playerWithBestScore;
         }
 
     }

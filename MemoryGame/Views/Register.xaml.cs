@@ -1,7 +1,9 @@
 ﻿using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.RegistryValidation;
 using MemoryGame.Utilities;
+using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 using Utilities;
 
@@ -16,9 +18,12 @@ namespace MemoryGame
     {
         private string _username, _emailAddress, _verificationToken, _password;      
         private RuleSet _ruleSet;
+        MemoryGameService.PlayerRegistryServiceClient _playerRegistryServiceClient;
         public Register()
         {            
             InitializeComponent();
+            _playerRegistryServiceClient =
+                new MemoryGameService.PlayerRegistryServiceClient();
         }
 
         private void SetFormValidation()
@@ -27,8 +32,6 @@ namespace MemoryGame
             _ruleSet.AddValidationRule(new UsernameValidationRule(_username));
             _ruleSet.AddValidationRule(new EmailAddressValidationRule(_emailAddress));
             _ruleSet.AddValidationRule(new PasswordValidationRule(_password));
-            _ruleSet.AddValidationRule(new EmailAddressAvailabilityValidationRule(_emailAddress));
-            _ruleSet.AddValidationRule(new UsernameAvailabilityValidationRule(_username));
         }
 
         private void ShowErrorMessage()
@@ -58,9 +61,55 @@ namespace MemoryGame
         {
             GetValuesFromFields();
             SetFormValidation();
-            if (_ruleSet.AllValidationRulesHavePassed())
+            if (AllValidationRulesHavePassed())
+            {                
+                RegisterPlayer();
+            }
+            else
+            {
+                ShowErrorMessage();
+            }                       
+        }
+
+        private void RegisterPlayer()
+        {
+            try
             {
                 GenerateToken();
+                TryRegisterPlayer();
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+
+        }
+
+        private void TryRegisterPlayer()
+        {
+            bool emailAddressIsAvailable = false;
+            bool usernameIsAvailable = false;
+
+            if (EmailAddressIsAvailable())
+            {
+                emailAddressIsAvailable = true;
+            }
+            else
+            {
+                MessageBox.Show(Properties.Langs.Resources.EmailAddressIsTaken);
+            }
+
+            if (UsernameIsAvailable())
+            {
+                usernameIsAvailable = true;
+            }
+            else
+            {
+                MessageBox.Show(Properties.Langs.Resources.UsernameIsTaken);
+            }
+
+            if(emailAddressIsAvailable && usernameIsAvailable)
+            {
                 if (PlayerWasSuccessfullyRegistered())
                 {
                     SendVerificationToken();
@@ -69,12 +118,14 @@ namespace MemoryGame
                 else
                 {
                     MessageBox.Show(Properties.Langs.Resources.RegistryError);
-                }                
+                }
             }
-            else
-            {
-                ShowErrorMessage();
-            }                       
+
+        }
+
+        private bool AllValidationRulesHavePassed()
+        {
+            return _ruleSet.AllValidationRulesHavePassed();
         }
 
         private void SendVerificationToken()
@@ -90,8 +141,23 @@ namespace MemoryGame
             this.Close();
         }
 
+        private bool EmailAddressIsAvailable()
+        {
+            bool emailAddressIsAvailable = false;
+            _playerRegistryServiceClient.EmailAddressIsAvailable(_emailAddress);            
+            return emailAddressIsAvailable;
+        }
+
+        private bool UsernameIsAvailable()
+        {
+            bool usernameIsAvailable = false;
+            usernameIsAvailable = _playerRegistryServiceClient.UserNameIsAvailable(_username);
+            return usernameIsAvailable;
+        }
+
         private bool PlayerWasSuccessfullyRegistered()
         {
+            bool playerWasSuccessfullyRegistered = false;
             BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
 
             MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
@@ -105,10 +171,11 @@ namespace MemoryGame
                     Password = hashGenerator.GenerateEncryptedString(_password),
                     VerificationToken = _verificationToken
                 };
-            
-            bool playerWasSucessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO);
-            return playerWasSucessfullyRegistered;
+
+            playerWasSuccessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO);
+            return playerWasSuccessfullyRegistered;
         }
+
 
         private void GoToActivationTokenWindow()
         {

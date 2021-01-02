@@ -1,4 +1,4 @@
-﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+﻿
 using MemoryGameService.Contracts;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MemoryGameService.DataTransferObjects
+namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
-    public class PlayerTurnDto
+    public class PlayerMovementDto
     {
         /**
  * Host
@@ -17,8 +17,9 @@ namespace MemoryGameService.DataTransferObjects
  * IMatchServiceCallback
  * */
         public string Host { get; set; }
-        public PlayerInMatchDto player { get; set; }
-        public int TurnsLeft { get; set; }
-        public IMatchServiceCallback MatchServiceCallback { get; set; }
+        public string Username { get; set; }
+        public bool HasFormedAPair { get; set; }
+        public int CardIndex { get; set; }
+        public int MovementsLeft { get; set; }
     }
 }

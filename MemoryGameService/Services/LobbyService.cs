@@ -6,41 +6,30 @@ using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
-    /*[ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single,
-       InstanceContextMode = InstanceContextMode.Single)]*/
-
     public partial class MemoryGameService : ILobbyService
     {
-        private static IList<GameMatchConfigDto> _matches = new List<GameMatchConfigDto>();
-
-        public void CreateNewMatch(GameMatchConfigDto gameMatchDto)
-        {    
-            _matches.Add(gameMatchDto);
-        }
-
-        public void DeleteMatch(GameMatchConfigDto gameMatchDto)
+        public void DeleteMatch(string matchHost)
         {
-            //GameMatchDto gameMatch = null;
-            foreach(var match in _matches)
+            GameMatchConfigDto gameMatch = GetMatch(matchHost);
+            _matches.Remove(gameMatch);
+
+            IList<LobbyRequestDto> playersConnectedToLobby = gameMatch.GetPlayersConnectedToLobby();
+            foreach(var player in playersConnectedToLobby)
             {
-                if (match.Host.Equals(gameMatchDto.Host))
-                {
-                    _matches.Remove(match);
-                    break;
-                }
+                var channel = player.Connection;
+                channel.TakePlayersOutOfLobby();
             }
+
         }
 
-
-
-        public IList<string> GetActivePlayersFromMatch(GameMatchConfigDto gameMatchDto)
+        public IList<string> GetActivePlayersInLobby(GameMatchConfigDto gameMatchDto)
         {
             IList<string> activePlayersFromMatch = new List<string>();
             foreach(var match in _matches)
             {
                 if (match.Host.Equals(gameMatchDto.Host))
-                {
-                    activePlayersFromMatch = match.GetPlayers();
+                {                    
+                    activePlayersFromMatch = match.GetUsernamesOfPlayersConnectedToLobby();
                     break;
                 }
             }
@@ -49,15 +38,14 @@ namespace MemoryGameService.Services
 
         public void JoinLobby(LobbyRequestDto lobbyRequestDto)
         {
-            //gameMatch podría ser null si no encuentra la partida. Refactorizar
-            lobbyRequestDto.Connection = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>(); ;
+            lobbyRequestDto.Connection = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>();
             
             string host = lobbyRequestDto.Host;
             string username = lobbyRequestDto.Username;
             GameMatchConfigDto gameMatch = GetMatch(host);
-
-            gameMatch.AddLobbyRequest(lobbyRequestDto);
-            IList<LobbyRequestDto> requests = gameMatch.GetLobbyRequests();
+            MatchLobbyDto matchLobbyDto = gameMatch.Lobby;
+            matchLobbyDto.AddPlayerToLobby(lobbyRequestDto);
+            IList<LobbyRequestDto> requests = gameMatch.Lobby.GetLobbyRequests();
             foreach (var request in requests)
             {
                 var channel = request.Connection;
@@ -66,41 +54,40 @@ namespace MemoryGameService.Services
         }
 
         public void LeaveLobby(LobbyRequestDto lobbyRequestDto)
-        {
-            //gameMatch podría ser null si no encuentra la partida. Refactorizar
-            lobbyRequestDto.Connection = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>();
-            
+        {            
             string host = lobbyRequestDto.Host;
             string username = lobbyRequestDto.Username;
             GameMatchConfigDto gameMatch = GetMatch(host);
 
-            IList<LobbyRequestDto> requests = gameMatch.GetLobbyRequests();
+            MatchLobbyDto matchLobby = gameMatch.Lobby;            
+            matchLobby.RemovePlayerFromLobby(lobbyRequestDto);
+
+            IList<LobbyRequestDto> requests = matchLobby.GetLobbyRequests();
+
             foreach (var request in requests)
             {
                 var channel = request.Connection;
                 channel.NotifyPlayerLeft(username);
+
             }
-
-            gameMatch.RemoveLobbyRequest(lobbyRequestDto);
-
-            if (lobbyRequestDto.Username.Equals(gameMatch.Host))
-            {
-                _matches.Remove(gameMatch);
-            }
-
         }
 
-        public void StartGame(LobbyRequestDto lobbyRequestDto)
+        public void StartGame(GameMatchConfigDto gameMatchDto)
         {
-            string host = lobbyRequestDto.Host;
-            GameMatchConfigDto gameMatch = GetMatch(host);
-            
-            IList<LobbyRequestDto> requests = gameMatch.GetLobbyRequests();
+            GameMatchConfigDto gameMatch = GetMatch(gameMatchDto.Host);
+            MatchLobbyDto matchLobby = gameMatch.Lobby;
+                                    
+            IList<LobbyRequestDto> requests = matchLobby.GetLobbyRequests();
+            IList<string> playersInMatch = gameMatch.GetUsernamesOfPlayersConnectedToLobby();
+
             foreach (var request in requests)
             {
                 var channel = request.Connection;
-                channel.TakePlayersToMatchView();
+                channel.TakePlayersToMatchView(playersInMatch);
             }
+
+            gameMatch.HasStarted = true;
+
         }
 
         private GameMatchConfigDto GetMatch(string host)

@@ -32,17 +32,26 @@ namespace MemoryGame
                 Host = _gameMatchDto.Host,
                 Username = playerSesion.Username
             };
-            _lobbyServiceClient.LeaveLobby(lobbyRequestDto);            
+            _lobbyServiceClient.LeaveLobby(lobbyRequestDto);
+
+            string matchHost = _gameMatchDto.Host;
+
+            if (matchHost.Equals(Sesion.GetSesion.Username))
+            {
+                _lobbyServiceClient.DeleteMatch(matchHost);
+            }
+            else
+            {
+                JoinGame joinGameView = new JoinGame();
+                joinGameView.Show();
+                this.Close();
+            }
+
         }
 
         public void StartButtonClicked(object sender, RoutedEventArgs e)
         {
-            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
-            {
-                Host = _gameMatchDto.Host,
-                Username = playerSesion.Username
-            };
-            _lobbyServiceClient.StartGame(lobbyRequestDto);
+            _lobbyServiceClient.StartGame(_gameMatchDto);
         }
 
         public void NotifyNewPlayerEntered(string username)
@@ -53,7 +62,42 @@ namespace MemoryGame
         public void NotifyPlayerLeft(string username)
         {
             players.Remove(username);
-            if (_gameMatchDto.Host.Equals(username))
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {            
+            IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersInLobby(_gameMatchDto);
+            players.AddRange(activePlayers);
+            WaitingRoomDataGrid.ItemsSource = players;
+
+            if (!_gameMatchDto.Host.Equals(playerSesion.Username))
+            {
+                StarButton.Visibility = System.Windows.Visibility.Collapsed;
+                
+            }
+            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
+            {
+                Host = _gameMatchDto.Host,
+                Username = playerSesion.Username
+            };
+            _lobbyServiceClient.JoinLobby(lobbyRequestDto);
+        }
+
+        public void TakePlayersToMatchView(string[] playersInMatch)
+        {
+            Views.Match matchView = new Views.Match()
+            {
+                Players = playersInMatch,
+                MatchHost = _gameMatchDto.Host,
+                CardDeck = _gameMatchDto.CardDeckDto
+            };
+            matchView.Show();
+            this.Close();
+        }
+
+        public void TakePlayersOutOfLobby()
+        {
+            if (Sesion.GetSesion.Username.Equals(_gameMatchDto.Host))
             {
                 MainMenu mainMenuView = new MainMenu();
                 mainMenuView.Show();
@@ -65,46 +109,6 @@ namespace MemoryGame
                 joinGameView.Show();
                 this.Close();
             }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {            
-            IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersFromMatch(_gameMatchDto);
-            players.AddRange(activePlayers);
-            WaitingRoomDataGrid.ItemsSource = players;
-
-            if (_gameMatchDto.Host.Equals(playerSesion.Username))
-            {
-                _lobbyServiceClient.CreateNewMatch(_gameMatchDto);
-            }
-            else
-            {
-                StarButton.Visibility = System.Windows.Visibility.Collapsed;
-            }
-            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
-            {
-                Host = _gameMatchDto.Host,
-                Username = playerSesion.Username
-            };
-            _lobbyServiceClient.JoinLobby(lobbyRequestDto);
-        }
-
-        public void TakePlayersToMatchView()
-        {
-            IList<PlayerInMatchDto> playersInMatchDtos = new List<PlayerInMatchDto>();
-            foreach(var player in players)
-            {
-                PlayerInMatchDto playerToBeIncludedInMatch = new PlayerInMatchDto()
-                {
-                    Username = player.ToString(),
-                    Score = 0
-                };
-
-                playersInMatchDtos.Add(playerToBeIncludedInMatch);
-            }
-            Views.Match matchView = new Views.Match(playersInMatchDtos);
-            matchView.Show();
-            this.Close();
         }
     }
 }

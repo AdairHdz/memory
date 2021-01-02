@@ -7,11 +7,12 @@ namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IMatchDiscoveryService
     {
-        public bool CanJoin(GameMatchConfigDto gameMatchDto)
+        public bool CanJoin(string matchHost)
         {
-            int numberOfPlayersConnectedToMatch = gameMatchDto.GetNumberOfPlayersConnected();
-            int numberOfPlayersRequired = gameMatchDto.MaxNumberOfPlayers;
-            bool matchHasStarted = gameMatchDto.HasStarted;
+            GameMatchConfigDto gameMatch = GetMatch(matchHost);
+            int numberOfPlayersConnectedToMatch = gameMatch.GetPlayersConnectedToLobby().Count;
+            int numberOfPlayersRequired = gameMatch.MaxNumberOfPlayers;
+            bool matchHasStarted = gameMatch.HasStarted;
             bool ThereIsSpaceForAnotherPlayer = false;
 
             if (numberOfPlayersConnectedToMatch < numberOfPlayersRequired)
@@ -26,12 +27,17 @@ namespace MemoryGameService.Services
             return false;
         }
 
-        public void DiscoverActiveMatches()
+        public IList<GameMatchConfigDto> GetActiveMatches()
         {
-            //_matches is located at LobbyService
-            IList<GameMatchConfigDto> matches = _matches;
-            var channel = OperationContext.Current.GetCallbackChannel<IMatchDiscoveryServiceCallback>();
-            channel.ShowActiveMatches(_matches);
+            IList<GameMatchConfigDto> matchesWaitingToStart = new List<GameMatchConfigDto>();
+            foreach (var match in _matches)
+            {
+                if (!match.HasStarted)
+                {
+                    matchesWaitingToStart.Add(match);
+                }
+            }
+            return matchesWaitingToStart;
         }
     }
 }

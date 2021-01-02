@@ -25,18 +25,35 @@ namespace MemoryGame
         public void CreateGameButtonClicked(object sender, RoutedEventArgs e)
         {
             int numberOfPlayers = Int32.Parse(ComboBoxNumberOfPlayers.SelectedItem.ToString());
+            MemoryGameService.DataTransferObjects.CardDeckDTO cardDeck = GetCardDeckDtoForMatch();
             MemoryGameService.DataTransferObjects.GameMatchConfigDto matchSettingsDto =
                 new MemoryGameService.DataTransferObjects.GameMatchConfigDto()
                 {
                     MaxNumberOfPlayers = numberOfPlayers,
                     Host = Sesion.GetSesion.Username,
-                    HasStarted = false
+                    HasStarted = false,
+                    CardDeckDto = cardDeck
                 };
+
+            MemoryGameService.MatchCreationServiceClient _matchCreationServiceClient =
+                new MemoryGameService.MatchCreationServiceClient();
+
+            _matchCreationServiceClient.CreateNewMatch(matchSettingsDto);
+
             WaitingRoom waitingRoomView = new WaitingRoom(){
                 _gameMatchDto = matchSettingsDto
             };
+
             waitingRoomView.Show();
             this.Close();
+        }
+
+        private MemoryGameService.DataTransferObjects.CardDeckDTO GetCardDeckDtoForMatch()
+        {
+            MemoryGameService.CardDeckRetrieverServiceClient cardDeckRetrieverServiceClient =
+                new MemoryGameService.CardDeckRetrieverServiceClient();
+
+            return cardDeckRetrieverServiceClient.GetCardDeckAndCards(1);
         }
 
         public void BackButtonClicked(object sender, RoutedEventArgs e)

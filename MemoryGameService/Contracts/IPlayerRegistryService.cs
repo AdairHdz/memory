@@ -1,5 +1,4 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
-using MemoryGame.MemoryGameService.Faults;
 using System.ServiceModel;
 
 namespace MemoryGameService.Contracts
@@ -8,7 +7,6 @@ namespace MemoryGameService.Contracts
     public interface IPlayerRegistryService
     {        
         [OperationContract]
-        [FaultContract(typeof(EndpointNotFoundFault))]
         bool RegisterNewPlayer(PlayerDTO playerDTO);
         [OperationContract]
         bool EmailAddressIsAvailable(string emailAddress);
