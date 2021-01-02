@@ -4,18 +4,18 @@ using System.Collections.Generic;
 
 namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
-    public class GameMatchConfigDto
+    public class GameMatchDto
     {
         public int MaxNumberOfPlayers { get; set; }
         public CardDeckDTO CardDeckDto { get; set; }
         public string Host { get; set; }
         public bool HasStarted { get; set; }
         private IList<PlayerInMatchDto> _players { get; set; }
-        public MatchLobbyDto Lobby { get; set; }
+        public MatchLobby Lobby { get; set; }
 
-        public GameMatchConfigDto()
+        public GameMatchDto()
         {
-            Lobby = new MatchLobbyDto();
+            Lobby = new MatchLobby();
             _players = new List<PlayerInMatchDto>();
         }
 

@@ -1,10 +1,7 @@
 ﻿using System.Windows;
-using System.ServiceModel;
 using DataAccess.Entities;
 using System.Collections.ObjectModel;
-using MemoryGame.MemoryGameService;
 using MemoryGame.MemoryGameService.DataTransferObjects;
-using System;
 
 namespace MemoryGame
 {
@@ -15,7 +12,7 @@ namespace MemoryGame
     {
         private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient = null;
         Sesion playerSesion = Sesion.GetSesion;
-        public ObservableCollection<GameMatchConfigDto> Matches = new ObservableCollection<GameMatchConfigDto>();
+        public ObservableCollection<GameMatchDto> Matches = new ObservableCollection<GameMatchDto>();
 
         public JoinGame()
         {
@@ -33,7 +30,7 @@ namespace MemoryGame
         
         private void JoinButtonClicked(object sender, RoutedEventArgs e)
         {
-            GameMatchConfigDto gameMatchDto = (GameMatchConfigDto)GamesDataGrid.SelectedItem;
+            GameMatchDto gameMatchDto = (GameMatchDto)GamesDataGrid.SelectedItem;
             string matchHost = gameMatchDto.Host;
             bool canJoinToGame = _matchDiscoveryServiceClient.CanJoin(matchHost);
             if (canJoinToGame)

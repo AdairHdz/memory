@@ -9,7 +9,7 @@ namespace MemoryGameService.Services
     {
         public bool CanJoin(string matchHost)
         {
-            GameMatchConfigDto gameMatch = GetMatch(matchHost);
+            GameMatchDto gameMatch = GetMatch(matchHost);
             int numberOfPlayersConnectedToMatch = gameMatch.GetPlayersConnectedToLobby().Count;
             int numberOfPlayersRequired = gameMatch.MaxNumberOfPlayers;
             bool matchHasStarted = gameMatch.HasStarted;
@@ -27,9 +27,9 @@ namespace MemoryGameService.Services
             return false;
         }
 
-        public IList<GameMatchConfigDto> GetActiveMatches()
+        public IList<GameMatchDto> GetActiveMatches()
         {
-            IList<GameMatchConfigDto> matchesWaitingToStart = new List<GameMatchConfigDto>();
+            IList<GameMatchDto> matchesWaitingToStart = new List<GameMatchDto>();
             foreach (var match in _matches)
             {
                 if (!match.HasStarted)

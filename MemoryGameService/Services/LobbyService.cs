@@ -1,6 +1,5 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
-using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -10,19 +9,17 @@ namespace MemoryGameService.Services
     {
         public void DeleteMatch(string matchHost)
         {
-            GameMatchConfigDto gameMatch = GetMatch(matchHost);
-            _matches.Remove(gameMatch);
-
+            GameMatchDto gameMatch = GetMatch(matchHost);            
             IList<LobbyRequestDto> playersConnectedToLobby = gameMatch.GetPlayersConnectedToLobby();
             foreach(var player in playersConnectedToLobby)
             {
                 var channel = player.Connection;
                 channel.TakePlayersOutOfLobby();
             }
-
+            _matches.Remove(gameMatch);
         }
 
-        public IList<string> GetActivePlayersInLobby(GameMatchConfigDto gameMatchDto)
+        public IList<string> GetActivePlayersInLobby(GameMatchDto gameMatchDto)
         {
             IList<string> activePlayersFromMatch = new List<string>();
             foreach(var match in _matches)
@@ -38,12 +35,11 @@ namespace MemoryGameService.Services
 
         public void JoinLobby(LobbyRequestDto lobbyRequestDto)
         {
-            lobbyRequestDto.Connection = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>();
-            
+            lobbyRequestDto.Connection = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>();            
             string host = lobbyRequestDto.Host;
             string username = lobbyRequestDto.Username;
-            GameMatchConfigDto gameMatch = GetMatch(host);
-            MatchLobbyDto matchLobbyDto = gameMatch.Lobby;
+            GameMatchDto gameMatch = GetMatch(host);
+            MatchLobby matchLobbyDto = gameMatch.Lobby;
             matchLobbyDto.AddPlayerToLobby(lobbyRequestDto);
             IList<LobbyRequestDto> requests = gameMatch.Lobby.GetLobbyRequests();
             foreach (var request in requests)
@@ -57,9 +53,9 @@ namespace MemoryGameService.Services
         {            
             string host = lobbyRequestDto.Host;
             string username = lobbyRequestDto.Username;
-            GameMatchConfigDto gameMatch = GetMatch(host);
+            GameMatchDto gameMatch = GetMatch(host);
 
-            MatchLobbyDto matchLobby = gameMatch.Lobby;            
+            MatchLobby matchLobby = gameMatch.Lobby;            
             matchLobby.RemovePlayerFromLobby(lobbyRequestDto);
 
             IList<LobbyRequestDto> requests = matchLobby.GetLobbyRequests();
@@ -72,10 +68,10 @@ namespace MemoryGameService.Services
             }
         }
 
-        public void StartGame(GameMatchConfigDto gameMatchDto)
+        public void StartGame(GameMatchDto gameMatchDto)
         {
-            GameMatchConfigDto gameMatch = GetMatch(gameMatchDto.Host);
-            MatchLobbyDto matchLobby = gameMatch.Lobby;
+            GameMatchDto gameMatch = GetMatch(gameMatchDto.Host);
+            MatchLobby matchLobby = gameMatch.Lobby;
                                     
             IList<LobbyRequestDto> requests = matchLobby.GetLobbyRequests();
             IList<string> playersInMatch = gameMatch.GetUsernamesOfPlayersConnectedToLobby();
@@ -90,9 +86,9 @@ namespace MemoryGameService.Services
 
         }
 
-        private GameMatchConfigDto GetMatch(string host)
+        private GameMatchDto GetMatch(string host)
         {
-            GameMatchConfigDto gameMatch = null;
+            GameMatchDto gameMatch = null;
             foreach (var match in _matches)
             {
                 if (match.Host.Equals(host))

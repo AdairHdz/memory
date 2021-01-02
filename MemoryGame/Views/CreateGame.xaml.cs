@@ -26,8 +26,8 @@ namespace MemoryGame
         {
             int numberOfPlayers = Int32.Parse(ComboBoxNumberOfPlayers.SelectedItem.ToString());
             MemoryGameService.DataTransferObjects.CardDeckDTO cardDeck = GetCardDeckDtoForMatch();
-            MemoryGameService.DataTransferObjects.GameMatchConfigDto matchSettingsDto =
-                new MemoryGameService.DataTransferObjects.GameMatchConfigDto()
+            MemoryGameService.DataTransferObjects.GameMatchDto matchSettingsDto =
+                new MemoryGameService.DataTransferObjects.GameMatchDto()
                 {
                     MaxNumberOfPlayers = numberOfPlayers,
                     Host = Sesion.GetSesion.Username,

@@ -7,6 +7,6 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         public string Username { get; set; }
         public int Score { get; set; } = 0;
         public bool HasActiveTurn { get; set; } = false;
-        public IMatchServiceCallback Connection { get; set; }
+        public IMatchServiceCallback MatchServiceConnection { get; set; }
     }
 }

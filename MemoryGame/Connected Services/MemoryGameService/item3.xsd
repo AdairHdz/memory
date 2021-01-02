@@ -268,7 +268,7 @@
   <xs:element name="GetActivePlayersInLobby">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="gameMatchDto" nillable="true" type="q8:GameMatchConfigDto" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="gameMatchDto" nillable="true" type="q8:GameMatchDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -282,7 +282,7 @@
   <xs:element name="StartGame">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="gameMatchDto" nillable="true" type="q10:GameMatchConfigDto" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="gameMatchDto" nillable="true" type="q10:GameMatchDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -336,7 +336,7 @@
   <xs:element name="CreateNewMatch">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="gameMatchDto" nillable="true" type="q12:GameMatchConfigDto" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="gameMatchDto" nillable="true" type="q12:GameMatchDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -348,7 +348,7 @@
   <xs:element name="GetActiveMatchesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetActiveMatchesResult" nillable="true" type="q13:ArrayOfGameMatchConfigDto" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetActiveMatchesResult" nillable="true" type="q13:ArrayOfGameMatchDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

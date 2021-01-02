@@ -8,9 +8,9 @@ namespace MemoryGameService.Contracts
     public interface IMatchCreatorService
     {
         [OperationContract(IsOneWay = true)]
-        void CreateNewMatch(GameMatchConfigDto gameMatchDto);
+        void CreateNewMatch(GameMatchDto gameMatchDto);
         [OperationContract(IsOneWay = true)]
-        void DeleteMatch(GameMatchConfigDto gameMatchDto);
+        void DeleteMatch(GameMatchDto gameMatchDto);
     }
 
     [ServiceContract]

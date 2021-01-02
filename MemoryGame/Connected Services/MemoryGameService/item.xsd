@@ -39,26 +39,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LobbyRequestDto" nillable="true" type="tns:LobbyRequestDto" />
-  <xs:complexType name="GameMatchConfigDto">
+  <xs:complexType name="GameMatchDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="CardDeckDto" nillable="true" type="tns:CardDeckDTO" />
       <xs:element minOccurs="0" name="HasStarted" type="xs:boolean" />
       <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Lobby" nillable="true" type="tns:MatchLobbyDto" />
+      <xs:element minOccurs="0" name="Lobby" nillable="true" type="tns:MatchLobby" />
       <xs:element minOccurs="0" name="MaxNumberOfPlayers" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="GameMatchConfigDto" nillable="true" type="tns:GameMatchConfigDto" />
-  <xs:complexType name="MatchLobbyDto">
+  <xs:element name="GameMatchDto" nillable="true" type="tns:GameMatchDto" />
+  <xs:complexType name="MatchLobby">
     <xs:sequence />
   </xs:complexType>
-  <xs:element name="MatchLobbyDto" nillable="true" type="tns:MatchLobbyDto" />
-  <xs:complexType name="ArrayOfGameMatchConfigDto">
+  <xs:element name="MatchLobby" nillable="true" type="tns:MatchLobby" />
+  <xs:complexType name="ArrayOfGameMatchDto">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="GameMatchConfigDto" nillable="true" type="tns:GameMatchConfigDto" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GameMatchDto" nillable="true" type="tns:GameMatchDto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfGameMatchConfigDto" nillable="true" type="tns:ArrayOfGameMatchConfigDto" />
+  <xs:element name="ArrayOfGameMatchDto" nillable="true" type="tns:ArrayOfGameMatchDto" />
   <xs:complexType name="PlayerMovementDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="CardIndex" type="xs:int" />
@@ -85,8 +85,8 @@
   <xs:element name="ArrayOfPlayerInMatchDto" nillable="true" type="tns:ArrayOfPlayerInMatchDto" />
   <xs:complexType name="PlayerInMatchDto">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Connection" nillable="true" type="xs:anyType" />
       <xs:element minOccurs="0" name="HasActiveTurn" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MatchServiceConnection" nillable="true" type="xs:anyType" />
       <xs:element minOccurs="0" name="Score" type="xs:int" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
     </xs:sequence>

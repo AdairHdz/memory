@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
-    public class MatchLobbyDto
+    public class MatchLobby
     {
         private IList<LobbyRequestDto> _playersConnectedToLobby;
 
-        public MatchLobbyDto()
+        public MatchLobby()
         {
             _playersConnectedToLobby = new List<LobbyRequestDto>();
         }

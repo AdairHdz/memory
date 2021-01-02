@@ -11,7 +11,7 @@ namespace MemoryGameService.Utilities
     {
         public string PlayerWithCurrentTurn { get; set; }
         private int _indexOfPlayerWithCurrentTurn;
-        private GameMatchConfigDto _gameMatch;
+        private GameMatchDto _gameMatch;
 
         public string PassTurnToNextPlayer(IList<PlayerInMatchDto> players)
         {

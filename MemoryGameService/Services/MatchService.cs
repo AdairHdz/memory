@@ -3,8 +3,6 @@ using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
-using MemoryGameService.DataTransferObjects;
-using MemoryGameService.Utilities;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -23,7 +21,6 @@ namespace MemoryGameService.Services
 
         public void EnterMatch(string host, string username)
         {
-
             foreach(var match in _matches)
             {
                 if (match.Host.Equals(host))
@@ -34,7 +31,7 @@ namespace MemoryGameService.Services
                         Username = username,
                         Score = 0,
                         HasActiveTurn = true,
-                        Connection = OperationContext.Current.GetCallbackChannel<IMatchServiceCallback>(),
+                        MatchServiceConnection = OperationContext.Current.GetCallbackChannel<IMatchServiceCallback>(),
                     };
                     match.AddPlayer(player);
                     break;
@@ -45,14 +42,14 @@ namespace MemoryGameService.Services
 
         public IList<PlayerInMatchDto> GetPlayersConnectedToMatch(string host)
         {
-            GameMatchConfigDto match = GetMatch(host);
+            GameMatchDto match = GetMatch(host);
             return match.GetPlayersConnectedToMatch();
         }
 
         public void NotifyCardWasUncoveredd(PlayerMovementDto playerTurnDto)
         {
             string host = playerTurnDto.Host;
-            GameMatchConfigDto gameMatch = null;
+            GameMatchDto gameMatch = null;
             foreach(var match in _matches)
             {
                 if (match.Host.Equals(host))
@@ -67,7 +64,7 @@ namespace MemoryGameService.Services
 
             foreach(var playerInMatch in playersInMatch)
             {
-                playerInMatch.Connection.UncoverCardd(playerTurnDto.CardIndex);
+                playerInMatch.MatchServiceConnection.UncoverCardd(playerTurnDto.CardIndex);
             }            
 
         }
@@ -75,7 +72,7 @@ namespace MemoryGameService.Services
         public void NotifyMatchHasEnded(string host)
         {
 
-            GameMatchConfigDto gameMatch = null;
+            GameMatchDto gameMatch = null;
             foreach (var match in _matches)
             {
                 if (match.Host.Equals(host))
@@ -89,7 +86,7 @@ namespace MemoryGameService.Services
             IList<PlayerInMatchDto> playersConnectedToMatch = gameMatch.GetPlayersConnectedToMatch();
             foreach(var playerConnected in playersConnectedToMatch)
             {
-                var channel = playerConnected.Connection;
+                var channel = playerConnected.MatchServiceConnection;
                 channel.ShowWinners(usernameOfPlayerWithBestScore);
             }
 
@@ -118,9 +115,9 @@ namespace MemoryGameService.Services
 
         //EndTurn
 
-        public void PassTurnToNextPlayer(string host, string username, CardPairDto cardPairDto)
+        public void EndTurn(string host, string username, CardPairDto cardPairDto)
         {
-            GameMatchConfigDto gameMatch = null;
+            GameMatchDto gameMatch = null;
             foreach (var match in _matches)
             {
                 if (match.Host.Equals(host))
@@ -154,12 +151,8 @@ namespace MemoryGameService.Services
 
             foreach (var playerInMatch in playersInMatch)
             {
-                playerInMatch.Connection.NotifyTurnHasBeenPassed(nextPlayer.Username, cardPairDto);
+                playerInMatch.MatchServiceConnection.NotifyTurnHasEnded(nextPlayer.Username, cardPairDto);
             }
-        }
-
-
-
-        
+        }        
     }
 }

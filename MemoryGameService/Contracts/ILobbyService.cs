@@ -13,9 +13,9 @@ namespace MemoryGameService.Contracts
         [OperationContract(IsOneWay = true)]
         void LeaveLobby(LobbyRequestDto lobbyRequestDto);
         [OperationContract]
-        IList<string> GetActivePlayersInLobby(GameMatchConfigDto gameMatchDto);
+        IList<string> GetActivePlayersInLobby(GameMatchDto gameMatchDto);
         [OperationContract(IsOneWay = true)]
-        void StartGame(GameMatchConfigDto gameMatchDto);
+        void StartGame(GameMatchDto gameMatchDto);
         [OperationContract(IsOneWay = true)]
         void DeleteMatch(string matchHost);
     }

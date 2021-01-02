@@ -12,7 +12,7 @@ namespace MemoryGameService.Contracts
     public interface IMatchDiscoveryService
     {
         [OperationContract]
-        IList<GameMatchConfigDto> GetActiveMatches();
+        IList<GameMatchDto> GetActiveMatches();
         [OperationContract]
         bool CanJoin(string matchHost);
     }

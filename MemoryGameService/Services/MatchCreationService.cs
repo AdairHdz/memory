@@ -1,16 +1,11 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IMatchCreationService
     {
-        public void CreateNewMatch(GameMatchConfigDto gameMatchDto)
+        public void CreateNewMatch(GameMatchDto gameMatchDto)
         {
             _matches.Add(gameMatchDto);
         }

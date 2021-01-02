@@ -12,6 +12,6 @@ namespace MemoryGameService.Contracts
     public interface IMatchCreationService
     {
         [OperationContract(IsOneWay = true)]
-        void CreateNewMatch(GameMatchConfigDto gameMatchDto);
+        void CreateNewMatch(GameMatchDto gameMatchDto);
     }
 }

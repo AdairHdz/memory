@@ -17,7 +17,7 @@ namespace MemoryGame
         Sesion playerSesion = Sesion.GetSesion;
         public ObservableCollection<string> players = new ObservableCollection<string>();
         bool isHost = false;
-        public GameMatchConfigDto _gameMatchDto { get; set; }
+        public GameMatchDto _gameMatchDto { get; set; }
         public WaitingRoom()
         {
             InitializeComponent();
@@ -39,6 +39,9 @@ namespace MemoryGame
             if (matchHost.Equals(Sesion.GetSesion.Username))
             {
                 _lobbyServiceClient.DeleteMatch(matchHost);
+                MainMenu mainMenuView = new MainMenu();
+                mainMenuView.Show();
+                this.Close();
             }
             else
             {

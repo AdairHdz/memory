@@ -12,7 +12,7 @@ namespace MemoryGameService.Contracts
         [OperationContract(IsOneWay = true)]
         void EnterMatch(string host, string username);
         [OperationContract(IsOneWay = true)]
-        void PassTurnToNextPlayer(string host, string username, CardPairDto cardPairDto);
+        void EndTurn(string host, string username, CardPairDto cardPairDto);
         [OperationContract]
         IList<PlayerInMatchDto> GetPlayersConnectedToMatch(string host);
         [OperationContract(IsOneWay = true)]
@@ -25,7 +25,7 @@ namespace MemoryGameService.Contracts
         [OperationContract(IsOneWay = true)]
         void UncoverCardd(int cardIndex);
         [OperationContract(IsOneWay = true)]
-        void NotifyTurnHasBeenPassed(string username, CardPairDto cardPairDto);
+        void NotifyTurnHasEnded(string username, CardPairDto cardPairDto);
         [OperationContract(IsOneWay = true)]
         void ShowWinners(string winner);
     }
