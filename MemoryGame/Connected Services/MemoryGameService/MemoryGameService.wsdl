@@ -440,7 +440,8 @@
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IAccessibilityService_HasAccessRights_InputMessage">
@@ -478,6 +479,9 @@
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetPlayerCredentials_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerCredentialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetPlayerCredentials_NonExistentUserFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q1:NonExistentUserFault" />
   </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDeckAndCards" />
@@ -569,9 +573,6 @@
   <wsdl:message name="ILobbyService_StartGame_InputMessage">
     <wsdl:part name="parameters" element="tns:StartGame" />
   </wsdl:message>
-  <wsdl:message name="ILobbyService_DeleteMatch_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteMatch" />
-  </wsdl:message>
   <wsdl:message name="ILobbyService_NotifyNewPlayerEntered_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyNewPlayerEntered" />
   </wsdl:message>
@@ -611,8 +612,8 @@
   <wsdl:message name="IMatchService_EnterMatch_InputMessage">
     <wsdl:part name="parameters" element="tns:EnterMatch" />
   </wsdl:message>
-  <wsdl:message name="IMatchService_PassTurnToNextPlayer_InputMessage">
-    <wsdl:part name="parameters" element="tns:PassTurnToNextPlayer" />
+  <wsdl:message name="IMatchService_EndTurn_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndTurn" />
   </wsdl:message>
   <wsdl:message name="IMatchService_GetPlayersConnectedToMatch_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayersConnectedToMatch" />
@@ -626,8 +627,8 @@
   <wsdl:message name="IMatchService_UncoverCardd_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UncoverCardd" />
   </wsdl:message>
-  <wsdl:message name="IMatchService_NotifyTurnHasBeenPassed_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyTurnHasBeenPassed" />
+  <wsdl:message name="IMatchService_NotifyTurnHasEnded_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyTurnHasEnded" />
   </wsdl:message>
   <wsdl:message name="IMatchService_ShowWinners_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ShowWinners" />
@@ -692,6 +693,7 @@
     <wsdl:operation name="GetPlayerCredentials">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials" message="tns:IAccessibilityService_GetPlayerCredentials_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse" message="tns:IAccessibilityService_GetPlayerCredentials_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetPlayerCredentials_NonExistentUserFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICardDeckRetrieverService">
@@ -773,9 +775,6 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/StartGame" message="tns:ILobbyService_StartGame_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DeleteMatch">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyService/DeleteMatch" message="tns:ILobbyService_DeleteMatch_InputMessage" />
-    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NotifyNewPlayerEntered">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyService/NotifyNewPlayerEntered" message="tns:ILobbyService_NotifyNewPlayerEntered_OutputCallbackMessage" />
     </wsdl:operation>
@@ -817,8 +816,8 @@
     <wsdl:operation name="EnterMatch">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/EnterMatch" message="tns:IMatchService_EnterMatch_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="PassTurnToNextPlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/PassTurnToNextPlayer" message="tns:IMatchService_PassTurnToNextPlayer_InputMessage" />
+    <wsdl:operation name="EndTurn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/EndTurn" message="tns:IMatchService_EndTurn_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPlayersConnectedToMatch">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/GetPlayersConnectedToMatch" message="tns:IMatchService_GetPlayersConnectedToMatch_InputMessage" />
@@ -830,8 +829,8 @@
     <wsdl:operation name="UncoverCardd">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/UncoverCardd" message="tns:IMatchService_UncoverCardd_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyTurnHasBeenPassed">
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/NotifyTurnHasBeenPassed" message="tns:IMatchService_NotifyTurnHasBeenPassed_OutputCallbackMessage" />
+    <wsdl:operation name="NotifyTurnHasEnded">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/NotifyTurnHasEnded" message="tns:IMatchService_NotifyTurnHasEnded_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="ShowWinners">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/ShowWinners" message="tns:IMatchService_ShowWinners_OutputCallbackMessage" />
@@ -927,6 +926,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="NonExistentUserFaultFault">
+        <soap12:fault use="literal" name="NonExistentUserFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ICardDeckRetrieverService" type="tns:ICardDeckRetrieverService">
@@ -1099,12 +1101,6 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="DeleteMatch">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyService/DeleteMatch" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
     <wsdl:operation name="NotifyNewPlayerEntered">
       <soap12:operation soapAction="http://tempuri.org/ILobbyService/NotifyNewPlayerEntered" style="document" />
       <wsdl:output>
@@ -1190,8 +1186,8 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="PassTurnToNextPlayer">
-      <soap12:operation soapAction="http://tempuri.org/IMatchService/PassTurnToNextPlayer" style="document" />
+    <wsdl:operation name="EndTurn">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/EndTurn" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1217,8 +1213,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyTurnHasBeenPassed">
-      <soap12:operation soapAction="http://tempuri.org/IMatchService/NotifyTurnHasBeenPassed" style="document" />
+    <wsdl:operation name="NotifyTurnHasEnded">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/NotifyTurnHasEnded" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

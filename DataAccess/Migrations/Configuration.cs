@@ -17,7 +17,7 @@
                 {
                     EmailAddress = "adrian1926@live.com.mx",
                     UserName = "VidrioCL",
-                    Password = "b70727333785e024d197682944440dd6",
+                    Password = "$2a$11$mcTGC7fgrKvxeXg8GXHaPOdadBl..4R4ouN84DhhxrTZlctD6hTWq",
                     TotalScore = 100,
                     EmailWasVerified = false,
                     ActivationToken = "abcdef",
@@ -27,7 +27,7 @@
                 {
                     EmailAddress = "ben.ja20@hotmail.com",
                     UserName = "MultiP97",
-                    Password = "b70727333785e024d197682944440dd6",
+                    Password = "$2a$11$mcTGC7fgrKvxeXg8GXHaPOdadBl..4R4ouN84DhhxrTZlctD6hTWq",
                     TotalScore = 35,
                     EmailWasVerified = false,
                     ActivationToken = "abcdef",
@@ -37,7 +37,7 @@
                 {
                     EmailAddress = "zS18012122@estudiantes.uv.mx",
                     UserName = "Navys230",
-                    Password = "b70727333785e024d197682944440dd6",
+                    Password = "$2a$11$mcTGC7fgrKvxeXg8GXHaPOdadBl..4R4ouN84DhhxrTZlctD6hTWq",
                     TotalScore = 730,
                     EmailWasVerified = false,
                     ActivationToken = "abcdef",
@@ -47,7 +47,7 @@
                 {
                     EmailAddress = "prueba123@gmail.com",
                     UserName = "bataco_271",
-                    Password = "b70727333785e024d197682944440dd6",
+                    Password = "$2a$11$mcTGC7fgrKvxeXg8GXHaPOdadBl..4R4ouN84DhhxrTZlctD6hTWq",
                     TotalScore = 192,
                     EmailWasVerified = false,
                     ActivationToken = "abcdef",
@@ -60,7 +60,7 @@
                 {
                     CardDeckId = 1,
                     Name = "Naruto Shippuden",
-                    BackImage = "CardDecks/backimage.jpg",
+                    BackImage = "pack://application:,,,/MemoryGameService;component/CardDecks/backimage.jpg",
                     NumberOfPairs = 11,
                 }
             );
@@ -69,67 +69,67 @@
                 new Card()
                 {
                     CardId = 1,
-                    FrontImage = "CardDecks/1/image1.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image1.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 2,
-                    FrontImage = "CardDecks/1/image2.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image2.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 3,
-                    FrontImage = "CardDecks/1/image3.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image3.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 4,
-                    FrontImage = "CardDecks/1/image4.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image4.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 5,
-                    FrontImage = "CardDecks/1/image5.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image5.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 6,
-                    FrontImage = "CardDecks/1/image6.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image6.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 7,
-                    FrontImage = "CardDecks/1/image7.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image7.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 8,
-                    FrontImage = "CardDecks/1/image8.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image8.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 9,
-                    FrontImage = "CardDecks/1/image9.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image9.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 10,
-                    FrontImage = "CardDecks/1/image10.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image10.jpg",
                     CardDeckId = 1
                 },
                 new Card()
                 {
                     CardId = 11,
-                    FrontImage = "CardDecks/1/image11.jpg",
+                    FrontImage = "pack://application:,,,/MemoryGameService;component/CardDecks/1/image11.jpg",
                     CardDeckId = 1
                 }
             ) ;

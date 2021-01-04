@@ -43,11 +43,16 @@
     <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.9.3.0\lib\net461\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -95,6 +100,8 @@
     <Compile Include="Contracts\IMatchService.cs" />
     <Compile Include="Contracts\IScoreService.cs" />
     <Compile Include="Contracts\ITokenGenerator.cs" />
+    <Compile Include="Faults\DataStorageFault.cs" />
+    <Compile Include="Faults\NonExistentUserFault.cs" />
     <Compile Include="GlobalErrorHandler.cs" />
     <Compile Include="GlobalErrorHandlerBehaviorAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,6 +119,7 @@
     <Compile Include="Services\MemoryGameService.cs" />
     <Compile Include="Services\PlayerRegistryService.cs" />
     <Compile Include="Services\ScoreService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\TimerInitializerService.cs" />
     <Compile Include="Services\TimerService.cs" />
     <Compile Include="Services\TokenGenerator.cs" />
@@ -132,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Log4Net.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

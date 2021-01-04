@@ -27,7 +27,6 @@ namespace MemoryGame
         {
             _ruleSet = new RuleSet();
             _ruleSet.AddValidationRule(new UsernameValidationRule(_newUsername));
-            _ruleSet.AddValidationRule(new UsernameAvailabilityValidationRule(_newUsername));
         }
 
         private void TextBoxNewUsername_LostFocus(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.MemoryGameService.Faults;
 using System.ServiceModel;
 
 namespace MemoryGameService.Contracts
@@ -16,6 +17,7 @@ namespace MemoryGameService.Contracts
         string GetUserEmailAddress(string username);
         [OperationContract]
         string GetUsername(string emailAddress);
+        [FaultContract(typeof(NonExistentUserFault))]
         [OperationContract]
         PlayerCredentialsDTO GetPlayerCredentials(string username);
     }

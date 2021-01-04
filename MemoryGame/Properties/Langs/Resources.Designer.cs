@@ -565,11 +565,20 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se perdió la conexión con el servidor.
+        ///   Busca una cadena traducida similar a Se perdió la conexión con el servidor. Por favor, intente más tarde.
         /// </summary>
         public static string ServerConnectionLost {
             get {
                 return ResourceManager.GetString("ServerConnectionLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El servidor ha tardado demasiado tiempo en responder. Por favor, intente más tarde.
+        /// </summary>
+        public static string ServerTimeoutError {
+            get {
+                return ResourceManager.GetString("ServerTimeoutError", resourceCulture);
             }
         }
         

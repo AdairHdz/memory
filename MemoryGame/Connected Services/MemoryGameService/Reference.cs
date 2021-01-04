@@ -46,6 +46,8 @@ namespace MemoryGame.MemoryGameService {
         System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsNonExistentUserFault" +
+            "Fault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO GetPlayerCredentials(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
@@ -507,6 +509,7 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         void JoinLobby(MemoryGame.MemoryGameService.DataTransferObjects.LobbyRequestDto lobbyRequestDto);
         
@@ -528,6 +531,7 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         void LeaveLobby(MemoryGame.MemoryGameService.DataTransferObjects.LobbyRequestDto lobbyRequestDto);
         
@@ -545,12 +549,6 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/StartGame")]
         System.Threading.Tasks.Task StartGameAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/DeleteMatch")]
-        void DeleteMatch(string matchHost);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/DeleteMatch")]
-        System.Threading.Tasks.Task DeleteMatchAsync(string matchHost);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -627,14 +625,6 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task StartGameAsync(MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto gameMatchDto) {
             return base.Channel.StartGameAsync(gameMatchDto);
-        }
-        
-        public void DeleteMatch(string matchHost) {
-            base.Channel.DeleteMatch(matchHost);
-        }
-        
-        public System.Threading.Tasks.Task DeleteMatchAsync(string matchHost) {
-            return base.Channel.DeleteMatchAsync(matchHost);
         }
     }
     
@@ -809,11 +799,11 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/EnterMatch")]
         System.Threading.Tasks.Task EnterMatchAsync(string host, string username);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/PassTurnToNextPlayer")]
-        void PassTurnToNextPlayer(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/EndTurn")]
+        void EndTurn(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/PassTurnToNextPlayer")]
-        System.Threading.Tasks.Task PassTurnToNextPlayerAsync(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/EndTurn")]
+        System.Threading.Tasks.Task EndTurnAsync(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetPlayersConnectedToMatch", ReplyAction="http://tempuri.org/IMatchService/GetPlayersConnectedToMatchResponse")]
         MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatchDto[] GetPlayersConnectedToMatch(string host);
@@ -834,8 +824,8 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/UncoverCardd")]
         void UncoverCardd(int cardIndex);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyTurnHasBeenPassed")]
-        void NotifyTurnHasBeenPassed(string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyTurnHasEnded")]
+        void NotifyTurnHasEnded(string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ShowWinners")]
         void ShowWinners(string winner);
@@ -885,12 +875,12 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.EnterMatchAsync(host, username);
         }
         
-        public void PassTurnToNextPlayer(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto) {
-            base.Channel.PassTurnToNextPlayer(host, username, cardPairDto);
+        public void EndTurn(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto) {
+            base.Channel.EndTurn(host, username, cardPairDto);
         }
         
-        public System.Threading.Tasks.Task PassTurnToNextPlayerAsync(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto) {
-            return base.Channel.PassTurnToNextPlayerAsync(host, username, cardPairDto);
+        public System.Threading.Tasks.Task EndTurnAsync(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto) {
+            return base.Channel.EndTurnAsync(host, username, cardPairDto);
         }
         
         public MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatchDto[] GetPlayersConnectedToMatch(string host) {

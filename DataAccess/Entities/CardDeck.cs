@@ -14,9 +14,8 @@ namespace DataAccess.Entities
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CardDeckId { get; set; }
-
         public int ThematicId { get; set; }
 
         [Required]

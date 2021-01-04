@@ -7,18 +7,6 @@ namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : ILobbyService
     {
-        public void DeleteMatch(string matchHost)
-        {
-            GameMatchDto gameMatch = GetMatch(matchHost);            
-            IList<LobbyRequestDto> playersConnectedToLobby = gameMatch.GetPlayersConnectedToLobby();
-            foreach(var player in playersConnectedToLobby)
-            {
-                var channel = player.Connection;
-                channel.TakePlayersOutOfLobby();
-            }
-            _matches.Remove(gameMatch);
-        }
-
         public IList<string> GetActivePlayersInLobby(GameMatchDto gameMatchDto)
         {
             IList<string> activePlayersFromMatch = new List<string>();
@@ -60,11 +48,22 @@ namespace MemoryGameService.Services
 
             IList<LobbyRequestDto> requests = matchLobby.GetLobbyRequests();
 
-            foreach (var request in requests)
+            if (host.Equals(username))
             {
-                var channel = request.Connection;
-                channel.NotifyPlayerLeft(username);
-
+                foreach (var request in requests)
+                {
+                    var channel = request.Connection;
+                    channel.TakePlayersOutOfLobby();
+                }
+                _matches.Remove(gameMatch);
+            }
+            else
+            {
+                foreach (var request in requests)
+                {
+                    var channel = request.Connection;
+                    channel.NotifyPlayerLeft(username);
+                }
             }
         }
 

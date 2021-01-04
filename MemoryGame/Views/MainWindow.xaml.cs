@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using MemoryGame.Components;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace MemoryGame
 {
@@ -7,8 +10,10 @@ namespace MemoryGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("MainWindow.xaml.cs");
         public MainWindow()
         {
+            _logger.Error("This was executed from client side");
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Properties.Settings.Default.LanguageSettings);
             InitializeComponent();
         }

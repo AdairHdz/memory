@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class CreatingDataBase : IMigrationMetadata
+    public sealed partial class IntKeySetToNullableSecondTry : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatingDataBase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(IntKeySetToNullableSecondTry));
         
         string IMigrationMetadata.Id
         {
-            get { return "202012120742505_CreatingDataBase"; }
+            get { return "202101040529154_IntKeySetToNullableSecondTry"; }
         }
         
         string IMigrationMetadata.Source

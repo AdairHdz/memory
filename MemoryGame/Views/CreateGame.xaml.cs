@@ -15,7 +15,6 @@ namespace MemoryGame
         public CreateGame()
         {
             InitializeComponent();
-            numberOfPlayers.Add("1");
             numberOfPlayers.Add("2");
             numberOfPlayers.Add("3");
             numberOfPlayers.Add("4");

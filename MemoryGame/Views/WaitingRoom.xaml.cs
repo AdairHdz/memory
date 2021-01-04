@@ -17,37 +17,27 @@ namespace MemoryGame
         Sesion playerSesion = Sesion.GetSesion;
         public ObservableCollection<string> players = new ObservableCollection<string>();
         bool isHost = false;
+        private bool _windowIsBeingClosedByTheCloseButton;
         public GameMatchDto _gameMatchDto { get; set; }
         public WaitingRoom()
         {
             InitializeComponent();
             context = new InstanceContext(this);
             _lobbyServiceClient = new MemoryGameService.LobbyServiceClient(context);
+            _windowIsBeingClosedByTheCloseButton = true;
         }
-
         public void LeaveButtonClicked(object sender, RoutedEventArgs e)
         {
-            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
-            {
-                Host = _gameMatchDto.Host,
-                Username = playerSesion.Username
-            };
-            _lobbyServiceClient.LeaveLobby(lobbyRequestDto);
-
+            CallLeaveLobbyService();
             string matchHost = _gameMatchDto.Host;
 
             if (matchHost.Equals(Sesion.GetSesion.Username))
             {
-                _lobbyServiceClient.DeleteMatch(matchHost);
-                MainMenu mainMenuView = new MainMenu();
-                mainMenuView.Show();
-                this.Close();
+                GoToMainMenuView();
             }
             else
             {
-                JoinGame joinGameView = new JoinGame();
-                joinGameView.Show();
-                this.Close();
+                GoToJoinGameView();
             }
 
         }
@@ -88,6 +78,7 @@ namespace MemoryGame
 
         public void TakePlayersToMatchView(string[] playersInMatch)
         {
+            _windowIsBeingClosedByTheCloseButton = false;
             Views.Match matchView = new Views.Match()
             {
                 Players = playersInMatch,
@@ -100,18 +91,41 @@ namespace MemoryGame
 
         public void TakePlayersOutOfLobby()
         {
-            if (Sesion.GetSesion.Username.Equals(_gameMatchDto.Host))
+            GoToJoinGameView();
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            if (_windowIsBeingClosedByTheCloseButton)
             {
-                MainMenu mainMenuView = new MainMenu();
-                mainMenuView.Show();
-                this.Close();
-            }
-            else
+                CallLeaveLobbyService();
+            }            
+        }
+
+        private void GoToJoinGameView()
+        {
+            _windowIsBeingClosedByTheCloseButton = false;
+            JoinGame joinGameView = new JoinGame();
+            joinGameView.Show();
+            this.Close();
+        }
+
+        private void GoToMainMenuView()
+        {
+            _windowIsBeingClosedByTheCloseButton = false;
+            MainMenu mainMenuView = new MainMenu();
+            mainMenuView.Show();
+            this.Close();
+        }
+
+        private void CallLeaveLobbyService()
+        {
+            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
             {
-                JoinGame joinGameView = new JoinGame();
-                joinGameView.Show();
-                this.Close();
-            }
+                Host = _gameMatchDto.Host,
+                Username = playerSesion.Username
+            };
+            _lobbyServiceClient.LeaveLobby(lobbyRequestDto);
         }
     }
 }

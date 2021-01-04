@@ -7,6 +7,7 @@ using MemoryGame.InputValidation.GenericValidations;
 using System.Collections.Generic;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using System.ServiceModel;
+using System;
 
 namespace MemoryGame
 {
@@ -90,9 +91,17 @@ namespace MemoryGame
             {
                 TryLoginUser();
             }
-            catch (EndpointNotFoundException)
+            catch (EndpointNotFoundException exception)
             {
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch(FaultException<MemoryGame.MemoryGameService.Faults.NonExistentUserFault> nonExistentUserFault)
+            {
+                MessageBox.Show("El usuario no existe");
+            }
+            catch(TimeoutException timeoutException)
+            {
+                MessageBox.Show("Error de timeout");
             }
         }
 

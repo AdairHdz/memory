@@ -16,6 +16,7 @@ namespace MemoryGame
 
     public partial class Register : Window
     {
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("Register.xaml.cs");
         private string _username, _emailAddress, _verificationToken, _password;      
         private RuleSet _ruleSet;
         MemoryGameService.PlayerRegistryServiceClient _playerRegistryServiceClient;
@@ -78,9 +79,15 @@ namespace MemoryGame
                 GenerateToken();
                 TryRegisterPlayer();
             }
-            catch (EndpointNotFoundException)
+            catch (EndpointNotFoundException endpointNotFoundException)
             {
+                _logger.Error("Endpoint couldn't be found. Error at method RegisterPlayer()", endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException timeOutException)
+            {
+                _logger.Error("Server took to long to send a responde. Error at method RegisterPlayer()", timeOutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
 
         }

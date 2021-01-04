@@ -5,7 +5,7 @@ namespace DataAccess.Entities
     public partial class Card
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CardId { get; set; }
 
         public int CardDeckId { get; set; }

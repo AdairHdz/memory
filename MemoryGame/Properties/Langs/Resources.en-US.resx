@@ -286,7 +286,10 @@
     <value>Send new code</value>
   </data>
   <data name="ServerConnectionLost" xml:space="preserve">
-    <value>Connection to the server has been lost</value>
+    <value>Connection to the server has been lost. Please, try again later</value>
+  </data>
+  <data name="ServerTimeoutError" xml:space="preserve">
+    <value>The server took too long to send a response. Please, try again later.</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
