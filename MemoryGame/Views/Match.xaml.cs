@@ -20,20 +20,21 @@ namespace MemoryGame.Views
         public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
         private List<ImageCard> _imageCards;
         private int _numberOfMovementsAllowed;
-        private IList<ImageCard> _cardsFlippedInCurrentTurn = new List<ImageCard>();
-        private IList<ImageCard> _cardsFlippedInTotal = new List<ImageCard>();
-        private int _score;
-        bool _playerHasFormedAPair = false;
+        private IList<ImageCard> _cardsFlippedInCurrentTurn;
+        private IList<ImageCard> _cardsFlippedInTotal;
+        private bool _playerHasFormedAPair;
         public string[] Players { get; set; }
         public string MatchHost { get; set; }
         public Match()
         {
             InitializeComponent();
-            _imageCards = new List<ImageCard>();
-            _context = new InstanceContext(this);            
+            _context = new InstanceContext(this);
             _matchServiceClient = new MemoryGameService.MatchServiceClient(_context);
+            _imageCards = new List<ImageCard>();                        
             _numberOfMovementsAllowed = 0;
-            _score = 0;
+            _cardsFlippedInCurrentTurn = new List<ImageCard>();
+            _cardsFlippedInTotal = new List<ImageCard>();
+            _playerHasFormedAPair = false;
         }
 
         private void DrawPlayersNames()
@@ -99,7 +100,6 @@ namespace MemoryGame.Views
                 {
                     _numberOfMovementsAllowed = 2;
                     _playerHasFormedAPair = true;
-                    _score += 100;
                 }
 
                 CardPairDto cardPairDto = new CardPairDto()

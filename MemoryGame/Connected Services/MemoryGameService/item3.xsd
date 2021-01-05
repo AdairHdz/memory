@@ -172,40 +172,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SubscribeToCardUncoveringService">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SubscribeToCardUncoveringServiceResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UnsubscribeFromCardUncoveringService">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UnsubscribeFromCardUncoveringServiceResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotifyCardWasUncovered">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="cardIndex" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UncoverCard">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="cardIndex" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="SubscribeToCommunicationService">
     <xs:complexType>
       <xs:sequence>
@@ -423,18 +389,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="winner" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateTimer">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DisplayTimerValue">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="timerValue" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

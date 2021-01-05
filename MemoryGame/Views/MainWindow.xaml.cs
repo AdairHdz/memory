@@ -13,7 +13,6 @@ namespace MemoryGame
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("MainWindow.xaml.cs");
         public MainWindow()
         {
-            _logger.Error("This was executed from client side");
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Properties.Settings.Default.LanguageSettings);
             InitializeComponent();
         }

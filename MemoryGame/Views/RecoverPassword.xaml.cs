@@ -3,6 +3,7 @@ using System.Windows;
 using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.RegistryValidation;
 using MemoryGame.MemoryGameService;
+using MemoryGame.Utilities;
 
 namespace MemoryGame
 {
@@ -57,19 +58,20 @@ namespace MemoryGame
 
         private void GenerateVerificationToken()
         {
-            TokenGeneratorClient client = new TokenGeneratorClient();
-            _verificationToken = client.GenerateToken(6);
+            _verificationToken = TokenManager.GenerateVerificationToken();
         }
 
         private void SendVerificationCode()
         {
-            MailingServiceClient client =
-                new MailingServiceClient();
-            client.SendVerificationToken(GetUsername(), _emailAddress, _verificationToken);
+            string username = GetUsername();
+            TokenManager.SendVerificationToken(username, _emailAddress, _verificationToken);
+        }
 
+        private bool AssignNewVerificationToken()
+        {
             AccountVerificationServiceClient accountVerificationServiceClient =
                 new AccountVerificationServiceClient();
-            accountVerificationServiceClient.AssignNewVerificationToken(TextBoxEmail.Text, _verificationToken);
+           return  accountVerificationServiceClient.AssignNewVerificationToken(TextBoxEmail.Text, _verificationToken);
         }
 
         private void SendCodeButtonClicked(object sender, RoutedEventArgs e)
@@ -81,11 +83,9 @@ namespace MemoryGame
                 if (EmailIsRegistered())
                 {
                     GenerateVerificationToken();
+                    AssignNewVerificationToken();
                     SendVerificationCode();
-                    RestorePassword restorePasswordWindow =
-                        new RestorePassword(_emailAddress, GetUsername());
-                    restorePasswordWindow.Show();
-                    this.Close();
+                    GoToRestorePassword();
                 }
                 else
                 {
@@ -96,6 +96,14 @@ namespace MemoryGame
             {
                 ShowErrorMessage();
             }
+        }
+
+        private void GoToRestorePassword()
+        {
+            RestorePassword restorePasswordWindow =
+                new RestorePassword(_emailAddress, GetUsername());
+            restorePasswordWindow.Show();
+            this.Close();
         }
 
     }

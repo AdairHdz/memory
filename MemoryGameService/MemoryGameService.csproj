@@ -64,16 +64,10 @@
     <Compile Include="Contracts\IAccountModifiabilityService.cs" />
     <Compile Include="Contracts\IAccountVerificationService.cs" />
     <Compile Include="Contracts\ICardDeckRetrieverService.cs" />
-    <Compile Include="Contracts\ICardUncoveringService.cs" />
-    <Compile Include="Contracts\IJoinGameService.cs" />
     <Compile Include="Contracts\ILobbyService.cs" />
     <Compile Include="Contracts\IMatchCreationService.cs" />
-    <Compile Include="Contracts\IMatchCreatorService.cs" />
     <Compile Include="Contracts\IMatchDiscoveryService.cs" />
     <Compile Include="Contracts\IPlayerRegistryService.cs" />
-    <Compile Include="Contracts\ITimerInitializerService.cs" />
-    <Compile Include="Contracts\ITimerService.cs" />
-    <Compile Include="Contracts\IWaitingRoomService.cs" />
     <Compile Include="DataTransferObjectMappers\CardDeckMapper.cs" />
     <Compile Include="DataTransferObjectMappers\CardMapper.cs" />
     <Compile Include="DataTransferObjectMappers\PlayerCredentialsMapper.cs" />
@@ -94,7 +88,6 @@
     <Compile Include="DataValidators\IPlayerValidator.cs" />
     <Compile Include="DataValidators\PlayerValidator.cs" />
     <Compile Include="Contracts\IAccessibilityService.cs" />
-    <Compile Include="Contracts\IChatClient.cs" />
     <Compile Include="Contracts\ICommunicationService.cs" />
     <Compile Include="Contracts\IMailingService.cs" />
     <Compile Include="Contracts\IMatchService.cs" />
@@ -109,7 +102,6 @@
     <Compile Include="Services\AccountModifiabilityService.cs" />
     <Compile Include="Services\AccountVerificationService.cs" />
     <Compile Include="Services\CardDeckRetrieverService.cs" />
-    <Compile Include="Services\CardUncoveringService.cs" />
     <Compile Include="Services\CommunicationService.cs" />
     <Compile Include="Services\LobbyService.cs" />
     <Compile Include="Services\MailingService.cs" />
@@ -119,14 +111,8 @@
     <Compile Include="Services\MemoryGameService.cs" />
     <Compile Include="Services\PlayerRegistryService.cs" />
     <Compile Include="Services\ScoreService.cs" />
-    <Compile Include="Services\ServiceBase.cs" />
-    <Compile Include="Services\TimerInitializerService.cs" />
-    <Compile Include="Services\TimerService.cs" />
     <Compile Include="Services\TokenGenerator.cs" />
     <Compile Include="Utilities\CardShuffler.cs" />
-    <Compile Include="Utilities\GameSettings.cs" />
-    <Compile Include="Utilities\SingletonTimer.cs" />
-    <Compile Include="Utilities\TurnManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

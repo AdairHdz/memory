@@ -12,94 +12,93 @@ namespace MemoryGame
     /// </summary>
     public partial class WaitingRoom : Window, MemoryGameService.ILobbyServiceCallback
     {
-        private MemoryGameService.LobbyServiceClient _lobbyServiceClient = null;
-        private InstanceContext context = null;
-        Sesion playerSesion = Sesion.GetSesion;
-        public ObservableCollection<string> players = new ObservableCollection<string>();
-        bool isHost = false;
+        public GameMatchDto GameMatchDto { get; set; }
+        private ObservableCollection<string> _players;
+        private InstanceContext _context;
+        private MemoryGameService.LobbyServiceClient _lobbyServiceClient;
+        private string _username;        
+        private bool _thisPlayerIsHost;
         private bool _windowIsBeingClosedByTheCloseButton;
-        public GameMatchDto _gameMatchDto { get; set; }
+        
         public WaitingRoom()
         {
             InitializeComponent();
-            context = new InstanceContext(this);
-            _lobbyServiceClient = new MemoryGameService.LobbyServiceClient(context);
-            _windowIsBeingClosedByTheCloseButton = true;
-        }
-        public void LeaveButtonClicked(object sender, RoutedEventArgs e)
-        {
-            CallLeaveLobbyService();
-            string matchHost = _gameMatchDto.Host;
-
-            if (matchHost.Equals(Sesion.GetSesion.Username))
-            {
-                GoToMainMenuView();
-            }
-            else
-            {
-                GoToJoinGameView();
-            }
-
-        }
-
-        public void StartButtonClicked(object sender, RoutedEventArgs e)
-        {
-            _lobbyServiceClient.StartGame(_gameMatchDto);
-        }
-
-        public void NotifyNewPlayerEntered(string username)
-        {
-            players.Add(username);
-        }
-
-        public void NotifyPlayerLeft(string username)
-        {
-            players.Remove(username);
+            _context = new InstanceContext(this);
+            _lobbyServiceClient = new MemoryGameService.LobbyServiceClient(_context);
+            _username = Sesion.GetSesion.Username;            
+            _windowIsBeingClosedByTheCloseButton = true;            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {            
-            IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersInLobby(_gameMatchDto);
-            players.AddRange(activePlayers);
-            WaitingRoomDataGrid.ItemsSource = players;
-
-            if (!_gameMatchDto.Host.Equals(playerSesion.Username))
+        {
+            DetermineIfPlayerIsHost();
+            if (!_thisPlayerIsHost)
             {
                 StarButton.Visibility = System.Windows.Visibility.Collapsed;
-                
             }
+
+            try
+            {
+                LoadActivePlayersInLobby();
+                CallJoinLobbyService();
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+
+        }
+
+        private void DetermineIfPlayerIsHost()
+        {
+            if (_username.Equals(GameMatchDto.Host))
+            {
+                _thisPlayerIsHost = true;
+            }
+            else
+            {
+                _thisPlayerIsHost = false;
+            }
+        }
+
+        private void LoadActivePlayersInLobby()
+        {
+            IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersInLobby(GameMatchDto);
+            _players.AddRange(activePlayers);
+            WaitingRoomDataGrid.ItemsSource = _players;
+        }
+
+        private void CallJoinLobbyService()
+        {
             LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
             {
-                Host = _gameMatchDto.Host,
-                Username = playerSesion.Username
+                Host = GameMatchDto.Host,
+                Username = _username
             };
             _lobbyServiceClient.JoinLobby(lobbyRequestDto);
         }
 
-        public void TakePlayersToMatchView(string[] playersInMatch)
+        public void LeaveButtonClicked(object sender, RoutedEventArgs e)
         {
-            _windowIsBeingClosedByTheCloseButton = false;
-            Views.Match matchView = new Views.Match()
-            {
-                Players = playersInMatch,
-                MatchHost = _gameMatchDto.Host,
-                CardDeck = _gameMatchDto.CardDeckDto
-            };
-            matchView.Show();
-            this.Close();
-        }
-
-        public void TakePlayersOutOfLobby()
-        {
-            GoToJoinGameView();
-        }
-
-        private void Window_Closed(object sender, System.EventArgs e)
-        {
-            if (_windowIsBeingClosedByTheCloseButton)
+            try
             {
                 CallLeaveLobbyService();
-            }            
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            finally
+            {
+                if (_thisPlayerIsHost)
+                {
+                    GoToMainMenuView();
+                }
+                else
+                {
+                    GoToJoinGameView();
+                }
+            }
         }
 
         private void GoToJoinGameView()
@@ -122,10 +121,52 @@ namespace MemoryGame
         {
             LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
             {
-                Host = _gameMatchDto.Host,
-                Username = playerSesion.Username
+                Host = GameMatchDto.Host,
+                Username = _username
             };
             _lobbyServiceClient.LeaveLobby(lobbyRequestDto);
+        }
+
+        public void StartButtonClicked(object sender, RoutedEventArgs e)
+        {
+            _lobbyServiceClient.StartGame(GameMatchDto);
+        }
+
+        public void NotifyNewPlayerEntered(string username)
+        {
+            //_players.Add(username);
+            _players.Add(null);
+        }
+
+        public void NotifyPlayerLeft(string username)
+        {
+            _players.Remove(username);
+        }
+
+        public void TakePlayersToMatchView(string[] playersInMatch)
+        {
+            _windowIsBeingClosedByTheCloseButton = false;
+            Views.Match matchView = new Views.Match()
+            {
+                Players = playersInMatch,
+                MatchHost = GameMatchDto.Host,
+                CardDeck = GameMatchDto.CardDeckDto
+            };
+            matchView.Show();
+            this.Close();
+        }
+
+        public void TakePlayersOutOfLobby()
+        {
+            GoToJoinGameView();
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            if (_windowIsBeingClosedByTheCloseButton)
+            {
+                CallLeaveLobbyService();
+            }            
         }
     }
 }

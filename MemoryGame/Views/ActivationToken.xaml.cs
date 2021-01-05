@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using MemoryGame.Utilities;
+using System.ServiceModel;
 using System.Windows;
 
 namespace MemoryGame
@@ -21,14 +22,13 @@ namespace MemoryGame
             InitializeComponent();
             _emailAddress = emailAddress;
             _username = username;
-            _newToken = "";
         }
 
         private void OkButtonClicked(object sender, RoutedEventArgs e)
         {
             try
             {
-                TryVerifyAccount();
+                VerifyAccount();
             }
             catch (EndpointNotFoundException)
             {
@@ -36,7 +36,7 @@ namespace MemoryGame
             }
         }
 
-        private void TryVerifyAccount()
+        private void VerifyAccount()
         {
             if (TokenIsCorrect())
             {
@@ -58,54 +58,6 @@ namespace MemoryGame
                 MessageBox.Show(Properties.Langs.Resources.NonMatchingVerificationCode);
             }
         }
-        
-        private void SendNewCodeButtonClicked(object sender, RoutedEventArgs e)
-        {
-
-            try
-            {
-                _newToken = TryGenerateNewToken();
-                bool newTokenWasAssigned = TryAssignNewVerificationToken();
-
-                if (newTokenWasAssigned)
-                {
-                    TrySendNewVerificationToken();
-                    MessageBox.Show(Properties.Langs.Resources.NewCodeSentMessage);
-                }
-
-            }
-            catch (EndpointNotFoundException)
-            {
-                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
-            }
-        }
-
-        private string TryGenerateNewToken()
-        {
-            MemoryGameService.TokenGeneratorClient tokenGeneratorClient =
-                new MemoryGameService.TokenGeneratorClient();
-            string newToken = tokenGeneratorClient.GenerateToken(6);
-            return newToken;
-        }
-
-        private bool TryAssignNewVerificationToken()
-        {
-            MemoryGameService.AccountVerificationServiceClient accountVerificationServiceClient =
-                new MemoryGameService.AccountVerificationServiceClient();
-
-            bool newVerificationTokenWasAssignedSuccessfully =
-                accountVerificationServiceClient.AssignNewVerificationToken(_emailAddress, _newToken);
-
-            return newVerificationTokenWasAssignedSuccessfully;
-
-        }
-
-        private void TrySendNewVerificationToken()
-        {
-            MemoryGameService.MailingServiceClient mailingServiceClient =
-                new MemoryGameService.MailingServiceClient();
-            mailingServiceClient.SendVerificationToken(_username, _emailAddress, _newToken);
-        }
 
         private bool TokenIsCorrect()
         {
@@ -119,6 +71,47 @@ namespace MemoryGame
             MemoryGameService.AccountVerificationServiceClient accountVerificationServiceClient =
                 new MemoryGameService.AccountVerificationServiceClient();
             return accountVerificationServiceClient.SetAccountAsVerified(_emailAddress);
+        }
+
+        private void SendNewCodeButtonClicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                GenerateNewToken();
+                bool newTokenWasAssigned = AssignNewVerificationToken();
+
+                if (newTokenWasAssigned)
+                {
+                    SendNewVerificationToken();
+                    MessageBox.Show(Properties.Langs.Resources.NewCodeSentMessage);
+                }
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+        }
+
+        private void GenerateNewToken()
+        {
+            string newToken = TokenManager.GenerateVerificationToken();
+            _newToken = newToken;
+        }
+
+        private bool AssignNewVerificationToken()
+        {
+            MemoryGameService.AccountVerificationServiceClient accountVerificationServiceClient =
+                new MemoryGameService.AccountVerificationServiceClient();
+
+            bool newVerificationTokenWasAssignedSuccessfully =
+                accountVerificationServiceClient.AssignNewVerificationToken(_emailAddress, _newToken);
+
+            return newVerificationTokenWasAssignedSuccessfully;
+        }
+
+        private void SendNewVerificationToken()
+        {
+            TokenManager.SendVerificationToken(_username, _emailAddress, _newToken);            
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)

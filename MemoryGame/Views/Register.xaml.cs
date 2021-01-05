@@ -19,7 +19,7 @@ namespace MemoryGame
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("Register.xaml.cs");
         private string _username, _emailAddress, _verificationToken, _password;      
         private RuleSet _ruleSet;
-        MemoryGameService.PlayerRegistryServiceClient _playerRegistryServiceClient;
+        private MemoryGameService.PlayerRegistryServiceClient _playerRegistryServiceClient;
         public Register()
         {            
             InitializeComponent();
@@ -63,8 +63,21 @@ namespace MemoryGame
             GetValuesFromFields();
             SetFormValidation();
             if (AllValidationRulesHavePassed())
-            {                
-                RegisterPlayer();
+            {
+                try
+                {
+                    RegisterPlayer();
+                }
+                catch (EndpointNotFoundException endpointNotFoundException)
+                {
+                    _logger.Error("Endpoint couldn't be found. Error at method RegisterPlayer()", endpointNotFoundException);
+                    MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+                }
+                catch (TimeoutException timeOutException)
+                {
+                    _logger.Error("Server took to long to send a responde. Error at method RegisterPlayer()", timeOutException);
+                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+                }
             }
             else
             {
@@ -73,26 +86,6 @@ namespace MemoryGame
         }
 
         private void RegisterPlayer()
-        {
-            try
-            {
-                GenerateToken();
-                TryRegisterPlayer();
-            }
-            catch (EndpointNotFoundException endpointNotFoundException)
-            {
-                _logger.Error("Endpoint couldn't be found. Error at method RegisterPlayer()", endpointNotFoundException);
-                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
-            }
-            catch (TimeoutException timeOutException)
-            {
-                _logger.Error("Server took to long to send a responde. Error at method RegisterPlayer()", timeOutException);
-                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
-            }
-
-        }
-
-        private void TryRegisterPlayer()
         {
             bool emailAddressIsAvailable = false;
             bool usernameIsAvailable = false;
@@ -117,6 +110,7 @@ namespace MemoryGame
 
             if(emailAddressIsAvailable && usernameIsAvailable)
             {
+                GenerateToken();
                 if (PlayerWasSuccessfullyRegistered())
                 {
                     SendVerificationToken();
@@ -150,15 +144,14 @@ namespace MemoryGame
 
         private bool EmailAddressIsAvailable()
         {
-            bool emailAddressIsAvailable = false;
-            _playerRegistryServiceClient.EmailAddressIsAvailable(_emailAddress);            
+            bool emailAddressIsAvailable = _playerRegistryServiceClient.EmailAddressIsAvailable(_emailAddress);            
             return emailAddressIsAvailable;
         }
 
         private bool UsernameIsAvailable()
         {
-            bool usernameIsAvailable = false;
-            usernameIsAvailable = _playerRegistryServiceClient.UserNameIsAvailable(_username);
+
+            bool usernameIsAvailable = _playerRegistryServiceClient.UserNameIsAvailable(_username);
             return usernameIsAvailable;
         }
 

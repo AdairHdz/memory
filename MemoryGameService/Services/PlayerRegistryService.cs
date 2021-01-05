@@ -4,6 +4,7 @@ using DataAccess.Units_of_work;
 using MemoryGameService.Contracts;
 using System.Linq;
 using MemoryGame.MemoryGameService.DataTransferObjects;
+using System.Collections.Generic;
 
 namespace MemoryGameService.Services
 {
@@ -14,28 +15,36 @@ namespace MemoryGameService.Services
             Player newPlayer = PlayerMapper.CreateEntity(playerDTO);
             newPlayer.EmailWasVerified = false;
             newPlayer.TotalScore = 0;
-            var unityOfWork = new UnitOfWork(new MemoryGameContext());
-            unityOfWork.Players.Add(newPlayer);
-            int playerWasRegistered = unityOfWork.Complete();
-            unityOfWork.Dispose();
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            unitOfWork.Players.Add(newPlayer);
+            int playerWasRegistered = unitOfWork.Complete();
+            unitOfWork.Dispose();
             return playerWasRegistered == 1;
         }
 
         public bool EmailAddressIsAvailable(string emailAddress)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Get(emailAddress);
+            Player playerWithTheSpecifiedEmailAddress = unitOfWork.Players.Get(emailAddress);
             unitOfWork.Dispose();
-            return player == null;
+            if (playerWithTheSpecifiedEmailAddress == null)
+            {
+                return true;
+            }
+            return false;           
         }
 
         public bool UserNameIsAvailable(string username)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(playerToFind => playerToFind.UserName == username);
+            IEnumerable<Player> player = unitOfWork.Players.Find(playerToFind => playerToFind.UserName == username);
             int playersWhichHaveThatUserName = player.Count();
             unitOfWork.Dispose();
-            return playersWhichHaveThatUserName == 0;
+            if (playersWhichHaveThatUserName == 0)
+            {
+                return true;
+            }
+            return false;            
         }
 
 

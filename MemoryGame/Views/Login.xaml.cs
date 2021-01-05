@@ -18,7 +18,7 @@ namespace MemoryGame
     {
         private RuleSet _ruleSet;
         private string _username, _password;
-        
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("Login.xaml.cs");
         public Login()
         {            
             InitializeComponent();
@@ -49,63 +49,43 @@ namespace MemoryGame
             }
         }
 
-        public bool LoginIsValid()
+        private void LoginButtonClicked(object sender, RoutedEventArgs e)
         {
-            bool isMatch = false;
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-            BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
-            PlayerCredentialsDTO playerCredentials = client.GetPlayerCredentials(_username);
-            isMatch = hashGenerator.Match(_password, playerCredentials.Password);
-            return isMatch;
-        }
-
-        public bool EmailIsVerified()
-        {
-            bool emailIsVerified = false;
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-            string username = TextBoxUsername.Text;
-            emailIsVerified = client.IsVerified(username);
-            return emailIsVerified;
-        }
-
-
-        public void GoToMainMenu()
-        {
-            MainMenu mainMenuView = new MainMenu();
-            mainMenuView.Show();
-            this.Close();
+            SetFormValidation();
+            if (_ruleSet.AllValidationRulesHavePassed())
+            {
+                try
+                {
+                    LoginUser();
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+                }
+                catch (FaultException<MemoryGame.MemoryGameService.Faults.NonExistentUserFault>)
+                {
+                    MessageBox.Show("El usuario no existe");
+                }
+                catch (TimeoutException)
+                {
+                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+                }
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
         }
 
         public string GetUserEmailAdress()
-        {
-            string emailAddress = "";
+        {          
             AccessibilityServiceClient client = new AccessibilityServiceClient();
             string username = TextBoxUsername.Text;
-            emailAddress = client.GetUserEmailAddress(username);
+            string emailAddress = client.GetUserEmailAddress(username);
             return emailAddress;
         }
 
         private void LoginUser()
-        {
-            try
-            {
-                TryLoginUser();
-            }
-            catch (EndpointNotFoundException exception)
-            {
-                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
-            }
-            catch(FaultException<MemoryGame.MemoryGameService.Faults.NonExistentUserFault> nonExistentUserFault)
-            {
-                MessageBox.Show("El usuario no existe");
-            }
-            catch(TimeoutException timeoutException)
-            {
-                MessageBox.Show("Error de timeout");
-            }
-        }
-
-        private void TryLoginUser()
         {
             if (LoginIsValid())
             {
@@ -118,11 +98,7 @@ namespace MemoryGame
                 }
                 else
                 {
-                    ActivationToken activationTokenWindow =
-                            new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
-
-                    activationTokenWindow.Show();
-                    this.Close();
+                    GoToActivationToken();
                 }
             }
             else
@@ -131,22 +107,29 @@ namespace MemoryGame
             }
         }
 
-        private void LoginButtonClicked(object sender, RoutedEventArgs e)
+        public bool LoginIsValid()
         {
-            SetFormValidation();
-            if (_ruleSet.AllValidationRulesHavePassed())
-            {
-                LoginUser();
-            }
-            else
-            {
-                ShowErrorMessage();
-            }
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+            BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
+            PlayerCredentialsDTO playerCredentials = client.GetPlayerCredentials(_username);
+            bool isMatch = hashGenerator.Match(_password, playerCredentials.Password);
+            return isMatch;
         }
 
-        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        public bool EmailIsVerified()
         {
-            RedirectToMainWindowView();
+            bool emailIsVerified = false;
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+            string username = TextBoxUsername.Text;
+            emailIsVerified = client.IsVerified(username);
+            return emailIsVerified;
+        }
+
+        public void GoToMainMenu()
+        {
+            MainMenu mainMenuView = new MainMenu();
+            mainMenuView.Show();
+            this.Close();
         }
 
         private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
@@ -156,10 +139,18 @@ namespace MemoryGame
             this.Close();
         }
 
-        private void RedirectToMainWindowView()
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindowView = new MainWindow();
             mainWindowView.Show();
+            this.Close();
+        }
+
+        private void GoToActivationToken()
+        {
+            ActivationToken activationTokenWindow =
+                new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
+            activationTokenWindow.Show();
             this.Close();
         }
     }

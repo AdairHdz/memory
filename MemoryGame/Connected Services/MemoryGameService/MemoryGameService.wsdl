@@ -116,35 +116,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_ICardUncoveringService_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
-        <wsaw:UsingAddressing />
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_ICommunicationService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -291,35 +262,6 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_IMatchService_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
-        <wsaw:UsingAddressing />
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_ITimerService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -519,24 +461,6 @@
   <wsdl:message name="IAccountVerificationService_VerifyToken_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerifyTokenResponse" />
   </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_SubscribeToCardUncoveringService_InputMessage">
-    <wsdl:part name="parameters" element="tns:SubscribeToCardUncoveringService" />
-  </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_SubscribeToCardUncoveringService_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SubscribeToCardUncoveringServiceResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_UnsubscribeFromCardUncoveringService_InputMessage">
-    <wsdl:part name="parameters" element="tns:UnsubscribeFromCardUncoveringService" />
-  </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_UnsubscribeFromCardUncoveringService_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UnsubscribeFromCardUncoveringServiceResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_NotifyCardWasUncovered_InputMessage">
-    <wsdl:part name="parameters" element="tns:NotifyCardWasUncovered" />
-  </wsdl:message>
-  <wsdl:message name="ICardUncoveringService_UncoverCard_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:UncoverCard" />
-  </wsdl:message>
   <wsdl:message name="ICommunicationService_SubscribeToCommunicationService_InputMessage">
     <wsdl:part name="parameters" element="tns:SubscribeToCommunicationService" />
   </wsdl:message>
@@ -633,12 +557,6 @@
   <wsdl:message name="IMatchService_ShowWinners_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ShowWinners" />
   </wsdl:message>
-  <wsdl:message name="ITimerService_UpdateTimer_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateTimer" />
-  </wsdl:message>
-  <wsdl:message name="ITimerService_DisplayTimerValue_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:DisplayTimerValue" />
-  </wsdl:message>
   <wsdl:message name="ITokenGenerator_GenerateToken_InputMessage">
     <wsdl:part name="parameters" element="tns:GenerateToken" />
   </wsdl:message>
@@ -724,22 +642,6 @@
     <wsdl:operation name="VerifyToken">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyToken" message="tns:IAccountVerificationService_VerifyToken_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyTokenResponse" message="tns:IAccountVerificationService_VerifyToken_OutputMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:portType msc:usingSession="true" name="ICardUncoveringService">
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SubscribeToCardUncoveringService">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringService" message="tns:ICardUncoveringService_SubscribeToCardUncoveringService_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringServiceResponse" message="tns:ICardUncoveringService_SubscribeToCardUncoveringService_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="true" name="UnsubscribeFromCardUncoveringService">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringService" message="tns:ICardUncoveringService_UnsubscribeFromCardUncoveringService_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringServiceResponse" message="tns:ICardUncoveringService_UnsubscribeFromCardUncoveringService_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NotifyCardWasUncovered">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered" message="tns:ICardUncoveringService_NotifyCardWasUncovered_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UncoverCard">
-      <wsdl:output wsaw:Action="http://tempuri.org/ICardUncoveringService/UncoverCard" message="tns:ICardUncoveringService_UncoverCard_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="ICommunicationService">
@@ -834,14 +736,6 @@
     </wsdl:operation>
     <wsdl:operation name="ShowWinners">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/ShowWinners" message="tns:IMatchService_ShowWinners_OutputCallbackMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:portType msc:usingSession="true" name="ITimerService">
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateTimer">
-      <wsdl:input wsaw:Action="http://tempuri.org/ITimerService/UpdateTimer" message="tns:ITimerService_UpdateTimer_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DisplayTimerValue">
-      <wsdl:output wsaw:Action="http://tempuri.org/ITimerService/DisplayTimerValue" message="tns:ITimerService_DisplayTimerValue_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ITokenGenerator">
@@ -992,40 +886,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_ICardUncoveringService" type="tns:ICardUncoveringService">
-    <wsp:PolicyReference URI="#NetTcpBinding_ICardUncoveringService_policy" />
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="SubscribeToCardUncoveringService">
-      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/SubscribeToCardUncoveringService" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UnsubscribeFromCardUncoveringService">
-      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/UnsubscribeFromCardUncoveringService" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyCardWasUncovered">
-      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/NotifyCardWasUncovered" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="UncoverCard">
-      <soap12:operation soapAction="http://tempuri.org/ICardUncoveringService/UncoverCard" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1226,22 +1086,6 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_ITimerService" type="tns:ITimerService">
-    <wsp:PolicyReference URI="#NetTcpBinding_ITimerService_policy" />
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="UpdateTimer">
-      <soap12:operation soapAction="http://tempuri.org/ITimerService/UpdateTimer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="DisplayTimerValue">
-      <soap12:operation soapAction="http://tempuri.org/ITimerService/DisplayTimerValue" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ITokenGenerator" type="tns:ITokenGenerator">
     <wsp:PolicyReference URI="#NetTcpBinding_ITokenGenerator_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
@@ -1336,15 +1180,6 @@
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_ICardUncoveringService" binding="tns:NetTcpBinding_ICardUncoveringService">
-      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
-      <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
-        </Identity>
-      </wsa10:EndpointReference>
-    </wsdl:port>
     <wsdl:port name="NetTcpBinding_ICommunicationService" binding="tns:NetTcpBinding_ICommunicationService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
@@ -1391,15 +1226,6 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMatchService" binding="tns:NetTcpBinding_IMatchService">
-      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
-      <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
-        </Identity>
-      </wsa10:EndpointReference>
-    </wsdl:port>
-    <wsdl:port name="NetTcpBinding_ITimerService" binding="tns:NetTcpBinding_ITimerService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>

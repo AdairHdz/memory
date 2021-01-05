@@ -219,6 +219,9 @@
   <data name="NewUsername" xml:space="preserve">
     <value>Nuevo nombre de usuario</value>
   </data>
+  <data name="NoMatchWasSelected" xml:space="preserve">
+    <value>Por favor seleccione una partida a la cual unirse</value>
+  </data>
   <data name="NonMatchingCredentials" xml:space="preserve">
     <value>Usuario no encontrado. Por favor verifique que el nombre de usuario y la contraseña que ingresó son las correctas.</value>
   </data>
@@ -230,6 +233,9 @@
   </data>
   <data name="NumberOfPlayers" xml:space="preserve">
     <value>Número de jugadores</value>
+  </data>
+  <data name="NumberOfPlayersForMatchWereNotSelected" xml:space="preserve">
+    <value>Por favor seleccione el número de jugadores que desea para la partida</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Aceptar</value>

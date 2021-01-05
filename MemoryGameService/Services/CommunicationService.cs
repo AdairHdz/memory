@@ -1,5 +1,4 @@
 ﻿using MemoryGameService.Contracts;
-using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace MemoryGameService.Services
@@ -16,7 +15,7 @@ namespace MemoryGameService.Services
         public static event MessageSentEventHandler MessageSentEvent;
         public delegate void MessageSentEventHandler(object sender,
             CommunicationEventArgs communicationEventArgs);
-        IChatClient _communicationServiceCallback = null;
+        ICommunicationServiceCallback _communicationServiceCallback = null;
         MessageSentEventHandler _messageSentHandler = null;
 
         public void SendMessage(string sender, string message)
@@ -32,7 +31,7 @@ namespace MemoryGameService.Services
 
         public void SubscribeToCommunicationService(string username)
         {
-            _communicationServiceCallback = OperationContext.Current.GetCallbackChannel<IChatClient>();
+            _communicationServiceCallback = OperationContext.Current.GetCallbackChannel<ICommunicationServiceCallback>();
             _messageSentHandler = new MessageSentEventHandler(MessageSentHandler);            
             MessageSentEvent += _messageSentHandler;
         }

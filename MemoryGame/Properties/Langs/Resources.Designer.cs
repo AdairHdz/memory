@@ -367,6 +367,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Por favor seleccione una partida a la cual unirse.
+        /// </summary>
+        public static string NoMatchWasSelected {
+            get {
+                return ResourceManager.GetString("NoMatchWasSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Usuario no encontrado. Por favor verifique que el nombre de usuario y la contraseña que ingresó son las correctas..
         /// </summary>
         public static string NonMatchingCredentials {
@@ -399,6 +408,15 @@ namespace MemoryGame.Properties.Langs {
         public static string NumberOfPlayers {
             get {
                 return ResourceManager.GetString("NumberOfPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor seleccione el número de jugadores que desea para la partida.
+        /// </summary>
+        public static string NumberOfPlayersForMatchWereNotSelected {
+            get {
+                return ResourceManager.GetString("NumberOfPlayersForMatchWereNotSelected", resourceCulture);
             }
         }
         

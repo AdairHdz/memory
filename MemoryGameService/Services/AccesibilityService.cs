@@ -6,7 +6,8 @@ using MemoryGameService.DataTransferObjectMappers;
 using System.Linq;
 using System.ServiceModel;
 using MemoryGame.MemoryGameService.Faults;
-using System;
+using DataAccess.Entities;
+using System.Collections.Generic;
 
 namespace MemoryGameService.Services
 {
@@ -64,36 +65,32 @@ namespace MemoryGameService.Services
 
         public PlayerCredentialsDTO GetPlayerCredentials(string username)
         {
+            var unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
-            {
-                PlayerCredentialsDTO playerCredentials = TryGetPlayerCredentials(username);
+            {                
+                IEnumerable<Player> players = unitOfWork.Players.Find(x => x.UserName == username);                
+                if (players.Count() == 0)
+                {
+                    NonExistentUserFault nonExistentUserFault = new NonExistentUserFault
+                    {
+                        Error = ""
+                    };
+                    throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+                }
+
+                var player = players.First();
+                PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(player);
                 return playerCredentials;
             }
-            catch (FaultException faultException)
-            {
-                Console.WriteLine(faultException);
-                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
-                nonExistentUserFault.Details = "Details";
-                nonExistentUserFault.Error = "Error";
-                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+            catch (FaultException)
+            {                
+                throw;
             }
-        }
-
-        private PlayerCredentialsDTO TryGetPlayerCredentials(string username)
-        {
-            var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var players = unitOfWork.Players.Find(x => x.UserName == username);
-            //unitOfWork.Dispose();
-            if (players.Count() == 0)
+            finally
             {
-                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
-                nonExistentUserFault.Error = "";
-                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+                //unitOfWork.Complete();
+                unitOfWork.Dispose();
             }
-
-            var player = players.First();
-            PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(player);
-            return playerCredentials;
         }
     }
 }

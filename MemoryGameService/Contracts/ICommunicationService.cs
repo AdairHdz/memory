@@ -4,7 +4,7 @@ namespace MemoryGameService.Contracts
 {
 
     [ServiceContract(SessionMode = SessionMode.Required,
-        CallbackContract = typeof(IChatClient))]
+        CallbackContract = typeof(ICommunicationServiceCallback))]
     public interface ICommunicationService
     {
         [OperationContract(IsOneWay = false, IsInitiating = true)]
@@ -16,5 +16,15 @@ namespace MemoryGameService.Contracts
 
         [OperationContract(IsOneWay = true)]
         void SendMessage(string sender, string message);
+    }
+
+    [ServiceContract]
+    public interface ICommunicationServiceCallback
+    {
+        [OperationContract(IsOneWay = true)]
+        void ReciveMessage(string username, string message);
+        [OperationContract(IsOneWay = true)]
+        void NotifyUserHasEnteredTheChat(string username);
+
     }
 }
