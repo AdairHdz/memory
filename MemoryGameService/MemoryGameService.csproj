@@ -84,7 +84,6 @@
     <Compile Include="DataTransferObjects\PlayerInMatchDto.cs" />
     <Compile Include="DataTransferObjects\PlayerScoreDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerMovementDto.cs" />
-    <Compile Include="DataTransferObjects\TurnTimerDTO.cs" />
     <Compile Include="DataValidators\IPlayerValidator.cs" />
     <Compile Include="DataValidators\PlayerValidator.cs" />
     <Compile Include="Contracts\IAccessibilityService.cs" />
@@ -93,8 +92,12 @@
     <Compile Include="Contracts\IMatchService.cs" />
     <Compile Include="Contracts\IScoreService.cs" />
     <Compile Include="Contracts\ITokenGenerator.cs" />
+    <Compile Include="Faults\CardDeckRetrievingFault.cs" />
+    <Compile Include="Faults\DatabaseConnectionLostFault.cs" />
     <Compile Include="Faults\DataStorageFault.cs" />
+    <Compile Include="Faults\MatchAccessDeniedFault.cs" />
     <Compile Include="Faults\NonExistentUserFault.cs" />
+    <Compile Include="Faults\TypedFault.cs" />
     <Compile Include="GlobalErrorHandler.cs" />
     <Compile Include="GlobalErrorHandlerBehaviorAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,6 +116,8 @@
     <Compile Include="Services\ScoreService.cs" />
     <Compile Include="Services\TokenGenerator.cs" />
     <Compile Include="Utilities\CardShuffler.cs" />
+    <Compile Include="Utilities\FisherYatesShuffler.cs" />
+    <Compile Include="Utilities\IShuffler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

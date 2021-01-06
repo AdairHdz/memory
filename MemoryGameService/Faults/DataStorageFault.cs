@@ -3,11 +3,11 @@
 namespace MemoryGame.MemoryGameService.Faults
 {
     [DataContract]
-    public class DataStorageFault
+    public class DataStorageFault : TypedFault
     {
-        [DataMember]
-        public string Error { get; set; }
-        [DataMember]
-        public string Details { get; set; }
+        public DataStorageFault()
+        {
+            Error = "An error has occured while performing an operation on the database";
+        }
     }
 }

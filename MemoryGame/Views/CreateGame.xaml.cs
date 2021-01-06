@@ -49,12 +49,22 @@ namespace MemoryGame
                     _logger.Error(endpointNotFoundException);
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }
+                catch (TimeoutException timeoutException)
+                {
+                    _logger.Error(timeoutException);
+                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+                }
+                catch (FaultException<MemoryGame.MemoryGameService.Faults.CardDeckRetrievingFault> cardDeckRetrievingFault)
+                {
+                    _logger.Error(cardDeckRetrievingFault);
+                    MessageBox.Show(Properties.Langs.Resources.CardDeckRetrievingError);
+                }
             }
 
         }
 
         private void CreateNewMatch()
-        {            
+        {                   
             LoadCardDeck();
             _gameMatch = new MemoryGameService.DataTransferObjects.GameMatchDto()
                 {

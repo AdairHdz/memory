@@ -2,6 +2,7 @@
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.MemoryGameService.Faults;
 using MemoryGameService.Contracts;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -10,34 +11,24 @@ namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IMatchService
     {
-        /**
-         * Host: string
-         * Username: string
-         * HasFormedAPair: bool
-         * CardIndex: int
-         * */
-
-        //private static IList<GameMatchConfigDto> _activeMatches = new List<GameMatchConfigDto>();
-
         public void EnterMatch(string host, string username)
         {
-            foreach(var match in _matches)
+            GameMatchDto gameMatch = GetMatch(host);
+
+            bool hasActiveTurn = false;
+            if (host.Equals(username))
             {
-                if (match.Host.Equals(host))
-                {
-                    bool hasActiveTurn = host.Equals(username);
-                    PlayerInMatchDto player = new PlayerInMatchDto()
-                    {
-                        Username = username,
-                        Score = 0,
-                        HasActiveTurn = true,
-                        MatchServiceConnection = OperationContext.Current.GetCallbackChannel<IMatchServiceCallback>(),
-                    };
-                    match.AddPlayer(player);
-                    break;
-                }
-      
+                hasActiveTurn = true;
             }
+
+            PlayerInMatchDto player = new PlayerInMatchDto()
+            {
+                Username = username,
+                Score = 0,
+                HasActiveTurn = hasActiveTurn,
+                MatchServiceConnection = OperationContext.Current.GetCallbackChannel<IMatchServiceCallback>()
+            };
+            gameMatch.AddPlayer(player);
         }
 
         public IList<PlayerInMatchDto> GetPlayersConnectedToMatch(string host)

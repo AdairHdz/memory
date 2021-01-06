@@ -48,6 +48,8 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsNonExistentUserFault" +
             "Fault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsDatabaseConnectionLo" +
+            "stFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO GetPlayerCredentials(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
@@ -135,6 +137,8 @@ namespace MemoryGame.MemoryGameService {
     public interface ICardDeckRetrieverService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.CardDeckRetrievingFault), Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsCardDeckRetrievin" +
+            "gFaultFault", Name="CardDeckRetrievingFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO GetCardDeckAndCards(int cardDeckId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse")]
@@ -423,6 +427,9 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.CardDeckRetrievingFault))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         void JoinLobby(MemoryGame.MemoryGameService.DataTransferObjects.LobbyRequestDto lobbyRequestDto);
         
@@ -445,6 +452,9 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.CardDeckRetrievingFault))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         void LeaveLobby(MemoryGame.MemoryGameService.DataTransferObjects.LobbyRequestDto lobbyRequestDto);
         
@@ -646,6 +656,7 @@ namespace MemoryGame.MemoryGameService {
         System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto[]> GetActiveMatchesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchDiscoveryService/CanJoin", ReplyAction="http://tempuri.org/IMatchDiscoveryService/CanJoinResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault), Action="http://tempuri.org/IMatchDiscoveryService/CanJoinMatchAccessDeniedFaultFault", Name="MatchAccessDeniedFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool CanJoin(string matchHost);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchDiscoveryService/CanJoin", ReplyAction="http://tempuri.org/IMatchDiscoveryService/CanJoinResponse")]

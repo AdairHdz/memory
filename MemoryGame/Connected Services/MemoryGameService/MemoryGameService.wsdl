@@ -425,11 +425,17 @@
   <wsdl:message name="IAccessibilityService_GetPlayerCredentials_NonExistentUserFaultFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q1:NonExistentUserFault" />
   </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetPlayerCredentials_DatabaseConnectionLostFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q2:DatabaseConnectionLostFault" />
+  </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDeckAndCards" />
   </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDeckAndCardsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_CardDeckRetrievingFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q3:CardDeckRetrievingFault" />
   </wsdl:message>
   <wsdl:message name="IAccountModifiabilityService_SetNewPassword_InputMessage">
     <wsdl:part name="parameters" element="tns:SetNewPassword" />
@@ -530,6 +536,9 @@
   <wsdl:message name="IMatchDiscoveryService_CanJoin_OutputMessage">
     <wsdl:part name="parameters" element="tns:CanJoinResponse" />
   </wsdl:message>
+  <wsdl:message name="IMatchDiscoveryService_CanJoin_MatchAccessDeniedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q4:MatchAccessDeniedFault" />
+  </wsdl:message>
   <wsdl:message name="IMatchService_NotifyCardWasUncoveredd_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyCardWasUncoveredd" />
   </wsdl:message>
@@ -612,12 +621,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials" message="tns:IAccessibilityService_GetPlayerCredentials_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse" message="tns:IAccessibilityService_GetPlayerCredentials_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetPlayerCredentials_NonExistentUserFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_GetPlayerCredentials_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICardDeckRetrieverService">
     <wsdl:operation name="GetCardDeckAndCards">
       <wsdl:input wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsCardDeckRetrievingFaultFault" name="CardDeckRetrievingFaultFault" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_CardDeckRetrievingFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAccountModifiabilityService">
@@ -709,6 +720,7 @@
     <wsdl:operation name="CanJoin">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchDiscoveryService/CanJoin" message="tns:IMatchDiscoveryService_CanJoin_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchDiscoveryService/CanJoinResponse" message="tns:IMatchDiscoveryService_CanJoin_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchDiscoveryService/CanJoinMatchAccessDeniedFaultFault" name="MatchAccessDeniedFaultFault" message="tns:IMatchDiscoveryService_CanJoin_MatchAccessDeniedFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMatchService">
@@ -823,6 +835,9 @@
       <wsdl:fault name="NonExistentUserFaultFault">
         <soap12:fault use="literal" name="NonExistentUserFaultFault" namespace="" />
       </wsdl:fault>
+      <wsdl:fault name="DatabaseConnectionLostFaultFault">
+        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ICardDeckRetrieverService" type="tns:ICardDeckRetrieverService">
@@ -836,6 +851,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="CardDeckRetrievingFaultFault">
+        <soap12:fault use="literal" name="CardDeckRetrievingFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IAccountModifiabilityService" type="tns:IAccountModifiabilityService">
@@ -1029,6 +1047,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="MatchAccessDeniedFaultFault">
+        <soap12:fault use="literal" name="MatchAccessDeniedFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IMatchService" type="tns:IMatchService">

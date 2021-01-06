@@ -17,7 +17,9 @@ namespace MemoryGameService.Contracts
         string GetUserEmailAddress(string username);
         [OperationContract]
         string GetUsername(string emailAddress);
+        
         [FaultContract(typeof(NonExistentUserFault))]
+        [FaultContract(typeof(DatabaseConnectionLostFault))]
         [OperationContract]
         PlayerCredentialsDTO GetPlayerCredentials(string username);
     }

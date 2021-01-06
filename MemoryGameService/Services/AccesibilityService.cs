@@ -7,42 +7,85 @@ using System.Linq;
 using System.ServiceModel;
 using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
-using System.Collections.Generic;
+using System;
+using System.Data.SqlClient;
 
 namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IAccessibilityService
     {
-
-
         public string GetUserEmailAddress(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.UserName == username);
-            string emailAddress = player.ElementAt(0).EmailAddress;
-            unitOfWork.Dispose();
-            return emailAddress;
+
+            try
+            {
+                Player playerWhoPossessTheSpecifiedUsername = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username);
+                string emailAddress = playerWhoPossessTheSpecifiedUsername.EmailAddress;                
+                return emailAddress;
+            }catch(InvalidOperationException)
+            {
+                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
+                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public string GetUsername(string emailAddress)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Get(emailAddress);
-            string username = player.UserName;
-            unitOfWork.Dispose();
-            return username;
+            try
+            {
+                var player = unitOfWork.Players.Get(emailAddress);
+                if(player == null)
+                {
+                    NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
+                    throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+                }
+                string username = player.UserName;                
+                return username;
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public bool HasAccessRights(PlayerCredentialsDTO playerCredentialsDTO)
         {
             string username = playerCredentialsDTO.Username;
             string password = playerCredentialsDTO.Password;
-
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.UserName == username && x.Password == password);
-            int matches = player.Count();
-            unitOfWork.Dispose();
-            return matches == 1;
+
+            try
+            {
+                var player = unitOfWork.Players.Find(x => x.UserName == username && x.Password == password);
+                int matches = player.Count();                
+                return matches == 1;
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
+
         }
 
         public bool IsVerified(string username)
@@ -68,27 +111,23 @@ namespace MemoryGameService.Services
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {                
-                IEnumerable<Player> players = unitOfWork.Players.Find(x => x.UserName == username);                
-                if (players.Count() == 0)
-                {
-                    NonExistentUserFault nonExistentUserFault = new NonExistentUserFault
-                    {
-                        Error = ""
-                    };
-                    throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
-                }
-
-                var player = players.First();
-                PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(player);
+                Player playerWhoPossessTheSpecifiedUsername = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username);                
+                PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(playerWhoPossessTheSpecifiedUsername);
                 return playerCredentials;
             }
-            catch (FaultException)
-            {                
-                throw;
+            catch (SqlException)
+            {
+                //Esto nunca lo lanza. Se da un timeout exception
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            catch (InvalidOperationException)
+            {
+                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
+                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
             finally
             {
-                //unitOfWork.Complete();
                 unitOfWork.Dispose();
             }
         }

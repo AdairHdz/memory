@@ -8,7 +8,7 @@ namespace DataAccess.Repositories
         TEntity Get(object id);
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Find(Func<TEntity, bool> predicate);
-
+        TEntity FindFirstOccurence(Func<TEntity, bool> predicate);
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);

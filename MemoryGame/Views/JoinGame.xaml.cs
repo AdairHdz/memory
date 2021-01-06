@@ -11,8 +11,9 @@ namespace MemoryGame
     /// </summary>
     public partial class JoinGame : Window
     {
-        private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient = null;        
+        private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient;        
         private GameMatchDto _selectedMatch;
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("JoinGame.xaml.cs");
 
         public JoinGame()
         {
@@ -25,15 +26,25 @@ namespace MemoryGame
         {
             try
             {
-                ObservableCollection<GameMatchDto> listOfActiveMatches = new ObservableCollection<GameMatchDto>();
-                GameMatchDto[] activeMatches = _matchDiscoveryServiceClient.GetActiveMatches();
-                listOfActiveMatches.AddRange(activeMatches);
-                GamesDataGrid.ItemsSource = listOfActiveMatches;
+                PopulateTableWithActiveMatches();
             }
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
+        }
+
+        private void PopulateTableWithActiveMatches()
+        {
+            ObservableCollection<GameMatchDto> listOfActiveMatches = new ObservableCollection<GameMatchDto>();
+            GameMatchDto[] activeMatches = _matchDiscoveryServiceClient.GetActiveMatches();
+
+            for (int indexOfActualMatch = 0; indexOfActualMatch < activeMatches.Length; indexOfActualMatch++)
+            {
+                listOfActiveMatches.Add(activeMatches[indexOfActualMatch]);
+            }
+
+            GamesDataGrid.ItemsSource = listOfActiveMatches;
         }
 
         private void JoinButtonClicked(object sender, RoutedEventArgs e)
@@ -43,8 +54,9 @@ namespace MemoryGame
             {
                 JoinMatch();
             }
-            catch (EndpointNotFoundException)
+            catch (EndpointNotFoundException endpointNotFoundException)
             {
+                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
         }
@@ -56,14 +68,33 @@ namespace MemoryGame
                 MessageBox.Show(Properties.Langs.Resources.NoMatchWasSelected);
             }
             else
-            {                
-                if (PlayerCanJoinToGame())
+            {
+                try
                 {
-                    GoToWaitingRoom();
+                    bool playerCanJoinToGame = PlayerCanJoinToGame();
+                    if (playerCanJoinToGame)
+                    {
+                        GoToWaitingRoom();
+                    }
+                    else
+                    {
+                        MessageBox.Show(Properties.Langs.Resources.FullGameMessage);
+                    }
                 }
-                else
+                catch (FaultException<MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault> matchAccessDeniedException)
                 {
-                    MessageBox.Show(Properties.Langs.Resources.FullGameMessage);
+                    _logger.Fatal("Method JoinMatch tried to join to a non existent match", matchAccessDeniedException);
+                    MessageBox.Show(Properties.Langs.Resources.TriedToJoinToNonexistentMatch);
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    _logger.Fatal(timeoutException);
+                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+                }
+                catch (EndpointNotFoundException endpointNotFoundException)
+                {
+                    _logger.Fatal(endpointNotFoundException);
+                    MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }
             }
         }

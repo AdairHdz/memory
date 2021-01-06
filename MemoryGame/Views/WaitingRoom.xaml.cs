@@ -26,7 +26,8 @@ namespace MemoryGame
             _context = new InstanceContext(this);
             _lobbyServiceClient = new MemoryGameService.LobbyServiceClient(_context);
             _username = Sesion.GetSesion.Username;            
-            _windowIsBeingClosedByTheCloseButton = true;            
+            _windowIsBeingClosedByTheCloseButton = true;
+            _players = new ObservableCollection<string>();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -64,7 +65,10 @@ namespace MemoryGame
         private void LoadActivePlayersInLobby()
         {
             IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersInLobby(GameMatchDto);
-            _players.AddRange(activePlayers);
+            foreach(var oneActivePlayer in activePlayers)
+            {
+                _players.Add(oneActivePlayer);
+            }            
             WaitingRoomDataGrid.ItemsSource = _players;
         }
 
@@ -133,9 +137,11 @@ namespace MemoryGame
         }
 
         public void NotifyNewPlayerEntered(string username)
-        {
-            //_players.Add(username);
-            _players.Add(null);
+        {           
+            if(username != null)
+            {
+                _players.Add(username);
+            }
         }
 
         public void NotifyPlayerLeft(string username)

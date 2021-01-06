@@ -135,6 +135,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="CardDeckRetrievingError" xml:space="preserve">
+    <value>Match couldn't be created because there was an error while trying to retrieve the selected card deck from the database</value>
+  </data>
   <data name="ChangeLanguageSettingsError" xml:space="preserve">
     <value>There was an error while trying to apply your changes. Please try again later</value>
   </data>
@@ -305,6 +308,9 @@
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start</value>
+  </data>
+  <data name="TriedToJoinToNonexistentMatch" xml:space="preserve">
+    <value>It was not possible to join to this match because the host has deleted it</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>

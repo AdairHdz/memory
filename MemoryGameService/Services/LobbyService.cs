@@ -8,16 +8,10 @@ namespace MemoryGameService.Services
     public partial class MemoryGameService : ILobbyService
     {
         public IList<string> GetActivePlayersInLobby(GameMatchDto gameMatchDto)
-        {
-            IList<string> activePlayersFromMatch = new List<string>();
-            foreach(var match in _matches)
-            {
-                if (match.Host.Equals(gameMatchDto.Host))
-                {                    
-                    activePlayersFromMatch = match.GetUsernamesOfPlayersConnectedToLobby();
-                    break;
-                }
-            }
+        {            
+            string host = gameMatchDto.Host;
+            GameMatchDto gameMatch = GetMatch(host);
+            IList<string> activePlayersFromMatch = gameMatch.GetUsernamesOfPlayersConnectedToLobby();
             return activePlayersFromMatch;
         }
 

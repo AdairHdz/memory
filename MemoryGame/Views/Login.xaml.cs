@@ -62,14 +62,18 @@ namespace MemoryGame
                 {
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }
-                catch (FaultException<MemoryGame.MemoryGameService.Faults.NonExistentUserFault>)
+                catch (FaultException<MemoryGameService.Faults.DatabaseConnectionLostFault>)
+                {
+                    MessageBox.Show("Se perdió la conexión");
+                }
+                catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
                 {
                     MessageBox.Show("El usuario no existe");
-                }
+                }                
                 catch (TimeoutException)
                 {
                     MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
-                }
+                }                
             }
             else
             {
@@ -93,12 +97,12 @@ namespace MemoryGame
                 {
                     Sesion playerSesion = Sesion.GetSesion;
                     playerSesion.Username = TextBoxUsername.Text;
-                    playerSesion.EmailAddress = GetUserEmailAdress();
+                    //playerSesion.EmailAddress = GetUserEmailAdress();
                     GoToMainMenu();
                 }
                 else
                 {
-                    GoToActivationToken();
+                    //GoToActivationToken();
                 }
             }
             else

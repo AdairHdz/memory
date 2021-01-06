@@ -1,4 +1,5 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.MemoryGameService.Faults;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -9,6 +10,7 @@ namespace MemoryGameService.Contracts
     {
         [OperationContract(IsOneWay = true)]
         void NotifyCardWasUncoveredd(PlayerMovementDto playerMovementDto);
+        
         [OperationContract(IsOneWay = true)]
         void EnterMatch(string host, string username);
         [OperationContract(IsOneWay = true)]

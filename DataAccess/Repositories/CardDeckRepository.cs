@@ -18,9 +18,10 @@ namespace DataAccess.Repositories
 
         public CardDeck GetCardDeckAndCards(int cardDeckId)
         {
-            CardDeck cardDeck = MemoryGameContext.CardDecks.Include("Cards")
-                .First();
-            return cardDeck;
+            CardDeck cardDeckRetrievedFromDatabase =
+                MemoryGameContext.CardDecks.Include("Cards")
+                .Where(cardDeck => cardDeck.CardDeckId == cardDeckId).First();
+            return cardDeckRetrievedFromDatabase;
         }
 
     }

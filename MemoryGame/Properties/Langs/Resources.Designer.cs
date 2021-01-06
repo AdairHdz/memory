@@ -115,6 +115,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se puede crear la partida debido a que ocurrió un error al intentar recuperar el mazo de cartas. Por favor, intente más tarde..
+        /// </summary>
+        public static string CardDeckRetrievingError {
+            get {
+                return ResourceManager.GetString("CardDeckRetrievingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ocurrió un error al intentar aplicar los cambios. Por favor, intente más tarde.
         /// </summary>
         public static string ChangeLanguageSettingsError {
@@ -624,6 +633,15 @@ namespace MemoryGame.Properties.Langs {
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible unirlo a la partida seleccionada, debido a que el anfitrión la ha eliminado.
+        /// </summary>
+        public static string TriedToJoinToNonexistentMatch {
+            get {
+                return ResourceManager.GetString("TriedToJoinToNonexistentMatch", resourceCulture);
             }
         }
         

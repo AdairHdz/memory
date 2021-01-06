@@ -3,11 +3,11 @@
 namespace MemoryGame.MemoryGameService.Faults
 {
     [DataContract]
-    public class NonExistentUserFault
+    public class NonExistentUserFault : TypedFault
     {
-        [DataMember]
-        public string Error { get; set; }
-        [DataMember]
-        public string Details { get; set; }
+        public NonExistentUserFault()
+        {
+            Error = "The database does not contain any user with the specified credentials";
+        }
     }
 }

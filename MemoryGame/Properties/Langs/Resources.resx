@@ -135,6 +135,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="CardDeckRetrievingError" xml:space="preserve">
+    <value>No se puede crear la partida debido a que ocurrió un error al intentar recuperar el mazo de cartas. Por favor, intente más tarde.</value>
+  </data>
   <data name="ChangeLanguageSettingsError" xml:space="preserve">
     <value>Ocurrió un error al intentar aplicar los cambios. Por favor, intente más tarde</value>
   </data>
@@ -305,6 +308,9 @@
   </data>
   <data name="Start" xml:space="preserve">
     <value>Comenzar</value>
+  </data>
+  <data name="TriedToJoinToNonexistentMatch" xml:space="preserve">
+    <value>No fue posible unirlo a la partida seleccionada, debido a que el anfitrión la ha eliminado</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Nombre de usuario</value>

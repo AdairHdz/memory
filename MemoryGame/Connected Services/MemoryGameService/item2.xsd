@@ -7,4 +7,25 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="NonExistentUserFault" nillable="true" type="tns:NonExistentUserFault" />
+  <xs:complexType name="DatabaseConnectionLostFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Details" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DatabaseConnectionLostFault" nillable="true" type="tns:DatabaseConnectionLostFault" />
+  <xs:complexType name="CardDeckRetrievingFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Details" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CardDeckRetrievingFault" nillable="true" type="tns:CardDeckRetrievingFault" />
+  <xs:complexType name="MatchAccessDeniedFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Details" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchAccessDeniedFault" nillable="true" type="tns:MatchAccessDeniedFault" />
 </xs:schema>
