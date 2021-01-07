@@ -29,6 +29,16 @@ namespace DataAccess.Repositories
             return _context.Set<TEntity>().Where(predicate);
         }
 
+        public TEntity FindFirstOccurence(Func<TEntity, bool> predicate)
+        {
+            IEnumerable<TEntity> results = _context.Set<TEntity>().Where(predicate);
+            if (results.Any())
+            {
+                return results.First();
+            }
+            return null;
+        }
+
         public void Add(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);

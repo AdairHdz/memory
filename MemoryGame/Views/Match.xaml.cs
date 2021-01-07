@@ -1,127 +1,192 @@
-﻿using MemoryGame.Utilities;
+﻿using DataAccess.Entities;
+using MemoryGame.Components;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace MemoryGame.Views
 {
     /// <summary>
     /// Lógica de interacción para Match.xaml
     /// </summary>
-    //[CallbackBehavior(UseSynchronizationContext = false)]
-    public partial class Match : Window, MemoryGameService.ITimerServiceCallback
+    public partial class Match : Window, MemoryGameService.IMatchServiceCallback
     {
-        public int TimerValue { get; set; } = 60;
+        
         private InstanceContext _context = null;
-        private MemoryGameService.TimerServiceClient _timerServiceClient;
-        private MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck;
+        private MemoryGameService.MatchServiceClient _matchServiceClient;
+        public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
+        private List<ImageCard> _imageCards;
+        private int _numberOfMovementsAllowed;
+        private IList<ImageCard> _cardsFlippedInCurrentTurn;
+        private IList<ImageCard> _cardsFlippedInTotal;
+        private bool _playerHasFormedAPair;
+        public string[] Players { get; set; }
+        public string MatchHost { get; set; }
         public Match()
         {
             InitializeComponent();
-            DrawGameBoard();
             _context = new InstanceContext(this);
-            _timerServiceClient = new MemoryGameService.TimerServiceClient(_context);
-            _timerServiceClient.UpdateTimer();
+            _matchServiceClient = new MemoryGameService.MatchServiceClient(_context);
+            _imageCards = new List<ImageCard>();                        
+            _numberOfMovementsAllowed = 0;
+            _cardsFlippedInCurrentTurn = new List<ImageCard>();
+            _cardsFlippedInTotal = new List<ImageCard>();
+            _playerHasFormedAPair = false;
         }
 
-        private void LoadCardDeck()
-        {
-            MemoryGameService.CardDeckRetrieverServiceClient cardDeckRetrieverServiceClient =
-                new MemoryGameService.CardDeckRetrieverServiceClient();
-
-            _cardDeck = cardDeckRetrieverServiceClient.GetCardDeckAndCards(1);           
+        private void DrawPlayersNames()
+        {            
+            UserBoxDrawer userBoxDrawer = new UserBoxDrawer()
+            {
+                GridToBeDrawnOn = MainGrid,
+                PlayersUsernames = Players
+            };
+            userBoxDrawer.Draw();
         }
 
         private void DrawGameBoard()
         {
-            LoadCardDeck();
-            DrawColumns();
-            DrawRows();
-            DrawImages();
-        }
-
-        private void DrawRows()
-        {
-            int numberOfCards = _cardDeck.Cards.Count;
-            int numberOfColumnsDrawn = GameBoardGrid.ColumnDefinitions.Count;
-            
-            //Comportamiento extraño. Ceiling no funciona
-            int numberOfRequiredRows = (int)Math.Ceiling(Convert.ToDouble(numberOfCards / numberOfColumnsDrawn)) + 1;
-            for (int i = 0; i < numberOfRequiredRows; i++)
+            GameBoardDrawer gameBoardDrawer = new GameBoardDrawer()
             {
-                GameBoardGrid.RowDefinitions.Add(new RowDefinition());
-            }
+                GridToBeDrawnOn = GameBoardGrid,
+                ImageCards = _imageCards,
+                CardDeck = CardDeck,
+                NumberOfColumns = 5
+            };
+            gameBoardDrawer.Draw();
+            gameBoardDrawer.SetEventOnCardClicked(GetClickedCard);
         }
-
-        private void DrawColumns()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                GameBoardGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-        }
-
-        private void DrawImages()
-        {            
-            int rowIndex = 0;
-            int columnIndex = 0;
-            int columnCount = GameBoardGrid.ColumnDefinitions.Count;
-            IList<MemoryGameService.DataTransferObjects.CardDto> cards = _cardDeck.Cards;
-            string backImageOfCards = _cardDeck.BackImage;
-            BitmapImage backImage = new BitmapImage(new Uri("pack://application:,,,/MemoryGameService;component/" + backImageOfCards));
-            for (int numberOfActualCard = 0; numberOfActualCard < cards.Count; numberOfActualCard++)
-            {
-                if(columnIndex >= columnCount)
-                {
-                    columnIndex = 0;
-                    rowIndex++;
-                }
-
-                MemoryGameService.DataTransferObjects.CardDto actualCard = _cardDeck.Cards[numberOfActualCard];
-                
-                string frontImageOfActualCard = actualCard.FrontImage;
-
-
-                BitmapImage frontImage = new BitmapImage(new Uri("pack://application:,,,/MemoryGameService;component/" + frontImageOfActualCard));
-                ImageCard imageCard = new ImageCard()
-                {
-                    FrontImage = frontImage,
-                    BackImage = backImage,
-                    Source = backImage,
-                    CardId = actualCard.CardId
-                };
-
-                Grid.SetRow(imageCard, rowIndex);
-                Grid.SetColumn(imageCard, columnIndex);
-                imageCard.Margin = new Thickness(8);
-                imageCard.MouseDown += GetClickedCard;
-                GameBoardGrid.Children.Add(imageCard);                
-                columnIndex++;
-            }
-        }
-
-        public void DisplayTimerValue(int timerValue)
-        {
-            TimerLabel.Content = timerValue;            
-        }
-
+        
         private void GetClickedCard(object sender, EventArgs e)
         {
             ImageCard cardClicked = ((ImageCard)sender);
-            if(cardClicked.Source != cardClicked.FrontImage)
+            bool cardHasNotBeenFlipped = cardClicked.Source != cardClicked.FrontImage;
+            bool playerStillHasMovements = _numberOfMovementsAllowed > 0;
+
+            if (cardHasNotBeenFlipped && playerStillHasMovements)
             {
-                cardClicked.Source = cardClicked.FrontImage;
+                FlipCard(cardClicked);
+                EndMovement();
             }            
         }
 
-        private class ImageCard : Image
+        private void FlipCard(ImageCard cardClicked)
         {
-            public int CardId { set; get; }
-            public BitmapImage FrontImage { get; set; }
-            public BitmapImage BackImage { get; set; }
+            _numberOfMovementsAllowed--;
+            int cardIndex = _imageCards.IndexOf(cardClicked);
+
+            _cardsFlippedInCurrentTurn.Add(cardClicked);
+
+            PlayerMovementDto playerMovementDto = new PlayerMovementDto()
+            {
+                Host = MatchHost,
+                Username = Sesion.GetSesion.Username,
+                CardIndex = cardIndex,
+                MovementsLeft = _numberOfMovementsAllowed,
+                HasFormedAPair = _playerHasFormedAPair
+            };
+
+            _matchServiceClient.NotifyCardWasUncoveredd(playerMovementDto);
+        }
+
+        private void EndMovement()
+        {
+            if (_numberOfMovementsAllowed == 0)
+            {
+                if (HasFormedAPair())
+                {
+                    _numberOfMovementsAllowed = 2;
+                    _playerHasFormedAPair = true;
+                }
+
+                CardPairDto cardPairDto = new CardPairDto()
+                {
+                    IndexOfCard1 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[0]),
+                    IndexOfCard2 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[1]),
+                    BothCardsAreEqual = _playerHasFormedAPair
+                };
+                _matchServiceClient.EndTurn(MatchHost, Sesion.GetSesion.Username, cardPairDto);
+                _playerHasFormedAPair = false;
+                _cardsFlippedInCurrentTurn.Clear();
+            }
+        }
+
+        private bool HasFormedAPair()
+        {
+            if (_cardsFlippedInCurrentTurn[0].CardId == _cardsFlippedInCurrentTurn[1].CardId)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void OptionsButtonClicked(object sender, RoutedEventArgs e)
+        {
+            GameOptions registerView = new GameOptions();
+            registerView.Show();
+        }
+
+        private void WindowLoaded(object sender, EventArgs e)
+        {            
+            DrawPlayersNames();
+            DrawGameBoard();
+            if (MatchHost.Equals(Sesion.GetSesion.Username))
+            {
+                _numberOfMovementsAllowed = 2;
+            }
+            else
+            {
+                _numberOfMovementsAllowed = 0;
+            }
+            TurnLabel.Content = "Es turno de: " + MatchHost;
+            _matchServiceClient.EnterMatch(MatchHost, Sesion.GetSesion.Username);
+        }
+
+        public void UncoverCardd(int cardIndex)
+        {
+            _imageCards[cardIndex].Source = _imageCards[cardIndex].FrontImage;
+        }
+
+        private async void FlipBothCardsAgain(CardPairDto cardPairDto)
+        {
+            await Task.Delay(1000);
+            _imageCards[cardPairDto.IndexOfCard1].Source = _imageCards[cardPairDto.IndexOfCard1].BackImage;
+            _imageCards[cardPairDto.IndexOfCard2].Source = _imageCards[cardPairDto.IndexOfCard2].BackImage;
+        }
+
+        public void NotifyTurnHasEnded(string username, CardPairDto cardPairDto)
+        {
+            TurnLabel.Content = "Es turno de: " + username;
+
+            if (Sesion.GetSesion.Username.Equals(username))
+            {
+                _numberOfMovementsAllowed = 2;
+            }
+
+            if (cardPairDto.BothCardsAreEqual)
+            {
+                ImageCard imageCard1 = _imageCards[cardPairDto.IndexOfCard1];
+                ImageCard imageCard2 = _imageCards[cardPairDto.IndexOfCard2];
+                _cardsFlippedInTotal.Add(imageCard1);
+                _cardsFlippedInTotal.Add(imageCard2);
+            }
+            else
+            {
+                FlipBothCardsAgain(cardPairDto);
+            }
+
+            if(_cardsFlippedInTotal.Count == _imageCards.Count)
+            {
+                _matchServiceClient.NotifyMatchHasEnded(MatchHost);
+            }
+        }
+
+        public void ShowWinners(string winner)
+        {
+            MessageBox.Show(winner + " ha ganado");
         }
     }
 }

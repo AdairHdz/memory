@@ -2,9 +2,12 @@
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.MemoryGameService.Faults;
 using MemoryGameService.Contracts;
 using MemoryGameService.DataTransferObjectMappers;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
@@ -13,11 +16,23 @@ namespace MemoryGameService.Services
         List<PlayerScoreDTO> IScoreService.GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            IEnumerable<Player> playerEntities =
-                unitOfWork.Players.GetPlayersWithBestScore(numberOfPlayersToBeRetrieved);
+            try
+            {
+                IEnumerable<Player> playerEntities =
+                    unitOfWork.Players.GetPlayersWithBestScore(numberOfPlayersToBeRetrieved);
 
-            List<PlayerScoreDTO> playersWithBestScores = MapFromEntitiesToDTOs(playerEntities);
-            return playersWithBestScores;
+                List<PlayerScoreDTO> playersWithBestScores = MapFromEntitiesToDTOs(playerEntities);
+                return playersWithBestScores;
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         private List<PlayerScoreDTO> MapFromEntitiesToDTOs(IEnumerable<Player> listOfEntities)

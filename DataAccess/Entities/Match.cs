@@ -13,8 +13,7 @@ namespace DataAccess.Entities
             Players = new HashSet<Player>();
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MatchId { get; set; }
 
         public int StatusId { get; set; }

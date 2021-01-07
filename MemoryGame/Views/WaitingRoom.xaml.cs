@@ -2,93 +2,221 @@
 using System.ServiceModel;
 using DataAccess.Entities;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System;
 
 namespace MemoryGame
 {
     /// <summary>
     /// Lógica de interacción para WaitingRoom.xaml
     /// </summary>
-    public partial class WaitingRoom : Window, Proxy.IWaitingRoomServiceCallback
+    public partial class WaitingRoom : Window, MemoryGameService.ILobbyServiceCallback
     {
-        private Proxy.WaitingRoomServiceClient server = null;
-        private InstanceContext context = null;
-        Sesion playerSesion = Sesion.GetSesion;
-        public ObservableCollection<string> players = new ObservableCollection<string>();
-        string gameHostUsername;
-        bool isHost;
-        public WaitingRoom(bool isHost, string gameHostUsername, int maxNumOfPlayers)
+        public MemoryGameService.DataTransferObjects.MatchDto GameMatchDto { get; set; }
+        private ObservableCollection<string> _players;
+        private InstanceContext _context;
+        private MemoryGameService.LobbyServiceClient _lobbyServiceClient;
+        private string _username;        
+        private bool _thisPlayerIsHost;
+        private bool _windowIsBeingClosedByTheCloseButton;
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("WaitingRoom.xaml.cs");
+
+        public WaitingRoom()
         {
             InitializeComponent();
-            context = new InstanceContext(this);
-            server = new Proxy.WaitingRoomServiceClient(context);
-            WaitingRoomDataGrid.ItemsSource = players;
-            this.gameHostUsername = gameHostUsername;
-            this.isHost = isHost;
-            if (isHost)
+            _context = new InstanceContext(this);
+            _lobbyServiceClient = new MemoryGameService.LobbyServiceClient(_context);
+            _username = Sesion.GetSesion.Username;            
+            _windowIsBeingClosedByTheCloseButton = true;
+            _players = new ObservableCollection<string>();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DetermineIfPlayerIsHost();
+            if (!_thisPlayerIsHost)
             {
-                server.CreateGame(playerSesion.Username, maxNumOfPlayers);
-            }
-            else
-            {
-                server.JoinGame(gameHostUsername, playerSesion.Username);
                 StarButton.Visibility = System.Windows.Visibility.Collapsed;
             }
 
-            server.RecoverGameMembers(gameHostUsername);
+            try
+            {
+                LoadActivePlayersInLobby();
+                CallJoinLobbyService();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+
         }
 
-        public void HostLeaveGame()
+        private void DetermineIfPlayerIsHost()
         {
-            JoinGame joinGameMenuView = new JoinGame();
-            joinGameMenuView.Show();
-            this.Close();
+            if (_username.Equals(GameMatchDto.Host))
+            {
+                _thisPlayerIsHost = true;
+            }
+            else
+            {
+                _thisPlayerIsHost = false;
+            }
         }
 
-        public void PlayerLeaveGame(string playerUsername)
+        private void LoadActivePlayersInLobby()
         {
-            players.Remove(playerUsername);
+            IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersInLobby(GameMatchDto.Host);
+            foreach(var oneActivePlayer in activePlayers)
+            {
+                _players.Add(oneActivePlayer);
+            }            
+            WaitingRoomDataGrid.ItemsSource = _players;
         }
 
-        public void NewPlayerJoined(string newPlayerUsername)
+        private void CallJoinLobbyService()
         {
-            players.Add(newPlayerUsername);
-        }
-
-        public void ReciveGameMembers(string memberUsername)
-        {
-            players.Add(memberUsername);
-        }
-
-        public void GameStarted()
-        {
-            Chat matchView = new Chat();
-            matchView.Show();
-            this.Close();
+            _lobbyServiceClient.JoinLobby(GameMatchDto.Host, _username);
         }
 
         public void LeaveButtonClicked(object sender, RoutedEventArgs e)
         {
-            server.LeaveGame(gameHostUsername, playerSesion.Username);
-            if (isHost)
+            try
             {
-                MainMenu mainMenuView = new MainMenu();
-                mainMenuView.Show();
-                this.Close();
+                CallLeaveLobbyService();
             }
-            else
+            catch (TimeoutException timeoutException)
             {
-                JoinGame joinGameView = new JoinGame();
-                joinGameView.Show();
-                this.Close();
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+            finally
+            {
+                if (_thisPlayerIsHost)
+                {
+                    GoToMainMenuView();
+                }
+                else
+                {
+                    GoToJoinGameView();
+                }
+            }
+        }
+
+        private void GoToJoinGameView()
+        {
+            _windowIsBeingClosedByTheCloseButton = false;
+            JoinGame joinGameView = new JoinGame();
+            joinGameView.Show();
+            this.Close();
+        }
+
+        private void GoToMainMenuView()
+        {
+            _windowIsBeingClosedByTheCloseButton = false;
+            MainMenu mainMenuView = new MainMenu();
+            mainMenuView.Show();
+            this.Close();
+        }
+
+        private void CallLeaveLobbyService()
+        {
+            _lobbyServiceClient.LeaveLobby(GameMatchDto.Host, _username);
         }
 
         public void StartButtonClicked(object sender, RoutedEventArgs e)
         {
-            server.StarGame(gameHostUsername);
-            Chat matchView = new Chat();
+            if(_players.Count < 2)
+            {
+                MessageBox.Show(Properties.Langs.Resources.InsufficientNumberOfPlayers);
+            }
+            else
+            {
+                StartGame();
+            }            
+        }
+
+        private void StartGame()
+        {
+            try
+            {
+                _lobbyServiceClient.StartGame(GameMatchDto.Host);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+
+        }
+
+        public void NotifyNewPlayerEntered(string username)
+        {           
+            if(username != null)
+            {
+                _players.Add(username);
+            }
+        }
+
+        public void NotifyPlayerLeft(string username)
+        {
+            _players.Remove(username);
+        }
+
+        public void TakePlayersToMatchView(string[] playersInMatch)
+        {
+            _windowIsBeingClosedByTheCloseButton = false;
+            Views.Match matchView = new Views.Match()
+            {
+                Players = playersInMatch,
+                MatchHost = GameMatchDto.Host,
+                CardDeck = GameMatchDto.CardDeckDto
+            };
             matchView.Show();
             this.Close();
+        }
+
+        public void TakePlayersOutOfLobby()
+        {
+            GoToJoinGameView();
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            if (_windowIsBeingClosedByTheCloseButton)
+            {
+                CallLeaveLobbyService();
+            }            
         }
     }
 }

@@ -11,6 +11,5 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         public string EmailAddress { get; set; }
         [DataMember]
         public string Password { get; set; }
-
     }
 }

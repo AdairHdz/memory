@@ -2,23 +2,24 @@
 using System.Windows.Input;
 using System.ServiceModel;
 using DataAccess.Entities;
+using System;
 
 namespace MemoryGame
 {
     /// <summary>
     /// Lógica de interacción para Chat.xaml
     /// </summary>
-    public partial class Chat : Window, Proxy.ICommunicationServiceCallback
+    public partial class Chat : Window, MemoryGameService.ICommunicationServiceCallback
     {
-        private Proxy.CommunicationServiceClient server = null;
+        private MemoryGameService.CommunicationServiceClient server = null;
         private InstanceContext context = null;
         Sesion playerSesion = Sesion.GetSesion;
         public Chat()
         {
             InitializeComponent();
             context = new InstanceContext(this);
-            server = new Proxy.CommunicationServiceClient(context);
-            server.Join(playerSesion.Username);
+            server = new MemoryGameService.CommunicationServiceClient(context);
+            server.SubscribeToCommunicationService("dummie");
 
         }
 
@@ -34,12 +35,8 @@ namespace MemoryGame
             string message = TextBoxMessageContent.Text;
             if (!string.IsNullOrEmpty(message))
             {
-                server.SendMessage(message);
+                server.SendMessage(playerSesion.Username, message);
             }
-
-            string format = "\n" + playerSesion.Username + ": " + message;
-            ChatBox.AppendText(format);
-            ChatBox.ScrollToEnd();
             TextBoxMessageContent.Clear();
         }
 
@@ -49,6 +46,14 @@ namespace MemoryGame
             {
                 SendMessageClickedButton(this, new RoutedEventArgs());
             }
+        }
+
+        public void NotifyUserHasEnteredTheChat(string username)
+        {
+            string format = "\n" + username + " entró al chat";
+            //ChatBox.AppendText(format);
+            //ChatBox.ScrollToEnd();
+            Console.WriteLine(format);
         }
     }
 }

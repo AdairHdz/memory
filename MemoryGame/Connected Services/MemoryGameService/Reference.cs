@@ -15,12 +15,6 @@ namespace MemoryGame.MemoryGameService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IAccessibilityService")]
     public interface IAccessibilityService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
-        bool HasAccessRights(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
-        System.Threading.Tasks.Task<bool> HasAccessRightsAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/IsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/IsVerifiedResponse")]
         bool IsVerified(string username);
         
@@ -46,6 +40,10 @@ namespace MemoryGame.MemoryGameService {
         System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsNonExistentUserFault" +
+            "Fault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsDatabaseConnectionLo" +
+            "stFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO GetPlayerCredentials(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
@@ -77,14 +75,6 @@ namespace MemoryGame.MemoryGameService {
         
         public AccessibilityServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public bool HasAccessRights(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
-            return base.Channel.HasAccessRights(playerCredentialsDTO);
-        }
-        
-        public System.Threading.Tasks.Task<bool> HasAccessRightsAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
-            return base.Channel.HasAccessRightsAsync(playerCredentialsDTO);
         }
         
         public bool IsVerified(string username) {
@@ -133,10 +123,18 @@ namespace MemoryGame.MemoryGameService {
     public interface ICardDeckRetrieverService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.CardDeckRetrievingFault), Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsCardDeckRetrievin" +
+            "gFaultFault", Name="CardDeckRetrievingFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO GetCardDeckAndCards(int cardDeckId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse")]
         System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO> GetCardDeckAndCardsAsync(int cardDeckId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDecksInfo", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDecksInfoResponse")]
+        MemoryGame.MemoryGameService.DataTransferObjects.CardDeckInfoDto[] GetCardDecksInfo();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDecksInfo", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDecksInfoResponse")]
+        System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDeckInfoDto[]> GetCardDecksInfoAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -173,6 +171,14 @@ namespace MemoryGame.MemoryGameService {
         public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO> GetCardDeckAndCardsAsync(int cardDeckId) {
             return base.Channel.GetCardDeckAndCardsAsync(cardDeckId);
         }
+        
+        public MemoryGame.MemoryGameService.DataTransferObjects.CardDeckInfoDto[] GetCardDecksInfo() {
+            return base.Channel.GetCardDecksInfo();
+        }
+        
+        public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.CardDeckInfoDto[]> GetCardDecksInfoAsync() {
+            return base.Channel.GetCardDecksInfoAsync();
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -180,16 +186,16 @@ namespace MemoryGame.MemoryGameService {
     public interface IAccountModifiabilityService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
-        bool SetNewPassword(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
+        bool SetNewPassword(string emailAddress, string newPassword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
-        System.Threading.Tasks.Task<bool> SetNewPasswordAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
+        System.Threading.Tasks.Task<bool> SetNewPasswordAsync(string emailAddress, string newPassword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse")]
-        bool ChangeUsername(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
+        bool ChangeUsername(string emailAddress, string newUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse")]
-        System.Threading.Tasks.Task<bool> ChangeUsernameAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO);
+        System.Threading.Tasks.Task<bool> ChangeUsernameAsync(string emailAddress, string newUsername);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -219,20 +225,20 @@ namespace MemoryGame.MemoryGameService {
                 base(binding, remoteAddress) {
         }
         
-        public bool SetNewPassword(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
-            return base.Channel.SetNewPassword(playerCredentialsDTO);
+        public bool SetNewPassword(string emailAddress, string newPassword) {
+            return base.Channel.SetNewPassword(emailAddress, newPassword);
         }
         
-        public System.Threading.Tasks.Task<bool> SetNewPasswordAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
-            return base.Channel.SetNewPasswordAsync(playerCredentialsDTO);
+        public System.Threading.Tasks.Task<bool> SetNewPasswordAsync(string emailAddress, string newPassword) {
+            return base.Channel.SetNewPasswordAsync(emailAddress, newPassword);
         }
         
-        public bool ChangeUsername(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
-            return base.Channel.ChangeUsername(playerCredentialsDTO);
+        public bool ChangeUsername(string emailAddress, string newUsername) {
+            return base.Channel.ChangeUsername(emailAddress, newUsername);
         }
         
-        public System.Threading.Tasks.Task<bool> ChangeUsernameAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO) {
-            return base.Channel.ChangeUsernameAsync(playerCredentialsDTO);
+        public System.Threading.Tasks.Task<bool> ChangeUsernameAsync(string emailAddress, string newUsername) {
+            return base.Channel.ChangeUsernameAsync(emailAddress, newUsername);
         }
     }
     
@@ -314,27 +320,38 @@ namespace MemoryGame.MemoryGameService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.ICommunicationService", CallbackContract=typeof(MemoryGame.MemoryGameService.ICommunicationServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.ICommunicationService", CallbackContract=typeof(MemoryGame.MemoryGameService.ICommunicationServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface ICommunicationService {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/Join")]
-        void Join(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/SubscribeToCommunicationService", ReplyAction="http://tempuri.org/ICommunicationService/SubscribeToCommunicationServiceResponse")]
+        void SubscribeToCommunicationService(string username);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/Join")]
-        System.Threading.Tasks.Task JoinAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/SubscribeToCommunicationService", ReplyAction="http://tempuri.org/ICommunicationService/SubscribeToCommunicationServiceResponse")]
+        System.Threading.Tasks.Task SubscribeToCommunicationServiceAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationService", ReplyAction="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationServiceRespo" +
+            "nse")]
+        void UnsubscribeFromCommunicationService();
+        
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationService", ReplyAction="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationServiceRespo" +
+            "nse")]
+        System.Threading.Tasks.Task UnsubscribeFromCommunicationServiceAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/SendMessage")]
-        void SendMessage(string message);
+        void SendMessage(string sender, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(string message);
+        System.Threading.Tasks.Task SendMessageAsync(string sender, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ICommunicationServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommunicationService/ReciveMessage", ReplyAction="http://tempuri.org/ICommunicationService/ReciveMessageResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/ReciveMessage")]
         void ReciveMessage(string username, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICommunicationService/NotifyUserHasEnteredTheChat")]
+        void NotifyUserHasEnteredTheChat(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -365,20 +382,134 @@ namespace MemoryGame.MemoryGameService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Join(string username) {
-            base.Channel.Join(username);
+        public void SubscribeToCommunicationService(string username) {
+            base.Channel.SubscribeToCommunicationService(username);
         }
         
-        public System.Threading.Tasks.Task JoinAsync(string username) {
-            return base.Channel.JoinAsync(username);
+        public System.Threading.Tasks.Task SubscribeToCommunicationServiceAsync(string username) {
+            return base.Channel.SubscribeToCommunicationServiceAsync(username);
         }
         
-        public void SendMessage(string message) {
-            base.Channel.SendMessage(message);
+        public void UnsubscribeFromCommunicationService() {
+            base.Channel.UnsubscribeFromCommunicationService();
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(string message) {
-            return base.Channel.SendMessageAsync(message);
+        public System.Threading.Tasks.Task UnsubscribeFromCommunicationServiceAsync() {
+            return base.Channel.UnsubscribeFromCommunicationServiceAsync();
+        }
+        
+        public void SendMessage(string sender, string message) {
+            base.Channel.SendMessage(sender, message);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageAsync(string sender, string message) {
+            return base.Channel.SendMessageAsync(sender, message);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.ILobbyService", CallbackContract=typeof(MemoryGame.MemoryGameService.ILobbyServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface ILobbyService {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/JoinLobby")]
+        void JoinLobby(string host, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/JoinLobby")]
+        System.Threading.Tasks.Task JoinLobbyAsync(string host, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/LeaveLobby")]
+        void LeaveLobby(string host, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/LeaveLobby")]
+        System.Threading.Tasks.Task LeaveLobbyAsync(string host, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetActivePlayersInLobby", ReplyAction="http://tempuri.org/ILobbyService/GetActivePlayersInLobbyResponse")]
+        string[] GetActivePlayersInLobby(string host);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyService/GetActivePlayersInLobby", ReplyAction="http://tempuri.org/ILobbyService/GetActivePlayersInLobbyResponse")]
+        System.Threading.Tasks.Task<string[]> GetActivePlayersInLobbyAsync(string host);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/StartGame")]
+        void StartGame(string host);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/StartGame")]
+        System.Threading.Tasks.Task StartGameAsync(string host);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ILobbyServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/NotifyNewPlayerEntered")]
+        void NotifyNewPlayerEntered(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/NotifyPlayerLeft")]
+        void NotifyPlayerLeft(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/TakePlayersToMatchView")]
+        void TakePlayersToMatchView(string[] playersInMatch);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyService/TakePlayersOutOfLobby")]
+        void TakePlayersOutOfLobby();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ILobbyServiceChannel : MemoryGame.MemoryGameService.ILobbyService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class LobbyServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.MemoryGameService.ILobbyService>, MemoryGame.MemoryGameService.ILobbyService {
+        
+        public LobbyServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public LobbyServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public LobbyServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public LobbyServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public LobbyServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void JoinLobby(string host, string username) {
+            base.Channel.JoinLobby(host, username);
+        }
+        
+        public System.Threading.Tasks.Task JoinLobbyAsync(string host, string username) {
+            return base.Channel.JoinLobbyAsync(host, username);
+        }
+        
+        public void LeaveLobby(string host, string username) {
+            base.Channel.LeaveLobby(host, username);
+        }
+        
+        public System.Threading.Tasks.Task LeaveLobbyAsync(string host, string username) {
+            return base.Channel.LeaveLobbyAsync(host, username);
+        }
+        
+        public string[] GetActivePlayersInLobby(string host) {
+            return base.Channel.GetActivePlayersInLobby(host);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetActivePlayersInLobbyAsync(string host) {
+            return base.Channel.GetActivePlayersInLobbyAsync(host);
+        }
+        
+        public void StartGame(string host) {
+            base.Channel.StartGame(host);
+        }
+        
+        public System.Threading.Tasks.Task StartGameAsync(string host) {
+            return base.Channel.StartGameAsync(host);
         }
     }
     
@@ -430,21 +561,160 @@ namespace MemoryGame.MemoryGameService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IMatchCreationService")]
+    public interface IMatchCreationService {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchCreationService/CreateNewMatch")]
+        void CreateNewMatch(MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatchDto);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchCreationService/CreateNewMatch")]
+        System.Threading.Tasks.Task CreateNewMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatchDto);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMatchCreationServiceChannel : MemoryGame.MemoryGameService.IMatchCreationService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class MatchCreationServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGameService.IMatchCreationService>, MemoryGame.MemoryGameService.IMatchCreationService {
+        
+        public MatchCreationServiceClient() {
+        }
+        
+        public MatchCreationServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public MatchCreationServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchCreationServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchCreationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public void CreateNewMatch(MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatchDto) {
+            base.Channel.CreateNewMatch(gameMatchDto);
+        }
+        
+        public System.Threading.Tasks.Task CreateNewMatchAsync(MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatchDto) {
+            return base.Channel.CreateNewMatchAsync(gameMatchDto);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IMatchDiscoveryService")]
+    public interface IMatchDiscoveryService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchDiscoveryService/GetActiveMatches", ReplyAction="http://tempuri.org/IMatchDiscoveryService/GetActiveMatchesResponse")]
+        MemoryGame.MemoryGameService.DataTransferObjects.MatchDto[] GetActiveMatches();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchDiscoveryService/GetActiveMatches", ReplyAction="http://tempuri.org/IMatchDiscoveryService/GetActiveMatchesResponse")]
+        System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.MatchDto[]> GetActiveMatchesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchDiscoveryService/CanJoin", ReplyAction="http://tempuri.org/IMatchDiscoveryService/CanJoinResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault), Action="http://tempuri.org/IMatchDiscoveryService/CanJoinMatchAccessDeniedFaultFault", Name="MatchAccessDeniedFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
+        bool CanJoin(string matchHost);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchDiscoveryService/CanJoin", ReplyAction="http://tempuri.org/IMatchDiscoveryService/CanJoinResponse")]
+        System.Threading.Tasks.Task<bool> CanJoinAsync(string matchHost);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMatchDiscoveryServiceChannel : MemoryGame.MemoryGameService.IMatchDiscoveryService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class MatchDiscoveryServiceClient : System.ServiceModel.ClientBase<MemoryGame.MemoryGameService.IMatchDiscoveryService>, MemoryGame.MemoryGameService.IMatchDiscoveryService {
+        
+        public MatchDiscoveryServiceClient() {
+        }
+        
+        public MatchDiscoveryServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public MatchDiscoveryServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchDiscoveryServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchDiscoveryServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public MemoryGame.MemoryGameService.DataTransferObjects.MatchDto[] GetActiveMatches() {
+            return base.Channel.GetActiveMatches();
+        }
+        
+        public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.MatchDto[]> GetActiveMatchesAsync() {
+            return base.Channel.GetActiveMatchesAsync();
+        }
+        
+        public bool CanJoin(string matchHost) {
+            return base.Channel.CanJoin(matchHost);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CanJoinAsync(string matchHost) {
+            return base.Channel.CanJoinAsync(matchHost);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IMatchService", CallbackContract=typeof(MemoryGame.MemoryGameService.IMatchServiceCallback))]
     public interface IMatchService {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/GetActivePlayers")]
-        void GetActivePlayers();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyCardWasUncoveredd")]
+        void NotifyCardWasUncoveredd(MemoryGame.MemoryGameService.DataTransferObjects.PlayerMovementDto playerMovementDto);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/GetActivePlayers")]
-        System.Threading.Tasks.Task GetActivePlayersAsync();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyCardWasUncoveredd")]
+        System.Threading.Tasks.Task NotifyCardWasUncovereddAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerMovementDto playerMovementDto);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/EnterMatch")]
+        void EnterMatch(string host, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/EnterMatch")]
+        System.Threading.Tasks.Task EnterMatchAsync(string host, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/EndTurn")]
+        void EndTurn(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/EndTurn")]
+        System.Threading.Tasks.Task EndTurnAsync(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetPlayersConnectedToMatch", ReplyAction="http://tempuri.org/IMatchService/GetPlayersConnectedToMatchResponse")]
+        MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatch[] GetPlayersConnectedToMatch(string host);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetPlayersConnectedToMatch", ReplyAction="http://tempuri.org/IMatchService/GetPlayersConnectedToMatchResponse")]
+        System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatch[]> GetPlayersConnectedToMatchAsync(string host);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyMatchHasEnded")]
+        void NotifyMatchHasEnded(string host);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyMatchHasEnded")]
+        System.Threading.Tasks.Task NotifyMatchHasEndedAsync(string host);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IMatchServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ShowActivePlayers")]
-        void ShowActivePlayers(string[] activePlayers);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/UncoverCardd")]
+        void UncoverCardd(int cardIndex);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyTurnHasEnded")]
+        void NotifyTurnHasEnded(string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ShowWinners")]
+        void ShowWinners(string winner);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -475,67 +745,44 @@ namespace MemoryGame.MemoryGameService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void GetActivePlayers() {
-            base.Channel.GetActivePlayers();
+        public void NotifyCardWasUncoveredd(MemoryGame.MemoryGameService.DataTransferObjects.PlayerMovementDto playerMovementDto) {
+            base.Channel.NotifyCardWasUncoveredd(playerMovementDto);
         }
         
-        public System.Threading.Tasks.Task GetActivePlayersAsync() {
-            return base.Channel.GetActivePlayersAsync();
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.ITimerService", CallbackContract=typeof(MemoryGame.MemoryGameService.ITimerServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
-    public interface ITimerService {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ITimerService/UpdateTimer")]
-        void UpdateTimer();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ITimerService/UpdateTimer")]
-        System.Threading.Tasks.Task UpdateTimerAsync();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ITimerServiceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ITimerService/DisplayTimerValue")]
-        void DisplayTimerValue(int timerValue);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ITimerServiceChannel : MemoryGame.MemoryGameService.ITimerService, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class TimerServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.MemoryGameService.ITimerService>, MemoryGame.MemoryGameService.ITimerService {
-        
-        public TimerServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+        public System.Threading.Tasks.Task NotifyCardWasUncovereddAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerMovementDto playerMovementDto) {
+            return base.Channel.NotifyCardWasUncovereddAsync(playerMovementDto);
         }
         
-        public TimerServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
+        public void EnterMatch(string host, string username) {
+            base.Channel.EnterMatch(host, username);
         }
         
-        public TimerServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public System.Threading.Tasks.Task EnterMatchAsync(string host, string username) {
+            return base.Channel.EnterMatchAsync(host, username);
         }
         
-        public TimerServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public void EndTurn(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto) {
+            base.Channel.EndTurn(host, username, cardPairDto);
         }
         
-        public TimerServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
+        public System.Threading.Tasks.Task EndTurnAsync(string host, string username, MemoryGame.MemoryGameService.DataTransferObjects.CardPairDto cardPairDto) {
+            return base.Channel.EndTurnAsync(host, username, cardPairDto);
         }
         
-        public void UpdateTimer() {
-            base.Channel.UpdateTimer();
+        public MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatch[] GetPlayersConnectedToMatch(string host) {
+            return base.Channel.GetPlayersConnectedToMatch(host);
         }
         
-        public System.Threading.Tasks.Task UpdateTimerAsync() {
-            return base.Channel.UpdateTimerAsync();
+        public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatch[]> GetPlayersConnectedToMatchAsync(string host) {
+            return base.Channel.GetPlayersConnectedToMatchAsync(host);
+        }
+        
+        public void NotifyMatchHasEnded(string host) {
+            base.Channel.NotifyMatchHasEnded(host);
+        }
+        
+        public System.Threading.Tasks.Task NotifyMatchHasEndedAsync(string host) {
+            return base.Channel.NotifyMatchHasEndedAsync(host);
         }
     }
     
@@ -638,8 +885,6 @@ namespace MemoryGame.MemoryGameService {
     public interface IPlayerRegistryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.EndpointNotFoundFault), Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerEndpointNotFoundFaultF" +
-            "ault", Name="EndpointNotFoundFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool RegisterNewPlayer(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse")]
@@ -707,232 +952,6 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task<bool> UserNameIsAvailableAsync(string username) {
             return base.Channel.UserNameIsAvailableAsync(username);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IJoinGameService", CallbackContract=typeof(MemoryGame.MemoryGameService.IJoinGameServiceCallback))]
-    public interface IJoinGameService {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/JoinGameLobby")]
-        void JoinGameLobby(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/JoinGameLobby")]
-        System.Threading.Tasks.Task JoinGameLobbyAsync(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/LeaveGameLobby")]
-        void LeaveGameLobby();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/LeaveGameLobby")]
-        System.Threading.Tasks.Task LeaveGameLobbyAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/RecoverAvailableGames")]
-        void RecoverAvailableGames();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/RecoverAvailableGames")]
-        System.Threading.Tasks.Task RecoverAvailableGamesAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJoinGameService/AskForJoinGame", ReplyAction="http://tempuri.org/IJoinGameService/AskForJoinGameResponse")]
-        bool AskForJoinGame(string gameHostUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJoinGameService/AskForJoinGame", ReplyAction="http://tempuri.org/IJoinGameService/AskForJoinGameResponse")]
-        System.Threading.Tasks.Task<bool> AskForJoinGameAsync(string gameHostUsername);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IJoinGameServiceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/NewGameCreated")]
-        void NewGameCreated(string gameHostUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/ReciveAvailableGames")]
-        void ReciveAvailableGames(string gameHostUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IJoinGameService/RemoveGameFromList")]
-        void RemoveGameFromList(string gameHostUsername);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IJoinGameServiceChannel : MemoryGame.MemoryGameService.IJoinGameService, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class JoinGameServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.MemoryGameService.IJoinGameService>, MemoryGame.MemoryGameService.IJoinGameService {
-        
-        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
-        }
-        
-        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
-        }
-        
-        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public JoinGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
-        }
-        
-        public void JoinGameLobby(string username) {
-            base.Channel.JoinGameLobby(username);
-        }
-        
-        public System.Threading.Tasks.Task JoinGameLobbyAsync(string username) {
-            return base.Channel.JoinGameLobbyAsync(username);
-        }
-        
-        public void LeaveGameLobby() {
-            base.Channel.LeaveGameLobby();
-        }
-        
-        public System.Threading.Tasks.Task LeaveGameLobbyAsync() {
-            return base.Channel.LeaveGameLobbyAsync();
-        }
-        
-        public void RecoverAvailableGames() {
-            base.Channel.RecoverAvailableGames();
-        }
-        
-        public System.Threading.Tasks.Task RecoverAvailableGamesAsync() {
-            return base.Channel.RecoverAvailableGamesAsync();
-        }
-        
-        public bool AskForJoinGame(string gameHostUsername) {
-            return base.Channel.AskForJoinGame(gameHostUsername);
-        }
-        
-        public System.Threading.Tasks.Task<bool> AskForJoinGameAsync(string gameHostUsername) {
-            return base.Channel.AskForJoinGameAsync(gameHostUsername);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MemoryGameService.IWaitingRoomService", CallbackContract=typeof(MemoryGame.MemoryGameService.IWaitingRoomServiceCallback))]
-    public interface IWaitingRoomService {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/CreateGame")]
-        void CreateGame(string username, int maxNumOfPlayers);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/CreateGame")]
-        System.Threading.Tasks.Task CreateGameAsync(string username, int maxNumOfPlayers);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/RecoverGameMembers")]
-        void RecoverGameMembers(string gameHostUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/RecoverGameMembers")]
-        System.Threading.Tasks.Task RecoverGameMembersAsync(string gameHostUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/JoinGame")]
-        void JoinGame(string gameHostUsername, string newPlayerUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/JoinGame")]
-        System.Threading.Tasks.Task JoinGameAsync(string gameHostUsername, string newPlayerUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/LeaveGame")]
-        void LeaveGame(string gameHostUsername, string username);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/LeaveGame")]
-        System.Threading.Tasks.Task LeaveGameAsync(string gameHostUsername, string username);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/StarGame")]
-        void StarGame(string gameHostUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/StarGame")]
-        System.Threading.Tasks.Task StarGameAsync(string gameHostUsername);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IWaitingRoomServiceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/NewPlayerJoined")]
-        void NewPlayerJoined(string newPlayerUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/ReciveGameMembers")]
-        void ReciveGameMembers(string memberUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/HostLeaveGame")]
-        void HostLeaveGame();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/PlayerLeaveGame")]
-        void PlayerLeaveGame(string playerUsername);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWaitingRoomService/GameStarted")]
-        void GameStarted();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IWaitingRoomServiceChannel : MemoryGame.MemoryGameService.IWaitingRoomService, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class WaitingRoomServiceClient : System.ServiceModel.DuplexClientBase<MemoryGame.MemoryGameService.IWaitingRoomService>, MemoryGame.MemoryGameService.IWaitingRoomService {
-        
-        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
-        }
-        
-        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
-        }
-        
-        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public WaitingRoomServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
-        }
-        
-        public void CreateGame(string username, int maxNumOfPlayers) {
-            base.Channel.CreateGame(username, maxNumOfPlayers);
-        }
-        
-        public System.Threading.Tasks.Task CreateGameAsync(string username, int maxNumOfPlayers) {
-            return base.Channel.CreateGameAsync(username, maxNumOfPlayers);
-        }
-        
-        public void RecoverGameMembers(string gameHostUsername) {
-            base.Channel.RecoverGameMembers(gameHostUsername);
-        }
-        
-        public System.Threading.Tasks.Task RecoverGameMembersAsync(string gameHostUsername) {
-            return base.Channel.RecoverGameMembersAsync(gameHostUsername);
-        }
-        
-        public void JoinGame(string gameHostUsername, string newPlayerUsername) {
-            base.Channel.JoinGame(gameHostUsername, newPlayerUsername);
-        }
-        
-        public System.Threading.Tasks.Task JoinGameAsync(string gameHostUsername, string newPlayerUsername) {
-            return base.Channel.JoinGameAsync(gameHostUsername, newPlayerUsername);
-        }
-        
-        public void LeaveGame(string gameHostUsername, string username) {
-            base.Channel.LeaveGame(gameHostUsername, username);
-        }
-        
-        public System.Threading.Tasks.Task LeaveGameAsync(string gameHostUsername, string username) {
-            return base.Channel.LeaveGameAsync(gameHostUsername, username);
-        }
-        
-        public void StarGame(string gameHostUsername) {
-            base.Channel.StarGame(gameHostUsername);
-        }
-        
-        public System.Threading.Tasks.Task StarGameAsync(string gameHostUsername) {
-            return base.Channel.StarGameAsync(gameHostUsername);
         }
     }
 }

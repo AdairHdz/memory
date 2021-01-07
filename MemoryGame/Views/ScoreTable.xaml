@@ -78,7 +78,7 @@
                     <DataGridTextColumn
                         HeaderStyle="{StaticResource dataGridHeader}"
                         Header="{x:Static p:Resources.Points}" Width="*"
-                        Binding="{Binding Score}"/>
+                        Binding="{Binding TotalScore}"/>
                 </DataGrid.Columns>
                 
             </DataGrid>

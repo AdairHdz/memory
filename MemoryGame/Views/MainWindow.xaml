@@ -31,7 +31,6 @@
                 <fa:FontAwesome Text="{x:Static p:Resources.Settings}" FontSize="15" Foreground="#FFFFFF"/>
             </StackPanel>
         </Button>
-
         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
                Foreground="#FFD166" HorizontalAlignment="Center"
                FontFamily="Fonts/ReenieBeanie-Regular.ttf" 

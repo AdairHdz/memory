@@ -18,10 +18,12 @@ namespace MemoryGame
     {
         private RuleSet _ruleSet;
         private string _username, _password;
-        
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("Login.xaml.cs");
+        private AccessibilityServiceClient _accessibilityServiceClient;
         public Login()
         {            
             InitializeComponent();
+            _accessibilityServiceClient = new AccessibilityServiceClient();
         }
 
         private void GetDataFromFields()
@@ -49,27 +51,89 @@ namespace MemoryGame
             }
         }
 
-        public bool LoginIsValid()
+        private void LoginButtonClicked(object sender, RoutedEventArgs e)
         {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
+            SetFormValidation();
+            if (_ruleSet.AllValidationRulesHavePassed())
+            {
+                try
+                {
+                    LoginUser();
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+                }
+                catch (FaultException<MemoryGameService.Faults.DatabaseConnectionLostFault>)
+                {
+                    //MessageBox.Show(Properties.Langs.Resources.);
+                }
+                catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
+                {
+                    MessageBox.Show("El usuario no existe");
+                }                
+                catch (TimeoutException timeoutException)
+                {
+                    _logger.Fatal(timeoutException);
+                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+                }
+                catch (CommunicationException communicationException)
+                {
+                    _logger.Fatal(communicationException);
+                    MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+                }
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
+        }
+
+        public string GetUserEmailAdress()
+        {          
+            
+            string username = TextBoxUsername.Text;
+            string emailAddress = _accessibilityServiceClient.GetUserEmailAddress(username);
+            return emailAddress;
+        }
+
+        private void LoginUser()
+        {
+            if (LoginIsValid())
+            {
+                if (EmailIsVerified())
+                {
+                    Sesion playerSesion = Sesion.GetSesion;
+                    playerSesion.Username = TextBoxUsername.Text;
+                    playerSesion.EmailAddress = GetUserEmailAdress();
+                    GoToMainMenu();
+                }
+                else
+                {
+                    GoToActivationToken();
+                }
+            }
+            else
+            {
+                MessageBox.Show(Properties.Langs.Resources.NonMatchingCredentials);
+            }
+        }
+
+        public bool LoginIsValid()
+        {                 
             BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
-
-            PlayerCredentialsDTO playerCredentials = client.GetPlayerCredentials(_username);
-
+            PlayerCredentialsDTO playerCredentials =
+                _accessibilityServiceClient.GetPlayerCredentials(_username);
             bool isMatch = hashGenerator.Match(_password, playerCredentials.Password);
-
             return isMatch;
         }
 
         public bool EmailIsVerified()
         {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-
             string username = TextBoxUsername.Text;
-
-            return client.IsVerified(username);
+            bool emailIsVerified = _accessibilityServiceClient.IsVerified(username);
+            return emailIsVerified;
         }
-
 
         public void GoToMainMenu()
         {
@@ -78,48 +142,11 @@ namespace MemoryGame
             this.Close();
         }
 
-        public string GetUserEmailAdress()
+        private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
         {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-
-            string username = TextBoxUsername.Text;
-
-            return client.GetUserEmailAddress(username);
-        }
-
-        private void LoginButtonClicked(object sender, RoutedEventArgs e)
-        {
-            SetFormValidation();
-            if (_ruleSet.AllValidationRulesHavePassed())
-            {
-                if (LoginIsValid())
-                {
-                    if (EmailIsVerified())
-                    {
-                        Sesion playerSesion = Sesion.GetSesion;
-                        playerSesion.Username = TextBoxUsername.Text;
-                        playerSesion.EmailAddress = GetUserEmailAdress();
-                        GoToMainMenu();
-                    }
-                    else
-                    {
-                        ActivationToken activationTokenWindow =
-                                new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
-
-                        activationTokenWindow.Show();
-                        this.Close();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(Properties.Langs.Resources.NonMatchingCredentials);
-                }
-            }
-            else
-            {
-                ShowErrorMessage();
-            }
-
+            RecoverPassword mainWindowView = new RecoverPassword();
+            mainWindowView.Show();
+            this.Close();
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)
@@ -129,10 +156,11 @@ namespace MemoryGame
             this.Close();
         }
 
-        private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
+        private void GoToActivationToken()
         {
-            RecoverPassword mainWindowView = new RecoverPassword();
-            mainWindowView.Show();
+            ActivationToken activationTokenWindow =
+                new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
+            activationTokenWindow.Show();
             this.Close();
         }
     }

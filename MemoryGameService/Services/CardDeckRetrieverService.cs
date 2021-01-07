@@ -1,12 +1,15 @@
 ﻿using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
+using MemoryGame.MemoryGameService.Faults;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using MemoryGameService.DataTransferObjectMappers;
+using MemoryGameService.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ServiceModel;
+using System.Data.SqlClient;
 
 namespace MemoryGameService.Services
 {
@@ -17,23 +20,66 @@ namespace MemoryGameService.Services
         public CardDeckDTO GetCardDeckAndCards(int cardDeckId)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            CardDeck cardDeck = unitOfWork.CardDecks.GetCardDeckAndCards(cardDeckId);
+            try
+            {
+                CardDeck cardDeck = unitOfWork.CardDecks.GetCardDeckAndCards(cardDeckId);
+                if(cardDeck != null)
+                {
+                    _cardDeckDTO = CardDeckMapper.CreateDTO(cardDeck);
+                    _cards = cardDeck.Cards;
 
-            _cardDeckDTO = CardDeckMapper.CreateDTO(cardDeck);
+                    /**
+                     * This code is adding the same set of cards Twice.
+                     * This is because this way I don't need to store each pair of cards
+                     * in the database (it would be a waste of storage)
+                     */
+                    PopulateCardDeckDtoWithCards();
+                    PopulateCardDeckDtoWithCards();
 
-            _cards = cardDeck.Cards;
+                    ShuffleCards();
+                    return _cardDeckDTO;
+                }
+                CardDeckRetrievingFault cardDeckRetrievingFault = new CardDeckRetrievingFault()
+                {
+                    Error = "CardDeckRetrieving error",
+                    Details = "There was an error while trying to get the selected card deck from the database"
+                };
+                throw new FaultException<CardDeckRetrievingFault>(cardDeckRetrievingFault);
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
+        }
 
-            /**
-             * This code is adding the same set of cards Twice.
-             * This is becausa this way I don't need to store each pair of cards
-             * in the database (it would be a waste of storage)
-             */
-            PopulateCardDeckDtoWithCards();
-            PopulateCardDeckDtoWithCards();
-
-            ShuffleCards();
-
-            return _cardDeckDTO;
+        public IList<CardDeckInfoDto> GetCardDecksInfo()
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            try
+            {
+                IEnumerable<CardDeck> cardDecks = unitOfWork.CardDecks.GetAll();
+                IList<CardDeckInfoDto> listOfCardDecksInfo = new List<CardDeckInfoDto>();
+                foreach (var individualCardDeck in cardDecks)
+                {
+                    CardDeckInfoDto cardDeckInfo = new CardDeckInfoDto()
+                    {
+                        CardDeckId = individualCardDeck.CardDeckId,
+                        CardDeckName = individualCardDeck.Name
+                    };
+                    listOfCardDecksInfo.Add(cardDeckInfo);
+                }
+                return listOfCardDecksInfo;
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }      
         }
 
         private void PopulateCardDeckDtoWithCards()
@@ -47,24 +93,8 @@ namespace MemoryGameService.Services
 
         private void ShuffleCards()
         {
-            IList<CardDto> cards = _cardDeckDTO.Cards;
-            int lastIndex = cards.Count() - 1;
-            while (lastIndex > 0)
-            {
-                int randomIndex = GenerateRandomNumberBetweenRange(0, lastIndex);
-                CardDto auxiliaryContainer = cards[lastIndex];
-                cards[lastIndex] = cards[randomIndex];
-                cards[randomIndex] = auxiliaryContainer;
-                lastIndex--;
-            }
+            CardShuffler cardShuffler = new CardShuffler();
+            cardShuffler.ShuffleCards(_cardDeckDTO.Cards);
         }
-
-        private int GenerateRandomNumberBetweenRange(int minimum, int maximum)
-        {
-            Random randomNumberGenerator = new Random();
-            int randomNumber = randomNumberGenerator.Next(minimum, maximum);
-            return randomNumber;
-        }
-
     }
 }

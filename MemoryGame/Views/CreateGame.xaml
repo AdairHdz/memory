@@ -40,20 +40,26 @@
                Style="{StaticResource title}" Content="{x:Static p:Resources.CreateGame}">
         </Label>
 
-        <ComboBox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="4" Name="ComboBoxNumberOfPlayers"
-                  ItemsSource="{Binding}">
-        </ComboBox>
-
-        <Label Grid.Column="4" Grid.Row="3"
+        <Label Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="3"
                HorizontalAlignment="Center" VerticalAlignment="Center"
                Style="{StaticResource infoLabel}"
                Content="{x:Static p:Resources.Deck}"/>
 
-        <Label Name="deckLbl" Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="2" 
+        <ComboBox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="4" 
+                  Name="CardDeckComboBox"/>
+
+
+        <Label Name="deckLbl" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="2" 
+               HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Style="{StaticResource infoLabel}" 
-               Content="Nombre"/>
+               Content="{x:Static p:Resources.NumberOfPlayers}"/>
 
+        <ComboBox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="6" Name="ComboBoxNumberOfPlayers">
+            <ComboBoxItem Content="{x:Static p:Resources.TwoPlayers}" IsSelected="True" Tag="2"/>
+            <ComboBoxItem Content="{x:Static p:Resources.ThreePlayers}" Tag="3"/>
+            <ComboBoxItem Content="{x:Static p:Resources.FourPlayers}" Tag="4"/>
+        </ComboBox>
         <Button Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="2" 
                 VerticalAlignment="Center"
                 Margin="10 0 0 0"

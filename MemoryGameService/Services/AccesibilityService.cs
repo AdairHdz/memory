@@ -3,7 +3,10 @@ using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using MemoryGameService.DataTransferObjectMappers;
-using System.Linq;
+using System.ServiceModel;
+using MemoryGame.MemoryGameService.Faults;
+using DataAccess.Entities;
+using System.Data.SqlClient;
 
 namespace MemoryGameService.Services
 {
@@ -12,58 +15,122 @@ namespace MemoryGameService.Services
         public string GetUserEmailAddress(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.UserName == username);
-            string emailAddress = player.ElementAt(0).EmailAddress;
-            unitOfWork.Dispose();
-            return emailAddress;
+            try
+            {
+                Player playerWhoPossessTheSpecifiedUsername = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username);
+                if(playerWhoPossessTheSpecifiedUsername != null)
+                {
+                    string emailAddress = playerWhoPossessTheSpecifiedUsername.EmailAddress;
+                    return emailAddress;
+                }
+                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
+                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public string GetUsername(string emailAddress)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Get(emailAddress);
-            string username = player.UserName;
-            unitOfWork.Dispose();
-            return username;
-        }
-
-        public bool HasAccessRights(PlayerCredentialsDTO playerCredentialsDTO)
-        {
-            string username = playerCredentialsDTO.Username;
-            string password = playerCredentialsDTO.Password;
-
-            var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.UserName == username && x.Password == password);
-            int matches = player.Count();
-            unitOfWork.Dispose();
-            return matches == 1;
+            try
+            {
+                var player = unitOfWork.Players.Get(emailAddress);
+                if(player != null)
+                {
+                    return player.UserName;
+                }
+                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
+                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public bool IsVerified(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.UserName == username && x.EmailWasVerified);
-            int matches = player.Count();
-            unitOfWork.Dispose();
-            return matches == 1;
+            try
+            {
+                var player = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username && x.EmailWasVerified);
+                if (player != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch(SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public bool ItsRegistered(string emailAddress)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.EmailAddress == emailAddress);
-            int matches = player.Count();
-            unitOfWork.Dispose();
-            return matches == 1;
+            Player player = unitOfWork.Players.Get(emailAddress);
+            try
+            {
+                if (player != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public PlayerCredentialsDTO GetPlayerCredentials(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.UserName == username).First();
-
-            PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(player);
-            return playerCredentials;
+            try
+            {                
+                Player playerWhoPossessTheSpecifiedUsername = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username);                
+                if(playerWhoPossessTheSpecifiedUsername != null)
+                {
+                    PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(playerWhoPossessTheSpecifiedUsername);
+                    return playerCredentials;
+                }
+                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
+                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+            }
+            catch (SqlException)
+            {
+                //Esto nunca lo lanza. Se da un timeout exception
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
     }
 }

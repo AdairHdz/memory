@@ -1,36 +1,52 @@
 ﻿using MemoryGameService.Contracts;
-using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single,
-       InstanceContextMode = InstanceContextMode.Single)]
+    public class CommunicationEventArgs
+    {
+        public string Sender { get; set; }
+        public string Message { get; set; }
+    }
+
     public partial class MemoryGameService : ICommunicationService
     {
-        private Dictionary<IChatClient, string> _players = new Dictionary<IChatClient, string>();
-        public void SendMessage(string message)
-        {
-            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-            string player;
-            if (!_players.TryGetValue(connection, out player))
-            {
-                return;
-            }
-            foreach (var other in _players.Keys)
-            {
-                if (other == connection)
-                {
-                    continue;
-                }
-                other.ReciveMessage(player, message);
-            }
 
-        }
-        public void Join(string username)
+        public static event MessageSentEventHandler MessageSentEvent;
+        public delegate void MessageSentEventHandler(object sender,
+            CommunicationEventArgs communicationEventArgs);
+        ICommunicationServiceCallback _communicationServiceCallback = null;
+        MessageSentEventHandler _messageSentHandler = null;
+
+        public void SendMessage(string sender, string message)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-            _players[connection] = username;
+
+            CommunicationEventArgs communicationEventArgs = new CommunicationEventArgs()
+            {
+                Sender = sender,
+                Message = message
+            };
+            MessageSentEvent(this, communicationEventArgs);
         }
+
+        public void SubscribeToCommunicationService(string username)
+        {
+            _communicationServiceCallback = OperationContext.Current.GetCallbackChannel<ICommunicationServiceCallback>();
+            _messageSentHandler = new MessageSentEventHandler(MessageSentHandler);            
+            MessageSentEvent += _messageSentHandler;
+        }
+
+        public void UnsubscribeFromCommunicationService()
+        {
+            MessageSentEvent -= _messageSentHandler;
+        }
+
+        public void MessageSentHandler(object sender,
+            CommunicationEventArgs communicationEventArgs)
+        {
+            _communicationServiceCallback.ReciveMessage(communicationEventArgs.Sender,
+                communicationEventArgs.Message);
+        }
+
     }
 }

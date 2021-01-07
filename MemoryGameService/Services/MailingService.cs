@@ -1,5 +1,5 @@
 ﻿using MemoryGameService.Contracts;
-using Utilities;
+using MemoryGameService.Utilities;
 
 namespace MemoryGameService.Services
 {
