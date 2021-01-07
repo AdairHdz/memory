@@ -180,6 +180,9 @@
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="ExpelMessage" xml:space="preserve">
+    <value>has been expelled</value>
+  </data>
   <data name="ExpelPlayer" xml:space="preserve">
     <value>Expel player</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="LeaveGame" xml:space="preserve">
     <value>Leave game</value>
+  </data>
+  <data name="LeaveMatchMessage" xml:space="preserve">
+    <value>has left the game</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -327,6 +333,9 @@
   <data name="TriedToJoinToNonexistentMatch" xml:space="preserve">
     <value>It was not possible to join to this match because the host has deleted it</value>
   </data>
+  <data name="TurnMessage" xml:space="preserve">
+    <value>In turn</value>
+  </data>
   <data name="TwoPlayers" xml:space="preserve">
     <value>2 players</value>
   </data>
@@ -350,5 +359,8 @@
   </data>
   <data name="WaitingRoom" xml:space="preserve">
     <value>Waiting room</value>
+  </data>
+  <data name="WinMessage" xml:space="preserve">
+    <value>has won</value>
   </data>
 </root>

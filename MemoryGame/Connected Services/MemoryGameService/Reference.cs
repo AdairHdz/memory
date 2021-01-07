@@ -16,24 +16,35 @@ namespace MemoryGame.MemoryGameService {
     public interface IAccessibilityService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/IsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/IsVerifiedResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/IsVerifiedDatabaseConnectionLostFaultFau" +
+            "lt", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool IsVerified(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/IsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/IsVerifiedResponse")]
         System.Threading.Tasks.Task<bool> IsVerifiedAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ItsRegistered", ReplyAction="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/ItsRegisteredDatabaseConnectionLostFault" +
+            "Fault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool ItsRegistered(string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ItsRegistered", ReplyAction="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse")]
         System.Threading.Tasks.Task<bool> ItsRegisteredAsync(string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress", ReplyAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressNonExistentUserFaultF" +
+            "ault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressDatabaseConnectionLos" +
+            "tFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         string GetUserEmailAddress(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress", ReplyAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse")]
         System.Threading.Tasks.Task<string> GetUserEmailAddressAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetUsernameNonExistentUserFaultFault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/GetUsernameDatabaseConnectionLostFaultFa" +
+            "ult", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         string GetUsername(string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
@@ -186,12 +197,16 @@ namespace MemoryGame.MemoryGameService {
     public interface IAccountModifiabilityService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordDatabaseConnectionL" +
+            "ostFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool SetNewPassword(string emailAddress, string newPassword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
         System.Threading.Tasks.Task<bool> SetNewPasswordAsync(string emailAddress, string newPassword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameDatabaseConnectionL" +
+            "ostFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool ChangeUsername(string emailAddress, string newUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse")]
@@ -702,6 +717,30 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyMatchHasEnded")]
         System.Threading.Tasks.Task NotifyMatchHasEndedAsync(string host);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/LeaveMatch")]
+        void LeaveMatch(string host, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/LeaveMatch")]
+        System.Threading.Tasks.Task LeaveMatchAsync(string host, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ExpelPlayer")]
+        void ExpelPlayer(string host, string expelPlayerUsername, string playerUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ExpelPlayer")]
+        System.Threading.Tasks.Task ExpelPlayerAsync(string host, string expelPlayerUsername, string playerUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetUsernamesOfPlayersConnectedToMatch", ReplyAction="http://tempuri.org/IMatchService/GetUsernamesOfPlayersConnectedToMatchResponse")]
+        string[] GetUsernamesOfPlayersConnectedToMatch(string host);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetUsernamesOfPlayersConnectedToMatch", ReplyAction="http://tempuri.org/IMatchService/GetUsernamesOfPlayersConnectedToMatchResponse")]
+        System.Threading.Tasks.Task<string[]> GetUsernamesOfPlayersConnectedToMatchAsync(string host);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetPlayersVoted", ReplyAction="http://tempuri.org/IMatchService/GetPlayersVotedResponse")]
+        string[] GetPlayersVoted(string host, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetPlayersVoted", ReplyAction="http://tempuri.org/IMatchService/GetPlayersVotedResponse")]
+        System.Threading.Tasks.Task<string[]> GetPlayersVotedAsync(string host, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -715,6 +754,18 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ShowWinners")]
         void ShowWinners(string winner);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyPlayerWasExpel")]
+        void NotifyPlayerWasExpel(string expelPlayerUsername, int[] cardsUncovered);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/EndTurnOfExpelPlayer")]
+        void EndTurnOfExpelPlayer(string nextPlayerUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/NotifyPlayerLeaveMatch")]
+        void NotifyPlayerLeaveMatch(string username, int[] cardsUncovered);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/MatchHasEnded")]
+        void MatchHasEnded();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -783,6 +834,38 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task NotifyMatchHasEndedAsync(string host) {
             return base.Channel.NotifyMatchHasEndedAsync(host);
+        }
+        
+        public void LeaveMatch(string host, string username) {
+            base.Channel.LeaveMatch(host, username);
+        }
+        
+        public System.Threading.Tasks.Task LeaveMatchAsync(string host, string username) {
+            return base.Channel.LeaveMatchAsync(host, username);
+        }
+        
+        public void ExpelPlayer(string host, string expelPlayerUsername, string playerUsername) {
+            base.Channel.ExpelPlayer(host, expelPlayerUsername, playerUsername);
+        }
+        
+        public System.Threading.Tasks.Task ExpelPlayerAsync(string host, string expelPlayerUsername, string playerUsername) {
+            return base.Channel.ExpelPlayerAsync(host, expelPlayerUsername, playerUsername);
+        }
+        
+        public string[] GetUsernamesOfPlayersConnectedToMatch(string host) {
+            return base.Channel.GetUsernamesOfPlayersConnectedToMatch(host);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetUsernamesOfPlayersConnectedToMatchAsync(string host) {
+            return base.Channel.GetUsernamesOfPlayersConnectedToMatchAsync(host);
+        }
+        
+        public string[] GetPlayersVoted(string host, string username) {
+            return base.Channel.GetPlayersVoted(host, username);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetPlayersVotedAsync(string host, string username) {
+            return base.Channel.GetPlayersVotedAsync(host, username);
         }
     }
     

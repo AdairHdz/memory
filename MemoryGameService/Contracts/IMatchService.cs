@@ -19,6 +19,14 @@ namespace MemoryGameService.Contracts
         IList<PlayerInMatch> GetPlayersConnectedToMatch(string host);
         [OperationContract(IsOneWay = true)]
         void NotifyMatchHasEnded(string host);
+        [OperationContract(IsOneWay = true)]
+        void LeaveMatch(string host, string username);
+        [OperationContract(IsOneWay = true)]
+        void ExpelPlayer(string host, string expelPlayerUsername, string playerUsername);
+        [OperationContract]
+        IList<string> GetUsernamesOfPlayersConnectedToMatch(string host);
+        [OperationContract]
+        IList<string> GetPlayersVoted(string host, string username);
     }
 
     [ServiceContract]
@@ -30,6 +38,14 @@ namespace MemoryGameService.Contracts
         void NotifyTurnHasEnded(string username, CardPairDto cardPairDto);
         [OperationContract(IsOneWay = true)]
         void ShowWinners(string winner);
+        [OperationContract(IsOneWay = true)]
+        void NotifyPlayerWasExpel(string expelPlayerUsername, IList<int> cardsUncovered);
+        [OperationContract(IsOneWay = true)]
+        void EndTurnOfExpelPlayer(string nextPlayerUsername);
+        [OperationContract(IsOneWay = true)]
+        void NotifyPlayerLeaveMatch(string username, IList<int> cardsUncovered);
+        [OperationContract(IsOneWay = true)]
+        void MatchHasEnded();
     }
 
 }

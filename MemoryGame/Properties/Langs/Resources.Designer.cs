@@ -250,6 +250,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ha sido expulsado.
+        /// </summary>
+        public static string ExpelMessage {
+            get {
+                return ResourceManager.GetString("ExpelMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Expulsar jugador.
         /// </summary>
         public static string ExpelPlayer {
@@ -345,6 +354,15 @@ namespace MemoryGame.Properties.Langs {
         public static string LeaveGame {
             get {
                 return ResourceManager.GetString("LeaveGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ha abandonado la partida.
+        /// </summary>
+        public static string LeaveMatchMessage {
+            get {
+                return ResourceManager.GetString("LeaveMatchMessage", resourceCulture);
             }
         }
         
@@ -691,6 +709,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a En turno.
+        /// </summary>
+        public static string TurnMessage {
+            get {
+                return ResourceManager.GetString("TurnMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a 2 jugadores.
         /// </summary>
         public static string TwoPlayers {
@@ -759,6 +786,15 @@ namespace MemoryGame.Properties.Langs {
         public static string WaitingRoom {
             get {
                 return ResourceManager.GetString("WaitingRoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ha ganado.
+        /// </summary>
+        public static string WinMessage {
+            get {
+                return ResourceManager.GetString("WinMessage", resourceCulture);
             }
         }
     }

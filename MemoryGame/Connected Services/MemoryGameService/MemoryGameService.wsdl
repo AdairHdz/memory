@@ -380,9 +380,9 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
@@ -392,11 +392,17 @@
   <wsdl:message name="IAccessibilityService_IsVerified_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsVerifiedResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccessibilityService_IsVerified_DatabaseConnectionLostFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q1:DatabaseConnectionLostFault" />
+  </wsdl:message>
   <wsdl:message name="IAccessibilityService_ItsRegistered_InputMessage">
     <wsdl:part name="parameters" element="tns:ItsRegistered" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_ItsRegistered_OutputMessage">
     <wsdl:part name="parameters" element="tns:ItsRegisteredResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_ItsRegistered_DatabaseConnectionLostFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q2:DatabaseConnectionLostFault" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetUserEmailAddress_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUserEmailAddress" />
@@ -404,11 +410,23 @@
   <wsdl:message name="IAccessibilityService_GetUserEmailAddress_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserEmailAddressResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUserEmailAddress_NonExistentUserFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q3:NonExistentUserFault" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUserEmailAddress_DatabaseConnectionLostFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q4:DatabaseConnectionLostFault" />
+  </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetUsername_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUsername" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetUsername_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUsername_NonExistentUserFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q5:NonExistentUserFault" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUsername_DatabaseConnectionLostFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q6:DatabaseConnectionLostFault" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetPlayerCredentials_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPlayerCredentials" />
@@ -417,10 +435,10 @@
     <wsdl:part name="parameters" element="tns:GetPlayerCredentialsResponse" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetPlayerCredentials_NonExistentUserFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q1:NonExistentUserFault" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q7:NonExistentUserFault" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetPlayerCredentials_DatabaseConnectionLostFaultFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q2:DatabaseConnectionLostFault" />
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q8:DatabaseConnectionLostFault" />
   </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDeckAndCards" />
@@ -429,7 +447,7 @@
     <wsdl:part name="parameters" element="tns:GetCardDeckAndCardsResponse" />
   </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_CardDeckRetrievingFaultFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q3:CardDeckRetrievingFault" />
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q9:CardDeckRetrievingFault" />
   </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDecksInfo_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDecksInfo" />
@@ -443,11 +461,17 @@
   <wsdl:message name="IAccountModifiabilityService_SetNewPassword_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetNewPasswordResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccountModifiabilityService_SetNewPassword_DatabaseConnectionLostFaultFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q10:DatabaseConnectionLostFault" />
+  </wsdl:message>
   <wsdl:message name="IAccountModifiabilityService_ChangeUsername_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangeUsername" />
   </wsdl:message>
   <wsdl:message name="IAccountModifiabilityService_ChangeUsername_OutputMessage">
     <wsdl:part name="parameters" element="tns:ChangeUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountModifiabilityService_ChangeUsername_DatabaseConnectionLostFaultFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q11:DatabaseConnectionLostFault" />
   </wsdl:message>
   <wsdl:message name="IAccountVerificationService_SetAccountAsVerified_InputMessage">
     <wsdl:part name="parameters" element="tns:SetAccountAsVerified" />
@@ -537,7 +561,7 @@
     <wsdl:part name="parameters" element="tns:CanJoinResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchDiscoveryService_CanJoin_MatchAccessDeniedFaultFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q4:MatchAccessDeniedFault" />
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q12:MatchAccessDeniedFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_NotifyCardWasUncoveredd_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyCardWasUncoveredd" />
@@ -557,6 +581,24 @@
   <wsdl:message name="IMatchService_NotifyMatchHasEnded_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyMatchHasEnded" />
   </wsdl:message>
+  <wsdl:message name="IMatchService_LeaveMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveMatch" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_ExpelPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExpelPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_GetUsernamesOfPlayersConnectedToMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsernamesOfPlayersConnectedToMatch" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_GetUsernamesOfPlayersConnectedToMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsernamesOfPlayersConnectedToMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_GetPlayersVoted_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersVoted" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_GetPlayersVoted_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersVotedResponse" />
+  </wsdl:message>
   <wsdl:message name="IMatchService_UncoverCardd_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UncoverCardd" />
   </wsdl:message>
@@ -565,6 +607,18 @@
   </wsdl:message>
   <wsdl:message name="IMatchService_ShowWinners_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ShowWinners" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_NotifyPlayerWasExpel_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyPlayerWasExpel" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_EndTurnOfExpelPlayer_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:EndTurnOfExpelPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_NotifyPlayerLeaveMatch_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyPlayerLeaveMatch" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_MatchHasEnded_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MatchHasEnded" />
   </wsdl:message>
   <wsdl:message name="ITokenGenerator_GenerateToken_InputMessage">
     <wsdl:part name="parameters" element="tns:GenerateToken" />
@@ -600,18 +654,24 @@
     <wsdl:operation name="IsVerified">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerified" message="tns:IAccessibilityService_IsVerified_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerifiedResponse" message="tns:IAccessibilityService_IsVerified_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerifiedDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_IsVerified_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ItsRegistered">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegistered" message="tns:IAccessibilityService_ItsRegistered_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse" message="tns:IAccessibilityService_ItsRegistered_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegisteredDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_ItsRegistered_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUserEmailAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress" message="tns:IAccessibilityService_GetUserEmailAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse" message="tns:IAccessibilityService_GetUserEmailAddress_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetUserEmailAddress_NonExistentUserFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_GetUserEmailAddress_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUsername">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsername" message="tns:IAccessibilityService_GetUsername_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameResponse" message="tns:IAccessibilityService_GetUsername_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetUsername_NonExistentUserFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_GetUsername_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPlayerCredentials">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials" message="tns:IAccessibilityService_GetPlayerCredentials_InputMessage" />
@@ -635,10 +695,12 @@
     <wsdl:operation name="SetNewPassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword" message="tns:IAccountModifiabilityService_SetNewPassword_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse" message="tns:IAccountModifiabilityService_SetNewPassword_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccountModifiabilityService_SetNewPassword_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ChangeUsername">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername" message="tns:IAccountModifiabilityService_ChangeUsername_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse" message="tns:IAccountModifiabilityService_ChangeUsername_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccountModifiabilityService_ChangeUsername_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAccountVerificationService">
@@ -740,6 +802,20 @@
     <wsdl:operation name="NotifyMatchHasEnded">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/NotifyMatchHasEnded" message="tns:IMatchService_NotifyMatchHasEnded_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="LeaveMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/LeaveMatch" message="tns:IMatchService_LeaveMatch_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExpelPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/ExpelPlayer" message="tns:IMatchService_ExpelPlayer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsernamesOfPlayersConnectedToMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/GetUsernamesOfPlayersConnectedToMatch" message="tns:IMatchService_GetUsernamesOfPlayersConnectedToMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/GetUsernamesOfPlayersConnectedToMatchResponse" message="tns:IMatchService_GetUsernamesOfPlayersConnectedToMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersVoted">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/GetPlayersVoted" message="tns:IMatchService_GetPlayersVoted_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/GetPlayersVotedResponse" message="tns:IMatchService_GetPlayersVoted_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UncoverCardd">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/UncoverCardd" message="tns:IMatchService_UncoverCardd_OutputCallbackMessage" />
     </wsdl:operation>
@@ -748,6 +824,18 @@
     </wsdl:operation>
     <wsdl:operation name="ShowWinners">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/ShowWinners" message="tns:IMatchService_ShowWinners_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyPlayerWasExpel">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/NotifyPlayerWasExpel" message="tns:IMatchService_NotifyPlayerWasExpel_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndTurnOfExpelPlayer">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/EndTurnOfExpelPlayer" message="tns:IMatchService_EndTurnOfExpelPlayer_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyPlayerLeaveMatch">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/NotifyPlayerLeaveMatch" message="tns:IMatchService_NotifyPlayerLeaveMatch_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchHasEnded">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/MatchHasEnded" message="tns:IMatchService_MatchHasEnded_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ITokenGenerator">
@@ -787,6 +875,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="DatabaseConnectionLostFaultFault">
+        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ItsRegistered">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/ItsRegistered" style="document" />
@@ -796,6 +887,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="DatabaseConnectionLostFaultFault">
+        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetUserEmailAddress">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddress" style="document" />
@@ -805,6 +899,12 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="NonExistentUserFaultFault">
+        <soap12:fault use="literal" name="NonExistentUserFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DatabaseConnectionLostFaultFault">
+        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetUsername">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetUsername" style="document" />
@@ -814,6 +914,12 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="NonExistentUserFaultFault">
+        <soap12:fault use="literal" name="NonExistentUserFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DatabaseConnectionLostFaultFault">
+        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetPlayerCredentials">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentials" style="document" />
@@ -867,6 +973,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="DatabaseConnectionLostFaultFault">
+        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ChangeUsername">
       <soap12:operation soapAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsername" style="document" />
@@ -876,6 +985,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="DatabaseConnectionLostFaultFault">
+        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IAccountVerificationService" type="tns:IAccountVerificationService">
@@ -1088,6 +1200,36 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="LeaveMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/LeaveMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ExpelPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/ExpelPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsernamesOfPlayersConnectedToMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/GetUsernamesOfPlayersConnectedToMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersVoted">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/GetPlayersVoted" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UncoverCardd">
       <soap12:operation soapAction="http://tempuri.org/IMatchService/UncoverCardd" style="document" />
       <wsdl:output>
@@ -1102,6 +1244,30 @@
     </wsdl:operation>
     <wsdl:operation name="ShowWinners">
       <soap12:operation soapAction="http://tempuri.org/IMatchService/ShowWinners" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyPlayerWasExpel">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/NotifyPlayerWasExpel" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndTurnOfExpelPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/EndTurnOfExpelPlayer" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyPlayerLeaveMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/NotifyPlayerLeaveMatch" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchHasEnded">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/MatchHasEnded" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1170,7 +1336,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1179,7 +1345,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1188,7 +1354,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1197,7 +1363,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1206,7 +1372,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1215,7 +1381,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1224,7 +1390,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1233,7 +1399,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1242,7 +1408,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1251,7 +1417,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1260,7 +1426,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1269,7 +1435,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1278,7 +1444,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
+          <Upn>LAPTOP-PCDO896V\obalt</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

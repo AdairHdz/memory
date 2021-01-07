@@ -9,7 +9,8 @@
         Title="{x:Static p:Resources.Options}"
         Height="250" Width="400" 
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Loaded="WindowLoaded">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
@@ -37,18 +38,19 @@
         </Grid.RowDefinitions>
 
         <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" 
+                    Style="{StaticResource buttonPrimary}" 
+                    Content="{x:Static p:Resources.Back}"
+                    Click="BackButtonClicked"></Button>
+
+        <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" 
                     Style="{StaticResource buttonSecondary}" 
                     Content="{x:Static p:Resources.LeaveGame}"
                     Click="LeaveGameButtonClicked"></Button>
 
-        <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" 
-                    Style="{StaticResource buttonSecondary}" 
+        <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" 
+                    Style="{StaticResource buttonSecondary}"
+                    Name="ExpelPlayerButton"
                     Content="{x:Static p:Resources.ExpelPlayer}"
                     Click="ExpelPlayerButtonClicked"></Button>
-
-        <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" 
-                    Style="{StaticResource buttonPrimary}" 
-                    Content="{x:Static p:Resources.Back}"
-                    Click="BackButtonClicked"></Button>
     </Grid>
 </Window>

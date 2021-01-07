@@ -78,5 +78,25 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
             return playerWithBestScore;
         }
 
+        public int AddExpelVote(string playerUsername)
+        {
+            int playerExpelVotes = 0;
+            for (int currentIndex = 0; currentIndex < _players.Count; currentIndex++)
+            {
+                if (_players[currentIndex].Username.Equals(playerUsername))
+                {
+                    _players[currentIndex].ExpulsionVotes++;
+                    playerExpelVotes = _players[currentIndex].ExpulsionVotes;
+                }
+            }
+            return playerExpelVotes;
+        }
+
+        public void RemovePlayer(string playerUsername)
+        {
+            PlayerInMatch playerToRemove = this.GetPlayer(playerUsername);
+            _players.Remove(playerToRemove);
+        }
+
     }
 }

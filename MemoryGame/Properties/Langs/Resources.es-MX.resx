@@ -180,6 +180,9 @@
   <data name="Exit" xml:space="preserve">
     <value>Salir</value>
   </data>
+  <data name="ExpelMessage" xml:space="preserve">
+    <value>ha sido expulsado</value>
+  </data>
   <data name="ExpelPlayer" xml:space="preserve">
     <value>Expulsar jugador</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="LeaveGame" xml:space="preserve">
     <value>Abandonar partida</value>
+  </data>
+  <data name="LeaveMatchMessage" xml:space="preserve">
+    <value>ha abandonado la partida</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Iniciar sesión</value>
@@ -327,6 +333,9 @@
   <data name="TriedToJoinToNonexistentMatch" xml:space="preserve">
     <value>No fue posible unirlo a la partida seleccionada, debido a que el anfitrión la ha eliminado</value>
   </data>
+  <data name="TurnMessage" xml:space="preserve">
+    <value>En turno</value>
+  </data>
   <data name="TwoPlayers" xml:space="preserve">
     <value>2 jugadores</value>
   </data>
@@ -350,5 +359,8 @@
   </data>
   <data name="WaitingRoom" xml:space="preserve">
     <value>Sala de espera</value>
+  </data>
+  <data name="WinMessage" xml:space="preserve">
+    <value>ha ganado</value>
   </data>
 </root>
