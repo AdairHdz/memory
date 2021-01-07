@@ -2,8 +2,8 @@
 using System.ServiceModel;
 using DataAccess.Entities;
 using System.Collections.ObjectModel;
-using MemoryGame.MemoryGameService.DataTransferObjects;
 using System.Collections.Generic;
+using System;
 
 namespace MemoryGame
 {
@@ -12,14 +12,15 @@ namespace MemoryGame
     /// </summary>
     public partial class WaitingRoom : Window, MemoryGameService.ILobbyServiceCallback
     {
-        public GameMatchDto GameMatchDto { get; set; }
+        public MemoryGameService.DataTransferObjects.MatchDto GameMatchDto { get; set; }
         private ObservableCollection<string> _players;
         private InstanceContext _context;
         private MemoryGameService.LobbyServiceClient _lobbyServiceClient;
         private string _username;        
         private bool _thisPlayerIsHost;
         private bool _windowIsBeingClosedByTheCloseButton;
-        
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("WaitingRoom.xaml.cs");
+
         public WaitingRoom()
         {
             InitializeComponent();
@@ -43,9 +44,20 @@ namespace MemoryGame
                 LoadActivePlayersInLobby();
                 CallJoinLobbyService();
             }
-            catch (EndpointNotFoundException)
+            catch (TimeoutException timeoutException)
             {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
 
         }
@@ -64,7 +76,7 @@ namespace MemoryGame
 
         private void LoadActivePlayersInLobby()
         {
-            IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersInLobby(GameMatchDto);
+            IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersInLobby(GameMatchDto.Host);
             foreach(var oneActivePlayer in activePlayers)
             {
                 _players.Add(oneActivePlayer);
@@ -74,12 +86,7 @@ namespace MemoryGame
 
         private void CallJoinLobbyService()
         {
-            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
-            {
-                Host = GameMatchDto.Host,
-                Username = _username
-            };
-            _lobbyServiceClient.JoinLobby(lobbyRequestDto);
+            _lobbyServiceClient.JoinLobby(GameMatchDto.Host, _username);
         }
 
         public void LeaveButtonClicked(object sender, RoutedEventArgs e)
@@ -88,9 +95,20 @@ namespace MemoryGame
             {
                 CallLeaveLobbyService();
             }
-            catch (EndpointNotFoundException)
+            catch (TimeoutException timeoutException)
             {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
             finally
             {
@@ -123,17 +141,43 @@ namespace MemoryGame
 
         private void CallLeaveLobbyService()
         {
-            LobbyRequestDto lobbyRequestDto = new LobbyRequestDto()
-            {
-                Host = GameMatchDto.Host,
-                Username = _username
-            };
-            _lobbyServiceClient.LeaveLobby(lobbyRequestDto);
+            _lobbyServiceClient.LeaveLobby(GameMatchDto.Host, _username);
         }
 
         public void StartButtonClicked(object sender, RoutedEventArgs e)
         {
-            _lobbyServiceClient.StartGame(GameMatchDto);
+            if(_players.Count < 2)
+            {
+                MessageBox.Show(Properties.Langs.Resources.InsufficientNumberOfPlayers);
+            }
+            else
+            {
+                StartGame();
+            }            
+        }
+
+        private void StartGame()
+        {
+            try
+            {
+                _lobbyServiceClient.StartGame(GameMatchDto.Host);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+
         }
 
         public void NotifyNewPlayerEntered(string username)

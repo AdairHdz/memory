@@ -160,6 +160,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Se interrumpió la comunicación con el servidor. Por favor, intente más tarde.
+        /// </summary>
+        public static string CommunicationInterrupted {
+            get {
+                return ResourceManager.GetString("CommunicationInterrupted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Crear partida.
         /// </summary>
         public static string CreateGame {
@@ -259,6 +268,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a 4 jugadores.
+        /// </summary>
+        public static string FourPlayers {
+            get {
+                return ResourceManager.GetString("FourPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La partida esta llena, espera a que haya un lugar disponible o ingresa a otra partida.
         /// </summary>
         public static string FullGameMessage {
@@ -282,6 +300,15 @@ namespace MemoryGame.Properties.Langs {
         public static string Host {
             get {
                 return ResourceManager.GetString("Host", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debe haber al menos 2 jugadores para comenzar la partida.
+        /// </summary>
+        public static string InsufficientNumberOfPlayers {
+            get {
+                return ResourceManager.GetString("InsufficientNumberOfPlayers", resourceCulture);
             }
         }
         
@@ -372,6 +399,15 @@ namespace MemoryGame.Properties.Langs {
         public static string NewUsername {
             get {
                 return ResourceManager.GetString("NewUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor seleccione un mazo de cartas para la partida.
+        /// </summary>
+        public static string NoCardDeckHasBeenSelected {
+            get {
+                return ResourceManager.GetString("NoCardDeckHasBeenSelected", resourceCulture);
             }
         }
         
@@ -637,11 +673,29 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a 3 jugadores.
+        /// </summary>
+        public static string ThreePlayers {
+            get {
+                return ResourceManager.GetString("ThreePlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No fue posible unirlo a la partida seleccionada, debido a que el anfitrión la ha eliminado.
         /// </summary>
         public static string TriedToJoinToNonexistentMatch {
             get {
                 return ResourceManager.GetString("TriedToJoinToNonexistentMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 2 jugadores.
+        /// </summary>
+        public static string TwoPlayers {
+            get {
+                return ResourceManager.GetString("TwoPlayers", resourceCulture);
             }
         }
         

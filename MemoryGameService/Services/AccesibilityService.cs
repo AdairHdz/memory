@@ -3,11 +3,9 @@ using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using MemoryGameService.DataTransferObjectMappers;
-using System.Linq;
 using System.ServiceModel;
 using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
-using System;
 using System.Data.SqlClient;
 
 namespace MemoryGameService.Services
@@ -17,14 +15,14 @@ namespace MemoryGameService.Services
         public string GetUserEmailAddress(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-
             try
             {
                 Player playerWhoPossessTheSpecifiedUsername = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username);
-                string emailAddress = playerWhoPossessTheSpecifiedUsername.EmailAddress;                
-                return emailAddress;
-            }catch(InvalidOperationException)
-            {
+                if(playerWhoPossessTheSpecifiedUsername != null)
+                {
+                    string emailAddress = playerWhoPossessTheSpecifiedUsername.EmailAddress;
+                    return emailAddress;
+                }
                 NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
                 throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
@@ -45,13 +43,12 @@ namespace MemoryGameService.Services
             try
             {
                 var player = unitOfWork.Players.Get(emailAddress);
-                if(player == null)
+                if(player != null)
                 {
-                    NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
-                    throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+                    return player.UserName;
                 }
-                string username = player.UserName;                
-                return username;
+                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
+                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
             catch (SqlException)
             {
@@ -62,48 +59,52 @@ namespace MemoryGameService.Services
             {
                 unitOfWork.Dispose();
             }
-        }
-
-        public bool HasAccessRights(PlayerCredentialsDTO playerCredentialsDTO)
-        {
-            string username = playerCredentialsDTO.Username;
-            string password = playerCredentialsDTO.Password;
-            var unitOfWork = new UnitOfWork(new MemoryGameContext());
-
-            try
-            {
-                var player = unitOfWork.Players.Find(x => x.UserName == username && x.Password == password);
-                int matches = player.Count();                
-                return matches == 1;
-            }
-            catch (SqlException)
-            {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
-            }
-            finally
-            {
-                unitOfWork.Dispose();
-            }
-
         }
 
         public bool IsVerified(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.UserName == username && x.EmailWasVerified);
-            int matches = player.Count();
-            unitOfWork.Dispose();
-            return matches == 1;
+            try
+            {
+                var player = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username && x.EmailWasVerified);
+                if (player != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch(SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public bool ItsRegistered(string emailAddress)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            var player = unitOfWork.Players.Find(x => x.EmailAddress == emailAddress);
-            int matches = player.Count();
-            unitOfWork.Dispose();
-            return matches == 1;
+            Player player = unitOfWork.Players.Get(emailAddress);
+            try
+            {
+                if (player != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public PlayerCredentialsDTO GetPlayerCredentials(string username)
@@ -112,19 +113,19 @@ namespace MemoryGameService.Services
             try
             {                
                 Player playerWhoPossessTheSpecifiedUsername = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username);                
-                PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(playerWhoPossessTheSpecifiedUsername);
-                return playerCredentials;
+                if(playerWhoPossessTheSpecifiedUsername != null)
+                {
+                    PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(playerWhoPossessTheSpecifiedUsername);
+                    return playerCredentials;
+                }
+                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
+                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
             catch (SqlException)
             {
                 //Esto nunca lo lanza. Se da un timeout exception
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
-            }
-            catch (InvalidOperationException)
-            {
-                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
-                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
             finally
             {

@@ -1,44 +1,26 @@
-﻿using MemoryGameService.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
-    public class GameMatchDto
+    public class MatchDto
     {
         public int MaxNumberOfPlayers { get; set; }
         public CardDeckDTO CardDeckDto { get; set; }
         public string Host { get; set; }
         public bool HasStarted { get; set; }
-        private IList<PlayerInMatchDto> _players { get; set; }
-        public MatchLobby Lobby { get; set; }
+        public Lobby Lobby { get; set; }
+        private IList<PlayerInMatch> _players;        
 
-        public GameMatchDto()
+        public MatchDto()
         {
-            Lobby = new MatchLobby();
-            _players = new List<PlayerInMatchDto>();
+            Lobby = new Lobby();
+            _players = new List<PlayerInMatch>();
         }
 
-        public IList<LobbyRequestDto> GetPlayersConnectedToLobby()
-        {
-            IList<LobbyRequestDto> lobbyRequests = Lobby.GetLobbyRequests();
-            return lobbyRequests;
-        }
-
-        public IList<PlayerInMatchDto> GetPlayersConnectedToMatch()
+        public IList<PlayerInMatch> GetPlayersConnectedToMatch()
         {            
             return _players;
-        }
-
-        public IList<string> GetUsernamesOfPlayersConnectedToLobby()
-        {
-            IList<string> usernamesOfPlayersConnectedToLobby = new List<string>();
-            IList<LobbyRequestDto> lobbyRequests = Lobby.GetLobbyRequests();
-            foreach(var request in lobbyRequests)
-            {
-                usernamesOfPlayersConnectedToLobby.Add(request.Username);
-            }
-            return usernamesOfPlayersConnectedToLobby;
         }
 
         public IList<string> GetUsernamesOfPlayersConnectedToMatch()
@@ -51,12 +33,12 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
             return usernamesOfPlayersConnectedToMatch;
         }
 
-        public void AddPlayer(PlayerInMatchDto player)
+        public void AddPlayer(PlayerInMatch player)
         {
             _players.Add(player);
         }
 
-        public PlayerInMatchDto GetPlayer(string username)
+        public PlayerInMatch GetPlayer(string username)
         {
             foreach(var player in _players)
             {
@@ -69,9 +51,22 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
             throw new Exception("");
         }
 
-        public PlayerInMatchDto GetPlayerWithBestScore()
+
+        public void StartMatch()
+        {            
+            IList<PlayerInLobby> playersConnectedToLobby = Lobby.GetPlayersConnectedToLobby();
+            IList<string> usernamesOfPlayersConnectedToLobby = Lobby.GetUsernamesOfPlayersConnectedToLobby();
+            foreach (var playerInLobby in playersConnectedToLobby)
+            {
+                var channel = playerInLobby.Connection;
+                channel.TakePlayersToMatchView(usernamesOfPlayersConnectedToLobby);
+            }
+            HasStarted = true;
+        }
+
+        public PlayerInMatch GetPlayerWithBestScore()
         {
-            PlayerInMatchDto playerWithBestScore = _players[0];
+            PlayerInMatch playerWithBestScore = _players[0];
 
             for(int currentIndex = 0; currentIndex < _players.Count - 1; currentIndex++)
             {

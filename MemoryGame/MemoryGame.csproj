@@ -120,9 +120,6 @@
     <Compile Include="Views\ActivationToken.xaml.cs">
       <DependentUpon>ActivationToken.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChangePassword.xaml.cs">
-      <DependentUpon>ChangePassword.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ChangeUsername.xaml.cs">
       <DependentUpon>ChangeUsername.xaml</DependentUpon>
     </Compile>
@@ -174,10 +171,6 @@
       <DependentUpon>WaitingRoom.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ActivationToken.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,10 +318,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckInfoDto.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.GameMatchDto.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.Match.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.MatchDto.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatch.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatchDto.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGameService.DataTransferObjects.CardDTO.datasource" />

@@ -10,7 +10,7 @@ namespace MemoryGameService.Services
     {
         public bool CanJoin(string matchHost)
         {
-            GameMatchDto gameMatch = GetMatch(matchHost);
+            MatchDto gameMatch = GetMatch(matchHost);
             if (gameMatch == null)
             {
                 MatchAccessDeniedFault matchAccessDeniedFault = new MatchAccessDeniedFault()
@@ -21,7 +21,9 @@ namespace MemoryGameService.Services
             }
             else
             {
-                int numberOfPlayersConnectedToMatch = gameMatch.GetPlayersConnectedToLobby().Count;
+                Lobby lobby = gameMatch.Lobby;
+                IList<PlayerInLobby> playersConnectedToLobby = lobby.GetPlayersConnectedToLobby();
+                int numberOfPlayersConnectedToMatch = playersConnectedToLobby.Count;
                 int numberOfPlayersRequired = gameMatch.MaxNumberOfPlayers;
                 bool matchHasStarted = gameMatch.HasStarted;
                 bool ThereIsSpaceForAnotherPlayer = false;
@@ -41,9 +43,9 @@ namespace MemoryGameService.Services
 
         }
 
-        public IList<GameMatchDto> GetActiveMatches()
+        public IList<MatchDto> GetActiveMatches()
         {
-            IList<GameMatchDto> matchesWaitingToStart = new List<GameMatchDto>();
+            IList<MatchDto> matchesWaitingToStart = new List<MatchDto>();
             foreach (var match in _matches)
             {
                 if (!match.HasStarted)

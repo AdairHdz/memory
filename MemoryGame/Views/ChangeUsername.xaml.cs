@@ -1,7 +1,9 @@
 ﻿using DataAccess.Entities;
 using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.RegistryValidation;
+using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 
 namespace MemoryGame
@@ -14,13 +16,13 @@ namespace MemoryGame
         private string _userEmailAddress;
         private string _newUsername;
         private RuleSet _ruleSet;
-
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("ChangeUsername.xaml.cs");
         public ChangeUsername()
         {
             InitializeComponent();
             Sesion userSession = Sesion.GetSesion;
             _userEmailAddress = userSession.EmailAddress;      
-            LabelOldUsername.Content = GetOldUsername();
+            LoadOldUsername();
         }
 
         private void SetFormValidation()
@@ -45,29 +47,68 @@ namespace MemoryGame
             TextBoxNewUsername.Focus();
         }
 
-        private string GetOldUsername()
-        {            
-            MemoryGameService.AccessibilityServiceClient accesibilityServiceClient =
-                new MemoryGameService.AccessibilityServiceClient();
-            return accesibilityServiceClient.GetUsername(_userEmailAddress);            
+
+
+        private void LoadOldUsername()
+        {
+            try
+            {
+                MemoryGameService.AccessibilityServiceClient accesibilityServiceClient =
+                    new MemoryGameService.AccessibilityServiceClient();
+                LabelOldUsername.Content = accesibilityServiceClient.GetUsername(_userEmailAddress);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+
         }
 
         private void SaveChangesButtonClicked(object sender, RoutedEventArgs e)
-        {
-            
+        {            
             _newUsername = TextBoxNewUsername.Text;
             SetFormValidation();
             if (_ruleSet.AllValidationRulesHavePassed())
             {
-                if (ChangeUserName())
+                try
                 {
-                    MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedSuccessfully);
-                    GoToMainWindow();
+                    if (ChangeUserName())
+                    {
+                        MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedSuccessfully);
+                        GoToMainWindow();
+                    }
+                    else
+                    {
+                        MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedError);
+                    }
                 }
-                else
+                catch (TimeoutException timeoutException)
                 {
-                    MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedError);
+                    _logger.Fatal(timeoutException);
+                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
                 }
+                catch (EndpointNotFoundException endpointNotFoundException)
+                {
+                    _logger.Fatal(endpointNotFoundException);
+                    MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+                }
+                catch (CommunicationException communicationException)
+                {
+                    _logger.Fatal(communicationException);
+                    MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+                }
+
             }
             else
             {
@@ -91,14 +132,7 @@ namespace MemoryGame
             MemoryGameService.AccountModifiabilityServiceClient accountModifiabilityServiceClient =
                 new MemoryGameService.AccountModifiabilityServiceClient();
 
-            MemoryGameService.DataTransferObjects.PlayerCredentialsDTO playerCredentialsDTO =
-                new MemoryGameService.DataTransferObjects.PlayerCredentialsDTO()
-                {
-                    Username = _newUsername,
-                    EmailAddress = _userEmailAddress
-                };
-
-            return accountModifiabilityServiceClient.ChangeUsername(playerCredentialsDTO);            
+            return accountModifiabilityServiceClient.ChangeUsername(_userEmailAddress, _newUsername);            
         }
 
         private void GoToMainWindow()

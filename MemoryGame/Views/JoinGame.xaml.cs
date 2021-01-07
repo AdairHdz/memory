@@ -12,7 +12,7 @@ namespace MemoryGame
     public partial class JoinGame : Window
     {
         private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient;        
-        private GameMatchDto _selectedMatch;
+        private MatchDto _selectedMatch;
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("JoinGame.xaml.cs");
 
         public JoinGame()
@@ -28,16 +28,27 @@ namespace MemoryGame
             {
                 PopulateTableWithActiveMatches();
             }
-            catch (EndpointNotFoundException)
+            catch (TimeoutException timeoutException)
             {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
 
         private void PopulateTableWithActiveMatches()
         {
-            ObservableCollection<GameMatchDto> listOfActiveMatches = new ObservableCollection<GameMatchDto>();
-            GameMatchDto[] activeMatches = _matchDiscoveryServiceClient.GetActiveMatches();
+            ObservableCollection<MatchDto> listOfActiveMatches = new ObservableCollection<MatchDto>();
+            MatchDto[] activeMatches = _matchDiscoveryServiceClient.GetActiveMatches();
 
             for (int indexOfActualMatch = 0; indexOfActualMatch < activeMatches.Length; indexOfActualMatch++)
             {
@@ -49,15 +60,25 @@ namespace MemoryGame
 
         private void JoinButtonClicked(object sender, RoutedEventArgs e)
         {
-            _selectedMatch = (GameMatchDto)GamesDataGrid.SelectedItem;
+            _selectedMatch = (MatchDto)GamesDataGrid.SelectedItem;
             try
             {
                 JoinMatch();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
             catch (EndpointNotFoundException endpointNotFoundException)
             {
                 _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
 
@@ -83,7 +104,7 @@ namespace MemoryGame
                 }
                 catch (FaultException<MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault> matchAccessDeniedException)
                 {
-                    _logger.Fatal("Method JoinMatch tried to join to a non existent match", matchAccessDeniedException);
+                    _logger.Fatal(matchAccessDeniedException);
                     MessageBox.Show(Properties.Langs.Resources.TriedToJoinToNonexistentMatch);
                 }
                 catch (TimeoutException timeoutException)
@@ -95,6 +116,11 @@ namespace MemoryGame
                 {
                     _logger.Fatal(endpointNotFoundException);
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+                }
+                catch (CommunicationException communicationException)
+                {
+                    _logger.Fatal(communicationException);
+                    MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
                 }
             }
         }

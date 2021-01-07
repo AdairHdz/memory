@@ -32,7 +32,11 @@ namespace DataAccess.Repositories
         public TEntity FindFirstOccurence(Func<TEntity, bool> predicate)
         {
             IEnumerable<TEntity> results = _context.Set<TEntity>().Where(predicate);
-            return results.First();
+            if (results.Any())
+            {
+                return results.First();
+            }
+            return null;
         }
 
         public void Add(TEntity entity)

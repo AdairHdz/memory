@@ -13,32 +13,39 @@ namespace MemoryGame
     /// </summary>
     public partial class CreateGame : Window
     {
-        public ObservableCollection<string> ListOfnumberOfPlayers = new ObservableCollection<string>();
+        private ObservableCollection<MemoryGameService.DataTransferObjects.CardDeckInfoDto> _cardDecksInfoList;
+        private int _selectedCardDeckId;
         private string _username;
         private int _numberOfPlayersDesiredForMatch;
-        private MemoryGameService.DataTransferObjects.GameMatchDto _gameMatch;
+        private MemoryGameService.DataTransferObjects.MatchDto _gameMatch;
         private MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck;
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("CreateGame.xaml.cs");
         public CreateGame()
         {
             InitializeComponent();
-            _username = Sesion.GetSesion.Username;
-            ListOfnumberOfPlayers.Add("2");
-            ListOfnumberOfPlayers.Add("3");
-            ListOfnumberOfPlayers.Add("4");
-            ComboBoxNumberOfPlayers.ItemsSource = ListOfnumberOfPlayers;
+            _cardDecksInfoList = new ObservableCollection<MemoryGameService.DataTransferObjects.CardDeckInfoDto>();
+            LoadCardDecksInfo();            
+            _username = Sesion.GetSesion.Username;            
         }
 
         public void CreateGameButtonClicked(object sender, RoutedEventArgs e)
         {
-            var selectedItem = ComboBoxNumberOfPlayers.SelectedItem;
-            if (selectedItem == null)
+            MemoryGameService.DataTransferObjects.CardDeckInfoDto cardDeckForMatch =
+                ((MemoryGameService.DataTransferObjects.CardDeckInfoDto)CardDeckComboBox.SelectedItem);
+            
+            var numberOfPlayersSelectedItem = ((ComboBoxItem)ComboBoxNumberOfPlayers.SelectedItem).Tag;
+            
+            if (numberOfPlayersSelectedItem == null)
             {
                 MessageBox.Show(Properties.Langs.Resources.NumberOfPlayersForMatchWereNotSelected);                
+            }else if(cardDeckForMatch == null)
+            {
+                MessageBox.Show(Properties.Langs.Resources.NoCardDeckHasBeenSelected);
             }
             else
             {
-                _numberOfPlayersDesiredForMatch = Int32.Parse(selectedItem.ToString());
+                _numberOfPlayersDesiredForMatch = Int32.Parse(numberOfPlayersSelectedItem.ToString());
+                _selectedCardDeckId = cardDeckForMatch.CardDeckId;
                 try
                 {
                     CreateNewMatch();
@@ -46,27 +53,31 @@ namespace MemoryGame
                 }
                 catch (EndpointNotFoundException endpointNotFoundException)
                 {
-                    _logger.Error(endpointNotFoundException);
+                    _logger.Fatal(endpointNotFoundException);
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    _logger.Error(timeoutException);
+                    _logger.Fatal(timeoutException);
                     MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
                 }
                 catch (FaultException<MemoryGame.MemoryGameService.Faults.CardDeckRetrievingFault> cardDeckRetrievingFault)
                 {
-                    _logger.Error(cardDeckRetrievingFault);
+                    _logger.Fatal(cardDeckRetrievingFault);
                     MessageBox.Show(Properties.Langs.Resources.CardDeckRetrievingError);
                 }
+                catch (CommunicationException communicationException)
+                {
+                    _logger.Fatal(communicationException);
+                    MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+                }
             }
-
         }
 
         private void CreateNewMatch()
         {                   
             LoadCardDeck();
-            _gameMatch = new MemoryGameService.DataTransferObjects.GameMatchDto()
+            _gameMatch = new MemoryGameService.DataTransferObjects.MatchDto()
                 {
                     MaxNumberOfPlayers = _numberOfPlayersDesiredForMatch,
                     Host = _username,
@@ -80,12 +91,28 @@ namespace MemoryGame
             _matchCreationServiceClient.CreateNewMatch(_gameMatch);
         }
 
-        private void LoadCardDeck()
+        private void LoadCardDecksInfo()
         {
             MemoryGameService.CardDeckRetrieverServiceClient cardDeckRetrieverServiceClient =
                 new MemoryGameService.CardDeckRetrieverServiceClient();
 
-            _cardDeck = cardDeckRetrieverServiceClient.GetCardDeckAndCards(1);
+            MemoryGameService.DataTransferObjects.CardDeckInfoDto[] cardDecksInfo =
+                cardDeckRetrieverServiceClient.GetCardDecksInfo();
+
+            for(int index = 0; index < cardDecksInfo.Length; index++)
+            {
+                _cardDecksInfoList.Add(cardDecksInfo[index]);
+            }
+            CardDeckComboBox.ItemsSource = _cardDecksInfoList;
+            CardDeckComboBox.DisplayMemberPath = "CardDeckName";
+            CardDeckComboBox.SelectedValuePath = "CardDeckId";
+        }
+
+        private void LoadCardDeck()
+        {
+            MemoryGameService.CardDeckRetrieverServiceClient cardDeckRetrieverServiceClient =
+                new MemoryGameService.CardDeckRetrieverServiceClient();
+            _cardDeck = cardDeckRetrieverServiceClient.GetCardDeckAndCards(_selectedCardDeckId);
         }
 
         private void GoToWaitingRoom()

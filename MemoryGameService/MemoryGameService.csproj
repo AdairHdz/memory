@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.8.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.8\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -46,11 +49,21 @@
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MailKit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.10.1\lib\net47\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.10.1\lib\net47\MimeKit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -74,14 +87,16 @@
     <Compile Include="DataTransferObjectMappers\PlayerMapper.cs" />
     <Compile Include="DataTransferObjectMappers\PlayerScoreMapper.cs" />
     <Compile Include="DataTransferObjects\CardDeckDTO.cs" />
+    <Compile Include="DataTransferObjects\CardDeckInfoDto.cs" />
     <Compile Include="DataTransferObjects\CardDto.cs" />
     <Compile Include="DataTransferObjects\CardPairDto.cs" />
-    <Compile Include="DataTransferObjects\GameMatchDto.cs" />
-    <Compile Include="DataTransferObjects\LobbyRequestDto.cs" />
-    <Compile Include="DataTransferObjects\MatchLobby.cs" />
+    <Compile Include="DataTransferObjects\MatchDto.cs" />
+    <Compile Include="DataTransferObjects\PlayerInLobby.cs" />
+    <Compile Include="DataTransferObjects\Lobby.cs" />
+    <Compile Include="DataTransferObjects\MatchRequestDto.cs" />
     <Compile Include="DataTransferObjects\PlayerCredentialsDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerDTO.cs" />
-    <Compile Include="DataTransferObjects\PlayerInMatchDto.cs" />
+    <Compile Include="DataTransferObjects\PlayerInMatch.cs" />
     <Compile Include="DataTransferObjects\PlayerScoreDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerMovementDto.cs" />
     <Compile Include="DataValidators\IPlayerValidator.cs" />
@@ -118,6 +133,7 @@
     <Compile Include="Utilities\CardShuffler.cs" />
     <Compile Include="Utilities\FisherYatesShuffler.cs" />
     <Compile Include="Utilities\IShuffler.cs" />
+    <Compile Include="Utilities\MailTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

@@ -13,7 +13,7 @@ namespace MemoryGameService.Services
     {
         public void EnterMatch(string host, string username)
         {
-            GameMatchDto gameMatch = GetMatch(host);
+            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = GetMatch(host);
 
             bool hasActiveTurn = false;
             if (host.Equals(username))
@@ -21,7 +21,7 @@ namespace MemoryGameService.Services
                 hasActiveTurn = true;
             }
 
-            PlayerInMatchDto player = new PlayerInMatchDto()
+            PlayerInMatch player = new PlayerInMatch()
             {
                 Username = username,
                 Score = 0,
@@ -31,16 +31,16 @@ namespace MemoryGameService.Services
             gameMatch.AddPlayer(player);
         }
 
-        public IList<PlayerInMatchDto> GetPlayersConnectedToMatch(string host)
+        public IList<PlayerInMatch> GetPlayersConnectedToMatch(string host)
         {
-            GameMatchDto match = GetMatch(host);
+            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto match = GetMatch(host);
             return match.GetPlayersConnectedToMatch();
         }
 
         public void NotifyCardWasUncoveredd(PlayerMovementDto playerTurnDto)
         {
             string host = playerTurnDto.Host;
-            GameMatchDto gameMatch = null;
+            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
             foreach(var match in _matches)
             {
                 if (match.Host.Equals(host))
@@ -51,7 +51,7 @@ namespace MemoryGameService.Services
 
             
 
-            IList<PlayerInMatchDto> playersInMatch = gameMatch.GetPlayersConnectedToMatch();
+            IList<PlayerInMatch> playersInMatch = gameMatch.GetPlayersConnectedToMatch();
 
             foreach(var playerInMatch in playersInMatch)
             {
@@ -63,7 +63,7 @@ namespace MemoryGameService.Services
         public void NotifyMatchHasEnded(string host)
         {
 
-            GameMatchDto gameMatch = null;
+            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
             foreach (var match in _matches)
             {
                 if (match.Host.Equals(host))
@@ -72,9 +72,9 @@ namespace MemoryGameService.Services
                 }
             }
 
-            PlayerInMatchDto playerWithBestScore = gameMatch.GetPlayerWithBestScore();
+            PlayerInMatch playerWithBestScore = gameMatch.GetPlayerWithBestScore();
             string usernameOfPlayerWithBestScore = playerWithBestScore.Username;
-            IList<PlayerInMatchDto> playersConnectedToMatch = gameMatch.GetPlayersConnectedToMatch();
+            IList<PlayerInMatch> playersConnectedToMatch = gameMatch.GetPlayersConnectedToMatch();
             foreach(var playerConnected in playersConnectedToMatch)
             {
                 var channel = playerConnected.MatchServiceConnection;
@@ -84,7 +84,7 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             int cardDeckId = gameMatch.CardDeckDto.CardDeckId;
 
-            Match matchToBeSaved = new Match()
+            DataAccess.Entities.Match matchToBeSaved = new DataAccess.Entities.Match()
             {
                 StatusId = 1,
                 CardDeckId = cardDeckId,
@@ -108,7 +108,7 @@ namespace MemoryGameService.Services
 
         public void EndTurn(string host, string username, CardPairDto cardPairDto)
         {
-            GameMatchDto gameMatch = null;
+            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
             foreach (var match in _matches)
             {
                 if (match.Host.Equals(host))
@@ -117,7 +117,7 @@ namespace MemoryGameService.Services
                 }
             }
 
-            PlayerInMatchDto player = gameMatch.GetPlayer(username);
+            PlayerInMatch player = gameMatch.GetPlayer(username);
             int indexOfPlayerWithCurrentTurn = gameMatch.GetPlayersConnectedToMatch().IndexOf(player);
 
             if (cardPairDto.BothCardsAreEqual)
@@ -136,9 +136,9 @@ namespace MemoryGameService.Services
                 }
             }
             
-            PlayerInMatchDto nextPlayer = gameMatch.GetPlayersConnectedToMatch()[indexOfPlayerWithCurrentTurn];
+            PlayerInMatch nextPlayer = gameMatch.GetPlayersConnectedToMatch()[indexOfPlayerWithCurrentTurn];
 
-            IList<PlayerInMatchDto> playersInMatch = gameMatch.GetPlayersConnectedToMatch();
+            IList<PlayerInMatch> playersInMatch = gameMatch.GetPlayersConnectedToMatch();
 
             foreach (var playerInMatch in playersInMatch)
             {

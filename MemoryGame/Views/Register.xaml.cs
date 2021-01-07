@@ -68,15 +68,20 @@ namespace MemoryGame
                 {
                     RegisterPlayer();
                 }
+                catch (TimeoutException timeoutException)
+                {
+                    _logger.Fatal(timeoutException);
+                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+                }
                 catch (EndpointNotFoundException endpointNotFoundException)
                 {
-                    _logger.Error("Endpoint couldn't be found. Error at method RegisterPlayer()", endpointNotFoundException);
+                    _logger.Fatal(endpointNotFoundException);
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }
-                catch (TimeoutException timeOutException)
+                catch (CommunicationException communicationException)
                 {
-                    _logger.Error("Server took to long to send a responde. Error at method RegisterPlayer()", timeOutException);
-                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+                    _logger.Fatal(communicationException);
+                    MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
                 }
             }
             else
@@ -157,7 +162,6 @@ namespace MemoryGame
 
         private bool PlayerWasSuccessfullyRegistered()
         {
-            bool playerWasSuccessfullyRegistered = false;
             BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
 
             MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
@@ -172,7 +176,7 @@ namespace MemoryGame
                     VerificationToken = _verificationToken
                 };
 
-            playerWasSuccessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO);
+            bool playerWasSuccessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO);
             return playerWasSuccessfullyRegistered;
         }
 

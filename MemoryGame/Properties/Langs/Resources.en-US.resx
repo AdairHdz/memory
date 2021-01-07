@@ -150,6 +150,9 @@
   <data name="ChangeUsername" xml:space="preserve">
     <value>Change username</value>
   </data>
+  <data name="CommunicationInterrupted" xml:space="preserve">
+    <value>Se interrumpió la comunicación con el servidor. Por favor, intente más tarde</value>
+  </data>
   <data name="CreateGame" xml:space="preserve">
     <value>Create game</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="ForgotPasswordMessage" xml:space="preserve">
     <value>Have you forgotten your password?</value>
   </data>
+  <data name="FourPlayers" xml:space="preserve">
+    <value>4 players</value>
+  </data>
   <data name="FullGameMessage" xml:space="preserve">
     <value>The game is full, wait for a place to be available or try another match</value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="Host" xml:space="preserve">
     <value>Host</value>
+  </data>
+  <data name="InsufficientNumberOfPlayers" xml:space="preserve">
+    <value>There must be at least 2 players to start the match</value>
   </data>
   <data name="Join" xml:space="preserve">
     <value>Join</value>
@@ -221,6 +230,9 @@
   </data>
   <data name="NewUsername" xml:space="preserve">
     <value>New username</value>
+  </data>
+  <data name="NoCardDeckHasBeenSelected" xml:space="preserve">
+    <value>Please pick a card deck for the match</value>
   </data>
   <data name="NoMatchWasSelected" xml:space="preserve">
     <value>Please pick the match you would like to join</value>
@@ -309,8 +321,14 @@
   <data name="Start" xml:space="preserve">
     <value>Start</value>
   </data>
+  <data name="ThreePlayers" xml:space="preserve">
+    <value>3 players</value>
+  </data>
   <data name="TriedToJoinToNonexistentMatch" xml:space="preserve">
     <value>It was not possible to join to this match because the host has deleted it</value>
+  </data>
+  <data name="TwoPlayers" xml:space="preserve">
+    <value>2 players</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>

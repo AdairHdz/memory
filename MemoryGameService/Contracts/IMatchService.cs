@@ -16,7 +16,7 @@ namespace MemoryGameService.Contracts
         [OperationContract(IsOneWay = true)]
         void EndTurn(string host, string username, CardPairDto cardPairDto);
         [OperationContract]
-        IList<PlayerInMatchDto> GetPlayersConnectedToMatch(string host);
+        IList<PlayerInMatch> GetPlayersConnectedToMatch(string host);
         [OperationContract(IsOneWay = true)]
         void NotifyMatchHasEnded(string host);
     }

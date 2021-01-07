@@ -150,6 +150,9 @@
   <data name="ChangeUsername" xml:space="preserve">
     <value>Cambiar nombre de usuario</value>
   </data>
+  <data name="CommunicationInterrupted" xml:space="preserve">
+    <value>Se interrumpió la comunicación con el servidor. Por favor, intente más tarde</value>
+  </data>
   <data name="CreateGame" xml:space="preserve">
     <value>Crear partida</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="ForgotPasswordMessage" xml:space="preserve">
     <value>¿Has olvidado tu contraseña?</value>
   </data>
+  <data name="FourPlayers" xml:space="preserve">
+    <value>4 jugadores</value>
+  </data>
   <data name="FullGameMessage" xml:space="preserve">
     <value>La partida esta llena, espera a que haya un lugar disponible o ingresa a otra partida</value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="Host" xml:space="preserve">
     <value>Anfitrión</value>
+  </data>
+  <data name="InsufficientNumberOfPlayers" xml:space="preserve">
+    <value>Debe haber al menos 2 jugadores para comenzar la partida</value>
   </data>
   <data name="Join" xml:space="preserve">
     <value>Unirse</value>
@@ -221,6 +230,9 @@
   </data>
   <data name="NewUsername" xml:space="preserve">
     <value>Nuevo nombre de usuario</value>
+  </data>
+  <data name="NoCardDeckHasBeenSelected" xml:space="preserve">
+    <value>Por favor seleccione un mazo de cartas para la partida</value>
   </data>
   <data name="NoMatchWasSelected" xml:space="preserve">
     <value>Por favor seleccione una partida a la cual unirse</value>
@@ -309,8 +321,14 @@
   <data name="Start" xml:space="preserve">
     <value>Comenzar</value>
   </data>
+  <data name="ThreePlayers" xml:space="preserve">
+    <value>3 jugadores</value>
+  </data>
   <data name="TriedToJoinToNonexistentMatch" xml:space="preserve">
     <value>No fue posible unirlo a la partida seleccionada, debido a que el anfitrión la ha eliminado</value>
+  </data>
+  <data name="TwoPlayers" xml:space="preserve">
+    <value>2 jugadores</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Nombre de usuario</value>

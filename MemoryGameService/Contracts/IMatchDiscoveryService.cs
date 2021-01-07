@@ -9,7 +9,7 @@ namespace MemoryGameService.Contracts
     public interface IMatchDiscoveryService
     {
         [OperationContract]
-        IList<GameMatchDto> GetActiveMatches();
+        IList<MatchDto> GetActiveMatches();
         
         [FaultContract(typeof(MatchAccessDeniedFault))]
         [OperationContract]

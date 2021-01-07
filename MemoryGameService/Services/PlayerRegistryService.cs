@@ -2,9 +2,10 @@
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGameService.Contracts;
-using System.Linq;
 using MemoryGame.MemoryGameService.DataTransferObjects;
-using System.Collections.Generic;
+using System.Data.SqlClient;
+using MemoryGame.MemoryGameService.Faults;
+using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
@@ -16,35 +17,67 @@ namespace MemoryGameService.Services
             newPlayer.EmailWasVerified = false;
             newPlayer.TotalScore = 0;
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            unitOfWork.Players.Add(newPlayer);
-            int playerWasRegistered = unitOfWork.Complete();
-            unitOfWork.Dispose();
-            return playerWasRegistered == 1;
+            try
+            {
+                unitOfWork.Players.Add(newPlayer);
+                int playerWasRegistered = unitOfWork.Complete();                
+                return playerWasRegistered == 1;
+            }
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public bool EmailAddressIsAvailable(string emailAddress)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            Player playerWithTheSpecifiedEmailAddress = unitOfWork.Players.Get(emailAddress);
-            unitOfWork.Dispose();
-            if (playerWithTheSpecifiedEmailAddress == null)
+            try
             {
-                return true;
+                Player playerWithTheSpecifiedEmailAddress = unitOfWork.Players.Get(emailAddress);                
+                if (playerWithTheSpecifiedEmailAddress == null)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;           
+            catch(SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         public bool UserNameIsAvailable(string username)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            IEnumerable<Player> player = unitOfWork.Players.Find(playerToFind => playerToFind.UserName == username);
-            int playersWhichHaveThatUserName = player.Count();
-            unitOfWork.Dispose();
-            if (playersWhichHaveThatUserName == 0)
+            try
             {
-                return true;
+                Player player = unitOfWork.Players.FindFirstOccurence(playerToFind => playerToFind.UserName == username);
+                if (player == null)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;            
+            catch (SqlException)
+            {
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
 

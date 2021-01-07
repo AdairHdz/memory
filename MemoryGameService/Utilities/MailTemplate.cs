@@ -1,7 +1,7 @@
 ﻿using MimeKit;
 using MailKit.Net.Smtp;
 
-namespace Utilities
+namespace MemoryGameService.Utilities
 {
     public class MailTemplate
     {

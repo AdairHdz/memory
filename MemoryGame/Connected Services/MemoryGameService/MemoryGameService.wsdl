@@ -381,17 +381,11 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IAccessibilityService_HasAccessRights_InputMessage">
-    <wsdl:part name="parameters" element="tns:HasAccessRights" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_HasAccessRights_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HasAccessRightsResponse" />
-  </wsdl:message>
   <wsdl:message name="IAccessibilityService_IsVerified_InputMessage">
     <wsdl:part name="parameters" element="tns:IsVerified" />
   </wsdl:message>
@@ -436,6 +430,12 @@
   </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_CardDeckRetrievingFaultFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q3:CardDeckRetrievingFault" />
+  </wsdl:message>
+  <wsdl:message name="ICardDeckRetrieverService_GetCardDecksInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardDecksInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICardDeckRetrieverService_GetCardDecksInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardDecksInfoResponse" />
   </wsdl:message>
   <wsdl:message name="IAccountModifiabilityService_SetNewPassword_InputMessage">
     <wsdl:part name="parameters" element="tns:SetNewPassword" />
@@ -597,10 +597,6 @@
     <wsdl:part name="parameters" element="tns:UserNameIsAvailableResponse" />
   </wsdl:message>
   <wsdl:portType name="IAccessibilityService">
-    <wsdl:operation name="HasAccessRights">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRights" message="tns:IAccessibilityService_HasAccessRights_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse" message="tns:IAccessibilityService_HasAccessRights_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="IsVerified">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerified" message="tns:IAccessibilityService_IsVerified_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerifiedResponse" message="tns:IAccessibilityService_IsVerified_OutputMessage" />
@@ -629,6 +625,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsCardDeckRetrievingFaultFault" name="CardDeckRetrievingFaultFault" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_CardDeckRetrievingFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardDecksInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDecksInfo" message="tns:ICardDeckRetrieverService_GetCardDecksInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDecksInfoResponse" message="tns:ICardDeckRetrieverService_GetCardDecksInfo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAccountModifiabilityService">
@@ -779,15 +779,6 @@
   <wsdl:binding name="NetTcpBinding_IAccessibilityService" type="tns:IAccessibilityService">
     <wsp:PolicyReference URI="#NetTcpBinding_IAccessibilityService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="HasAccessRights">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/HasAccessRights" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="IsVerified">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/IsVerified" style="document" />
       <wsdl:input>
@@ -854,6 +845,15 @@
       <wsdl:fault name="CardDeckRetrievingFaultFault">
         <soap12:fault use="literal" name="CardDeckRetrievingFaultFault" namespace="" />
       </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardDecksInfo">
+      <soap12:operation soapAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDecksInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IAccountModifiabilityService" type="tns:IAccountModifiabilityService">

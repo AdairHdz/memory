@@ -5,7 +5,7 @@ namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IMatchCreationService
     {
-        public void CreateNewMatch(GameMatchDto gameMatchDto)
+        public void CreateNewMatch(MatchDto gameMatchDto)
         {
             _matches.Add(gameMatchDto);
         }

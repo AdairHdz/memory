@@ -1,87 +1,52 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using System.Collections.Generic;
-using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : ILobbyService
     {
-        public IList<string> GetActivePlayersInLobby(GameMatchDto gameMatchDto)
+        public IList<string> GetActivePlayersInLobby(string host)
         {            
-            string host = gameMatchDto.Host;
-            GameMatchDto gameMatch = GetMatch(host);
-            IList<string> activePlayersFromMatch = gameMatch.GetUsernamesOfPlayersConnectedToLobby();
+            MatchDto match = GetMatch(host);
+            Lobby lobby = match.Lobby;
+            IList<string> activePlayersFromMatch = lobby.GetUsernamesOfPlayersConnectedToLobby();
             return activePlayersFromMatch;
         }
 
-        public void JoinLobby(LobbyRequestDto lobbyRequestDto)
+        public void JoinLobby(string host, string username)
         {
-            lobbyRequestDto.Connection = OperationContext.Current.GetCallbackChannel<ILobbyServiceCallback>();            
-            string host = lobbyRequestDto.Host;
-            string username = lobbyRequestDto.Username;
-            GameMatchDto gameMatch = GetMatch(host);
-            MatchLobby matchLobbyDto = gameMatch.Lobby;
-            matchLobbyDto.AddPlayerToLobby(lobbyRequestDto);
-            IList<LobbyRequestDto> requests = gameMatch.Lobby.GetLobbyRequests();
-            foreach (var request in requests)
-            {
-                var channel = request.Connection;
-                channel.NotifyNewPlayerEntered(username);
-            }
+            MatchDto match = GetMatch(host);
+            Lobby lobby = match.Lobby;
+            lobby.AddPlayerToLobby(host, username);
+            lobby.NotifyNewPlayerEnteredLobby(username);
         }
 
-        public void LeaveLobby(LobbyRequestDto lobbyRequestDto)
+        public void LeaveLobby(string host, string username)
         {            
-            string host = lobbyRequestDto.Host;
-            string username = lobbyRequestDto.Username;
-            GameMatchDto gameMatch = GetMatch(host);
-
-            MatchLobby matchLobby = gameMatch.Lobby;            
-            matchLobby.RemovePlayerFromLobby(lobbyRequestDto);
-
-            IList<LobbyRequestDto> requests = matchLobby.GetLobbyRequests();
-
+            MatchDto match = GetMatch(host);
+            Lobby lobby = match.Lobby;
+            lobby.RemovePlayerFromLobby(username);            
             if (host.Equals(username))
             {
-                foreach (var request in requests)
-                {
-                    var channel = request.Connection;
-                    channel.TakePlayersOutOfLobby();
-                }
-                _matches.Remove(gameMatch);
+                lobby.NotifyPlayersMatchHasBeenDeleted();
+                _matches.Remove(match);
             }
             else
             {
-                foreach (var request in requests)
-                {
-                    var channel = request.Connection;
-                    channel.NotifyPlayerLeft(username);
-                }
+                lobby.NotifyOnePlayerLeftLobby(username);
             }
         }
 
-        public void StartGame(GameMatchDto gameMatchDto)
+        public void StartGame(string host)
         {
-            GameMatchDto gameMatch = GetMatch(gameMatchDto.Host);
-            MatchLobby matchLobby = gameMatch.Lobby;
-                                    
-            IList<LobbyRequestDto> requests = matchLobby.GetLobbyRequests();
-            IList<string> playersInMatch = gameMatch.GetUsernamesOfPlayersConnectedToLobby();
-
-            foreach (var request in requests)
-            {
-                var channel = request.Connection;
-                channel.TakePlayersToMatchView(playersInMatch);
-            }
-
-            gameMatch.HasStarted = true;
-
+            MatchDto match = GetMatch(host);
+            match.StartMatch();            
         }
 
-        private GameMatchDto GetMatch(string host)
+        private MatchDto GetMatch(string host)
         {
-            GameMatchDto gameMatch = null;
+            MatchDto gameMatch = null;
             foreach (var match in _matches)
             {
                 if (match.Host.Equals(host))

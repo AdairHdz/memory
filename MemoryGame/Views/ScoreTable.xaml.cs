@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using System.Windows;
 
 namespace MemoryGame
@@ -9,6 +10,7 @@ namespace MemoryGame
     public partial class ScoreTable : Window
     {
         private MemoryGameService.DataTransferObjects.PlayerScoreDTO[] _bestScores;
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("ScoreTable.xaml.cs");
         public ScoreTable()
         {
             InitializeComponent();
@@ -28,9 +30,20 @@ namespace MemoryGame
                     }                    
                 }                
             }
-            catch (EndpointNotFoundException)
+            catch (TimeoutException timeoutException)
             {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
 

@@ -10,7 +10,7 @@ namespace MemoryGameService.Services
         ConcurrencyMode = ConcurrencyMode.Single)]
     public partial class MemoryGameService
     {
-        private static IList<GameMatchDto> _matches = new List<GameMatchDto>();
+        private static IList<MatchDto> _matches = new List<MatchDto>();
         public MemoryGameService() { }        
     }
 }
