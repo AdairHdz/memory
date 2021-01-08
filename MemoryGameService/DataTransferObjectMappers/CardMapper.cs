@@ -9,7 +9,7 @@ namespace MemoryGameService.DataTransferObjectMappers
         {
             CardDto cardDto = new CardDto()
             {
-                CardId = card.Id,
+                CardId = card.CardId,
                 FrontImage = card.FrontImage
             };
 
@@ -20,7 +20,7 @@ namespace MemoryGameService.DataTransferObjectMappers
         {
             Card card = new Card()
             {
-                Id = cardDto.CardId,
+                CardId = cardDto.CardId,
                 FrontImage = cardDto.FrontImage
             };
 

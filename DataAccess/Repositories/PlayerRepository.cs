@@ -20,7 +20,7 @@ namespace DataAccess.Repositories
         {
             IEnumerable<Player> players = new List<Player>();
             var playersRetrieved = MemoryGameContext.Players
-                .Include("Accounts");
+                .Include("Account");
             if(playersRetrieved != null)
             {
                 players = playersRetrieved.OrderByDescending(player => player.Score)

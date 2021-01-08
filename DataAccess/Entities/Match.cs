@@ -13,7 +13,7 @@ namespace DataAccess.Entities
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int MatchId { get; set; }
 
         public virtual CardDeck CardDeck { get; set; }
 

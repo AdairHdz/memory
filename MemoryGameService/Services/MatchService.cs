@@ -1,8 +1,4 @@
-﻿using DataAccess;
-using DataAccess.Entities;
-using DataAccess.Units_of_work;
-using MemoryGame.MemoryGameService.DataTransferObjects;
-using MemoryGame.MemoryGameService.Faults;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using System.Collections.Generic;
 using System.ServiceModel;

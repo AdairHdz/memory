@@ -27,7 +27,7 @@ namespace MemoryGameService.Services
             
             Player newPlayer = new Player()
             {
-                Account = newAccount,
+                //Account = newAccount,
                 EmailAddress = newAccount.EmailAddress,
                 Score = 0
             };

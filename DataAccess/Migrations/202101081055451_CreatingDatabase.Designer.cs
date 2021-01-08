@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class LongerSaltField : IMigrationMetadata
+    public sealed partial class CreatingDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(LongerSaltField));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatingDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101080330256_LongerSaltField"; }
+            get { return "202101081055451_CreatingDatabase"; }
         }
         
         string IMigrationMetadata.Source

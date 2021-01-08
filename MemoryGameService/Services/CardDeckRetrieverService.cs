@@ -68,7 +68,7 @@ namespace MemoryGameService.Services
                 {
                     CardDeckInfoDto cardDeckInfo = new CardDeckInfoDto()
                     {
-                        CardDeckId = individualCardDeck.Id,
+                        CardDeckId = individualCardDeck.CardDeckId,
                         CardDeckName = individualCardDeck.Name
                     };
                     listOfCardDecksInfo.Add(cardDeckInfo);

@@ -55,7 +55,7 @@
                     RecoveryToken = null
                 }
             );
-
+            */
             context.CardDecks.AddOrUpdate(x => x.CardDeckId,
                 new CardDeck()
                 {
@@ -134,7 +134,7 @@
                     CardDeckId = 1
                 }
             ) ;
-            */
+            
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method

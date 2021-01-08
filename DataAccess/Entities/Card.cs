@@ -6,8 +6,10 @@ namespace DataAccess.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
+        public int CardId { get; set; }
+        
+        public int CardDeckId { get; set; }
+        [ForeignKey("CardDeckId")]
         public virtual CardDeck CardDeck { get; set; }
 
         [Required]

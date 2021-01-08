@@ -21,7 +21,7 @@ namespace DataAccess.Repositories
         public CardDeck GetCardDeckAndCards(int cardDeckId)
         {
             IEnumerable<CardDeck> cardDecksRetrieved = MemoryGameContext.CardDecks.Include("Cards")
-                .Where(cardDeck => cardDeck.Id == cardDeckId);
+                .Where(cardDeck => cardDeck.CardDeckId == cardDeckId);
 
             if (cardDecksRetrieved.Any())
             {
