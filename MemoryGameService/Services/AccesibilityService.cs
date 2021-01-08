@@ -7,11 +7,13 @@ using System.ServiceModel;
 using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
 using System.Data.SqlClient;
+using System;
 
 namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IAccessibilityService
     {
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("AccesibilityService.cs");
         public string GetUserEmailAddress(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -110,6 +112,8 @@ namespace MemoryGameService.Services
         public PlayerCredentialsDTO GetPlayerCredentials(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
+            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
+            _logger.Fatal("This worked");
             try
             {                
                 Player playerWhoPossessTheSpecifiedUsername = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username);                

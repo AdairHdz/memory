@@ -32,5 +32,13 @@ namespace MemoryGame
             scoreTableView.Show();
             this.Close();
         }
+
+        private void ChangeUsernameButtonClicked(object sender, RoutedEventArgs e)
+        {
+            ChangeUsername changeUsernameView = new ChangeUsername();
+            changeUsernameView.Show();
+            this.Close();
+        }
+
     }
 }
