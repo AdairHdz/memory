@@ -54,6 +54,7 @@ namespace MemoryGameService.Services
             if (playerTurnDto.HasFormedAPair)
             {
                 player.AddUncoveredCard(playerTurnDto.CardIndex);
+                gameMatch.TotalPairs++;
             }
             else
             {
@@ -156,6 +157,11 @@ namespace MemoryGameService.Services
             {
                 playerInMatch.MatchServiceConnection.NotifyTurnHasEnded(nextPlayer.Username, cardPairDto);
             }
+
+            if (gameMatch.TotalPairs == gameMatch.CardDeckDto.NumberOfPairs)
+            {
+                this.NotifyMatchHasEnded(host);
+            }
         }
 
         public void LeaveMatch(string host, string username)
@@ -198,12 +204,14 @@ namespace MemoryGameService.Services
                 }
             }
 
+            IList<int> cardsUncovered = leavePlayer.GetUncoveredCards();
             foreach (var playerConnected in playersInMatch)
             {
                 var channel = playerConnected.MatchServiceConnection;
-                channel.NotifyPlayerLeaveMatch(username, leavePlayer.GetUncoveredCards());
+                channel.NotifyPlayerLeaveMatch(username, cardsUncovered);
             }
 
+            RemovePairs(gameMatch, cardsUncovered);
             gameMatch.RemovePlayer(username);
 
             if (playersInMatch.Count == 1)
@@ -260,18 +268,21 @@ namespace MemoryGameService.Services
                     }
                 }
 
+                IList<int> cardsUncovered = expelPlayer.GetUncoveredCards();
                 foreach (var playerConnected in playersInMatch)
                 {
                     var channel = playerConnected.MatchServiceConnection;
-                    channel.NotifyPlayerWasExpel(expelPlayerUsername, expelPlayer.GetUncoveredCards());
+                    channel.NotifyPlayerWasExpel(expelPlayerUsername, cardsUncovered);
                 }
 
+                RemovePairs(gameMatch, cardsUncovered);
                 gameMatch.RemovePlayer(expelPlayerUsername);
 
                 if (playersInMatch.Count == 1)
                 {
                     this.NotifyMatchHasEnded(host);
                 }
+
             }
         }
 
@@ -320,6 +331,18 @@ namespace MemoryGameService.Services
             }
 
             return indexOfPlayerWithCurrentTurn;
+        }
+
+        public void RemovePairs(MatchDto gameMatch, IList<int> cardsUncovered)
+        {
+            if ((cardsUncovered.Count % 2) == 0)
+            {
+                gameMatch.TotalPairs = gameMatch.TotalPairs - (cardsUncovered.Count / 2);
+            }
+            else
+            {
+                gameMatch.TotalPairs = gameMatch.TotalPairs - ((cardsUncovered.Count - 1) / 2);
+            }          
         }
     }
 }
