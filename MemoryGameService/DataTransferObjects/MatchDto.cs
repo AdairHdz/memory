@@ -10,7 +10,8 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         public string Host { get; set; }
         public bool HasStarted { get; set; }
         public Lobby Lobby { get; set; }
-        private IList<PlayerInMatch> _players;        
+        private IList<PlayerInMatch> _players;
+        public int TotalPairs { get; set; }
 
         public MatchDto()
         {

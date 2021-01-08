@@ -78,11 +78,12 @@ namespace MemoryGame
         {                   
             LoadCardDeck();
             _gameMatch = new MemoryGameService.DataTransferObjects.MatchDto()
-                {
-                    MaxNumberOfPlayers = _numberOfPlayersDesiredForMatch,
-                    Host = _username,
-                    HasStarted = false,
-                    CardDeckDto = _cardDeck
+            {
+                MaxNumberOfPlayers = _numberOfPlayersDesiredForMatch,
+                Host = _username,
+                HasStarted = false,
+                CardDeckDto = _cardDeck,
+                TotalPairs = 0
                 };
 
             MemoryGameService.MatchCreationServiceClient _matchCreationServiceClient =
