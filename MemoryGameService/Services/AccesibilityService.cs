@@ -9,6 +9,8 @@ using DataAccess.Entities;
 using System.Data.SqlClient;
 using System;
 using Utilities;
+using System.Web.Hosting;
+using System.IO;
 
 namespace MemoryGameService.Services
 {
@@ -17,6 +19,7 @@ namespace MemoryGameService.Services
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("AccesibilityService.cs");
         public string GetUserEmailAddress(string username)
         {
+            
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {

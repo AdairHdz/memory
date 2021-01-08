@@ -100,9 +100,8 @@ namespace MemoryGameService.Services
 
             DataAccess.Entities.Match matchToBeSaved = new DataAccess.Entities.Match()
             {
-                StatusId = 1,
                 CardDeckId = cardDeckId,
-                Duration = 0
+                
             };
 
             unitOfWork.Matches.Add(matchToBeSaved);

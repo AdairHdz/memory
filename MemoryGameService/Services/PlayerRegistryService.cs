@@ -27,7 +27,6 @@ namespace MemoryGameService.Services
             
             Player newPlayer = new Player()
             {
-                //Account = newAccount,
                 EmailAddress = newAccount.EmailAddress,
                 Score = 0
             };
@@ -87,7 +86,6 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                //Player player = unitOfWork.Players.FindFirstOccurence(playerToFind => playerToFind.UserName == username);
                 Account accountWithTheSpecifiedUsername = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);
                 if (accountWithTheSpecifiedUsername == null)
                 {
