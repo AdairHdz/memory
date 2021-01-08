@@ -60,6 +60,10 @@ namespace MemoryGame
                 {
                     LoginUser();
                 }
+                catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
+                {
+                    MessageBox.Show("El usuario no existe");
+                }
                 catch (EndpointNotFoundException)
                 {
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
@@ -67,11 +71,7 @@ namespace MemoryGame
                 catch (FaultException<MemoryGameService.Faults.DatabaseConnectionLostFault>)
                 {
                     //MessageBox.Show(Properties.Langs.Resources.);
-                }
-                catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
-                {
-                    MessageBox.Show("El usuario no existe");
-                }                
+                }               
                 catch (TimeoutException timeoutException)
                 {
                     _logger.Fatal(timeoutException);
@@ -120,12 +120,21 @@ namespace MemoryGame
         }
 
         public bool LoginIsValid()
-        {                 
-            BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
-            PlayerCredentialsDTO playerCredentials =
-                _accessibilityServiceClient.GetPlayerCredentials(_username);
-            bool isMatch = hashGenerator.Match(_password, playerCredentials.Password);
-            return isMatch;
+        {
+            BCryptHashGenerator bCryptHashGenerator = new BCryptHashGenerator();
+            string salt = GetPasswordSalt();
+            string encryptedPassword = bCryptHashGenerator.GenerateEncryptedString(_password, salt);
+            AccessibilityServiceClient accessibilityServiceClient = new AccessibilityServiceClient();
+            bool hasAccessRights = accessibilityServiceClient.HasAccessRights(_username, encryptedPassword);
+            return hasAccessRights;
+        }
+
+        private string GetPasswordSalt()
+        {
+            MemoryGameService.AccessibilityServiceClient accessibilityServiceClient =
+                new MemoryGameService.AccessibilityServiceClient();
+            string salt = accessibilityServiceClient.GetSalt(_username);
+            return salt;
         }
 
         public bool EmailIsVerified()

@@ -10,13 +10,11 @@ namespace DataAccess.Entities
         public CardDeck()
         {
             Cards = new HashSet<Card>();
-            Matches = new HashSet<Match>();
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CardDeckId { get; set; }
-        public int ThematicId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -30,7 +28,7 @@ namespace DataAccess.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Card> Cards { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Match> Matches { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public ICollection<Match> Matches { get; set; }
     }
 }

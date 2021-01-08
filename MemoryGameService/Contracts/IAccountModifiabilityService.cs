@@ -9,7 +9,7 @@ namespace MemoryGameService.Contracts
     {
         [FaultContract(typeof(DatabaseConnectionLostFault))]
         [OperationContract]
-        bool SetNewPassword(string emailAddress, string newPassword);
+        bool SetNewPassword(string emailAddress, string newPassword, string salt);
 
         [FaultContract(typeof(DatabaseConnectionLostFault))]
         [OperationContract]

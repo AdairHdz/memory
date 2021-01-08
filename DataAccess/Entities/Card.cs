@@ -6,13 +6,11 @@ namespace DataAccess.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CardId { get; set; }
+        public int Id { get; set; }
 
-        public int CardDeckId { get; set; }
+        public virtual CardDeck CardDeck { get; set; }
 
         [Required]
-        public string FrontImage { get; set; }
-
-        public virtual CardDeck CardDecks { get; set; }
+        public string FrontImage { get; set; }        
     }
 }

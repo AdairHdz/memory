@@ -15,10 +15,10 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Player player = unitOfWork.Players.Get(emailAddress);
-                if(player != null)
+                Account retrievedAccount = unitOfWork.Accounts.Get(emailAddress);
+                if(retrievedAccount != null)
                 {
-                    player.EmailWasVerified = true;
+                    retrievedAccount.EmailWasVerified = true;
                     int rowsModified = unitOfWork.Complete();
                     return rowsModified == 1;
                 }
@@ -41,10 +41,10 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                var player = unitOfWork.Players.Get(emailAddress);
-                if(player != null)
+                Account retrievedAccount = unitOfWork.Accounts.Get(emailAddress);
+                if (retrievedAccount != null)
                 {
-                    player.ActivationToken = verificationToken;
+                    retrievedAccount.ActivationToken = verificationToken;
                     int rowsModified = unitOfWork.Complete();
                     return rowsModified == 1;
                 }
@@ -67,9 +67,8 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Player player = unitOfWork.Players.FindFirstOccurence(playerToFind => playerToFind.EmailAddress ==
-                emailAddress && playerToFind.ActivationToken == verificationToken);
-                if(player != null)
+                Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => account.EmailAddress == emailAddress && account.ActivationToken == verificationToken);
+                if(retrievedAccount != null)
                 {
                     return true;
                 }

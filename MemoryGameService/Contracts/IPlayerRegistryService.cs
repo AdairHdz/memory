@@ -7,7 +7,7 @@ namespace MemoryGameService.Contracts
     public interface IPlayerRegistryService
     {        
         [OperationContract]
-        bool RegisterNewPlayer(PlayerDTO playerDTO);
+        bool RegisterNewPlayer(PlayerDTO playerDTO, string salt);
         [OperationContract]
         bool EmailAddressIsAvailable(string emailAddress);
         [OperationContract]

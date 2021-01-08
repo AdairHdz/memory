@@ -34,12 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -54,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\CardDeck.cs" />
     <Compile Include="Entities\Card.cs" />
     <Compile Include="MemoryGameContext.cs" />
@@ -76,6 +71,22 @@
     <Compile Include="Migrations\202101040540180_DeletePrimaryKeyFromMatchTable.designer.cs">
       <DependentUpon>202101040540180_DeletePrimaryKeyFromMatchTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101080240086_ChangedDatabaseStructure.cs" />
+    <Compile Include="Migrations\202101080240086_ChangedDatabaseStructure.designer.cs">
+      <DependentUpon>202101080240086_ChangedDatabaseStructure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101080330256_LongerSaltField.cs" />
+    <Compile Include="Migrations\202101080330256_LongerSaltField.designer.cs">
+      <DependentUpon>202101080330256_LongerSaltField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101080412279_AddedForeignKey.cs" />
+    <Compile Include="Migrations\202101080412279_AddedForeignKey.designer.cs">
+      <DependentUpon>202101080412279_AddedForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.cs" />
+    <Compile Include="Migrations\202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.designer.cs">
+      <DependentUpon>202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CardDeckRepository.cs" />
@@ -86,7 +97,6 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Units of work\IUnitOfWork.cs" />
     <Compile Include="Units of work\UnitOfWork.cs" />
-    <Compile Include="Entities\Winner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -104,6 +114,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101040540180_DeletePrimaryKeyFromMatchTable.resx">
       <DependentUpon>202101040540180_DeletePrimaryKeyFromMatchTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101080240086_ChangedDatabaseStructure.resx">
+      <DependentUpon>202101080240086_ChangedDatabaseStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101080330256_LongerSaltField.resx">
+      <DependentUpon>202101080330256_LongerSaltField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101080412279_AddedForeignKey.resx">
+      <DependentUpon>202101080412279_AddedForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.resx">
+      <DependentUpon>202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

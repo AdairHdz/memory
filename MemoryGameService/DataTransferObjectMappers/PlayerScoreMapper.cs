@@ -9,8 +9,8 @@ namespace MemoryGameService.DataTransferObjectMappers
         {
             PlayerScoreDTO playerScoreDTO = new PlayerScoreDTO()
             {
-                Username = player.UserName,
-                TotalScore = player.TotalScore
+                /*Username = player.UserName,
+                TotalScore = player.TotalScore*/
             };
 
             return playerScoreDTO;
@@ -20,8 +20,8 @@ namespace MemoryGameService.DataTransferObjectMappers
         {
             Player player = new Player()
             {
-                UserName = playerScoreDTO.Username,
-                TotalScore = playerScoreDTO.TotalScore
+                //UserName = playerScoreDTO.Username,
+                Score = playerScoreDTO.TotalScore
             };
 
             return player;

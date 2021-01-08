@@ -21,6 +21,7 @@ namespace UnitTests.DataAccessLayerTests
         [TestMethod]
         public void Test()
         {
+            /*
             Mock<IPlayerRepository> mockRepo = new Mock<IPlayerRepository>();
 
             var data = new List<Player>()
@@ -117,6 +118,7 @@ namespace UnitTests.DataAccessLayerTests
             Assert.AreEqual(expectedResults.Count, 3);
         }
         */
+            /*
         [TestMethod]
         public void Test4()
         {
@@ -163,43 +165,45 @@ namespace UnitTests.DataAccessLayerTests
             return null;
         }
         */
-
-        private List<Player> GetPlayers()
-        {
-            var data = new List<Player>()
-            {
-                new Player
-                {
-                    UserName = "AdairBenjamin",
-                    EmailAddress = "adairho16@gmail.com",
-                    Password = "12345678Ax$",
-                    TotalScore = 0,
-                    EmailWasVerified = false,
-                    ActivationToken = "abcdef",
-                    RecoveryToken = null
-                },
-                new Player
-                {
-                    UserName = "EduardoAldair",
-                    EmailAddress = "eduardo@hotmail.com",
-                    Password = "qwertyuiAx$",
-                    TotalScore = 120,
-                    EmailWasVerified = false,
-                    ActivationToken = "zxcvbn",
-                    RecoveryToken = null
-                },
-                new Player
-                {
-                    UserName = "IrvingLozada",
-                    EmailAddress = "irving@outlook.com",
-                    Password = "plmnbvgsAxc$",
-                    TotalScore = 160,
-                    EmailWasVerified = false,
-                    ActivationToken = "dfgasv",
-                    RecoveryToken = null
-                }
-            };
-            return data;
+            /*
+                    private List<Player> GetPlayers()
+                    {
+                        var data = new List<Player>()
+                        {
+                            new Player
+                            {
+                                UserName = "AdairBenjamin",
+                                EmailAddress = "adairho16@gmail.com",
+                                Password = "12345678Ax$",
+                                TotalScore = 0,
+                                EmailWasVerified = false,
+                                ActivationToken = "abcdef",
+                                RecoveryToken = null
+                            },
+                            new Player
+                            {
+                                UserName = "EduardoAldair",
+                                EmailAddress = "eduardo@hotmail.com",
+                                Password = "qwertyuiAx$",
+                                TotalScore = 120,
+                                EmailWasVerified = false,
+                                ActivationToken = "zxcvbn",
+                                RecoveryToken = null
+                            },
+                            new Player
+                            {
+                                UserName = "IrvingLozada",
+                                EmailAddress = "irving@outlook.com",
+                                Password = "plmnbvgsAxc$",
+                                TotalScore = 160,
+                                EmailWasVerified = false,
+                                ActivationToken = "dfgasv",
+                                RecoveryToken = null
+                            }
+                        };
+                        return data;
+                    }
+                    */
         }
     }
 }

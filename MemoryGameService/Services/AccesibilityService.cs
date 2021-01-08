@@ -8,6 +8,7 @@ using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
 using System.Data.SqlClient;
 using System;
+using Utilities;
 
 namespace MemoryGameService.Services
 {
@@ -19,10 +20,10 @@ namespace MemoryGameService.Services
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Player playerWhoPossessTheSpecifiedUsername = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username);
-                if(playerWhoPossessTheSpecifiedUsername != null)
-                {
-                    string emailAddress = playerWhoPossessTheSpecifiedUsername.EmailAddress;
+                Account accountRetrieved = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);                                
+                if (accountRetrieved != null)
+                {                    
+                    string emailAddress = accountRetrieved.EmailAddress;
                     return emailAddress;
                 }
                 NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
@@ -44,10 +45,10 @@ namespace MemoryGameService.Services
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                var player = unitOfWork.Players.Get(emailAddress);
-                if(player != null)
+                Account accountRetrieved = unitOfWork.Accounts.Get(emailAddress);               
+                if(accountRetrieved != null)
                 {
-                    return player.UserName;
+                    return accountRetrieved.Username;
                 }
                 NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
                 throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
@@ -68,8 +69,8 @@ namespace MemoryGameService.Services
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                var player = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username && x.EmailWasVerified);
-                if (player != null)
+                Account accountRetrieved = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username && account.EmailWasVerified);                
+                if (accountRetrieved != null)
                 {
                     return true;
                 }
@@ -88,11 +89,11 @@ namespace MemoryGameService.Services
 
         public bool ItsRegistered(string emailAddress)
         {
-            var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            Player player = unitOfWork.Players.Get(emailAddress);
+            var unitOfWork = new UnitOfWork(new MemoryGameContext());            
             try
             {
-                if (player != null)
+                Account accountRetrieved = unitOfWork.Accounts.Get(emailAddress);
+                if (accountRetrieved != null)
                 {
                     return true;
                 }
@@ -112,14 +113,18 @@ namespace MemoryGameService.Services
         public PlayerCredentialsDTO GetPlayerCredentials(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
-            _logger.Fatal("This worked");
             try
-            {                
-                Player playerWhoPossessTheSpecifiedUsername = unitOfWork.Players.FindFirstOccurence(x => x.UserName == username);                
-                if(playerWhoPossessTheSpecifiedUsername != null)
+            {
+                Account accountRetrieved = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);
+                if (accountRetrieved != null)
                 {
-                    PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(playerWhoPossessTheSpecifiedUsername);
+                    //PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(playerWhoPossessTheSpecifiedUsername);
+                    PlayerCredentialsDTO playerCredentials = new PlayerCredentialsDTO()
+                    {
+                        EmailAddress = accountRetrieved.EmailAddress,
+                        Username = accountRetrieved.Username,
+                        Password = accountRetrieved.Password
+                    };
                     return playerCredentials;
                 }
                 NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
@@ -130,6 +135,52 @@ namespace MemoryGameService.Services
                 //Esto nunca lo lanza. Se da un timeout exception
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
+        }
+
+        public string GetSalt(string username)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            try
+            {
+                Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);
+                if(retrievedAccount != null)
+                {
+                    return retrievedAccount.Salt;
+                }
+                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
+                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
+        }
+
+        public bool HasAccessRights(string username, string password)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            try
+            {
+                IEncryption bCryptHashGenerator = new BCryptHashGenerator();
+                Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username && account.Password == password);
+                if(retrievedAccount != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             finally
             {

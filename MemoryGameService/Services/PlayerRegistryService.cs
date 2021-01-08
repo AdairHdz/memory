@@ -6,27 +6,52 @@ using MemoryGame.MemoryGameService.DataTransferObjects;
 using System.Data.SqlClient;
 using MemoryGame.MemoryGameService.Faults;
 using System.ServiceModel;
+using System;
 
 namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IPlayerRegistryService
     {
-        public bool RegisterNewPlayer(PlayerDTO playerDTO)
+        public bool RegisterNewPlayer(PlayerDTO playerDTO, string salt)
         {
-            Player newPlayer = PlayerMapper.CreateEntity(playerDTO);
-            newPlayer.EmailWasVerified = false;
-            newPlayer.TotalScore = 0;
-            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+
+            Account newAccount = new Account()
+            {
+                EmailAddress = playerDTO.EmailAddress,
+                Username = playerDTO.Username,
+                Password = playerDTO.Password,
+                Salt = salt,
+                EmailWasVerified = false,
+                ActivationToken = playerDTO.VerificationToken
+            };
+            
+            Player newPlayer = new Player()
+            {
+                Account = newAccount,
+                EmailAddress = newAccount.EmailAddress,
+                Score = 0
+            };
+            MemoryGameContext memoryGameContext = new MemoryGameContext();
+            UnitOfWork unitOfWork = new UnitOfWork(memoryGameContext);
             try
             {
+                var transaction = memoryGameContext.Database.BeginTransaction();
+                unitOfWork.Accounts.Add(newAccount);
                 unitOfWork.Players.Add(newPlayer);
-                int playerWasRegistered = unitOfWork.Complete();                
-                return playerWasRegistered == 1;
+                int rowsAffected = unitOfWork.Complete();
+                transaction.Commit();
+                return rowsAffected > 0;
             }
             catch (SqlException)
             {
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.ReadLine();
+                throw;
             }
             finally
             {
@@ -39,8 +64,8 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Player playerWithTheSpecifiedEmailAddress = unitOfWork.Players.Get(emailAddress);                
-                if (playerWithTheSpecifiedEmailAddress == null)
+                Account accountWithTheSpecifiedEmailAddress = unitOfWork.Accounts.Get(emailAddress);
+                if (accountWithTheSpecifiedEmailAddress == null)
                 {
                     return true;
                 }
@@ -62,8 +87,9 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Player player = unitOfWork.Players.FindFirstOccurence(playerToFind => playerToFind.UserName == username);
-                if (player == null)
+                //Player player = unitOfWork.Players.FindFirstOccurence(playerToFind => playerToFind.UserName == username);
+                Account accountWithTheSpecifiedUsername = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);
+                if (accountWithTheSpecifiedUsername == null)
                 {
                     return true;
                 }

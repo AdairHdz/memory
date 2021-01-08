@@ -73,9 +73,10 @@ namespace MemoryGame
             {
                 return false;
             }
-            string encryptedNewPassword = bCryptHashGenerator.GenerateEncryptedString(newPassword);
+            string salt = bCryptHashGenerator.GenerateSalt();
+            string encryptedNewPassword = bCryptHashGenerator.GenerateEncryptedString(newPassword, salt);
             AccountModifiabilityServiceClient accountModifiabilityServiceClient = new AccountModifiabilityServiceClient();
-            bool newPasswordWasAssigned = accountModifiabilityServiceClient.SetNewPassword(_emailAddress, encryptedNewPassword);
+            bool newPasswordWasAssigned = accountModifiabilityServiceClient.SetNewPassword(_emailAddress, encryptedNewPassword, salt);
             return newPasswordWasAssigned;
         }
 

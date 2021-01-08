@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.Faults;
 using MemoryGameService.Contracts;
@@ -14,10 +15,10 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                var player = unitOfWork.Players.Get(emailAddress);
-                if(player != null)
+                Account account = unitOfWork.Accounts.Get(emailAddress);
+                if(account != null)
                 {
-                    player.UserName = newUsername;
+                    account.Username = newUsername;
                     int rowsModified = unitOfWork.Complete();
                     return rowsModified == 1;
                 }
@@ -32,18 +33,18 @@ namespace MemoryGameService.Services
             {
                 unitOfWork.Dispose();
             }
-
         }
 
-        public bool SetNewPassword(string emailAddress, string newPassword)
+        public bool SetNewPassword(string emailAddress, string newPassword, string salt)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                var player = unitOfWork.Players.Get(emailAddress);
-                if(player != null)
+                Account account = unitOfWork.Accounts.Get(emailAddress);
+                if(account != null)
                 {
-                    player.Password = newPassword;
+                    account.Password = newPassword;
+                    account.Salt = salt;
                     int rowsModified = unitOfWork.Complete();
                     return rowsModified == 1;
                 }

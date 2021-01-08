@@ -9,8 +9,8 @@ namespace MemoryGameService.DataTransferObjectMappers
         {
             PlayerCredentialsDTO playerCredentialsDTO = new PlayerCredentialsDTO()
             {
-                Username = player.UserName,
-                Password = player.Password
+                /*Username = player.UserName,
+                Password = player.Password*/
             };
 
             return playerCredentialsDTO;
@@ -20,8 +20,8 @@ namespace MemoryGameService.DataTransferObjectMappers
         {
             Player player = new Player()
             {
-                UserName = playerCredentialsDTO.Username,
-                Password = playerCredentialsDTO.Password
+                //UserName = playerCredentialsDTO.Username,
+                //Password = playerCredentialsDTO.Password
             };
 
             return player;

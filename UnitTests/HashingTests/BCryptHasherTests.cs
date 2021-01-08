@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace UnitTests.HashingTests
 {
@@ -38,6 +39,20 @@ namespace UnitTests.HashingTests
             bool actual = BCrypt.Net.BCrypt.Verify(password + "abc", hashedPassword);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Test()
+        {
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(8);
+            string password = "Hello there";
+            string encryptedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt);
+
+
+            string secondPassword = "Hello there";
+            string secondEncryptedPassword = BCrypt.Net.BCrypt.HashPassword(secondPassword, salt);
+
+            Assert.AreEqual(encryptedPassword, secondEncryptedPassword);
         }
     }
 }

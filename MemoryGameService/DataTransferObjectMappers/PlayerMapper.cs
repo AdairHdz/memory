@@ -9,10 +9,12 @@ namespace MemoryGameService
         {
             PlayerDTO mappedDTO = new PlayerDTO()
             {
+                /*
                 EmailAddress = player.EmailAddress,
-                Username = player.UserName,
+                Username = player.Username,
                 Password = player.Password,
                 VerificationToken = player.ActivationToken
+                */
             };
             return mappedDTO;
         }
@@ -22,9 +24,9 @@ namespace MemoryGameService
             Player mappedEntity = new Player()
             {
                 EmailAddress = dto.EmailAddress,
-                UserName = dto.Username,
-                Password = dto.Password,
-                ActivationToken = dto.VerificationToken
+                //UserName = dto.Username,
+                //Password = dto.Password,
+                //ActivationToken = dto.VerificationToken
             };
             return mappedEntity;
         }

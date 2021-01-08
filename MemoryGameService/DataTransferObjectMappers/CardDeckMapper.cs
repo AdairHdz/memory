@@ -10,7 +10,7 @@ namespace MemoryGameService.DataTransferObjectMappers
         {
             CardDeckDTO cardDeckDTO = new CardDeckDTO()
             {
-                CardDeckId = cardDeckEntity.CardDeckId,
+                CardDeckId = cardDeckEntity.Id,
                 Name = cardDeckEntity.Name,
                 BackImage = cardDeckEntity.BackImage,
                 NumberOfPairs = cardDeckEntity.NumberOfPairs,
@@ -24,7 +24,7 @@ namespace MemoryGameService.DataTransferObjectMappers
         {
             CardDeck cardDeck = new CardDeck()
             {
-                CardDeckId = cardDeckDTO.CardDeckId,
+                Id = cardDeckDTO.CardDeckId,
                 Name = cardDeckDTO.Name,
                 BackImage = cardDeckDTO.BackImage,
                 NumberOfPairs = cardDeckDTO.NumberOfPairs
