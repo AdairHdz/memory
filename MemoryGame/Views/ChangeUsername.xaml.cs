@@ -72,7 +72,6 @@ namespace MemoryGame
                 _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
-
         }
 
         private void SaveChangesButtonClicked(object sender, RoutedEventArgs e)
@@ -83,6 +82,7 @@ namespace MemoryGame
             {
                 try
                 {
+
                     if (ChangeUserName())
                     {
                         MessageBox.Show(Properties.Langs.Resources.UsernameUpdatedSuccessfully);

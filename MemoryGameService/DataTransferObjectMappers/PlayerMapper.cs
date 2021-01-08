@@ -23,7 +23,7 @@ namespace MemoryGameService
         {
             Player mappedEntity = new Player()
             {
-                EmailAddress = dto.EmailAddress,
+//                EmailAddress = dto.EmailAddress,
                 //UserName = dto.Username,
                 //Password = dto.Password,
                 //ActivationToken = dto.VerificationToken

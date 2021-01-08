@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddedSaltDefaultValueNullableInPropertyTrying : IMigrationMetadata
+    public sealed partial class AddedForeignKeyToPlayer : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedSaltDefaultValueNullableInPropertyTrying));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedForeignKeyToPlayer));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101080437355_AddedSaltDefaultValueNullableInPropertyTrying"; }
+            get { return "202101081005445_AddedForeignKeyToPlayer"; }
         }
         
         string IMigrationMetadata.Source

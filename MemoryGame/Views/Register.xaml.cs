@@ -1,5 +1,6 @@
 ﻿using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.RegistryValidation;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGame.Utilities;
 using System;
 using System.Collections.Generic;
@@ -116,7 +117,7 @@ namespace MemoryGame
             if(emailAddressIsAvailable && usernameIsAvailable)
             {
                 GenerateToken();
-                if (PlayerWasSuccessfullyRegistered())
+                if (PlayerWasSuccessfullyRegistered())                
                 {
                     SendVerificationToken();
                     GoToActivationTokenWindow();
@@ -136,8 +137,15 @@ namespace MemoryGame
 
         private void SendVerificationToken()
         {
-            TokenManager.SendVerificationToken(_username,
-                    _emailAddress, _verificationToken);
+
+            VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+            {
+                Name = _username,
+                EmailAddress = _emailAddress,
+                VerificationToken = _verificationToken
+            };
+
+            TokenManager.SendVerificationToken(verificationTokenInfo);
         }
 
         private void CancelButtonClicked(object sender, RoutedEventArgs e)

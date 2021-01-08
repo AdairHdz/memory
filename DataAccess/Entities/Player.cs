@@ -2,6 +2,7 @@ namespace DataAccess.Entities
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Player
     {
@@ -12,8 +13,10 @@ namespace DataAccess.Entities
         }
 
         [Key]
+        public string EmailAddress { get; set; }       
+
+        [ForeignKey("EmailAddress")]
         [StringLength(254)]
-        public string EmailAddress { get; set; }
         public virtual Account Account { get; set; }
         public int Score { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using System.ServiceModel;
 
 namespace MemoryGameService.Contracts
 {
@@ -6,6 +7,6 @@ namespace MemoryGameService.Contracts
     public interface IMailingService
     {
         [OperationContract]
-        void SendVerificationToken(string name, string emailAddress, string verificationToken);
+        void SendVerificationToken(VerificationTokenInfoDto verificationTokenInfo);
     }
 }

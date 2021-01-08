@@ -1,4 +1,6 @@
-﻿namespace MemoryGame.Utilities
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+
+namespace MemoryGame.Utilities
 {
     public static class TokenManager
     {
@@ -9,11 +11,11 @@
             return client.GenerateToken(6);
         }
 
-        public static void SendVerificationToken(string username, string emailAddress, string verificationToken)
+        public static void SendVerificationToken(VerificationTokenInfoDto verificationTokenInfo)
         {
             MemoryGameService.MailingServiceClient client =
                 new MemoryGameService.MailingServiceClient();
-            client.SendVerificationToken(username, emailAddress, verificationToken);
+            client.SendVerificationToken(verificationTokenInfo);
         }
     }
 }

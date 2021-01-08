@@ -357,8 +357,14 @@
   <data name="UsernameUpdatedSuccessfully" xml:space="preserve">
     <value>Nombre de usuario actualizado de forma exitosa</value>
   </data>
+  <data name="VerificationToken" xml:space="preserve">
+    <value>Tu token de verificación es</value>
+  </data>
   <data name="WaitingRoom" xml:space="preserve">
     <value>Sala de espera</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Bienvenido</value>
   </data>
   <data name="WinMessage" xml:space="preserve">
     <value>ha ganado</value>

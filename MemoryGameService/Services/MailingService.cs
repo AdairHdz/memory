@@ -1,12 +1,16 @@
-﻿using MemoryGameService.Contracts;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGameService.Contracts;
 using MemoryGameService.Utilities;
 
 namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IMailingService
     {
-        public void SendVerificationToken(string name, string emailAddress, string verificationToken)
+        public void SendVerificationToken(VerificationTokenInfoDto verificationTokenInfo)
         {
+            string name = verificationTokenInfo.Name;
+            string emailAddress = verificationTokenInfo.EmailAddress;
+            string verificationToken = verificationTokenInfo.VerificationToken;
             MailTemplate mt = new MailTemplate();
             mt.SetReceiver(name, emailAddress);
             mt.SetMessage("Bienvenido",

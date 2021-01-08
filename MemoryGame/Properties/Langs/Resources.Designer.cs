@@ -781,11 +781,29 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tu token de verificación es.
+        /// </summary>
+        public static string VerificationToken {
+            get {
+                return ResourceManager.GetString("VerificationToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sala de espera.
         /// </summary>
         public static string WaitingRoom {
             get {
                 return ResourceManager.GetString("WaitingRoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Bienvenido.
+        /// </summary>
+        public static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
         

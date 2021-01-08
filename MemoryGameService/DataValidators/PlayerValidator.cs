@@ -18,7 +18,7 @@ namespace MemoryGameService.DataValidators
         {
             Player playerToBeValidated = new Player()
             {
-                EmailAddress = emailAddress,
+                //EmailAddress = emailAddress,
                 //UserName = username,
                 //Password = password
             };

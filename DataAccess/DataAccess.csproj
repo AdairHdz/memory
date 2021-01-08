@@ -83,9 +83,9 @@
     <Compile Include="Migrations\202101080412279_AddedForeignKey.designer.cs">
       <DependentUpon>202101080412279_AddedForeignKey.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.cs" />
-    <Compile Include="Migrations\202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.designer.cs">
-      <DependentUpon>202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.cs</DependentUpon>
+    <Compile Include="Migrations\202101081005445_AddedForeignKeyToPlayer.cs" />
+    <Compile Include="Migrations\202101081005445_AddedForeignKeyToPlayer.designer.cs">
+      <DependentUpon>202101081005445_AddedForeignKeyToPlayer.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,8 +124,8 @@
     <EmbeddedResource Include="Migrations\202101080412279_AddedForeignKey.resx">
       <DependentUpon>202101080412279_AddedForeignKey.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.resx">
-      <DependentUpon>202101080437355_AddedSaltDefaultValueNullableInPropertyTrying.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101081005445_AddedForeignKeyToPlayer.resx">
+      <DependentUpon>202101081005445_AddedForeignKeyToPlayer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

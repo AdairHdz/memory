@@ -89,6 +89,7 @@ namespace MemoryGame
             }
         }
 
+
         public string GetUserEmailAdress()
         {          
             
@@ -103,9 +104,10 @@ namespace MemoryGame
             {
                 if (EmailIsVerified())
                 {
+                    string emailAddress = GetUserEmailAdress();
                     Sesion playerSesion = Sesion.GetSesion;
-                    playerSesion.Username = TextBoxUsername.Text;
-                    playerSesion.EmailAddress = GetUserEmailAdress();
+                    playerSesion.Username = _username;
+                    playerSesion.EmailAddress = emailAddress;
                     GoToMainMenu();
                 }
                 else
@@ -167,8 +169,9 @@ namespace MemoryGame
 
         private void GoToActivationToken()
         {
+            string emailAddress = GetUserEmailAdress();
             ActivationToken activationTokenWindow =
-                new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
+                new ActivationToken(emailAddress, TextBoxUsername.Text);
             activationTokenWindow.Show();
             this.Close();
         }

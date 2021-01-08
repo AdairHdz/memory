@@ -44,6 +44,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CardDeckInfoDto" nillable="true" type="tns:CardDeckInfoDto" />
+  <xs:complexType name="PasswordModificationCredentialsDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salt" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PasswordModificationCredentialsDto" nillable="true" type="tns:PasswordModificationCredentialsDto" />
+  <xs:complexType name="VerificationTokenInfoDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VerificationToken" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VerificationTokenInfoDto" nillable="true" type="tns:VerificationTokenInfoDto" />
   <xs:complexType name="MatchDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="CardDeckDto" nillable="true" type="tns:CardDeckDTO" />
@@ -51,6 +67,7 @@
       <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Lobby" nillable="true" type="tns:Lobby" />
       <xs:element minOccurs="0" name="MaxNumberOfPlayers" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalPairs" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MatchDto" nillable="true" type="tns:MatchDto" />

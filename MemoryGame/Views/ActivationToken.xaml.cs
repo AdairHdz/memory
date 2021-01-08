@@ -1,4 +1,5 @@
-﻿using MemoryGame.Utilities;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.Utilities;
 using System;
 using System.ServiceModel;
 using System.Windows;
@@ -134,7 +135,14 @@ namespace MemoryGame
 
         private void SendNewVerificationToken()
         {
-            TokenManager.SendVerificationToken(_username, _emailAddress, _newToken);            
+            VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+            {
+                Name = _username,
+                EmailAddress = _emailAddress,
+                VerificationToken = _newToken
+            };
+
+            TokenManager.SendVerificationToken(verificationTokenInfo);            
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)

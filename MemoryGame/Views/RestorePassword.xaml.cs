@@ -3,6 +3,8 @@ using Utilities;
 using MemoryGame.MemoryGameService;
 using System.ServiceModel;
 using System;
+using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.Utilities;
 
 namespace MemoryGame
 {
@@ -13,7 +15,6 @@ namespace MemoryGame
     {
         private string _emailAddress;
         private string _username;
-        private string _newPassword;
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("RestorePassword.xaml.cs");
         public RestorePassword()
         {
@@ -76,7 +77,13 @@ namespace MemoryGame
             string salt = bCryptHashGenerator.GenerateSalt();
             string encryptedNewPassword = bCryptHashGenerator.GenerateEncryptedString(newPassword, salt);
             AccountModifiabilityServiceClient accountModifiabilityServiceClient = new AccountModifiabilityServiceClient();
-            bool newPasswordWasAssigned = accountModifiabilityServiceClient.SetNewPassword(_emailAddress, encryptedNewPassword, salt);
+            PasswordModificationCredentialsDto passwordModificationCredentials = new PasswordModificationCredentialsDto()
+            {
+                EmailAddress = _emailAddress,
+                Salt = salt,
+                NewPassword = encryptedNewPassword
+            };
+            bool newPasswordWasAssigned = accountModifiabilityServiceClient.SetNewPassword(passwordModificationCredentials);
             return newPasswordWasAssigned;
         }
 
@@ -108,27 +115,6 @@ namespace MemoryGame
                 _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
-            /*
-            if (TokenIsCorrect())
-            {
-                bool passwordRestored = SetNewPassword();
-                if (passwordRestored)
-                {
-                    MessageBox.Show("Contraseña restablecida exitosamente");
-                    Login loginView = new Login();
-                    loginView.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("No se pudo restablecer la contraseña");
-                }
-            }
-            else
-            {
-                MessageBox.Show(Properties.Langs.Resources.NonMatchingVerificationCode);
-            }
-            */
         }
 
         private void SendNewCodeButtonClicked(object sender, RoutedEventArgs e)
@@ -164,24 +150,25 @@ namespace MemoryGame
         }
 
         private void SendNewCode()
-        {
-            TokenGeneratorClient tokenGeneratorClient =
-                new TokenGeneratorClient();
-            string newToken = tokenGeneratorClient.GenerateToken(6);
+        {            
+            string newToken = TokenManager.GenerateVerificationToken();            
             bool newVerificationTokenWasAssigned = false;
             if(newToken != "")
             {
                 AccountVerificationServiceClient accountVerificationServiceClient =
                     new AccountVerificationServiceClient();
                 newVerificationTokenWasAssigned = accountVerificationServiceClient.AssignNewVerificationToken(_emailAddress, newToken);
-
-                MailingServiceClient mailingServiceClient =
-                    new MailingServiceClient();
-                mailingServiceClient.SendVerificationToken(_username, _emailAddress, newToken);                
             }
 
             if (newVerificationTokenWasAssigned)
             {
+                VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+                {
+                    Name = _username,
+                    EmailAddress = _emailAddress,
+                    VerificationToken = newToken
+                };
+                TokenManager.SendVerificationToken(verificationTokenInfo);
                 MessageBox.Show(Properties.Langs.Resources.NewCodeSentMessage);
             }                
         }
