@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Options}"
         Height="250" Width="400" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Loaded="WindowLoaded">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">

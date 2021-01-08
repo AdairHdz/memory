@@ -25,9 +25,9 @@
     <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="a49d5a89-bacc-485f-a6d2-c6ec590637b5" SourceId="1" SourceUrl="http://localhost:8080/?xsd=xsd2" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="6e4eaea4-5c56-415f-b5cd-90d62b1fa905" SourceId="1" SourceUrl="http://localhost:8080/?disco" />
     <MetadataFile FileName="MemoryGameService.wsdl" MetadataType="Wsdl" ID="5d9fae2e-e3b3-409a-8157-6987403834ab" SourceId="1" SourceUrl="http://localhost:8080/?wsdl" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="971ab7c2-fbba-4b25-bd1a-06b843426ef8" SourceId="1" SourceUrl="http://localhost:8080/?xsd=xsd3" />
     <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="5083cf00-2e59-4d82-a4fa-b8e74f366658" SourceId="1" SourceUrl="http://localhost:8080/?xsd=xsd4" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="1565760b-e6ad-42d7-8af5-ca590a8d5e7e" SourceId="1" SourceUrl="http://localhost:8080/?xsd=xsd1" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="971ab7c2-fbba-4b25-bd1a-06b843426ef8" SourceId="1" SourceUrl="http://localhost:8080/?xsd=xsd3" />
     <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="18063eb2-60ce-4a33-b8a9-bc0c4fbc70b3" SourceId="1" SourceUrl="http://localhost:8080/?xsd=xsd0" />
   </Metadata>
   <Extensions>

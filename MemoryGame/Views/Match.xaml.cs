@@ -24,7 +24,9 @@ namespace MemoryGame.Views
         private IList<ImageCard> _cardsFlippedInTotal;
         private bool _playerHasFormedAPair;
         public string[] Players { get; set; }
+        public int NumberOfPlayers { get; set; }
         public string MatchHost { get; set; }
+        private bool _windowIsBeingClosedByTheCloseButton;
         public Match()
         {
             InitializeComponent();
@@ -35,6 +37,7 @@ namespace MemoryGame.Views
             _cardsFlippedInCurrentTurn = new List<ImageCard>();
             _cardsFlippedInTotal = new List<ImageCard>();
             _playerHasFormedAPair = false;
+            _windowIsBeingClosedByTheCloseButton = true;
         }
 
         private void DrawPlayersNames()
@@ -89,6 +92,14 @@ namespace MemoryGame.Views
                 HasFormedAPair = _playerHasFormedAPair
             };
 
+            if (_numberOfMovementsAllowed == 0)
+            {
+                if (HasFormedAPair())
+                {
+                    playerMovementDto.HasFormedAPair = true;
+                }
+            }
+
             _matchServiceClient.NotifyCardWasUncoveredd(playerMovementDto);
         }
 
@@ -125,8 +136,15 @@ namespace MemoryGame.Views
 
         private void OptionsButtonClicked(object sender, RoutedEventArgs e)
         {
-            GameOptions registerView = new GameOptions();
-            registerView.Show();
+            _windowIsBeingClosedByTheCloseButton = false;
+            GameOptions gameOptionsView = new GameOptions()
+            {
+                MatchHost = this.MatchHost,
+                NumberOfPlayersInMatch = NumberOfPlayers,
+                PlayerUsername = Sesion.GetSesion.Username,
+                Context = this._context
+            };
+            gameOptionsView.Show();
         }
 
         private void WindowLoaded(object sender, EventArgs e)
@@ -141,8 +159,17 @@ namespace MemoryGame.Views
             {
                 _numberOfMovementsAllowed = 0;
             }
-            TurnLabel.Content = "Es turno de: " + MatchHost;
+            TurnLabel.Content = Properties.Langs.Resources.TurnMessage + ": " + MatchHost;
             _matchServiceClient.EnterMatch(MatchHost, Sesion.GetSesion.Username);
+            NumberOfPlayers = Players.Length;
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            if (_windowIsBeingClosedByTheCloseButton)
+            {
+                _matchServiceClient.LeaveMatch(MatchHost, Sesion.GetSesion.Username);
+            }
         }
 
         public void UncoverCardd(int cardIndex)
@@ -159,7 +186,7 @@ namespace MemoryGame.Views
 
         public void NotifyTurnHasEnded(string username, CardPairDto cardPairDto)
         {
-            TurnLabel.Content = "Es turno de: " + username;
+            TurnLabel.Content = Properties.Langs.Resources.TurnMessage + ": " + username;
 
             if (Sesion.GetSesion.Username.Equals(username))
             {
@@ -186,7 +213,64 @@ namespace MemoryGame.Views
 
         public void ShowWinners(string winner)
         {
-            MessageBox.Show(winner + " ha ganado");
+            MessageBox.Show(winner + " " + Properties.Langs.Resources.WinMessage);
+        }
+
+        public void MatchHasEnded()
+        {
+            GoToMainMenuView();
+        }
+
+        public void NotifyPlayerWasExpel(string expelPlayerUsername, int[] cardsUncovered)
+        {
+            if (Sesion.GetSesion.Username.Equals(expelPlayerUsername))
+            {
+                GoToMainMenuView();
+            }
+            else
+            {
+                for (int index = 0; index < cardsUncovered.Length; index++)
+                {
+                    _imageCards[cardsUncovered[index]].Source = _imageCards[cardsUncovered[index]].BackImage;
+                }
+                MessageBox.Show(expelPlayerUsername + " " + Properties.Langs.Resources.ExpelMessage);
+                NumberOfPlayers--;
+            }
+        }
+
+        public void NotifyPlayerLeaveMatch(string playerUsername, int[] cardsUncovered)
+        {
+            if (Sesion.GetSesion.Username.Equals(playerUsername))
+            {
+                GoToMainMenuView();
+            }
+            else
+            {
+                for (int index = 0; index < cardsUncovered.Length; index++)
+                {
+                    _imageCards[cardsUncovered[index]].Source = _imageCards[cardsUncovered[index]].BackImage;
+                }
+                MessageBox.Show(playerUsername + " " + Properties.Langs.Resources.LeaveMatchMessage);
+                NumberOfPlayers--;
+            }
+        }
+
+        public void EndTurnOfExpelPlayer(string nextPlayerUsername)
+        {
+            TurnLabel.Content = Properties.Langs.Resources.TurnMessage + ": " + nextPlayerUsername;
+
+            if (Sesion.GetSesion.Username.Equals(nextPlayerUsername))
+            {
+                _numberOfMovementsAllowed = 2;
+            }
+        }
+
+        private void GoToMainMenuView()
+        {
+            _windowIsBeingClosedByTheCloseButton = false;
+            MainMenu mainMenuView = new MainMenu();
+            mainMenuView.Show();
+            this.Close();
         }
     }
 }

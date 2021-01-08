@@ -10,8 +10,8 @@ namespace MemoryGameServiceHost
         {
             using (ServiceHost host = new ServiceHost(typeof(MemoryGameService.Services.MemoryGameService)))
             {                
-                host.Open();
-                Console.WriteLine("Server started @ " + DateTime.Now.ToString());
+                host.Open();                
+                Console.WriteLine("Server started @ " + DateTime.Now.ToString());                
                 Console.ReadKey();                
             }
         }

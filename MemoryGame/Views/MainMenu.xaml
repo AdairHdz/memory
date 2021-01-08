@@ -47,12 +47,17 @@
 
         <Button Grid.Column="4" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center"
                     Style="{StaticResource buttonPrimary}"
-                    Content="{x:Static p:Resources.JoinGame}" Grid.RowSpan="2"
+                    Content="{x:Static p:Resources.JoinGame}" Grid.RowSpan="1"
                     Click="JoinGameButtonClicked"/>
 
-        <Button Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Center"
+        <Button Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Center"
                     Style="{StaticResource buttonPrimary}"
                     Content="{x:Static p:Resources.ScoreTable}"
                     Click="ScoreTableButtonClicked"/>
+
+        <Button Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                    Style="{StaticResource buttonPrimary}"
+                    Content="{x:Static p:Resources.ChangeUsername}"
+                    Click="ChangeUsernameButtonClicked"/>
     </Grid>
 </Window>
