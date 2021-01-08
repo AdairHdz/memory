@@ -21,7 +21,6 @@ namespace MemoryGame.Views
         private List<ImageCard> _imageCards;
         private int _numberOfMovementsAllowed;
         private IList<ImageCard> _cardsFlippedInCurrentTurn;
-        private IList<ImageCard> _cardsFlippedInTotal;
         private bool _playerHasFormedAPair;
         public string[] Players { get; set; }
         public int NumberOfPlayers { get; set; }
@@ -35,7 +34,6 @@ namespace MemoryGame.Views
             _imageCards = new List<ImageCard>();                        
             _numberOfMovementsAllowed = 0;
             _cardsFlippedInCurrentTurn = new List<ImageCard>();
-            _cardsFlippedInTotal = new List<ImageCard>();
             _playerHasFormedAPair = false;
             _windowIsBeingClosedByTheCloseButton = true;
         }
@@ -197,17 +195,10 @@ namespace MemoryGame.Views
             {
                 ImageCard imageCard1 = _imageCards[cardPairDto.IndexOfCard1];
                 ImageCard imageCard2 = _imageCards[cardPairDto.IndexOfCard2];
-                _cardsFlippedInTotal.Add(imageCard1);
-                _cardsFlippedInTotal.Add(imageCard2);
             }
             else
             {
                 FlipBothCardsAgain(cardPairDto);
-            }
-
-            if(_cardsFlippedInTotal.Count == _imageCards.Count)
-            {
-                _matchServiceClient.NotifyMatchHasEnded(MatchHost);
             }
         }
 
