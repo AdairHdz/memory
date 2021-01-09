@@ -102,15 +102,12 @@ namespace MemoryGameService.Services
 
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
-            {                
-                Player player = new Player()
-                {
-                    EmailAddress = "adairho16@gmail.com",
-                    Score = 0
-                };                
+            {
+                Player player = unitOfWork.Players.Get("adairho16@gmail.com");
+                CardDeck cardDeck = unitOfWork.CardDecks.Get(gameMatch.CardDeckDto.CardDeckId);
                 DataAccess.Entities.Match matchToBeSaved = new DataAccess.Entities.Match()
                 {
-                    CardDeck = CardDeckMapper.CreateEntity(gameMatch.CardDeckDto),
+                    CardDeck = cardDeck,
                     Winner = player
                 };
                 unitOfWork.Matches.Add(matchToBeSaved);                

@@ -55,13 +55,9 @@
     <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\Sesion.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Migrations\202101081055451_CreatingDatabase.cs" />
-    <Compile Include="Migrations\202101081055451_CreatingDatabase.designer.cs">
-      <DependentUpon>202101081055451_CreatingDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101081103531_AddingForeignKwy.cs" />
-    <Compile Include="Migrations\202101081103531_AddingForeignKwy.designer.cs">
-      <DependentUpon>202101081103531_AddingForeignKwy.cs</DependentUpon>
+    <Compile Include="Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.cs" />
+    <Compile Include="Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.designer.cs">
+      <DependentUpon>202101090707155_SetForeignKeysOnMatchExplicitly.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,11 +75,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101081055451_CreatingDatabase.resx">
-      <DependentUpon>202101081055451_CreatingDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101081103531_AddingForeignKwy.resx">
-      <DependentUpon>202101081103531_AddingForeignKwy.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.resx">
+      <DependentUpon>202101090707155_SetForeignKeysOnMatchExplicitly.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

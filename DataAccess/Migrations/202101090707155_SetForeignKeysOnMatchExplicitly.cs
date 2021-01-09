@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreatingDatabase : DbMigration
+    public partial class SetForeignKeysOnMatchExplicitly : DbMigration
     {
         public override void Up()
         {
@@ -23,26 +23,26 @@
                 c => new
                     {
                         CardId = c.Int(nullable: false, identity: true),
+                        CardDeckId = c.Int(nullable: false),
                         FrontImage = c.String(nullable: false),
-                        CardDeck_CardDeckId = c.Int(),
                     })
                 .PrimaryKey(t => t.CardId)
-                .ForeignKey("dbo.CardDecks", t => t.CardDeck_CardDeckId)
-                .Index(t => t.CardDeck_CardDeckId);
+                .ForeignKey("dbo.CardDecks", t => t.CardDeckId, cascadeDelete: true)
+                .Index(t => t.CardDeckId);
             
             CreateTable(
                 "dbo.Matches",
                 c => new
                     {
                         MatchId = c.Int(nullable: false, identity: true),
-                        CardDeck_CardDeckId = c.Int(),
-                        Winner_EmailAddress = c.String(maxLength: 254),
+                        CardDeckId = c.Int(nullable: false),
+                        EmailAddress = c.String(maxLength: 254),
                     })
                 .PrimaryKey(t => t.MatchId)
-                .ForeignKey("dbo.CardDecks", t => t.CardDeck_CardDeckId)
-                .ForeignKey("dbo.Players", t => t.Winner_EmailAddress)
-                .Index(t => t.CardDeck_CardDeckId)
-                .Index(t => t.Winner_EmailAddress);
+                .ForeignKey("dbo.CardDecks", t => t.CardDeckId, cascadeDelete: true)
+                .ForeignKey("dbo.Players", t => t.EmailAddress)
+                .Index(t => t.CardDeckId)
+                .Index(t => t.EmailAddress);
             
             CreateTable(
                 "dbo.Players",
@@ -73,14 +73,14 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.Matches", "Winner_EmailAddress", "dbo.Players");
+            DropForeignKey("dbo.Matches", "EmailAddress", "dbo.Players");
             DropForeignKey("dbo.Players", "EmailAddress", "dbo.Accounts");
-            DropForeignKey("dbo.Matches", "CardDeck_CardDeckId", "dbo.CardDecks");
-            DropForeignKey("dbo.Cards", "CardDeck_CardDeckId", "dbo.CardDecks");
+            DropForeignKey("dbo.Matches", "CardDeckId", "dbo.CardDecks");
+            DropForeignKey("dbo.Cards", "CardDeckId", "dbo.CardDecks");
             DropIndex("dbo.Players", new[] { "EmailAddress" });
-            DropIndex("dbo.Matches", new[] { "Winner_EmailAddress" });
-            DropIndex("dbo.Matches", new[] { "CardDeck_CardDeckId" });
-            DropIndex("dbo.Cards", new[] { "CardDeck_CardDeckId" });
+            DropIndex("dbo.Matches", new[] { "EmailAddress" });
+            DropIndex("dbo.Matches", new[] { "CardDeckId" });
+            DropIndex("dbo.Cards", new[] { "CardDeckId" });
             DropTable("dbo.Accounts");
             DropTable("dbo.Players");
             DropTable("dbo.Matches");

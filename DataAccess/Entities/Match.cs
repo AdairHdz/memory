@@ -15,8 +15,12 @@ namespace DataAccess.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MatchId { get; set; }
 
+        public int CardDeckId { get; set; }
+        [ForeignKey("CardDeckId")]
         public virtual CardDeck CardDeck { get; set; }
 
+        public string EmailAddress { get; set; }
+        [ForeignKey("EmailAddress")]
         public virtual Player Winner { get; set; }
     }
 }

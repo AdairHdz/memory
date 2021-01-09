@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddingForeignKwy : IMigrationMetadata
+    public sealed partial class SetForeignKeysOnMatchExplicitly : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddingForeignKwy));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SetForeignKeysOnMatchExplicitly));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101081103531_AddingForeignKwy"; }
+            get { return "202101090707155_SetForeignKeysOnMatchExplicitly"; }
         }
         
         string IMigrationMetadata.Source
