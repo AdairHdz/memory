@@ -237,6 +237,9 @@
   <data name="NewUsername" xml:space="preserve">
     <value>Nuevo nombre de usuario</value>
   </data>
+  <data name="NewUsernameIsIdenticalToTheOldOne" xml:space="preserve">
+    <value>El nombre de usuario ingresado es idéntico al que ya tiene</value>
+  </data>
   <data name="NoCardDeckHasBeenSelected" xml:space="preserve">
     <value>Por favor seleccione un mazo de cartas para la partida</value>
   </data>

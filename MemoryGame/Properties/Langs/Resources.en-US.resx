@@ -237,6 +237,9 @@
   <data name="NewUsername" xml:space="preserve">
     <value>New username</value>
   </data>
+  <data name="NewUsernameIsIdenticalToTheOldOne" xml:space="preserve">
+    <value>The username you entered is identical to your actual one</value>
+  </data>
   <data name="NoCardDeckHasBeenSelected" xml:space="preserve">
     <value>Please pick a card deck for the match</value>
   </data>

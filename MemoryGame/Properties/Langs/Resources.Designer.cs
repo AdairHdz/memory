@@ -421,6 +421,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El nombre de usuario ingresado es idéntico al que ya tiene..
+        /// </summary>
+        public static string NewUsernameIsIdenticalToTheOldOne {
+            get {
+                return ResourceManager.GetString("NewUsernameIsIdenticalToTheOldOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Por favor seleccione un mazo de cartas para la partida.
         /// </summary>
         public static string NoCardDeckHasBeenSelected {

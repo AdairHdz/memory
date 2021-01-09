@@ -1,5 +1,10 @@
-﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+﻿using DataAccess;
+using DataAccess.Entities;
+using DataAccess.Units_of_work;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
+using MemoryGameService.DataTransferObjectMappers;
+using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -95,18 +100,31 @@ namespace MemoryGameService.Services
                 channel.MatchHasEnded();
             }
 
-            /*UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            int cardDeckId = gameMatch.CardDeckDto.CardDeckId;
-
-            DataAccess.Entities.Match matchToBeSaved = new DataAccess.Entities.Match()
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            try
+            {                
+                Player player = new Player()
+                {
+                    EmailAddress = "adairho16@gmail.com",
+                    Score = 0
+                };                
+                DataAccess.Entities.Match matchToBeSaved = new DataAccess.Entities.Match()
+                {
+                    CardDeck = CardDeckMapper.CreateEntity(gameMatch.CardDeckDto),
+                    Winner = player
+                };
+                unitOfWork.Matches.Add(matchToBeSaved);                
+                int recordsAdded = unitOfWork.Complete();
+            }
+            catch(Exception e)
             {
-                CardDeckId = cardDeckId,
-                
-            };
-
-            unitOfWork.Matches.Add(matchToBeSaved);
-            int recordsAdded = unitOfWork.Complete();
-            unitOfWork.Dispose();*/
+                Console.WriteLine(e);
+                Console.ReadLine();
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
 
             _matches.Remove(gameMatch);
 

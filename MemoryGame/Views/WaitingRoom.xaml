@@ -45,7 +45,8 @@
                   Grid.Row="3" Grid.RowSpan="3"
                   Margin="30 0 30 0"
                   Name="WaitingRoomDataGrid"
-                  AutoGenerateColumns="False">
+                  CanUserSortColumns="False"
+                  AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     HeaderStyle="{StaticResource dataGridHeader}" 
