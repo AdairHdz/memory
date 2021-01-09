@@ -113,7 +113,7 @@ namespace MemoryGame
         {
             MemoryGameService.CardDeckRetrieverServiceClient cardDeckRetrieverServiceClient =
                 new MemoryGameService.CardDeckRetrieverServiceClient();
-            _cardDeck = cardDeckRetrieverServiceClient.GetCardDeckAndCards(_selectedCardDeckId);
+            _cardDeck = cardDeckRetrieverServiceClient.GetCardDeckAndCards(_selectedCardDeckId);            
         }
 
         private void GoToWaitingRoom()

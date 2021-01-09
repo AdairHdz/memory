@@ -237,6 +237,9 @@
   <data name="NewUsername" xml:space="preserve">
     <value>New username</value>
   </data>
+  <data name="NewUsernameIsIdenticalToTheOldOne" xml:space="preserve">
+    <value>The username you entered is identical to your actual one</value>
+  </data>
   <data name="NoCardDeckHasBeenSelected" xml:space="preserve">
     <value>Please pick a card deck for the match</value>
   </data>
@@ -357,8 +360,14 @@
   <data name="UsernameUpdatedSuccessfully" xml:space="preserve">
     <value>Your username has been updated successfully</value>
   </data>
+  <data name="VerificationToken" xml:space="preserve">
+    <value>Your verification token is</value>
+  </data>
   <data name="WaitingRoom" xml:space="preserve">
     <value>Waiting room</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
   </data>
   <data name="WinMessage" xml:space="preserve">
     <value>has won</value>

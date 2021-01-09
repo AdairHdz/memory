@@ -43,7 +43,8 @@
         <DataGrid Grid.ColumnSpan="4" Grid.Column="3" HorizontalAlignment="Left" 
                   Grid.Row="3" Grid.RowSpan="4"                  
                   Name="GamesDataGrid"
-                  AutoGenerateColumns="False"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  CanUserSortColumns="False"
                   CanUserAddRows="False"
                   ItemsSource="{Binding Path=Matches}">
 

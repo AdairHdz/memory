@@ -29,5 +29,12 @@ namespace MemoryGameService.Contracts
         [FaultContract(typeof(DatabaseConnectionLostFault))]
         [OperationContract]
         PlayerCredentialsDTO GetPlayerCredentials(string username);
+
+
+        [OperationContract]
+        string GetSalt(string username);
+
+        [OperationContract]
+        bool HasAccessRights(string username, string password);
     }
 }

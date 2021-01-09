@@ -18,8 +18,14 @@ namespace DataAccess.Repositories
 
         public IEnumerable<Entities.Player> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
         {
-            IEnumerable<Player> players = MemoryGameContext.Players
-                .OrderByDescending(player => player.TotalScore).Take(numberOfPlayersToBeRetrieved);
+            IEnumerable<Player> players = new List<Player>();
+            var playersRetrieved = MemoryGameContext.Players
+                .Include("Account");
+            if(playersRetrieved != null)
+            {
+                players = playersRetrieved.OrderByDescending(player => player.Score)
+                .Take(numberOfPlayersToBeRetrieved);
+            }
             return players;
         }
     }

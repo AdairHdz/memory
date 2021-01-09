@@ -237,6 +237,9 @@
   <data name="NewUsername" xml:space="preserve">
     <value>Nuevo nombre de usuario</value>
   </data>
+  <data name="NewUsernameIsIdenticalToTheOldOne" xml:space="preserve">
+    <value>El nombre de usuario ingresado es idéntico al que ya tiene</value>
+  </data>
   <data name="NoCardDeckHasBeenSelected" xml:space="preserve">
     <value>Por favor seleccione un mazo de cartas para la partida</value>
   </data>
@@ -357,8 +360,14 @@
   <data name="UsernameUpdatedSuccessfully" xml:space="preserve">
     <value>Nombre de usuario actualizado de forma exitosa</value>
   </data>
+  <data name="VerificationToken" xml:space="preserve">
+    <value>Tu token de verificación es</value>
+  </data>
   <data name="WaitingRoom" xml:space="preserve">
     <value>Sala de espera</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Bienvenido</value>
   </data>
   <data name="WinMessage" xml:space="preserve">
     <value>ha ganado</value>

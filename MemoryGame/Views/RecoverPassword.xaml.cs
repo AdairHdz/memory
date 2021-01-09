@@ -5,6 +5,7 @@ using System.Windows;
 using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.RegistryValidation;
 using MemoryGame.MemoryGameService;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGame.Utilities;
 
 namespace MemoryGame
@@ -138,8 +139,15 @@ namespace MemoryGame
         }
 
         private void SendVerificationCode()
-        {            
-            TokenManager.SendVerificationToken(_username, _emailAddress, _verificationToken);
+        {
+            VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+            {
+                Name = _username,
+                EmailAddress = _emailAddress,
+                VerificationToken = _verificationToken
+            };
+
+            TokenManager.SendVerificationToken(verificationTokenInfo);
         }
 
         private void GoToRestorePassword()

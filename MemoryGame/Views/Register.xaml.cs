@@ -1,5 +1,6 @@
 ﻿using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.RegistryValidation;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGame.Utilities;
 using System;
 using System.Collections.Generic;
@@ -112,11 +113,11 @@ namespace MemoryGame
             {
                 MessageBox.Show(Properties.Langs.Resources.UsernameIsTaken);
             }
-
+            
             if(emailAddressIsAvailable && usernameIsAvailable)
             {
                 GenerateToken();
-                if (PlayerWasSuccessfullyRegistered())
+                if (PlayerWasSuccessfullyRegistered())                
                 {
                     SendVerificationToken();
                     GoToActivationTokenWindow();
@@ -136,8 +137,15 @@ namespace MemoryGame
 
         private void SendVerificationToken()
         {
-            TokenManager.SendVerificationToken(_username,
-                    _emailAddress, _verificationToken);
+
+            VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+            {
+                Name = _username,
+                EmailAddress = _emailAddress,
+                VerificationToken = _verificationToken
+            };
+
+            TokenManager.SendVerificationToken(verificationTokenInfo);
         }
 
         private void CancelButtonClicked(object sender, RoutedEventArgs e)
@@ -163,7 +171,8 @@ namespace MemoryGame
         private bool PlayerWasSuccessfullyRegistered()
         {
             BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
-
+            string salt = hashGenerator.GenerateSalt();
+            string encryptedPassword = hashGenerator.GenerateEncryptedString(_password, salt);
             MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
                 new MemoryGameService.PlayerRegistryServiceClient();
 
@@ -172,14 +181,13 @@ namespace MemoryGame
                 {
                     Username = _username,
                     EmailAddress = _emailAddress,
-                    Password = hashGenerator.GenerateEncryptedString(_password),
+                    Password = encryptedPassword,
                     VerificationToken = _verificationToken
                 };
 
-            bool playerWasSuccessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO);
+            bool playerWasSuccessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO, salt);
             return playerWasSuccessfullyRegistered;
         }
-
 
         private void GoToActivationTokenWindow()
         {

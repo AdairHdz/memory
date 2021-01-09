@@ -110,7 +110,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccessLayerTests\DbContextMock.cs" />
     <Compile Include="DataAccessLayerTests\PlayerTest.cs" />
+    <Compile Include="DataAccessLayerTests\AccountTest.cs" />
     <Compile Include="HashingTests\BCryptHasherTests.cs" />
     <Compile Include="InputValidationTests\EmailAddressValidationRuleTest.cs" />
     <Compile Include="InputValidationTests\NonEmptyFieldValidationTest.cs" />

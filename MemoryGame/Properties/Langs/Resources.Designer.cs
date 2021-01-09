@@ -421,6 +421,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El nombre de usuario ingresado es idéntico al que ya tiene..
+        /// </summary>
+        public static string NewUsernameIsIdenticalToTheOldOne {
+            get {
+                return ResourceManager.GetString("NewUsernameIsIdenticalToTheOldOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Por favor seleccione un mazo de cartas para la partida.
         /// </summary>
         public static string NoCardDeckHasBeenSelected {
@@ -781,11 +790,29 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tu token de verificación es.
+        /// </summary>
+        public static string VerificationToken {
+            get {
+                return ResourceManager.GetString("VerificationToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sala de espera.
         /// </summary>
         public static string WaitingRoom {
             get {
                 return ResourceManager.GetString("WaitingRoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Bienvenido.
+        /// </summary>
+        public static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
         

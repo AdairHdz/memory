@@ -9,6 +9,7 @@ namespace DataAccess.Units_of_work
         public IPlayerRepository Players { get; private set; }
         public ICardDeckRepository CardDecks { get; private set; }
         public Repository<Match> Matches { get; private set; }
+        public Repository<Account> Accounts { get; private set; }
 
         public UnitOfWork(MemoryGameContext context)
         {
@@ -16,6 +17,7 @@ namespace DataAccess.Units_of_work
             Players = new PlayerRepository(_context);
             CardDecks = new CardDeckRepository(_context);
             Matches = new Repository<Match>(_context);
+            Accounts = new Repository<Account>(_context);
         }
 
         

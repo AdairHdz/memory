@@ -72,6 +72,35 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetSalt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSaltResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSaltResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HasAccessRights">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HasAccessRightsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HasAccessRightsResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetCardDeckAndCards">
     <xs:complexType>
       <xs:sequence>
@@ -101,8 +130,7 @@
   <xs:element name="SetNewPassword">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="emailAddress" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="newPassword" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="passwordModificationCredentials" nillable="true" type="q4:PasswordModificationCredentialsDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -243,7 +271,7 @@
   <xs:element name="GetActivePlayersInLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetActivePlayersInLobbyResult" nillable="true" type="q4:ArrayOfstring" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetActivePlayersInLobbyResult" nillable="true" type="q5:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -271,7 +299,7 @@
   <xs:element name="TakePlayersToMatchView">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInMatch" nillable="true" type="q5:ArrayOfstring" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInMatch" nillable="true" type="q6:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -283,9 +311,7 @@
   <xs:element name="SendVerificationToken">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="emailAddress" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="verificationToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="verificationTokenInfo" nillable="true" type="q7:VerificationTokenInfoDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -297,7 +323,7 @@
   <xs:element name="CreateNewMatch">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="gameMatchDto" nillable="true" type="q6:MatchDto" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="gameMatchDto" nillable="true" type="q8:MatchDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -309,7 +335,7 @@
   <xs:element name="GetActiveMatchesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetActiveMatchesResult" nillable="true" type="q7:ArrayOfMatchDto" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetActiveMatchesResult" nillable="true" type="q9:ArrayOfMatchDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -330,7 +356,7 @@
   <xs:element name="NotifyCardWasUncoveredd">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerMovementDto" nillable="true" type="q8:PlayerMovementDto" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerMovementDto" nillable="true" type="q10:PlayerMovementDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -347,7 +373,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="host" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="cardPairDto" nillable="true" type="q9:CardPairDto" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="cardPairDto" nillable="true" type="q11:CardPairDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -361,7 +387,7 @@
   <xs:element name="GetPlayersConnectedToMatchResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersConnectedToMatchResult" nillable="true" type="q10:ArrayOfPlayerInMatch" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersConnectedToMatchResult" nillable="true" type="q12:ArrayOfPlayerInMatch" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -399,7 +425,7 @@
   <xs:element name="GetUsernamesOfPlayersConnectedToMatchResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetUsernamesOfPlayersConnectedToMatchResult" nillable="true" type="q11:ArrayOfstring" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetUsernamesOfPlayersConnectedToMatchResult" nillable="true" type="q13:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -414,7 +440,7 @@
   <xs:element name="GetPlayersVotedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPlayersVotedResult" nillable="true" type="q12:ArrayOfstring" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPlayersVotedResult" nillable="true" type="q14:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -429,7 +455,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="cardPairDto" nillable="true" type="q13:CardPairDto" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="cardPairDto" nillable="true" type="q15:CardPairDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -444,7 +470,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="expelPlayerUsername" nillable="true" type="xs:string" />
-        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cardsUncovered" nillable="true" type="q14:ArrayOfint" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cardsUncovered" nillable="true" type="q16:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -459,7 +485,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cardsUncovered" nillable="true" type="q15:ArrayOfint" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cardsUncovered" nillable="true" type="q17:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -492,14 +518,15 @@
   <xs:element name="GetPlayersWithBestScoreResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersWithBestScoreResult" nillable="true" type="q16:ArrayOfPlayerScoreDTO" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersWithBestScoreResult" nillable="true" type="q18:ArrayOfPlayerScoreDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RegisterNewPlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerDTO" nillable="true" type="q17:PlayerDTO" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerDTO" nillable="true" type="q19:PlayerDTO" />
+        <xs:element minOccurs="0" name="salt" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -440,6 +440,18 @@
   <wsdl:message name="IAccessibilityService_GetPlayerCredentials_DatabaseConnectionLostFaultFault_FaultMessage">
     <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q8:DatabaseConnectionLostFault" />
   </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetSalt_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSalt" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetSalt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSaltResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_HasAccessRights_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasAccessRights" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_HasAccessRights_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasAccessRightsResponse" />
+  </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDeckAndCards" />
   </wsdl:message>
@@ -678,6 +690,14 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse" message="tns:IAccessibilityService_GetPlayerCredentials_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetPlayerCredentials_NonExistentUserFaultFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_GetPlayerCredentials_DatabaseConnectionLostFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSalt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetSalt" message="tns:IAccessibilityService_GetSalt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetSaltResponse" message="tns:IAccessibilityService_GetSalt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasAccessRights">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRights" message="tns:IAccessibilityService_HasAccessRights_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse" message="tns:IAccessibilityService_HasAccessRights_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICardDeckRetrieverService">
@@ -935,6 +955,24 @@
       <wsdl:fault name="DatabaseConnectionLostFaultFault">
         <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
       </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSalt">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetSalt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasAccessRights">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/HasAccessRights" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ICardDeckRetrieverService" type="tns:ICardDeckRetrieverService">
@@ -1336,7 +1374,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1345,7 +1383,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1354,7 +1392,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1363,7 +1401,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1372,7 +1410,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1381,7 +1419,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1390,7 +1428,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1399,7 +1437,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1408,7 +1446,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1417,7 +1455,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1426,7 +1464,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1435,7 +1473,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -1444,7 +1482,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-PCDO896V\obalt</Upn>
+          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

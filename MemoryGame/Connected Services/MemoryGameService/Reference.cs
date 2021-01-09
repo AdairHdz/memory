@@ -59,6 +59,18 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
         System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO> GetPlayerCredentialsAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetSalt", ReplyAction="http://tempuri.org/IAccessibilityService/GetSaltResponse")]
+        string GetSalt(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetSalt", ReplyAction="http://tempuri.org/IAccessibilityService/GetSaltResponse")]
+        System.Threading.Tasks.Task<string> GetSaltAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
+        bool HasAccessRights(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
+        System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -126,6 +138,22 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO> GetPlayerCredentialsAsync(string username) {
             return base.Channel.GetPlayerCredentialsAsync(username);
+        }
+        
+        public string GetSalt(string username) {
+            return base.Channel.GetSalt(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetSaltAsync(string username) {
+            return base.Channel.GetSaltAsync(username);
+        }
+        
+        public bool HasAccessRights(string username, string password) {
+            return base.Channel.HasAccessRights(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password) {
+            return base.Channel.HasAccessRightsAsync(username, password);
         }
     }
     
@@ -199,10 +227,10 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordDatabaseConnectionL" +
             "ostFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
-        bool SetNewPassword(string emailAddress, string newPassword);
+        bool SetNewPassword(MemoryGame.MemoryGameService.DataTransferObjects.PasswordModificationCredentialsDto passwordModificationCredentials);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
-        System.Threading.Tasks.Task<bool> SetNewPasswordAsync(string emailAddress, string newPassword);
+        System.Threading.Tasks.Task<bool> SetNewPasswordAsync(MemoryGame.MemoryGameService.DataTransferObjects.PasswordModificationCredentialsDto passwordModificationCredentials);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameDatabaseConnectionL" +
@@ -240,12 +268,12 @@ namespace MemoryGame.MemoryGameService {
                 base(binding, remoteAddress) {
         }
         
-        public bool SetNewPassword(string emailAddress, string newPassword) {
-            return base.Channel.SetNewPassword(emailAddress, newPassword);
+        public bool SetNewPassword(MemoryGame.MemoryGameService.DataTransferObjects.PasswordModificationCredentialsDto passwordModificationCredentials) {
+            return base.Channel.SetNewPassword(passwordModificationCredentials);
         }
         
-        public System.Threading.Tasks.Task<bool> SetNewPasswordAsync(string emailAddress, string newPassword) {
-            return base.Channel.SetNewPasswordAsync(emailAddress, newPassword);
+        public System.Threading.Tasks.Task<bool> SetNewPasswordAsync(MemoryGame.MemoryGameService.DataTransferObjects.PasswordModificationCredentialsDto passwordModificationCredentials) {
+            return base.Channel.SetNewPasswordAsync(passwordModificationCredentials);
         }
         
         public bool ChangeUsername(string emailAddress, string newUsername) {
@@ -533,10 +561,10 @@ namespace MemoryGame.MemoryGameService {
     public interface IMailingService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendVerificationToken", ReplyAction="http://tempuri.org/IMailingService/SendVerificationTokenResponse")]
-        void SendVerificationToken(string name, string emailAddress, string verificationToken);
+        void SendVerificationToken(MemoryGame.MemoryGameService.DataTransferObjects.VerificationTokenInfoDto verificationTokenInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendVerificationToken", ReplyAction="http://tempuri.org/IMailingService/SendVerificationTokenResponse")]
-        System.Threading.Tasks.Task SendVerificationTokenAsync(string name, string emailAddress, string verificationToken);
+        System.Threading.Tasks.Task SendVerificationTokenAsync(MemoryGame.MemoryGameService.DataTransferObjects.VerificationTokenInfoDto verificationTokenInfo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -566,12 +594,12 @@ namespace MemoryGame.MemoryGameService {
                 base(binding, remoteAddress) {
         }
         
-        public void SendVerificationToken(string name, string emailAddress, string verificationToken) {
-            base.Channel.SendVerificationToken(name, emailAddress, verificationToken);
+        public void SendVerificationToken(MemoryGame.MemoryGameService.DataTransferObjects.VerificationTokenInfoDto verificationTokenInfo) {
+            base.Channel.SendVerificationToken(verificationTokenInfo);
         }
         
-        public System.Threading.Tasks.Task SendVerificationTokenAsync(string name, string emailAddress, string verificationToken) {
-            return base.Channel.SendVerificationTokenAsync(name, emailAddress, verificationToken);
+        public System.Threading.Tasks.Task SendVerificationTokenAsync(MemoryGame.MemoryGameService.DataTransferObjects.VerificationTokenInfoDto verificationTokenInfo) {
+            return base.Channel.SendVerificationTokenAsync(verificationTokenInfo);
         }
     }
     
@@ -968,10 +996,10 @@ namespace MemoryGame.MemoryGameService {
     public interface IPlayerRegistryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse")]
-        bool RegisterNewPlayer(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO);
+        bool RegisterNewPlayer(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO, string salt);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayer", ReplyAction="http://tempuri.org/IPlayerRegistryService/RegisterNewPlayerResponse")]
-        System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO);
+        System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO, string salt);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailable", ReplyAction="http://tempuri.org/IPlayerRegistryService/EmailAddressIsAvailableResponse")]
         bool EmailAddressIsAvailable(string emailAddress);
@@ -1013,12 +1041,12 @@ namespace MemoryGame.MemoryGameService {
                 base(binding, remoteAddress) {
         }
         
-        public bool RegisterNewPlayer(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO) {
-            return base.Channel.RegisterNewPlayer(playerDTO);
+        public bool RegisterNewPlayer(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO, string salt) {
+            return base.Channel.RegisterNewPlayer(playerDTO, salt);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO) {
-            return base.Channel.RegisterNewPlayerAsync(playerDTO);
+        public System.Threading.Tasks.Task<bool> RegisterNewPlayerAsync(MemoryGame.MemoryGameService.DataTransferObjects.PlayerDTO playerDTO, string salt) {
+            return base.Channel.RegisterNewPlayerAsync(playerDTO, salt);
         }
         
         public bool EmailAddressIsAvailable(string emailAddress) {

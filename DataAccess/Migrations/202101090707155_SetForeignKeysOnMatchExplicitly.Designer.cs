@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class IntKeySetToNullableSecondTry : IMigrationMetadata
+    public sealed partial class SetForeignKeysOnMatchExplicitly : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(IntKeySetToNullableSecondTry));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SetForeignKeysOnMatchExplicitly));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101040529154_IntKeySetToNullableSecondTry"; }
+            get { return "202101090707155_SetForeignKeysOnMatchExplicitly"; }
         }
         
         string IMigrationMetadata.Source

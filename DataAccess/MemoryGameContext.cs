@@ -15,10 +15,10 @@ namespace DataAccess
         public virtual DbSet<Card> Cards { get; set; }
         public virtual DbSet<Match> Matches { get; set; }
         public virtual DbSet<Player> Players { get; set; }
-        public virtual DbSet<Winner> Winners { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            /*
             modelBuilder.Entity<CardDeck>()
                 .HasMany(e => e.Cards)
                 .WithRequired(e => e.CardDecks)
@@ -43,6 +43,7 @@ namespace DataAccess
                 .HasMany(e => e.Matches)
                 .WithMany(e => e.Players)
                 .Map(m => m.ToTable("MatchesPlayed").MapLeftKey("EmailAddress").MapRightKey("MatchId"));
+            */
         }
     }
 }
