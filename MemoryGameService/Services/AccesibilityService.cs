@@ -6,17 +6,14 @@ using System.ServiceModel;
 using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
 using System.Data.SqlClient;
-using System;
-using Utilities;
 
 namespace MemoryGameService.Services
 {
     public partial class MemoryGameService : IAccessibilityService
     {
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("AccesibilityService.cs");
+        private readonly log4net.ILog _logger = log4net.LogManager.GetLogger("AccesibilityService.cs");
         public string GetUserEmailAddress(string username)
-        {
-            
+        {            
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
@@ -29,8 +26,9 @@ namespace MemoryGameService.Services
                 NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
                 throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
+                _logger.Fatal(sqlException);
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
             }
@@ -53,8 +51,9 @@ namespace MemoryGameService.Services
                 NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
                 throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
+                _logger.Fatal(sqlException);
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
             }
@@ -76,8 +75,9 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-            catch(SqlException)
+            catch(SqlException sqlException)
             {
+                _logger.Fatal(sqlException);
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
             }
@@ -99,8 +99,9 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
+                _logger.Fatal(sqlException);
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
             }
@@ -118,7 +119,6 @@ namespace MemoryGameService.Services
                 Account accountRetrieved = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);
                 if (accountRetrieved != null)
                 {
-                    //PlayerCredentialsDTO playerCredentials = PlayerCredentialsMapper.CreateDTO(playerWhoPossessTheSpecifiedUsername);
                     PlayerCredentialsDTO playerCredentials = new PlayerCredentialsDTO()
                     {
                         EmailAddress = accountRetrieved.EmailAddress,
@@ -130,9 +130,9 @@ namespace MemoryGameService.Services
                 NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
                 throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                //Esto nunca lo lanza. Se da un timeout exception
+                _logger.Fatal(sqlException);
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
             }
@@ -143,22 +143,21 @@ namespace MemoryGameService.Services
         }
 
         public string GetSalt(string username)
-        {
+        {            
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
-            {
+            {                
                 Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);
-                if(retrievedAccount != null)
+                if (retrievedAccount != null)
                 {
                     return retrievedAccount.Salt;
                 }
                 NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
                 throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
-            catch (Exception e)
+            catch (SqlException sqlException)
             {
-                Console.WriteLine(e);
-                Console.ReadLine();
+                _logger.Fatal(sqlException.Message);
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);                
             }
@@ -180,9 +179,11 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                throw;
+                _logger.Fatal(sqlException);
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
             }
             finally
             {

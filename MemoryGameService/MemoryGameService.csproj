@@ -148,7 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Log4Net.config" />
+    <Content Include="Log4Net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

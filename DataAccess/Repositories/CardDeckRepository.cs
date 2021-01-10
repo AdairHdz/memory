@@ -22,7 +22,6 @@ namespace DataAccess.Repositories
         {
             IEnumerable<CardDeck> cardDecksRetrieved = MemoryGameContext.CardDecks.Include("Cards")
                 .Where(cardDeck => cardDeck.CardDeckId == cardDeckId);
-
             if (cardDecksRetrieved.Any())
             {
                 CardDeck cardDeckRetrievedFromDatabase = cardDecksRetrieved.First();

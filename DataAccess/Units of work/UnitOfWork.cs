@@ -8,7 +8,7 @@ namespace DataAccess.Units_of_work
         private readonly MemoryGameContext _context;
         public IPlayerRepository Players { get; private set; }
         public ICardDeckRepository CardDecks { get; private set; }
-        public Repository<Match> Matches { get; private set; }
+        public IRepository<Match> Matches { get; private set; }
         public IAccountRepository Accounts { get; private set; }
 
         public UnitOfWork(MemoryGameContext context)
