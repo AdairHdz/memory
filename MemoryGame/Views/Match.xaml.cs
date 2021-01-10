@@ -26,6 +26,7 @@ namespace MemoryGame.Views
         public int NumberOfPlayers { get; set; }
         public string MatchHost { get; set; }
         private bool _windowIsBeingClosedByTheCloseButton;
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("Match.xaml.cs");
         public Match()
         {
             InitializeComponent();
@@ -196,9 +197,9 @@ namespace MemoryGame.Views
                 {
                     _matchServiceClient.LeaveMatch(MatchHost, Sesion.GetSesion.Username);
                 }
-                catch (CommunicationException)
+                catch (CommunicationException communicationException)
                 {
-                    MessageBox.Show("Se atrapó");
+                    _logger.Fatal(communicationException);
                 }
                 
             }

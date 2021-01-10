@@ -90,6 +90,7 @@
     <Compile Include="DataTransferObjects\CardDeckInfoDto.cs" />
     <Compile Include="DataTransferObjects\CardDto.cs" />
     <Compile Include="DataTransferObjects\CardPairDto.cs" />
+    <Compile Include="DataTransferObjects\ExpelVoteDto.cs" />
     <Compile Include="DataTransferObjects\MatchDto.cs" />
     <Compile Include="DataTransferObjects\PasswordModificationCredentialsDto.cs" />
     <Compile Include="DataTransferObjects\PlayerInLobby.cs" />

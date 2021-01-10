@@ -34,21 +34,14 @@ namespace MemoryGameService.Services
 
         public IList<PlayerInMatch> GetPlayersConnectedToMatch(string host)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto match = GetMatch(host);
+            MatchDto match = GetMatch(host);
             return match.GetPlayersConnectedToMatch();
         }
 
         public void NotifyCardWasUncoveredd(PlayerMovementDto playerTurnDto)
         {
             string host = playerTurnDto.Host;
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach(var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    gameMatch = match;
-                }
-            }
+            MatchDto gameMatch = GetMatch(host);
 
             PlayerInMatch player = gameMatch.GetPlayer(playerTurnDto.Username);
             if (playerTurnDto.HasFormedAPair)
@@ -177,14 +170,7 @@ namespace MemoryGameService.Services
 
         public void LeaveMatch(string host, string username)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach (var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    gameMatch = match;
-                }
-            }
+            MatchDto gameMatch = GetMatch(host);
 
             IList<PlayerInMatch> playersInMatch = gameMatch.GetPlayersConnectedToMatch();
             PlayerInMatch playerWithActiveTurn = null;
@@ -231,29 +217,23 @@ namespace MemoryGameService.Services
             }
         }
 
-        public void ExpelPlayer(string host, string expelPlayerUsername, string playerUsername)
+        public void ExpelPlayer(ExpelVoteDto expelVote)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach (var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    gameMatch = match;
-                }
-            }
+            string host = expelVote.Host;
+            MatchDto gameMatch = GetMatch(host);
+            string usernameOfExpelPlayer = expelVote.UsernameOfExpelPlayer;
 
-            int playerExpelVotes = gameMatch.AddExpelVote(expelPlayerUsername);
-            PlayerInMatch currentPlayer = gameMatch.GetPlayer(playerUsername);
-            currentPlayer.AddPlayerVoted(expelPlayerUsername);
+            int playerExpelVotes = gameMatch.AddExpelVote(usernameOfExpelPlayer);
+            PlayerInMatch voterPlayer = gameMatch.GetPlayer(expelVote.UsernameOfVoterPlayer);
+            voterPlayer.AddPlayerVoted(usernameOfExpelPlayer);
 
             IList<PlayerInMatch> playersInMatch = gameMatch.GetPlayersConnectedToMatch();
             int numOfPlayers = playersInMatch.Count;
 
             if (playerExpelVotes > (numOfPlayers / 2))
             {
-
                 PlayerInMatch playerWithActiveTurn = null;
-                PlayerInMatch expelPlayer = gameMatch.GetPlayer(expelPlayerUsername);
+                PlayerInMatch expelPlayer = gameMatch.GetPlayer(usernameOfExpelPlayer);
 
                 foreach (var player in playersInMatch)
                 {
@@ -263,7 +243,7 @@ namespace MemoryGameService.Services
                     }
                 }
 
-                if (playerWithActiveTurn.Username.Equals(expelPlayerUsername))
+                if (playerWithActiveTurn.Username.Equals(usernameOfExpelPlayer))
                 {
                     expelPlayer = playerWithActiveTurn;
                     int indexOfPlayerWithCurrentTurn = gameMatch.GetPlayersConnectedToMatch().IndexOf(playerWithActiveTurn);
@@ -283,11 +263,11 @@ namespace MemoryGameService.Services
                 foreach (var playerConnected in playersInMatch)
                 {
                     var channel = playerConnected.MatchServiceConnection;
-                    channel.NotifyPlayerWasExpel(expelPlayerUsername, cardsUncovered);
+                    channel.NotifyPlayerWasExpel(usernameOfExpelPlayer, cardsUncovered);
                 }
 
                 RemovePairs(gameMatch, cardsUncovered);
-                gameMatch.RemovePlayer(expelPlayerUsername);
+                gameMatch.RemovePlayer(usernameOfExpelPlayer);
 
                 if (playersInMatch.Count == 1)
                 {

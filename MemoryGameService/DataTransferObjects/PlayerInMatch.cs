@@ -41,7 +41,8 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
 
         public void RemoveUncoveredCard()
         {
-            _uncoveredCards.Remove(_uncoveredCards[_uncoveredCards.Count - 1]);
+            int indexOfLastCard = _uncoveredCards.Count - 1;
+            _uncoveredCards.Remove(_uncoveredCards[indexOfLastCard]);
         }
     }
 }
