@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
 
 namespace MemoryGame
 {
@@ -24,14 +25,34 @@ namespace MemoryGame
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             _matchServiceClient = new MemoryGameService.MatchServiceClient(Context);
+            try
+            {
+                LoadUsernamesToBeVoted();
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException)
+            {                
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+        }
+
+        private void LoadUsernamesToBeVoted()
+        {
             IList<string> playersInMatchUsernames = _matchServiceClient.GetUsernamesOfPlayersConnectedToMatch(MatchHost);
             IList<string> playersVoted = _matchServiceClient.GetPlayersVoted(MatchHost, PlayerUsername);
             foreach (var playerUsername in playersInMatchUsernames)
             {
-                if(playerUsername != PlayerUsername)
+                if (playerUsername != PlayerUsername)
                 {
                     players.Add(playerUsername);
-                }               
+                }
             }
             if (playersVoted.Count != 0)
             {
@@ -45,15 +66,38 @@ namespace MemoryGame
                         }
                     }
                 }
-            }           
+            }
             ExpelPlayerDataGrid.ItemsSource = players;
         }
 
         private void ExpelPlayerButtonClicked(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                VoteToExpelPlayer();
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+            finally
+            {
+                this.Close();
+            }
+        }
+
+        private void VoteToExpelPlayer()
+        {
             string selectedPlayer = ExpelPlayerDataGrid.SelectedItem.ToString();
             _matchServiceClient.ExpelPlayer(MatchHost, selectedPlayer, PlayerUsername);
-            this.Close();
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)

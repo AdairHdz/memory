@@ -9,39 +9,58 @@ namespace MemoryGameService.Services
         public IList<string> GetActivePlayersInLobby(string host)
         {            
             MatchDto match = GetMatch(host);
-            Lobby lobby = match.Lobby;
-            IList<string> activePlayersFromMatch = lobby.GetUsernamesOfPlayersConnectedToLobby();
-            return activePlayersFromMatch;
+            if(match != null)
+            {
+                Lobby lobby = match.Lobby;
+                IList<string> activePlayersFromMatch = lobby.GetUsernamesOfPlayersConnectedToLobby();
+                return activePlayersFromMatch;
+            }
+            //throw new NonExistentMatch
+            throw new System.Exception();
         }
 
         public void JoinLobby(string host, string username)
         {
             MatchDto match = GetMatch(host);
-            Lobby lobby = match.Lobby;
-            lobby.AddPlayerToLobby(host, username);
-            lobby.NotifyNewPlayerEnteredLobby(username);
+            if(match != null)
+            {
+                Lobby lobby = match.Lobby;
+                lobby.AddPlayerToLobby(host, username);
+                lobby.NotifyNewPlayerEnteredLobby(username);
+            }
+            else
+            {
+                //Here we could log the error
+            }            
         }
 
         public void LeaveLobby(string host, string username)
         {            
             MatchDto match = GetMatch(host);
-            Lobby lobby = match.Lobby;
-            lobby.RemovePlayerFromLobby(username);            
-            if (host.Equals(username))
+            if(match != null)
             {
-                lobby.NotifyPlayersMatchHasBeenDeleted();
-                _matches.Remove(match);
-            }
-            else
-            {
-                lobby.NotifyOnePlayerLeftLobby(username);
-            }
+                Lobby lobby = match.Lobby;
+                lobby.RemovePlayerFromLobby(username);
+                if (host.Equals(username))
+                {
+                    lobby.NotifyPlayersMatchHasBeenDeleted();
+                    _matches.Remove(match);
+                }
+                else
+                {
+                    lobby.NotifyOnePlayerLeftLobby(username);
+                }
+            }            
         }
 
         public void StartGame(string host)
         {
             MatchDto match = GetMatch(host);
-            match.StartMatch();            
+            if(match != null)
+            {
+                match.StartMatch();
+            }
+            
         }
 
         private MatchDto GetMatch(string host)

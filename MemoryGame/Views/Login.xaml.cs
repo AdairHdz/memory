@@ -64,14 +64,14 @@ namespace MemoryGame
                 {
                     MessageBox.Show("El usuario no existe");
                 }
+                catch (FaultException<MemoryGameService.Faults.DatabaseConnectionLostFault>)
+                {
+                    MessageBox.Show("Error con la bd");
+                }
                 catch (EndpointNotFoundException)
                 {
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
-                }
-                catch (FaultException<MemoryGameService.Faults.DatabaseConnectionLostFault>)
-                {
-                    //MessageBox.Show(Properties.Langs.Resources.);
-                }               
+                }            
                 catch (TimeoutException timeoutException)
                 {
                     _logger.Fatal(timeoutException);

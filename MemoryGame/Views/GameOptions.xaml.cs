@@ -25,14 +25,32 @@ namespace MemoryGame
             _matchServiceClient = new MemoryGameService.MatchServiceClient(Context);
             if (NumberOfPlayersInMatch < 3)
             {
-                ExpelPlayerButton.Visibility = System.Windows.Visibility.Collapsed;
+                ExpelPlayerButton.Visibility = Visibility.Collapsed;
             }
         }
 
         private void LeaveGameButtonClicked(object sender, RoutedEventArgs e)
         {
-            _matchServiceClient.LeaveMatch(MatchHost, PlayerUsername);
-            this.Close();
+            try
+            {
+                _matchServiceClient.LeaveMatch(MatchHost, PlayerUsername);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+            finally
+            {
+                this.Close();
+            }
         }
 
         private void ExpelPlayerButtonClicked(object sender, RoutedEventArgs e)

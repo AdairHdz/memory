@@ -276,6 +276,15 @@
   <data name="PasswordIsInvalid" xml:space="preserve">
     <value>La contraseña que ingresó no es segura. Por favor, asegúrese de que su contraseña contiene al menos un caracter especial, una letra minúscula, una letra mayúscula y un número. Además, asegúrese de que su contraseña tiene entre 8 y 25 caracteres</value>
   </data>
+  <data name="PasswordRecoveryError" xml:space="preserve">
+    <value>Ocurrió un error al intentar restablecer su contraseña. Por favor, intente más tarde</value>
+  </data>
+  <data name="PasswordRecoveryTokenSent" xml:space="preserve">
+    <value>Hemos enviado un código de recuperación a su email. Para recuperar su contraseña, por favor inserte el código</value>
+  </data>
+  <data name="PasswordReset" xml:space="preserve">
+    <value>Contraseña restablecida</value>
+  </data>
   <data name="Players" xml:space="preserve">
     <value>Jugadores</value>
   </data>
@@ -287,6 +296,9 @@
   </data>
   <data name="RecoverPasswordMessage" xml:space="preserve">
     <value>Introduzca el email con el que se registró; se le proporcionará un código de verificación para recuperar su contraseña</value>
+  </data>
+  <data name="RecoveryTokenSendingError" xml:space="preserve">
+    <value>Ocurrió un error al intentar asignarle un nuevo código de verificación. Por favor, intente restablecer su contraseña más tarde</value>
   </data>
   <data name="RegisterViewTitle" xml:space="preserve">
     <value>Registro</value>

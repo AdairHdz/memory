@@ -4,10 +4,8 @@ using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGame.MemoryGameService.Faults;
 using MemoryGameService.Contracts;
-using MemoryGameService.DataTransferObjectMappers;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.ServiceModel;
 
 namespace MemoryGameService.Services
@@ -19,17 +17,15 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                IEnumerable<Player> playerEntities =
-                    unitOfWork.Players.GetPlayersWithBestScore(numberOfPlayersToBeRetrieved);
-
+                IEnumerable<Account> accountEntities = unitOfWork.Accounts.GetNumberOfAccountsWithPlayerInfo(numberOfPlayersToBeRetrieved);
                 List<PlayerScoreDTO> playersWithBestScores = new List<PlayerScoreDTO>();
 
-                foreach(var player in playerEntities)
+                foreach(var account in accountEntities)
                 {
                     PlayerScoreDTO playerScore = new PlayerScoreDTO()
                     {
-                        Username = player.Account.Username,
-                        TotalScore = player.Score
+                        Username = account.Username,
+                        TotalScore = account.Player.Score
                     };
                     playersWithBestScores.Add(playerScore);
                 }

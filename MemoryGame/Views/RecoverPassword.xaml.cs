@@ -101,11 +101,12 @@ namespace MemoryGame
                     SendVerificationCode();
                     if (newVerificationTokenWasAssigned)
                     {
+                        MessageBox.Show(Properties.Langs.Resources.PasswordRecoveryTokenSent);
                         GoToRestorePassword();
                     }
                     else
                     {
-                        MessageBox.Show("No se asignó el token");
+                        MessageBox.Show(Properties.Langs.Resources.RecoveryTokenSendingError);
                     }
                     
                 }

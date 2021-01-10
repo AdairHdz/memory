@@ -76,50 +76,76 @@ namespace MemoryGame.Views
 
         private void FlipCard(ImageCard cardClicked)
         {
-            _numberOfMovementsAllowed--;
-            int cardIndex = _imageCards.IndexOf(cardClicked);
-
-            _cardsFlippedInCurrentTurn.Add(cardClicked);
-
-            PlayerMovementDto playerMovementDto = new PlayerMovementDto()
+            try
             {
-                Host = MatchHost,
-                Username = Sesion.GetSesion.Username,
-                CardIndex = cardIndex,
-                MovementsLeft = _numberOfMovementsAllowed,
-                HasFormedAPair = _playerHasFormedAPair
-            };
-
-            if (_numberOfMovementsAllowed == 0)
-            {
-                if (HasFormedAPair())
+                _numberOfMovementsAllowed--;
+                int cardIndex = _imageCards.IndexOf(cardClicked);
+                _cardsFlippedInCurrentTurn.Add(cardClicked);
+                PlayerMovementDto playerMovementDto = new PlayerMovementDto()
                 {
-                    playerMovementDto.HasFormedAPair = true;
+                    Host = MatchHost,
+                    Username = Sesion.GetSesion.Username,
+                    CardIndex = cardIndex,
+                    MovementsLeft = _numberOfMovementsAllowed,
+                    HasFormedAPair = _playerHasFormedAPair
+                };
+                if (_numberOfMovementsAllowed == 0)
+                {
+                    if (HasFormedAPair())
+                    {
+                        playerMovementDto.HasFormedAPair = true;
+                    }
                 }
+                _matchServiceClient.NotifyCardWasUncoveredd(playerMovementDto);
             }
-
-            _matchServiceClient.NotifyCardWasUncoveredd(playerMovementDto);
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
         }
 
         private void EndMovement()
         {
-            if (_numberOfMovementsAllowed == 0)
+            try
             {
-                if (HasFormedAPair())
+                if (_numberOfMovementsAllowed == 0)
                 {
-                    _numberOfMovementsAllowed = 2;
-                    _playerHasFormedAPair = true;
-                }
+                    if (HasFormedAPair())
+                    {
+                        _numberOfMovementsAllowed = 2;
+                        _playerHasFormedAPair = true;
+                    }
 
-                CardPairDto cardPairDto = new CardPairDto()
-                {
-                    IndexOfCard1 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[0]),
-                    IndexOfCard2 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[1]),
-                    BothCardsAreEqual = _playerHasFormedAPair
-                };
-                _matchServiceClient.EndTurn(MatchHost, Sesion.GetSesion.Username, cardPairDto);
-                _playerHasFormedAPair = false;
-                _cardsFlippedInCurrentTurn.Clear();
+                    CardPairDto cardPairDto = new CardPairDto()
+                    {
+                        IndexOfCard1 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[0]),
+                        IndexOfCard2 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[1]),
+                        BothCardsAreEqual = _playerHasFormedAPair
+                    };
+                    _matchServiceClient.EndTurn(MatchHost, Sesion.GetSesion.Username, cardPairDto);
+                    _playerHasFormedAPair = false;
+                    _cardsFlippedInCurrentTurn.Clear();
+                }
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
 
@@ -166,7 +192,15 @@ namespace MemoryGame.Views
         {
             if (_windowIsBeingClosedByTheCloseButton)
             {
-                _matchServiceClient.LeaveMatch(MatchHost, Sesion.GetSesion.Username);
+                try
+                {
+                    _matchServiceClient.LeaveMatch(MatchHost, Sesion.GetSesion.Username);
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show("Se atrapó");
+                }
+                
             }
         }
 

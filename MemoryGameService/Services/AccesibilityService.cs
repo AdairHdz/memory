@@ -2,15 +2,12 @@
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
-using MemoryGameService.DataTransferObjectMappers;
 using System.ServiceModel;
 using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
 using System.Data.SqlClient;
 using System;
 using Utilities;
-using System.Web.Hosting;
-using System.IO;
 
 namespace MemoryGameService.Services
 {
@@ -158,9 +155,12 @@ namespace MemoryGameService.Services
                 NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
                 throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e);
+                Console.ReadLine();
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);                
             }
             finally
             {
@@ -173,7 +173,6 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                IEncryption bCryptHashGenerator = new BCryptHashGenerator();
                 Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username && account.Password == password);
                 if(retrievedAccount != null)
                 {

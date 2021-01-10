@@ -3,7 +3,6 @@ using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
-using MemoryGameService.DataTransferObjectMappers;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -81,7 +80,7 @@ namespace MemoryGameService.Services
         public void NotifyMatchHasEnded(string host)
         {
 
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
+            MatchDto gameMatch = null;
             foreach (var match in _matches)
             {
                 if (match.Host.Equals(host))
@@ -102,13 +101,20 @@ namespace MemoryGameService.Services
 
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
-            {
-                Player player = unitOfWork.Players.Get("adairho16@gmail.com");
+            {                
+                foreach(var playerInMatch in gameMatch.GetPlayersConnectedToMatch())
+                {
+                    unitOfWork.Players.UpdateScoreOfPlayersAfterMatch(playerInMatch.Username, playerInMatch.Score);
+                }
+
+                Player winner = unitOfWork.Players.FindPlayerByUsername(usernameOfPlayerWithBestScore);
                 CardDeck cardDeck = unitOfWork.CardDecks.Get(gameMatch.CardDeckDto.CardDeckId);
+                
                 DataAccess.Entities.Match matchToBeSaved = new DataAccess.Entities.Match()
                 {
                     CardDeck = cardDeck,
-                    Winner = player
+                    Winner = winner,
+                    Date = DateTime.Now
                 };
                 unitOfWork.Matches.Add(matchToBeSaved);                
                 int recordsAdded = unitOfWork.Complete();
@@ -125,11 +131,6 @@ namespace MemoryGameService.Services
 
             _matches.Remove(gameMatch);
 
-        }
-
-        private bool SaveMatch()
-        {            
-            return false;
         }
 
         //EndTurn

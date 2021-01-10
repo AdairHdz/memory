@@ -59,9 +59,23 @@
     <Compile Include="Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.designer.cs">
       <DependentUpon>202101090707155_SetForeignKeysOnMatchExplicitly.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101090917339_AddedNavigabilityFromAccountToPlayer.cs" />
+    <Compile Include="Migrations\202101090917339_AddedNavigabilityFromAccountToPlayer.designer.cs">
+      <DependentUpon>202101090917339_AddedNavigabilityFromAccountToPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101092235309_RemoveVirtualAccountFromPlayer.cs" />
+    <Compile Include="Migrations\202101092235309_RemoveVirtualAccountFromPlayer.designer.cs">
+      <DependentUpon>202101092235309_RemoveVirtualAccountFromPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101100503290_AddedDateToMatch.cs" />
+    <Compile Include="Migrations\202101100503290_AddedDateToMatch.designer.cs">
+      <DependentUpon>202101100503290_AddedDateToMatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\CardDeckRepository.cs" />
+    <Compile Include="Repositories\IAccountRepository.cs" />
     <Compile Include="Repositories\ICardDeckRepository.cs" />
     <Compile Include="Repositories\IPlayerRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -77,6 +91,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.resx">
       <DependentUpon>202101090707155_SetForeignKeysOnMatchExplicitly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101090917339_AddedNavigabilityFromAccountToPlayer.resx">
+      <DependentUpon>202101090917339_AddedNavigabilityFromAccountToPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101092235309_RemoveVirtualAccountFromPlayer.resx">
+      <DependentUpon>202101092235309_RemoveVirtualAccountFromPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101100503290_AddedDateToMatch.resx">
+      <DependentUpon>202101100503290_AddedDateToMatch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

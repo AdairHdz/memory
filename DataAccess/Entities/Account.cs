@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
@@ -11,6 +12,7 @@ namespace DataAccess.Entities
         }
 
         [Key]
+        [ForeignKey("Player")]
         [StringLength(254)]
         public string EmailAddress { get; set; }
 
@@ -22,9 +24,7 @@ namespace DataAccess.Entities
         public string Password { get; set; }
         
         [StringLength(254)]
-        [DefaultValue("$2a$04$DXnem3yCZc6RNQKVNFKLtO")]
         public string Salt { get; set; }
-
 
         public bool EmailWasVerified { get; set; }
 
@@ -33,5 +33,7 @@ namespace DataAccess.Entities
 
         [StringLength(50)]
         public string RecoveryToken { get; set; }
+
+        public virtual Player Player { get; set; }
     }
 }

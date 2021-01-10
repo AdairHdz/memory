@@ -14,7 +14,7 @@ namespace MemoryGame
     public partial class RestorePassword : Window
     {
         private string _emailAddress;
-        private string _username;
+        private string _username;        
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("RestorePassword.xaml.cs");
         public RestorePassword()
         {
@@ -32,25 +32,34 @@ namespace MemoryGame
 
         private void RestoreUserPassword()
         {
-            bool tokenIsCorrect = TokenIsCorrect();
-            if (tokenIsCorrect)
+            string newPassword = NewPasswordBox.Password;
+
+            if (newPassword == "")
             {
-                bool newPasswordWasSet = SetNewPassword();
-                if (newPasswordWasSet)
-                {
-                    MessageBox.Show("Contraseña restablecida exitosamente");
-                    Login loginView = new Login();
-                    loginView.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("No se pudo restablecer la contraseña");
-                }
+                MessageBox.Show(Properties.Langs.Resources.PasswordIsInvalid);
             }
             else
             {
-                MessageBox.Show(Properties.Langs.Resources.NonMatchingVerificationCode);
+                bool tokenIsCorrect = TokenIsCorrect();
+                if (tokenIsCorrect)
+                {
+                    bool newPasswordWasSet = SetNewPassword();
+                    if (newPasswordWasSet)
+                    {
+                        MessageBox.Show(Properties.Langs.Resources.PasswordReset);
+                        Login loginView = new Login();
+                        loginView.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show(Properties.Langs.Resources.PasswordRecoveryError);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(Properties.Langs.Resources.NonMatchingVerificationCode);
+                }                
             }
         }
 
