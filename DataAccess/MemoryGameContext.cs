@@ -9,6 +9,8 @@ namespace DataAccess
             : base("name=MemoryGame")
         {
             var ensureDllIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+            //Disable migraitions
+            Database.SetInitializer<MemoryGameContext>(null);
         }
 
         public virtual DbSet<CardDeck> CardDecks { get; set; }

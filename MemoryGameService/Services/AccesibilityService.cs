@@ -6,6 +6,7 @@ using System.ServiceModel;
 using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
 using System.Data.SqlClient;
+using System.Data.Entity.Core;
 
 namespace MemoryGameService.Services
 {
@@ -160,6 +161,12 @@ namespace MemoryGameService.Services
                 _logger.Fatal(sqlException.Message);
                 DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
                 throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);                
+            }
+            catch(EntityException entityException)
+            {
+                _logger.Fatal(entityException);
+                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
+                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
             }
             finally
             {
