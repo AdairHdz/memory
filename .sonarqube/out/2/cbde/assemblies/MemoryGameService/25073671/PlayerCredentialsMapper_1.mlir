@@ -1,0 +1,30 @@
+func @_MemoryGameService.DataTransferObjectMappers.PlayerCredentialsMapper.CreateDTO$DataAccess.Entities.Player$(none) -> none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :7 :8) {
+^entry (%_player : none):
+%0 = cbde.alloca none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :7 :53)
+cbde.store %_player, %0 : memref<none> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :7 :53)
+br ^0
+
+^0: // JumpBlock
+%1 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :9 :56) // new PlayerCredentialsDTO()              {                  /*Username = player.UserName,                  Password = player.Password*/              } (ObjectCreationExpression)
+%3 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :15 :19) // Not a variable of known type: playerCredentialsDTO
+return %3 : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :15 :12)
+
+^1: // ExitBlock
+cbde.unreachable
+
+}
+func @_MemoryGameService.DataTransferObjectMappers.PlayerCredentialsMapper.CreateEntity$MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO$(none) -> none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :18 :8) {
+^entry (%_playerCredentialsDTO : none):
+%0 = cbde.alloca none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :18 :42)
+cbde.store %_playerCredentialsDTO, %0 : memref<none> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :18 :42)
+br ^0
+
+^0: // JumpBlock
+%1 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :20 :28) // new Player()              {                  //UserName = playerCredentialsDTO.Username,                  //Password = playerCredentialsDTO.Password              } (ObjectCreationExpression)
+%3 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :26 :19) // Not a variable of known type: player
+return %3 : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjectMappers\\PlayerCredentialsMapper.cs" :26 :12)
+
+^1: // ExitBlock
+cbde.unreachable
+
+}

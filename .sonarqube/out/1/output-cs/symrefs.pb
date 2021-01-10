@@ -1,40 +1,44 @@
-√
-GC:\Users\Adair Hern√°ndez\source\repos\memory\Utilities\MailTemplate.cs
+à
+NC:\Users\Adair Hern√°ndez\source\repos\memory\Utilities\BCryptHashGenerator.cs
 
- (
- ! (( **& .P
-		 $   ## ** ++ 00 !2
-
+ $
+
+ -
+5 H		C V
+Q U		X \
+		 !
 
- & %  ( /
- ("" ##& /
- )) <
- "   00 11 
+ !
 
- 
+ 
+! -4 @
+6 EB Q
+  
 
- 
-% ). 2
-2 >4 @
+ "
+ 2 >
+ 4 ?
+9 @: A
+F MC J
+ ( 4
+  ®
+FC:\Users\Adair Hern√°ndez\source\repos\memory\Utilities\IEncryption.cs
 
-   
-  ' +""0 4
-  4 @""6 B
+		  
 
-&& 
-&&& -)) #++ &
-&&6 =((! (
+ &
 
-.. ∫
-HC:\Users\Adair Hern√°ndez\source\repos\memory\Utilities\MD5Encryption.cs
+. A
 
- 
+J N
 
-		 $
-		, 1< A
-, / !
- !. 2
- . 2T
+ 
+
+ &
+
+/ >
+
+ T
 RC:\Users\Adair Hern√°ndez\source\repos\memory\Utilities\Properties\AssemblyInfo.cs∑
 IC:\Users\Adair Hern√°ndez\source\repos\memory\Utilities\TokenGenerator.cs
 

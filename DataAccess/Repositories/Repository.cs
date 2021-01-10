@@ -26,11 +26,12 @@ namespace DataAccess.Repositories
 
         public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
         {
-            if(predicate != null)
+            IEnumerable<TEntity> matchingResults = new List<TEntity>();
+            if (predicate != null)
             {
-                return _context.Set<TEntity>().Where(predicate);                
+                matchingResults = _context.Set<TEntity>().Where(predicate);                
             }
-            return null;
+            return matchingResults;
         }
 
         public TEntity FindFirstOccurence(Func<TEntity, bool> predicate)
@@ -48,12 +49,12 @@ namespace DataAccess.Repositories
             if(entity != null)
             {
                 _context.Set<TEntity>().Add(entity);
-            }            
+            }
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
-            if(entities != null)
+            if(entities != null && entities.Any())
             {
                 _context.Set<TEntity>().AddRange(entities);
             }            
@@ -69,7 +70,7 @@ namespace DataAccess.Repositories
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            if(entities != null)
+            if(entities != null && entities.Any())
             {
                 _context.Set<TEntity>().RemoveRange(entities);
             }            

@@ -17,10 +17,10 @@ namespace DataAccess.Repositories
 
         public AccountRepository(DbContext context) : base(context) { }
 
-        Account IAccountRepository.GetAccountWithPlayerInfo(string username)
+        public Account GetAccountWithPlayerInfo(string username)
         {
             IQueryable<Account> accountsRetrieved = MemoryGameContext.Accounts.Where(account => account.Username == username);
-            if (accountsRetrieved.Count() == 1)
+            if (accountsRetrieved != null)
             {
                 Account account = accountsRetrieved.First();
                 return account;
@@ -28,7 +28,7 @@ namespace DataAccess.Repositories
             return null;
         }
 
-        IEnumerable<Account> IAccountRepository.GetNumberOfAccountsWithPlayerInfo(int numberOfAccountsToBeRetrieved)
+        public IEnumerable<Account> GetNumberOfAccountsWithPlayerInfo(int numberOfAccountsToBeRetrieved)
         {
             IEnumerable<Account> accounts = new List<Account>();
             IEnumerable<Account> accountsRetrieved = MemoryGameContext.Accounts.Include("Player");
