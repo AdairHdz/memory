@@ -1,5 +1,4 @@
 ﻿using DataAccess.Entities;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -22,7 +21,6 @@ namespace DataAccess.Repositories
         {
             IEnumerable<CardDeck> cardDecksRetrieved = MemoryGameContext.CardDecks.Include("Cards")
                 .Where(cardDeck => cardDeck.CardDeckId == cardDeckId);
-
             if (cardDecksRetrieved.Any())
             {
                 CardDeck cardDeckRetrievedFromDatabase = cardDecksRetrieved.First();

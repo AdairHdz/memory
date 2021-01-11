@@ -3,18 +3,76 @@ using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
-using MemoryGameService.DataTransferObjectMappers;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
+    /// <summary>
+    /// The <c>Match</c> service.
+    /// Is used to register a new player in the database of the game.
+    /// The operations it contains are:
+    /// <list type="bullet">
+    /// <item>
+    /// <term>EnterMatch</term>
+    /// <description>Add the players to a list of coneccted players.</description>
+    /// </item>
+    /// <item>
+    /// <term>GetPlayersConnectedToMatch</term>
+    /// <description>Gets a list of the players connected in the game.</description>
+    /// </item>
+    /// <item>
+    /// <term>NotifyCardWasUncoveredd</term>
+    /// <description>Flips a card clicked by the player.</description>
+    /// </item>
+    /// <item>
+    /// <term>NotifyMatchHasEnded</term>
+    /// <description>Notifies players that the match has ended.</description>
+    /// </item>
+    /// <item>
+    /// <term>EndTurn</term>
+    /// <description>Ends one player's turn to pass it on to the next.</description>
+    /// </item>
+    /// <item>
+    /// <term>LeaveMatch</term>
+    /// <description>Remove a player from the list of connected players.</description>
+    /// </item>
+    /// <item>
+    /// <term>ExpelPlayer</term>
+    /// <description>Expels a player from the list of connected players according to the votes.</description>
+    /// </item>
+    /// <item>
+    /// <term>GetUsernamesOfPlayersConnectedToMatch</term>
+    /// <description>Gets a list of the names of the players connected to the match.</description>
+    /// </item>
+    /// </list>
+    /// <item>
+    /// <term>GetPlayersVoted</term>
+    /// <description>Get a list of the names of the players a player has already voted for.</description>
+    /// </item>
+    /// </list>
+    /// <item>
+    /// <term>ChangeTurn</term>
+    /// <description>Make a turn assignment for a new player.</description>
+    /// </item>
+    /// </list>
+    /// <item>
+    /// <term>RemovePairs</term>
+    /// <description>Subtract an amount from the total pairs formed in the match.</description>
+    /// </item>
+    /// </list>
+    /// </summary>
     public partial class MemoryGameService : IMatchService
     {
+        /// <summary>
+        /// Create a list of connected players in the match mapping players on PlayerInMatch type objects.
+        /// </summary>
+        /// <param name="host">Name of the player who created the match.</param>
+        /// <param name="username">Name of the player to be added to the list.</param>
         public void EnterMatch(string host, string username)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = GetMatch(host);
+            MatchDto gameMatch = GetMatch(host);
 
             bool hasActiveTurn = false;
             if (host.Equals(username))
@@ -33,39 +91,41 @@ namespace MemoryGameService.Services
             gameMatch.AddPlayer(player);
         }
 
+        /// <summary>
+        /// Gets a list of PlayerInMatch objects of the players connected to the game.
+        /// </summary>
+        /// <param name="host">Name of the player who created the match.</param>
+        /// <returns>A list of PlayerInMatch objects.</returns>
         public IList<PlayerInMatch> GetPlayersConnectedToMatch(string host)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto match = GetMatch(host);
+            MatchDto match = GetMatch(host);
             return match.GetPlayersConnectedToMatch();
         }
 
-        public void NotifyCardWasUncoveredd(PlayerMovementDto playerTurnDto)
+        /// <summary>
+        /// Flips a card clicked by the player and and notifies all connected players.
+        /// </summary>
+        /// <param name="playerMovementDto">Contains the data about the player's turn.</param>
+        public void NotifyCardWasUncoveredd(PlayerMovementDto playerMovementDto)
         {
-            string host = playerTurnDto.Host;
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach(var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    gameMatch = match;
-                }
-            }
+            string host = playerMovementDto.Host;
+            MatchDto gameMatch = GetMatch(host);
 
-            PlayerInMatch player = gameMatch.GetPlayer(playerTurnDto.Username);
-            if (playerTurnDto.HasFormedAPair)
+            PlayerInMatch player = gameMatch.GetPlayer(playerMovementDto.Username);
+            if (playerMovementDto.HasFormedAPair)
             {
-                player.AddUncoveredCard(playerTurnDto.CardIndex);
+                player.AddUncoveredCard(playerMovementDto.CardIndex);
                 gameMatch.TotalPairs++;
             }
             else
             {
-                if (playerTurnDto.MovementsLeft == 0)
+                if (playerMovementDto.MovementsLeft == 0)
                 {
                     player.RemoveUncoveredCard();
                 }
                 else
                 {
-                    player.AddUncoveredCard(playerTurnDto.CardIndex);
+                    player.AddUncoveredCard(playerMovementDto.CardIndex);
                 }
             }
 
@@ -73,78 +133,74 @@ namespace MemoryGameService.Services
 
             foreach(var playerInMatch in playersInMatch)
             {
-                playerInMatch.MatchServiceConnection.UncoverCardd(playerTurnDto.CardIndex);
+                playerInMatch.MatchServiceConnection.UncoverCardd(playerMovementDto.CardIndex);
             }            
 
         }
 
+        /// <summary>
+        /// Notifies all connected players that the game is over and the player who has won.
+        /// </summary>
+        /// <param name="host">Name of the player who created the match.</param>
         public void NotifyMatchHasEnded(string host)
         {
 
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach (var match in _matches)
+            MatchDto gameMatch = GetMatch(host);
+            if(host != null)
             {
-                if (match.Host.Equals(host))
+                PlayerInMatch playerWithBestScore = gameMatch.GetPlayerWithBestScore();
+                string usernameOfPlayerWithBestScore = playerWithBestScore.Username;
+                IList<PlayerInMatch> playersConnectedToMatch = gameMatch.GetPlayersConnectedToMatch();
+                foreach (var playerConnected in playersConnectedToMatch)
                 {
-                    gameMatch = match;
+                    var channel = playerConnected.MatchServiceConnection;
+                    channel.ShowWinners(usernameOfPlayerWithBestScore);
+                    channel.MatchHasEnded();
                 }
-            }
 
-            PlayerInMatch playerWithBestScore = gameMatch.GetPlayerWithBestScore();
-            string usernameOfPlayerWithBestScore = playerWithBestScore.Username;
-            IList<PlayerInMatch> playersConnectedToMatch = gameMatch.GetPlayersConnectedToMatch();
-            foreach(var playerConnected in playersConnectedToMatch)
-            {
-                var channel = playerConnected.MatchServiceConnection;
-                channel.ShowWinners(usernameOfPlayerWithBestScore);
-                channel.MatchHasEnded();
-            }
-
-            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            try
-            {
-                Player player = unitOfWork.Players.Get("adairho16@gmail.com");
-                CardDeck cardDeck = unitOfWork.CardDecks.Get(gameMatch.CardDeckDto.CardDeckId);
-                DataAccess.Entities.Match matchToBeSaved = new DataAccess.Entities.Match()
+                UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+                try
                 {
-                    CardDeck = cardDeck,
-                    Winner = player
-                };
-                unitOfWork.Matches.Add(matchToBeSaved);                
-                int recordsAdded = unitOfWork.Complete();
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e);
-                Console.ReadLine();
-            }
-            finally
-            {
-                unitOfWork.Dispose();
-            }
+                    foreach (var playerInMatch in gameMatch.GetPlayersConnectedToMatch())
+                    {
+                        unitOfWork.Players.UpdateScoreOfPlayersAfterMatch(playerInMatch.Username, playerInMatch.Score);
+                    }
 
-            _matches.Remove(gameMatch);
+                    Player winner = unitOfWork.Players.FindPlayerByUsername(usernameOfPlayerWithBestScore);
+                    CardDeck cardDeck = unitOfWork.CardDecks.Get(gameMatch.CardDeckDto.CardDeckId);
 
+                    Match matchToBeSaved = new Match()
+                    {
+                        CardDeck = cardDeck,
+                        Winner = winner,
+                        Date = DateTime.Now
+                    };
+                    unitOfWork.Matches.Add(matchToBeSaved);
+                    unitOfWork.Complete();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    Console.ReadLine();
+                }
+                finally
+                {
+                    unitOfWork.Dispose();
+                }
+
+                _matches.Remove(gameMatch);
+            }
         }
 
-        private bool SaveMatch()
-        {            
-            return false;
-        }
-
-        //EndTurn
-
+        /// <summary>
+        /// Ends the turn taken by a player and checks if he has formed a pair of cards.
+        /// </summary>
+        /// <param name="host">Name of the player who created the match.</param>
+        /// <param name="username">Name of the player who has taken the turn.</param>
+        /// <param name="cardPairDto">The pair of cards he has flipped.</param>
         public void EndTurn(string host, string username, CardPairDto cardPairDto)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach (var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    gameMatch = match;
-                }
-            }
-
+            MatchDto gameMatch = GetMatch(host);
             PlayerInMatch player = gameMatch.GetPlayer(username);
             int indexOfPlayerWithCurrentTurn = gameMatch.GetPlayersConnectedToMatch().IndexOf(player);
 
@@ -156,7 +212,7 @@ namespace MemoryGameService.Services
             {
                 indexOfPlayerWithCurrentTurn = ChangeTurn(gameMatch, indexOfPlayerWithCurrentTurn);
             }
-            
+
             PlayerInMatch nextPlayer = gameMatch.GetPlayersConnectedToMatch()[indexOfPlayerWithCurrentTurn];
             player.HasActiveTurn = false;
             nextPlayer.HasActiveTurn = true;
@@ -172,31 +228,21 @@ namespace MemoryGameService.Services
             {
                 this.NotifyMatchHasEnded(host);
             }
+
         }
 
+        /// <summary>
+        /// Allows a player to leave the game and removes him from the list of connected players.
+        /// </summary>
+        /// <param name="host">Name of the player who created the match.</param>
+        /// <param name="username">Name of the player who leaves the match.</param>
         public void LeaveMatch(string host, string username)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach (var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    gameMatch = match;
-                }
-            }
+            MatchDto gameMatch = GetMatch(host);
 
             IList<PlayerInMatch> playersInMatch = gameMatch.GetPlayersConnectedToMatch();
-            PlayerInMatch playerWithActiveTurn = null;
+            PlayerInMatch playerWithActiveTurn = gameMatch.GetPlyerWithActiveTurn();
             PlayerInMatch leavePlayer = gameMatch.GetPlayer(username);
-
-            foreach (var player in playersInMatch)
-            {
-                if (player.HasActiveTurn == true)
-                {
-                    playerWithActiveTurn = player;
-                    break;
-                }
-            }
 
             if (playerWithActiveTurn.Username.Equals(username))
             {
@@ -230,39 +276,31 @@ namespace MemoryGameService.Services
             }
         }
 
-        public void ExpelPlayer(string host, string expelPlayerUsername, string playerUsername)
+        /// <summary>
+        /// Allows a player to vote for the expulsion of another player, who will be 
+        /// voted out by collecting a majority of votes.
+        /// </summary>
+        /// <param name="expelVote">It contains the expulsion data: Name of the player to 
+        /// be expelled, name of the player voting and the host name of the game</param>
+        public void ExpelPlayer(ExpelVoteDto expelVote)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach (var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    gameMatch = match;
-                }
-            }
+            string host = expelVote.Host;
+            MatchDto gameMatch = GetMatch(host);
+            string usernameOfExpelPlayer = expelVote.UsernameOfExpelPlayer;
 
-            int playerExpelVotes = gameMatch.AddExpelVote(expelPlayerUsername);
-            PlayerInMatch currentPlayer = gameMatch.GetPlayer(playerUsername);
-            currentPlayer.AddPlayerVoted(expelPlayerUsername);
+            int playerExpelVotes = gameMatch.AddExpelVote(usernameOfExpelPlayer);
+            PlayerInMatch voterPlayer = gameMatch.GetPlayer(expelVote.UsernameOfVoterPlayer);
+            voterPlayer.AddPlayerVoted(usernameOfExpelPlayer);
 
             IList<PlayerInMatch> playersInMatch = gameMatch.GetPlayersConnectedToMatch();
             int numOfPlayers = playersInMatch.Count;
 
             if (playerExpelVotes > (numOfPlayers / 2))
             {
+                PlayerInMatch playerWithActiveTurn = gameMatch.GetPlyerWithActiveTurn();
+                PlayerInMatch expelPlayer = gameMatch.GetPlayer(usernameOfExpelPlayer);
 
-                PlayerInMatch playerWithActiveTurn = null;
-                PlayerInMatch expelPlayer = gameMatch.GetPlayer(expelPlayerUsername);
-
-                foreach (var player in playersInMatch)
-                {
-                    if (player.HasActiveTurn == true)
-                    {
-                        playerWithActiveTurn = player;
-                    }
-                }
-
-                if (playerWithActiveTurn.Username.Equals(expelPlayerUsername))
+                if (playerWithActiveTurn.Username.Equals(usernameOfExpelPlayer))
                 {
                     expelPlayer = playerWithActiveTurn;
                     int indexOfPlayerWithCurrentTurn = gameMatch.GetPlayersConnectedToMatch().IndexOf(playerWithActiveTurn);
@@ -282,11 +320,11 @@ namespace MemoryGameService.Services
                 foreach (var playerConnected in playersInMatch)
                 {
                     var channel = playerConnected.MatchServiceConnection;
-                    channel.NotifyPlayerWasExpel(expelPlayerUsername, cardsUncovered);
+                    channel.NotifyPlayerWasExpel(usernameOfExpelPlayer, cardsUncovered);
                 }
 
                 RemovePairs(gameMatch, cardsUncovered);
-                gameMatch.RemovePlayer(expelPlayerUsername);
+                gameMatch.RemovePlayer(usernameOfExpelPlayer);
 
                 if (playersInMatch.Count == 1)
                 {
@@ -296,32 +334,29 @@ namespace MemoryGameService.Services
             }
         }
 
+        /// <summary>
+        /// Gets a list of usernames of the players connected to the game.
+        /// </summary>
+        /// <param name="host">Name of the player who created the match.</param>
+        /// <returns>A list of strings.</returns>
         public IList<string> GetUsernamesOfPlayersConnectedToMatch(string host)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach (var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    gameMatch = match;
-                }
-            }
+            MatchDto gameMatch = GetMatch(host);
 
             IList<string> playerUsername = gameMatch.GetUsernamesOfPlayersConnectedToMatch();
 
             return playerUsername;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="host">Name of the player who created the match.</param>
+        /// <param name="username">Name of the player associated to the list to be retriev.</param>
+        /// <returns>A list of strings of the user names for which the player has voted.</returns>
         public IList<string> GetPlayersVoted(string host, string username)
         {
-            MemoryGame.MemoryGameService.DataTransferObjects.MatchDto gameMatch = null;
-            foreach (var match in _matches)
-            {
-                if (match.Host.Equals(host))
-                {
-                    gameMatch = match;
-                }
-            }
+            MatchDto gameMatch = GetMatch(host);
 
             PlayerInMatch player = gameMatch.GetPlayer(username);
             IList<string> playersVoted = player.GetPlayersVoted();
@@ -329,6 +364,12 @@ namespace MemoryGameService.Services
             return playersVoted;
         }
 
+        /// <summary>
+        /// Change the active turn from one player to the next in the list of connected players.
+        /// </summary>
+        /// <param name="gameMatch">Match in which the operation is to be carried out.</param>
+        /// <param name="indexOfPlayerWithCurrentTurn">Index in the list of the player with active turn.</param>
+        /// <returns>Index of the new player with active turn.</returns>
         public int ChangeTurn(MatchDto gameMatch, int indexOfPlayerWithCurrentTurn)
         {
             if (indexOfPlayerWithCurrentTurn == (gameMatch.GetPlayersConnectedToMatch().Count - 1))
@@ -343,6 +384,12 @@ namespace MemoryGameService.Services
             return indexOfPlayerWithCurrentTurn;
         }
 
+        /// <summary>
+        /// Subtracts the number of total pairs formed in the match from the number of pairs formed 
+        /// by the player leaving the match.
+        /// </summary>
+        /// <param name="gameMatch">Match in which the operation is to be carried out.</param>
+        /// <param name="cardsUncovered">List of index of cards flipped by the player.</param>
         public void RemovePairs(MatchDto gameMatch, IList<int> cardsUncovered)
         {
             if ((cardsUncovered.Count % 2) == 0)

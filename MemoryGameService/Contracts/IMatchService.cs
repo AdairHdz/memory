@@ -21,7 +21,7 @@ namespace MemoryGameService.Contracts
         [OperationContract(IsOneWay = true)]
         void LeaveMatch(string host, string username);
         [OperationContract(IsOneWay = true)]
-        void ExpelPlayer(string host, string expelPlayerUsername, string playerUsername);
+        void ExpelPlayer(ExpelVoteDto expelVote);
         [OperationContract]
         IList<string> GetUsernamesOfPlayersConnectedToMatch(string host);
         [OperationContract]

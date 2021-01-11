@@ -7,7 +7,7 @@ namespace MemoryGameService.Utilities
     {
         private TextPart _message;
         private MimeMessage _content;
-        private MailboxAddress _sender;
+        private readonly MailboxAddress _sender;
         private MailboxAddress _receiver;
         private string _subject;
         private SmtpClient _client;
@@ -18,8 +18,8 @@ namespace MemoryGameService.Utilities
             _content = new MimeMessage();
             _client = new SmtpClient();
             _client.Connect("smtp.gmail.com", 587, false);
-            _sender = new MailboxAddress("memory.game.lis@gmail.com", "cfalpwtqeeitkhsk");
-            _content.From.Add(_sender);            
+            var sender = new MailboxAddress("memory.game.lis@gmail.com", "cfalpwtqeeitkhsk");
+            _content.From.Add(sender);            
             _sender = new MailboxAddress("memorygame2020", "memory.game.lis@gmail.com");
             _client.Authenticate("memory.game.lis@gmail.com", "cfalpwtqeeitkhsk");
         }

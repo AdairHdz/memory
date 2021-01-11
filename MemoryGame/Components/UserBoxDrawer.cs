@@ -6,8 +6,8 @@ namespace MemoryGame.Components
 {
     public class UserBoxDrawer
     {
-        public Grid GridToBeDrawnOn;
-        public string[] PlayersUsernames;        
+        public Grid GridToBeDrawnOn { get; set; }
+        public string[] PlayersUsernames { get; set; }        
 
         public void Draw()
         {

@@ -10,9 +10,9 @@ namespace MemoryGame.MemoryGameService.Faults
         [DataMember]
         public string Details { get; set; }
 
-        public TypedFault() { }
+        protected TypedFault() { }
 
-        public TypedFault(string error, string details)
+        protected TypedFault(string error, string details)
         {
             Error = error;
             Details = details;

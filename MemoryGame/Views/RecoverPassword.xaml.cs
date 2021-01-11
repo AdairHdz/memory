@@ -33,12 +33,10 @@ namespace MemoryGame
 
         private void ShowErrorMessage()
         {
-            List<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
-            foreach (ValidationRuleResult validationRuleResult
-                in validationResultErrors)
+            IList<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
+            if (validationResultErrors.Count > 0)
             {
-                MessageBox.Show(validationRuleResult.Message);
-                return;
+                MessageBox.Show(validationResultErrors[0].Message);
             }
         }
 
@@ -101,11 +99,12 @@ namespace MemoryGame
                     SendVerificationCode();
                     if (newVerificationTokenWasAssigned)
                     {
+                        MessageBox.Show(Properties.Langs.Resources.PasswordRecoveryTokenSent);
                         GoToRestorePassword();
                     }
                     else
                     {
-                        MessageBox.Show("No se asignó el token");
+                        MessageBox.Show(Properties.Langs.Resources.RecoveryTokenSendingError);
                     }
                     
                 }

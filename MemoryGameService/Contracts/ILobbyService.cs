@@ -1,5 +1,4 @@
-﻿using MemoryGame.MemoryGameService.DataTransferObjects;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace MemoryGameService.Contracts

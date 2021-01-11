@@ -2,6 +2,8 @@
 using System.ServiceModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 
 namespace MemoryGame
 {
@@ -12,7 +14,7 @@ namespace MemoryGame
     {
         public InstanceContext Context { get; set; }
         private MemoryGameService.MatchServiceClient _matchServiceClient;
-        public ObservableCollection<string> players = new ObservableCollection<string>();
+        public ObservableCollection<string> players { get; set; } = new ObservableCollection<string>();
         public string MatchHost { get; set; }
         public int NumberOfPlayersInMatch { get; set; }
         public string PlayerUsername { get; set; }
@@ -24,14 +26,34 @@ namespace MemoryGame
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             _matchServiceClient = new MemoryGameService.MatchServiceClient(Context);
+            try
+            {
+                LoadUsernamesToBeVoted();
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException)
+            {                
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+        }
+
+        private void LoadUsernamesToBeVoted()
+        {
             IList<string> playersInMatchUsernames = _matchServiceClient.GetUsernamesOfPlayersConnectedToMatch(MatchHost);
             IList<string> playersVoted = _matchServiceClient.GetPlayersVoted(MatchHost, PlayerUsername);
             foreach (var playerUsername in playersInMatchUsernames)
             {
-                if(playerUsername != PlayerUsername)
+                if (playerUsername != PlayerUsername)
                 {
                     players.Add(playerUsername);
-                }               
+                }
             }
             if (playersVoted.Count != 0)
             {
@@ -45,15 +67,44 @@ namespace MemoryGame
                         }
                     }
                 }
-            }           
+            }
             ExpelPlayerDataGrid.ItemsSource = players;
         }
 
         private void ExpelPlayerButtonClicked(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                VoteToExpelPlayer();
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+            finally
+            {
+                this.Close();
+            }
+        }
+
+        private void VoteToExpelPlayer()
+        {
             string selectedPlayer = ExpelPlayerDataGrid.SelectedItem.ToString();
-            _matchServiceClient.ExpelPlayer(MatchHost, selectedPlayer, PlayerUsername);
-            this.Close();
+            ExpelVoteDto expelVote = new ExpelVoteDto()
+            {
+                Host = MatchHost,
+                UsernameOfExpelPlayer = selectedPlayer,
+                UsernameOfVoterPlayer = PlayerUsername
+            };
+            _matchServiceClient.ExpelPlayer(expelVote);
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)

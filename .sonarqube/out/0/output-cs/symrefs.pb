@@ -1,4 +1,25 @@
-œ
+∆
+LC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Account.cs
+
+  
+
+		 
+
+ "
+
+ 
+
+ 
+
+ 
+
+ $
+
+ %
+
+"" #
+
+$$ $≠
 MC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\CardDeck.cs
 
  !
@@ -6,29 +27,28 @@ MC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\CardDeck.cs
 
 
  
-  ) . 
-##* 1 
+) . 
 
- 
+ 
 
- 
+ 
 
- 
+ 
 
- 
-
-  á
+  á
 IC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Card.cs
 
- 
+ 
 
-		 
+
+
+ 
 
- 
+ 
 
-  
+  (
 
-  )Î
+  «
 MC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\MemoryGameContext.cs
 
  *
@@ -45,40 +65,30 @@ MC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\MemoryGameContext.cs
 
 % ,
 
-% ,
+& .
 
-  /<
-? K     %% ** 
-  
- # $
-  
- # $
-!! !! 
-"" ""# $
-&& && 
-'' ''# $
-++ ++ 
-,, ,,  
--- -- Ã
+  /
+
+? K¨
 JC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Match.cs
 
  
 
 
 
- 
-+ 2 
-  + 2 
+ 
 
- 
+ 
 
- 
+ 
 
- 
+ 
 
- 
+  (
 
-  )—
+ "
+
+ $—
 KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Sesion.cs
   
 
@@ -92,99 +102,135 @@ KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Sesion.cs
 
 
 
- &Â
+ &}
 KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Player.cs
 
- 
+ 
 
-		 
-$$+ 2 
-''* 1 
+ 
 
- "
+ "
 
- 
+ ¨
+dC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202101110153060_FinalDatabase.cs
 
- 
+ &
 
- 
+ P
+ ' (# $# $  + ,* +( )
+ ! "
++ ,0 1
+  
+ ' (  !
+!! !!! "2
+%% ''% &((  ))$ %**( )
+,, ,,! "(
+00 22! "33% &44% &
+66 66! "
+77- .772 3
+88 88 2
+<< >>" #??  @@% &AA' (
+CC CC! "
+DD- .DD2 3
+EE+ ,EE0 1
+FF FF 
+GG GG 
 
- $
-
- %
-
-!! #∑
-eC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202012040439359_AddingCardDeck.cs
-
- '
-
- 
-7 8< =
-
- !
-7 8< =ä
-dC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202012040456441_SolvingExepto.cs
-
- &
-
- 
-
- !ä
-dC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202012040500490_SolveExcption.cs
-
- &
-
- 
-
- !Ê
+KK !∆
 TC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\Configuration.cs
 
  '
 
  
 
-  $(
-B I :: DD 
-( )- .
-::* +::/ 0
-DD& 'DD+ ,U
-SC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Properties\AssemblyInfo.csœ
-[C:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\CardDeckRepository.cs
+  $
+B I  
+* +/ 0
+& '+ ,U
+SC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Properties\AssemblyInfo.csê
+ZC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\AccountRepository.cs
 
- #
+ "
 
 
-! 2  1
+! 24 E""5 F
 
- !
-, 3< C
+  
++ 2; B
 
- +
+ /
+7 ?t |
+  1 !" 3
+U \` g
+  
 
-0 :
-  Ç
+$ E
+J g&& 7
+!!! )%% (( 
+""! 2##  %% ,
+%%? F%%J Qè
+[C:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\CardDeckRepository.cs
+
+ #
+
+
+! 27 H
+
+ !
+, 3< C
+
+ +
+0 :: D
+" 4 "9 K
+ # +
+ 6 4ô
+[C:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\IAccountRepository.cs
+
+ '
+
+ (
+
+0 8
+
+		 >
+
+		C `Ç
 \C:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\ICardDeckRepository.cs
 
  (
 
  $
 
-) 3Ä
+) 3º
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\IPlayerRepository.cs
 
  &
 
 % <
 
-A ]‰
+A ]
+
+		 +
+
+		3 ;
+
+		A F
+
+
+
+ #
+
+
+
++ 3ê
 TC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\IRepository.cs
 
-  d
+  x
 ! (0 7 		 
 
  
 
-' . " ) % ,
+' . ( / " ) % ,
 
  
 
@@ -200,6 +246,10 @@ TC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\IReposito
 
 6 ?
 
+ "
+
+7 @
+
  
 
  
@@ -214,26 +264,39 @@ TC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\IReposito
 
  
 
-. 6Ì
+. 6≥
 YC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\PlayerRepository.cs
 
- !
-
-
-! 2* ;
+ !(
+		! 2# 4""5 F--5 F
 
- 
-2 9@ G
+ 
+2 9@ G
 
-, C
-H dE a
-  ' 
-# )- 3Ó
+# :
+? [ 2
+  '  
+    *
+= CG M
+
+   2
+  : B##6 >
+  H M''  %
+""! 2$$ !%%" 3
+## ##" )
+%% &&  '
+&& '' 
+
+++ *
+++2 :..6 >
+--! 2//  11" 3
+.. .." )
+11 22 ‹
 SC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\Repository.cs
 
- ¥
- #3 :		    ' "  ' ". 5  '!! ##  &&) 0((  ++ "--  00, 322  Z
-% -    ## (( -- 22 
+ 
+ #3 :		    ' "  ' ". 5 < C  / 6%% %%/ 6'' ''8 ?// 33 $77) 0;; $?? "CC $GG, 3KK $d
+% -     " *''+ 333 ;; CC KK 
 
  
 $ + 
@@ -243,50 +306,54 @@ SC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\Repositor
 
 $ *
 
-$ (
-= F1 :
+$ (
+= F   @ I
+! 0   "" "
 
-!! 
-!!  &##( .
+%% )
+%%> G''I R
+''! ((( ** 
 
-&& 
-&&2 :((- 5
+// 
+//  &11 33, 2
 
-++ 
-++# )--+ 1
+77 (
+772 :99 99# +;;1 9
 
-00 
-005 =220 8{
+?? 
+??# )AA CC/ 5
+
+GG (
+GG5 =II II# +KK4 <ü
 UC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Units of work\IUnitOfWork.cs
 
-  
+  
 
- !
+		 !
 
-		 Ü
+
+
+ %
+
+ "
+
+ #
+
+ ∆
 TC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Units of work\UnitOfWork.cs
 
- <
-+ 3 + 3/ 7  
-! ( 
-		# , 
+ P
++ 3 + 3/ 7, 4- 5    
+		! ( 
+
+
+# , 
+" ) 
+" * 
 
- 
-, 3 
+ 
+, 3 
 
- 
+ 
 
- ï
-KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Winner.cs
-
- 
-
- "
-
- 
-
- 
-
- $
-
- %
+ 

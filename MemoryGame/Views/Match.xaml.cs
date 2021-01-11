@@ -1,5 +1,6 @@
 ﻿using DataAccess.Entities;
 using MemoryGame.Components;
+using MemoryGame.MemoryGameService;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace MemoryGame.Views
     {
         
         private InstanceContext _context = null;
-        private MemoryGameService.MatchServiceClient _matchServiceClient;
-        public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
+        private MatchServiceClient _matchServiceClient;
+        public CardDeckDTO CardDeck { get; set; }
         private List<ImageCard> _imageCards;
         private int _numberOfMovementsAllowed;
         private IList<ImageCard> _cardsFlippedInCurrentTurn;
@@ -26,6 +27,7 @@ namespace MemoryGame.Views
         public int NumberOfPlayers { get; set; }
         public string MatchHost { get; set; }
         private bool _windowIsBeingClosedByTheCloseButton;
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("Match.xaml.cs");
         public Match()
         {
             InitializeComponent();
@@ -76,50 +78,73 @@ namespace MemoryGame.Views
 
         private void FlipCard(ImageCard cardClicked)
         {
-            _numberOfMovementsAllowed--;
-            int cardIndex = _imageCards.IndexOf(cardClicked);
-
-            _cardsFlippedInCurrentTurn.Add(cardClicked);
-
-            PlayerMovementDto playerMovementDto = new PlayerMovementDto()
+            try
             {
-                Host = MatchHost,
-                Username = Sesion.GetSesion.Username,
-                CardIndex = cardIndex,
-                MovementsLeft = _numberOfMovementsAllowed,
-                HasFormedAPair = _playerHasFormedAPair
-            };
-
-            if (_numberOfMovementsAllowed == 0)
-            {
-                if (HasFormedAPair())
+                _numberOfMovementsAllowed--;
+                int cardIndex = _imageCards.IndexOf(cardClicked);
+                _cardsFlippedInCurrentTurn.Add(cardClicked);
+                PlayerMovementDto playerMovementDto = new PlayerMovementDto()
+                {
+                    Host = MatchHost,
+                    Username = Sesion.GetSesion.Username,
+                    CardIndex = cardIndex,
+                    MovementsLeft = _numberOfMovementsAllowed,
+                    HasFormedAPair = _playerHasFormedAPair
+                };
+                if (_numberOfMovementsAllowed == 0 && HasFormedAPair())
                 {
                     playerMovementDto.HasFormedAPair = true;
                 }
+                _matchServiceClient.NotifyCardWasUncoveredd(playerMovementDto);
             }
-
-            _matchServiceClient.NotifyCardWasUncoveredd(playerMovementDto);
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
         }
 
         private void EndMovement()
         {
-            if (_numberOfMovementsAllowed == 0)
+            try
             {
-                if (HasFormedAPair())
+                if (_numberOfMovementsAllowed == 0)
                 {
-                    _numberOfMovementsAllowed = 2;
-                    _playerHasFormedAPair = true;
-                }
+                    if (HasFormedAPair())
+                    {
+                        _numberOfMovementsAllowed = 2;
+                        _playerHasFormedAPair = true;
+                    }
 
-                CardPairDto cardPairDto = new CardPairDto()
-                {
-                    IndexOfCard1 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[0]),
-                    IndexOfCard2 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[1]),
-                    BothCardsAreEqual = _playerHasFormedAPair
-                };
-                _matchServiceClient.EndTurn(MatchHost, Sesion.GetSesion.Username, cardPairDto);
-                _playerHasFormedAPair = false;
-                _cardsFlippedInCurrentTurn.Clear();
+                    CardPairDto cardPairDto = new CardPairDto()
+                    {
+                        IndexOfCard1 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[0]),
+                        IndexOfCard2 = _imageCards.IndexOf(_cardsFlippedInCurrentTurn[1]),
+                        BothCardsAreEqual = _playerHasFormedAPair
+                    };
+                    _matchServiceClient.EndTurn(MatchHost, Sesion.GetSesion.Username, cardPairDto);
+                    _playerHasFormedAPair = false;
+                    _cardsFlippedInCurrentTurn.Clear();
+                }
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
 
@@ -166,7 +191,15 @@ namespace MemoryGame.Views
         {
             if (_windowIsBeingClosedByTheCloseButton)
             {
-                _matchServiceClient.LeaveMatch(MatchHost, Sesion.GetSesion.Username);
+                try
+                {
+                    _matchServiceClient.LeaveMatch(MatchHost, Sesion.GetSesion.Username);
+                }
+                catch (CommunicationException communicationException)
+                {
+                    _logger.Fatal(communicationException);
+                }
+                
             }
         }
 
@@ -190,14 +223,9 @@ namespace MemoryGame.Views
             {
                 _numberOfMovementsAllowed = 2;
             }
-
-            if (cardPairDto.BothCardsAreEqual)
-            {
-                ImageCard imageCard1 = _imageCards[cardPairDto.IndexOfCard1];
-                ImageCard imageCard2 = _imageCards[cardPairDto.IndexOfCard2];
-            }
-            else
-            {
+            
+            if(!cardPairDto.BothCardsAreEqual)
+            {                
                 FlipBothCardsAgain(cardPairDto);
             }
         }
@@ -229,9 +257,9 @@ namespace MemoryGame.Views
             }
         }
 
-        public void NotifyPlayerLeaveMatch(string playerUsername, int[] cardsUncovered)
+        public void NotifyPlayerLeaveMatch(string username, int[] cardsUncovered)
         {
-            if (Sesion.GetSesion.Username.Equals(playerUsername))
+            if (Sesion.GetSesion.Username.Equals(username))
             {
                 GoToMainMenuView();
             }
@@ -241,7 +269,7 @@ namespace MemoryGame.Views
                 {
                     _imageCards[cardsUncovered[index]].Source = _imageCards[cardsUncovered[index]].BackImage;
                 }
-                MessageBox.Show(playerUsername + " " + Properties.Langs.Resources.LeaveMatchMessage);
+                MessageBox.Show(username + " " + Properties.Langs.Resources.LeaveMatchMessage);
                 NumberOfPlayers--;
             }
         }

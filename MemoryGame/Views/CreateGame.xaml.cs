@@ -3,7 +3,6 @@ using DataAccess.Entities;
 using System.Collections.ObjectModel;
 using System;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.ServiceModel;
 
 namespace MemoryGame

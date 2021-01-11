@@ -11,8 +11,8 @@ namespace MemoryGame.Components
     {
         public int NumberOfColumns { get; set; }
         public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
-        public Grid GridToBeDrawnOn;
-        public IList<ImageCard> ImageCards;
+        public Grid GridToBeDrawnOn { get; set; }
+        public IList<ImageCard> ImageCards { get; set; }
 
         public GameBoardDrawer() { }
 
@@ -36,7 +36,6 @@ namespace MemoryGame.Components
             int numberOfCards = CardDeck.Cards.Count;
             int numberOfColumnsDrawn = GridToBeDrawnOn.ColumnDefinitions.Count;
 
-            //Comportamiento extraño. Ceiling no funciona
             int numberOfRequiredRows = (int)Math.Ceiling(Convert.ToDouble(numberOfCards / numberOfColumnsDrawn)) + 1;
             for (int numberOfCurrentRow = 0; numberOfCurrentRow < numberOfRequiredRows; numberOfCurrentRow++)
             {
@@ -88,7 +87,6 @@ namespace MemoryGame.Components
                 Grid.SetRow(ImageCards[numberOfActualCard], rowIndex);
                 Grid.SetColumn(ImageCards[numberOfActualCard], columnIndex);
                 ImageCards[numberOfActualCard].Margin = new Thickness(8);
-                //_imageCards[numberOfActualCard].MouseDown += GetClickedCard;
                 GridToBeDrawnOn.Children.Add(ImageCards[numberOfActualCard]);
                 columnIndex++;
             }

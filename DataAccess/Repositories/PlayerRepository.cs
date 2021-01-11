@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class PlayerRepository : Repository<Entities.Player>, IPlayerRepository
+    public class PlayerRepository : Repository<Player>, IPlayerRepository
     {
         public MemoryGameContext MemoryGameContext
         {
@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
 
         public PlayerRepository(MemoryGameContext context):base(context) { }
 
-        public IEnumerable<Entities.Player> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
+        public IEnumerable<Player> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
         {
             IEnumerable<Player> players = new List<Player>();
             var playersRetrieved = MemoryGameContext.Players
@@ -27,6 +27,29 @@ namespace DataAccess.Repositories
                 .Take(numberOfPlayersToBeRetrieved);
             }
             return players;
+        }
+
+        public void UpdateScoreOfPlayersAfterMatch(string username, int score)
+        {
+            IEnumerable<Account> retrievedAccounts = MemoryGameContext.Accounts.Include("Player")
+                .Where(account => account.Username == username);
+            if (retrievedAccounts.Count() == 1){
+                Account account = retrievedAccounts.First();
+                Player player = account.Player;                
+                player.Score += score;                
+            }
+        }
+
+        public Player FindPlayerByUsername(string username)
+        {
+            IEnumerable<Account> retrievedAccounts = MemoryGameContext.Accounts.Include("Player")
+                .Where(account => account.Username == username);
+            if(retrievedAccounts.Count() == 1)
+            {
+                Account account = retrievedAccounts.First();
+                return account.Player;
+            }
+            return null;
         }
     }
 }

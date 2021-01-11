@@ -276,6 +276,15 @@
   <data name="PasswordIsInvalid" xml:space="preserve">
     <value>The password you have entered is too weak. Please make sure that your password contains at least one capital letter, one lowercase letter, a number and an special character. Also make your that your password's lenght is between 8 and 25 characters long</value>
   </data>
+  <data name="PasswordRecoveryError" xml:space="preserve">
+    <value>An error has occured. We were not able to change your password. Please try again later</value>
+  </data>
+  <data name="PasswordRecoveryTokenSent" xml:space="preserve">
+    <value>We hace sent a recovery token to your email. To recover your password, please insert the code</value>
+  </data>
+  <data name="PasswordReset" xml:space="preserve">
+    <value>Your password has been reset</value>
+  </data>
   <data name="Players" xml:space="preserve">
     <value>Players</value>
   </data>
@@ -287,6 +296,9 @@
   </data>
   <data name="RecoverPasswordMessage" xml:space="preserve">
     <value>Enter the email you signed up with; a verification code will be provided to reset your password</value>
+  </data>
+  <data name="RecoveryTokenSendingError" xml:space="preserve">
+    <value>An error occured while trying to assign a new verification code to you. Please try again later</value>
   </data>
   <data name="RegisterViewTitle" xml:space="preserve">
     <value>Register</value>

@@ -538,6 +538,33 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrió un error al intentar restablecer su contraseña. Por favor, intente más tarde.
+        /// </summary>
+        public static string PasswordRecoveryError {
+            get {
+                return ResourceManager.GetString("PasswordRecoveryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hemos enviado un código de recuperación a su email. Para recuperar su contraseña, por favor inserte el código.
+        /// </summary>
+        public static string PasswordRecoveryTokenSent {
+            get {
+                return ResourceManager.GetString("PasswordRecoveryTokenSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña restablecida.
+        /// </summary>
+        public static string PasswordReset {
+            get {
+                return ResourceManager.GetString("PasswordReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Jugadores.
         /// </summary>
         public static string Players {
@@ -570,6 +597,15 @@ namespace MemoryGame.Properties.Langs {
         public static string RecoverPasswordMessage {
             get {
                 return ResourceManager.GetString("RecoverPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrió un error al intentar asignarle un nuevo código de verificación. Por favor, intente restablecer su contraseña más tarde.
+        /// </summary>
+        public static string RecoveryTokenSendingError {
+            get {
+                return ResourceManager.GetString("RecoveryTokenSendingError", resourceCulture);
             }
         }
         

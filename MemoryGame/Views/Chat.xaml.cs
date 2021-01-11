@@ -50,9 +50,7 @@ namespace MemoryGame
 
         public void NotifyUserHasEnteredTheChat(string username)
         {
-            string format = "\n" + username + " entró al chat";
-            //ChatBox.AppendText(format);
-            //ChatBox.ScrollToEnd();
+            string format = "\n" + username + " entró al chat";;
             Console.WriteLine(format);
         }
     }
