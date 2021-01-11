@@ -82,14 +82,23 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         public int AddExpelVote(string playerUsername)
         {
             int playerExpelVotes = 0;
-            for (int currentIndex = 0; currentIndex < _players.Count; currentIndex++)
+            /*for (int currentIndex = 0; currentIndex < _players.Count; currentIndex++)
             {
                 if (_players[currentIndex].Username.Equals(playerUsername))
                 {
                     _players[currentIndex].ExpulsionVotes++;
                     playerExpelVotes = _players[currentIndex].ExpulsionVotes;
                 }
+            }*/
+            foreach (var player in _players)
+            {
+                if (player.Username.Equals(playerUsername))
+                {
+                    player.ExpulsionVotes++;
+                    playerExpelVotes = player.ExpulsionVotes;
+                }
             }
+
             return playerExpelVotes;
         }
 
@@ -97,6 +106,20 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         {
             PlayerInMatch playerToRemove = this.GetPlayer(playerUsername);
             _players.Remove(playerToRemove);
+        }
+
+        public PlayerInMatch GetPlyerWithActiveTurn()
+        {
+            PlayerInMatch playerWithActiveTurn = null;
+            foreach (var player in _players)
+            {
+                if (player.HasActiveTurn)
+                {
+                    playerWithActiveTurn = player;
+                }
+            }
+
+            return playerWithActiveTurn;
         }
 
     }

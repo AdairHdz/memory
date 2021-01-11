@@ -158,17 +158,8 @@ namespace MemoryGameService.Services
             MatchDto gameMatch = GetMatch(host);
 
             IList<PlayerInMatch> playersInMatch = gameMatch.GetPlayersConnectedToMatch();
-            PlayerInMatch playerWithActiveTurn = null;
+            PlayerInMatch playerWithActiveTurn = gameMatch.GetPlyerWithActiveTurn();
             PlayerInMatch leavePlayer = gameMatch.GetPlayer(username);
-
-            foreach (var player in playersInMatch)
-            {
-                if (player.HasActiveTurn)
-                {
-                    playerWithActiveTurn = player;
-                    break;
-                }
-            }
 
             if (playerWithActiveTurn.Username.Equals(username))
             {
@@ -217,16 +208,8 @@ namespace MemoryGameService.Services
 
             if (playerExpelVotes > (numOfPlayers / 2))
             {
-                PlayerInMatch playerWithActiveTurn = null;
+                PlayerInMatch playerWithActiveTurn = gameMatch.GetPlyerWithActiveTurn();
                 PlayerInMatch expelPlayer = gameMatch.GetPlayer(usernameOfExpelPlayer);
-
-                foreach (var player in playersInMatch)
-                {
-                    if (player.HasActiveTurn)
-                    {
-                        playerWithActiveTurn = player;
-                    }
-                }
 
                 if (playerWithActiveTurn.Username.Equals(usernameOfExpelPlayer))
                 {
