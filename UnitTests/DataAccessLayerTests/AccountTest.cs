@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Repositories;
+using DataAccess.Units_of_work;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -16,6 +18,7 @@ namespace UnitTests.DataAccessLayerTests
         DbSet<Account> _mockSet;
         MemoryGameContext _mockContext;
         AccountRepository _repository;
+        UnitOfWork _unitOfWork;
 
         [TestInitialize]
         public void TestInitialize()
@@ -56,10 +59,13 @@ namespace UnitTests.DataAccessLayerTests
                     Player = null
                 },
             };
-            _mockSet = GetQueryableMockDbSet(_data);
-            _mockContext = GetContext(_mockSet);
+            _mockSet = DbContextMock.GetQueryableMockDbSet(_data);
+            _mockContext = DbContextMock.GetContext(_mockSet);
             _repository = new AccountRepository(_mockContext);
+            _unitOfWork = new UnitOfWork(_mockContext);
         }
+
+
 
         [TestMethod]
         public void AddNewAccount_Success()
@@ -185,6 +191,17 @@ namespace UnitTests.DataAccessLayerTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void RemoveAll_Success()
+        {
+            var accounts = _repository.GetAll();
+            _repository.RemoveRange(accounts);
+            int expected = 0;
+            int actual = _mockSet.Count();
+
+            Assert.AreEqual(expected, actual);
+        }
+
         /*
         [TestMethod]
         public void RemoveElement_Success()
@@ -248,10 +265,7 @@ namespace UnitTests.DataAccessLayerTests
             mockSet.As<IQueryable<T>>().Setup(m => m.Provider).Returns(queryable.Provider);
             mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(queryable.Expression);
             mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(queryable.ElementType);
-            mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(() => queryable.GetEnumerator());
-            mockSet.Setup(dbSet => dbSet.Add(It.IsAny<T>())).Callback<T>((s) => sourceList.Add(s));
-            mockSet.Setup(dbSet => dbSet.Remove(It.IsAny<T>())).Callback<T>((s) => sourceList.Remove(s));
-            mockSet.Setup(dbSet => dbSet.AddRange(It.IsAny<IEnumerable<T>>())).Callback<IEnumerable<T>>((s) => sourceList.AddRange(s));
+            mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(() => queryable.GetEnumerator());            
             return mockSet.Object;
         }
     }
