@@ -6,7 +6,6 @@ using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using MemoryGameService.DataTransferObjectMappers;
 using MemoryGameService.Utilities;
-using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Data.SqlClient;

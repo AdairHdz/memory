@@ -118,10 +118,8 @@
     <Compile Include="InputValidationTests\EmailAddressValidationRuleTest.cs" />
     <Compile Include="InputValidationTests\NonEmptyFieldValidationTest.cs" />
     <Compile Include="InputValidationTests\PasswordValidationRuleTest.cs" />
-    <Compile Include="InputValidationTests\RegistryRuleSetTest.cs" />
     <Compile Include="InputValidationTests\UsernameValidationRuleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServicesTests\UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -34,12 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -61,21 +55,9 @@
     <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\Sesion.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.cs" />
-    <Compile Include="Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.designer.cs">
-      <DependentUpon>202101090707155_SetForeignKeysOnMatchExplicitly.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101090917339_AddedNavigabilityFromAccountToPlayer.cs" />
-    <Compile Include="Migrations\202101090917339_AddedNavigabilityFromAccountToPlayer.designer.cs">
-      <DependentUpon>202101090917339_AddedNavigabilityFromAccountToPlayer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101092235309_RemoveVirtualAccountFromPlayer.cs" />
-    <Compile Include="Migrations\202101092235309_RemoveVirtualAccountFromPlayer.designer.cs">
-      <DependentUpon>202101092235309_RemoveVirtualAccountFromPlayer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101100503290_AddedDateToMatch.cs" />
-    <Compile Include="Migrations\202101100503290_AddedDateToMatch.designer.cs">
-      <DependentUpon>202101100503290_AddedDateToMatch.cs</DependentUpon>
+    <Compile Include="Migrations\202101110153060_FinalDatabase.cs" />
+    <Compile Include="Migrations\202101110153060_FinalDatabase.designer.cs">
+      <DependentUpon>202101110153060_FinalDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,17 +77,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.resx">
-      <DependentUpon>202101090707155_SetForeignKeysOnMatchExplicitly.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101090917339_AddedNavigabilityFromAccountToPlayer.resx">
-      <DependentUpon>202101090917339_AddedNavigabilityFromAccountToPlayer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101092235309_RemoveVirtualAccountFromPlayer.resx">
-      <DependentUpon>202101092235309_RemoveVirtualAccountFromPlayer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101100503290_AddedDateToMatch.resx">
-      <DependentUpon>202101100503290_AddedDateToMatch.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101110153060_FinalDatabase.resx">
+      <DependentUpon>202101110153060_FinalDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,9 +11,6 @@ namespace MemoryGameService.Contracts
         void SubscribeToCommunicationService(string username);
         [OperationContract(IsOneWay = false, IsTerminating = true)]
         void UnsubscribeFromCommunicationService();
-        //[OperationContract(IsOneWay = true)]
-        //void Join(string username);
-
         [OperationContract(IsOneWay = true)]
         void SendMessage(string sender, string message);
     }

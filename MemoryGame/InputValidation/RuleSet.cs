@@ -5,7 +5,7 @@ namespace MemoryGame.InputValidation
     public class RuleSet
     {
         public List<IValidationRule> ValidationRules { get; set; }
-        private List<ValidationRuleResult> _validationResultErrors;
+        private readonly List<ValidationRuleResult> _validationResultErrors;
 
         public RuleSet()
         {

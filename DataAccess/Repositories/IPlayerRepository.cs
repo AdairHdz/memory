@@ -1,5 +1,4 @@
 ﻿using DataAccess.Entities;
-using System;
 using System.Collections.Generic;
 
 namespace DataAccess.Repositories

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Utilities
+﻿namespace Utilities
 {
     public class BCryptHashGenerator : IEncryption
     {
@@ -17,16 +15,8 @@ namespace Utilities
         }
 
         public string GenerateSalt()
-        {
-            int randomNumber = GenerateRandomNumberBetweenRange(6, 12);
-            return BCrypt.Net.BCrypt.GenerateSalt(randomNumber);
-        }
-
-        private int GenerateRandomNumberBetweenRange(int minimum, int maximum)
-        {
-            Random randomNumberGenerator = new Random();
-            int randomNumber = randomNumberGenerator.Next(minimum, maximum);
-            return randomNumber;
+        {            
+            return BCrypt.Net.BCrypt.GenerateSalt(10);
         }
     }
 }

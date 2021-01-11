@@ -41,6 +41,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
 
         public PlayerInMatch GetPlayer(string username)
         {
+            PlayerInMatch playerRetrieved = null;
             foreach(var player in _players)
             {
                 if (player.Username.Equals(username))
@@ -48,8 +49,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
                     return player;
                 }                
             }
-            //No se encontró al jugador. Hacer excepción personalizada
-            throw new Exception("");
+            return playerRetrieved;
         }
 
 

@@ -5,13 +5,7 @@ IC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Card.csutf-
 MC:\Users\Adair Hernández\source\repos\memory\DataAccess\MemoryGameContext.csutf-8S
 JC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Match.csutf-8T
 KC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Sesion.csutf-8T
-KC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Player.csutf-8
-vC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.csutf-8�
-C:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101090707155_SetForeignKeysOnMatchExplicitly.designer.csutf-8�
-{C:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101090917339_AddedNavigabilityFromAccountToPlayer.csutf-8�
-�C:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101090917339_AddedNavigabilityFromAccountToPlayer.designer.csutf-8~
-uC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101092235309_RemoveVirtualAccountFromPlayer.csutf-8�
-~C:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101092235309_RemoveVirtualAccountFromPlayer.designer.csutf-8p
+KC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Player.csutf-8p
 gC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101100503290_AddedDateToMatch.csutf-8{
 pC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101100503290_AddedDateToMatch.designer.csutf-8]
 TC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\Configuration.csutf-8\

@@ -5,7 +5,6 @@ using DataAccess.Entities;
 using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.GenericValidations;
 using System.Collections.Generic;
-using MemoryGame.MemoryGameService.DataTransferObjects;
 using System.ServiceModel;
 using System;
 
@@ -42,12 +41,10 @@ namespace MemoryGame
 
         private void ShowErrorMessage()
         {
-            List<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
-            foreach (ValidationRuleResult validationRuleResult
-                in validationResultErrors)
+            IList<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
+            if (validationResultErrors.Count > 0)
             {
-                MessageBox.Show(validationRuleResult.Message);
-                return;
+                MessageBox.Show(validationResultErrors[0].Message);
             }
         }
 

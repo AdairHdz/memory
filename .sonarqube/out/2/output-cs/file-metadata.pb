@@ -7,14 +7,12 @@ bC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\IMatc
 cC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\IMatchDiscoveryService.csutf-8l
 cC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\IPlayerRegistryService.csutf-8t
 kC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjectMappers\CardDeckMapper.csutf-8p
-gC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjectMappers\CardMapper.csutf-8}
-tC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjectMappers\PlayerCredentialsMapper.csutf-8r
-iC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjectMappers\PlayerMapper.csutf-8w
-nC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjectMappers\PlayerScoreMapper.csutf-8k
+gC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjectMappers\CardMapper.csutf-8k
 bC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\CardDeckDTO.csutf-8o
 fC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\CardDeckInfoDto.csutf-8g
 ^C:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\CardDto.csutf-8k
-bC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\CardPairDto.csutf-8h
+bC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\CardPairDto.csutf-8l
+cC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\ExpelVoteDto.csutf-8h
 _C:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\MatchDto.csutf-8�
 yC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\PasswordModificationCredentialsDto.csutf-8m
 dC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerInLobby.csutf-8e
@@ -25,8 +23,6 @@ dC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObj
 eC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerScoreDTO.csutf-8q
 hC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerMovementDto.csutf-8x
 oC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataTransferObjects\VerificationTokenInfoDto.csutf-8k
-bC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataValidators\IPlayerValidator.csutf-8j
-aC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\DataValidators\PlayerValidator.csutf-8k
 bC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\IAccessibilityService.csutf-8k
 bC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\ICommunicationService.csutf-8e
 \C:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\IMailingService.csutf-8c

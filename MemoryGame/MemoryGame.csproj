@@ -86,7 +86,6 @@
     </ApplicationDefinition>
     <Compile Include="Components\GameBoardDrawer.cs" />
     <Compile Include="Components\ImageCard.cs" />
-    <Compile Include="Components\PlayerInfo.cs" />
     <Compile Include="Components\UserBox.cs" />
     <Compile Include="Components\UserBoxDrawer.cs" />
     <Compile Include="Connected Services\MemoryGameService\Reference.cs">
@@ -94,22 +93,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\Proxy\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="InputValidation\GenericValidations\NonEmptyFieldValidation.cs" />
+    <Compile Include="InputValidation\NonEmptyFieldValidation.cs" />
     <Compile Include="InputValidation\IValidationRule.cs" />
-    <Compile Include="InputValidation\RegistryValidation\EmailAddressValidationRule.cs" />
-    <Compile Include="InputValidation\RegistryValidation\IRegistryRule.cs" />
-    <Compile Include="InputValidation\RegistryValidation\PasswordValidationRule.cs" />
-    <Compile Include="InputValidation\RegistryValidation\RegistryRuleSet.cs" />
-    <Compile Include="InputValidation\RegistryValidation\UsernameValidationRule.cs" />
-    <Compile Include="InputValidation\RegistryValidation\RegistryData.cs" />
+    <Compile Include="InputValidation\EmailAddressValidationRule.cs" />
+    <Compile Include="InputValidation\PasswordValidationRule.cs" />
+    <Compile Include="InputValidation\UsernameValidationRule.cs" />
     <Compile Include="InputValidation\IRuleSet.cs" />
     <Compile Include="InputValidation\RuleSet.cs" />
-    <Compile Include="InputValidation\ValidationRule.cs" />
     <Compile Include="InputValidation\ValidationRuleResult.cs" />
     <Compile Include="Properties\Langs\Resources.es-MX.Designer.cs">
       <DependentUpon>Resources.es-MX.resx</DependentUpon>
@@ -289,22 +279,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\MemoryGameService\MemoryGameService.wsdl" />
-    <None Include="Connected Services\Proxy\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\Proxy\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\Proxy\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\Proxy\item32.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\Proxy\item33.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\Proxy\MemoryGameService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DataAccess.Models.Player.datasource" />
     <None Include="Connected Services\MemoryGameService\item.disco" />
@@ -357,20 +331,8 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\MemoryGameService\" />
-    <WCFMetadataStorage Include="Connected Services\Proxy\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\Proxy\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\Proxy\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\Proxy\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

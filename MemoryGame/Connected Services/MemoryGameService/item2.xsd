@@ -115,6 +115,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerInMatch" nillable="true" type="tns:PlayerInMatch" />
+  <xs:complexType name="ExpelVoteDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UsernameOfExpelPlayer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UsernameOfVoterPlayer" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExpelVoteDto" nillable="true" type="tns:ExpelVoteDto" />
   <xs:complexType name="ArrayOfPlayerScoreDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerScoreDTO" nillable="true" type="tns:PlayerScoreDTO" />

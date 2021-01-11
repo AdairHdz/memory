@@ -1,5 +1,6 @@
 ﻿using DataAccess.Entities;
 using MemoryGame.Components;
+using MemoryGame.MemoryGameService;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace MemoryGame.Views
     {
         
         private InstanceContext _context = null;
-        private MemoryGameService.MatchServiceClient _matchServiceClient;
-        public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
+        private MatchServiceClient _matchServiceClient;
+        public CardDeckDTO CardDeck { get; set; }
         private List<ImageCard> _imageCards;
         private int _numberOfMovementsAllowed;
         private IList<ImageCard> _cardsFlippedInCurrentTurn;
@@ -90,12 +91,9 @@ namespace MemoryGame.Views
                     MovementsLeft = _numberOfMovementsAllowed,
                     HasFormedAPair = _playerHasFormedAPair
                 };
-                if (_numberOfMovementsAllowed == 0)
+                if (_numberOfMovementsAllowed == 0 && HasFormedAPair())
                 {
-                    if (HasFormedAPair())
-                    {
-                        playerMovementDto.HasFormedAPair = true;
-                    }
+                    playerMovementDto.HasFormedAPair = true;
                 }
                 _matchServiceClient.NotifyCardWasUncoveredd(playerMovementDto);
             }
@@ -225,14 +223,9 @@ namespace MemoryGame.Views
             {
                 _numberOfMovementsAllowed = 2;
             }
-
-            if (cardPairDto.BothCardsAreEqual)
-            {
-                ImageCard imageCard1 = _imageCards[cardPairDto.IndexOfCard1];
-                ImageCard imageCard2 = _imageCards[cardPairDto.IndexOfCard2];
-            }
-            else
-            {
+            
+            if(!cardPairDto.BothCardsAreEqual)
+            {                
                 FlipBothCardsAgain(cardPairDto);
             }
         }
@@ -264,9 +257,9 @@ namespace MemoryGame.Views
             }
         }
 
-        public void NotifyPlayerLeaveMatch(string playerUsername, int[] cardsUncovered)
+        public void NotifyPlayerLeaveMatch(string username, int[] cardsUncovered)
         {
-            if (Sesion.GetSesion.Username.Equals(playerUsername))
+            if (Sesion.GetSesion.Username.Equals(username))
             {
                 GoToMainMenuView();
             }
@@ -276,7 +269,7 @@ namespace MemoryGame.Views
                 {
                     _imageCards[cardsUncovered[index]].Source = _imageCards[cardsUncovered[index]].BackImage;
                 }
-                MessageBox.Show(playerUsername + " " + Properties.Langs.Resources.LeaveMatchMessage);
+                MessageBox.Show(username + " " + Properties.Langs.Resources.LeaveMatchMessage);
                 NumberOfPlayers--;
             }
         }

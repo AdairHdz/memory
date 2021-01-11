@@ -83,9 +83,6 @@
     <Compile Include="Contracts\IPlayerRegistryService.cs" />
     <Compile Include="DataTransferObjectMappers\CardDeckMapper.cs" />
     <Compile Include="DataTransferObjectMappers\CardMapper.cs" />
-    <Compile Include="DataTransferObjectMappers\PlayerCredentialsMapper.cs" />
-    <Compile Include="DataTransferObjectMappers\PlayerMapper.cs" />
-    <Compile Include="DataTransferObjectMappers\PlayerScoreMapper.cs" />
     <Compile Include="DataTransferObjects\CardDeckDTO.cs" />
     <Compile Include="DataTransferObjects\CardDeckInfoDto.cs" />
     <Compile Include="DataTransferObjects\CardDto.cs" />
@@ -101,8 +98,6 @@
     <Compile Include="DataTransferObjects\PlayerScoreDTO.cs" />
     <Compile Include="DataTransferObjects\PlayerMovementDto.cs" />
     <Compile Include="DataTransferObjects\VerificationTokenInfoDto.cs" />
-    <Compile Include="DataValidators\IPlayerValidator.cs" />
-    <Compile Include="DataValidators\PlayerValidator.cs" />
     <Compile Include="Contracts\IAccessibilityService.cs" />
     <Compile Include="Contracts\ICommunicationService.cs" />
     <Compile Include="Contracts\IMailingService.cs" />

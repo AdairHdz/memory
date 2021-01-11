@@ -3,6 +3,7 @@ using System.ServiceModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
+using MemoryGame.MemoryGameService.DataTransferObjects;
 
 namespace MemoryGame
 {
@@ -13,7 +14,7 @@ namespace MemoryGame
     {
         public InstanceContext Context { get; set; }
         private MemoryGameService.MatchServiceClient _matchServiceClient;
-        public ObservableCollection<string> players = new ObservableCollection<string>();
+        public ObservableCollection<string> players { get; set; } = new ObservableCollection<string>();
         public string MatchHost { get; set; }
         public int NumberOfPlayersInMatch { get; set; }
         public string PlayerUsername { get; set; }
@@ -97,7 +98,13 @@ namespace MemoryGame
         private void VoteToExpelPlayer()
         {
             string selectedPlayer = ExpelPlayerDataGrid.SelectedItem.ToString();
-            _matchServiceClient.ExpelPlayer(MatchHost, selectedPlayer, PlayerUsername);
+            ExpelVoteDto expelVote = new ExpelVoteDto()
+            {
+                Host = MatchHost,
+                UsernameOfExpelPlayer = selectedPlayer,
+                UsernameOfVoterPlayer = PlayerUsername
+            };
+            _matchServiceClient.ExpelPlayer(expelVote);
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)

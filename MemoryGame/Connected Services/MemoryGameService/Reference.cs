@@ -753,10 +753,10 @@ namespace MemoryGame.MemoryGameService {
         System.Threading.Tasks.Task LeaveMatchAsync(string host, string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ExpelPlayer")]
-        void ExpelPlayer(string host, string expelPlayerUsername, string playerUsername);
+        void ExpelPlayer(MemoryGame.MemoryGameService.DataTransferObjects.ExpelVoteDto expelVote);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/ExpelPlayer")]
-        System.Threading.Tasks.Task ExpelPlayerAsync(string host, string expelPlayerUsername, string playerUsername);
+        System.Threading.Tasks.Task ExpelPlayerAsync(MemoryGame.MemoryGameService.DataTransferObjects.ExpelVoteDto expelVote);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetUsernamesOfPlayersConnectedToMatch", ReplyAction="http://tempuri.org/IMatchService/GetUsernamesOfPlayersConnectedToMatchResponse")]
         string[] GetUsernamesOfPlayersConnectedToMatch(string host);
@@ -872,12 +872,12 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.LeaveMatchAsync(host, username);
         }
         
-        public void ExpelPlayer(string host, string expelPlayerUsername, string playerUsername) {
-            base.Channel.ExpelPlayer(host, expelPlayerUsername, playerUsername);
+        public void ExpelPlayer(MemoryGame.MemoryGameService.DataTransferObjects.ExpelVoteDto expelVote) {
+            base.Channel.ExpelPlayer(expelVote);
         }
         
-        public System.Threading.Tasks.Task ExpelPlayerAsync(string host, string expelPlayerUsername, string playerUsername) {
-            return base.Channel.ExpelPlayerAsync(host, expelPlayerUsername, playerUsername);
+        public System.Threading.Tasks.Task ExpelPlayerAsync(MemoryGame.MemoryGameService.DataTransferObjects.ExpelVoteDto expelVote) {
+            return base.Channel.ExpelPlayerAsync(expelVote);
         }
         
         public string[] GetUsernamesOfPlayersConnectedToMatch(string host) {
