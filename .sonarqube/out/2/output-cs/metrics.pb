@@ -29,9 +29,9 @@ fC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\DataTransferObj
 bC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\DataTransferObjects\CardPairDto.cs 8r	
 {
 cC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\DataTransferObjects\ExpelVoteDto.cs 8r	
-ๆ
-_C:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\DataTransferObjects\MatchDto.cs  8rZ	
- !"#%&'(*+,-./01234589:;<=>?@ABDEFHIJKLMNOPRSTUVWXYZ[\]^`abcdfgx "'-/14:;<>?AHJLOUWYZ]bc‘
+๖
+_C:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\DataTransferObjects\MatchDto.cs% 8 rf	
+ !"#%&'(*+,-./01234589:;<=>?@ABDEFHIJKLMNOPRSTUVWXYZ[\^_abcdeghijklmnoprsuvx  "'-/14:;<>?AHJLOUWYZ^cdjlnr‘
 yC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\DataTransferObjects\PasswordModificationCredentialsDto.cs 8r	
 x
 dC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerInLobby.cs 8r
@@ -104,9 +104,9 @@ ZC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\Services\Mailin
 ธ
 aC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\Services\MatchDiscoveryService.cs 8r5	
  !"$%&'(),./0123456789:;x
-!$&(1358ศ
-XC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\Services\MatchService.cs~ 8$r•
- !#$%&')*+,./0123456789:;<=>@BCDEGIJLMNOPQRSTUVWYZ[\]^_abdefghijklmnopqrstuwxy{|}~…‘’“•–— กขคฅฆงจฉชซญฎฏฐฑณดตทธนบปฝพฟภมยฤลวศษสหอฮฯะัำิีืุฺÛÜÝ฿เแโใไๅ็่้๊๋ํ๎๏๑๒๓๔๕๗๘๙๚๛üþÿ’“”–— กขฃคฅงจชซฌญฎฏฐฑฒณดตถx-ศ %&+,./1268<@BDLMOPQRTUV\^abhjkoptw}~’•— ขคฆจฉญฏฐฑณดตทนฝพภมฤลวษฯะัำิีืุฺÝ฿แใ็้๊๋ํ๎๏๑๓๗๘๚๛þÿ”–— คงฌฎฒt
+!$&(1358 
+XC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\Services\MatchService.csw 8 r๗
+ !#$%&')*+,./0123456789:;<=>@BCDEGIJLMNOPQRSTUVWYZ[\]^_abdefghijklmnopqrstuwxy{|}~…‘’“•–— กขคฅฆงจชซฌฎฏฐฑฒดตถทธนปผพฟภมยฤลฦวศสหฬฮฯัาำิึืุูฺÜÝÞเแโใไๆ็่้๊๋ํ๎๐๑๒๓๕๖๘๙๚üþÿ…‘’“”–— กขฃคฅx%พ %&+,./1268<@BDLMOPQRTUV\^abhjkoptw}~’•— กขคฆงจชซฌฎฐดตทธปผพภฦวศสหฬฮฯัำิึุูฺÜÝÞเโๆ็้๊ํ๎๐๒๚üþ…“–กt
 ]C:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\Services\MemoryGameService.cs 8r	
 ๔
 aC:\Users\Adair Hernรกndez\source\repos\memory\MemoryGameService\Services\PlayerRegistryService.cs# 8rf	 !"#$%&'()*+,-./0123456789:;=>?@ABCDEFGHIJKLMNOPQRTUVWXYZ[\]^_`abcdefghilmx%&'()*/3459BCEGLPYZ\^cg 

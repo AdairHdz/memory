@@ -89,81 +89,26 @@ return %29 : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\Memor
 cbde.unreachable
 
 }
-func @_MemoryGame.MemoryGameService.DataTransferObjects.MatchDto.AddExpelVote$string$(none) -> i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :81 :8) {
+// Skipping function AddExpelVote(none), it contains poisonous unsupported syntaxes
+
+func @_MemoryGame.MemoryGameService.DataTransferObjects.MatchDto.RemovePlayer$string$(none) -> () loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :96 :8) {
 ^entry (%_playerUsername : none):
-%0 = cbde.alloca none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :81 :32)
-cbde.store %_playerUsername, %0 : memref<none> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :81 :32)
-br ^0
-
-^0: // ForInitializerBlock
-%1 = constant 0 : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :83 :35)
-%2 = cbde.alloca i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :83 :16) // playerExpelVotes
-cbde.store %1, %2 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :83 :16)
-%3 = constant 0 : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :36)
-%4 = cbde.alloca i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :21) // currentIndex
-cbde.store %3, %4 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :21)
-br ^1
-
-^1: // BinaryBranchBlock
-%5 = cbde.load %4 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :39)
-%6 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :54) // Not a variable of known type: _players
-%7 = cbde.unknown : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :54) // _players.Count (SimpleMemberAccessExpression)
-%8 = cmpi "slt", %5, %7 : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :39)
-cond_br %8, ^2, ^3 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :39)
-
-^2: // BinaryBranchBlock
-%9 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :86 :20) // Not a variable of known type: _players
-%10 = cbde.load %4 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :86 :29)
-%11 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :86 :20) // _players[currentIndex] (ElementAccessExpression)
-%12 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :86 :20) // _players[currentIndex].Username (SimpleMemberAccessExpression)
-%13 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :86 :59) // Not a variable of known type: playerUsername
-%14 = cbde.unknown : i1 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :86 :20) // _players[currentIndex].Username.Equals(playerUsername) (InvocationExpression)
-cond_br %14, ^4, ^5 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :86 :20)
-
-^4: // SimpleBlock
-%15 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :88 :20) // Not a variable of known type: _players
-%16 = cbde.load %4 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :88 :29)
-%17 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :88 :20) // _players[currentIndex] (ElementAccessExpression)
-%18 = cbde.unknown : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :88 :20) // _players[currentIndex].ExpulsionVotes (SimpleMemberAccessExpression)
-%19 = cbde.unknown : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :88 :20) // Inc/Decrement of unknown identifier
-%20 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :89 :39) // Not a variable of known type: _players
-%21 = cbde.load %4 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :89 :48)
-%22 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :89 :39) // _players[currentIndex] (ElementAccessExpression)
-%23 = cbde.unknown : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :89 :39) // _players[currentIndex].ExpulsionVotes (SimpleMemberAccessExpression)
-cbde.store %23, %2 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :89 :20)
-br ^5
-
-^5: // SimpleBlock
-%24 = cbde.load %4 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :70)
-%25 = constant 1 : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :70)
-%26 = addi %24, %25 : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :70)
-cbde.store %26, %4 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :84 :70)
-br ^1
-
-^3: // JumpBlock
-%27 = cbde.load %2 : memref<i32> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :92 :19)
-return %27 : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :92 :12)
-
-^6: // ExitBlock
-cbde.unreachable
-
-}
-func @_MemoryGame.MemoryGameService.DataTransferObjects.MatchDto.RemovePlayer$string$(none) -> () loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :95 :8) {
-^entry (%_playerUsername : none):
-%0 = cbde.alloca none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :95 :33)
-cbde.store %_playerUsername, %0 : memref<none> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :95 :33)
+%0 = cbde.alloca none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :96 :33)
+cbde.store %_playerUsername, %0 : memref<none> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :96 :33)
 br ^0
 
 ^0: // SimpleBlock
-%1 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :97 :43) // this (ThisExpression)
-%2 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :97 :58) // Not a variable of known type: playerUsername
-%3 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :97 :43) // this.GetPlayer(playerUsername) (InvocationExpression)
-%5 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :98 :12) // Not a variable of known type: _players
-%6 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :98 :28) // Not a variable of known type: playerToRemove
-%7 = cbde.unknown : i1 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :98 :12) // _players.Remove(playerToRemove) (InvocationExpression)
+%1 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :98 :43) // this (ThisExpression)
+%2 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :98 :58) // Not a variable of known type: playerUsername
+%3 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :98 :43) // this.GetPlayer(playerUsername) (InvocationExpression)
+%5 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :99 :12) // Not a variable of known type: _players
+%6 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :99 :28) // Not a variable of known type: playerToRemove
+%7 = cbde.unknown : i1 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGameService\\DataTransferObjects\\MatchDto.cs" :99 :12) // _players.Remove(playerToRemove) (InvocationExpression)
 br ^1
 
 ^1: // ExitBlock
 return
 
 }
+// Skipping function GetPlyerWithActiveTurn(), it contains poisonous unsupported syntaxes
+

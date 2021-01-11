@@ -200,15 +200,21 @@ cond_br %13, ^1, ^2 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\Mem
 
 ^1: // SimpleBlock
 %14 = constant 2 : i32 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\Match.xaml.cs" :223 :44)
-br ^3
+br ^2
 
-^2: // SimpleBlock
+^2: // BinaryBranchBlock
+%15 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\Match.xaml.cs" :226 :16) // Not a variable of known type: cardPairDto
+%16 = cbde.unknown : i1 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\Match.xaml.cs" :226 :16) // cardPairDto.BothCardsAreEqual (SimpleMemberAccessExpression)
+%17 = cbde.unknown : i1 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\Match.xaml.cs" :226 :15) // !cardPairDto.BothCardsAreEqual (LogicalNotExpression)
+cond_br %17, ^3, ^4 loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\Match.xaml.cs" :226 :15)
+
+^3: // SimpleBlock
 // Skipped because MethodDeclarationSyntax or ClassDeclarationSyntax or NamespaceDeclarationSyntax: FlipBothCardsAgain
-%15 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\Match.xaml.cs" :228 :35) // Not a variable of known type: cardPairDto
-%16 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\Match.xaml.cs" :228 :16) // FlipBothCardsAgain(cardPairDto) (InvocationExpression)
-br ^3
+%18 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\Match.xaml.cs" :228 :35) // Not a variable of known type: cardPairDto
+%19 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\Match.xaml.cs" :228 :16) // FlipBothCardsAgain(cardPairDto) (InvocationExpression)
+br ^4
 
-^3: // ExitBlock
+^4: // ExitBlock
 return
 
 }

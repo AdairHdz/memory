@@ -5,9 +5,9 @@ IC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Card.csutf-
 MC:\Users\Adair Hernández\source\repos\memory\DataAccess\MemoryGameContext.csutf-8S
 JC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Match.csutf-8T
 KC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Sesion.csutf-8T
-KC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Player.csutf-8p
-gC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101100503290_AddedDateToMatch.csutf-8{
-pC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101100503290_AddedDateToMatch.designer.csutf-8]
+KC:\Users\Adair Hernández\source\repos\memory\DataAccess\Entities\Player.csutf-8m
+dC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101110153060_FinalDatabase.csutf-8x
+mC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\202101110153060_FinalDatabase.designer.csutf-8]
 TC:\Users\Adair Hernández\source\repos\memory\DataAccess\Migrations\Configuration.csutf-8\
 SC:\Users\Adair Hernández\source\repos\memory\DataAccess\Properties\AssemblyInfo.csutf-8c
 ZC:\Users\Adair Hernández\source\repos\memory\DataAccess\Repositories\AccountRepository.csutf-8d

@@ -12,9 +12,10 @@ JC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Match.cs 8
 KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Sesion.cs 8r	
 xÇa
 KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Player.cs 8r
-á
-gC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202101100503290_AddedDateToMatch.cs 8r	
-Ç	¬
+Ä
+dC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202101110153060_FinalDatabase.cs 8rU	
+ !#$%&'()*+,./012345678:;<=>?@ABCDEFGIKLMNOPQRSTUVWXYZ[\Ç8
+!#%'()*,.0234678:<>?@ACDEFGMNOPQRSTUVWXY¬
 TC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\Configuration.cs 8r\	
  !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_Ç
 w

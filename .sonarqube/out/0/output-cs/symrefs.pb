@@ -111,15 +111,32 @@ KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Player.cs
 
  "
 
- £
-gC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202101100503290_AddedDateToMatch.cs
+ ¨
+dC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202101110153060_FinalDatabase.cs
 
- )
+ &
 
- 
-		- .		2 3
+ P
+ ' (# $# $  + ,* +( )
+ ! "
++ ,0 1
+  
+ ' (  !
+!! !!! "2
+%% ''% &((  ))$ %**( )
+,, ,,! "(
+00 22! "33% &44% &
+66 66! "
+77- .772 3
+88 88 2
+<< >>" #??  @@% &AA' (
+CC CC! "
+DD- .DD2 3
+EE+ ,EE0 1
+FF FF 
+GG GG 
 
- !∆
+KK !∆
 TC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\Configuration.cs
 
  '

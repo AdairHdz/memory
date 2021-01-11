@@ -82,14 +82,6 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         public int AddExpelVote(string playerUsername)
         {
             int playerExpelVotes = 0;
-            /*for (int currentIndex = 0; currentIndex < _players.Count; currentIndex++)
-            {
-                if (_players[currentIndex].Username.Equals(playerUsername))
-                {
-                    _players[currentIndex].ExpulsionVotes++;
-                    playerExpelVotes = _players[currentIndex].ExpulsionVotes;
-                }
-            }*/
             foreach (var player in _players)
             {
                 if (player.Username.Equals(playerUsername))
