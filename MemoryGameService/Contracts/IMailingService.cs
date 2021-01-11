@@ -7,6 +7,6 @@ namespace MemoryGameService.Contracts
     public interface IMailingService
     {
         [OperationContract]
-        void SendVerificationToken(VerificationTokenInfoDto verificationTokenInfo);
+        void SendVerificationToken(TokenInfoDto verificationTokenInfo);
     }
 }

@@ -97,14 +97,23 @@ namespace MemoryGame
 
         private void VoteToExpelPlayer()
         {
-            string selectedPlayer = ExpelPlayerDataGrid.SelectedItem.ToString();
-            ExpelVoteDto expelVote = new ExpelVoteDto()
+            var selectedPlayer = ExpelPlayerDataGrid.SelectedItem;
+            if(selectedPlayer != null)
             {
-                Host = MatchHost,
-                UsernameOfExpelPlayer = selectedPlayer,
-                UsernameOfVoterPlayer = PlayerUsername
-            };
-            _matchServiceClient.ExpelPlayer(expelVote);
+                string usernameOfSelectedPlayer = selectedPlayer.ToString();
+                ExpelVoteDto expelVote = new ExpelVoteDto()
+                {
+                    Host = MatchHost,
+                    UsernameOfExpelPlayer = usernameOfSelectedPlayer,
+                    UsernameOfVoterPlayer = PlayerUsername
+                };
+                _matchServiceClient.ExpelPlayer(expelVote);
+            }
+            else
+            {
+                MessageBox.Show(Properties.Langs.Resources.SelectPlayerToBeExpeled);
+            }
+
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)

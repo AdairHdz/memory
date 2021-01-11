@@ -140,46 +140,52 @@ func @_MemoryGame.ActivationToken.SendNewVerificationToken$$() -> () loc("C:\\Us
 br ^0
 
 ^0: // SimpleBlock
-%0 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :137 :61) // new VerificationTokenInfoDto()              {                  Name = _username,                  EmailAddress = _emailAddress,                  VerificationToken = _newToken              } (ObjectCreationExpression)
+%0 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :137 :61) // new VerificationTokenInfoDto()              {                  Name = _username,                  EmailAddress = _emailAddress,                  VerificationToken = _newToken,                  Subject = Properties.Langs.Resources.Welcome,                  Body = Properties.Langs.Resources.VerificationToken              } (ObjectCreationExpression)
 %1 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :139 :23) // Not a variable of known type: _username
 %2 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :140 :31) // Not a variable of known type: _emailAddress
 %3 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :141 :36) // Not a variable of known type: _newToken
+// Skipped because MethodDeclarationSyntax or ClassDeclarationSyntax or NamespaceDeclarationSyntax: Properties
+%4 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :142 :26) // Properties.Langs.Resources (SimpleMemberAccessExpression)
+%5 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :142 :26) // Properties.Langs.Resources.Welcome (SimpleMemberAccessExpression)
+// Skipped because MethodDeclarationSyntax or ClassDeclarationSyntax or NamespaceDeclarationSyntax: Properties
+%6 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :143 :23) // Properties.Langs.Resources (SimpleMemberAccessExpression)
+%7 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :143 :23) // Properties.Langs.Resources.VerificationToken (SimpleMemberAccessExpression)
 // Skipped because MethodDeclarationSyntax or ClassDeclarationSyntax or NamespaceDeclarationSyntax: TokenManager
-%5 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :144 :47) // Not a variable of known type: verificationTokenInfo
-%6 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :144 :12) // TokenManager.SendVerificationToken(verificationTokenInfo) (InvocationExpression)
+%9 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :146 :47) // Not a variable of known type: verificationTokenInfo
+%10 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :146 :12) // TokenManager.SendVerificationToken(verificationTokenInfo) (InvocationExpression)
 br ^1
 
 ^1: // ExitBlock
 return
 
 }
-func @_MemoryGame.ActivationToken.BackButtonClicked$object.System.Windows.RoutedEventArgs$(none, none) -> () loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :147 :8) {
+func @_MemoryGame.ActivationToken.BackButtonClicked$object.System.Windows.RoutedEventArgs$(none, none) -> () loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :149 :8) {
 ^entry (%_sender : none, %_e : none):
-%0 = cbde.alloca none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :147 :39)
-cbde.store %_sender, %0 : memref<none> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :147 :39)
-%1 = cbde.alloca none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :147 :54)
-cbde.store %_e, %1 : memref<none> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :147 :54)
+%0 = cbde.alloca none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :149 :39)
+cbde.store %_sender, %0 : memref<none> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :149 :39)
+%1 = cbde.alloca none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :149 :54)
+cbde.store %_e, %1 : memref<none> loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :149 :54)
 br ^0
 
 ^0: // SimpleBlock
 // Skipped because MethodDeclarationSyntax or ClassDeclarationSyntax or NamespaceDeclarationSyntax: GoToMainWindow
-%2 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :149 :12) // GoToMainWindow() (InvocationExpression)
+%2 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :151 :12) // GoToMainWindow() (InvocationExpression)
 br ^1
 
 ^1: // ExitBlock
 return
 
 }
-func @_MemoryGame.ActivationToken.GoToMainWindow$$() -> () loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :152 :8) {
+func @_MemoryGame.ActivationToken.GoToMainWindow$$() -> () loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :154 :8) {
 ^entry :
 br ^0
 
 ^0: // SimpleBlock
-%0 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :154 :40) // new MainWindow() (ObjectCreationExpression)
-%2 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :155 :12) // Not a variable of known type: mainWindowView
-%3 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :155 :12) // mainWindowView.Show() (InvocationExpression)
-%4 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :156 :12) // this (ThisExpression)
-%5 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :156 :12) // this.Close() (InvocationExpression)
+%0 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :156 :40) // new MainWindow() (ObjectCreationExpression)
+%2 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :157 :12) // Not a variable of known type: mainWindowView
+%3 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :157 :12) // mainWindowView.Show() (InvocationExpression)
+%4 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :158 :12) // this (ThisExpression)
+%5 = cbde.unknown : none loc("C:\\Users\\Adair Hernández\\source\\repos\\memory\\MemoryGame\\Views\\ActivationToken.xaml.cs" :158 :12) // this.Close() (InvocationExpression)
 br ^1
 
 ^1: // ExitBlock

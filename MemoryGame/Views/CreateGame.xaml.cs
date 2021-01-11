@@ -27,6 +27,41 @@ namespace MemoryGame
             _username = Sesion.GetSesion.Username;            
         }
 
+        private void LoadCardDecksInfo()
+        {
+            try
+            {
+                MemoryGameService.CardDeckRetrieverServiceClient cardDeckRetrieverServiceClient =
+                new MemoryGameService.CardDeckRetrieverServiceClient();
+
+                MemoryGameService.DataTransferObjects.CardDeckInfoDto[] cardDecksInfo =
+                    cardDeckRetrieverServiceClient.GetCardDecksInfo();
+
+                for (int index = 0; index < cardDecksInfo.Length; index++)
+                {
+                    _cardDecksInfoList.Add(cardDecksInfo[index]);
+                }
+                CardDeckComboBox.ItemsSource = _cardDecksInfoList;
+                CardDeckComboBox.DisplayMemberPath = "CardDeckName";
+                CardDeckComboBox.SelectedValuePath = "CardDeckId";
+            }
+            catch (EndpointNotFoundException endpointNotFoundException)
+            {
+                _logger.Fatal(endpointNotFoundException);
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+        }
+
         public void CreateGameButtonClicked(object sender, RoutedEventArgs e)
         {
             MemoryGameService.DataTransferObjects.CardDeckInfoDto cardDeckForMatch =
@@ -60,11 +95,6 @@ namespace MemoryGame
                     _logger.Fatal(timeoutException);
                     MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
                 }
-                catch (FaultException<MemoryGame.MemoryGameService.Faults.CardDeckRetrievingFault> cardDeckRetrievingFault)
-                {
-                    _logger.Fatal(cardDeckRetrievingFault);
-                    MessageBox.Show(Properties.Langs.Resources.CardDeckRetrievingError);
-                }
                 catch (CommunicationException communicationException)
                 {
                     _logger.Fatal(communicationException);
@@ -81,31 +111,13 @@ namespace MemoryGame
                 MaxNumberOfPlayers = _numberOfPlayersDesiredForMatch,
                 Host = _username,
                 HasStarted = false,
-                CardDeckDto = _cardDeck,
-                TotalPairs = 0
+                CardDeckDto = _cardDeck
                 };
 
             MemoryGameService.MatchCreationServiceClient _matchCreationServiceClient =
                 new MemoryGameService.MatchCreationServiceClient();
 
             _matchCreationServiceClient.CreateNewMatch(_gameMatch);
-        }
-
-        private void LoadCardDecksInfo()
-        {
-            MemoryGameService.CardDeckRetrieverServiceClient cardDeckRetrieverServiceClient =
-                new MemoryGameService.CardDeckRetrieverServiceClient();
-
-            MemoryGameService.DataTransferObjects.CardDeckInfoDto[] cardDecksInfo =
-                cardDeckRetrieverServiceClient.GetCardDecksInfo();
-
-            for(int index = 0; index < cardDecksInfo.Length; index++)
-            {
-                _cardDecksInfoList.Add(cardDecksInfo[index]);
-            }
-            CardDeckComboBox.ItemsSource = _cardDecksInfoList;
-            CardDeckComboBox.DisplayMemberPath = "CardDeckName";
-            CardDeckComboBox.SelectedValuePath = "CardDeckId";
         }
 
         private void LoadCardDeck()

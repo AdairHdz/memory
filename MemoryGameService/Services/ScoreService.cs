@@ -2,11 +2,10 @@
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
-using MemoryGame.MemoryGameService.Faults;
 using MemoryGameService.Contracts;
-using System;
 using System.Collections.Generic;
-using System.ServiceModel;
+using System.Data.Entity.Core;
+using System.Data.SqlClient;
 
 namespace MemoryGameService.Services
 {
@@ -28,7 +27,8 @@ namespace MemoryGameService.Services
         /// </summary>
         /// <param name="numberOfPlayersToBeRetrieved">The number of players you want to recover</param>
         /// <returns>A list of the specified number of top-scoring players.</returns>
-        /// <exception cref="Exception">Thrown when a default exception is catched.</exception>
+        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
+        /// <exception cref="EntityException">Thrown when there is no database.</exception>
         List<PlayerScoreDTO> IScoreService.GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -49,12 +49,19 @@ namespace MemoryGameService.Services
 
                 return playersWithBestScores;
             }
-            catch (Exception e)
+            catch (SqlException sqlException)
             {
-                Console.WriteLine(e);
-                Console.ReadLine();
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("An exception was thrown while trying to get a collection of Account " +
+                    "entities with and their Player info. " +
+                    "Method GetPlayersWithBestScore, line 40", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method GetPlayersWithBestScore, line 40", entityException);
+                throw;
             }
             finally
             {

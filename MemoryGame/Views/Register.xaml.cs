@@ -54,7 +54,7 @@ namespace MemoryGame
 
         private void GenerateToken()
         {
-            _verificationToken = TokenManager.GenerateVerificationToken();
+            _verificationToken = TokenManager.GenerateToken();
         }
 
         private void RegisterButtonClicked(object sender, RoutedEventArgs e)
@@ -91,33 +91,20 @@ namespace MemoryGame
 
         private void RegisterPlayer()
         {
-            bool emailAddressIsAvailable = false;
-            bool usernameIsAvailable = false;
-
-            if (EmailAddressIsAvailable())
-            {
-                emailAddressIsAvailable = true;
-            }
-            else
+            if (!EmailAddressIsAvailable())
             {
                 MessageBox.Show(Properties.Langs.Resources.EmailAddressIsTaken);
             }
-
-            if (UsernameIsAvailable())
-            {
-                usernameIsAvailable = true;
-            }
-            else
+            else if (!UsernameIsAvailable())
             {
                 MessageBox.Show(Properties.Langs.Resources.UsernameIsTaken);
             }
-            
-            if(emailAddressIsAvailable && usernameIsAvailable)
+            else
             {
                 GenerateToken();
-                if (PlayerWasSuccessfullyRegistered())                
+                if (PlayerWasSuccessfullyRegistered())
                 {
-                    SendVerificationToken();
+                    SendActivationToken();
                     GoToActivationTokenWindow();
                 }
                 else
@@ -133,17 +120,18 @@ namespace MemoryGame
             return _ruleSet.AllValidationRulesHavePassed();
         }
 
-        private void SendVerificationToken()
+        private void SendActivationToken()
         {
-
-            VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+            TokenInfoDto verificationTokenInfo = new TokenInfoDto()
             {
                 Name = _username,
                 EmailAddress = _emailAddress,
-                VerificationToken = _verificationToken
+                Token = _verificationToken,
+                Subject = Properties.Langs.Resources.Welcome,
+                Body = Properties.Langs.Resources.VerificationToken
             };
 
-            TokenManager.SendVerificationToken(verificationTokenInfo);
+            TokenManager.SendToken(verificationTokenInfo);
         }
 
         private void CancelButtonClicked(object sender, RoutedEventArgs e)
@@ -174,14 +162,13 @@ namespace MemoryGame
             MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
                 new MemoryGameService.PlayerRegistryServiceClient();
 
-            MemoryGameService.DataTransferObjects.PlayerDTO playerDTO =
-                new MemoryGameService.DataTransferObjects.PlayerDTO()
-                {
-                    Username = _username,
-                    EmailAddress = _emailAddress,
-                    Password = encryptedPassword,
-                    VerificationToken = _verificationToken
-                };
+            PlayerDTO playerDTO = new PlayerDTO()
+            {
+                Username = _username,
+                EmailAddress = _emailAddress,
+                Password = encryptedPassword,
+                VerificationToken = _verificationToken
+            };
 
             bool playerWasSuccessfullyRegistered = playerRegistryServiceClient.RegisterNewPlayer(playerDTO, salt);
             return playerWasSuccessfullyRegistered;

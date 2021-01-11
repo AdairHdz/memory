@@ -32,7 +32,9 @@ namespace MemoryGameService.Services
         /// </summary>
         /// <param name="matchHost">Name of the player who created the game.</param>
         /// <returns>True if the player can join the match and false if not.</returns>
-        /// <exception cref="FaultException">Thrown when there is a null gameMath.</exception>
+        /// <exception cref="MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault">
+        /// Thrown when a player tries to access to a match that does not exist anymore.
+        /// </exception>
         public bool CanJoin(string matchHost)
         {
             MatchDto gameMatch = GetMatch(matchHost);
@@ -40,7 +42,7 @@ namespace MemoryGameService.Services
             {
                 MatchAccessDeniedFault matchAccessDeniedFault = new MatchAccessDeniedFault()
                 {
-                    Details = "This error occured at the method CanJoin on class MatchDiscoveryService.cs"
+                    Details = "The match does not exist."
                 };
                 throw new FaultException<MatchAccessDeniedFault>(matchAccessDeniedFault);
             }
@@ -48,12 +50,12 @@ namespace MemoryGameService.Services
             {
                 Lobby lobby = gameMatch.Lobby;
                 IList<PlayerInLobby> playersConnectedToLobby = lobby.GetPlayersConnectedToLobby();
-                int numberOfPlayersConnectedToMatch = playersConnectedToLobby.Count;
+                int numberOfPlayersConnectedToLobby = playersConnectedToLobby.Count;
                 int numberOfPlayersRequired = gameMatch.MaxNumberOfPlayers;
                 bool matchHasStarted = gameMatch.HasStarted;
                 bool ThereIsSpaceForAnotherPlayer = false;
 
-                if (numberOfPlayersConnectedToMatch < numberOfPlayersRequired)
+                if (numberOfPlayersConnectedToLobby < numberOfPlayersRequired)
                 {
                     ThereIsSpaceForAnotherPlayer = true;
                 }
@@ -64,8 +66,6 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-
-
         }
 
         /// <summary>

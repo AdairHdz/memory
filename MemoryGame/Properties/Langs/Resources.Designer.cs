@@ -538,6 +538,15 @@ namespace MemoryGame.Properties.Langs {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Recuperación de contraseña.
+        /// </summary>
+        public static string PasswordRecovery {
+            get {
+                return ResourceManager.GetString("PasswordRecovery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ocurrió un error al intentar restablecer su contraseña. Por favor, intente más tarde.
         /// </summary>
         public static string PasswordRecoveryError {
@@ -597,6 +606,15 @@ namespace MemoryGame.Properties.Langs {
         public static string RecoverPasswordMessage {
             get {
                 return ResourceManager.GetString("RecoverPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Este es tu token de recuperación.
+        /// </summary>
+        public static string RecoveryToken {
+            get {
+                return ResourceManager.GetString("RecoveryToken", resourceCulture);
             }
         }
         
@@ -669,6 +687,15 @@ namespace MemoryGame.Properties.Langs {
         public static string ScoreTable {
             get {
                 return ResourceManager.GetString("ScoreTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor seleccione un jugador para poder votar..
+        /// </summary>
+        public static string SelectPlayerToBeExpeled {
+            get {
+                return ResourceManager.GetString("SelectPlayerToBeExpeled", resourceCulture);
             }
         }
         

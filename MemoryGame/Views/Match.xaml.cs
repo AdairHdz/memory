@@ -15,7 +15,9 @@ namespace MemoryGame.Views
     /// </summary>
     public partial class Match : Window, MemoryGameService.IMatchServiceCallback
     {
-        
+        public string[] Players { get; set; }
+        public int NumberOfPlayers { get; set; }
+        public string MatchHost { get; set; }
         private InstanceContext _context = null;
         private MatchServiceClient _matchServiceClient;
         public CardDeckDTO CardDeck { get; set; }
@@ -23,11 +25,9 @@ namespace MemoryGame.Views
         private int _numberOfMovementsAllowed;
         private IList<ImageCard> _cardsFlippedInCurrentTurn;
         private bool _playerHasFormedAPair;
-        public string[] Players { get; set; }
-        public int NumberOfPlayers { get; set; }
-        public string MatchHost { get; set; }
         private bool _windowIsBeingClosedByTheCloseButton;
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("Match.xaml.cs");
+
         public Match()
         {
             InitializeComponent();
@@ -59,8 +59,8 @@ namespace MemoryGame.Views
                 CardDeck = CardDeck,
                 NumberOfColumns = 5
             };
-            gameBoardDrawer.Draw();
-            gameBoardDrawer.SetEventOnCardClicked(GetClickedCard);
+               gameBoardDrawer.Draw();
+               gameBoardDrawer.SetEventOnCardClicked(GetClickedCard);
         }
         
         private void GetClickedCard(object sender, EventArgs e)
@@ -198,8 +198,7 @@ namespace MemoryGame.Views
                 catch (CommunicationException communicationException)
                 {
                     _logger.Fatal(communicationException);
-                }
-                
+                }                
             }
         }
 

@@ -5,6 +5,8 @@ using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
+using System.Data.SqlClient;
 using System.ServiceModel;
 
 namespace MemoryGameService.Services
@@ -46,17 +48,14 @@ namespace MemoryGameService.Services
     /// <term>GetUsernamesOfPlayersConnectedToMatch</term>
     /// <description>Gets a list of the names of the players connected to the match.</description>
     /// </item>
-    /// </list>
     /// <item>
     /// <term>GetPlayersVoted</term>
     /// <description>Get a list of the names of the players a player has already voted for.</description>
     /// </item>
-    /// </list>
     /// <item>
     /// <term>ChangeTurn</term>
     /// <description>Make a turn assignment for a new player.</description>
     /// </item>
-    /// </list>
     /// <item>
     /// <term>RemovePairs</term>
     /// <description>Subtract an amount from the total pairs formed in the match.</description>
@@ -178,10 +177,20 @@ namespace MemoryGameService.Services
                     unitOfWork.Matches.Add(matchToBeSaved);
                     unitOfWork.Complete();
                 }
-                catch (Exception e)
+                catch (SqlException sqlException)
                 {
-                    Console.WriteLine(e);
-                    Console.ReadLine();
+                    _logger.Fatal("MatchService.cs: An exception was thrown while trying " +
+                        "to update the score of the players or while trying to register " +
+                        " the match. The transaction could not be completed. " +
+                        "Method NotifyMatchHasEnded, line 181", sqlException);
+                    throw;
+                }
+                catch (EntityException entityException)
+                {
+                    _logger.Fatal("MatchService.cs: An exception was thrown while trying to access the " +
+                        " database. It is possible that the database is corrupted or that it does not exist. " +
+                        "Method NotifyMatchHasEnded, line 181", entityException);
+                    throw;
                 }
                 finally
                 {

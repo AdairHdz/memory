@@ -82,9 +82,8 @@ namespace MemoryGame
             if (token == "")
             {
                 return false;
-            }
-            
-            return _accountVerificationServiceClient.VerifyToken(_emailAddress, token);
+            }            
+            return _accountVerificationServiceClient.VerifyActivationToken(_emailAddress, token);
         }
 
         private bool AccountWasSuccessfullyVerified()
@@ -97,9 +96,8 @@ namespace MemoryGame
             try
             {
                 GenerateNewToken();
-                bool newTokenWasAssigned = AssignNewVerificationToken();
-
-                if (newTokenWasAssigned)
+                
+                if (AssignNewVerificationToken())
                 {
                     SendNewVerificationToken();
                     MessageBox.Show(Properties.Langs.Resources.NewCodeSentMessage);
@@ -121,36 +119,33 @@ namespace MemoryGame
 
         private void GenerateNewToken()
         {
-            string newToken = TokenManager.GenerateVerificationToken();
+            string newToken = TokenManager.GenerateToken();
             _newToken = newToken;
         }
 
         private bool AssignNewVerificationToken()
         {
             bool newVerificationTokenWasAssignedSuccessfully =
-                _accountVerificationServiceClient.AssignNewVerificationToken(_emailAddress, _newToken);
+                _accountVerificationServiceClient.AssignNewActivationToken(_emailAddress, _newToken);
 
             return newVerificationTokenWasAssignedSuccessfully;
         }
 
         private void SendNewVerificationToken()
         {
-            VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+            TokenInfoDto verificationTokenInfo = new TokenInfoDto()
             {
                 Name = _username,
                 EmailAddress = _emailAddress,
-                VerificationToken = _newToken
+                Token = _newToken,
+                Subject = Properties.Langs.Resources.Welcome,
+                Body = Properties.Langs.Resources.VerificationToken
             };
 
-            TokenManager.SendVerificationToken(verificationTokenInfo);            
+            TokenManager.SendToken(verificationTokenInfo);            
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)
-        {
-            GoToMainWindow();
-        }
-
-        private void GoToMainWindow()
         {
             MainWindow mainWindowView = new MainWindow();
             mainWindowView.Show();

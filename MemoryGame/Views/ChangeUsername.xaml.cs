@@ -38,15 +38,15 @@ namespace MemoryGame
         {
             if (string.IsNullOrEmpty(TextBoxNewUsername.Text))
             {
-                TextBoxNewUsername.Visibility = System.Windows.Visibility.Collapsed;
-                waterMarkText.Visibility = System.Windows.Visibility.Visible;
+                TextBoxNewUsername.Visibility = Visibility.Collapsed;
+                waterMarkText.Visibility = Visibility.Visible;
             }
         }
 
         private void waterMarkText_GotFocus(object sender, RoutedEventArgs e)
         {
-            waterMarkText.Visibility = System.Windows.Visibility.Collapsed;
-            TextBoxNewUsername.Visibility = System.Windows.Visibility.Visible;
+            waterMarkText.Visibility = Visibility.Collapsed;
+            TextBoxNewUsername.Visibility = Visibility.Visible;
             TextBoxNewUsername.Focus();
         }
 
@@ -128,9 +128,9 @@ namespace MemoryGame
         }
 
         private bool UserNameWasChangedSuccessfully()
-        {            
-            MemoryGameService.AccountModifiabilityServiceClient accountModifiabilityServiceClient =
-                new MemoryGameService.AccountModifiabilityServiceClient();
+        {
+            AccountModifiabilityServiceClient accountModifiabilityServiceClient =
+                new AccountModifiabilityServiceClient();
 
             return accountModifiabilityServiceClient.ChangeUsername(_userEmailAddress, _newUsername);            
         }

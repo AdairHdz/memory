@@ -28,10 +28,7 @@ bC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\IComm
 \C:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\IMailingService.csutf-8c
 ZC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\IMatchService.csutf-8c
 ZC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\IScoreService.csutf-8e
-\C:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\ITokenGenerator.csutf-8j
-aC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Faults\CardDeckRetrievingFault.csutf-8n
-eC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Faults\DatabaseConnectionLostFault.csutf-8c
-ZC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Faults\DataStorageFault.csutf-8i
+\C:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Contracts\ITokenGenerator.csutf-8i
 `C:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Faults\MatchAccessDeniedFault.csutf-8g
 ^C:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Faults\NonExistentUserFault.csutf-8]
 TC:\Users\Adair Hernández\source\repos\memory\MemoryGameService\Faults\TypedFault.csutf-8^

@@ -64,11 +64,7 @@ namespace MemoryGameService.Services
                 Lobby lobby = match.Lobby;
                 lobby.AddPlayerToLobby(host, username);
                 lobby.NotifyNewPlayerEnteredLobby(username);
-            }
-            else
-            {
-                //Here we could log the error
-            }            
+            }        
         }
 
         /// <summary>
@@ -92,7 +88,7 @@ namespace MemoryGameService.Services
                 {
                     lobby.NotifyOnePlayerLeftLobby(username);
                 }
-            }            
+            }
         }
 
         /// <summary>

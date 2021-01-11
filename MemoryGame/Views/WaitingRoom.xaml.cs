@@ -36,7 +36,7 @@ namespace MemoryGame
             DetermineIfPlayerIsHost();
             if (!_thisPlayerIsHost)
             {
-                StarButton.Visibility = System.Windows.Visibility.Collapsed;
+                StarButton.Visibility = Visibility.Collapsed;
             }
 
             try

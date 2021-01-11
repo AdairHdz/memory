@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using MemoryGame.MemoryGameService.Faults;
 using System.ServiceModel;
 using System;
+using System.Data.Entity.Core;
 
 namespace MemoryGameService.Services
 {
@@ -61,22 +62,23 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(memoryGameContext);
             try
             {
-                var transaction = memoryGameContext.Database.BeginTransaction();
                 unitOfWork.Accounts.Add(newAccount);
                 unitOfWork.Players.Add(newPlayer);
                 int rowsAffected = unitOfWork.Complete();
-                transaction.Commit();
                 return rowsAffected > 0;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("PlayerRegistryService.cs: An exception was thrown while trying to register both " +
+                    "Account and Player entities. " +
+                     "Method RegisterNewPlayer, line 67", sqlException);
+                throw;
             }
-            catch (Exception e)
+            catch (EntityException entityException)
             {
-                Console.WriteLine(e);
-                Console.ReadLine();
+                _logger.Fatal("PlayerRegistryService.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method  RegisterNewPlayer, line 67", entityException);
                 throw;
             }
             finally
@@ -103,10 +105,19 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-            catch(SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("PlayerRegistryService.cs: An exception was thrown while trying to get " +
+                    "an Account using its primary key (emailAddress). " +
+                     "Method EmailAddressIsAvailable, line 101", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method EmailAddressIsAvailable, line 101", entityException);
+                throw;
             }
             finally
             {
@@ -132,10 +143,19 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("PlayerRegistryService.cs: An exception was thrown while trying to " +
+                    "find the first occurence of an Account with the username provided. " +
+                     "Method UsernameIsAvailable, line 139", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method UsernameIsAvailable, line 139", entityException);
+                throw;
             }
             finally
             {

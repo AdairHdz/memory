@@ -1,9 +1,5 @@
 ﻿using MimeKit;
 using MailKit.Net.Smtp;
-using System;
-using System.Net.Sockets;
-using MailKit;
-using System.Security.Authentication;
 
 namespace MemoryGameService.Utilities
 {
@@ -19,7 +15,7 @@ namespace MemoryGameService.Utilities
         private MailboxAddress _receiver;
         private string _subject;
         private SmtpClient _client;
-
+        private readonly log4net.ILog _logger = log4net.LogManager.GetLogger("MailTemplate.cs");
         /// <summary>
         /// The <c>MailTemplate</c> constructor.
         /// </summary>
@@ -62,21 +58,10 @@ namespace MemoryGameService.Utilities
         /// </summary>
         public void Send()
         {
-            try
-            {
-                _client.Connect("smtp.gmail.com", 587, false);
-                _client.Authenticate("memory.game.lis@gmail.com", "cfalpwtqeeitkhsk");
-                _client.Send(_content);
-                _client.Disconnect(true);
-            }
-            catch (SocketException)
-            {
-
-            }
-            catch (ProtocolException)
-            {
-
-            }
+            _client.Connect("smtp.gmail.com", 587, false);
+            _client.Authenticate("memory.game.lis@gmail.com", "cfalpwtqeeitkhsk");
+            _client.Send(_content);
+            _client.Disconnect(true);
         }
     }
 }

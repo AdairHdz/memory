@@ -57,14 +57,6 @@ namespace MemoryGame
                 {
                     LoginUser();
                 }
-                catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
-                {
-                    MessageBox.Show("El usuario no existe");
-                }
-                catch (FaultException<MemoryGameService.Faults.DatabaseConnectionLostFault>)
-                {
-                    MessageBox.Show("Error con la bd");
-                }
                 catch (EndpointNotFoundException)
                 {
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
@@ -86,10 +78,8 @@ namespace MemoryGame
             }
         }
 
-
         public string GetUserEmailAdress()
-        {          
-            
+        {                      
             string username = TextBoxUsername.Text;
             string emailAddress = _accessibilityServiceClient.GetUserEmailAddress(username);
             return emailAddress;
@@ -122,17 +112,14 @@ namespace MemoryGame
         {
             BCryptHashGenerator bCryptHashGenerator = new BCryptHashGenerator();
             string salt = GetPasswordSalt();
-            string encryptedPassword = bCryptHashGenerator.GenerateEncryptedString(_password, salt);
-            AccessibilityServiceClient accessibilityServiceClient = new AccessibilityServiceClient();
-            bool hasAccessRights = accessibilityServiceClient.HasAccessRights(_username, encryptedPassword);
+            string encryptedPassword = bCryptHashGenerator.GenerateEncryptedString(_password, salt);            
+            bool hasAccessRights = _accessibilityServiceClient.HasAccessRights(_username, encryptedPassword);
             return hasAccessRights;
         }
 
         private string GetPasswordSalt()
         {
-            MemoryGameService.AccessibilityServiceClient accessibilityServiceClient =
-                new MemoryGameService.AccessibilityServiceClient();
-            string salt = accessibilityServiceClient.GetSalt(_username);
+            string salt = _accessibilityServiceClient.GetSalt(_username);
             return salt;
         }
 
@@ -167,8 +154,7 @@ namespace MemoryGame
         private void GoToActivationToken()
         {
             string emailAddress = GetUserEmailAdress();
-            ActivationToken activationTokenWindow =
-                new ActivationToken(emailAddress, TextBoxUsername.Text);
+            ActivationToken activationTokenWindow = new ActivationToken(emailAddress, TextBoxUsername.Text);
             activationTokenWindow.Show();
             this.Close();
         }

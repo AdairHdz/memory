@@ -8,7 +8,6 @@ namespace MemoryGameService.Contracts
     [ServiceContract]
     public interface ICardDeckRetrieverService
     {
-        [FaultContract(typeof(CardDeckRetrievingFault))]
         [OperationContract]
         CardDeckDTO GetCardDeckAndCards(int cardDeckId);
         

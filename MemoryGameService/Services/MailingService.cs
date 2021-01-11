@@ -1,6 +1,9 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.MemoryGameService.Faults;
 using MemoryGameService.Contracts;
 using MemoryGameService.Utilities;
+using System.Net.Sockets;
+using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
@@ -22,16 +25,33 @@ namespace MemoryGameService.Services
         /// </summary>
         /// <param name="verificationTokenInfo">Contains the name of the player, email to which the token will 
         /// be sent, the token to be sent.</param>
-        public void SendVerificationToken(VerificationTokenInfoDto verificationTokenInfo)
+        public void SendVerificationToken(TokenInfoDto verificationTokenInfo)
         {
             string name = verificationTokenInfo.Name;
             string emailAddress = verificationTokenInfo.EmailAddress;
-            string verificationToken = verificationTokenInfo.VerificationToken;
+            string verificationToken = verificationTokenInfo.Token;
+            string subjectOfTheMessage = verificationTokenInfo.Subject;
+            string bodyOfTheMessage = verificationTokenInfo.Body;
             MailTemplate mt = new MailTemplate();
             mt.SetReceiver(name, emailAddress);
-            mt.SetMessage("Bienvenido",
-                "Tu token de verificación de cuenta es: " + verificationToken);
-            mt.Send();
+            mt.SetMessage(subjectOfTheMessage, bodyOfTheMessage + ": " + verificationToken);
+            try
+            {
+                mt.Send();
+            }
+            catch (SocketException socketException)
+            {
+                _logger.Fatal("MailingService.cs: An error related to the socket occured while " +
+                    "trying to send the email. Check the credentials for " +
+                    "sending the email. Method Send, line 40", socketException);
+            }
+            catch (ProtocolException protocolException)
+            {
+                _logger.Fatal("MailingService.cs: An error related with the protocol occured while " +
+                    "trying to send the email. Check that you are using a valid " +
+                    "protocol for sending the emails.", protocolException);
+            }
+
         }
     }
 }

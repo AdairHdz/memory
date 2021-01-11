@@ -2,10 +2,9 @@
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
-using MemoryGame.MemoryGameService.Faults;
 using MemoryGameService.Contracts;
+using System.Data.Entity.Core;
 using System.Data.SqlClient;
-using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
@@ -33,6 +32,7 @@ namespace MemoryGameService.Services
         /// <param name="newUsername">New user name to be assigned.</param>
         /// <returns>True if modified successfully and false if not.</returns>
         /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
+        /// <exception cref="EntityException">Thrown when there is no database.</exception>
         public bool ChangeUsername(string emailAddress, string newUsername)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -47,10 +47,19 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("AccountModifiability.cs: An exception was thrown while trying to get an Account entity with " +
+                    "the specified primary key (emailAddress). Method ChangeUsername, line 41" +
+                    "from the database. ", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {                
+                _logger.Fatal("AccountModifiability.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method ChangeUsername, line 41", entityException);
+                throw;
             }
             finally
             {
@@ -65,6 +74,7 @@ namespace MemoryGameService.Services
         /// the new password and the encryption Salt.</param>
         /// <returns>True if modified successfully and false if not.</returns>
         /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
+        /// <exception cref="EntityException">Thrown when there is no database.</exception>
         public bool SetNewPassword(PasswordModificationCredentialsDto passwordModificationCredentials)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -74,19 +84,24 @@ namespace MemoryGameService.Services
             try
             {
                 Account account = unitOfWork.Accounts.Get(emailAddress);
-                if(account != null)
-                {
-                    account.Password = newPassword;
-                    account.Salt = salt;
-                    int rowsModified = unitOfWork.Complete();
-                    return rowsModified == 1;
-                }
-                return false;
+                account.Password = newPassword;
+                account.Salt = salt;
+                int rowsModified = unitOfWork.Complete();
+                return rowsModified == 1;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("AccountModifiability.cs: An exception was thrown while trying to get an Account entity with " +
+                    "the specified primary key (emailAddress) " +
+                    "from the database. Method SetNewPassword, line 89", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("AccountModifiability.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method SetNewPassword, line 86", entityException);
+                throw;
             }
             finally
             {

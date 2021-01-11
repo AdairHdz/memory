@@ -276,6 +276,9 @@
   <data name="PasswordIsInvalid" xml:space="preserve">
     <value>La contraseña que ingresó no es segura. Por favor, asegúrese de que su contraseña contiene al menos un caracter especial, una letra minúscula, una letra mayúscula y un número. Además, asegúrese de que su contraseña tiene entre 8 y 25 caracteres</value>
   </data>
+  <data name="PasswordRecovery" xml:space="preserve">
+    <value>Recuperación de contraseña</value>
+  </data>
   <data name="PasswordRecoveryError" xml:space="preserve">
     <value>Ocurrió un error al intentar restablecer su contraseña. Por favor, intente más tarde</value>
   </data>
@@ -296,6 +299,9 @@
   </data>
   <data name="RecoverPasswordMessage" xml:space="preserve">
     <value>Introduzca el email con el que se registró; se le proporcionará un código de verificación para recuperar su contraseña</value>
+  </data>
+  <data name="RecoveryToken" xml:space="preserve">
+    <value>Este es tu token de recuperación</value>
   </data>
   <data name="RecoveryTokenSendingError" xml:space="preserve">
     <value>Ocurrió un error al intentar asignarle un nuevo código de verificación. Por favor, intente restablecer su contraseña más tarde</value>
@@ -320,6 +326,9 @@
   </data>
   <data name="ScoreTable" xml:space="preserve">
     <value>Table de puntajes</value>
+  </data>
+  <data name="SelectPlayerToBeExpeled" xml:space="preserve">
+    <value>Por favor seleccione un jugador para poder votar.</value>
   </data>
   <data name="SendCode" xml:space="preserve">
     <value>Enviar código</value>

@@ -91,9 +91,8 @@ namespace MemoryGame
             else
             {
                 try
-                {
-                    bool playerCanJoinToGame = PlayerCanJoinToGame();
-                    if (playerCanJoinToGame)
+                {                    
+                    if (PlayerCanJoinToGame())
                     {
                         GoToWaitingRoom();
                     }
