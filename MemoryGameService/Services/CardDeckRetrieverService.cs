@@ -12,10 +12,40 @@ using System.Data.SqlClient;
 
 namespace MemoryGameService.Services
 {
+    /// <summary>
+    /// The <c>CardDeckRetriever</c> service.
+    /// Is used Used to retrieve card decks and shuffle cards for matches.
+    /// The operations it contains are:
+    /// <list type="bullet">
+    /// <item>
+    /// <term>GetCardDeckAndCards</term>
+    /// <description>Gets a specific card deck.</description>
+    /// </item>
+    /// <item>
+    /// <term>GetCardDecksInfo</term>
+    /// <description>Gets the information of all the card decks.</description>
+    /// </item>
+    /// <item>
+    /// <term>PopulateCardDeckDtoWithCards</term>
+    /// <description>Map a Card entity to a CardDto.</description>
+    /// </item>
+    /// <item>
+    /// <term>ShuffleCards</term>
+    /// <description>Shuffle the cards on a card deck for a game.</description>
+    /// </item>
+    /// </list>
+    /// </summary>
     public partial class MemoryGameService : ICardDeckRetrieverService
     {
         private CardDeckDTO _cardDeckDTO;
         private IEnumerable<Card> _cards;
+
+        /// <summary>
+        /// Gets a card deck registered in the database according to an id.
+        /// </summary>
+        /// <param name="cardDeckId">Id of card deck to be recovered.</param>
+        /// <returns>A CardDeckDto object with the information of the recovered card deck.</returns>
+        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
         public CardDeckDTO GetCardDeckAndCards(int cardDeckId)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -56,6 +86,12 @@ namespace MemoryGameService.Services
             }
         }
 
+        /// <summary>
+        /// Obtiene una lista con todos los card deck registrados en la base de datos.
+        /// </summary>
+        /// <returns>A list with CarDeckDto objects mapped from the card decks 
+        /// retrieved from the database.</returns>
+        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
         public IList<CardDeckInfoDto> GetCardDecksInfo()
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -81,6 +117,9 @@ namespace MemoryGameService.Services
             }      
         }
 
+        /// <summary>
+        /// Creates a CardDto object mapped from a Card entity.
+        /// </summary>
         private void PopulateCardDeckDtoWithCards()
         {
             foreach (Card actualCard in _cards)
@@ -90,6 +129,9 @@ namespace MemoryGameService.Services
             }
         }
 
+        /// <summary>
+        /// Randomly shuffle the cards on a card deck for a game.
+        /// </summary>
         private void ShuffleCards()
         {
             CardShuffler cardShuffler = new CardShuffler();

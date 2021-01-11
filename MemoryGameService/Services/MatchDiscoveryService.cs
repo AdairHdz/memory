@@ -6,8 +6,33 @@ using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
+    /// <summary>
+    /// The <c>MatchDiscovery</c> service.
+    /// Is used to show the available matches and check if they can accept players.
+    /// The operations it contains are:
+    /// <list type="bullet">
+    /// <item>
+    /// <term>CanJoin</term>
+    /// <description>Checks if a player can join the match.</description>
+    /// </item>
+    /// <item>
+    /// <term>EmailAddressIsAvailable</term>
+    /// <description>Verifies the email provided.</description>
+    /// </item>
+    /// <item>
+    /// <term>UserNameIsAvailable</term>
+    /// <description>Verifies the username provided.</description>
+    /// </item>
+    /// </list>
+    /// </summary>
     public partial class MemoryGameService : IMatchDiscoveryService
     {
+        /// <summary>
+        /// Checks if a new player can join the match, if it is already full or if it has started.
+        /// </summary>
+        /// <param name="matchHost">Name of the player who created the game.</param>
+        /// <returns>True if the player can join the match and false if not.</returns>
+        /// <exception cref="FaultException">Thrown when there is a null gameMath.</exception>
         public bool CanJoin(string matchHost)
         {
             MatchDto gameMatch = GetMatch(matchHost);
@@ -43,6 +68,10 @@ namespace MemoryGameService.Services
 
         }
 
+        /// <summary>
+        /// Recovers all the games in the game that have not started.
+        /// </summary>
+        /// <returns>A list of the matches</returns>
         public IList<MatchDto> GetActiveMatches()
         {
             IList<MatchDto> matchesWaitingToStart = new List<MatchDto>();
