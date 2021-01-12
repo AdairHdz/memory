@@ -1,4 +1,4 @@
-—
+ç
 NC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameServiceHost\Program.cs
 	namespace 	!
 MemoryGameServiceHost
@@ -18,12 +18,8 @@ NC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameServiceHost\Program.cs
 static 
 void 
 Main 
-( 
-string 
-[  
-]  !
-args" &
-)& '
+( 
+) 
 { 	
 using 
 ( 
