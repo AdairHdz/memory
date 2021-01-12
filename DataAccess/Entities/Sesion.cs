@@ -1,6 +1,6 @@
 ﻿namespace DataAccess.Entities
 {
-    // <summary>
+    /// <summary>
     /// The <c>Sesion</c> class
     /// It is an entity that stores Sesion data of a Player who entered the game.
     /// </summary>

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    // <summary>
+    /// <summary>
     /// The <c>CardDeck</c> class
     /// It is an entity that stores data of a CardDeck in the database.
     /// </summary>

@@ -31,7 +31,7 @@ namespace DataAccess.Repositories
             }
         }
 
-        /// <inheritdoc>/>
+        /// <inheritdoc/>
         public Player FindPlayerByUsername(string username)
         {
             IEnumerable<Account> retrievedAccounts = MemoryGameContext.Accounts.Include("Player")
