@@ -1,4 +1,5 @@
 ﻿using MemoryGameService.Contracts;
+using MemoryGameService.Logic;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -41,14 +42,14 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
     /// </summary>
     public class ServiceLobby
     {
-        private IList<PlayerInLobby> _playersConnectedToLobby;
+        private IList<ServicePlayerInLobby> _playersConnectedToLobby;
 
         /// <summary>
         /// Class constructor.
         /// </summary>
         public ServiceLobby()
         {
-            _playersConnectedToLobby = new List<PlayerInLobby>();
+            _playersConnectedToLobby = new List<ServicePlayerInLobby>();
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         /// <param name="username">Username of the new player.</param>
         public void AddPlayerToLobby(string host, string username)
         {
-            PlayerInLobby lobbyRequestDto = new PlayerInLobby()
+            ServicePlayerInLobby lobbyRequestDto = new ServicePlayerInLobby()
             {
                 Host = host,
                 Username = username,
@@ -87,7 +88,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         /// Gets a list of the players connected to the match lobby.
         /// </summary>
         /// <returns>A list of PlayerInLobby objects.</returns>
-        public IList<PlayerInLobby> GetPlayersConnectedToLobby()
+        public IList<ServicePlayerInLobby> GetPlayersConnectedToLobby()
         {
             return _playersConnectedToLobby;
         }

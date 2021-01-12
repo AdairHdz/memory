@@ -12,7 +12,7 @@ namespace MemoryGameService.Services
     public partial class MemoryGameService : IPlayerRegistryService
     {
         /// <inheritdoc/>
-        public bool RegisterNewPlayer(PlayerDTO playerDTO, string salt)
+        public bool RegisterNewPlayer(PlayerDto playerDTO, string salt)
         {
 
             Account newAccount = new Account()

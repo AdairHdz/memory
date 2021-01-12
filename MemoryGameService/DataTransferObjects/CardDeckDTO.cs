@@ -8,7 +8,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
     /// It is used to map the information of a CardDeck entity.
     /// </summary>
     [DataContract]
-    public class CardDeckDTO
+    public class CardDeckDto
     {
         /// <summary>
         /// CardDeck identifier.

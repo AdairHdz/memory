@@ -1,7 +1,4 @@
-﻿using MemoryGameService.Contracts;
-using System.Collections.Generic;
-
-namespace MemoryGame.MemoryGameService.DataTransferObjects
+﻿namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
     /// <summary>
     /// The <c>PlayerInMatch</c> class.
@@ -30,7 +27,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
     /// </item>
     /// </list>
     /// </summary>
-    public class PlayerInMatch
+    public class PlayerInMatchDto
     {
         /// <summary>
         /// Username of the player.
@@ -48,23 +45,6 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         /// Expulsion votes for the player.
         /// </summary>
         public int ExpulsionVotes { get; set; }
-        /// <summary>
-        /// List of the players the player has voted for.
-        /// </summary>
-        private IList<string> _playersVoted;
-        /// <summary>
-        /// List of all the uncovered cards by the player.
-        /// </summary>
-        private IList<int> _uncoveredCards;
-
-        /// <summary>
-        /// Constructor of the class.
-        /// </summary>
-        public PlayerInMatch()
-        {
-            _playersVoted = new List<string>();
-            _uncoveredCards = new List<int>();
-        }
 
     }
 }

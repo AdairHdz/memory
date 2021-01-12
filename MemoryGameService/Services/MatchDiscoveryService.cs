@@ -25,7 +25,7 @@ namespace MemoryGameService.Services
             else
             {
                 ServiceLobby lobby = gameMatch.Lobby;
-                IList<PlayerInLobby> playersConnectedToLobby = lobby.GetPlayersConnectedToLobby();
+                IList<ServicePlayerInLobby> playersConnectedToLobby = lobby.GetPlayersConnectedToLobby();
                 int numberOfPlayersConnectedToLobby = playersConnectedToLobby.Count;
                 int numberOfPlayersRequired = gameMatch.MaxNumberOfPlayers;
                 bool matchHasStarted = gameMatch.HasStarted;
@@ -65,7 +65,7 @@ namespace MemoryGameService.Services
                         cards.Add(cardDto);
                     }
 
-                    CardDeckDTO cardDeckDto = new CardDeckDTO()
+                    CardDeckDto cardDeckDto = new CardDeckDto()
                     {
                         CardDeckId = match.ServiceCardDeck.CardDeckId,
                         Name = match.ServiceCardDeck.Name,

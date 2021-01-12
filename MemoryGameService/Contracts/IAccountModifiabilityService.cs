@@ -1,5 +1,4 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
-using MemoryGame.MemoryGameService.Faults;
 using System.ServiceModel;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;

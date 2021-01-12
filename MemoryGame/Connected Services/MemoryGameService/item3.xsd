@@ -97,7 +97,7 @@
   <xs:element name="GetCardDeckAndCardsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetCardDeckAndCardsResult" nillable="true" type="q1:CardDeckDTO" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetCardDeckAndCardsResult" nillable="true" type="q1:CardDeckDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -213,51 +213,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="VerifyRecoveryTokenResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SubscribeToCommunicationService">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SubscribeToCommunicationServiceResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UnsubscribeFromCommunicationService">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UnsubscribeFromCommunicationServiceResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SendMessage">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="sender" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ReciveMessage">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotifyUserHasEnteredTheChat">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -403,7 +358,7 @@
   <xs:element name="GetPlayersConnectedToMatchResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersConnectedToMatchResult" nillable="true" type="q11:ArrayOfPlayerInMatch" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersConnectedToMatchResult" nillable="true" type="q11:ArrayOfPlayerInMatchDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -532,14 +487,14 @@
   <xs:element name="GetPlayersWithBestScoreResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersWithBestScoreResult" nillable="true" type="q18:ArrayOfPlayerScoreDTO" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="GetPlayersWithBestScoreResult" nillable="true" type="q18:ArrayOfPlayerScoreDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RegisterNewPlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerDTO" nillable="true" type="q19:PlayerDTO" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" minOccurs="0" name="playerDTO" nillable="true" type="q19:PlayerDto" />
         <xs:element minOccurs="0" name="salt" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>

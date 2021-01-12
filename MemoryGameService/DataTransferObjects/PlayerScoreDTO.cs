@@ -4,7 +4,7 @@
     /// The <c>PlayerScoreDto</c> class.
     /// It is used to map the information of a Player etity when consulting the table of best scores.
     /// </summary>
-    public class PlayerScoreDTO
+    public class PlayerScoreDto
     {
         /// <summary>
         /// Player username.

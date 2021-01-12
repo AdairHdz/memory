@@ -4,9 +4,7 @@ namespace MemoryGame.InputValidation.RegistryValidation
 {
     public class PasswordValidationRule : IValidationRule
     {
-        private readonly string _password;
-        private Regex _regularExpression;
-        private MatchCollection _matches;
+        private readonly string _password;        
 
         public PasswordValidationRule(string password)
         {
@@ -15,30 +13,30 @@ namespace MemoryGame.InputValidation.RegistryValidation
 
         private bool HasAtLeastOneSpecialCharacter()
         {
-            _regularExpression = new Regex("\\W+");
-            _matches = _regularExpression.Matches(_password);
-            return _matches.Count >= 1;
+            Regex regularExpression = new Regex("\\W+");
+            MatchCollection matches = regularExpression.Matches(_password);
+            return matches.Count >= 1;
         }
 
         private bool HasAtLeastOneCapitalLetter()
         {
-            _regularExpression = new Regex("[A-Z+]");
-            _matches = _regularExpression.Matches(_password);
-            return _matches.Count >= 1;
+            Regex regularExpression = new Regex("[A-Z+]");
+            MatchCollection matches = regularExpression.Matches(_password);
+            return matches.Count >= 1;
         }
 
         private bool HasAtLeastOneNumericCharacter()
         {
-            _regularExpression = new Regex("[0-9]");
-            _matches = _regularExpression.Matches(_password);
-            return _matches.Count >= 1;
+            Regex regularExpression = new Regex("[0-9]");
+            MatchCollection matches = regularExpression.Matches(_password);
+            return matches.Count >= 1;
         }
 
         private bool HasAtLeastOneLowercaseLetter()
         {
-            _regularExpression = new Regex("[a-z+]");
-            _matches = _regularExpression.Matches(_password);
-            return _matches.Count >= 1;
+            Regex regularExpression = new Regex("[a-z+]");
+            MatchCollection matches = regularExpression.Matches(_password);
+            return matches.Count >= 1;
         }
 
         private bool IsBetween8And25CharactersLength()

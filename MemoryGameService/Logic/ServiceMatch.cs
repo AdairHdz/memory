@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MemoryGameService.Logic
 {
+    /// <summary>
     /// The <c>ServiceMatch</c> class.
     /// It has the methods to manipulate the match information.
     /// The operations it contains are:
@@ -140,7 +141,7 @@ namespace MemoryGameService.Logic
         /// </summary>
         public void StartMatch()
         {
-            IList<PlayerInLobby> playersConnectedToLobby = Lobby.GetPlayersConnectedToLobby();
+            IList<ServicePlayerInLobby> playersConnectedToLobby = Lobby.GetPlayersConnectedToLobby();
             IList<string> usernamesOfPlayersConnectedToLobby = Lobby.GetUsernamesOfPlayersConnectedToLobby();
             foreach (var playerInLobby in playersConnectedToLobby)
             {

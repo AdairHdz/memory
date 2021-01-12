@@ -46,7 +46,7 @@ namespace MemoryGameService.Services
         }
 
         /// <inheritdoc/>
-        public bool AssignNewActivationToken(string emailAddress, string verificationToken)
+        public bool AssignNewActivationToken(string emailAddress, string activationToken)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
@@ -54,7 +54,7 @@ namespace MemoryGameService.Services
                 Account retrievedAccount = unitOfWork.Accounts.Get(emailAddress);
                 if (retrievedAccount != null)
                 {
-                    retrievedAccount.ActivationToken = verificationToken;
+                    retrievedAccount.ActivationToken = activationToken;
                     int rowsModified = unitOfWork.Complete();
                     return rowsModified == 1;
                 }
@@ -149,12 +149,12 @@ namespace MemoryGameService.Services
         }
 
         /// <inheritdoc/>
-        public bool VerifyRecoveryToken(string emailAddress, string recoveryToken)
+        public bool VerifyRecoveryToken(string emailAddress, string activationToken)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => account.EmailAddress == emailAddress && account.RecoveryToken == recoveryToken);
+                Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => account.EmailAddress == emailAddress && account.RecoveryToken == activationToken);
                 if (retrievedAccount != null)
                 {
                     return true;

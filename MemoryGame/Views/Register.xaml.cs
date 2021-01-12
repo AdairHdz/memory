@@ -158,7 +158,7 @@ namespace MemoryGame
             MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
                 new MemoryGameService.PlayerRegistryServiceClient();
 
-            PlayerDTO playerDTO = new PlayerDTO()
+            PlayerDto playerDTO = new PlayerDto()
             {
                 Username = _username,
                 EmailAddress = _emailAddress,

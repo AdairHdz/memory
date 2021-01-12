@@ -12,14 +12,9 @@ namespace MemoryGameService.Services
         public IList<string> GetActivePlayersInLobby(string host)
         {            
             ServiceMatch match = GetMatch(host);
-            if(match != null)
-            {
-                ServiceLobby lobby = match.Lobby;
-                IList<string> activePlayersFromMatch = lobby.GetUsernamesOfPlayersConnectedToLobby();
-                return activePlayersFromMatch;
-            }
-            //throw new NonExistentMatch
-            throw new System.Exception();
+            ServiceLobby lobby = match.Lobby;
+            IList<string> activePlayersFromMatch = lobby.GetUsernamesOfPlayersConnectedToLobby();
+            return activePlayersFromMatch;
         }
 
         /// <inheritdoc/>
@@ -61,8 +56,7 @@ namespace MemoryGameService.Services
             if(match != null)
             {
                 match.StartMatch();
-            }
-            
+            }            
         }
 
         /// <summary>

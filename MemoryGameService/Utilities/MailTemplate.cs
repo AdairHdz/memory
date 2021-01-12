@@ -9,24 +9,15 @@ namespace MemoryGameService.Utilities
     /// </summary>
     public class MailTemplate
     {
-        private TextPart _message;
-        private MimeMessage _content;
-        private readonly MailboxAddress _sender;
-        private MailboxAddress _receiver;
-        private string _subject;
-        private SmtpClient _client;
-        private readonly log4net.ILog _logger = log4net.LogManager.GetLogger("MailTemplate.cs");
+        private MimeMessage _content;    
         /// <summary>
         /// The <c>MailTemplate</c> constructor.
         /// </summary>
         public MailTemplate()
         {
-            _message = new TextPart("plain");
-            _content = new MimeMessage();
-            _client = new SmtpClient();            
+            _content = new MimeMessage();                    
             var sender = new MailboxAddress("memory.game.lis@gmail.com", "cfalpwtqeeitkhsk");
-            _content.From.Add(sender);            
-            _sender = new MailboxAddress("memorygame2020", "memory.game.lis@gmail.com");            
+            _content.From.Add(sender);                       
         }
 
         /// <summary>
@@ -36,8 +27,8 @@ namespace MemoryGameService.Utilities
         /// <param name="emailAddress">email address of the receiver</param>
         public void SetReceiver(string name, string emailAddress)
         {
-            _receiver = new MailboxAddress(name, emailAddress);
-            _content.To.Add(_receiver);
+            MailboxAddress receiver = new MailboxAddress(name, emailAddress);
+            _content.To.Add(receiver);
         }
 
         /// <summary>
@@ -47,9 +38,9 @@ namespace MemoryGameService.Utilities
         /// <param name="message">The content of the message</param>
         public void SetMessage(string subject, string message)
         {
-            _message.Text = message;
-            _subject = subject;
-            _content.Body = _message;
+            TextPart messageContent = new TextPart("plain");
+            messageContent.Text = message;
+            _content.Body = messageContent;
             _content.Subject = subject;
         }
 
@@ -58,10 +49,11 @@ namespace MemoryGameService.Utilities
         /// </summary>
         public void Send()
         {
-            _client.Connect("smtp.gmail.com", 587, false);
-            _client.Authenticate("memory.game.lis@gmail.com", "cfalpwtqeeitkhsk");
-            _client.Send(_content);
-            _client.Disconnect(true);
+            SmtpClient client = new SmtpClient();
+            client.Connect("smtp.gmail.com", 587, false);
+            client.Authenticate("memory.game.lis@gmail.com", "cfalpwtqeeitkhsk");
+            client.Send(_content);
+            client.Disconnect(true);
         }
     }
 }

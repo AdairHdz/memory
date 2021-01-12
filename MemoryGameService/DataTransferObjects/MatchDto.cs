@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MemoryGame.MemoryGameService.DataTransferObjects
+﻿namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
     /// <summary>
     /// The <c>MatchDto</c> class.
@@ -17,7 +14,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         /// <summary>
         /// The CarDeck used in the match.
         /// </summary>
-        public CardDeckDTO CardDeckDto { get; set; }
+        public CardDeckDto CardDeckDto { get; set; }
         /// <summary>
         /// Username of the player who created the match.
         /// </summary>
@@ -31,10 +28,6 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         /// </summary>
         public ServiceLobby Lobby { get; set; }
         /// <summary>
-        /// List of the players connected to the match.
-        /// </summary>
-        private IList<PlayerInMatch> _players;
-        /// <summary>
         /// Total number of pairs that can be formed in with the CardDeck.
         /// </summary>
         public int TotalPairs { get; set; }
@@ -45,7 +38,6 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         public MatchDto()
         {
             Lobby = new ServiceLobby();
-            _players = new List<PlayerInMatch>();
         }
     }
 }

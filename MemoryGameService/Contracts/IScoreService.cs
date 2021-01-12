@@ -28,6 +28,6 @@ namespace MemoryGameService.Contracts
         /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
         /// <exception cref="EntityException">Thrown when there is no database.</exception>
         [OperationContract]
-        List<PlayerScoreDTO> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
+        List<PlayerScoreDto> GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved);
     }
 }

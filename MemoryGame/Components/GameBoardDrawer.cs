@@ -10,7 +10,7 @@ namespace MemoryGame.Components
     public class GameBoardDrawer
     {
         public int NumberOfColumns { get; set; }
-        public MemoryGameService.DataTransferObjects.CardDeckDTO CardDeck { get; set; }
+        public MemoryGameService.DataTransferObjects.CardDeckDto CardDeck { get; set; }
         public Grid GridToBeDrawnOn { get; set; }
         public IList<ImageCard> ImageCards { get; set; }
 

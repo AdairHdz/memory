@@ -1,5 +1,4 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
-using MemoryGame.MemoryGameService.Faults;
 using MemoryGameService.Contracts;
 using MemoryGameService.Utilities;
 using System.Net.Sockets;

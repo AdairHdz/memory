@@ -7,7 +7,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
     /// It is used to verify the acces of a player to the game.
     /// </summary>
     [DataContract]
-    public class PlayerCredentialsDTO
+    public class PlayerCredentialsDto
     {
         /// <summary>
         /// Provided username.

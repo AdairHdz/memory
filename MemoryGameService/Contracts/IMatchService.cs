@@ -88,7 +88,7 @@ namespace MemoryGameService.Contracts
         /// <param name="host">Name of the player who created the match.</param>
         /// <returns>A list of PlayerInMatch objects.</returns>
         [OperationContract]
-        IList<PlayerInMatch> GetPlayersConnectedToMatch(string host);
+        IList<PlayerInMatchDto> GetPlayersConnectedToMatch(string host);
 
         /// <summary>
         /// Notifies all connected players that the game is over and the player who has won.

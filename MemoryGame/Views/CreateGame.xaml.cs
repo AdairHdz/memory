@@ -17,7 +17,7 @@ namespace MemoryGame
         private string _username;
         private int _numberOfPlayersDesiredForMatch;
         private MemoryGameService.DataTransferObjects.MatchDto _gameMatch;
-        private MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck;
+        private MemoryGameService.DataTransferObjects.CardDeckDto _cardDeck;
         public CreateGame()
         {
             InitializeComponent();

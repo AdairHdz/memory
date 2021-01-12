@@ -38,14 +38,14 @@ namespace MemoryGameService.Services
         }
 
         /// <inheritdoc/>
-        public IList<PlayerInMatch> GetPlayersConnectedToMatch(string host)
+        public IList<PlayerInMatchDto> GetPlayersConnectedToMatch(string host)
         {
             ServiceMatch match = GetMatch(host);
             IList<ServicePlayer> playersConnectedToMatch = match.GetPlayersConnectedToMatch();
-            IList<PlayerInMatch> playersToBeReturned = new List<PlayerInMatch>();
+            IList<PlayerInMatchDto> playersToBeReturned = new List<PlayerInMatchDto>();
             foreach(var player in playersConnectedToMatch)
             {
-                PlayerInMatch playerInMatch = new PlayerInMatch()
+                PlayerInMatchDto playerInMatch = new PlayerInMatchDto()
                 {
                     Username = player.Username,
                     Score = player.Score,

@@ -62,11 +62,6 @@
     <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\Sesion.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Migrations\202101110153060_FinalDatabase.cs" />
-    <Compile Include="Migrations\202101110153060_FinalDatabase.designer.cs">
-      <DependentUpon>202101110153060_FinalDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\CardDeckRepository.cs" />
@@ -84,9 +79,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101110153060_FinalDatabase.resx">
-      <DependentUpon>202101110153060_FinalDatabase.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -7,7 +7,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
     /// It is used to map the information of a Player entity.
     /// </summary>
     [DataContract]
-    public class PlayerDTO
+    public class PlayerDto
     {
         /// <summary>
         /// Player username.

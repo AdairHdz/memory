@@ -20,7 +20,7 @@ namespace MemoryGame.Views
         public string MatchHost { get; set; }
         private InstanceContext _context = null;
         private MatchServiceClient _matchServiceClient;
-        public CardDeckDTO CardDeck { get; set; }
+        public CardDeckDto CardDeck { get; set; }
         private List<ImageCard> _imageCards;
         private int _numberOfMovementsAllowed;
         private IList<ImageCard> _cardsFlippedInCurrentTurn;

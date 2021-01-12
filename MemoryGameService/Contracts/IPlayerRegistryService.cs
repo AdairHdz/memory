@@ -36,7 +36,7 @@ namespace MemoryGameService.Contracts
         /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
         /// <exception cref="Exception">Thrown when a default exception is catched.</exception>
         [OperationContract]
-        bool RegisterNewPlayer(PlayerDTO playerDTO, string salt);
+        bool RegisterNewPlayer(PlayerDto playerDTO, string salt);
 
         /// <summary>
         /// Verify that the email provided is not already registered in the database.

@@ -13,17 +13,17 @@ namespace MemoryGameService.Services
     public partial class MemoryGameService : IScoreService
     {
         /// <inheritdoc/>
-        List<PlayerScoreDTO> IScoreService.GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
+        List<PlayerScoreDto> IScoreService.GetPlayersWithBestScore(int numberOfPlayersToBeRetrieved)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
                 IEnumerable<Account> accountEntities = unitOfWork.Accounts.GetNumberOfAccountsWithPlayerInfo(numberOfPlayersToBeRetrieved);
-                List<PlayerScoreDTO> playersWithBestScores = new List<PlayerScoreDTO>();
+                List<PlayerScoreDto> playersWithBestScores = new List<PlayerScoreDto>();
 
                 foreach(var account in accountEntities)
                 {
-                    PlayerScoreDTO playerScore = new PlayerScoreDTO()
+                    PlayerScoreDto playerScore = new PlayerScoreDto()
                     {
                         Username = account.Username,
                         TotalScore = account.Player.Score

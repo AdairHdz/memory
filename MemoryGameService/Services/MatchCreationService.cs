@@ -11,7 +11,6 @@ namespace MemoryGameService.Services
         /// <inheritdoc/>
         public void CreateNewMatch(MatchDto gameMatchDto)
         {
-            IList<CardDto> cards = new List<CardDto>();
             IList<ServiceCard> serviceCards = new List<ServiceCard>();
             foreach(var cardDto in gameMatchDto.CardDeckDto.Cards)
             {

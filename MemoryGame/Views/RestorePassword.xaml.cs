@@ -5,6 +5,9 @@ using System.ServiceModel;
 using System;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGame.Utilities;
+using MemoryGame.InputValidation;
+using MemoryGame.InputValidation.RegistryValidation;
+using System.Collections.Generic;
 
 namespace MemoryGame
 {
@@ -14,7 +17,9 @@ namespace MemoryGame
     public partial class RestorePassword : Window
     {
         private string _emailAddress;
-        private string _username;        
+        private string _username;
+        private RuleSet _ruleSet;
+        private string _newPassword;
         public RestorePassword()
         {
             InitializeComponent();
@@ -27,18 +32,18 @@ namespace MemoryGame
             _username = username;
         }
 
-
+        private void SetFormValidation()
+        {
+            _ruleSet = new RuleSet();
+            _ruleSet.AddValidationRule(new PasswordValidationRule(_newPassword));
+        }
 
         private void RestoreUserPassword()
         {
-            string newPassword = NewPasswordBox.Password;
-
-            if (newPassword == "")
+            _newPassword = NewPasswordBox.Password;
+            SetFormValidation();
+            if (_ruleSet.AllValidationRulesHavePassed())
             {
-                MessageBox.Show(Properties.Langs.Resources.PasswordIsInvalid);
-            }
-            else
-            {                
                 if (TokenIsCorrect())
                 {
                     if (SetNewPassword())
@@ -54,7 +59,21 @@ namespace MemoryGame
                 else
                 {
                     MessageBox.Show(Properties.Langs.Resources.NonMatchingVerificationCode);
-                }                
+                }
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
+        }
+
+
+        private void ShowErrorMessage()
+        {
+            IList<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
+            if (validationResultErrors.Count > 0)
+            {
+                MessageBox.Show(validationResultErrors[0].Message);
             }
         }
 

@@ -1,12 +1,12 @@
 ﻿using MemoryGameService.Contracts;
 
-namespace MemoryGame.MemoryGameService.DataTransferObjects
+namespace MemoryGameService.Logic
 {
     /// <summary>
-    /// The <c>PlayerInLobbyDto</c> class.
+    /// The <c>ServicePlayerInLobby</c> class.
     /// It is used save the basic information of a player wwho joined the lobby of a match.
     /// </summary>
-    public class PlayerInLobby
+    public class ServicePlayerInLobby
     {
         /// <summary>
         /// Username of the player who created the match.

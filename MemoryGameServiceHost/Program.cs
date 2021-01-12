@@ -5,6 +5,9 @@ namespace MemoryGameServiceHost
 {
     public class Program
     {
+
+        protected Program() { }
+
         static void Main(string[] args)
         {
             using (ServiceHost host = new ServiceHost(typeof(MemoryGameService.Services.MemoryGameService)))
