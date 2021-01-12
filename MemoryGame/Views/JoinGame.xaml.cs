@@ -14,6 +14,9 @@ namespace MemoryGame
         private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient;        
         private MatchDto _selectedMatch;
 
+        /// <summary>
+        /// The <c>JoinGame</c> constructor.
+        /// </summary>
         public JoinGame()
         {
             InitializeComponent();

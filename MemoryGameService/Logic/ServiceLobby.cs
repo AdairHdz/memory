@@ -6,7 +6,7 @@ using System.ServiceModel;
 namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
     /// <summary>
-    /// The <c>Lobby</c> class.
+    /// The <c>ServiceLobby</c> class.
     /// It has the methods to manipulate the players coneccted to a match lobby.
     /// The operations it contains are:
     /// <list type="bullet">

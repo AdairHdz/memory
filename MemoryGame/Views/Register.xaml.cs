@@ -11,7 +11,7 @@ using Utilities;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para Register.xaml
+    /// Interaction logic for Register.xaml
     /// </summary>
     /// 
 
@@ -20,6 +20,10 @@ namespace MemoryGame
         private string _username, _emailAddress, _verificationToken, _password;      
         private RuleSet _ruleSet;
         private MemoryGameService.PlayerRegistryServiceClient _playerRegistryServiceClient;
+        
+        /// <summary>
+        /// The <c>Register</c> constructor.
+        /// </summary>
         public Register()
         {            
             InitializeComponent();

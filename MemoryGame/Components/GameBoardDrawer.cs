@@ -7,15 +7,39 @@ using System.Windows.Media.Imaging;
 
 namespace MemoryGame.Components
 {
+    /// <summary>
+    /// The <c>GameBoardDrawer</c> class.
+    /// This a helper class to draw the gameboard for the match.
+    /// </summary>
     public class GameBoardDrawer
     {
+        /// <summary>
+        /// Number of columns to be drawn.
+        /// </summary>
         public int NumberOfColumns { get; set; }
+        /// <summary>
+        /// The card deck to be drawn on the game board.
+        /// </summary>
         public MemoryGameService.DataTransferObjects.CardDeckDto CardDeck { get; set; }
+
+        /// <summary>
+        /// The Grid on which this class will draw the cards.
+        /// </summary>
         public Grid GridToBeDrawnOn { get; set; }
+
+        /// <summary>
+        /// The cards to be drawn on the game board.
+        /// </summary>
         public IList<ImageCard> ImageCards { get; set; }
 
+        /// <summary>
+        /// The <c>GameBoardDrawer</c> constructor.
+        /// </summary>
         public GameBoardDrawer() { }
 
+        /// <summary>
+        /// Draws the cards on the gameboard.
+        /// </summary>
         public void Draw()
         {
             DrawColumns();
@@ -92,6 +116,11 @@ namespace MemoryGame.Components
             }
         }
 
+        /// <summary>
+        /// Sets the event to be triggered when a card
+        /// is clicked by the user.
+        /// </summary>
+        /// <param name="eventHandler"></param>
         public void SetEventOnCardClicked(MouseButtonEventHandler eventHandler)
         {
             for (int numberOfActualCard = 0; numberOfActualCard < ImageCards.Count; numberOfActualCard++)

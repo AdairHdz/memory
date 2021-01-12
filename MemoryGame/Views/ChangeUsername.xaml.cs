@@ -10,7 +10,7 @@ using System.Windows;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para ChangeUsername.xaml
+    /// Interaction logic for ChangeUsername.xaml
     /// </summary>
     public partial class ChangeUsername : Window
     {
@@ -18,6 +18,10 @@ namespace MemoryGame
         private string _newUsername;
         private string _oldUsername;
         private RuleSet _ruleSet;
+
+        /// <summary>
+        /// The <c>ChangeUsername</c> class constructor.
+        /// </summary>
         public ChangeUsername()
         {
             InitializeComponent();
@@ -136,6 +140,11 @@ namespace MemoryGame
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        {
+            GoToMainWindow();
         }
     }
 }

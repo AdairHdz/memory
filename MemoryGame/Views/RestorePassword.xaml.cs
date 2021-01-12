@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para RestorePassword.xaml
+    /// Interaction logic for RestorePassword.xaml
     /// </summary>
     public partial class RestorePassword : Window
     {
@@ -20,11 +20,20 @@ namespace MemoryGame
         private string _username;
         private RuleSet _ruleSet;
         private string _newPassword;
+        
+        /// <summary>
+        /// The <c>RestorePassword</c> constructor.
+        /// </summary>
         public RestorePassword()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// The <c>RestorePassword</c> constructor.
+        /// </summary>
+        /// <param name="emailAddress">The email address of the player who wants to restore its password.</param>
+        /// <param name="username">The username of the player who wants to restore its password.</param>
         public RestorePassword(string emailAddress, string username)
         {
             InitializeComponent();
@@ -89,7 +98,7 @@ namespace MemoryGame
             return accountVerificationServiceClient.VerifyRecoveryToken(_emailAddress, token);
         }
 
-        public bool SetNewPassword()
+        private bool SetNewPassword()
         {
             IEncryption bCryptHashGenerator = new BCryptHashGenerator();
             string newPassword = NewPasswordBox.Password;

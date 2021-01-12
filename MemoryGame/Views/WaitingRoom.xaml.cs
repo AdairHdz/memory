@@ -8,10 +8,13 @@ using System;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para WaitingRoom.xaml
+    /// Interaction logic for WaitingRoom.xaml
     /// </summary>
     public partial class WaitingRoom : Window, MemoryGameService.ILobbyServiceCallback
     {
+        /// <summary>
+        /// The match this waiting room pertains to.
+        /// </summary>
         public MemoryGameService.DataTransferObjects.MatchDto GameMatchDto { get; set; }
         private ObservableCollection<string> _players;
         private InstanceContext _context;
@@ -20,6 +23,9 @@ namespace MemoryGame
         private bool _thisPlayerIsHost;
         private bool _windowIsBeingClosedByTheCloseButton;
 
+        /// <summary>
+        /// The <c>WaitingRoom</c> constructor.
+        /// </summary>
         public WaitingRoom()
         {
             InitializeComponent();
@@ -85,7 +91,12 @@ namespace MemoryGame
             _lobbyServiceClient.JoinLobby(GameMatchDto.Host, _username);
         }
 
-        public void LeaveButtonClicked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Defines the behavior for when the "Leave" button is clicked.
+        /// </summary>
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="routedEventArgs">The arguments of the event</param>
+        public void LeaveButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             try
             {
@@ -137,7 +148,12 @@ namespace MemoryGame
             _lobbyServiceClient.LeaveLobby(GameMatchDto.Host, _username);
         }
 
-        public void StartButtonClicked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Defines the behavior for when the "Start" button is clicked.
+        /// </summary>
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="routedEventArgs">The arguments for the event</param>
+        public void StartButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             if(_players.Count < 2)
             {
@@ -170,6 +186,10 @@ namespace MemoryGame
 
         }
 
+        /// <summary>
+        /// Notifies the client that a new player entered the waiting room,
+        /// </summary>
+        /// <param name="username">The username of the player who entered the waiting room</param>
         public void NotifyNewPlayerEntered(string username)
         {           
             if(username != null)
@@ -178,6 +198,10 @@ namespace MemoryGame
             }
         }
 
+        /// <summary>
+        /// Notifies the client that a player left the waiting room.
+        /// </summary>
+        /// <param name="username">The username of the player who left the waiting room</param>
         public void NotifyPlayerLeft(string username)
         {
             _players.Remove(username);
@@ -196,12 +220,15 @@ namespace MemoryGame
             this.Close();
         }
 
+        /// <summary>
+        /// Takes the players out of the waitingRoom
+        /// </summary>
         public void TakePlayersOutOfLobby()
         {
             GoToJoinGameView();
         }
 
-        private void Window_Closed(object sender, System.EventArgs e)
+        private void Window_Closed(object sender, EventArgs eventArgs)
         {
             if (_windowIsBeingClosedByTheCloseButton)
             {

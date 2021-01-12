@@ -2,14 +2,21 @@
 
 namespace MemoryGame.InputValidation.GenericValidations
 {
+    /// <inheritdoc/>
     public class NonEmptyFieldValidation : IValidationRule
     {
         private readonly string _inputField;
+
+        /// <summary>
+        /// The <c>NonEmptyFieldValidarion</c> constructor.
+        /// </summary>
+        /// <param name="inputField"> the input from the field to be validated</param>
         public NonEmptyFieldValidation(string inputField)
         {
             _inputField = inputField;
         }
 
+        /// <inheritdoc/>
         public ValidationRuleResult GetValidationRuleResult()
         {
             if (IsNotEmpty())
@@ -20,6 +27,7 @@ namespace MemoryGame.InputValidation.GenericValidations
                 Properties.Langs.Resources.EmptyField);
         }
 
+        /// <inheritdoc/>
         public bool Validate()
         {
             throw new NotImplementedException();

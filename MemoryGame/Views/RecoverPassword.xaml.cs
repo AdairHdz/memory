@@ -11,7 +11,7 @@ using MemoryGame.Utilities;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para RecoverPassword.xaml
+    /// Interaction logic for RecoverPassword.xaml
     /// </summary>
     public partial class RecoverPassword : Window
     {
@@ -20,6 +20,10 @@ namespace MemoryGame
         private string _emailAddress;
         private string _username;
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("RecoverPassword.xaml.cs");
+        
+        /// <summary>
+        /// The <c>RecoverPassword</c> constructor.
+        /// </summary>
         public RecoverPassword()
         {
             InitializeComponent();

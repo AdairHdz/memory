@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace MemoryGameService.Logic
 {
     /// <summary>
-    /// The <c>PlayerInMatch</c> class.
+    /// The <c>ServicePlayer</c> class.
     /// It has the methods to manipulate the infromatioin of the players connected to a match.
     /// The operations it contains are:
     /// <list type="bullet">

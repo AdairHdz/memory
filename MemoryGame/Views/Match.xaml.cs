@@ -11,16 +11,31 @@ using System.Windows;
 namespace MemoryGame.Views
 {
     /// <summary>
-    /// Lógica de interacción para Match.xaml
+    /// Interaction logic for Match.xaml
     /// </summary>
     public partial class Match : Window, MemoryGameService.IMatchServiceCallback
     {
+        /// <summary>
+        /// The players for the current match.
+        /// </summary>
         public string[] Players { get; set; }
+
+        /// <summary>
+        /// The number of players set to the current match.
+        /// </summary>
         public int NumberOfPlayers { get; set; }
+
+        /// <summary>
+        /// The host of the current match.
+        /// </summary>
         public string MatchHost { get; set; }
-        private InstanceContext _context = null;
-        private MatchServiceClient _matchServiceClient;
+
+        /// <summary>
+        /// The card deck for the current match.
+        /// </summary>
         public CardDeckDto CardDeck { get; set; }
+        private InstanceContext _context = null;
+        private MatchServiceClient _matchServiceClient;        
         private List<ImageCard> _imageCards;
         private int _numberOfMovementsAllowed;
         private IList<ImageCard> _cardsFlippedInCurrentTurn;
@@ -28,6 +43,9 @@ namespace MemoryGame.Views
         private bool _windowIsBeingClosedByTheCloseButton;
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("Match.xaml.cs");
 
+        /// <summary>
+        /// The <c>Match</c> constructor.
+        /// </summary>
         public Match()
         {
             InitializeComponent();
@@ -202,6 +220,10 @@ namespace MemoryGame.Views
             }
         }
 
+        /// <summary>
+        /// Notifies the client that it has to uncover the card with the specified index.
+        /// </summary>
+        /// <param name="cardIndex">The index of the card to be uncovered.</param>
         public void UncoverCardd(int cardIndex)
         {
             _imageCards[cardIndex].Source = _imageCards[cardIndex].FrontImage;
@@ -214,6 +236,11 @@ namespace MemoryGame.Views
             _imageCards[cardPairDto.IndexOfCard2].Source = _imageCards[cardPairDto.IndexOfCard2].BackImage;
         }
 
+        /// <summary>
+        /// Notifies the client that the turn of the previous player has ended.
+        /// </summary>
+        /// <param name="username">The username of the player that had the previous turn.</param>
+        /// <param name="cardPairDto">The pair of cards of the previous player.</param>
         public void NotifyTurnHasEnded(string username, CardPairDto cardPairDto)
         {
             TurnLabel.Content = Properties.Langs.Resources.TurnMessage + ": " + username;
@@ -229,16 +256,28 @@ namespace MemoryGame.Views
             }
         }
 
+        /// <summary>
+        /// Shows the winner of the current match.
+        /// </summary>
+        /// <param name="winner">The winner of the current match.</param>
         public void ShowWinners(string winner)
         {
             MessageBox.Show(winner + " " + Properties.Langs.Resources.WinMessage);
         }
 
+        /// <summary>
+        /// Notifies the client that the match has already ended.
+        /// </summary>
         public void MatchHasEnded()
         {
             GoToMainMenuView();
         }
 
+        /// <summary>
+        /// Notifies the client that a player has been expeled.
+        /// </summary>
+        /// <param name="expelPlayerUsername">The username of the expeled player.</param>
+        /// <param name="cardsUncovered">The cards that the expeled player had uncovered.</param>
         public void NotifyPlayerWasExpel(string expelPlayerUsername, int[] cardsUncovered)
         {
             if (Sesion.GetSesion.Username.Equals(expelPlayerUsername))
@@ -256,6 +295,11 @@ namespace MemoryGame.Views
             }
         }
 
+        /// <summary>
+        /// Notifies the client that a player left the match.
+        /// </summary>
+        /// <param name="username">The username of the player who left the match.</param>
+        /// <param name="cardsUncovered">The uncovered cards of the player who left.</param>
         public void NotifyPlayerLeaveMatch(string username, int[] cardsUncovered)
         {
             if (Sesion.GetSesion.Username.Equals(username))
@@ -273,6 +317,10 @@ namespace MemoryGame.Views
             }
         }
 
+        /// <summary>
+        /// Notifies the client that the turn of the expeled player has been ended.
+        /// </summary>
+        /// <param name="nextPlayerUsername">The name of the player who is gonna take the next turn.</param>
         public void EndTurnOfExpelPlayer(string nextPlayerUsername)
         {
             TurnLabel.Content = Properties.Langs.Resources.TurnMessage + ": " + nextPlayerUsername;

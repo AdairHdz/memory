@@ -4,7 +4,7 @@ namespace MemoryGameService.Logic
 {
     /// <summary>
     /// The <c>ServicePlayerInLobby</c> class.
-    /// It is used save the basic information of a player wwho joined the lobby of a match.
+    /// It is used save the basic information of a player who joined the lobby of a match.
     /// </summary>
     public class ServicePlayerInLobby
     {

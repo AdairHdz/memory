@@ -94,7 +94,8 @@
             <Button Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="4"
                     Margin="20,5,20,10"
                     Style="{StaticResource buttonSecondary}"
-                    Content="{x:Static p:Resources.Cancel}"/>
+                    Content="{x:Static p:Resources.Cancel}"
+                    Click="BackButtonClicked"/>
         </Grid>
     </Grid>
 </Window>
