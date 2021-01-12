@@ -161,19 +161,12 @@ namespace UnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DbUpdateException), "Non existing database")]
+        [ExpectedException(typeof(EntityException), "Non existing database")]
         public void NonExistingDatabase()
         {
-            Player player = new Player()
-            {
-                EmailAddress = "eliam@hotmail.com",
-                Score = 0
-            };
-
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            unitOfWork.Players.Add(player);
+            var playersRetrieved = unitOfWork.Players.GetAll();
             unitOfWork.Complete();
-            //Assert.ThrowsException<EntityException>();
         }
     }
 }
