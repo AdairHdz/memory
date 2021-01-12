@@ -6,8 +6,6 @@
 
 // Skipping function ItsRegistered(none), it contains poisonous unsupported syntaxes
 
-// Skipping function GetPlayerCredentials(none), it contains poisonous unsupported syntaxes
-
 // Skipping function GetSalt(none), it contains poisonous unsupported syntaxes
 
 // Skipping function HasAccessRights(none, none), it contains poisonous unsupported syntaxes

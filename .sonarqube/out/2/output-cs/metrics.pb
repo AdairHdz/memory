@@ -1,8 +1,8 @@
 }
 iC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAccountModifiabilityService.csr	
-|
-hC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAccountVerificationService.csr	
-{
+å
+hC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAccountVerificationService.csjr	
+{
 fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\ICardDeckRetrieverService.csr	
 ~
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\ILobbyService.csr	
@@ -12,12 +12,7 @@ bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IMatc
 cC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IMatchDiscoveryService.csr	
 x
 cC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IPlayerRegistryService.csr	
-§
-kC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjectMappers\CardDeckMapper.cs 8r 	
- !"#Ç
- ñ
-gC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjectMappers\CardMapper.cs 8r	
-Çî
+î
 bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\CardDeckDTO.cs 
 8
 j	!"#r
@@ -53,13 +48,13 @@ eC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObj
 hC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerMovementDto.cs 
 8
 j	
-rô
-oC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\VerificationTokenInfoDto.cs 
+rç
+cC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\TokenInfoDto.cs 
 8
 j	
-rÉ
-bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAccessibilityService.csr	
- !"#
+rŒ
+bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAccessibilityService.csjL	
+ !"#$%&'()*./0123489:;<=>BCDEFGHMNOPQRSXYZ[\]^_cdefgr+,-56?@IJTUV`ahijk
 bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\ICommunicationService.csr	
 m
 \C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IMailingService.csr	
@@ -76,24 +71,20 @@ ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IScor
 ^C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Faults\NonExistentUserFault.cs 8jr	
 Çã
 TC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Faults\TypedFault.cs 8j !r	
-"#$%&'(Ç$%{
-UC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\GlobalErrorHandler.cs 8r	
-Çü
-fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\GlobalErrorHandlerBehaviorAttribute.cs 8r#	
- !"#$%'(*+,xÇ "~
+"#$%&'(Ç$%~
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Properties\AssemblyInfo.csj !"r	
-#$∆
-_C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccesibilityService.csS 8jv !"#$%&'()*+,-./456789:YZ[\]^_}~ÄÅÇÉ†°¢£§•¶√ƒ≈∆«»…ÌÓÔÒÚÛëíìîïñóòrÈ	012;<=>?@ABCDEFGHIJKLMNOPQRSTUVW`abcdefghijklmnopqrstuvwxyz{ÑÖÜáàâäãåçéèêëíìîïñóòôöõúùûß®©™´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªºΩæø¿¡ ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÙıˆ˜¯˘˙˚¸˝˛ˇÄÅÇÉÑÖÜáàâäãåçéèôöõúùûü†°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥¥µxÇt2@ACDGKLPQUefhkoptuyâäåéíìóòú¨≠Ø±µ∂∫ªøœ–‘’÷ÿ€ﬂ‡‰ÂÈ˘˙¸ˇÉÑàâçûü°£ß®¨≠±Ä
-gC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccountModifiabilityService.cs 8j !"#$%DEFGHIJKrM	&'()*+,-./0123456789:;<=>?@ABLMNOPQRSTUVWXYZ[\]^_`abcdefghijkmnoxÇ+,./0267;<@OPQTUWXYZ\`aefjΩ
-fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccountVerificationService.cs% 8j+"#$%&'(GHIJKLMNmnopqrstru
- !)*+,-./0123456789:;<=>?@ABCDEOPQRSTUVWXYZ[\]^_`abcdefghijkuvwxyz{|}~ÄÅÇÉÑÖÜáàâäãåçéèêëx
-Ç$./12359:>?CTUWXY[_`deiz{}ÉÑàâçµ
-dC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\CardDeckRetrieverService.cs  8j2 !"#$%&,-./012;<=UVWXYZ[~Ääãårm	
-'()*3456789:?@BCDEFGHIJKLMNOPQRS\]^_`abcdefghijklmnopqrstuvwxyz{|ÅÇÉÑÖÜáàçéèêëíìxÇ89:?@BCGHLMQacghjlpquvzÉÖÜê°
+#$⁄
+_C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccesibilityService.cs? 8j	0Noè¥rî	 !"#$%&'()*+,-.123456789:;<=>?@ABCDEFGHIJKOPQRSTUVWXYZ[\]^_`abcdefghijklmpqrstuvwxyz{|}~ÄÅÇÉÑÖÜáàâäãåçêëíìîïñóòôöõúùûü†°¢£§•¶ß®©™´¨≠ÆØ∞±µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘xÇJ!%(,67;>BEITUWY]`dgkuvxz~ÄÑáãïñòö¢§®´Ø∫ªΩø√≈…Ã–Ä
+gC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccountModifiabilityService.cs 8j !"#FGHIJKLMrO	
+$%&'()*+,-./0123456789:;<=>?@ABCDNOPQRSTUVWXYZ[\]^_`abcdefghijklmopqxÇ)*,-.047;>BQRSVWXYZ^aehl˚
+fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccountVerificationService.cs= 8j4
+ !"#$%&IJKLMNOPsñóòôöõúùrÇ	'()*+,-./0123456789:;<=>?@ABCDEFGQRSTUVWXYZ[\]^_`abcdefghijklmnopqtuvwxyz{|}~ÄÅÇÉÑÖÜáàâäãåçéèêëíìîûü†°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªºæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁxÇK,-/0137:>AEVWYZ[]adhkoyz|}~ÄÑáãéí£§¶®¨Ø≥∂∫√ƒ∆»Ãœ”÷⁄›
+dC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\CardDeckRetrieverService.cs  8j4 !"#)*+,-./?@A]^_`abcäãåöõúrä	$%&'0123456789:;<=>CDFGHIJKLMNOPQRSTUVWXYZ[defghijklmnopqrstuvwxyz{|}~ÄÅÇÉÑÖÜáàçéèêëíìîïñóòùûü†°¢£xÇ'5689:;>CDFGKNRUYikoprtx{ÇÜèìîñ†°
 `C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\CommunicationService.cs 8r+	
- !"#$%'()*,-./0134Ç"#$)/0à
-XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\LobbyService.cs 8j5	
- !$%&'(26789:FJKLMNbcdepqrstrL"#)*+,-./0134;<=>?@ABCDEGHOPQRSTUVWXYZ[\]^_`fghijklnuvwxyz{|}~ÄÅÇÉxÇ+,./03=>@ABQRTUVXY]hikxz|}ÄÆ
+ !"#$%'()*,-./0134Ç"#$)/0ˇ
+XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\LobbyService.cs 8j4	
+ !$%&'(26789:FGHIJ^_`almnoprE"#)*+,-./0134;<=>?@ABCDKLMNOPQRSTUVWXYZ[\bcdefghjqrstuvwxyz{|}~x
+Ç+,./03=>@ABMNPQRTUYdegtvxy|Æ
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MailingService.cs 8j
 r'	 !"#$%&'()*+,-./012345789xÇ
  !"$%(,2ç
@@ -101,15 +92,15 @@ ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\Mailin
 rÇŸ
 aC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MatchDiscoveryService.cs 8j	
  !"#$%GHIJr5&'()*+,-./012345678:;<=?@ABCDEKLMNOPQRSTUVWXx
-Ç()/34567:<?ACNPRUí
-XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MatchService.csw 8 jö !"#$%&'()*+,-./0123456789:;<=>?@ADEFGH^_`abijklçéèê√ƒ≈∆«»ÍÎÏÌÓóòôöõú—“”‘’ﬂ·‚„‰ÔÒÚÛÙÉÑÖÜáàr±
-BCIJKMNOPQSTUVWXYZ[\cdefgmnoprstuvwxyz{|}~ÄÅÇÑÜáàâãëíîïñóòôöõúùûü°¢£§•¶ß©™¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªºΩø¿¡… ÀÃÕœ–—“”‘’÷ÿŸ⁄‹ﬁﬂ‡·„‰ÂÊËÔÒÛÙı˜¯˘˙˚˝˛ˇÅÇÉÑÖáàâäãåéèëíìîïùûü†°£§•ß®™´¨≠Ø∞±≤≥µ∂∑π∫ªºΩø¿¡¬√ƒ∆«… ÀÃŒœ÷◊ÿ⁄‹›ÂÊÁÈÍÏÌıˆ˜¯˘˙˚¸˝˛ÄÅâäãåçéèêëíìîïx%ÇŸKNPX[efoprsuvz|ÄÑÜàîïóòôöúùû§¶©™∞≤≥∑∏ºøÀÃÕœ—’ÿŸ⁄‹ﬁ‡„ÂÒÛÙı˜˘˙˚˝˛ˇÅÉáàäãéèëìü†°£§•ß®™¨≠Ø±≤≥µ∂∑πªø¿¬√∆«…Àÿ⁄‹ÁÈÍÏ˜˘˝Äãçë|
+Ç()/34567:<?ACNPRUß
+XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MatchService.csy 8 jó !"#$%&'()*+,-./0123456789:;<=>?@CDEFG]^_`ahijkåçéèÃÕŒœ–—ÛÙıˆ˜†°¢£§•⁄€‹›ﬁËÍÎÏÌ¯˘˙˚¸˝åçéèêër∆	
+ABHIJLMNOPRSTUVWXYZ[bcdeflmnoqrstuvwxyz{|}~ÄÅÉÖÜáàäêëìîïñóòôöõúùû†°¢£§•¶®©´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆»… “”‘’÷ÿŸ⁄€‹›ﬁﬂ·‚„ÂÁËÈÍÏÌÓÔÒ¯˘˙¸˝˛ÄÅÇÉÑÜáàäãåçéêëíìîïóòöõúùû¶ß®©™¨≠Æ∞±≥¥µ∂∏π∫ªºæø¿¬√ƒ≈∆»… ÀÃÕœ–“”‘’◊ÿﬂ‡·„ÂÊÓÔÚÛıˆ˛ˇÄÅÇÉÑÖÜáâäíìîïñóòôöõúùûx'Ç‹JMOWZdenoqrtuy{ÉÖáìîñóòôõúù£•®©Ø±≤∂∫æ¡≈»‘’÷ÿ⁄ﬁ·‚„ÂÁÈÏÓ˙¸˝˛ÄÇÉÑÜáàäåêëìîóòöú®©™¨≠Æ∞±≥µ∂∏∫ªºæø¿¬ƒ»…ÀÃœ–“‘·„ÂÚÛıÄÇÜâîñö|
 ]C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MemoryGameService.cs 8j	r
-Œ
-aC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\PlayerRegistryService.cs$ 8j' #$%&'()*VWXYZ[xyz{|}râ	
-!"+,./012345689:;<=>?@ABCDEFGHIJKLMNOPQRST\]^_`abcdefghijklmnopqrstuv~ÄÅÇÉÑÖÜáàâäãåçéèêëíìîïñóòõúxÇ)0125:ABCDHIMNRabdfjkoptÉÑÜàåçëíñ∫
-XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\ScoreService.cs 8j !"r2	
-#$%&'()+,-./012356789:;<=>?@ABCDEFGxÇ(+/0259:>?Cé
+Ê
+aC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\PlayerRegistryService.cs$ 8j- #$%&'()*Z[\]^_ÄÅÇÉÑÖrõ	
+!"+,./012345689:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWX`abcdefghijklmnopqrstuvwxyz{|}~Üáàâäãåçéèêëíìîïñóòôöõúùûü†°¢£§ß®xÇ)0125:ABCDHKORVefhjnqux|ãåéêîóõû¢ª
+XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\ScoreService.cs 8jr3
+ !"#$%&()*+,-./023456789:;<=>?@ABCDEFGHxÇ%(,-/269=@Dé
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\TokenGenerator.cs 8j	
 r Çà
 YC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Utilities\CardShuffler.cs 8j	r
