@@ -191,17 +191,6 @@ namespace UnitTests.DataAccessLayerTests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        public void RemoveAll_Success()
-        {
-            var accounts = _repository.GetAll();
-            _repository.RemoveRange(accounts);
-            int expected = 0;
-            int actual = _mockSet.Count();
-
-            Assert.AreEqual(expected, actual);
-        }
-
         /*
         [TestMethod]
         public void RemoveElement_Success()
