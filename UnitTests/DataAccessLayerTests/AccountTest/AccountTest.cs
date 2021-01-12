@@ -202,54 +202,6 @@ namespace UnitTests.DataAccessLayerTests
             Assert.AreEqual(expected, actual);
         }
 
-        /*
-        [TestMethod]
-        public void RemoveElement_Success()
-        {
-            DbSet<Account> mockSet = GetQueryableMockDbSet(_data);
-            var mockContext = GetContext(mockSet);
-            var repository = new AccountRepository(mockContext);
-
-            Account account = new Account()
-            {
-                EmailAddress = "adairho16@gmail.com",
-                Username = "AdairHz",
-                Password = "adahplf0015",
-                Salt = "123456",
-                EmailWasVerified = true,
-                ActivationToken = null,
-                RecoveryToken = null,
-                Player = null
-            };            
-
-            repository.Remove(account);
-
-            int expected = 2;
-            int actual = mockSet.Count();
-            Assert.AreEqual(expected, actual);
-        }
-        */
-        /*
-        [TestMethod]
-        public void GetElement_Success()
-        {
-            string emailAddress = "adairho16@gmail.com";
-            Account expectedEntity = _data.Find(x => x.EmailAddress == emailAddress);
-            DbSet<Account> mockSet = GetQueryableMockDbSet(_data);
-
-            var mockContext = GetContext(mockSet);
-            var repository = new AccountRepository(mockContext);
-            
-
-            var result = repository.Get(emailAddress);
-
-            
-
-            Assert.AreSame(expectedEntity, result);
-
-        }
-        */
-
         private MemoryGameContext GetContext(DbSet<Account> dbSet)
         {
             var mockContext = new Mock<MemoryGameContext>();
