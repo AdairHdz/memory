@@ -39,14 +39,14 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
     /// </item>
     /// </list>
     /// </summary>
-    public class Lobby
+    public class ServiceLobby
     {
         private IList<PlayerInLobby> _playersConnectedToLobby;
 
         /// <summary>
         /// Class constructor.
         /// </summary>
-        public Lobby()
+        public ServiceLobby()
         {
             _playersConnectedToLobby = new List<PlayerInLobby>();
         }

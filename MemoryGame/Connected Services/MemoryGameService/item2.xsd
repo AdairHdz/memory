@@ -59,16 +59,16 @@
       <xs:element minOccurs="0" name="CardDeckDto" nillable="true" type="tns:CardDeckDTO" />
       <xs:element minOccurs="0" name="HasStarted" type="xs:boolean" />
       <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Lobby" nillable="true" type="tns:Lobby" />
+      <xs:element minOccurs="0" name="Lobby" nillable="true" type="tns:ServiceLobby" />
       <xs:element minOccurs="0" name="MaxNumberOfPlayers" type="xs:int" />
       <xs:element minOccurs="0" name="TotalPairs" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MatchDto" nillable="true" type="tns:MatchDto" />
-  <xs:complexType name="Lobby">
+  <xs:complexType name="ServiceLobby">
     <xs:sequence />
   </xs:complexType>
-  <xs:element name="Lobby" nillable="true" type="tns:Lobby" />
+  <xs:element name="ServiceLobby" nillable="true" type="tns:ServiceLobby" />
   <xs:complexType name="ArrayOfMatchDto">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MatchDto" nillable="true" type="tns:MatchDto" />
@@ -103,7 +103,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ExpulsionVotes" type="xs:int" />
       <xs:element minOccurs="0" name="HasActiveTurn" type="xs:boolean" />
-      <xs:element minOccurs="0" name="MatchServiceConnection" nillable="true" type="xs:anyType" />
       <xs:element minOccurs="0" name="Score" type="xs:int" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
     </xs:sequence>

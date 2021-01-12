@@ -1,7 +1,7 @@
 ﻿using MemoryGameService.Contracts;
 using System.Collections.Generic;
 
-namespace MemoryGame.MemoryGameService.DataTransferObjects
+namespace MemoryGameService.Logic
 {
     /// <summary>
     /// The <c>PlayerInMatch</c> class.
@@ -30,7 +30,7 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
     /// </item>
     /// </list>
     /// </summary>
-    public class PlayerInMatch
+    public class ServicePlayer
     {
         /// <summary>
         /// Username of the player.
@@ -39,11 +39,15 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         /// <summary>
         /// Total score of the player.
         /// </summary>
-        public int Score { get; set; } 
+        public int Score { get; set; }
         /// <summary>
         /// Verifies if the turn is active or not.
         /// </summary>
         public bool HasActiveTurn { get; set; } = false;
+        /// <summary>
+        /// The callback connection of the player.
+        /// </summary>
+        public IMatchServiceCallback MatchServiceConnection { get; set; }
         /// <summary>
         /// Expulsion votes for the player.
         /// </summary>
@@ -60,11 +64,55 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
         /// <summary>
         /// Constructor of the class.
         /// </summary>
-        public PlayerInMatch()
+        public ServicePlayer()
         {
             _playersVoted = new List<string>();
             _uncoveredCards = new List<int>();
         }
 
+        /// <summary>
+        /// Gets the list of the players the players has voted for.
+        /// </summary>
+        /// <returns>A string list wt¿ith the usernames.</returns>
+        public IList<string> GetPlayersVoted()
+        {
+            return _playersVoted;
+        }
+
+        /// <summary>
+        /// Adds a player username to the players voted list.
+        /// </summary>
+        /// <param name="playerUsername">Username of the new player voted.</param>
+        public void AddPlayerVoted(string playerUsername)
+        {
+            _playersVoted.Add(playerUsername);
+        }
+
+        /// <summary>
+        /// Gets a list of all the cards uncovered by the player.
+        /// </summary>
+        /// <returns>A int list with the indexes of the cards.</returns>
+        public IList<int> GetUncoveredCards()
+        {
+            return _uncoveredCards;
+        }
+
+        /// <summary>
+        /// Adds a new card uncovered by the player.
+        /// </summary>
+        /// <param name="cardIndex">New card uncovered index.</param>
+        public void AddUncoveredCard(int cardIndex)
+        {
+            _uncoveredCards.Add(cardIndex);
+        }
+
+        /// <summary>
+        /// Removes the last card in the uncovered card list.
+        /// </summary>
+        public void RemoveUncoveredCard()
+        {
+            int indexOfLastCard = _uncoveredCards.Count - 1;
+            _uncoveredCards.Remove(_uncoveredCards[indexOfLastCard]);
+        }
     }
 }

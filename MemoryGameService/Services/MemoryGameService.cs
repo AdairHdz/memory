@@ -1,4 +1,5 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGameService.Logic;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -12,7 +13,7 @@ namespace MemoryGameService.Services
         ConcurrencyMode = ConcurrencyMode.Single)]
     public partial class MemoryGameService
     {
-        private static IList<MatchDto> _matches = new List<MatchDto>();
+        private static IList<ServiceMatch> _matches = new List<ServiceMatch>();
         /// <summary>
         /// Is the constructor for the MemoryGameService class.
         /// </summary>

@@ -1,7 +1,7 @@
 ﻿namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
     /// <summary>
-    /// The <c>VerificationTokenInfoDto</c> class.
+    /// The <c>TokenInfoDto</c> class.
     /// It is used to save the basic info when a player introduce a verify token..
     /// </summary>
     public class TokenInfoDto

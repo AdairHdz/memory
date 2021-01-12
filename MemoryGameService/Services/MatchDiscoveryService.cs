@@ -1,6 +1,7 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGame.MemoryGameService.Faults;
 using MemoryGameService.Contracts;
+using MemoryGameService.Logic;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -12,7 +13,7 @@ namespace MemoryGameService.Services
         /// <inheritdoc/>
         public bool CanJoin(string matchHost)
         {
-            MatchDto gameMatch = GetMatch(matchHost);
+            ServiceMatch gameMatch = GetMatch(matchHost);
             if (gameMatch == null)
             {
                 MatchAccessDeniedFault matchAccessDeniedFault = new MatchAccessDeniedFault()
@@ -23,7 +24,7 @@ namespace MemoryGameService.Services
             }
             else
             {
-                Lobby lobby = gameMatch.Lobby;
+                ServiceLobby lobby = gameMatch.Lobby;
                 IList<PlayerInLobby> playersConnectedToLobby = lobby.GetPlayersConnectedToLobby();
                 int numberOfPlayersConnectedToLobby = playersConnectedToLobby.Count;
                 int numberOfPlayersRequired = gameMatch.MaxNumberOfPlayers;
@@ -51,7 +52,35 @@ namespace MemoryGameService.Services
             {
                 if (!match.HasStarted)
                 {
-                    matchesWaitingToStart.Add(match);
+
+                    IList<CardDto> cards = new List<CardDto>();
+
+                    foreach(var card in match.ServiceCardDeck.Cards)
+                    {
+                        CardDto cardDto = new CardDto()
+                        {
+                            CardId = card.CardId,
+                            FrontImage = card.FrontImage
+                        };
+                        cards.Add(cardDto);
+                    }
+
+                    CardDeckDTO cardDeckDto = new CardDeckDTO()
+                    {
+                        CardDeckId = match.ServiceCardDeck.CardDeckId,
+                        Name = match.ServiceCardDeck.Name,
+                        BackImage = match.ServiceCardDeck.BackImage,
+                        Cards = cards
+                    };
+
+                    MatchDto matchDto = new MatchDto()
+                    {
+                        Host = match.Host,
+                        HasStarted = false,
+                        MaxNumberOfPlayers = match.MaxNumberOfPlayers,
+                        CardDeckDto = cardDeckDto
+                    };
+                    matchesWaitingToStart.Add(matchDto);
                 }
             }
             return matchesWaitingToStart;
