@@ -4,11 +4,15 @@ using System.Windows;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("MainWindow.xaml.cs");
+        
+        /// <summary>
+        /// The <c>MainWindow</c> constructor.
+        /// </summary>
         public MainWindow()
         {
             LoadCultureInfo();

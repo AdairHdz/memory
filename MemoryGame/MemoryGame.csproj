@@ -19,7 +19,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\MemoryGame.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -113,9 +114,6 @@
     <Compile Include="Views\ChangeUsername.xaml.cs">
       <DependentUpon>ChangeUsername.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Chat.xaml.cs">
-      <DependentUpon>Chat.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CreateGame.xaml.cs">
       <DependentUpon>CreateGame.xaml</DependentUpon>
     </Compile>
@@ -165,10 +163,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ChangeUsername.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Chat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,6 +286,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDto1.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDto2.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDto3.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDto4.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDeckInfoDto.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.CardDTO.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.GameMatchConfigDto.datasource" />
@@ -302,6 +300,10 @@
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatch.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerInMatchDto.datasource" />
     <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDTO.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDto1.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDto2.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDto3.datasource" />
+    <None Include="Properties\DataSources\MemoryGame.MemoryGameService.DataTransferObjects.PlayerScoreDto4.datasource" />
     <None Include="Properties\DataSources\MemoryGameService.DataTransferObjects.CardDTO.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -75,7 +75,7 @@
                     <DataGridTextColumn 
                         HeaderStyle="{StaticResource dataGridHeader}"
                         Header="{x:Static p:Resources.Username}" Width="150"
-                        x:Name="DataGridTextColumnUsername"
+                        x:Name="UsernameDataGridTextColumn"
                         Binding="{Binding Username}"/>
                     <DataGridTextColumn
                         HeaderStyle="{StaticResource dataGridHeader}"

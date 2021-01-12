@@ -9,7 +9,10 @@ namespace MemoryGame
     /// </summary>
     public partial class ScoreTable : Window
     {
-        private MemoryGameService.DataTransferObjects.PlayerScoreDTO[] _bestScores;
+        private MemoryGameService.DataTransferObjects.PlayerScoreDto[] _bestScores;
+        /// <summary>
+        /// The <c>ScoreTable</c> constructor.
+        /// </summary>
         public ScoreTable()
         {
             InitializeComponent();

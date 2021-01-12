@@ -70,6 +70,7 @@ namespace MemoryGameService.Contracts
         /// <returns>A string of the email address.</returns>
         /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
         /// <exception cref="EntityException">Thrown when there is no database.</exception>
+        [FaultContract(typeof(NonExistentUserFault))]
         [OperationContract]       
         string GetUserEmailAddress(string username);
 

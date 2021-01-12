@@ -116,35 +116,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_ICommunicationService_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
-        <wsaw:UsingAddressing />
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="NetTcpBinding_ILobbyService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -404,6 +375,9 @@
   <wsdl:message name="IAccessibilityService_GetUserEmailAddress_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserEmailAddressResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUserEmailAddress_NonExistentUserFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q1:NonExistentUserFault" />
+  </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetSalt_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSalt" />
   </wsdl:message>
@@ -411,7 +385,7 @@
     <wsdl:part name="parameters" element="tns:GetSaltResponse" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetSalt_NonExistentUserFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q1:NonExistentUserFault" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q2:NonExistentUserFault" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_HasAccessRights_InputMessage">
     <wsdl:part name="parameters" element="tns:HasAccessRights" />
@@ -479,27 +453,6 @@
   <wsdl:message name="IAccountVerificationService_VerifyRecoveryToken_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerifyRecoveryTokenResponse" />
   </wsdl:message>
-  <wsdl:message name="ICommunicationService_SubscribeToCommunicationService_InputMessage">
-    <wsdl:part name="parameters" element="tns:SubscribeToCommunicationService" />
-  </wsdl:message>
-  <wsdl:message name="ICommunicationService_SubscribeToCommunicationService_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SubscribeToCommunicationServiceResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICommunicationService_UnsubscribeFromCommunicationService_InputMessage">
-    <wsdl:part name="parameters" element="tns:UnsubscribeFromCommunicationService" />
-  </wsdl:message>
-  <wsdl:message name="ICommunicationService_UnsubscribeFromCommunicationService_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UnsubscribeFromCommunicationServiceResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICommunicationService_SendMessage_InputMessage">
-    <wsdl:part name="parameters" element="tns:SendMessage" />
-  </wsdl:message>
-  <wsdl:message name="ICommunicationService_ReciveMessage_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReciveMessage" />
-  </wsdl:message>
-  <wsdl:message name="ICommunicationService_NotifyUserHasEnteredTheChat_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyUserHasEnteredTheChat" />
-  </wsdl:message>
   <wsdl:message name="ILobbyService_JoinLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:JoinLobby" />
   </wsdl:message>
@@ -549,7 +502,7 @@
     <wsdl:part name="parameters" element="tns:CanJoinResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchDiscoveryService_CanJoin_MatchAccessDeniedFaultFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q2:MatchAccessDeniedFault" />
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q3:MatchAccessDeniedFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_NotifyCardWasUncoveredd_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyCardWasUncoveredd" />
@@ -650,6 +603,7 @@
     <wsdl:operation name="GetUserEmailAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress" message="tns:IAccessibilityService_GetUserEmailAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse" message="tns:IAccessibilityService_GetUserEmailAddress_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetUserEmailAddress_NonExistentUserFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetSalt">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetSalt" message="tns:IAccessibilityService_GetSalt_InputMessage" />
@@ -705,25 +659,6 @@
     <wsdl:operation name="VerifyRecoveryToken">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyRecoveryToken" message="tns:IAccountVerificationService_VerifyRecoveryToken_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyRecoveryTokenResponse" message="tns:IAccountVerificationService_VerifyRecoveryToken_OutputMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:portType msc:usingSession="true" name="ICommunicationService">
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SubscribeToCommunicationService">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/SubscribeToCommunicationService" message="tns:ICommunicationService_SubscribeToCommunicationService_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/SubscribeToCommunicationServiceResponse" message="tns:ICommunicationService_SubscribeToCommunicationService_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="true" name="UnsubscribeFromCommunicationService">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationService" message="tns:ICommunicationService_UnsubscribeFromCommunicationService_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationServiceResponse" message="tns:ICommunicationService_UnsubscribeFromCommunicationService_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendMessage">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICommunicationService/SendMessage" message="tns:ICommunicationService_SendMessage_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReciveMessage">
-      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/ReciveMessage" message="tns:ICommunicationService_ReciveMessage_OutputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NotifyUserHasEnteredTheChat">
-      <wsdl:output wsaw:Action="http://tempuri.org/ICommunicationService/NotifyUserHasEnteredTheChat" message="tns:ICommunicationService_NotifyUserHasEnteredTheChat_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="ILobbyService">
@@ -883,6 +818,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="NonExistentUserFaultFault">
+        <soap12:fault use="literal" name="NonExistentUserFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetSalt">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetSalt" style="document" />
@@ -1003,46 +941,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_ICommunicationService" type="tns:ICommunicationService">
-    <wsp:PolicyReference URI="#NetTcpBinding_ICommunicationService_policy" />
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="SubscribeToCommunicationService">
-      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/SubscribeToCommunicationService" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UnsubscribeFromCommunicationService">
-      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/UnsubscribeFromCommunicationService" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SendMessage">
-      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/SendMessage" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="ReciveMessage">
-      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/ReciveMessage" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyUserHasEnteredTheChat">
-      <soap12:operation soapAction="http://tempuri.org/ICommunicationService/NotifyUserHasEnteredTheChat" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1346,15 +1244,6 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IAccountVerificationService" binding="tns:NetTcpBinding_IAccountVerificationService">
-      <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
-      <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-AASH9DD9\Adair Hernández</Upn>
-        </Identity>
-      </wsa10:EndpointReference>
-    </wsdl:port>
-    <wsdl:port name="NetTcpBinding_ICommunicationService" binding="tns:NetTcpBinding_ICommunicationService">
       <soap12:address location="net.tcp://localhost:8090/MemoryGameService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/MemoryGameService</wsa10:Address>

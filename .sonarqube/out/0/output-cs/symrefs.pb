@@ -80,11 +80,11 @@ JC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Match.cs
 
 $$ 
 
-&&  (
+**  (
 
-++ "
+// "
 
--- $—
+55 $—
 KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Sesion.cs
  		  (
 		 + ! ! $
@@ -103,42 +103,7 @@ KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Player.cs
 
  "
 
- ¨
-dC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202101110153060_FinalDatabase.cs
-
- &
-
- P
- ' (# $# $  + ,* +( )
- ! "
-+ ,0 1
-  
- ' (  !
-!! !!! "2
-%% ''% &((  ))$ %**( )
-,, ,,! "(
-00 22! "33% &44% &
-66 66! "
-77- .772 3
-88 88 2
-<< >>" #??  @@% &AA' (
-CC CC! "
-DD- .DD2 3
-EE+ ,EE0 1
-FF FF 
-GG GG 
-
-KK !∆
-TC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\Configuration.cs
-
- '
-
- 
-
-  $
-B I  
-* +/ 0
-& '+ ,U
+ U
 SC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Properties\AssemblyInfo.csê
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\AccountRepository.cs
 

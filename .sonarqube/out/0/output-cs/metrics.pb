@@ -6,21 +6,15 @@ MC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\CardDeck.cs
 IC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Card.cs 8j	 r
 !"#$á
 MC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\MemoryGameContext.cs 8j	!"#%&'r
- $()*ÇÄ
-JC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Match.cs 8j	
-!"#()*r$%&+,-./É
+ $()*ÇÜ
+JC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Match.cs 8j	
+!"#&'(,-.123r$)*/4567É
 KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Sesion.cs 8j
 r	 !"#xÇp
 KC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Entities\Player.cs 8jr	
-Ä
-dC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\202101110153060_FinalDatabase.cs 8rU	
- !#$%&'()*+,./012345678:;<=>?@ABCDEFGIKLMNOPQRSTUVWXYZ[\Ç8
-!#%'()*,.0234678:<>?@ACDEFGMNOPQRSTUVWXY¬
-TC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Migrations\Configuration.cs 8r\	
- !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_Ç
-w
-SC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Properties\AssemblyInfo.csj !"r	
-#$©
+v
+SC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Properties\AssemblyInfo.csj !r	
+"#©
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\DataAccess\Repositories\AccountRepository.cs 8j)r'	
  !"#$%&'*+,-./0123456xÇ
  !#$&-.03ü

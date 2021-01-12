@@ -13,9 +13,7 @@ namespace DataAccess.Entities
         /// Class constructor.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Account()
-        {
-        }
+        public Account() { }
 
         /// <summary>
         /// Player's registered email.

@@ -5,15 +5,33 @@ using System;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para GameOptions.xaml
+    /// Interaction logic for GameOptions.xaml
     /// </summary>
     public partial class GameOptions : Window
     {
+        /// <summary>
+        /// The Context of the current communication channel.
+        /// </summary>        
         public InstanceContext Context { get; set; }
+
+        /// <summary>
+        /// The host of the current match.
+        /// </summary>
         public string MatchHost { get; set; }
+
+        /// <summary>
+        /// The number of players in the current match.
+        /// </summary>
         public int NumberOfPlayersInMatch { get; set; }
+
+        /// <summary>
+        /// The username of the player who opened the Expel Player window.
+        /// </summary>
         public string PlayerUsername { get; set; }
 
+        /// <summary>
+        /// The <c>GameOptions</c> constructor.
+        /// </summary>
         public GameOptions()
         {
             InitializeComponent();

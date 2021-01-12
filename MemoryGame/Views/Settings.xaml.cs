@@ -11,14 +11,23 @@ namespace MemoryGame
     public partial class Settings : Window
     {
         private string _selectedTag;
+        
+        /// <summary>
+        /// The <c>Settings</c> constructor.
+        /// </summary>
         public Settings()
         {                        
             InitializeComponent();
         }
 
-        public void SaveChangesButtonClicked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Specifies the behavior for then the "Save changes" button is clicked.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="routedEventArgs">The arguments of the event.</param>
+        public void SaveChangesButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {            
-            _selectedTag = ((ComboBoxItem)ComboBoxLanguageSelection.SelectedItem).Tag.ToString();            
+            _selectedTag = ((ComboBoxItem)LanguageSelectionComboBox.SelectedItem).Tag.ToString();            
             try
             {
                 var culture = new CultureInfo(_selectedTag);
@@ -36,7 +45,12 @@ namespace MemoryGame
             GoToMainWindow();
         }
 
-        public void BackButtonClicked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Specifies the behavior for when the "Back" button is clicked.
+        /// </summary>
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="routedEventArgs">The arguments for the event</param>
+        public void BackButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             GoToMainWindow();
         }

@@ -11,13 +11,17 @@ using System;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para Login.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
     public partial class Login : Window
     {
         private RuleSet _ruleSet;
         private string _username, _password;
         private AccessibilityServiceClient _accessibilityServiceClient;
+        
+        /// <summary>
+        /// The <c>Login</c> constructor.
+        /// </summary>
         public Login()
         {            
             InitializeComponent();
@@ -26,8 +30,8 @@ namespace MemoryGame
 
         private void GetDataFromFields()
         {
-            _username = TextBoxUsername.Text;
-            _password = PasswordBoxPassword.Password;
+            _username = UsernameTextBox.Text;
+            _password = PasswordPasswordBox.Password;
         }
 
         private void SetFormValidation()
@@ -79,9 +83,9 @@ namespace MemoryGame
             }
         }
 
-        public string GetUserEmailAdress()
+        private string GetUserEmailAdress()
         {                      
-            string username = TextBoxUsername.Text;
+            string username = UsernameTextBox.Text;
             string emailAddress = _accessibilityServiceClient.GetUserEmailAddress(username);
             return emailAddress;
         }
@@ -109,7 +113,7 @@ namespace MemoryGame
             }
         }
 
-        public bool LoginIsValid()
+        private bool LoginIsValid()
         {
             BCryptHashGenerator bCryptHashGenerator = new BCryptHashGenerator();
             string salt = GetPasswordSalt();
@@ -124,14 +128,14 @@ namespace MemoryGame
             return salt;
         }
 
-        public bool EmailIsVerified()
+        private bool EmailIsVerified()
         {
-            string username = TextBoxUsername.Text;
+            string username = UsernameTextBox.Text;
             bool emailIsVerified = _accessibilityServiceClient.IsVerified(username);
             return emailIsVerified;
         }
 
-        public void GoToMainMenu()
+        private void GoToMainMenu()
         {
             MainMenu mainMenuView = new MainMenu();
             mainMenuView.Show();
@@ -155,7 +159,7 @@ namespace MemoryGame
         private void GoToActivationToken()
         {
             string emailAddress = GetUserEmailAdress();
-            ActivationToken activationTokenWindow = new ActivationToken(emailAddress, TextBoxUsername.Text);
+            ActivationToken activationTokenWindow = new ActivationToken(emailAddress, UsernameTextBox.Text);
             activationTokenWindow.Show();
             this.Close();
         }

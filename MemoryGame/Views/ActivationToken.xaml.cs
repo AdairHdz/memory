@@ -7,7 +7,7 @@ using System.Windows;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para ActivationToken.xaml
+    /// Interaction logic for ActivationToken.xaml
     /// </summary>
     public partial class ActivationToken : Window
     {
@@ -16,6 +16,11 @@ namespace MemoryGame
         private string _newToken;
         private MemoryGameService.AccountVerificationServiceClient _accountVerificationServiceClient;
 
+        /// <summary>
+        /// The <c>ActivationToken</c> constructor.
+        /// </summary>
+        /// <param name="emailAddress">The email address of the user to whom the token will be sent</param>
+        /// <param name="username">The username of the user to whom the token will be sent</param>
         public ActivationToken(string emailAddress, string username)
         {
             InitializeComponent();
@@ -24,7 +29,7 @@ namespace MemoryGame
             _username = username;
         }
 
-        private void OkButtonClicked(object sender, RoutedEventArgs e)
+        private void OkButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             try
             {
@@ -87,7 +92,7 @@ namespace MemoryGame
             return _accountVerificationServiceClient.SetAccountAsVerified(_emailAddress);
         }
 
-        private void SendNewCodeButtonClicked(object sender, RoutedEventArgs e)
+        private void SendNewCodeButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             try
             {
@@ -141,7 +146,7 @@ namespace MemoryGame
             TokenManager.SendToken(verificationTokenInfo);            
         }
 
-        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        private void BackButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             MainWindow mainWindowView = new MainWindow();
             mainWindowView.Show();

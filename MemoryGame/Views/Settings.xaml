@@ -61,7 +61,7 @@
             </Grid.RowDefinitions>
 
             <Label Content="{x:Static p:Resources.Language}" Style="{StaticResource infoLabel}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"></Label>
-            <ComboBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Name="ComboBoxLanguageSelection">
+            <ComboBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Name="LanguageSelectionComboBox">
                 <ComboBoxItem Name="ComboBoxItemSpanishMX" IsSelected="True" Tag="es-MX" Content="{x:Static p:Resources.SpanishMX}"/>
                 <ComboBoxItem Name="ComboBoxItemEnglishUSA"  Tag="en-US"  Content="{x:Static p:Resources.EnglishUSA}"/>
             </ComboBox>

@@ -2,12 +2,15 @@
 
 namespace MemoryGame.InputValidation.RegistryValidation
 {
+    /// <inheritdoc/>
     public class PasswordValidationRule : IValidationRule
     {
-        private readonly string _password;
-        private Regex _regularExpression;
-        private MatchCollection _matches;
+        private readonly string _password;        
 
+        /// <summary>
+        /// The <c>PasswordValidationRule</c> constructor.
+        /// </summary>
+        /// <param name="password">The password to be validated</param>
         public PasswordValidationRule(string password)
         {
             _password = password;
@@ -15,30 +18,30 @@ namespace MemoryGame.InputValidation.RegistryValidation
 
         private bool HasAtLeastOneSpecialCharacter()
         {
-            _regularExpression = new Regex("\\W+");
-            _matches = _regularExpression.Matches(_password);
-            return _matches.Count >= 1;
+            Regex regularExpression = new Regex("\\W+");
+            MatchCollection matches = regularExpression.Matches(_password);
+            return matches.Count >= 1;
         }
 
         private bool HasAtLeastOneCapitalLetter()
         {
-            _regularExpression = new Regex("[A-Z+]");
-            _matches = _regularExpression.Matches(_password);
-            return _matches.Count >= 1;
+            Regex regularExpression = new Regex("[A-Z+]");
+            MatchCollection matches = regularExpression.Matches(_password);
+            return matches.Count >= 1;
         }
 
         private bool HasAtLeastOneNumericCharacter()
         {
-            _regularExpression = new Regex("[0-9]");
-            _matches = _regularExpression.Matches(_password);
-            return _matches.Count >= 1;
+            Regex regularExpression = new Regex("[0-9]");
+            MatchCollection matches = regularExpression.Matches(_password);
+            return matches.Count >= 1;
         }
 
         private bool HasAtLeastOneLowercaseLetter()
         {
-            _regularExpression = new Regex("[a-z+]");
-            _matches = _regularExpression.Matches(_password);
-            return _matches.Count >= 1;
+            Regex regularExpression = new Regex("[a-z+]");
+            MatchCollection matches = regularExpression.Matches(_password);
+            return matches.Count >= 1;
         }
 
         private bool IsBetween8And25CharactersLength()
@@ -46,7 +49,7 @@ namespace MemoryGame.InputValidation.RegistryValidation
             return _password.Length >= 8 && _password.Length <= 25;
         }
 
-
+        /// <inheritdoc/>
         public bool Validate()
         {
             ValidationRuleResult validationRuleResult = GetValidationRuleResult();
@@ -57,6 +60,7 @@ namespace MemoryGame.InputValidation.RegistryValidation
             return false;
         }
 
+        /// <inheritdoc/>
         public ValidationRuleResult GetValidationRuleResult()
         {
             if (HasAtLeastOneSpecialCharacter()

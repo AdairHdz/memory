@@ -1,5 +1,6 @@
 ﻿using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
+using MemoryGameService.Logic;
 using System.Collections.Generic;
 
 namespace MemoryGameService.Services
@@ -10,24 +11,19 @@ namespace MemoryGameService.Services
         /// <inheritdoc/>
         public IList<string> GetActivePlayersInLobby(string host)
         {            
-            MatchDto match = GetMatch(host);
-            if(match != null)
-            {
-                Lobby lobby = match.Lobby;
-                IList<string> activePlayersFromMatch = lobby.GetUsernamesOfPlayersConnectedToLobby();
-                return activePlayersFromMatch;
-            }
-            //throw new NonExistentMatch
-            throw new System.Exception();
+            ServiceMatch match = GetMatch(host);
+            ServiceLobby lobby = match.Lobby;
+            IList<string> activePlayersFromMatch = lobby.GetUsernamesOfPlayersConnectedToLobby();
+            return activePlayersFromMatch;
         }
 
         /// <inheritdoc/>
         public void JoinLobby(string host, string username)
         {
-            MatchDto match = GetMatch(host);
+            ServiceMatch match = GetMatch(host);
             if(match != null)
             {
-                Lobby lobby = match.Lobby;
+                ServiceLobby lobby = match.Lobby;
                 lobby.AddPlayerToLobby(host, username);
                 lobby.NotifyNewPlayerEnteredLobby(username);
             }        
@@ -36,10 +32,10 @@ namespace MemoryGameService.Services
         /// <inheritdoc/>
         public void LeaveLobby(string host, string username)
         {            
-            MatchDto match = GetMatch(host);
+            ServiceMatch match = GetMatch(host);
             if(match != null)
             {
-                Lobby lobby = match.Lobby;
+                ServiceLobby lobby = match.Lobby;
                 lobby.RemovePlayerFromLobby(username);
                 if (host.Equals(username))
                 {
@@ -56,12 +52,11 @@ namespace MemoryGameService.Services
         /// <inheritdoc/>
         public void StartGame(string host)
         {
-            MatchDto match = GetMatch(host);
+            ServiceMatch match = GetMatch(host);
             if(match != null)
             {
                 match.StartMatch();
-            }
-            
+            }            
         }
 
         /// <summary>
@@ -69,9 +64,9 @@ namespace MemoryGameService.Services
         /// </summary>
         /// <param name="host">Name of the player who created the game.</param>
         /// <returns>A specific matchDto object</returns>
-        private MatchDto GetMatch(string host)
+        private ServiceMatch GetMatch(string host)
         {
-            MatchDto gameMatch = null;
+            ServiceMatch gameMatch = null;
             foreach (var match in _matches)
             {
                 if (match.Host.Equals(host))

@@ -1,5 +1,4 @@
-﻿using MemoryGame.MemoryGameService.Faults;
-using MemoryGame.MemoryGameService.DataTransferObjects;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
 using System.ServiceModel;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -41,7 +40,7 @@ namespace MemoryGameService.Contracts
         /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
         /// <exception cref="EntityException">Thrown when there is no database.</exception>
         [OperationContract]
-        CardDeckDTO GetCardDeckAndCards(int cardDeckId);
+        CardDeckDto GetCardDeckAndCards(int cardDeckId);
 
         /// <summary>
         /// Gets a list od CardDecks in data base.

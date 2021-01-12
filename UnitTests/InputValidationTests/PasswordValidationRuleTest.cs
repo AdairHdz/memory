@@ -5,13 +5,7 @@ namespace UnitTests.InputValidationTests
 {
     [TestClass]
     public class PasswordValidationRuleTest
-    {        
-
-        public PasswordValidationRuleTest()
-        {
-            
-        }
-
+    {                
         [TestMethod]
         [DataRow("Abcdefg@12.")]
         [DataRow("CIONTraseña_2712@#$%hola")]

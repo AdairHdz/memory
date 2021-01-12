@@ -6,7 +6,6 @@ using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
 using System.Data.SqlClient;
 using System.Data.Entity.Core;
-using System;
 
 namespace MemoryGameService.Services
 {
@@ -22,8 +21,16 @@ namespace MemoryGameService.Services
             try
             {
                 Account accountRetrieved = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);
-                string emailAddress = accountRetrieved.EmailAddress;
-                return emailAddress;
+                if(accountRetrieved != null)
+                {
+                    string emailAddress = accountRetrieved.EmailAddress;
+                    return emailAddress;
+                }
+                throw new FaultException<NonExistentUserFault>(new NonExistentUserFault()
+                {
+                    Error = "No user with those credentials is registered int the database",
+                    Details = "The username entered does not match any of our registered users"
+                });
             }
             catch (SqlException sqlException)
             {
@@ -183,7 +190,8 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username && account.Password == password);
+                Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => 
+                    account.Username == username && account.Password == password);
                 if(retrievedAccount != null)
                 {
                     return true;

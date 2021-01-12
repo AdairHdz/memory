@@ -13,17 +13,17 @@ namespace MemoryGameService.Services
     /// <inheritdoc/>
     public partial class MemoryGameService : ICardDeckRetrieverService
     {
-        private CardDeckDTO _cardDeckDTO = new CardDeckDTO();
+        private CardDeckDto _cardDeckDTO = new CardDeckDto();
         private IEnumerable<Card> _cards;
 
         /// <inheritdoc/>
-        public CardDeckDTO GetCardDeckAndCards(int cardDeckId)
+        public CardDeckDto GetCardDeckAndCards(int cardDeckId)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
                 CardDeck cardDeck = unitOfWork.CardDecks.GetCardDeckAndCards(cardDeckId);
-                _cardDeckDTO = new CardDeckDTO()
+                _cardDeckDTO = new CardDeckDto()
                 {
                     CardDeckId = cardDeck.CardDeckId,
                     Name = cardDeck.Name,

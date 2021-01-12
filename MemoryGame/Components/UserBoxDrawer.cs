@@ -4,11 +4,25 @@ using System.Windows.Media;
 
 namespace MemoryGame.Components
 {
+    /// <summary>
+    /// The <c>UserBoxDrawer</c> class.
+    /// This class draws the usernames of the players in the match.
+    /// </summary>
     public class UserBoxDrawer
     {
+        /// <summary>
+        /// The grid on which the usernames will be drawn.
+        /// </summary>
         public Grid GridToBeDrawnOn { get; set; }
+
+        /// <summary>
+        /// The usernames of the players from the actual match.
+        /// </summary>
         public string[] PlayersUsernames { get; set; }        
 
+        /// <summary>
+        /// Draws the usernames on the match view.
+        /// </summary>
         public void Draw()
         {
             int rowIndex = 0;

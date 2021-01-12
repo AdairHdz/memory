@@ -42,7 +42,7 @@ namespace UnitTests.HashingTests
         }
 
         [TestMethod]
-        public void Test()
+        public void CompareEncryptedPasswords_Success()
         {
             string salt = BCrypt.Net.BCrypt.GenerateSalt(8);
             string password = "Hello there";

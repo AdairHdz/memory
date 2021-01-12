@@ -2,15 +2,21 @@
 
 namespace MemoryGame.InputValidation.RegistryValidation
 {
+    /// <inheritdoc/>
     public class EmailAddressValidationRule : IValidationRule
     {
         private readonly string _emailAddress;
 
+        /// <summary>
+        /// The <c>EmailAddressValidationRule</c> constructor.
+        /// </summary>
+        /// <param name="emailAddress">The email address to be validated</param>
         public EmailAddressValidationRule(string emailAddress)
         {
             _emailAddress = emailAddress;
         }
 
+        /// <inheritdoc/>
         public ValidationRuleResult GetValidationRuleResult()
         {
             if (HasValidFormat() && IsLessOrEqualsThan254CharactersLength())
@@ -21,6 +27,7 @@ namespace MemoryGame.InputValidation.RegistryValidation
                 Properties.Langs.Resources.EmailAddressIsInvalid);
         }
 
+        /// <inheritdoc/>
         public bool Validate()
         {
             ValidationRuleResult validationRuleResult = GetValidationRuleResult();

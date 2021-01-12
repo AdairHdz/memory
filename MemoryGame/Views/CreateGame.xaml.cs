@@ -8,7 +8,7 @@ using System.ServiceModel;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para JoinGame.xaml
+    /// Interaction logic for JoinGame.xaml
     /// </summary>
     public partial class CreateGame : Window
     {
@@ -17,7 +17,11 @@ namespace MemoryGame
         private string _username;
         private int _numberOfPlayersDesiredForMatch;
         private MemoryGameService.DataTransferObjects.MatchDto _gameMatch;
-        private MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck;
+        private MemoryGameService.DataTransferObjects.CardDeckDto _cardDeck;
+        
+        /// <summary>
+        /// The <c>CreateGame</c> constructor.
+        /// </summary>
         public CreateGame()
         {
             InitializeComponent();
@@ -58,12 +62,18 @@ namespace MemoryGame
             }
         }
 
-        public void CreateGameButtonClicked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// This method specifies what gets executed when the "Create Game" button
+        /// is clicked.
+        /// </summary>
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="routedEventArgs">The event arguments</param>
+        public void CreateGameButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             MemoryGameService.DataTransferObjects.CardDeckInfoDto cardDeckForMatch =
                 ((MemoryGameService.DataTransferObjects.CardDeckInfoDto)CardDeckComboBox.SelectedItem);
             
-            var numberOfPlayersSelectedItem = ((ComboBoxItem)ComboBoxNumberOfPlayers.SelectedItem).Tag;
+            var numberOfPlayersSelectedItem = ((ComboBoxItem)NumberOfPlayersComboBox.SelectedItem).Tag;
             
             if (numberOfPlayersSelectedItem == null)
             {
@@ -131,7 +141,13 @@ namespace MemoryGame
             this.Close();
         }
 
-        public void BackButtonClicked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// This method specifies what gets executed when the "Back" button
+        /// is clicked.
+        /// </summary>
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="routedEventArgs">The event arguments</param>
+        public void BackButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             MainMenu mainMenuView = new MainMenu();
             mainMenuView.Show();

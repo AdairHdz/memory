@@ -10,7 +10,7 @@ using System.Windows;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para ChangeUsername.xaml
+    /// Interaction logic for ChangeUsername.xaml
     /// </summary>
     public partial class ChangeUsername : Window
     {
@@ -18,13 +18,17 @@ namespace MemoryGame
         private string _newUsername;
         private string _oldUsername;
         private RuleSet _ruleSet;
+
+        /// <summary>
+        /// The <c>ChangeUsername</c> class constructor.
+        /// </summary>
         public ChangeUsername()
         {
             InitializeComponent();
             Sesion userSession = Sesion.GetSesion;
             _userEmailAddress = userSession.EmailAddress;
             _oldUsername = userSession.Username;
-            LabelOldUsername.Content = _oldUsername;
+            OldUsernameLabel.Content = _oldUsername;
         }
 
         private void SetFormValidation()
@@ -33,7 +37,7 @@ namespace MemoryGame
             _ruleSet.AddValidationRule(new UsernameValidationRule(_newUsername));
         }
 
-        private void TextBoxNewUsername_LostFocus(object sender, RoutedEventArgs e)
+        private void NewUsernameTextBoxLostFocus(object sender, RoutedEventArgs routedEventArgs)
         {
             if (string.IsNullOrEmpty(TextBoxNewUsername.Text))
             {
@@ -42,7 +46,7 @@ namespace MemoryGame
             }
         }
 
-        private void waterMarkText_GotFocus(object sender, RoutedEventArgs e)
+        private void NewUsernameTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
             waterMarkText.Visibility = Visibility.Collapsed;
             TextBoxNewUsername.Visibility = Visibility.Visible;
@@ -56,7 +60,7 @@ namespace MemoryGame
             return usernameIsAvailable;
         }
 
-        private void SaveChangesButtonClicked(object sender, RoutedEventArgs e)
+        private void SaveChangesButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {            
             _newUsername = TextBoxNewUsername.Text;
             SetFormValidation();
@@ -136,6 +140,11 @@ namespace MemoryGame
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        {
+            GoToMainWindow();
         }
     }
 }

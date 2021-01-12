@@ -5,21 +5,35 @@ using System.ServiceModel;
 using System;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGame.Utilities;
+using MemoryGame.InputValidation;
+using MemoryGame.InputValidation.RegistryValidation;
+using System.Collections.Generic;
 
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para RestorePassword.xaml
+    /// Interaction logic for RestorePassword.xaml
     /// </summary>
     public partial class RestorePassword : Window
     {
         private string _emailAddress;
-        private string _username;        
+        private string _username;
+        private RuleSet _ruleSet;
+        private string _newPassword;
+        
+        /// <summary>
+        /// The <c>RestorePassword</c> constructor.
+        /// </summary>
         public RestorePassword()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// The <c>RestorePassword</c> constructor.
+        /// </summary>
+        /// <param name="emailAddress">The email address of the player who wants to restore its password.</param>
+        /// <param name="username">The username of the player who wants to restore its password.</param>
         public RestorePassword(string emailAddress, string username)
         {
             InitializeComponent();
@@ -27,18 +41,18 @@ namespace MemoryGame
             _username = username;
         }
 
-
+        private void SetFormValidation()
+        {
+            _ruleSet = new RuleSet();
+            _ruleSet.AddValidationRule(new PasswordValidationRule(_newPassword));
+        }
 
         private void RestoreUserPassword()
         {
-            string newPassword = NewPasswordBox.Password;
-
-            if (newPassword == "")
+            _newPassword = NewPasswordBox.Password;
+            SetFormValidation();
+            if (_ruleSet.AllValidationRulesHavePassed())
             {
-                MessageBox.Show(Properties.Langs.Resources.PasswordIsInvalid);
-            }
-            else
-            {                
                 if (TokenIsCorrect())
                 {
                     if (SetNewPassword())
@@ -54,13 +68,27 @@ namespace MemoryGame
                 else
                 {
                     MessageBox.Show(Properties.Langs.Resources.NonMatchingVerificationCode);
-                }                
+                }
+            }
+            else
+            {
+                ShowErrorMessage();
+            }
+        }
+
+
+        private void ShowErrorMessage()
+        {
+            IList<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
+            if (validationResultErrors.Count > 0)
+            {
+                MessageBox.Show(validationResultErrors[0].Message);
             }
         }
 
         private bool TokenIsCorrect()
         {
-            string token = TextBoxToken.Text;
+            string token = TokenTextBox.Text;
             if (token == "")
             {
                 return false;
@@ -70,7 +98,7 @@ namespace MemoryGame
             return accountVerificationServiceClient.VerifyRecoveryToken(_emailAddress, token);
         }
 
-        public bool SetNewPassword()
+        private bool SetNewPassword()
         {
             IEncryption bCryptHashGenerator = new BCryptHashGenerator();
             string newPassword = NewPasswordBox.Password;

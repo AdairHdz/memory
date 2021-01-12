@@ -15,8 +15,7 @@ SC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\RuleSe
 eC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Properties\Langs\Resources.es-MX.Designer.csutf-8[
 RC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Utilities\TokenManager.csutf-8_
 VC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ActivationToken.xaml.csutf-8^
-UC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ChangeUsername.xaml.csutf-8T
-KC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\Chat.xaml.csutf-8Z
+UC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ChangeUsername.xaml.csutf-8Z
 QC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\CreateGame.xaml.csutf-8[
 RC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ExpelPlayer.xaml.csutf-8[
 RC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\GameOptions.xaml.csutf-8X
@@ -37,8 +36,7 @@ SC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Properties\AssemblyInf
 _C:\Users\Adair Hernández\source\repos\memory\MemoryGame\Properties\Langs\Resources.Designer.csutf-8c
 XC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Properties\Settings.Designer.csutf-8h
 ]C:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\ActivationToken.g.csutf-8g
-\C:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\ChangeUsername.g.csutf-8]
-RC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\Chat.g.csutf-8c
+\C:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\ChangeUsername.g.csutf-8c
 XC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\CreateGame.g.csutf-8d
 YC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\ExpelPlayer.g.csutf-8d
 YC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\GameOptions.g.csutf-8a

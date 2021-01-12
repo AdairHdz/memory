@@ -8,16 +8,40 @@ using MemoryGame.MemoryGameService.DataTransferObjects;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para ExpelPlayer.xaml
+    /// Interaction logic for ExpelPlayer.xaml
     /// </summary>
     public partial class ExpelPlayer : Window
     {
+        /// <summary>
+        /// The Context of the current communication channel.
+        /// </summary>        
         public InstanceContext Context { get; set; }
-        private MemoryGameService.MatchServiceClient _matchServiceClient;
-        public ObservableCollection<string> players { get; set; } = new ObservableCollection<string>();
+
+        /// <summary>
+        /// The list of the players in the current match.
+        /// </summary>
+        public ObservableCollection<string> Players { get; set; } = new ObservableCollection<string>();
+
+        /// <summary>
+        /// The host of the current match.
+        /// </summary>
         public string MatchHost { get; set; }
+
+        /// <summary>
+        /// The number of players in the current match.
+        /// </summary>
         public int NumberOfPlayersInMatch { get; set; }
+
+        /// <summary>
+        /// The username of the player who opened the Expel Player window.
+        /// </summary>
         public string PlayerUsername { get; set; }
+
+        private MemoryGameService.MatchServiceClient _matchServiceClient;
+        
+        /// <summary>
+        /// The <c>ExpelPlayer</c> constructor.
+        /// </summary>
         public ExpelPlayer()
         {
             InitializeComponent();
@@ -52,7 +76,7 @@ namespace MemoryGame
             {
                 if (playerUsername != PlayerUsername)
                 {
-                    players.Add(playerUsername);
+                    Players.Add(playerUsername);
                 }
             }
             if (playersVoted.Count != 0)
@@ -63,12 +87,12 @@ namespace MemoryGame
                     {
                         if (playersInMatchUsernames[index].Equals(playersVoted[playersVotedIndex]))
                         {
-                            players.Remove(playersVoted[playersVotedIndex]);
+                            Players.Remove(playersVoted[playersVotedIndex]);
                         }
                     }
                 }
             }
-            ExpelPlayerDataGrid.ItemsSource = players;
+            ExpelPlayerDataGrid.ItemsSource = Players;
         }
 
         private void ExpelPlayerButtonClicked(object sender, RoutedEventArgs e)

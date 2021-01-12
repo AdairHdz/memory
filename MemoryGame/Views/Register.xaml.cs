@@ -11,7 +11,7 @@ using Utilities;
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para Register.xaml
+    /// Interaction logic for Register.xaml
     /// </summary>
     /// 
 
@@ -20,6 +20,10 @@ namespace MemoryGame
         private string _username, _emailAddress, _verificationToken, _password;      
         private RuleSet _ruleSet;
         private MemoryGameService.PlayerRegistryServiceClient _playerRegistryServiceClient;
+        
+        /// <summary>
+        /// The <c>Register</c> constructor.
+        /// </summary>
         public Register()
         {            
             InitializeComponent();
@@ -46,9 +50,9 @@ namespace MemoryGame
 
         private void GetValuesFromFields()
         {
-            _emailAddress = TextBoxEmail.Text;
-            _username = TextBoxUsername.Text;
-            _password = PasswordBoxPassword.Password;
+            _emailAddress = EmailTextBox.Text;
+            _username = UsernameTextBox.Text;
+            _password = PasswordPasswordBox.Password;
         }
 
         private void GenerateToken()
@@ -158,7 +162,7 @@ namespace MemoryGame
             MemoryGameService.PlayerRegistryServiceClient playerRegistryServiceClient =
                 new MemoryGameService.PlayerRegistryServiceClient();
 
-            PlayerDTO playerDTO = new PlayerDTO()
+            PlayerDto playerDTO = new PlayerDto()
             {
                 Username = _username,
                 EmailAddress = _emailAddress,

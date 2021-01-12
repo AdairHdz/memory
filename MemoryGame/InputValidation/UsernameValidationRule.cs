@@ -2,15 +2,21 @@
 
 namespace MemoryGame.InputValidation.RegistryValidation
 {
+    /// <inheritdoc/>
     public class UsernameValidationRule : IValidationRule
     {
         private readonly string _username;
 
+        /// <summary>
+        /// The <c>UsernameValidationRule</c> constructor.
+        /// </summary>
+        /// <param name="username">The username to be validated.</param>
         public UsernameValidationRule(string username)
         {
             _username = username;
         }
 
+        /// <inheritdoc/>
         public ValidationRuleResult GetValidationRuleResult()
         {
             if (HasValidFormat() && IsBetween4And16CharactersLength())
@@ -21,6 +27,7 @@ namespace MemoryGame.InputValidation.RegistryValidation
                 Properties.Langs.Resources.UsernameIsInvalid);
         }
 
+        /// <inheritdoc/>
         public bool Validate()
         {
             ValidationRuleResult validationRuleResult = GetValidationRuleResult();
