@@ -8,6 +8,7 @@ namespace MemoryGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("MainWindow.xaml.cs");
         public MainWindow()
         {
             LoadCultureInfo();
@@ -22,7 +23,8 @@ namespace MemoryGame
             }
             catch (CultureNotFoundException)
             {
-                MessageBox.Show("No se encontró recurso");
+                _logger.Fatal("There was a problem while loading the culture resources");
+                this.Close();
             }
             
         }

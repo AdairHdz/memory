@@ -15,7 +15,6 @@ namespace MemoryGame
     {
         private string _emailAddress;
         private string _username;        
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("RestorePassword.xaml.cs");
         public RestorePassword()
         {
             InitializeComponent();
@@ -102,14 +101,12 @@ namespace MemoryGame
             {
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
@@ -124,14 +121,12 @@ namespace MemoryGame
             {
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
 

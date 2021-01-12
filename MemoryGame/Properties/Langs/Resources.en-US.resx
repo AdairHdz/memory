@@ -363,6 +363,9 @@
   <data name="TwoPlayers" xml:space="preserve">
     <value>2 players</value>
   </data>
+  <data name="UserDoesNotExist" xml:space="preserve">
+    <value>User not found. Please make sure that the username and password you entered are correct.</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
   </data>

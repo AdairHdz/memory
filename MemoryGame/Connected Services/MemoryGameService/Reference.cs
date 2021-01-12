@@ -28,14 +28,13 @@ namespace MemoryGame.MemoryGameService {
         System.Threading.Tasks.Task<bool> ItsRegisteredAsync(string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress", ReplyAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressNonExistentUserFaultF" +
-            "ault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         string GetUserEmailAddress(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress", ReplyAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse")]
         System.Threading.Tasks.Task<string> GetUserEmailAddressAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetSalt", ReplyAction="http://tempuri.org/IAccessibilityService/GetSaltResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetSaltNonExistentUserFaultFault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         string GetSalt(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetSalt", ReplyAction="http://tempuri.org/IAccessibilityService/GetSaltResponse")]
@@ -46,6 +45,12 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
         System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
+        string GetUsername(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
+        System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -113,6 +118,14 @@ namespace MemoryGame.MemoryGameService {
         
         public System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password) {
             return base.Channel.HasAccessRightsAsync(username, password);
+        }
+        
+        public string GetUsername(string emailAddress) {
+            return base.Channel.GetUsername(emailAddress);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress) {
+            return base.Channel.GetUsernameAsync(emailAddress);
         }
     }
     

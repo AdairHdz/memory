@@ -13,7 +13,6 @@ namespace MemoryGame
     {
         private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient;        
         private MatchDto _selectedMatch;
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("JoinGame.xaml.cs");
 
         public JoinGame()
         {
@@ -28,19 +27,16 @@ namespace MemoryGame
             {
                 PopulateTableWithActiveMatches();
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (EndpointNotFoundException endpointNotFoundException)
+            catch (EndpointNotFoundException)
             {
-                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
@@ -65,19 +61,16 @@ namespace MemoryGame
             {
                 JoinMatch();
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (EndpointNotFoundException endpointNotFoundException)
+            catch (EndpointNotFoundException)
             {
-                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
@@ -101,24 +94,20 @@ namespace MemoryGame
                         MessageBox.Show(Properties.Langs.Resources.FullGameMessage);
                     }
                 }
-                catch (FaultException<MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault> matchAccessDeniedException)
+                catch (FaultException<MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault>)
                 {
-                    _logger.Fatal(matchAccessDeniedException);
                     MessageBox.Show(Properties.Langs.Resources.TriedToJoinToNonexistentMatch);
                 }
-                catch (TimeoutException timeoutException)
+                catch (TimeoutException)
                 {
-                    _logger.Fatal(timeoutException);
                     MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
                 }
-                catch (EndpointNotFoundException endpointNotFoundException)
+                catch (EndpointNotFoundException)
                 {
-                    _logger.Fatal(endpointNotFoundException);
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }
-                catch (CommunicationException communicationException)
+                catch (CommunicationException)
                 {
-                    _logger.Fatal(communicationException);
                     MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
                 }
             }

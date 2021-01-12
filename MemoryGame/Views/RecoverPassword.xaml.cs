@@ -76,7 +76,8 @@ namespace MemoryGame
             if (_ruleSet.AllValidationRulesHavePassed())
             {
                 if (EmailIsRegistered())
-                {                    
+                {
+                    LoadUsername();
                     GenerateVerificationToken();
                     bool newVerificationTokenWasAssigned = AssignNewRecoveryToken();                    
                     if (newVerificationTokenWasAssigned)
@@ -131,6 +132,14 @@ namespace MemoryGame
             };
             TokenManager.SendToken(recoveryToken);
         }
+
+
+        private void LoadUsername()
+        {
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+            _username = client.GetUsername(_emailAddress);
+        }
+
 
         private void GoToRestorePassword()
         {

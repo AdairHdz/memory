@@ -18,7 +18,6 @@ namespace MemoryGame
         private int _numberOfPlayersDesiredForMatch;
         private MemoryGameService.DataTransferObjects.MatchDto _gameMatch;
         private MemoryGameService.DataTransferObjects.CardDeckDTO _cardDeck;
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("CreateGame.xaml.cs");
         public CreateGame()
         {
             InitializeComponent();
@@ -45,19 +44,16 @@ namespace MemoryGame
                 CardDeckComboBox.DisplayMemberPath = "CardDeckName";
                 CardDeckComboBox.SelectedValuePath = "CardDeckId";
             }
-            catch (EndpointNotFoundException endpointNotFoundException)
+            catch (EndpointNotFoundException)
             {
-                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
@@ -85,19 +81,16 @@ namespace MemoryGame
                     CreateNewMatch();
                     GoToWaitingRoom();
                 }
-                catch (EndpointNotFoundException endpointNotFoundException)
+                catch (EndpointNotFoundException)
                 {
-                    _logger.Fatal(endpointNotFoundException);
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }
-                catch (TimeoutException timeoutException)
+                catch (TimeoutException)
                 {
-                    _logger.Fatal(timeoutException);
                     MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
                 }
-                catch (CommunicationException communicationException)
+                catch (CommunicationException)
                 {
-                    _logger.Fatal(communicationException);
                     MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
                 }
             }

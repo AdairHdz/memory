@@ -1,5 +1,4 @@
-﻿using MemoryGame.MemoryGameService.DataTransferObjects;
-using MemoryGame.MemoryGameService.Faults;
+﻿using MemoryGame.MemoryGameService.Faults;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
 using System.ServiceModel;
@@ -71,7 +70,6 @@ namespace MemoryGameService.Contracts
         /// <returns>A string of the email address.</returns>
         /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
         /// <exception cref="EntityException">Thrown when there is no database.</exception>
-        [FaultContract(typeof(NonExistentUserFault))]
         [OperationContract]       
         string GetUserEmailAddress(string username);
 
@@ -83,6 +81,7 @@ namespace MemoryGameService.Contracts
         /// <returns>A stirng of the salt.</returns>
         /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
         /// <exception cref="EntityException">Thrown when there is no database.</exception>
+        [FaultContract(typeof(NonExistentUserFault))]
         [OperationContract]
         string GetSalt(string username);
 
@@ -96,5 +95,13 @@ namespace MemoryGameService.Contracts
         /// <exception cref="EntityException">Thrown when there is no database.</exception>
         [OperationContract]
         bool HasAccessRights(string username, string password);
+
+        /// <summary>
+        /// Gets the username of a registered players.
+        /// </summary>
+        /// <param name="emailAddress">Email of the player.</param>
+        /// <returns>A string of the username.</returns>
+        [OperationContract]
+        string GetUsername(string emailAddress);
     }
 }

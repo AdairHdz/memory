@@ -6,6 +6,7 @@ using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
 using System.Data.SqlClient;
 using System.Data.Entity.Core;
+using System;
 
 namespace MemoryGameService.Services
 {
@@ -45,6 +46,36 @@ namespace MemoryGameService.Services
         }
 
         /// <inheritdoc/>
+        public string GetUsername(string emailAddress)
+        {
+            var unitOfWork = new UnitOfWork(new MemoryGameContext());
+            try
+            {
+                Account accountRetrieved = unitOfWork.Accounts.Get(emailAddress);
+                return accountRetrieved.Username;
+            }
+            catch (SqlException sqlException)
+            {
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying " +
+                     "to get the account entity with the specified primary key (email address)" +
+                     "from the database. Method GetUsername, line 54 ", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to access the " +
+                    " database. It is possible that the database is corrupted or that it does not exist. " +
+                    "Method GetUsername, line 54", entityException);
+                throw;
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
+        }
+
+
+        /// <inheritdoc/>
         public bool IsVerified(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -61,14 +92,14 @@ namespace MemoryGameService.Services
             {
                 _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to get the first  " +
                     "occurence of an Account entity with the specified username and with a verified account in " +
-                    "the IsVerified method. Line 51", sqlException);
+                    "the IsVerified method. Line 92", sqlException);
                 throw;
             }
             catch (EntityException entityException)
             {
                 _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to access the database. " +
                     "It is possible that the database is corrupted or that it does not exist. " +
-                    "Method IsVerified, line 51", entityException);
+                    "Method IsVerified, line 92", entityException);
                 throw;
             }
             finally
@@ -120,8 +151,11 @@ namespace MemoryGameService.Services
                 {
                     return retrievedAccount.Salt;
                 }
-                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
-                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+                throw new FaultException<NonExistentUserFault>(new NonExistentUserFault()
+                {
+                    Error = "No user with those credentials is registered int the database",
+                    Details = "The username entered does not match any of our registered users"
+                });
             }
             catch (SqlException sqlException)
             {

@@ -18,7 +18,6 @@ namespace MemoryGame
         private string _newUsername;
         private string _oldUsername;
         private RuleSet _ruleSet;
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("ChangeUsername.xaml.cs");
         public ChangeUsername()
         {
             InitializeComponent();
@@ -68,19 +67,16 @@ namespace MemoryGame
                     SetNewUsername();
 
                 }
-                catch (TimeoutException timeoutException)
+                catch (TimeoutException)
                 {
-                    _logger.Fatal(timeoutException);
                     MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
                 }
-                catch (EndpointNotFoundException endpointNotFoundException)
+                catch (EndpointNotFoundException)
                 {
-                    _logger.Fatal(endpointNotFoundException);
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }
-                catch (CommunicationException communicationException)
+                catch (CommunicationException)
                 {
-                    _logger.Fatal(communicationException);
                     MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
                 }
             }

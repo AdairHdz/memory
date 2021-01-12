@@ -17,7 +17,6 @@ namespace MemoryGame
     {
         private RuleSet _ruleSet;
         private string _username, _password;
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("Login.xaml.cs");
         private AccessibilityServiceClient _accessibilityServiceClient;
         public Login()
         {            
@@ -57,18 +56,20 @@ namespace MemoryGame
                 {
                     LoginUser();
                 }
+                catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
+                {                    
+                    MessageBox.Show(Properties.Langs.Resources.UserDoesNotExist);
+                }
                 catch (EndpointNotFoundException)
                 {
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }            
-                catch (TimeoutException timeoutException)
+                catch (TimeoutException)
                 {
-                    _logger.Fatal(timeoutException);
                     MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
                 }
-                catch (CommunicationException communicationException)
+                catch (CommunicationException)
                 {
-                    _logger.Fatal(communicationException);
                     MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
                 }
             }

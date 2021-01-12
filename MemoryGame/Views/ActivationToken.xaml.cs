@@ -15,7 +15,6 @@ namespace MemoryGame
         private string _username;
         private string _newToken;
         private MemoryGameService.AccountVerificationServiceClient _accountVerificationServiceClient;
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("ActivationToken.xaml.cs");
 
         public ActivationToken(string emailAddress, string username)
         {
@@ -31,19 +30,16 @@ namespace MemoryGame
             {
                 VerifyAccount();
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (EndpointNotFoundException endpointNotFoundException)
+            catch (EndpointNotFoundException)
             {
-                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
