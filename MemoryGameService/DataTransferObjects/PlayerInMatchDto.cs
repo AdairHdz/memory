@@ -1,4 +1,6 @@
-﻿namespace MemoryGame.MemoryGameService.DataTransferObjects
+﻿using System.Runtime.Serialization;
+
+namespace MemoryGame.MemoryGameService.DataTransferObjects
 {
     /// <summary>
     /// The <c>PlayerInMatch</c> class.
@@ -27,23 +29,28 @@
     /// </item>
     /// </list>
     /// </summary>
+    [DataContract]
     public class PlayerInMatchDto
     {
         /// <summary>
         /// Username of the player.
         /// </summary>
+        [DataMember]
         public string Username { get; set; }
         /// <summary>
         /// Total score of the player.
         /// </summary>
-        public int Score { get; set; } 
+        [DataMember]
+        public int Score { get; set; }
         /// <summary>
         /// Verifies if the turn is active or not.
         /// </summary>
+        [DataMember]
         public bool HasActiveTurn { get; set; } = false;
         /// <summary>
         /// Expulsion votes for the player.
         /// </summary>
+        [DataMember]
         public int ExpulsionVotes { get; set; }
 
     }

@@ -68,14 +68,17 @@ namespace MemoryGameService.Logic
         /// Instance of the lobby match.
         /// </summary>
         public ServiceLobby Lobby { get; set; }
-        /// <summary>
-        /// List of the players connected to the match.
-        /// </summary>
-        private IList<ServicePlayer> _players;
+
         /// <summary>
         /// Total number of pairs that can be formed in with the CardDeck.
         /// </summary>
         public int TotalPairs { get; set; }
+
+        /// <summary>
+        /// List of the players connected to the match.
+        /// </summary>
+        private IList<ServicePlayer> _players;
+
 
         /// <summary>
         /// Constructor of the class.

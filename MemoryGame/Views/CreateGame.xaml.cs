@@ -73,7 +73,7 @@ namespace MemoryGame
             MemoryGameService.DataTransferObjects.CardDeckInfoDto cardDeckForMatch =
                 ((MemoryGameService.DataTransferObjects.CardDeckInfoDto)CardDeckComboBox.SelectedItem);
             
-            var numberOfPlayersSelectedItem = ((ComboBoxItem)ComboBoxNumberOfPlayers.SelectedItem).Tag;
+            var numberOfPlayersSelectedItem = ((ComboBoxItem)NumberOfPlayersComboBox.SelectedItem).Tag;
             
             if (numberOfPlayersSelectedItem == null)
             {

@@ -28,7 +28,7 @@ namespace MemoryGame
             Sesion userSession = Sesion.GetSesion;
             _userEmailAddress = userSession.EmailAddress;
             _oldUsername = userSession.Username;
-            LabelOldUsername.Content = _oldUsername;
+            OldUsernameLabel.Content = _oldUsername;
         }
 
         private void SetFormValidation()
@@ -37,7 +37,7 @@ namespace MemoryGame
             _ruleSet.AddValidationRule(new UsernameValidationRule(_newUsername));
         }
 
-        private void TextBoxNewUsername_LostFocus(object sender, RoutedEventArgs e)
+        private void NewUsernameTextBoxLostFocus(object sender, RoutedEventArgs routedEventArgs)
         {
             if (string.IsNullOrEmpty(TextBoxNewUsername.Text))
             {
@@ -46,7 +46,7 @@ namespace MemoryGame
             }
         }
 
-        private void waterMarkText_GotFocus(object sender, RoutedEventArgs e)
+        private void NewUsernameTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
             waterMarkText.Visibility = Visibility.Collapsed;
             TextBoxNewUsername.Visibility = Visibility.Visible;
@@ -60,7 +60,7 @@ namespace MemoryGame
             return usernameIsAvailable;
         }
 
-        private void SaveChangesButtonClicked(object sender, RoutedEventArgs e)
+        private void SaveChangesButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {            
             _newUsername = TextBoxNewUsername.Text;
             SetFormValidation();

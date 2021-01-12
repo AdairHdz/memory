@@ -190,7 +190,8 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username && account.Password == password);
+                Account retrievedAccount = unitOfWork.Accounts.FindFirstOccurence(account => 
+                    account.Username == username && account.Password == password);
                 if(retrievedAccount != null)
                 {
                     return true;

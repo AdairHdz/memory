@@ -29,7 +29,7 @@ namespace MemoryGame
             _username = username;
         }
 
-        private void OkButtonClicked(object sender, RoutedEventArgs e)
+        private void OkButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace MemoryGame
             return _accountVerificationServiceClient.SetAccountAsVerified(_emailAddress);
         }
 
-        private void SendNewCodeButtonClicked(object sender, RoutedEventArgs e)
+        private void SendNewCodeButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace MemoryGame
             TokenManager.SendToken(verificationTokenInfo);            
         }
 
-        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        private void BackButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
             MainWindow mainWindowView = new MainWindow();
             mainWindowView.Show();

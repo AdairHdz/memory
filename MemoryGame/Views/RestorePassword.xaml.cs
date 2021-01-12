@@ -88,7 +88,7 @@ namespace MemoryGame
 
         private bool TokenIsCorrect()
         {
-            string token = TextBoxToken.Text;
+            string token = TokenTextBox.Text;
             if (token == "")
             {
                 return false;

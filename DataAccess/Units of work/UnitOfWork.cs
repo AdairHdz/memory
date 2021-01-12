@@ -9,9 +9,7 @@ namespace DataAccess.Units_of_work
     /// database.
     /// </summary>
     public class UnitOfWork : IUnitOfWork
-    {
-        private readonly MemoryGameContext _context;
-
+    {        
         /// <summary>
         /// The <c>IPlayerRepository</c> that will be used to operate on <c>Player</c> entities.
         /// </summary>        
@@ -31,6 +29,8 @@ namespace DataAccess.Units_of_work
         /// The <c>IAccountRepository</c> that will be used to operate on <c>Account</c> entities.
         /// </summary>
         public IAccountRepository Accounts { get; private set; }
+
+        private readonly MemoryGameContext _context;
 
         /// <summary>
         /// The <c>UnitOfWork</c> constructor.

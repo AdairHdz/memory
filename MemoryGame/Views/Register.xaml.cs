@@ -50,9 +50,9 @@ namespace MemoryGame
 
         private void GetValuesFromFields()
         {
-            _emailAddress = TextBoxEmail.Text;
-            _username = TextBoxUsername.Text;
-            _password = PasswordBoxPassword.Password;
+            _emailAddress = EmailTextBox.Text;
+            _username = UsernameTextBox.Text;
+            _password = PasswordPasswordBox.Password;
         }
 
         private void GenerateToken()

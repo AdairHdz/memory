@@ -30,8 +30,8 @@ namespace MemoryGame
 
         private void GetDataFromFields()
         {
-            _username = TextBoxUsername.Text;
-            _password = PasswordBoxPassword.Password;
+            _username = UsernameTextBox.Text;
+            _password = PasswordPasswordBox.Password;
         }
 
         private void SetFormValidation()
@@ -85,7 +85,7 @@ namespace MemoryGame
 
         private string GetUserEmailAdress()
         {                      
-            string username = TextBoxUsername.Text;
+            string username = UsernameTextBox.Text;
             string emailAddress = _accessibilityServiceClient.GetUserEmailAddress(username);
             return emailAddress;
         }
@@ -130,7 +130,7 @@ namespace MemoryGame
 
         private bool EmailIsVerified()
         {
-            string username = TextBoxUsername.Text;
+            string username = UsernameTextBox.Text;
             bool emailIsVerified = _accessibilityServiceClient.IsVerified(username);
             return emailIsVerified;
         }
@@ -159,7 +159,7 @@ namespace MemoryGame
         private void GoToActivationToken()
         {
             string emailAddress = GetUserEmailAdress();
-            ActivationToken activationTokenWindow = new ActivationToken(emailAddress, TextBoxUsername.Text);
+            ActivationToken activationTokenWindow = new ActivationToken(emailAddress, UsernameTextBox.Text);
             activationTokenWindow.Show();
             this.Close();
         }

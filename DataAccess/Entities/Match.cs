@@ -14,9 +14,7 @@ namespace DataAccess.Entities
         /// Class constructor.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Match()
-        {
-        }
+        public Match() { }
 
         /// <summary>
         /// Match identifier.

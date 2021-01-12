@@ -30,7 +30,12 @@ namespace MemoryGame.InputValidation.GenericValidations
         /// <inheritdoc/>
         public bool Validate()
         {
-            throw new NotImplementedException();
+            ValidationRuleResult validationRuleResult = GetValidationRuleResult();
+            if (validationRuleResult.Status == ValidationRuleResult.SUCCESS)
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool DoesNotContainWhiteSpaceAtTheBeggining()

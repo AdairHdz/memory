@@ -27,7 +27,7 @@ namespace MemoryGame
         /// <param name="routedEventArgs">The arguments of the event.</param>
         public void SaveChangesButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {            
-            _selectedTag = ((ComboBoxItem)ComboBoxLanguageSelection.SelectedItem).Tag.ToString();            
+            _selectedTag = ((ComboBoxItem)LanguageSelectionComboBox.SelectedItem).Tag.ToString();            
             try
             {
                 var culture = new CultureInfo(_selectedTag);

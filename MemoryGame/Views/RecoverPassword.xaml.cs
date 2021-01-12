@@ -75,7 +75,7 @@ namespace MemoryGame
 
         private void SendCodeToUser()
         {
-            _emailAddress = TextBoxEmail.Text;
+            _emailAddress = EmailTextBox.Text;
             SetFormValidation();
             if (_ruleSet.AllValidationRulesHavePassed())
             {
