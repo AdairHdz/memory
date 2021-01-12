@@ -1,10 +1,10 @@
 ﻿
 FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\App.xaml;;
 FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ActivationToken.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ChangePassword.xaml;;
 FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ChangeUsername.xaml;;
-FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\Chat.xaml;;
 FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\CreateGame.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ExpelPlayer.xaml;;
+FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\GameOptions.xaml;;
 FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\JoinGame.xaml;;
 FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\Login.xaml;;
 FC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\MainMenu.xaml;;

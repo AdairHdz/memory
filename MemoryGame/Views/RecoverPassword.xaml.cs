@@ -1,19 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.RegistryValidation;
 using MemoryGame.MemoryGameService;
+using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGame.Utilities;
 
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para RecoverPassword.xaml
+    /// Interaction logic for RecoverPassword.xaml
     /// </summary>
     public partial class RecoverPassword : Window
     {
         private string _verificationToken;
         private RuleSet _ruleSet;
         private string _emailAddress;
+        private string _username;
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("RecoverPassword.xaml.cs");
+        
+        /// <summary>
+        /// The <c>RecoverPassword</c> constructor.
+        /// </summary>
         public RecoverPassword()
         {
             InitializeComponent();
@@ -27,12 +37,10 @@ namespace MemoryGame
 
         private void ShowErrorMessage()
         {
-            List<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
-            foreach (ValidationRuleResult validationRuleResult
-                in validationResultErrors)
+            IList<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
+            if (validationResultErrors.Count > 0)
             {
-                MessageBox.Show(validationRuleResult.Message);
-                return;
+                MessageBox.Show(validationResultErrors[0].Message);
             }
         }
 
@@ -43,49 +51,49 @@ namespace MemoryGame
             this.Close();
         }
 
-        private bool EmailIsRegistered()
-        {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-            return client.ItsRegistered(_emailAddress);
-        }
-
-        private string GetUsername()
-        {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-            return client.GetUsername(_emailAddress);
-        }
-
-        private void GenerateVerificationToken()
-        {
-            TokenGeneratorClient client = new TokenGeneratorClient();
-            _verificationToken = client.GenerateToken(6);
-        }
-
-        private void SendVerificationCode()
-        {
-            MailingServiceClient client =
-                new MailingServiceClient();
-            client.SendVerificationToken(GetUsername(), _emailAddress, _verificationToken);
-
-            AccountVerificationServiceClient accountVerificationServiceClient =
-                new AccountVerificationServiceClient();
-            accountVerificationServiceClient.AssignNewVerificationToken(TextBoxEmail.Text, _verificationToken);
-        }
-
         private void SendCodeButtonClicked(object sender, RoutedEventArgs e)
         {
-            _emailAddress = TextBoxEmail.Text;
+            try
+            {
+                SendCodeToUser();
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                _logger.Fatal(timeoutException);
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (CommunicationException communicationException)
+            {
+                _logger.Fatal(communicationException);
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+        }
+
+        private void SendCodeToUser()
+        {
+            _emailAddress = EmailTextBox.Text;
             SetFormValidation();
             if (_ruleSet.AllValidationRulesHavePassed())
             {
                 if (EmailIsRegistered())
                 {
+                    LoadUsername();
                     GenerateVerificationToken();
-                    SendVerificationCode();
-                    RestorePassword restorePasswordWindow =
-                        new RestorePassword(_emailAddress, GetUsername());
-                    restorePasswordWindow.Show();
-                    this.Close();
+                    bool newVerificationTokenWasAssigned = AssignNewRecoveryToken();                    
+                    if (newVerificationTokenWasAssigned)
+                    {
+                        SendRecoveryToken();
+                        MessageBox.Show(Properties.Langs.Resources.PasswordRecoveryTokenSent);
+                        GoToRestorePassword();
+                    }
+                    else
+                    {
+                        MessageBox.Show(Properties.Langs.Resources.RecoveryTokenSendingError);
+                    }                    
                 }
                 else
                 {
@@ -96,6 +104,53 @@ namespace MemoryGame
             {
                 ShowErrorMessage();
             }
+        }
+
+        private bool EmailIsRegistered()
+        {
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+            return client.ItsRegistered(_emailAddress);
+        }
+
+        private void GenerateVerificationToken()
+        {
+            _verificationToken = TokenManager.GenerateToken();
+        }
+
+        private bool AssignNewRecoveryToken()
+        {
+            AccountVerificationServiceClient accountVerificationServiceClient =
+                new AccountVerificationServiceClient();
+            return accountVerificationServiceClient.AssignNewRecoveryToken(_emailAddress, _verificationToken);
+        }
+
+        private void SendRecoveryToken()
+        {
+            TokenInfoDto recoveryToken = new TokenInfoDto()
+            {
+                Name = _username,
+                EmailAddress = _emailAddress,
+                Token = _verificationToken,
+                Subject = Properties.Langs.Resources.PasswordRecovery,
+                Body = Properties.Langs.Resources.RecoveryToken
+            };
+            TokenManager.SendToken(recoveryToken);
+        }
+
+
+        private void LoadUsername()
+        {
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+            _username = client.GetUsername(_emailAddress);
+        }
+
+
+        private void GoToRestorePassword()
+        {
+            RestorePassword restorePasswordWindow =
+                new RestorePassword(_emailAddress, _username);
+            restorePasswordWindow.Show();
+            this.Close();
         }
 
     }

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.ServiceModel;
+using System.Windows;
 
 namespace MemoryGame
 {
@@ -6,36 +8,48 @@ namespace MemoryGame
     /// Lógica de interacción para ScoreTable.xaml
     /// </summary>
     public partial class ScoreTable : Window
-    {        
+    {
+        private MemoryGameService.DataTransferObjects.PlayerScoreDto[] _bestScores;
+        /// <summary>
+        /// The <c>ScoreTable</c> constructor.
+        /// </summary>
         public ScoreTable()
         {
             InitializeComponent();
             PopulateTableWithBestScores();
-            
         }
-
-        private MemoryGameService.DataTransferObjects.PlayerScoreDTO[] GetBestScores()
-        {
-            MemoryGameService.ScoreServiceClient client =
-                new MemoryGameService.ScoreServiceClient();
-
-            return client.GetPlayersWithBestScore(10);
-        }
-
 
         private void PopulateTableWithBestScores()
         {
-            MemoryGameService.DataTransferObjects.PlayerScoreDTO[] playerScoreDTOs;
-            playerScoreDTOs = GetBestScores();
-            for(int i = 0; i < playerScoreDTOs.Length; i++)
-            {                
-                var data = new PlayerScore
+            try
+            {
+                LoadBestScores();
+                for(int indexOfActualPlayer = 0; indexOfActualPlayer < _bestScores.Length; indexOfActualPlayer++)
                 {
-                    Username = playerScoreDTOs[i].Username,
-                    Score = playerScoreDTOs[i].TotalScore
-                };
-                ScoreDataGrid.Items.Add(data);
+                    if(_bestScores[indexOfActualPlayer] != null)
+                    {
+                        ScoreDataGrid.Items.Add(_bestScores[indexOfActualPlayer]);
+                    }                    
+                }                
             }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+        }
+
+        private void LoadBestScores()
+        {
+            MemoryGameService.ScoreServiceClient client = new MemoryGameService.ScoreServiceClient();
+            _bestScores = client.GetPlayersWithBestScore(10);
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)
@@ -43,11 +57,6 @@ namespace MemoryGame
             MainMenu mainMenuView = new MainMenu();
             mainMenuView.Show();
             this.Close();
-        }
-        class PlayerScore
-        {
-            public string Username { get; set; }
-            public int Score { get; set; }
         }
     }
 

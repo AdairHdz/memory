@@ -3,68 +3,127 @@ using DataAccess.Entities;
 using DataAccess.Units_of_work;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
-using MemoryGameService.DataTransferObjectMappers;
-using System;
+using MemoryGameService.Utilities;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data.SqlClient;
+using System.Data.Entity.Core;
 
 namespace MemoryGameService.Services
 {
+    /// <inheritdoc/>
     public partial class MemoryGameService : ICardDeckRetrieverService
     {
-        private CardDeckDTO _cardDeckDTO;
+        private CardDeckDto _cardDeckDTO = new CardDeckDto();
         private IEnumerable<Card> _cards;
-        public CardDeckDTO GetCardDeckAndCards(int cardDeckId)
+
+        /// <inheritdoc/>
+        public CardDeckDto GetCardDeckAndCards(int cardDeckId)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
-            CardDeck cardDeck = unitOfWork.CardDecks.GetCardDeckAndCards(cardDeckId);
+            try
+            {
+                CardDeck cardDeck = unitOfWork.CardDecks.GetCardDeckAndCards(cardDeckId);
+                _cardDeckDTO = new CardDeckDto()
+                {
+                    CardDeckId = cardDeck.CardDeckId,
+                    Name = cardDeck.Name,
+                    BackImage = cardDeck.BackImage,
+                    NumberOfPairs = cardDeck.NumberOfPairs,
+                    Cards = new List<CardDto>()
+                };
+                _cards = cardDeck.Cards;
+                //This code is adding the same set of cards Twice.
+                //This is because this way I don't need to store each pair of cards
+                //in the database (it would be a waste of storage)
 
-            _cardDeckDTO = CardDeckMapper.CreateDTO(cardDeck);
+                PopulateCardDeckDtoWithCards();
+                PopulateCardDeckDtoWithCards();
 
-            _cards = cardDeck.Cards;
-
-            /**
-             * This code is adding the same set of cards Twice.
-             * This is becausa this way I don't need to store each pair of cards
-             * in the database (it would be a waste of storage)
-             */
-            PopulateCardDeckDtoWithCards();
-            PopulateCardDeckDtoWithCards();
-
-            ShuffleCards();
-
-            return _cardDeckDTO;
+                ShuffleCards();
+                return _cardDeckDTO;
+            }
+            catch (SqlException sqlException)
+            {
+                _logger.Fatal("CardDeckRetrieverService.cs: An exception was thrown while trying to get a Card entity with " +
+                    "the specified primary key (cardDeckId) " +
+                    "from the database. Method GetCardDeckAndCards, line 53", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("CardDeckRetrieverService.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method GetCardDeckAndCards, line 53", entityException);
+                throw;
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
+        /// <inheritdoc/>
+        public IList<CardDeckInfoDto> GetCardDecksInfo()
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
+            try
+            {
+                IEnumerable<CardDeck> cardDecks = unitOfWork.CardDecks.GetAll();
+                IList<CardDeckInfoDto> listOfCardDecksInfo = new List<CardDeckInfoDto>();
+                foreach (var individualCardDeck in cardDecks)
+                {
+                    CardDeckInfoDto cardDeckInfo = new CardDeckInfoDto()
+                    {
+                        CardDeckId = individualCardDeck.CardDeckId,
+                        CardDeckName = individualCardDeck.Name
+                    };
+                    listOfCardDecksInfo.Add(cardDeckInfo);
+                }
+                return listOfCardDecksInfo;
+            }
+            catch (SqlException sqlException)
+            {
+                _logger.Fatal("CardDeckRetrieverService.cs: An exception was thrown while trying to get the " +
+                    "CardDeck entities with the specified primary key (cardDeckId). " +
+                    "Method GetCardDecksInfo, line 105", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("CardDeckRetrieverService.cs: An exception was thrown while trying " +
+                    " to access the database. It is possible that the database is corrupted or that it does not exist. " +
+                    "Method GetCardDecksInfo, line 105", entityException);
+                throw;
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Creates a CardDto object mapped from a Card entity.
+        /// </summary>
         private void PopulateCardDeckDtoWithCards()
         {
             foreach (Card actualCard in _cards)
             {
-                CardDto cardDTO = CardMapper.CreateDTO(actualCard);
-                _cardDeckDTO.Cards.Add(cardDTO);
+                CardDto cardDto = new CardDto()
+                {
+                    CardId = actualCard.CardId,
+                    FrontImage = actualCard.FrontImage
+                };
+                _cardDeckDTO.Cards.Add(cardDto);
             }
         }
 
+        /// <summary>
+        /// Randomly shuffle the cards on a card deck for a game.
+        /// </summary>
         private void ShuffleCards()
         {
-            IList<CardDto> cards = _cardDeckDTO.Cards;
-            int lastIndex = cards.Count() - 1;
-            while (lastIndex > 0)
-            {
-                int randomIndex = GenerateRandomNumberBetweenRange(0, lastIndex);
-                CardDto auxiliaryContainer = cards[lastIndex];
-                cards[lastIndex] = cards[randomIndex];
-                cards[randomIndex] = auxiliaryContainer;
-                lastIndex--;
-            }
+            CardShuffler cardShuffler = new CardShuffler();
+            cardShuffler.ShuffleCards(_cardDeckDTO.Cards);
         }
-
-        private int GenerateRandomNumberBetweenRange(int minimum, int maximum)
-        {
-            Random randomNumberGenerator = new Random();
-            int randomNumber = randomNumberGenerator.Next(minimum, maximum);
-            return randomNumber;
-        }
-
     }
 }

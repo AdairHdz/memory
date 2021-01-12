@@ -73,7 +73,7 @@
 
             <TextBox Grid.Column="1" Grid.ColumnSpan="5" 
                      Grid.Row="2" Margin="0 0 0 10" 
-                     Name="TextBoxUsername"/>
+                     Name="UsernameTextBox"/>
 
             <Label Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4"
                    Content="{x:Static p:Resources.Password}" 
@@ -81,7 +81,7 @@
 
             <PasswordBox Grid.Column="1" Grid.ColumnSpan="5" 
                     Grid.Row="4" Margin="0 0 0 10" 
-                    Name="PasswordBoxPassword"></PasswordBox>
+                    Name="PasswordPasswordBox"></PasswordBox>
 
             <Label Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="5"
                    HorizontalAlignment="Center"

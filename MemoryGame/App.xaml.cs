@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
 namespace MemoryGame
 {
     /// <summary>
@@ -7,10 +9,6 @@ namespace MemoryGame
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {            
-                        
-        }
 
     }
 }

@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Utilities
+﻿namespace Utilities
 {
+    /// <summary>
+    /// The <c>BCryptHashGenerator</c> class.
+    /// It uses BCrypt to encrypt a string with the provided salt.
+    /// </summary>
     public class BCryptHashGenerator : IEncryption
     {
-        public string GenerateEncryptedString(string stringToBeEncrypted)
+        /// <inheritdoc/>
+        public string GenerateEncryptedString(string stringToBeEncrypted, string salt)
         {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(stringToBeEncrypted);
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(stringToBeEncrypted, salt);
             return hashedPassword;
         }
 
-        public bool Match(string normalString, string encryptedString)
-        {
-            bool isMatch = BCrypt.Net.BCrypt.Verify(normalString, encryptedString);
-            return isMatch;
+        /// <inheritdoc/>
+        public string GenerateSalt()
+        {            
+            return BCrypt.Net.BCrypt.GenerateSalt(10);
         }
     }
 }

@@ -8,6 +8,8 @@
         mc:Ignorable="d"
         Style="{StaticResource backgroundPrimary}"
         Title="{x:Static p:Resources.WaitingRoom}" Height="450" Width="800"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,12 +41,12 @@
                HorizontalAlignment="Center" VerticalAlignment="Center"
                Style="{StaticResource title}" Content="{x:Static p:Resources.WaitingRoom}">
         </Label>
-
         <DataGrid Grid.ColumnSpan="4" Grid.Column="3"
                   Grid.Row="3" Grid.RowSpan="3"
                   Margin="30 0 30 0"
                   Name="WaitingRoomDataGrid"
-                  AutoGenerateColumns="False">
+                  CanUserSortColumns="False"
+                  AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     HeaderStyle="{StaticResource dataGridHeader}" 

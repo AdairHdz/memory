@@ -1,9 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MemoryGame.InputValidation.RegistryValidation;
-using MemoryGame.InputValidation;
 
 namespace UnitTests.InputValidationTests
 {
@@ -32,6 +28,19 @@ namespace UnitTests.InputValidationTests
             bool expected = true;
             bool actual = emailAddressValidationRule.Validate();            
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow("abc.@hotmail")]
+        [DataRow("abc3249854rfed")]
+        [DataRow("abc3249854rfedgmail.")]
+        [DataRow("abc3249854rfedgmail.x")]
+        [DataRow("@gmail.com.mx")]
+        public void EmailAddressValidationReturnsFalse(string emailAddress)
+        {
+            EmailAddressValidationRule emailAddressValidationRule = new EmailAddressValidationRule(emailAddress);
+            bool actual = emailAddressValidationRule.Validate();
+            Assert.IsFalse(actual);
         }
     }
 }

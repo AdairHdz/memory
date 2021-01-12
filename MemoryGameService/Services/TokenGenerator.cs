@@ -3,8 +3,10 @@ using System;
 
 namespace MemoryGameService.Services
 {
+    /// <inheritdoc/>
     public partial class MemoryGameService : ITokenGenerator
     {
+        /// <inheritdoc/>
         public string GenerateToken(int length)
         {
             string token = Guid.NewGuid().ToString();

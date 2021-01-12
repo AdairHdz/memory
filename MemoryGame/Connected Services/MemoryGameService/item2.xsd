@@ -1,9 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfstring">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="CardDeckDto">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BackImage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardDeckId" type="xs:int" />
+      <xs:element minOccurs="0" name="Cards" nillable="true" type="tns:ArrayOfCardDto" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumberOfPairs" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+  <xs:element name="CardDeckDto" nillable="true" type="tns:CardDeckDto" />
+  <xs:complexType name="ArrayOfCardDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CardDto" nillable="true" type="tns:CardDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCardDto" nillable="true" type="tns:ArrayOfCardDto" />
+  <xs:complexType name="CardDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardId" type="xs:int" />
+      <xs:element minOccurs="0" name="FrontImage" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CardDto" nillable="true" type="tns:CardDto" />
+  <xs:complexType name="ArrayOfCardDeckInfoDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CardDeckInfoDto" nillable="true" type="tns:CardDeckInfoDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCardDeckInfoDto" nillable="true" type="tns:ArrayOfCardDeckInfoDto" />
+  <xs:complexType name="CardDeckInfoDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardDeckId" type="xs:int" />
+      <xs:element minOccurs="0" name="CardDeckName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CardDeckInfoDto" nillable="true" type="tns:CardDeckInfoDto" />
+  <xs:complexType name="PasswordModificationCredentialsDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salt" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PasswordModificationCredentialsDto" nillable="true" type="tns:PasswordModificationCredentialsDto" />
+  <xs:complexType name="TokenInfoDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Body" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Token" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TokenInfoDto" nillable="true" type="tns:TokenInfoDto" />
+  <xs:complexType name="MatchDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardDeckDto" nillable="true" type="tns:CardDeckDto" />
+      <xs:element minOccurs="0" name="HasStarted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Lobby" nillable="true" type="tns:ServiceLobby" />
+      <xs:element minOccurs="0" name="MaxNumberOfPlayers" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalPairs" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchDto" nillable="true" type="tns:MatchDto" />
+  <xs:complexType name="ServiceLobby">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="ServiceLobby" nillable="true" type="tns:ServiceLobby" />
+  <xs:complexType name="ArrayOfMatchDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MatchDto" nillable="true" type="tns:MatchDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMatchDto" nillable="true" type="tns:ArrayOfMatchDto" />
+  <xs:complexType name="PlayerMovementDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="HasFormedAPair" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MovementsLeft" type="xs:int" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerMovementDto" nillable="true" type="tns:PlayerMovementDto" />
+  <xs:complexType name="CardPairDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BothCardsAreEqual" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IndexOfCard1" type="xs:int" />
+      <xs:element minOccurs="0" name="IndexOfCard2" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CardPairDto" nillable="true" type="tns:CardPairDto" />
+  <xs:complexType name="ArrayOfPlayerInMatchDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerInMatchDto" nillable="true" type="tns:PlayerInMatchDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayerInMatchDto" nillable="true" type="tns:ArrayOfPlayerInMatchDto" />
+  <xs:complexType name="PlayerInMatchDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExpulsionVotes" type="xs:int" />
+      <xs:element minOccurs="0" name="HasActiveTurn" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Score" type="xs:int" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerInMatchDto" nillable="true" type="tns:PlayerInMatchDto" />
+  <xs:complexType name="ExpelVoteDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UsernameOfExpelPlayer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UsernameOfVoterPlayer" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExpelVoteDto" nillable="true" type="tns:ExpelVoteDto" />
+  <xs:complexType name="ArrayOfPlayerScoreDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlayerScoreDto" nillable="true" type="tns:PlayerScoreDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayerScoreDto" nillable="true" type="tns:ArrayOfPlayerScoreDto" />
+  <xs:complexType name="PlayerScoreDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TotalScore" type="xs:int" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerScoreDto" nillable="true" type="tns:PlayerScoreDto" />
+  <xs:complexType name="PlayerDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VerificationToken" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerDto" nillable="true" type="tns:PlayerDto" />
 </xs:schema>

@@ -1,48 +1,42 @@
+using System.Data.Entity;
+using DataAccess.Entities;
+
 namespace DataAccess
 {
-    using System.Data.Entity;
-    using DataAccess.Entities;
-
+    /// <summary>
+    /// The <c>MemoryGameContext</c> class.
+    /// Represents the DbContext the repositories will work with.
+    /// </summary>
     public partial class MemoryGameContext : DbContext
     {
+        /// <summary>
+        /// The <c>MemoryGameContext</c> constructor.
+        /// </summary>
         public MemoryGameContext()
             : base("name=MemoryGame")
         {
             var ensureDllIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
 
+        /// <summary>
+        /// The table from the database that containts the card decks.
+        /// </summary>
         public virtual DbSet<CardDeck> CardDecks { get; set; }
+        /// <summary>
+        /// The table from the database that containts the cards.
+        /// </summary>
         public virtual DbSet<Card> Cards { get; set; }
+        /// <summary>
+        /// The table from the database that containts the matches.
+        /// </summary>
         public virtual DbSet<Match> Matches { get; set; }
+        /// <summary>
+        /// The table from the database that contains the players.
+        /// </summary>
         public virtual DbSet<Player> Players { get; set; }
-        public virtual DbSet<Winner> Winners { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<CardDeck>()
-                .HasMany(e => e.Cards)
-                .WithRequired(e => e.CardDecks)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<CardDeck>()
-                .HasMany(e => e.Matches)
-                .WithRequired(e => e.CardDecks)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Match>()
-                .HasMany(e => e.Winners)
-                .WithRequired(e => e.Matches)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Player>()
-                .HasMany(e => e.Winners)
-                .WithRequired(e => e.Players)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Player>()
-                .HasMany(e => e.Matches)
-                .WithMany(e => e.Players)
-                .Map(m => m.ToTable("MatchesPlayed").MapLeftKey("EmailAddress").MapRightKey("MatchId"));
-        }
+        /// <summary>
+        /// The table from the database that containts the accounts.
+        /// </summary>
+        public virtual DbSet<Account> Accounts { get; set; }       
     }
 }

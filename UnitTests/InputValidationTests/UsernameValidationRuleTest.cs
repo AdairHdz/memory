@@ -1,11 +1,5 @@
-﻿using MemoryGame.InputValidation;
-using MemoryGame.InputValidation.RegistryValidation;
+﻿using MemoryGame.InputValidation.RegistryValidation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UnitTests.InputValidationTests
 {
@@ -19,12 +13,24 @@ namespace UnitTests.InputValidationTests
         [DataRow("AdairBenjamin@16")]
         public void UsernameValidationReturnsTrue(string username)
         {
-
             UsernameValidationRule usernameValidationRule = new UsernameValidationRule(username);
             bool expected = true;
             bool actual = usernameValidationRule.Validate();
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow("")]
+        [DataRow(" ")]
+        [DataRow("AdairBenjamin@16dskfkmdfgmkldmklbmfgklmfdskjfniuxehc yuf dcyfbryfbrusdfydsfoyuesfheiuerhsdufhkjdshfhjer" +
+            "jskafndjwedfhjbdbschbsdubcdsjnfjcrsdkfbjkfdnjvbfhjbfdsjdsbfhdbsgfbdgfbdhbgdbsfhedsij")]
+        public void UsernameValidationReturnsFalse(string username)
+        {
+            UsernameValidationRule usernameValidationRule = new UsernameValidationRule(username);
+            bool actual = usernameValidationRule.Validate();
+
+            Assert.IsFalse(actual);
         }
     }
 }

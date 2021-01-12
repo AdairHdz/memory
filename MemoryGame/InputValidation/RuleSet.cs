@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MemoryGame.InputValidation
 {
+    /// <inheritdoc/>
     public class RuleSet
     {
+        /// <summary>
+        /// The validation rules to be evaluated.
+        /// </summary>
         public List<IValidationRule> ValidationRules { get; set; }
-        private List<ValidationRuleResult> _validationResultErrors;
+        private readonly List<ValidationRuleResult> _validationResultErrors;
 
+        /// <summary>
+        /// The <c>VRuleSet</c> constructor.
+        /// </summary>
         public RuleSet()
         {
             ValidationRules = new List<IValidationRule>();
             _validationResultErrors = new List<ValidationRuleResult>();
         }
 
+        /// <inheritdoc/>
         public void AddValidationRule(IValidationRule validationRule)
         {
             ValidationRules.Add(validationRule);
@@ -35,6 +39,7 @@ namespace MemoryGame.InputValidation
             }
         }
 
+        /// <inheritdoc/>
         public bool AllValidationRulesHavePassed()
         {
             LookForValidationErrors();
@@ -45,12 +50,12 @@ namespace MemoryGame.InputValidation
             return false;
         }
 
+        /// <inheritdoc/>
         public List<ValidationRuleResult> GetValidationResultErrors()
         {
             LookForValidationErrors();
             return _validationResultErrors;
         }
-
 
 
         private void ClearValidationErrorsList()

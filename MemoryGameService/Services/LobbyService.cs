@@ -1,152 +1,81 @@
-﻿using MemoryGameService.Contracts;
-using MemoryGameService.Utilities;
+﻿using MemoryGame.MemoryGameService.DataTransferObjects;
+using MemoryGameService.Contracts;
+using MemoryGameService.Logic;
 using System.Collections.Generic;
-using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
-    /*[ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single,
-       InstanceContextMode = InstanceContextMode.Single)]*/
-    public partial class MemoryGameService : IJoinGameService, IWaitingRoomService
+    /// <inheritdoc/>
+    public partial class MemoryGameService : ILobbyService
     {
-        private Dictionary<string, GameSettings> _games = new Dictionary<string, GameSettings>();
-        private Dictionary<IJoinGameServiceCallback, string> _playersLookingForJoinGame = new Dictionary<IJoinGameServiceCallback, string>();
-
-        public void CreateGame(string username, int numOfPlayers)
-        {
-            var connection = OperationContext.Current.GetCallbackChannel<IWaitingRoomServiceCallback>();
-            GameSettings gameSettings = new GameSettings();
-            gameSettings.addToMembersDictionary(connection, username);
-            gameSettings.NumberOfPlayers = numOfPlayers;
-            _games.Add(username, gameSettings);
-            foreach (var playerJoinGameConnection in _playersLookingForJoinGame.Keys)
-            {
-                playerJoinGameConnection.NewGameCreated(username);
-            }
+        /// <inheritdoc/>
+        public IList<string> GetActivePlayersInLobby(string host)
+        {            
+            ServiceMatch match = GetMatch(host);
+            ServiceLobby lobby = match.Lobby;
+            IList<string> activePlayersFromMatch = lobby.GetUsernamesOfPlayersConnectedToLobby();
+            return activePlayersFromMatch;
         }
 
-        public bool AskForJoinGame(string gameHostUsername)
+        /// <inheritdoc/>
+        public void JoinLobby(string host, string username)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IJoinGameServiceCallback>();
-            GameSettings gameSettings = new GameSettings();
-            _games.TryGetValue(gameHostUsername, out gameSettings);
-            Dictionary<IWaitingRoomServiceCallback, string> _members = gameSettings.getMembersDictionary();
-            int numOfPlayers = _members.Count;
-            if (numOfPlayers == gameSettings.NumberOfPlayers)
+            ServiceMatch match = GetMatch(host);
+            if(match != null)
             {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+                ServiceLobby lobby = match.Lobby;
+                lobby.AddPlayerToLobby(host, username);
+                lobby.NotifyNewPlayerEnteredLobby(username);
+            }        
         }
 
-        public void JoinGame(string gameHostUsername, string newPlayerUsername)
-        {
-            var connection = OperationContext.Current.GetCallbackChannel<IWaitingRoomServiceCallback>();
-            GameSettings gameSettings = new GameSettings();
-            _games.TryGetValue(gameHostUsername, out gameSettings);
-            Dictionary<IWaitingRoomServiceCallback, string> _members = gameSettings.getMembersDictionary();
-            foreach (var playerConnection in _members.Keys)
+        /// <inheritdoc/>
+        public void LeaveLobby(string host, string username)
+        {            
+            ServiceMatch match = GetMatch(host);
+            if(match != null)
             {
-                playerConnection.NewPlayerJoined(newPlayerUsername);
-            }
-            gameSettings.addToMembersDictionary(connection, newPlayerUsername);
-        }
-
-        public void LeaveGame(string gameHostUsername, string username)
-        {
-            var connection = OperationContext.Current.GetCallbackChannel<IWaitingRoomServiceCallback>();
-            GameSettings gameSettings = new GameSettings();
-            _games.TryGetValue(gameHostUsername, out gameSettings);
-            Dictionary<IWaitingRoomServiceCallback, string> _members = gameSettings.getMembersDictionary();
-            if (gameHostUsername == username)
-            {
-
-                foreach (var playerConnection in _members.Keys)
+                ServiceLobby lobby = match.Lobby;
+                lobby.RemovePlayerFromLobby(username);
+                if (host.Equals(username))
                 {
-                    if (playerConnection == connection)
-                    {
-                        continue;
-                    }
-                    playerConnection.HostLeaveGame();
+                    lobby.NotifyPlayersMatchHasBeenDeleted();
+                    _matches.Remove(match);
                 }
-                _games.Remove(gameHostUsername);
-
-                foreach (var playerJoinGameConnection in _playersLookingForJoinGame.Keys)
+                else
                 {
-                    playerJoinGameConnection.RemoveGameFromList(gameHostUsername);
-                }
-            }
-            else
-            {
-                _members.Remove(connection);
-                gameSettings.setMembersDictionary(_members);
-                foreach (var playerConnection in _members.Keys)
-                {
-                    playerConnection.PlayerLeaveGame(username);
+                    lobby.NotifyOnePlayerLeftLobby(username);
                 }
             }
         }
 
-        public void JoinGameLobby(string usernme)
+        /// <inheritdoc/>
+        public void StartGame(string host)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IJoinGameServiceCallback>();
-            _playersLookingForJoinGame.Add(connection, usernme);
-        }
-
-        public void LeaveGameLobby()
-        {
-            var connection = OperationContext.Current.GetCallbackChannel<IJoinGameServiceCallback>();
-            _playersLookingForJoinGame.Remove(connection);
-        }
-
-        public void RecoverAvailableGames()
-        {
-            var connection = OperationContext.Current.GetCallbackChannel<IJoinGameServiceCallback>();
-            GameSettings gameSettings;;
-            foreach (var gameHost in _games.Keys)
+            ServiceMatch match = GetMatch(host);
+            if(match != null)
             {
-                _games.TryGetValue(gameHost, out gameSettings);
-                if(gameSettings.MatchWasStarted == false)
+                match.StartMatch();
+            }            
+        }
+
+        /// <summary>
+        /// Gets the match that matches the username provided.
+        /// </summary>
+        /// <param name="host">Name of the player who created the game.</param>
+        /// <returns>A specific matchDto object</returns>
+        private ServiceMatch GetMatch(string host)
+        {
+            ServiceMatch gameMatch = null;
+            foreach (var match in _matches)
+            {
+                if (match.Host.Equals(host))
                 {
-                    connection.ReciveAvailableGames(gameHost);
-                }               
-            }
-        }
-
-        public void RecoverGameMembers(string gameHostUsername)
-        {
-            var connection = OperationContext.Current.GetCallbackChannel<IWaitingRoomServiceCallback>();
-            GameSettings gameSettings = new GameSettings();
-            _games.TryGetValue(gameHostUsername, out gameSettings);
-            Dictionary<IWaitingRoomServiceCallback, string> _members = gameSettings.getMembersDictionary();
-            foreach (var playerUsername in _members.Values)
-            {
-                connection.ReciveGameMembers(playerUsername);
-            }
-        }
-
-        public void StarGame(string gameHostUsername)
-        {
-            var connection = OperationContext.Current.GetCallbackChannel<IWaitingRoomServiceCallback>();
-            GameSettings gameSettings = new GameSettings();
-            _games.TryGetValue(gameHostUsername, out gameSettings);
-            Dictionary<IWaitingRoomServiceCallback, string> _members = gameSettings.getMembersDictionary();
-            foreach (var playerConnection in _members.Keys)
-            {
-                if (playerConnection == connection)
-                {
-                    continue;
+                    gameMatch = match;
+                    break;
                 }
-                playerConnection.GameStarted();
             }
-            gameSettings.MatchWasStarted = true;
-            foreach (var playerJoinGameConnection in _playersLookingForJoinGame.Keys)
-            {
-                playerJoinGameConnection.RemoveGameFromList(gameHostUsername);
-            }
+            return gameMatch;
         }
     }
 }

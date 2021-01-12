@@ -1,44 +1,136 @@
 ﻿using System.Windows;
-using System.ServiceModel;
-using DataAccess.Entities;
 using System.Collections.ObjectModel;
+using MemoryGame.MemoryGameService.DataTransferObjects;
+using System.ServiceModel;
+using System;
 
 namespace MemoryGame
 {
     /// <summary>
     /// Lógica de interacción para JoinGame.xaml
     /// </summary>
-    public partial class JoinGame : Window, Proxy.IJoinGameServiceCallback
+    public partial class JoinGame : Window
     {
-        private Proxy.JoinGameServiceClient server = null;
-        private InstanceContext context = null;
-        Sesion playerSesion = Sesion.GetSesion;
-        public ObservableCollection<string> matches = new ObservableCollection<string>();
+        private MemoryGameService.MatchDiscoveryServiceClient _matchDiscoveryServiceClient;        
+        private MatchDto _selectedMatch;
 
-
+        /// <summary>
+        /// The <c>JoinGame</c> constructor.
+        /// </summary>
         public JoinGame()
         {
             InitializeComponent();
-            context = new InstanceContext(this);
-            server = new Proxy.JoinGameServiceClient(context);
-            GamesDataGrid.ItemsSource = matches;
-            server.JoinGameLobby(playerSesion.Username);
-            server.RecoverAvailableGames();
+            _matchDiscoveryServiceClient = new MemoryGameService.MatchDiscoveryServiceClient();
+            LoadActiveMatches();                        
         }
 
-        public void NewGameCreated(string gameHostUsername)
+        private void LoadActiveMatches()
         {
-            matches.Add(gameHostUsername);
+            try
+            {
+                PopulateTableWithActiveMatches();
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
         }
 
-        public void ReciveAvailableGames(string gameHostUsername)
+        private void PopulateTableWithActiveMatches()
         {
-            matches.Add(gameHostUsername);
+            ObservableCollection<MatchDto> listOfActiveMatches = new ObservableCollection<MatchDto>();
+            MatchDto[] activeMatches = _matchDiscoveryServiceClient.GetActiveMatches();
+
+            for (int indexOfActualMatch = 0; indexOfActualMatch < activeMatches.Length; indexOfActualMatch++)
+            {
+                listOfActiveMatches.Add(activeMatches[indexOfActualMatch]);
+            }
+
+            GamesDataGrid.ItemsSource = listOfActiveMatches;
         }
 
-        public void RemoveGameFromList(string gameHostUsername)
+        private void JoinButtonClicked(object sender, RoutedEventArgs e)
         {
-            matches.Remove(gameHostUsername);
+            _selectedMatch = (MatchDto)GamesDataGrid.SelectedItem;
+            try
+            {
+                JoinMatch();
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+        }
+
+        private void JoinMatch()
+        {
+            if (_selectedMatch == null)
+            {
+                MessageBox.Show(Properties.Langs.Resources.NoMatchWasSelected);
+            }
+            else
+            {
+                try
+                {                    
+                    if (PlayerCanJoinToGame())
+                    {
+                        GoToWaitingRoom();
+                    }
+                    else
+                    {
+                        MessageBox.Show(Properties.Langs.Resources.FullGameMessage);
+                    }
+                }
+                catch (FaultException<MemoryGame.MemoryGameService.Faults.MatchAccessDeniedFault>)
+                {
+                    MessageBox.Show(Properties.Langs.Resources.TriedToJoinToNonexistentMatch);
+                }
+                catch (TimeoutException)
+                {
+                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+                }
+            }
+        }
+
+        private bool PlayerCanJoinToGame()
+        {
+            string matchHost = _selectedMatch.Host;
+            bool canJoinToGame = _matchDiscoveryServiceClient.CanJoin(matchHost);
+            return canJoinToGame;
+        }
+
+        private void GoToWaitingRoom()
+        {
+            WaitingRoom waitingRoomView = new WaitingRoom()
+            {
+                GameMatchDto = _selectedMatch
+            };
+            waitingRoomView.Show();
+            this.Close();
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)
@@ -46,23 +138,6 @@ namespace MemoryGame
             MainMenu mainMenuView = new MainMenu();
             mainMenuView.Show();
             this.Close();
-        }
-
-        private void JoinButtonClicked(object sender, RoutedEventArgs e)
-        {
-            string hostUsername = GamesDataGrid.SelectedItem.ToString();
-            bool isHost = false;
-            bool gameIsAvailable = server.AskForJoinGame(hostUsername);
-            if (gameIsAvailable)
-            {
-                WaitingRoom mainMenuView = new WaitingRoom(isHost, hostUsername, 0);
-                mainMenuView.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show(Properties.Langs.Resources.FullGameMessage);
-            }
         }
     }
 }

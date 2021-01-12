@@ -2,93 +2,238 @@
 using System.ServiceModel;
 using DataAccess.Entities;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System;
 
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para WaitingRoom.xaml
+    /// Interaction logic for WaitingRoom.xaml
     /// </summary>
-    public partial class WaitingRoom : Window, Proxy.IWaitingRoomServiceCallback
+    public partial class WaitingRoom : Window, MemoryGameService.ILobbyServiceCallback
     {
-        private Proxy.WaitingRoomServiceClient server = null;
-        private InstanceContext context = null;
-        Sesion playerSesion = Sesion.GetSesion;
-        public ObservableCollection<string> players = new ObservableCollection<string>();
-        string gameHostUsername;
-        bool isHost;
-        public WaitingRoom(bool isHost, string gameHostUsername, int maxNumOfPlayers)
+        /// <summary>
+        /// The match this waiting room pertains to.
+        /// </summary>
+        public MemoryGameService.DataTransferObjects.MatchDto GameMatchDto { get; set; }
+        private ObservableCollection<string> _players;
+        private InstanceContext _context;
+        private MemoryGameService.LobbyServiceClient _lobbyServiceClient;
+        private string _username;        
+        private bool _thisPlayerIsHost;
+        private bool _windowIsBeingClosedByTheCloseButton;
+
+        /// <summary>
+        /// The <c>WaitingRoom</c> constructor.
+        /// </summary>
+        public WaitingRoom()
         {
             InitializeComponent();
-            context = new InstanceContext(this);
-            server = new Proxy.WaitingRoomServiceClient(context);
-            WaitingRoomDataGrid.ItemsSource = players;
-            this.gameHostUsername = gameHostUsername;
-            this.isHost = isHost;
-            if (isHost)
+            _context = new InstanceContext(this);
+            _lobbyServiceClient = new MemoryGameService.LobbyServiceClient(_context);
+            _username = Sesion.GetSesion.Username;            
+            _windowIsBeingClosedByTheCloseButton = true;
+            _players = new ObservableCollection<string>();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DetermineIfPlayerIsHost();
+            if (!_thisPlayerIsHost)
             {
-                server.CreateGame(playerSesion.Username, maxNumOfPlayers);
+                StarButton.Visibility = Visibility.Collapsed;
+            }
+
+            try
+            {
+                LoadActivePlayersInLobby();
+                CallJoinLobbyService();
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+
+        }
+
+        private void DetermineIfPlayerIsHost()
+        {
+            if (_username.Equals(GameMatchDto.Host))
+            {
+                _thisPlayerIsHost = true;
             }
             else
             {
-                server.JoinGame(gameHostUsername, playerSesion.Username);
-                StarButton.Visibility = System.Windows.Visibility.Collapsed;
+                _thisPlayerIsHost = false;
             }
-
-            server.RecoverGameMembers(gameHostUsername);
         }
 
-        public void HostLeaveGame()
+        private void LoadActivePlayersInLobby()
         {
-            JoinGame joinGameMenuView = new JoinGame();
-            joinGameMenuView.Show();
+            IList<string> activePlayers = _lobbyServiceClient.GetActivePlayersInLobby(GameMatchDto.Host);
+            foreach(var oneActivePlayer in activePlayers)
+            {
+                _players.Add(oneActivePlayer);
+            }            
+            WaitingRoomDataGrid.ItemsSource = _players;
+        }
+
+        private void CallJoinLobbyService()
+        {
+            _lobbyServiceClient.JoinLobby(GameMatchDto.Host, _username);
+        }
+
+        /// <summary>
+        /// Defines the behavior for when the "Leave" button is clicked.
+        /// </summary>
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="routedEventArgs">The arguments of the event</param>
+        public void LeaveButtonClicked(object sender, RoutedEventArgs routedEventArgs)
+        {
+            try
+            {
+                CallLeaveLobbyService();
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+            finally
+            {
+                if (_thisPlayerIsHost)
+                {
+                    GoToMainMenuView();
+                }
+                else
+                {
+                    GoToJoinGameView();
+                }
+            }
+        }
+
+        private void GoToJoinGameView()
+        {
+            _windowIsBeingClosedByTheCloseButton = false;
+            JoinGame joinGameView = new JoinGame();
+            joinGameView.Show();
             this.Close();
         }
 
-        public void PlayerLeaveGame(string playerUsername)
+        private void GoToMainMenuView()
         {
-            players.Remove(playerUsername);
+            _windowIsBeingClosedByTheCloseButton = false;
+            MainMenu mainMenuView = new MainMenu();
+            mainMenuView.Show();
+            this.Close();
         }
 
-        public void NewPlayerJoined(string newPlayerUsername)
+        private void CallLeaveLobbyService()
         {
-            players.Add(newPlayerUsername);
+            _lobbyServiceClient.LeaveLobby(GameMatchDto.Host, _username);
         }
 
-        public void ReciveGameMembers(string memberUsername)
+        /// <summary>
+        /// Defines the behavior for when the "Start" button is clicked.
+        /// </summary>
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="routedEventArgs">The arguments for the event</param>
+        public void StartButtonClicked(object sender, RoutedEventArgs routedEventArgs)
         {
-            players.Add(memberUsername);
+            if(_players.Count < 2)
+            {
+                MessageBox.Show(Properties.Langs.Resources.InsufficientNumberOfPlayers);
+            }
+            else
+            {
+                StartGame();
+            }            
         }
 
-        public void GameStarted()
+        private void StartGame()
         {
-            Chat matchView = new Chat();
+            try
+            {
+                _lobbyServiceClient.StartGame(GameMatchDto.Host);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
+            }
+
+        }
+
+        /// <summary>
+        /// Notifies the client that a new player entered the waiting room,
+        /// </summary>
+        /// <param name="username">The username of the player who entered the waiting room</param>
+        public void NotifyNewPlayerEntered(string username)
+        {           
+            if(username != null)
+            {
+                _players.Add(username);
+            }
+        }
+
+        /// <summary>
+        /// Notifies the client that a player left the waiting room.
+        /// </summary>
+        /// <param name="username">The username of the player who left the waiting room</param>
+        public void NotifyPlayerLeft(string username)
+        {
+            _players.Remove(username);
+        }
+
+        public void TakePlayersToMatchView(string[] playersInMatch)
+        {
+            _windowIsBeingClosedByTheCloseButton = false;
+            Views.Match matchView = new Views.Match()
+            {
+                Players = playersInMatch,
+                MatchHost = GameMatchDto.Host,
+                CardDeck = GameMatchDto.CardDeckDto
+            };
             matchView.Show();
             this.Close();
         }
 
-        public void LeaveButtonClicked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Takes the players out of the waitingRoom
+        /// </summary>
+        public void TakePlayersOutOfLobby()
         {
-            server.LeaveGame(gameHostUsername, playerSesion.Username);
-            if (isHost)
-            {
-                MainMenu mainMenuView = new MainMenu();
-                mainMenuView.Show();
-                this.Close();
-            }
-            else
-            {
-                JoinGame joinGameView = new JoinGame();
-                joinGameView.Show();
-                this.Close();
-            }
+            GoToJoinGameView();
         }
 
-        public void StartButtonClicked(object sender, RoutedEventArgs e)
+        private void Window_Closed(object sender, EventArgs eventArgs)
         {
-            server.StarGame(gameHostUsername);
-            Chat matchView = new Chat();
-            matchView.Show();
-            this.Close();
+            if (_windowIsBeingClosedByTheCloseButton)
+            {
+                CallLeaveLobbyService();
+            }            
         }
     }
 }

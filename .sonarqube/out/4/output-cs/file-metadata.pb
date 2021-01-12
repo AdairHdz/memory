@@ -1,21 +1,24 @@
-u
-jC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Connected Services\MemoryGameService\Reference.csutf-8i
-^C:\Users\Adair Hernández\source\repos\memory\MemoryGame\Connected Services\Proxy\Reference.csutf-8�
-�C:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\RegistryValidation\EmailAddressAvailabilityValidationRule.csutf-8�
-yC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\RegistryValidation\EmailAddressValidationRule.csutf-8u
-lC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\RegistryValidation\IRegistryRule.csutf-8~
-uC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\RegistryValidation\PasswordValidationRule.csutf-8�
-�C:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\RegistryValidation\UsernameAvailabilityValidationRule.csutf-8~
-uC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\RegistryValidation\UsernameValidationRule.csutf-8t
-kC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\RegistryValidation\RegistryData.csutf-8i
+_
+VC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Components\GameBoardDrawer.csutf-8Y
+PC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Components\ImageCard.csutf-8W
+NC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Components\UserBox.csutf-8]
+TC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Components\UserBoxDrawer.csutf-8u
+jC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Connected Services\MemoryGameService\Reference.csutf-8l
+cC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\NonEmptyFieldValidation.csutf-8d
+[C:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\IValidationRule.csutf-8o
+fC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\EmailAddressValidationRule.csutf-8k
+bC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\PasswordValidationRule.csutf-8k
+bC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\UsernameValidationRule.csutf-8]
+TC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\IRuleSet.csutf-8\
+SC:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\RuleSet.csutf-8i
 `C:\Users\Adair Hernández\source\repos\memory\MemoryGame\InputValidation\ValidationRuleResult.csutf-8p
 eC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Properties\Langs\Resources.es-MX.Designer.csutf-8[
 RC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Utilities\TokenManager.csutf-8_
 VC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ActivationToken.xaml.csutf-8^
-UC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ChangePassword.xaml.csutf-8^
-UC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ChangeUsername.xaml.csutf-8T
-KC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\Chat.xaml.csutf-8Z
-QC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\CreateGame.xaml.csutf-8X
+UC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ChangeUsername.xaml.csutf-8Z
+QC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\CreateGame.xaml.csutf-8[
+RC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\ExpelPlayer.xaml.csutf-8[
+RC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\GameOptions.xaml.csutf-8X
 OC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\JoinGame.xaml.csutf-8U
 LC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\Login.xaml.csutf-8X
 OC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Views\MainMenu.xaml.csutf-8p
@@ -33,10 +36,10 @@ SC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Properties\AssemblyInf
 _C:\Users\Adair Hernández\source\repos\memory\MemoryGame\Properties\Langs\Resources.Designer.csutf-8c
 XC:\Users\Adair Hernández\source\repos\memory\MemoryGame\Properties\Settings.Designer.csutf-8h
 ]C:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\ActivationToken.g.csutf-8g
-\C:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\ChangePassword.g.csutf-8g
-\C:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\ChangeUsername.g.csutf-8]
-RC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\Chat.g.csutf-8c
-XC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\CreateGame.g.csutf-8a
+\C:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\ChangeUsername.g.csutf-8c
+XC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\CreateGame.g.csutf-8d
+YC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\ExpelPlayer.g.csutf-8d
+YC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\GameOptions.g.csutf-8a
 VC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\JoinGame.g.csutf-8^
 SC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\Login.g.csutf-8a
 VC:\Users\Adair Hernández\source\repos\memory\MemoryGame\obj\Debug\Views\MainMenu.g.csutf-8c

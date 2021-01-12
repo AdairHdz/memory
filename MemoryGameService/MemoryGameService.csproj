@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\MemoryGameService.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.8.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.8\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -43,11 +47,26 @@
     <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.9.3.0\lib\net461\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.10.1\lib\net47\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.10.1\lib\net47\MimeKit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,52 +78,55 @@
     <Compile Include="Contracts\IAccountModifiabilityService.cs" />
     <Compile Include="Contracts\IAccountVerificationService.cs" />
     <Compile Include="Contracts\ICardDeckRetrieverService.cs" />
-    <Compile Include="Contracts\IJoinGameService.cs" />
+    <Compile Include="Contracts\ILobbyService.cs" />
+    <Compile Include="Contracts\IMatchCreationService.cs" />
+    <Compile Include="Contracts\IMatchDiscoveryService.cs" />
     <Compile Include="Contracts\IPlayerRegistryService.cs" />
-    <Compile Include="Contracts\ITimerInitializerService.cs" />
-    <Compile Include="Contracts\ITimerService.cs" />
-    <Compile Include="Contracts\IWaitingRoomService.cs" />
-    <Compile Include="DataTransferObjectMappers\CardDeckMapper.cs" />
-    <Compile Include="DataTransferObjectMappers\CardMapper.cs" />
-    <Compile Include="DataTransferObjectMappers\PlayerCredentialsMapper.cs" />
-    <Compile Include="DataTransferObjectMappers\PlayerMapper.cs" />
-    <Compile Include="DataTransferObjectMappers\PlayerScoreMapper.cs" />
-    <Compile Include="DataTransferObjects\CardDeckDTO.cs" />
+    <Compile Include="DataTransferObjects\CardDeckDto.cs" />
+    <Compile Include="DataTransferObjects\CardDeckInfoDto.cs" />
     <Compile Include="DataTransferObjects\CardDto.cs" />
-    <Compile Include="DataTransferObjects\PlayerCredentialsDTO.cs" />
-    <Compile Include="DataTransferObjects\PlayerDTO.cs" />
-    <Compile Include="DataTransferObjects\PlayerScoreDTO.cs" />
-    <Compile Include="DataTransferObjects\TurnTimerDTO.cs" />
-    <Compile Include="DataValidators\IPlayerValidator.cs" />
-    <Compile Include="DataValidators\PlayerValidator.cs" />
+    <Compile Include="DataTransferObjects\CardPairDto.cs" />
+    <Compile Include="DataTransferObjects\ExpelVoteDto.cs" />
+    <Compile Include="DataTransferObjects\MatchDto.cs" />
+    <Compile Include="DataTransferObjects\PasswordModificationCredentialsDto.cs" />
+    <Compile Include="Logic\ServicePlayerInLobby.cs" />
+    <Compile Include="Logic\ServiceLobby.cs" />
+    <Compile Include="DataTransferObjects\PlayerCredentialsDto.cs" />
+    <Compile Include="DataTransferObjects\PlayerDto.cs" />
+    <Compile Include="DataTransferObjects\PlayerInMatchDto.cs" />
+    <Compile Include="DataTransferObjects\PlayerScoreDto.cs" />
+    <Compile Include="DataTransferObjects\PlayerMovementDto.cs" />
+    <Compile Include="DataTransferObjects\TokenInfoDto.cs" />
     <Compile Include="Contracts\IAccessibilityService.cs" />
-    <Compile Include="Contracts\IChatClient.cs" />
-    <Compile Include="Contracts\ICommunicationService.cs" />
     <Compile Include="Contracts\IMailingService.cs" />
     <Compile Include="Contracts\IMatchService.cs" />
     <Compile Include="Contracts\IScoreService.cs" />
     <Compile Include="Contracts\ITokenGenerator.cs" />
-    <Compile Include="Faults\EndpointNotFoundFault.cs" />
-    <Compile Include="GlobalErrorHandler.cs" />
-    <Compile Include="GlobalErrorHandlerBehaviorAttribute.cs" />
+    <Compile Include="Faults\MatchAccessDeniedFault.cs" />
+    <Compile Include="Faults\NonExistentUserFault.cs" />
+    <Compile Include="Faults\TypedFault.cs" />
+    <Compile Include="Logic\ServiceCard.cs" />
+    <Compile Include="Logic\ServiceCardDeck.cs" />
+    <Compile Include="Logic\ServiceMatch.cs" />
+    <Compile Include="Logic\ServicePlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccesibilityService.cs" />
     <Compile Include="Services\AccountModifiabilityService.cs" />
     <Compile Include="Services\AccountVerificationService.cs" />
     <Compile Include="Services\CardDeckRetrieverService.cs" />
-    <Compile Include="Services\CommunicationService.cs" />
     <Compile Include="Services\LobbyService.cs" />
     <Compile Include="Services\MailingService.cs" />
+    <Compile Include="Services\MatchCreationService.cs" />
+    <Compile Include="Services\MatchDiscoveryService.cs" />
     <Compile Include="Services\MatchService.cs" />
     <Compile Include="Services\MemoryGameService.cs" />
     <Compile Include="Services\PlayerRegistryService.cs" />
     <Compile Include="Services\ScoreService.cs" />
-    <Compile Include="Services\TimerInitializerService.cs" />
-    <Compile Include="Services\TimerService.cs" />
     <Compile Include="Services\TokenGenerator.cs" />
     <Compile Include="Utilities\CardShuffler.cs" />
-    <Compile Include="Utilities\GameSettings.cs" />
-    <Compile Include="Utilities\SingletonTimer.cs" />
+    <Compile Include="Utilities\FisherYatesShuffler.cs" />
+    <Compile Include="Utilities\IShuffler.cs" />
+    <Compile Include="Utilities\MailTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
@@ -118,6 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Log4Net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +181,7 @@
   <ItemGroup>
     <Resource Include="CardDecks\backimage.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

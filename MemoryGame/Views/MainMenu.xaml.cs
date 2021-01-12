@@ -3,10 +3,13 @@
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para RecoverPassword.xaml
+    /// Interaction logic for RecoverPassword.xaml
     /// </summary>
     public partial class MainMenu : Window
     {
+        /// <summary>
+        /// The <c>MainMenu</c> constructor.
+        /// </summary>
         public MainMenu()
         {
             InitializeComponent();
@@ -32,5 +35,13 @@ namespace MemoryGame
             scoreTableView.Show();
             this.Close();
         }
+
+        private void ChangeUsernameButtonClicked(object sender, RoutedEventArgs e)
+        {
+            ChangeUsername changeUsernameView = new ChangeUsername();
+            changeUsernameView.Show();
+            this.Close();
+        }
+
     }
 }

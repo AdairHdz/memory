@@ -5,29 +5,33 @@ using DataAccess.Entities;
 using MemoryGame.InputValidation;
 using MemoryGame.InputValidation.GenericValidations;
 using System.Collections.Generic;
-using MemoryGame.MemoryGameService.DataTransferObjects;
 using System.ServiceModel;
 using System;
 
 namespace MemoryGame
 {
     /// <summary>
-    /// Lógica de interacción para Login.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
     public partial class Login : Window
     {
         private RuleSet _ruleSet;
         private string _username, _password;
+        private AccessibilityServiceClient _accessibilityServiceClient;
         
+        /// <summary>
+        /// The <c>Login</c> constructor.
+        /// </summary>
         public Login()
         {            
             InitializeComponent();
+            _accessibilityServiceClient = new AccessibilityServiceClient();
         }
 
         private void GetDataFromFields()
         {
-            _username = TextBoxUsername.Text;
-            _password = PasswordBoxPassword.Password;
+            _username = UsernameTextBox.Text;
+            _password = PasswordPasswordBox.Password;
         }
 
         private void SetFormValidation()
@@ -40,51 +44,11 @@ namespace MemoryGame
 
         private void ShowErrorMessage()
         {
-            List<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
-            foreach (ValidationRuleResult validationRuleResult
-                in validationResultErrors)
+            IList<ValidationRuleResult> validationResultErrors = _ruleSet.GetValidationResultErrors();
+            if (validationResultErrors.Count > 0)
             {
-                MessageBox.Show(validationRuleResult.Message);
-                return;
+                MessageBox.Show(validationResultErrors[0].Message);
             }
-        }
-
-        public bool LoginIsValid()
-        {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-            BCryptHashGenerator hashGenerator = new BCryptHashGenerator();
-
-            PlayerCredentialsDTO playerCredentials = client.GetPlayerCredentials(_username);
-
-            bool isMatch = hashGenerator.Match(_password, playerCredentials.Password);
-
-            return isMatch;
-        }
-
-        public bool EmailIsVerified()
-        {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-
-            string username = TextBoxUsername.Text;
-
-            return client.IsVerified(username);
-        }
-
-
-        public void GoToMainMenu()
-        {
-            MainMenu mainMenuView = new MainMenu();
-            mainMenuView.Show();
-            this.Close();
-        }
-
-        public string GetUserEmailAdress()
-        {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-
-            string username = TextBoxUsername.Text;
-
-            return client.GetUserEmailAddress(username);
         }
 
         private void LoginButtonClicked(object sender, RoutedEventArgs e)
@@ -92,34 +56,97 @@ namespace MemoryGame
             SetFormValidation();
             if (_ruleSet.AllValidationRulesHavePassed())
             {
-                if (LoginIsValid())
+                try
                 {
-                    if (EmailIsVerified())
-                    {
-                        Sesion playerSesion = Sesion.GetSesion;
-                        playerSesion.Username = TextBoxUsername.Text;
-                        playerSesion.EmailAddress = GetUserEmailAdress();
-                        GoToMainMenu();
-                    }
-                    else
-                    {
-                        ActivationToken activationTokenWindow =
-                                new ActivationToken(GetUserEmailAdress(), TextBoxUsername.Text);
-
-                        activationTokenWindow.Show();
-                        this.Close();
-                    }
+                    LoginUser();
                 }
-                else
+                catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
+                {                    
+                    MessageBox.Show(Properties.Langs.Resources.UserDoesNotExist);
+                }
+                catch (EndpointNotFoundException)
                 {
-                    MessageBox.Show(Properties.Langs.Resources.NonMatchingCredentials);
+                    MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
+                }            
+                catch (TimeoutException)
+                {
+                    MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
                 }
             }
             else
             {
                 ShowErrorMessage();
             }
+        }
 
+        private string GetUserEmailAdress()
+        {                      
+            string username = UsernameTextBox.Text;
+            string emailAddress = _accessibilityServiceClient.GetUserEmailAddress(username);
+            return emailAddress;
+        }
+
+        private void LoginUser()
+        {
+            if (LoginIsValid())
+            {
+                if (EmailIsVerified())
+                {
+                    string emailAddress = GetUserEmailAdress();
+                    Sesion playerSesion = Sesion.GetSesion;
+                    playerSesion.Username = _username;
+                    playerSesion.EmailAddress = emailAddress;
+                    GoToMainMenu();
+                }
+                else
+                {
+                    GoToActivationToken();
+                }
+            }
+            else
+            {
+                MessageBox.Show(Properties.Langs.Resources.NonMatchingCredentials);
+            }
+        }
+
+        private bool LoginIsValid()
+        {
+            BCryptHashGenerator bCryptHashGenerator = new BCryptHashGenerator();
+            string salt = GetPasswordSalt();
+            string encryptedPassword = bCryptHashGenerator.GenerateEncryptedString(_password, salt);            
+            bool hasAccessRights = _accessibilityServiceClient.HasAccessRights(_username, encryptedPassword);
+            return hasAccessRights;
+        }
+
+        private string GetPasswordSalt()
+        {
+            string salt = _accessibilityServiceClient.GetSalt(_username);
+            return salt;
+        }
+
+        private bool EmailIsVerified()
+        {
+            string username = UsernameTextBox.Text;
+            bool emailIsVerified = _accessibilityServiceClient.IsVerified(username);
+            return emailIsVerified;
+        }
+
+        private void GoToMainMenu()
+        {
+            MainMenu mainMenuView = new MainMenu();
+            mainMenuView.Show();
+            this.Close();
+        }
+
+        private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
+        {
+            RecoverPassword mainWindowView = new RecoverPassword();
+            mainWindowView.Show();
+            this.Close();
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)
@@ -129,10 +156,11 @@ namespace MemoryGame
             this.Close();
         }
 
-        private void RecoverPasswordLabelClicked(object sender, RoutedEventArgs e)
+        private void GoToActivationToken()
         {
-            RecoverPassword mainWindowView = new RecoverPassword();
-            mainWindowView.Show();
+            string emailAddress = GetUserEmailAdress();
+            ActivationToken activationTokenWindow = new ActivationToken(emailAddress, UsernameTextBox.Text);
+            activationTokenWindow.Show();
             this.Close();
         }
     }
