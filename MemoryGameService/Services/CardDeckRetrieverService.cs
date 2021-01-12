@@ -1,84 +1,60 @@
 ﻿using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Units_of_work;
-using MemoryGame.MemoryGameService.Faults;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
-using MemoryGameService.DataTransferObjectMappers;
 using MemoryGameService.Utilities;
 using System.Collections.Generic;
-using System.ServiceModel;
 using System.Data.SqlClient;
+using System.Data.Entity.Core;
 
 namespace MemoryGameService.Services
 {
-    /// <summary>
-    /// The <c>CardDeckRetriever</c> service.
-    /// Is used Used to retrieve card decks and shuffle cards for matches.
-    /// The operations it contains are:
-    /// <list type="bullet">
-    /// <item>
-    /// <term>GetCardDeckAndCards</term>
-    /// <description>Gets a specific card deck.</description>
-    /// </item>
-    /// <item>
-    /// <term>GetCardDecksInfo</term>
-    /// <description>Gets the information of all the card decks.</description>
-    /// </item>
-    /// <item>
-    /// <term>PopulateCardDeckDtoWithCards</term>
-    /// <description>Map a Card entity to a CardDto.</description>
-    /// </item>
-    /// <item>
-    /// <term>ShuffleCards</term>
-    /// <description>Shuffle the cards on a card deck for a game.</description>
-    /// </item>
-    /// </list>
-    /// </summary>
+    /// <inheritdoc/>
     public partial class MemoryGameService : ICardDeckRetrieverService
     {
-        private CardDeckDTO _cardDeckDTO;
+        private CardDeckDTO _cardDeckDTO = new CardDeckDTO();
         private IEnumerable<Card> _cards;
 
-        /// <summary>
-        /// Gets a card deck registered in the database according to an id.
-        /// </summary>
-        /// <param name="cardDeckId">Id of card deck to be recovered.</param>
-        /// <returns>A CardDeckDto object with the information of the recovered card deck.</returns>
-        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
+        /// <inheritdoc/>
         public CardDeckDTO GetCardDeckAndCards(int cardDeckId)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
                 CardDeck cardDeck = unitOfWork.CardDecks.GetCardDeckAndCards(cardDeckId);
-                if(cardDeck != null)
+                _cardDeckDTO = new CardDeckDTO()
                 {
-                    _cardDeckDTO = CardDeckMapper.CreateDTO(cardDeck);
-                    _cards = cardDeck.Cards;
-
-                    /**
-                     * This code is adding the same set of cards Twice.
-                     * This is because this way I don't need to store each pair of cards
-                     * in the database (it would be a waste of storage)
-                     */
-                    PopulateCardDeckDtoWithCards();
-                    PopulateCardDeckDtoWithCards();
-
-                    ShuffleCards();
-                    return _cardDeckDTO;
-                }
-                CardDeckRetrievingFault cardDeckRetrievingFault = new CardDeckRetrievingFault()
-                {
-                    Error = "CardDeckRetrieving error",
-                    Details = "There was an error while trying to get the selected card deck from the database"
+                    CardDeckId = cardDeck.CardDeckId,
+                    Name = cardDeck.Name,
+                    BackImage = cardDeck.BackImage,
+                    NumberOfPairs = cardDeck.NumberOfPairs,
+                    Cards = new List<CardDto>()
                 };
-                throw new FaultException<CardDeckRetrievingFault>(cardDeckRetrievingFault);
+                _cards = cardDeck.Cards;
+                //This code is adding the same set of cards Twice.
+                //This is because this way I don't need to store each pair of cards
+                //in the database (it would be a waste of storage)
+
+                PopulateCardDeckDtoWithCards();
+                PopulateCardDeckDtoWithCards();
+
+                ShuffleCards();
+                return _cardDeckDTO;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("CardDeckRetrieverService.cs: An exception was thrown while trying to get a Card entity with " +
+                    "the specified primary key (cardDeckId) " +
+                    "from the database. Method GetCardDeckAndCards, line 53", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("CardDeckRetrieverService.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method GetCardDeckAndCards, line 53", entityException);
+                throw;
             }
             finally
             {
@@ -86,12 +62,7 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Obtiene una lista con todos los card deck registrados en la base de datos.
-        /// </summary>
-        /// <returns>A list with CarDeckDto objects mapped from the card decks 
-        /// retrieved from the database.</returns>
-        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
+        /// <inheritdoc/>
         public IList<CardDeckInfoDto> GetCardDecksInfo()
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -110,11 +81,24 @@ namespace MemoryGameService.Services
                 }
                 return listOfCardDecksInfo;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
-            }      
+                _logger.Fatal("CardDeckRetrieverService.cs: An exception was thrown while trying to get the " +
+                    "CardDeck entities with the specified primary key (cardDeckId). " +
+                    "Method GetCardDecksInfo, line 105", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("CardDeckRetrieverService.cs: An exception was thrown while trying " +
+                    " to access the database. It is possible that the database is corrupted or that it does not exist. " +
+                    "Method GetCardDecksInfo, line 105", entityException);
+                throw;
+            }
+            finally
+            {
+                unitOfWork.Dispose();
+            }
         }
 
         /// <summary>
@@ -124,8 +108,12 @@ namespace MemoryGameService.Services
         {
             foreach (Card actualCard in _cards)
             {
-                CardDto cardDTO = CardMapper.CreateDTO(actualCard);
-                _cardDeckDTO.Cards.Add(cardDTO);
+                CardDto cardDto = new CardDto()
+                {
+                    CardId = actualCard.CardId,
+                    FrontImage = actualCard.FrontImage
+                };
+                _cardDeckDTO.Cards.Add(cardDto);
             }
         }
 

@@ -1980,7 +1980,7 @@ MemoryGame
 ; 
 } 	
 } 
-} ﬁ
+} ¢
 RC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Utilities\TokenManager.cs
 	namespace 	
 
@@ -1997,10 +1997,10 @@ MemoryGame
 { 
 public 
 static 
-string %
-GenerateVerificationToken 6
-(6 7
-)7 8
+string 
+GenerateToken *
+(* +
+)+ ,
 { 	
 MemoryGameService		 
 .		  
@@ -2039,12 +2039,12 @@ MemoryGame
 } 	
 public 
 static 
-void !
-SendVerificationToken 0
-(0 1$
-VerificationTokenInfoDto1 I!
-verificationTokenInfoJ _
-)_ `
+void 
+	SendToken $
+($ %
+TokenInfoDto% 1
+	tokenInfo2 ;
+); <
 { 	
 MemoryGameService 
 .  
@@ -2061,13 +2061,13 @@ MemoryGame
 client 
 . !
 SendVerificationToken (
-(( )!
-verificationTokenInfo) >
-)> ?
-;? @
+(( )
+	tokenInfo) 2
+)2 3
+;3 4
 } 	
 } 
-} ‚V
+} ôP
 VC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\ActivationToken.xaml.cs
 	namespace 	
 
@@ -2099,657 +2099,609 @@ MemoryGame
 .! ",
  AccountVerificationServiceClient" B-
 !_accountVerificationServiceClientC d
-;d e
-private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
+;d e
+public 
+ActivationToken 
+( 
+string %
+emailAddress& 2
+,2 3
+string4 :
+username; C
+)C D
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "-
+!_accountVerificationServiceClient -
+=. /
+new0 3
+MemoryGameService4 E
+.E F,
+ AccountVerificationServiceClientF f
+(f g
+)g h
+;h i
+_emailAddress 
+= 
+emailAddress (
+;( )
+	_username 
+= 
+username  
+;  !
+} 	
+private 
+void 
+OkButtonClicked $
+($ %
+object% +
+sender, 2
+,2 3
+RoutedEventArgs4 C
+eD E
+)E F
+{ 	
+try 
+{ 
+VerifyAccount 
+( 
+) 
+;  
+}   
+catch!! 
+(!! 
+TimeoutException!! #
+)!!# $
+{"" 
 
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT m
-)m n
-;n o
-public 
-ActivationToken 
-( 
-string %
-emailAddress& 2
-,2 3
-string4 :
-username; C
-)C D
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "-
-!_accountVerificationServiceClient -
-=. /
-new0 3
-MemoryGameService4 E
-.E F,
- AccountVerificationServiceClientF f
-(f g
-)g h
-;h i
-_emailAddress 
-= 
-emailAddress (
-;( )
-	_username 
-= 
-username  
-;  !
-} 	
-private 
-void 
-OkButtonClicked $
-($ %
-object% +
-sender, 2
-,2 3
-RoutedEventArgs4 C
-eD E
-)E F
-{ 	
-try 
-{ 
-VerifyAccount   
-(   
-)   
-;    
-}!! 
-catch"" 
-("" 
-TimeoutException"" #
-timeoutException""$ 4
-)""4 5
-{## 
-_logger$$ 
-.$$ 
-Fatal$$ 
-($$ 
-timeoutException$$ .
-)$$. /
-;$$/ 0
+MessageBox## 
+.## 
+Show## 
+(##  
 
-MessageBox%% 
-.%% 
-Show%% 
-(%%  
+Properties##  *
+.##* +
+Langs##+ 0
+.##0 1
+	Resources##1 :
+.##: ;
+ServerTimeoutError##; M
+)##M N
+;##N O
+}$$ 
+catch%% 
+(%% %
+EndpointNotFoundException%% ,
+)%%, -
+{&& 
 
-Properties%%  *
-.%%* +
-Langs%%+ 0
-.%%0 1
-	Resources%%1 :
-.%%: ;
-ServerTimeoutError%%; M
-)%%M N
-;%%N O
-}&& 
-catch'' 
-('' %
-EndpointNotFoundException'' ,%
-endpointNotFoundException''- F
-)''F G
-{(( 
-_logger)) 
-.)) 
-Fatal)) 
-()) %
-endpointNotFoundException)) 7
-)))7 8
-;))8 9
+MessageBox'' 
+.'' 
+Show'' 
+(''  
 
-MessageBox** 
-.** 
-Show** 
-(**  
+Properties''  *
+.''* +
+Langs''+ 0
+.''0 1
+	Resources''1 :
+.'': ; 
+ServerConnectionLost''; O
+)''O P
+;''P Q
+}(( 
+catch)) 
+()) "
+CommunicationException)) )
+)))) *
+{** 
 
-Properties**  *
-.*** +
-Langs**+ 0
-.**0 1
-	Resources**1 :
-.**: ; 
-ServerConnectionLost**; O
-)**O P
-;**P Q
-}++ 
-catch,, 
-(,, "
-CommunicationException,, )"
-communicationException,,* @
-),,@ A
-{-- 
-_logger.. 
-... 
-Fatal.. 
-(.. "
-communicationException.. 4
-)..4 5
-;..5 6
+MessageBox++ 
+.++ 
+Show++ 
+(++  
 
-MessageBox// 
-.// 
-Show// 
-(//  
+Properties++  *
+.++* +
+Langs+++ 0
+.++0 1
+	Resources++1 :
+.++: ;$
+CommunicationInterrupted++; S
+)++S T
+;++T U
+},, 
+}-- 	
+private// 
+void// 
+VerifyAccount// "
+(//" #
+)//# $
+{00 	
+if11 
+(11 
+TokenIsCorrect11 
+(11 
+)11  
+)11  !
+{22 
+if33 
+(33 *
+AccountWasSuccessfullyVerified33 2
+(332 3
+)333 4
+)334 5
+{44 
 
-Properties//  *
-.//* +
-Langs//+ 0
-.//0 1
-	Resources//1 :
-.//: ;$
-CommunicationInterrupted//; S
-)//S T
-;//T U
-}00 
-}11 	
-private33 
-void33 
-VerifyAccount33 "
-(33" #
-)33# $
-{44 	
-if55 
-(55 
-TokenIsCorrect55 
-(55 
-)55  
-)55  !
-{66 
-if77 
-(77 *
-AccountWasSuccessfullyVerified77 2
-(772 3
-)773 4
-)774 5
-{88 
+MessageBox55 
+.55 
+Show55 #
+(55# $
 
-MessageBox99 
-.99 
-Show99 #
-(99# $
+Properties55$ .
+.55. /
+Langs55/ 4
+.554 5
+	Resources555 >
+.55> ?&
+AccountVerificationSuccess55? Y
+)55Y Z
+;55Z [
+	GoToLogin77 
+(77 
+)77 
+;77  
+}88 
+else99 
+{:: 
 
-Properties99$ .
-.99. /
-Langs99/ 4
-.994 5
-	Resources995 >
-.99> ?&
-AccountVerificationSuccess99? Y
-)99Y Z
-;99Z [
-	GoToLogin;; 
-(;; 
-);; 
-;;;  
-}<< 
-else== 
-{>> 
+MessageBox;; 
+.;; 
+Show;; #
+(;;# $
 
-MessageBox?? 
-.?? 
-Show?? #
-(??# $
+Properties;;$ .
+.;;. /
+Langs;;/ 4
+.;;4 5
+	Resources;;5 >
+.;;> ?$
+AccountVerificationError;;? W
+);;W X
+;;;X Y
+}<< 
+}== 
+else>> 
+{?? 
 
-Properties??$ .
-.??. /
-Langs??/ 4
-.??4 5
-	Resources??5 >
-.??> ?$
-AccountVerificationError??? W
-)??W X
-;??X Y
-}@@ 
-}AA 
-elseBB 
-{CC 
+MessageBox@@ 
+.@@ 
+Show@@ 
+(@@  
 
-MessageBoxDD 
-.DD 
-ShowDD 
-(DD  
-
-PropertiesDD  *
-.DD* +
-LangsDD+ 0
-.DD0 1
-	ResourcesDD1 :
-.DD: ;'
-NonMatchingVerificationCodeDD; V
-)DDV W
-;DDW X
-}EE 
-}FF 	
-privateHH 
-voidHH 
-	GoToLoginHH 
-(HH 
-)HH  
-{II 	
-LoginJJ 
-	loginViewJJ 
-=JJ 
-newJJ !
-LoginJJ" '
-(JJ' (
-)JJ( )
-;JJ) *
-	loginViewKK 
-.KK 
-ShowKK 
-(KK 
-)KK 
-;KK 
-thisLL 
-.LL 
-CloseLL 
-(LL 
-)LL 
-;LL 
-}MM 	
-privateOO 
-boolOO 
-TokenIsCorrectOO #
-(OO# $
-)OO$ %
-{PP 	
-stringQQ 
-tokenQQ 
-=QQ 
-TextBoxTokenQQ '
-.QQ' (
-TextQQ( ,
-;QQ, -
-ifRR 
-(RR 
-tokenRR 
-==RR 
-$strRR 
-)RR 
-{SS 
-returnTT 
-falseTT 
-;TT 
-}UU 
+Properties@@  *
+.@@* +
+Langs@@+ 0
+.@@0 1
+	Resources@@1 :
+.@@: ;'
+NonMatchingVerificationCode@@; V
+)@@V W
+;@@W X
+}AA 
+}BB 	
+privateDD 
+voidDD 
+	GoToLoginDD 
+(DD 
+)DD  
+{EE 	
+LoginFF 
+	loginViewFF 
+=FF 
+newFF !
+LoginFF" '
+(FF' (
+)FF( )
+;FF) *
+	loginViewGG 
+.GG 
+ShowGG 
+(GG 
+)GG 
+;GG 
+thisHH 
+.HH 
+CloseHH 
+(HH 
+)HH 
+;HH 
+}II 	
+privateKK 
+boolKK 
+TokenIsCorrectKK #
+(KK# $
+)KK$ %
+{LL 	
+stringMM 
+tokenMM 
+=MM 
+TextBoxTokenMM '
+.MM' (
+TextMM( ,
+;MM, -
+ifNN 
+(NN 
+tokenNN 
+==NN 
+$strNN 
+)NN 
+{OO 
+returnPP 
+falsePP 
+;PP 
+}QQ 
+returnRR -
+!_accountVerificationServiceClientRR 4
+.RR4 5!
+VerifyActivationTokenRR5 J
+(RRJ K
+_emailAddressRRK X
+,RRX Y
+tokenRRZ _
+)RR_ `
+;RR` a
+}SS 	
+privateUU 
+boolUU *
+AccountWasSuccessfullyVerifiedUU 3
+(UU3 4
+)UU4 5
+{VV 	
 returnWW -
 !_accountVerificationServiceClientWW 4
-.WW4 5
-VerifyTokenWW5 @
-(WW@ A
-_emailAddressWWA N
-,WWN O
-tokenWWP U
-)WWU V
-;WWV W
+.WW4 5 
+SetAccountAsVerifiedWW5 I
+(WWI J
+_emailAddressWWJ W
+)WWW X
+;WWX Y
 }XX 	
 privateZZ 
-boolZZ *
-AccountWasSuccessfullyVerifiedZZ 3
-(ZZ3 4
-)ZZ4 5
-{[[ 	
-return\\ -
-!_accountVerificationServiceClient\\ 4
-.\\4 5 
-SetAccountAsVerified\\5 I
-(\\I J
-_emailAddress\\J W
-)\\W X
-;\\X Y
-}]] 	
-private__ 
-void__ $
-SendNewCodeButtonClicked__ -
-(__- .
-object__. 4
-sender__5 ;
-,__; <
-RoutedEventArgs__= L
-e__M N
-)__N O
-{`` 	
-tryaa 
-{bb 
-GenerateNewTokencc  
-(cc  !
-)cc! "
-;cc" #
-booldd 
-newTokenWasAssigneddd (
-=dd) *&
-AssignNewVerificationTokendd+ E
-(ddE F
-)ddF G
-;ddG H
-ifff 
-(ff 
-newTokenWasAssignedff '
-)ff' (
-{gg $
-SendNewVerificationTokenhh ,
-(hh, -
-)hh- .
-;hh. /
+voidZZ $
+SendNewCodeButtonClickedZZ -
+(ZZ- .
+objectZZ. 4
+senderZZ5 ;
+,ZZ; <
+RoutedEventArgsZZ= L
+eZZM N
+)ZZN O
+{[[ 	
+try\\ 
+{]] 
+GenerateNewToken^^  
+(^^  !
+)^^! "
+;^^" #
+if`` 
+(`` &
+AssignNewVerificationToken`` .
+(``. /
+)``/ 0
+)``0 1
+{aa $
+SendNewVerificationTokenbb ,
+(bb, -
+)bb- .
+;bb. /
 
-MessageBoxii 
-.ii 
-Showii #
-(ii# $
+MessageBoxcc 
+.cc 
+Showcc #
+(cc# $
 
-Propertiesii$ .
-.ii. /
-Langsii/ 4
-.ii4 5
-	Resourcesii5 >
-.ii> ?
-NewCodeSentMessageii? Q
-)iiQ R
-;iiR S
-}jj 
-}kk 
-catchll 
-(ll %
-EndpointNotFoundExceptionll ,
-)ll, -
-{mm 
+Propertiescc$ .
+.cc. /
+Langscc/ 4
+.cc4 5
+	Resourcescc5 >
+.cc> ?
+NewCodeSentMessagecc? Q
+)ccQ R
+;ccR S
+}dd 
+}ee 
+catchff 
+(ff %
+EndpointNotFoundExceptionff ,
+)ff, -
+{gg 
 
-MessageBoxnn 
-.nn 
-Shownn 
-(nn  
+MessageBoxhh 
+.hh 
+Showhh 
+(hh  
 
-Propertiesnn  *
-.nn* +
-Langsnn+ 0
-.nn0 1
-	Resourcesnn1 :
-.nn: ; 
-ServerConnectionLostnn; O
-)nnO P
-;nnP Q
-}oo 
-catchpp 
-(pp 
-TimeoutExceptionpp #
-)pp# $
-{qq 
+Propertieshh  *
+.hh* +
+Langshh+ 0
+.hh0 1
+	Resourceshh1 :
+.hh: ; 
+ServerConnectionLosthh; O
+)hhO P
+;hhP Q
+}ii 
+catchjj 
+(jj 
+TimeoutExceptionjj #
+)jj# $
+{kk 
 
-MessageBoxrr 
-.rr 
-Showrr 
-(rr  
+MessageBoxll 
+.ll 
+Showll 
+(ll  
 
-Propertiesrr  *
-.rr* +
-Langsrr+ 0
-.rr0 1
-	Resourcesrr1 :
-.rr: ;
-ServerTimeoutErrorrr; M
-)rrM N
-;rrN O
-}ss 
-catchtt 
-(tt /
-#CommunicationObjectFaultedExceptiontt 6
-)tt6 7
-{uu 
+Propertiesll  *
+.ll* +
+Langsll+ 0
+.ll0 1
+	Resourcesll1 :
+.ll: ;
+ServerTimeoutErrorll; M
+)llM N
+;llN O
+}mm 
+catchnn 
+(nn /
+#CommunicationObjectFaultedExceptionnn 6
+)nn6 7
+{oo 
 
-MessageBoxvv 
-.vv 
-Showvv 
-(vv  
+MessageBoxpp 
+.pp 
+Showpp 
+(pp  
 
-Propertiesvv  *
-.vv* +
-Langsvv+ 0
-.vv0 1
-	Resourcesvv1 :
-.vv: ;$
-CommunicationInterruptedvv; S
-)vvS T
-;vvT U
-}ww 
+Propertiespp  *
+.pp* +
+Langspp+ 0
+.pp0 1
+	Resourcespp1 :
+.pp: ;$
+CommunicationInterruptedpp; S
+)ppS T
+;ppT U
+}qq 
+}rr 	
+privatett 
+voidtt 
+GenerateNewTokentt %
+(tt% &
+)tt& '
+{uu 	
+stringvv 
+newTokenvv 
+=vv 
+TokenManagervv *
+.vv* +
+GenerateTokenvv+ 8
+(vv8 9
+)vv9 :
+;vv: ;
+	_newTokenww 
+=ww 
+newTokenww  
+;ww  !
 }xx 	
 privatezz 
-voidzz 
-GenerateNewTokenzz %
-(zz% &
-)zz& '
-{{{ 	
-string|| 
-newToken|| 
-=|| 
-TokenManager|| *
-.||* +%
-GenerateVerificationToken||+ D
-(||D E
-)||E F
-;||F G
-	_newToken}} 
-=}} 
-newToken}}  
-;}}  !
-}~~ 	
-private
-ÄÄ 
-bool
-ÄÄ (
-AssignNewVerificationToken
-ÄÄ /
-(
-ÄÄ/ 0
-)
-ÄÄ0 1
-{
-ÅÅ 	
-bool
-ÇÇ 9
-+newVerificationTokenWasAssignedSuccessfully
-ÇÇ <
-=
-ÇÇ= >/
-!_accountVerificationServiceClient
-ÉÉ 1
-.
-ÉÉ1 2(
-AssignNewVerificationToken
-ÉÉ2 L
-(
-ÉÉL M
-_emailAddress
-ÉÉM Z
-,
-ÉÉZ [
-	_newToken
-ÉÉ\ e
-)
-ÉÉe f
-;
-ÉÉf g
-return
-ÖÖ 9
-+newVerificationTokenWasAssignedSuccessfully
-ÖÖ >
-;
-ÖÖ> ?
+boolzz &
+AssignNewVerificationTokenzz /
+(zz/ 0
+)zz0 1
+{{{ 	
+bool|| 7
++newVerificationTokenWasAssignedSuccessfully|| <
+=||= >-
+!_accountVerificationServiceClient}} 1
+.}}1 2$
+AssignNewActivationToken}}2 J
+(}}J K
+_emailAddress}}K X
+,}}X Y
+	_newToken}}Z c
+)}}c d
+;}}d e
+return 7
++newVerificationTokenWasAssignedSuccessfully >
+;> ?
 }
-ÜÜ 	
+ÄÄ 	
 private
-àà 
+ÇÇ 
 void
-àà &
+ÇÇ &
 SendNewVerificationToken
-àà -
+ÇÇ -
 (
-àà- .
+ÇÇ- .
 )
-àà. /
+ÇÇ. /
 {
-ââ 	&
-VerificationTokenInfoDto
-ää $#
+ÉÉ 	
+TokenInfoDto
+ÑÑ #
 verificationTokenInfo
-ää% :
+ÑÑ .
 =
-ää; <
+ÑÑ/ 0
 new
-ää= @&
-VerificationTokenInfoDto
-ääA Y
+ÑÑ1 4
+TokenInfoDto
+ÑÑ5 A
 (
-ääY Z
+ÑÑA B
 )
-ääZ [
+ÑÑB C
 {
-ãã 
+ÖÖ 
 Name
-åå 
+ÜÜ 
 =
-åå 
+ÜÜ 
 	_username
-åå  
+ÜÜ  
 ,
-åå  !
+ÜÜ  !
 EmailAddress
-çç 
+áá 
 =
-çç 
+áá 
 _emailAddress
-çç ,
+áá ,
 ,
-çç, -
-VerificationToken
-éé !
+áá, -
+Token
+àà 
 =
-éé" #
+àà 
 	_newToken
-éé$ -
-}
-èè 
-;
-èè 
-TokenManager
-ëë 
-.
-ëë #
-SendVerificationToken
-ëë .
-(
-ëë. /#
-verificationTokenInfo
-ëë/ D
-)
-ëëD E
-;
-ëëE F
-}
-íí 	
-private
-îî 
-void
-îî 
-BackButtonClicked
-îî &
-(
-îî& '
-object
-îî' -
-sender
-îî. 4
+àà !
 ,
-îî4 5
-RoutedEventArgs
-îî6 E
-e
-îîF G
-)
-îîG H
-{
-ïï 	
-GoToMainWindow
-ññ 
-(
-ññ 
-)
-ññ 
-;
-ññ 
-}
-óó 	
-private
-ôô 
-void
-ôô 
-GoToMainWindow
-ôô #
-(
-ôô# $
-)
-ôô$ %
-{
-öö 	
-
-MainWindow
-õõ 
-mainWindowView
-õõ %
+àà! "
+Subject
+ââ 
 =
-õõ& '
-new
-õõ( +
+ââ 
+
+Properties
+ââ $
+.
+ââ$ %
+Langs
+ââ% *
+.
+ââ* +
+	Resources
+ââ+ 4
+.
+ââ4 5
+Welcome
+ââ5 <
+,
+ââ< =
+Body
+ää 
+=
+ää 
+
+Properties
+ää !
+.
+ää! "
+Langs
+ää" '
+.
+ää' (
+	Resources
+ää( 1
+.
+ää1 2
+VerificationToken
+ää2 C
+}
+ãã 
+;
+ãã 
+TokenManager
+çç 
+.
+çç 
+	SendToken
+çç "
+(
+çç" ##
+verificationTokenInfo
+çç# 8
+)
+çç8 9
+;
+çç9 :
+}
+éé 	
+private
+êê 
+void
+êê 
+BackButtonClicked
+êê &
+(
+êê& '
+object
+êê' -
+sender
+êê. 4
+,
+êê4 5
+RoutedEventArgs
+êê6 E
+e
+êêF G
+)
+êêG H
+{
+ëë 	
 
 MainWindow
-õõ, 6
-(
-õõ6 7
-)
-õõ7 8
-;
-õõ8 9
+íí 
 mainWindowView
-úú 
+íí %
+=
+íí& '
+new
+íí( +
+
+MainWindow
+íí, 6
+(
+íí6 7
+)
+íí7 8
+;
+íí8 9
+mainWindowView
+ìì 
 .
-úú 
+ìì 
 Show
-úú 
+ìì 
 (
-úú  
+ìì  
 )
-úú  !
+ìì  !
 ;
-úú! "
+ìì! "
 this
-ùù 
+îî 
 .
-ùù 
+îî 
 Close
-ùù 
+îî 
 (
-ùù 
+îî 
 )
-ùù 
+îî 
 ;
-ùù 
+îî 
 }
-ûû 	
+ïï 	
 }
-üü 
-}†† ∆T
+ññ 
+}óó ÄK
 UC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\ChangeUsername.xaml.cs
 	namespace
 
@@ -2783,614 +2735,541 @@ MemoryGame
 private 
 RuleSet 
 _ruleSet  
-;  !
-private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
-
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT l
-)l m
-;m n
-public 
-ChangeUsername 
-( 
-) 
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "
-Sesion 
-userSession 
-=  
-Sesion! '
-.' (
-	GetSesion( 1
-;1 2
-_userEmailAddress 
-= 
-userSession  +
-.+ ,
-EmailAddress, 8
-;8 9
-_oldUsername 
-= 
-userSession &
-.& '
-Username' /
-;/ 0
-LabelOldUsername 
-. 
-Content $
-=% &
-_oldUsername' 3
-;3 4
-} 	
-private 
-void 
-SetFormValidation &
-(& '
-)' (
-{   	
+;  !
+public 
+ChangeUsername 
+( 
+) 
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "
+Sesion 
+userSession 
+=  
+Sesion! '
+.' (
+	GetSesion( 1
+;1 2
+_userEmailAddress 
+= 
+userSession  +
+.+ ,
+EmailAddress, 8
+;8 9
+_oldUsername 
+= 
+userSession &
+.& '
+Username' /
+;/ 0
+LabelOldUsername 
+. 
+Content $
+=% &
+_oldUsername' 3
+;3 4
+} 	
+private 
+void 
+SetFormValidation &
+(& '
+)' (
+{ 	
+_ruleSet   
+=   
+new   
+RuleSet   "
+(  " #
+)  # $
+;  $ %
 _ruleSet!! 
-=!! 
-new!! 
-RuleSet!! "
-(!!" #
-)!!# $
-;!!$ %
-_ruleSet"" 
-."" 
-AddValidationRule"" &
-(""& '
-new""' *"
-UsernameValidationRule""+ A
-(""A B
-_newUsername""B N
-)""N O
-)""O P
-;""P Q
-}## 	
-private%% 
-void%% (
-TextBoxNewUsername_LostFocus%% 1
-(%%1 2
-object%%2 8
-sender%%9 ?
-,%%? @
-RoutedEventArgs%%A P
-e%%Q R
-)%%R S
-{&& 	
-if'' 
-('' 
-string'' 
-.'' 
-IsNullOrEmpty'' $
-(''$ %
-TextBoxNewUsername''% 7
-.''7 8
-Text''8 <
-)''< =
-)''= >
-{(( 
-TextBoxNewUsername)) "
-.))" #
+.!! 
+AddValidationRule!! &
+(!!& '
+new!!' *"
+UsernameValidationRule!!+ A
+(!!A B
+_newUsername!!B N
+)!!N O
+)!!O P
+;!!P Q
+}"" 	
+private$$ 
+void$$ (
+TextBoxNewUsername_LostFocus$$ 1
+($$1 2
+object$$2 8
+sender$$9 ?
+,$$? @
+RoutedEventArgs$$A P
+e$$Q R
+)$$R S
+{%% 	
+if&& 
+(&& 
+string&& 
+.&& 
+IsNullOrEmpty&& $
+(&&$ %
+TextBoxNewUsername&&% 7
+.&&7 8
+Text&&8 <
+)&&< =
+)&&= >
+{'' 
+TextBoxNewUsername(( "
+.((" #
 
-Visibility))# -
-=)). /
-System))0 6
-.))6 7
-Windows))7 >
-.))> ?
+Visibility((# -
+=((. /
 
-Visibility))? I
-.))I J
-	Collapsed))J S
-;))S T
-waterMarkText** 
-.** 
+Visibility((0 :
+.((: ;
+	Collapsed((; D
+;((D E
+waterMarkText)) 
+.)) 
 
-Visibility** (
-=**) *
-System**+ 1
-.**1 2
-Windows**2 9
-.**9 :
+Visibility)) (
+=))) *
 
-Visibility**: D
-.**D E
-Visible**E L
-;**L M
-}++ 
-},, 	
-private.. 
-void.. "
-waterMarkText_GotFocus.. +
-(..+ ,
-object.., 2
-sender..3 9
-,..9 :
-RoutedEventArgs..; J
-e..K L
-)..L M
-{// 	
-waterMarkText00 
-.00 
+Visibility))+ 5
+.))5 6
+Visible))6 =
+;))= >
+}** 
+}++ 	
+private-- 
+void-- "
+waterMarkText_GotFocus-- +
+(--+ ,
+object--, 2
+sender--3 9
+,--9 :
+RoutedEventArgs--; J
+e--K L
+)--L M
+{.. 	
+waterMarkText// 
+.// 
 
-Visibility00 $
-=00% &
-System00' -
-.00- .
-Windows00. 5
-.005 6
+Visibility// $
+=//% &
 
-Visibility006 @
-.00@ A
-	Collapsed00A J
-;00J K
+Visibility//' 1
+.//1 2
+	Collapsed//2 ;
+;//; <
+TextBoxNewUsername00 
+.00 
+
+Visibility00 )
+=00* +
+
+Visibility00, 6
+.006 7
+Visible007 >
+;00> ?
 TextBoxNewUsername11 
-.11 
+.11 
+Focus11 $
+(11$ %
+)11% &
+;11& '
+}22 	
+private44 
+bool44 
+UsernameIsAvailable44 (
+(44( )
+)44) *
+{55 	'
+PlayerRegistryServiceClient66 ''
+playerRegistryServiceClient66( C
+=66D E
+new66F I'
+PlayerRegistryServiceClient66J e
+(66e f
+)66f g
+;66g h
+bool77 
+usernameIsAvailable77 $
+=77% &'
+playerRegistryServiceClient77' B
+.77B C
+UserNameIsAvailable77C V
+(77V W
+_newUsername77W c
+)77c d
+;77d e
+return88 
+usernameIsAvailable88 &
+;88& '
+}99 	
+private;; 
+void;; $
+SaveChangesButtonClicked;; -
+(;;- .
+object;;. 4
+sender;;5 ;
+,;;; <
+RoutedEventArgs;;= L
+e;;M N
+);;N O
+{<< 	
+_newUsername== 
+=== 
+TextBoxNewUsername== -
+.==- .
+Text==. 2
+;==2 3
+SetFormValidation>> 
+(>> 
+)>> 
+;>>  
+if?? 
+(?? 
+_ruleSet?? 
+.?? (
+AllValidationRulesHavePassed?? 5
+(??5 6
+)??6 7
+)??7 8
+{@@ 
+tryAA 
+{BB 
+SetNewUsernameCC "
+(CC" #
+)CC# $
+;CC$ %
+}EE 
+catchFF 
+(FF 
+TimeoutExceptionFF '
+)FF' (
+{GG 
 
-Visibility11 )
-=11* +
-System11, 2
-.112 3
-Windows113 :
-.11: ;
+MessageBoxHH 
+.HH 
+ShowHH #
+(HH# $
 
-Visibility11; E
-.11E F
-Visible11F M
-;11M N
-TextBoxNewUsername22 
-.22 
-Focus22 $
-(22$ %
-)22% &
-;22& '
-}33 	
-private55 
-bool55 
-UsernameIsAvailable55 (
-(55( )
-)55) *
-{66 	'
-PlayerRegistryServiceClient77 ''
-playerRegistryServiceClient77( C
-=77D E
-new77F I'
-PlayerRegistryServiceClient77J e
-(77e f
-)77f g
-;77g h
-bool88 
-usernameIsAvailable88 $
-=88% &'
-playerRegistryServiceClient88' B
-.88B C
-UserNameIsAvailable88C V
-(88V W
-_newUsername88W c
-)88c d
-;88d e
-return99 
-usernameIsAvailable99 &
-;99& '
-}:: 	
-private<< 
-void<< $
-SaveChangesButtonClicked<< -
-(<<- .
-object<<. 4
-sender<<5 ;
-,<<; <
-RoutedEventArgs<<= L
-e<<M N
-)<<N O
-{== 	
-_newUsername>> 
-=>> 
-TextBoxNewUsername>> -
-.>>- .
-Text>>. 2
-;>>2 3
-SetFormValidation?? 
-(?? 
-)?? 
-;??  
-if@@ 
-(@@ 
-_ruleSet@@ 
-.@@ (
-AllValidationRulesHavePassed@@ 5
-(@@5 6
-)@@6 7
-)@@7 8
-{AA 
-tryBB 
-{CC 
-SetNewUsernameDD "
-(DD" #
-)DD# $
-;DD$ %
-}FF 
-catchGG 
-(GG 
-TimeoutExceptionGG '
-timeoutExceptionGG( 8
-)GG8 9
-{HH 
-_loggerII 
-.II 
-FatalII !
-(II! "
-timeoutExceptionII" 2
-)II2 3
-;II3 4
+PropertiesHH$ .
+.HH. /
+LangsHH/ 4
+.HH4 5
+	ResourcesHH5 >
+.HH> ?
+ServerTimeoutErrorHH? Q
+)HHQ R
+;HHR S
+}II 
+catchJJ 
+(JJ %
+EndpointNotFoundExceptionJJ 0
+)JJ0 1
+{KK 
 
-MessageBoxJJ 
-.JJ 
-ShowJJ #
-(JJ# $
+MessageBoxLL 
+.LL 
+ShowLL #
+(LL# $
 
-PropertiesJJ$ .
-.JJ. /
-LangsJJ/ 4
-.JJ4 5
-	ResourcesJJ5 >
-.JJ> ?
-ServerTimeoutErrorJJ? Q
-)JJQ R
-;JJR S
-}KK 
-catchLL 
-(LL %
-EndpointNotFoundExceptionLL 0%
-endpointNotFoundExceptionLL1 J
-)LLJ K
-{MM 
-_loggerNN 
-.NN 
-FatalNN !
-(NN! "%
-endpointNotFoundExceptionNN" ;
-)NN; <
-;NN< =
+PropertiesLL$ .
+.LL. /
+LangsLL/ 4
+.LL4 5
+	ResourcesLL5 >
+.LL> ? 
+ServerConnectionLostLL? S
+)LLS T
+;LLT U
+}MM 
+catchNN 
+(NN "
+CommunicationExceptionNN -
+)NN- .
+{OO 
 
-MessageBoxOO 
-.OO 
-ShowOO #
-(OO# $
+MessageBoxPP 
+.PP 
+ShowPP #
+(PP# $
 
-PropertiesOO$ .
-.OO. /
-LangsOO/ 4
-.OO4 5
-	ResourcesOO5 >
-.OO> ? 
-ServerConnectionLostOO? S
-)OOS T
-;OOT U
-}PP 
-catchQQ 
-(QQ "
-CommunicationExceptionQQ -"
-communicationExceptionQQ. D
-)QQD E
-{RR 
-_loggerSS 
-.SS 
-FatalSS !
-(SS! ""
-communicationExceptionSS" 8
-)SS8 9
-;SS9 :
+PropertiesPP$ .
+.PP. /
+LangsPP/ 4
+.PP4 5
+	ResourcesPP5 >
+.PP> ?$
+CommunicationInterruptedPP? W
+)PPW X
+;PPX Y
+}QQ 
+}RR 
+elseSS 
+{TT 
+ShowErrorMessageUU  
+(UU  !
+)UU! "
+;UU" #
+}VV 
+}WW 	
+privateYY 
+voidYY 
+SetNewUsernameYY #
+(YY# $
+)YY$ %
+{ZZ 	
+if[[ 
+([[ 
+_oldUsername[[ 
+.[[ 
+Equals[[ #
+([[# $
+_newUsername[[$ 0
+)[[0 1
+)[[1 2
+{\\ 
 
-MessageBoxTT 
-.TT 
-ShowTT #
-(TT# $
+MessageBox]] 
+.]] 
+Show]] 
+(]]  
 
-PropertiesTT$ .
-.TT. /
-LangsTT/ 4
-.TT4 5
-	ResourcesTT5 >
-.TT> ?$
-CommunicationInterruptedTT? W
-)TTW X
-;TTX Y
-}UU 
-}VV 
-elseWW 
-{XX 
-ShowErrorMessageYY  
-(YY  !
-)YY! "
-;YY" #
-}ZZ 
-}[[ 	
-private]] 
-void]] 
-SetNewUsername]] #
-(]]# $
-)]]$ %
-{^^ 	
-if__ 
-(__ 
-_oldUsername__ 
-.__ 
-Equals__ #
-(__# $
-_newUsername__$ 0
-)__0 1
-)__1 2
-{`` 
+Properties]]  *
+.]]* +
+Langs]]+ 0
+.]]0 1
+	Resources]]1 :
+.]]: ;-
+!NewUsernameIsIdenticalToTheOldOne]]; \
+)]]\ ]
+;]]] ^
+}^^ 
+else__ 
+{`` 
+ifaa 
+(aa 
+UsernameIsAvailableaa '
+(aa' (
+)aa( )
+)aa) *
+{bb 
+ifcc 
+(cc *
+UserNameWasChangedSuccessfullycc 6
+(cc6 7
+)cc7 8
+)cc8 9
+{dd 
 
-MessageBoxaa 
-.aa 
-Showaa 
-(aa  
+MessageBoxee "
+.ee" #
+Showee# '
+(ee' (
 
-Propertiesaa  *
-.aa* +
-Langsaa+ 0
-.aa0 1
-	Resourcesaa1 :
-.aa: ;-
-!NewUsernameIsIdenticalToTheOldOneaa; \
-)aa\ ]
-;aa] ^
-}bb 
-elsecc 
-{dd 
-ifee 
-(ee 
-UsernameIsAvailableee '
-(ee' (
-)ee( )
-)ee) *
-{ff 
-ifgg 
-(gg *
-UserNameWasChangedSuccessfullygg 6
-(gg6 7
-)gg7 8
-)gg8 9
-{hh 
+Propertiesee( 2
+.ee2 3
+Langsee3 8
+.ee8 9
+	Resourcesee9 B
+.eeB C'
+UsernameUpdatedSuccessfullyeeC ^
+)ee^ _
+;ee_ `
+GoToMainWindowff &
+(ff& '
+)ff' (
+;ff( )
+}gg 
+elsehh 
+{ii 
 
-MessageBoxii "
-.ii" #
-Showii# '
-(ii' (
+MessageBoxjj "
+.jj" #
+Showjj# '
+(jj' (
 
-Propertiesii( 2
-.ii2 3
-Langsii3 8
-.ii8 9
-	Resourcesii9 B
-.iiB C'
-UsernameUpdatedSuccessfullyiiC ^
-)ii^ _
-;ii_ `
-GoToMainWindowjj &
-(jj& '
-)jj' (
-;jj( )
-}kk 
-elsell 
-{mm 
+Propertiesjj( 2
+.jj2 3
+Langsjj3 8
+.jj8 9
+	Resourcesjj9 B
+.jjB C 
+UsernameUpdatedErrorjjC W
+)jjW X
+;jjX Y
+}kk 
+}ll 
+elsemm 
+{nn 
 
-MessageBoxnn "
-.nn" #
-Shownn# '
-(nn' (
+MessageBoxoo 
+.oo 
+Showoo #
+(oo# $
 
-Propertiesnn( 2
-.nn2 3
-Langsnn3 8
-.nn8 9
-	Resourcesnn9 B
-.nnB C 
-UsernameUpdatedErrornnC W
-)nnW X
-;nnX Y
-}oo 
-}pp 
-elseqq 
-{rr 
+Propertiesoo$ .
+.oo. /
+Langsoo/ 4
+.oo4 5
+	Resourcesoo5 >
+.oo> ?
+UsernameIsTakenoo? N
+)ooN O
+;ooO P
+}pp 
+}qq 
+}ss 	
+privateuu 
+voiduu 
+ShowErrorMessageuu %
+(uu% &
+)uu& '
+{vv 	
+IListww 
+<ww  
+ValidationRuleResultww &
+>ww& '"
+validationResultErrorsww( >
+=ww? @
+_ruleSetwwA I
+.wwI J%
+GetValidationResultErrorswwJ c
+(wwc d
+)wwd e
+;wwe f
+ifxx 
+(xx "
+validationResultErrorsxx %
+.xx% &
+Countxx& +
+>xx, -
+$numxx. /
+)xx/ 0
+{yy 
 
-MessageBoxss 
-.ss 
-Showss #
-(ss# $
-
-Propertiesss$ .
-.ss. /
-Langsss/ 4
-.ss4 5
-	Resourcesss5 >
-.ss> ?
-UsernameIsTakenss? N
-)ssN O
-;ssO P
-}tt 
-}uu 
-}ww 	
-privateyy 
-voidyy 
-ShowErrorMessageyy %
-(yy% &
-)yy& '
-{zz 	
-IList{{ 
-<{{  
-ValidationRuleResult{{ &
->{{& '"
-validationResultErrors{{( >
-={{? @
-_ruleSet{{A I
-.{{I J%
-GetValidationResultErrors{{J c
-({{c d
-){{d e
-;{{e f
-if|| 
-(|| "
-validationResultErrors|| %
-.||% &
-Count||& +
->||, -
-$num||. /
-)||/ 0
-{}} 
-
-MessageBox~~ 
-.~~ 
-Show~~ 
-(~~  "
-validationResultErrors~~  6
-[~~6 7
-$num~~7 8
-]~~8 9
-.~~9 :
-Message~~: A
-)~~A B
-;~~B C
-} 
-}
-ÄÄ 	
-private
-ÇÇ 
-bool
-ÇÇ ,
-UserNameWasChangedSuccessfully
-ÇÇ 3
-(
-ÇÇ3 4
-)
-ÇÇ4 5
-{
-ÉÉ 	
-MemoryGameService
-ÑÑ 
-.
-ÑÑ /
+MessageBoxzz 
+.zz 
+Showzz 
+(zz  "
+validationResultErrorszz  6
+[zz6 7
+$numzz7 8
+]zz8 9
+.zz9 :
+Messagezz: A
+)zzA B
+;zzB C
+}{{ 
+}|| 	
+private~~ 
+bool~~ *
+UserNameWasChangedSuccessfully~~ 3
+(~~3 4
+)~~4 5
+{ 	/
 !AccountModifiabilityServiceClient
-ÑÑ ?/
+ÄÄ -/
 !accountModifiabilityServiceClient
-ÑÑ@ a
+ÄÄ. O
 =
-ÑÑb c
+ÄÄP Q
 new
-ÖÖ 
-MemoryGameService
-ÖÖ %
-.
-ÖÖ% &/
+ÅÅ /
 !AccountModifiabilityServiceClient
-ÖÖ& G
+ÅÅ 5
 (
-ÖÖG H
+ÅÅ5 6
 )
-ÖÖH I
+ÅÅ6 7
 ;
-ÖÖI J
+ÅÅ7 8
 return
-áá /
+ÉÉ /
 !accountModifiabilityServiceClient
-áá 4
+ÉÉ 4
 .
-áá4 5
+ÉÉ4 5
 ChangeUsername
-áá5 C
+ÉÉ5 C
 (
-ááC D
+ÉÉC D
 _userEmailAddress
-ááD U
+ÉÉD U
 ,
-ááU V
+ÉÉU V
 _newUsername
-ááW c
+ÉÉW c
 )
-áác d
+ÉÉc d
 ;
-áád e
+ÉÉd e
 }
-àà 	
+ÑÑ 	
 private
-ää 
+ÜÜ 
 void
-ää 
+ÜÜ 
 GoToMainWindow
-ää #
+ÜÜ #
 (
-ää# $
+ÜÜ# $
 )
-ää$ %
+ÜÜ$ %
 {
-ãã 	
+áá 	
 
 MainWindow
-åå 
+àà 
 
 mainWindow
-åå !
+àà !
 =
-åå" #
+àà" #
 new
-åå$ '
+àà$ '
 
 MainWindow
-åå( 2
+àà( 2
 (
-åå2 3
+àà2 3
 )
-åå3 4
+àà3 4
 ;
-åå4 5
+àà4 5
 
 mainWindow
-çç 
+ââ 
 .
-çç 
+ââ 
 Show
-çç 
+ââ 
 (
-çç 
+ââ 
 )
-çç 
+ââ 
 ;
-çç 
+ââ 
 this
-éé 
+ää 
 .
-éé 
+ää 
 Close
-éé 
+ää 
 (
-éé 
+ää 
 )
-éé 
+ää 
 ;
-éé 
+ää 
 }
-èè 	
+ãã 	
 }
-êê 
-}ëë ò 
+åå 
+}çç ò 
 KC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\Chat.xaml.cs
 	namespace 	
 
@@ -3611,7 +3490,7 @@ AppendText 
 ;66% &
 }77 	
 }88 
-}99 ¨[
+}99 ËW
 QC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\CreateGame.xaml.cs
 	namespace 	
 
@@ -3666,589 +3545,584 @@ _gameMatch? I
 .5 6
 CardDeckDTO6 A
 	_cardDeckB K
-;K L
-private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
+;K L
+public 
 
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT h
-)h i
-;i j
-public 
+CreateGame 
+( 
+) 
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "
+_cardDecksInfoList 
+=  
+new! $ 
+ObservableCollection% 9
+<9 :
+MemoryGameService: K
+.K L
+DataTransferObjectsL _
+._ `
+CardDeckInfoDto` o
+>o p
+(p q
+)q r
+;r s
+LoadCardDecksInfo 
+( 
+) 
+;  
+	_username 
+= 
+Sesion 
+. 
+	GetSesion (
+.( )
+Username) 1
+;1 2
+} 	
+private 
+void 
+LoadCardDecksInfo &
+(& '
+)' (
+{ 	
+try 
+{   
+MemoryGameService!! !
+.!!! "*
+CardDeckRetrieverServiceClient!!" @*
+cardDeckRetrieverServiceClient!!A _
+=!!` a
+new"" 
+MemoryGameService"" %
+.""% &*
+CardDeckRetrieverServiceClient""& D
+(""D E
+)""E F
+;""F G
+MemoryGameService$$ !
+.$$! "
+DataTransferObjects$$" 5
+.$$5 6
+CardDeckInfoDto$$6 E
+[$$E F
+]$$F G
+cardDecksInfo$$H U
+=$$V W*
+cardDeckRetrieverServiceClient%% 2
+.%%2 3
+GetCardDecksInfo%%3 C
+(%%C D
+)%%D E
+;%%E F
+for'' 
+('' 
+int'' 
+index'' 
+=''  
+$num''! "
+;''" #
+index''$ )
+<''* +
+cardDecksInfo'', 9
+.''9 :
+Length'': @
+;''@ A
+index''B G
+++''G I
+)''I J
+{(( 
+_cardDecksInfoList)) &
+.))& '
+Add))' *
+())* +
+cardDecksInfo))+ 8
+[))8 9
+index))9 >
+]))> ?
+)))? @
+;))@ A
+}** 
+CardDeckComboBox++  
+.++  !
+ItemsSource++! ,
+=++- .
+_cardDecksInfoList++/ A
+;++A B
+CardDeckComboBox,,  
+.,,  !
+DisplayMemberPath,,! 2
+=,,3 4
+$str,,5 C
+;,,C D
+CardDeckComboBox--  
+.--  !
+SelectedValuePath--! 2
+=--3 4
+$str--5 A
+;--A B
+}.. 
+catch// 
+(// %
+EndpointNotFoundException// ,
+)//, -
+{00 
 
-CreateGame 
-( 
-) 
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "
-_cardDecksInfoList 
-=  
-new! $ 
-ObservableCollection% 9
-<9 :
-MemoryGameService: K
-.K L
-DataTransferObjectsL _
-._ `
-CardDeckInfoDto` o
->o p
-(p q
-)q r
-;r s
-LoadCardDecksInfo 
-( 
-) 
-;  
-	_username 
-= 
-Sesion 
-. 
-	GetSesion (
-.( )
-Username) 1
-;1 2
-} 	
-public 
-void #
-CreateGameButtonClicked +
-(+ ,
-object, 2
-sender3 9
-,9 :
-RoutedEventArgs; J
-eK L
-)L M
-{ 	
-MemoryGameService   
-.   
-DataTransferObjects   1
-.  1 2
-CardDeckInfoDto  2 A
-cardDeckForMatch  B R
-=  S T
-(!! 
-(!! 
-MemoryGameService!! #
-.!!# $
-DataTransferObjects!!$ 7
-.!!7 8
-CardDeckInfoDto!!8 G
-)!!G H
-CardDeckComboBox!!H X
-.!!X Y
-SelectedItem!!Y e
-)!!e f
-;!!f g
-var## '
-numberOfPlayersSelectedItem## +
-=##, -
-(##. /
-(##/ 0
-ComboBoxItem##0 <
-)##< =#
-ComboBoxNumberOfPlayers##= T
-.##T U
-SelectedItem##U a
-)##a b
-.##b c
-Tag##c f
-;##f g
-if%% 
-(%% '
-numberOfPlayersSelectedItem%% +
-==%%, .
-null%%/ 3
-)%%3 4
-{&& 
+MessageBox11 
+.11 
+Show11 
+(11  
 
-MessageBox'' 
-.'' 
-Show'' 
-(''  
+Properties11  *
+.11* +
+Langs11+ 0
+.110 1
+	Resources111 :
+.11: ; 
+ServerConnectionLost11; O
+)11O P
+;11P Q
+}22 
+catch33 
+(33 
+TimeoutException33 #
+)33# $
+{44 
 
-Properties''  *
-.''* +
-Langs''+ 0
-.''0 1
-	Resources''1 :
-.'': ;2
-&NumberOfPlayersForMatchWereNotSelected''; a
-)''a b
-;''b c
-}(( 
-else(( 
-if(( 
-((( 
-cardDeckForMatch(( %
-==((& (
-null(() -
-)((- .
-{)) 
+MessageBox55 
+.55 
+Show55 
+(55  
 
-MessageBox** 
-.** 
-Show** 
-(**  
+Properties55  *
+.55* +
+Langs55+ 0
+.550 1
+	Resources551 :
+.55: ;
+ServerTimeoutError55; M
+)55M N
+;55N O
+}66 
+catch77 
+(77 "
+CommunicationException77 )
+)77) *
+{88 
 
-Properties**  *
-.*** +
-Langs**+ 0
-.**0 1
-	Resources**1 :
-.**: ;%
-NoCardDeckHasBeenSelected**; T
-)**T U
-;**U V
-}++ 
-else,, 
-{-- +
-_numberOfPlayersDesiredForMatch.. /
-=..0 1
-Int32..2 7
-...7 8
-Parse..8 =
-(..= >'
-numberOfPlayersSelectedItem..> Y
-...Y Z
-ToString..Z b
-(..b c
-)..c d
-)..d e
-;..e f
-_selectedCardDeckId// #
-=//$ %
-cardDeckForMatch//& 6
-.//6 7
+MessageBox99 
+.99 
+Show99 
+(99  
 
-CardDeckId//7 A
-;//A B
-try00 
-{11 
-CreateNewMatch22 "
-(22" #
-)22# $
-;22$ %
-GoToWaitingRoom33 #
-(33# $
-)33$ %
-;33% &
-}44 
-catch55 
-(55 %
-EndpointNotFoundException55 0%
-endpointNotFoundException551 J
-)55J K
-{66 
-_logger77 
-.77 
-Fatal77 !
-(77! "%
-endpointNotFoundException77" ;
-)77; <
-;77< =
+Properties99  *
+.99* +
+Langs99+ 0
+.990 1
+	Resources991 :
+.99: ;$
+CommunicationInterrupted99; S
+)99S T
+;99T U
+}:: 
+};; 	
+public== 
+void== #
+CreateGameButtonClicked== +
+(==+ ,
+object==, 2
+sender==3 9
+,==9 :
+RoutedEventArgs==; J
+e==K L
+)==L M
+{>> 	
+MemoryGameService?? 
+.?? 
+DataTransferObjects?? 1
+.??1 2
+CardDeckInfoDto??2 A
+cardDeckForMatch??B R
+=??S T
+(@@ 
+(@@ 
+MemoryGameService@@ #
+.@@# $
+DataTransferObjects@@$ 7
+.@@7 8
+CardDeckInfoDto@@8 G
+)@@G H
+CardDeckComboBox@@H X
+.@@X Y
+SelectedItem@@Y e
+)@@e f
+;@@f g
+varBB '
+numberOfPlayersSelectedItemBB +
+=BB, -
+(BB. /
+(BB/ 0
+ComboBoxItemBB0 <
+)BB< =#
+ComboBoxNumberOfPlayersBB= T
+.BBT U
+SelectedItemBBU a
+)BBa b
+.BBb c
+TagBBc f
+;BBf g
+ifDD 
+(DD '
+numberOfPlayersSelectedItemDD +
+==DD, .
+nullDD/ 3
+)DD3 4
+{EE 
 
-MessageBox88 
-.88 
-Show88 #
-(88# $
+MessageBoxFF 
+.FF 
+ShowFF 
+(FF  
 
-Properties88$ .
-.88. /
-Langs88/ 4
-.884 5
-	Resources885 >
-.88> ? 
-ServerConnectionLost88? S
-)88S T
-;88T U
-}99 
-catch:: 
-(:: 
-TimeoutException:: '
-timeoutException::( 8
-)::8 9
-{;; 
-_logger<< 
-.<< 
-Fatal<< !
-(<<! "
-timeoutException<<" 2
-)<<2 3
-;<<3 4
+PropertiesFF  *
+.FF* +
+LangsFF+ 0
+.FF0 1
+	ResourcesFF1 :
+.FF: ;2
+&NumberOfPlayersForMatchWereNotSelectedFF; a
+)FFa b
+;FFb c
+}GG 
+elseGG 
+ifGG 
+(GG 
+cardDeckForMatchGG %
+==GG& (
+nullGG) -
+)GG- .
+{HH 
 
-MessageBox== 
-.== 
-Show== #
-(==# $
+MessageBoxII 
+.II 
+ShowII 
+(II  
 
-Properties==$ .
-.==. /
-Langs==/ 4
-.==4 5
-	Resources==5 >
-.==> ?
-ServerTimeoutError==? Q
-)==Q R
-;==R S
-}>> 
-catch?? 
-(?? 
-FaultException?? %
-<??% &
+PropertiesII  *
+.II* +
+LangsII+ 0
+.II0 1
+	ResourcesII1 :
+.II: ;%
+NoCardDeckHasBeenSelectedII; T
+)IIT U
+;IIU V
+}JJ 
+elseKK 
+{LL +
+_numberOfPlayersDesiredForMatchMM /
+=MM0 1
+Int32MM2 7
+.MM7 8
+ParseMM8 =
+(MM= >'
+numberOfPlayersSelectedItemMM> Y
+.MMY Z
+ToStringMMZ b
+(MMb c
+)MMc d
+)MMd e
+;MMe f
+_selectedCardDeckIdNN #
+=NN$ %
+cardDeckForMatchNN& 6
+.NN6 7
 
-MemoryGame??& 0
-.??0 1
-MemoryGameService??1 B
-.??B C
-Faults??C I
-.??I J#
-CardDeckRetrievingFault??J a
->??a b#
-cardDeckRetrievingFault??c z
-)??z {
-{@@ 
-_loggerAA 
-.AA 
-FatalAA !
-(AA! "#
-cardDeckRetrievingFaultAA" 9
-)AA9 :
-;AA: ;
+CardDeckIdNN7 A
+;NNA B
+tryOO 
+{PP 
+CreateNewMatchQQ "
+(QQ" #
+)QQ# $
+;QQ$ %
+GoToWaitingRoomRR #
+(RR# $
+)RR$ %
+;RR% &
+}SS 
+catchTT 
+(TT %
+EndpointNotFoundExceptionTT 0
+)TT0 1
+{UU 
 
-MessageBoxBB 
-.BB 
-ShowBB #
-(BB# $
+MessageBoxVV 
+.VV 
+ShowVV #
+(VV# $
 
-PropertiesBB$ .
-.BB. /
-LangsBB/ 4
-.BB4 5
-	ResourcesBB5 >
-.BB> ?#
-CardDeckRetrievingErrorBB? V
-)BBV W
-;BBW X
-}CC 
-catchDD 
-(DD "
-CommunicationExceptionDD -"
-communicationExceptionDD. D
-)DDD E
-{EE 
-_loggerFF 
-.FF 
-FatalFF !
-(FF! ""
-communicationExceptionFF" 8
-)FF8 9
-;FF9 :
+PropertiesVV$ .
+.VV. /
+LangsVV/ 4
+.VV4 5
+	ResourcesVV5 >
+.VV> ? 
+ServerConnectionLostVV? S
+)VVS T
+;VVT U
+}WW 
+catchXX 
+(XX 
+TimeoutExceptionXX '
+)XX' (
+{YY 
 
-MessageBoxGG 
-.GG 
-ShowGG #
-(GG# $
+MessageBoxZZ 
+.ZZ 
+ShowZZ #
+(ZZ# $
 
-PropertiesGG$ .
-.GG. /
-LangsGG/ 4
-.GG4 5
-	ResourcesGG5 >
-.GG> ?$
-CommunicationInterruptedGG? W
-)GGW X
-;GGX Y
-}HH 
-}II 
-}JJ 	
-privateLL 
-voidLL 
-CreateNewMatchLL #
-(LL# $
-)LL$ %
-{MM 	
-LoadCardDeckNN 
-(NN 
-)NN 
-;NN 
+PropertiesZZ$ .
+.ZZ. /
+LangsZZ/ 4
+.ZZ4 5
+	ResourcesZZ5 >
+.ZZ> ?
+ServerTimeoutErrorZZ? Q
+)ZZQ R
+;ZZR S
+}[[ 
+catch\\ 
+(\\ "
+CommunicationException\\ -
+)\\- .
+{]] 
 
-_gameMatchOO 
-=OO 
-newOO 
-MemoryGameServiceOO .
-.OO. /
-DataTransferObjectsOO/ B
-.OOB C
-MatchDtoOOC K
-(OOK L
-)OOL M
-{PP 
-MaxNumberOfPlayersQQ "
-=QQ# $+
-_numberOfPlayersDesiredForMatchQQ% D
-,QQD E
-HostRR 
-=RR 
-	_usernameRR  
-,RR  !
+MessageBox^^ 
+.^^ 
+Show^^ #
+(^^# $
 
-HasStartedSS 
-=SS 
-falseSS "
-,SS" #
-CardDeckDtoTT 
-=TT 
-	_cardDeckTT '
-,TT' (
+Properties^^$ .
+.^^. /
+Langs^^/ 4
+.^^4 5
+	Resources^^5 >
+.^^> ?$
+CommunicationInterrupted^^? W
+)^^W X
+;^^X Y
+}__ 
+}`` 
+}aa 	
+privatecc 
+voidcc 
+CreateNewMatchcc #
+(cc# $
+)cc$ %
+{dd 	
+LoadCardDeckee 
+(ee 
+)ee 
+;ee 
 
-TotalPairsUU 
-=UU 
-$numUU 
-}VV 
-;VV 
-MemoryGameServiceXX 
-.XX &
-MatchCreationServiceClientXX 8'
-_matchCreationServiceClientXX9 T
-=XXU V
-newYY 
-MemoryGameServiceYY %
-.YY% &&
-MatchCreationServiceClientYY& @
-(YY@ A
-)YYA B
-;YYB C'
-_matchCreationServiceClient[[ '
-.[[' (
-CreateNewMatch[[( 6
-([[6 7
-
-_gameMatch[[7 A
-)[[A B
-;[[B C
-}\\ 	
-private^^ 
-void^^ 
-LoadCardDecksInfo^^ &
-(^^& '
-)^^' (
-{__ 	
-MemoryGameService`` 
-.`` *
-CardDeckRetrieverServiceClient`` <*
-cardDeckRetrieverServiceClient``= [
-=``\ ]
-newaa 
-MemoryGameServiceaa %
-.aa% &*
-CardDeckRetrieverServiceClientaa& D
-(aaD E
-)aaE F
-;aaF G
-MemoryGameServicecc 
-.cc 
-DataTransferObjectscc 1
-.cc1 2
-CardDeckInfoDtocc2 A
-[ccA B
-]ccB C
-cardDecksInfoccD Q
-=ccR S*
-cardDeckRetrieverServiceClientdd .
-.dd. /
-GetCardDecksInfodd/ ?
-(dd? @
-)dd@ A
-;ddA B
-forff 
-(ff 
-intff 
-indexff 
-=ff 
-$numff 
-;ff 
-indexff $
-<ff% &
-cardDecksInfoff' 4
-.ff4 5
-Lengthff5 ;
-;ff; <
-indexff= B
-++ffB D
-)ffD E
+_gameMatchff 
+=ff 
+newff 
+MemoryGameServiceff .
+.ff. /
+DataTransferObjectsff/ B
+.ffB C
+MatchDtoffC K
+(ffK L
+)ffL M
 {gg 
-_cardDecksInfoListhh "
-.hh" #
-Addhh# &
-(hh& '
-cardDecksInfohh' 4
-[hh4 5
-indexhh5 :
-]hh: ;
-)hh; <
-;hh< =
-}ii 
-CardDeckComboBoxjj 
-.jj 
-ItemsSourcejj (
-=jj) *
-_cardDecksInfoListjj+ =
-;jj= >
-CardDeckComboBoxkk 
-.kk 
-DisplayMemberPathkk .
-=kk/ 0
-$strkk1 ?
-;kk? @
-CardDeckComboBoxll 
-.ll 
-SelectedValuePathll .
-=ll/ 0
-$strll1 =
-;ll= >
-}mm 	
-privateoo 
-voidoo 
-LoadCardDeckoo !
-(oo! "
-)oo" #
-{pp 	
-MemoryGameServiceqq 
-.qq *
-CardDeckRetrieverServiceClientqq <*
-cardDeckRetrieverServiceClientqq= [
-=qq\ ]
-newrr 
-MemoryGameServicerr %
-.rr% &*
-CardDeckRetrieverServiceClientrr& D
-(rrD E
-)rrE F
-;rrF G
-	_cardDeckss 
-=ss *
-cardDeckRetrieverServiceClientss 6
-.ss6 7
-GetCardDeckAndCardsss7 J
-(ssJ K
-_selectedCardDeckIdssK ^
-)ss^ _
-;ss_ `
-}tt 	
-privatevv 
-voidvv 
-GoToWaitingRoomvv $
-(vv$ %
-)vv% &
-{ww 	
-WaitingRoomxx 
-waitingRoomViewxx '
-=xx( )
-newxx* -
-WaitingRoomxx. 9
-(xx9 :
-)xx: ;
-{yy 
-GameMatchDtozz 
-=zz 
+MaxNumberOfPlayershh "
+=hh# $+
+_numberOfPlayersDesiredForMatchhh% D
+,hhD E
+Hostii 
+=ii 
+	_usernameii  
+,ii  !
 
-_gameMatchzz )
-}{{ 
-;{{ 
-waitingRoomView}} 
-.}} 
-Show}}  
-(}}  !
-)}}! "
-;}}" #
-this~~ 
-.~~ 
-Close~~ 
-(~~ 
-)~~ 
-;~~ 
-} 	
-public
-ÅÅ 
-void
-ÅÅ 
-BackButtonClicked
-ÅÅ %
-(
-ÅÅ% &
-object
-ÅÅ& ,
-sender
-ÅÅ- 3
-,
-ÅÅ3 4
-RoutedEventArgs
-ÅÅ5 D
-e
-ÅÅE F
-)
-ÅÅF G
-{
-ÇÇ 	
-MainMenu
-ÉÉ 
-mainMenuView
-ÉÉ !
-=
-ÉÉ" #
-new
-ÉÉ$ '
-MainMenu
-ÉÉ( 0
-(
-ÉÉ0 1
-)
-ÉÉ1 2
+HasStartedjj 
+=jj 
+falsejj "
+,jj" #
+CardDeckDtokk 
+=kk 
+	_cardDeckkk '
+}ll 
+;ll 
+MemoryGameServicenn 
+.nn &
+MatchCreationServiceClientnn 8'
+_matchCreationServiceClientnn9 T
+=nnU V
+newoo 
+MemoryGameServiceoo %
+.oo% &&
+MatchCreationServiceClientoo& @
+(oo@ A
+)ooA B
+;ooB C'
+_matchCreationServiceClientqq '
+.qq' (
+CreateNewMatchqq( 6
+(qq6 7
+
+_gameMatchqq7 A
+)qqA B
+;qqB C
+}rr 	
+privatett 
+voidtt 
+LoadCardDecktt !
+(tt! "
+)tt" #
+{uu 	
+MemoryGameServicevv 
+.vv *
+CardDeckRetrieverServiceClientvv <*
+cardDeckRetrieverServiceClientvv= [
+=vv\ ]
+newww 
+MemoryGameServiceww %
+.ww% &*
+CardDeckRetrieverServiceClientww& D
+(wwD E
+)wwE F
+;wwF G
+	_cardDeckxx 
+=xx *
+cardDeckRetrieverServiceClientxx 6
+.xx6 7
+GetCardDeckAndCardsxx7 J
+(xxJ K
+_selectedCardDeckIdxxK ^
+)xx^ _
+;xx_ `
+}yy 	
+private{{ 
+void{{ 
+GoToWaitingRoom{{ $
+({{$ %
+){{% &
+{|| 	
+WaitingRoom}} 
+waitingRoomView}} '
+=}}( )
+new}}* -
+WaitingRoom}}. 9
+(}}9 :
+)}}: ;
+{~~ 
+GameMatchDto 
+= 
+
+_gameMatch )
+}
+ÄÄ 
 ;
-ÉÉ2 3
-mainMenuView
-ÑÑ 
+ÄÄ 
+waitingRoomView
+ÇÇ 
 .
-ÑÑ 
+ÇÇ 
 Show
-ÑÑ 
+ÇÇ  
 (
-ÑÑ 
+ÇÇ  !
 )
-ÑÑ 
+ÇÇ! "
 ;
-ÑÑ  
+ÇÇ" #
 this
-ÖÖ 
+ÉÉ 
 .
-ÖÖ 
+ÉÉ 
 Close
-ÖÖ 
+ÉÉ 
 (
-ÖÖ 
+ÉÉ 
 )
-ÖÖ 
+ÉÉ 
 ;
-ÖÖ 
+ÉÉ 
 }
-ÜÜ 	
+ÑÑ 	
+public
+ÜÜ 
+void
+ÜÜ 
+BackButtonClicked
+ÜÜ %
+(
+ÜÜ% &
+object
+ÜÜ& ,
+sender
+ÜÜ- 3
+,
+ÜÜ3 4
+RoutedEventArgs
+ÜÜ5 D
+e
+ÜÜE F
+)
+ÜÜF G
+{
+áá 	
+MainMenu
+àà 
+mainMenuView
+àà !
+=
+àà" #
+new
+àà$ '
+MainMenu
+àà( 0
+(
+àà0 1
+)
+àà1 2
+;
+àà2 3
+mainMenuView
+ââ 
+.
+ââ 
+Show
+ââ 
+(
+ââ 
+)
+ââ 
+;
+ââ  
+this
+ää 
+.
+ää 
+Close
+ää 
+(
+ää 
+)
+ää 
+;
+ää 
 }
-áá 
-}àà ¨J
+ãã 	
+}
+åå 
+}çç ˘N
 RC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\ExpelPlayer.xaml.cs
 	namespace 	
 
@@ -4662,106 +4536,151 @@ PropertiesZZ  *
 VoteToExpelPlayerbb &
 (bb& '
 )bb' (
-{cc 	
-stringdd 
-selectedPlayerdd !
-=dd" #
-ExpelPlayerDataGriddd$ 7
-.dd7 8
-SelectedItemdd8 D
-.ddD E
-ToStringddE M
-(ddM N
-)ddN O
-;ddO P
-ExpelVoteDtoee 
-	expelVoteee "
-=ee# $
-newee% (
-ExpelVoteDtoee) 5
-(ee5 6
-)ee6 7
-{ff 
-Hostgg 
-=gg 
-	MatchHostgg  
-,gg  !!
-UsernameOfExpelPlayerhh %
-=hh& '
-selectedPlayerhh( 6
-,hh6 7!
-UsernameOfVoterPlayerii %
-=ii& '
-PlayerUsernameii( 6
-}jj 
-;jj 
-_matchServiceClientkk 
-.kk  
-ExpelPlayerkk  +
-(kk+ ,
-	expelVotekk, 5
-)kk5 6
-;kk6 7
-}ll 	
-privatenn 
-voidnn 
-BackButtonClickednn &
-(nn& '
-objectnn' -
-sendernn. 4
-,nn4 5
-RoutedEventArgsnn6 E
-ennF G
-)nnG H
-{oo 	
-GameOptionspp 
-gameOptionsViewpp '
-=pp( )
-newpp* -
-GameOptionspp. 9
-(pp9 :
-)pp: ;
-{qq 
-	MatchHostrr 
-=rr 
-thisrr  
-.rr  !
-	MatchHostrr! *
-,rr* +"
-NumberOfPlayersInMatchss &
-=ss' (
-thisss) -
-.ss- ."
-NumberOfPlayersInMatchss. D
-,ssD E
-PlayerUsernamett 
-=tt  
-thistt! %
-.tt% &
-PlayerUsernamett& 4
-,tt4 5
-Contextuu 
-=uu 
-thisuu 
-.uu 
-Contextuu &
-}vv 
-;vv 
-gameOptionsViewww 
-.ww 
-Showww  
-(ww  !
-)ww! "
-;ww" #
-thisxx 
-.xx 
-Closexx 
-(xx 
-)xx 
-;xx 
-}yy 	
-}zz 
-}{{ Å(
+{cc 	
+vardd 
+selectedPlayerdd 
+=dd  
+ExpelPlayerDataGriddd! 4
+.dd4 5
+SelectedItemdd5 A
+;ddA B
+ifee 
+(ee 
+selectedPlayeree 
+!=ee  
+nullee! %
+)ee% &
+{ff 
+stringgg $
+usernameOfSelectedPlayergg /
+=gg0 1
+selectedPlayergg2 @
+.gg@ A
+ToStringggA I
+(ggI J
+)ggJ K
+;ggK L
+ExpelVoteDtohh 
+	expelVotehh &
+=hh' (
+newhh) ,
+ExpelVoteDtohh- 9
+(hh9 :
+)hh: ;
+{ii 
+Hostjj 
+=jj 
+	MatchHostjj $
+,jj$ %!
+UsernameOfExpelPlayerkk )
+=kk* +$
+usernameOfSelectedPlayerkk, D
+,kkD E!
+UsernameOfVoterPlayerll )
+=ll* +
+PlayerUsernamell, :
+}mm 
+;mm 
+_matchServiceClientnn #
+.nn# $
+ExpelPlayernn$ /
+(nn/ 0
+	expelVotenn0 9
+)nn9 :
+;nn: ;
+}oo 
+elsepp 
+{qq 
+
+MessageBoxrr 
+.rr 
+Showrr 
+(rr  
+
+Propertiesrr  *
+.rr* +
+Langsrr+ 0
+.rr0 1
+	Resourcesrr1 :
+.rr: ;#
+SelectPlayerToBeExpeledrr; R
+)rrR S
+;rrS T
+}ss 
+}uu 	
+privateww 
+voidww 
+BackButtonClickedww &
+(ww& '
+objectww' -
+senderww. 4
+,ww4 5
+RoutedEventArgsww6 E
+ewwF G
+)wwG H
+{xx 	
+GameOptionsyy 
+gameOptionsViewyy '
+=yy( )
+newyy* -
+GameOptionsyy. 9
+(yy9 :
+)yy: ;
+{zz 
+	MatchHost{{ 
+={{ 
+this{{  
+.{{  !
+	MatchHost{{! *
+,{{* +"
+NumberOfPlayersInMatch|| &
+=||' (
+this||) -
+.||- ."
+NumberOfPlayersInMatch||. D
+,||D E
+PlayerUsername}} 
+=}}  
+this}}! %
+.}}% &
+PlayerUsername}}& 4
+,}}4 5
+Context~~ 
+=~~ 
+this~~ 
+.~~ 
+Context~~ &
+} 
+; 
+gameOptionsView
+ÄÄ 
+.
+ÄÄ 
+Show
+ÄÄ  
+(
+ÄÄ  !
+)
+ÄÄ! "
+;
+ÄÄ" #
+this
+ÅÅ 
+.
+ÅÅ 
+Close
+ÅÅ 
+(
+ÅÅ 
+)
+ÅÅ 
+;
+ÅÅ 
+}
+ÇÇ 	
+}
+ÉÉ 
+}ÑÑ ∫'
 RC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\GameOptions.xaml.cs
 	namespace 	
 
@@ -4796,264 +4715,261 @@ MemoryGame
 ;, -
 set. 1
 ;1 2
-}3 4
-private 
-MemoryGameService !
-.! "
-MatchServiceClient" 4
-_matchServiceClient5 H
-;H I
-public 
-string 
-	MatchHost 
-{  !
-get" %
-;% &
-set' *
-;* +
-}, -
-public 
-int "
-NumberOfPlayersInMatch )
-{* +
-get, /
-;/ 0
-set1 4
-;4 5
-}6 7
-public 
-string 
-PlayerUsername $
-{% &
-get' *
-;* +
-set, /
-;/ 0
-}1 2
-public 
-GameOptions 
-( 
-) 
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "
-} 	
-private 
-void 
-WindowLoaded !
-(! "
-object" (
-sender) /
-,/ 0
-	EventArgs1 :
-e; <
-)< =
-{ 	
-_matchServiceClient 
-=  !
-new" %
-MemoryGameService& 7
-.7 8
-MatchServiceClient8 J
-(J K
-ContextK R
-)R S
-;S T
-if 
-( "
-NumberOfPlayersInMatch &
-<' (
-$num) *
-)* +
-{ 
-ExpelPlayerButton !
-.! "
+}3 4
+public 
+string 
+	MatchHost 
+{  !
+get" %
+;% &
+set' *
+;* +
+}, -
+public 
+int "
+NumberOfPlayersInMatch )
+{* +
+get, /
+;/ 0
+set1 4
+;4 5
+}6 7
+public 
+string 
+PlayerUsername $
+{% &
+get' *
+;* +
+set, /
+;/ 0
+}1 2
+public 
+GameOptions 
+( 
+) 
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "
+} 	
+private 
+void 
+WindowLoaded !
+(! "
+object" (
+sender) /
+,/ 0
+	EventArgs1 :
+e; <
+)< =
+{ 	
+if 
+( "
+NumberOfPlayersInMatch &
+<' (
+$num) *
+)* +
+{ 
+ExpelPlayerButton !
+.! "
 
-Visibility" ,
-=- .
+Visibility" ,
+=- .
 
-Visibility/ 9
-.9 :
-	Collapsed: C
-;C D
-} 
-} 	
-private   
-void   "
-LeaveGameButtonClicked   +
-(  + ,
-object  , 2
-sender  3 9
-,  9 :
-RoutedEventArgs  ; J
-e  K L
-)  L M
-{!! 	
-try"" 
-{## 
-_matchServiceClient$$ #
-.$$# $
+Visibility/ 9
+.9 :
+	Collapsed: C
+;C D
+} 
+} 	
+private 
+void "
+LeaveGameButtonClicked +
+(+ ,
+object, 2
+sender3 9
+,9 :
+RoutedEventArgs; J
+eK L
+)L M
+{ 	
+try   
+{!! 
+MemoryGameService"" !
+.""! "
+MatchServiceClient""" 4
+matchServiceClient""5 G
+=""H I
+new""J M
+MemoryGameService""N _
+.""_ `
+MatchServiceClient""` r
+(""r s
+Context""s z
+)""z {
+;""{ |
+matchServiceClient## "
+.##" #
 
-LeaveMatch$$$ .
-($$. /
-	MatchHost$$/ 8
-,$$8 9
-PlayerUsername$$: H
-)$$H I
-;$$I J
-}%% 
-catch&& 
-(&& %
-EndpointNotFoundException&& ,
-)&&, -
-{'' 
+LeaveMatch### -
+(##- .
+	MatchHost##. 7
+,##7 8
+PlayerUsername##9 G
+)##G H
+;##H I
+}$$ 
+catch%% 
+(%% %
+EndpointNotFoundException%% ,
+)%%, -
+{&& 
 
-MessageBox(( 
-.(( 
-Show(( 
-(((  
+MessageBox'' 
+.'' 
+Show'' 
+(''  
 
-Properties((  *
-.((* +
-Langs((+ 0
-.((0 1
-	Resources((1 :
-.((: ; 
-ServerConnectionLost((; O
-)((O P
-;((P Q
-})) 
-catch** 
-(** 
-TimeoutException** #
-)**# $
-{++ 
+Properties''  *
+.''* +
+Langs''+ 0
+.''0 1
+	Resources''1 :
+.'': ; 
+ServerConnectionLost''; O
+)''O P
+;''P Q
+}(( 
+catch)) 
+()) 
+TimeoutException)) #
+)))# $
+{** 
 
-MessageBox,, 
-.,, 
-Show,, 
-(,,  
+MessageBox++ 
+.++ 
+Show++ 
+(++  
 
-Properties,,  *
-.,,* +
-Langs,,+ 0
-.,,0 1
-	Resources,,1 :
-.,,: ;
-ServerTimeoutError,,; M
-),,M N
-;,,N O
-}-- 
-catch.. 
-(.. "
-CommunicationException.. )
-)..) *
-{// 
+Properties++  *
+.++* +
+Langs+++ 0
+.++0 1
+	Resources++1 :
+.++: ;
+ServerTimeoutError++; M
+)++M N
+;++N O
+},, 
+catch-- 
+(-- "
+CommunicationException-- )
+)--) *
+{.. 
 
-MessageBox00 
-.00 
-Show00 
-(00  
+MessageBox// 
+.// 
+Show// 
+(//  
 
-Properties00  *
-.00* +
-Langs00+ 0
-.000 1
-	Resources001 :
-.00: ;$
-CommunicationInterrupted00; S
-)00S T
-;00T U
-}11 
-finally22 
-{33 
-this44 
-.44 
-Close44 
-(44 
-)44 
-;44 
-}55 
-}66 	
-private88 
-void88 $
-ExpelPlayerButtonClicked88 -
-(88- .
-object88. 4
-sender885 ;
-,88; <
-RoutedEventArgs88= L
-e88M N
-)88N O
-{99 	
-ExpelPlayer:: 
-expelPlayerView:: '
-=::( )
-new::* -
-ExpelPlayer::. 9
-(::9 :
-)::: ;
-{;; 
-	MatchHost<< 
-=<< 
-this<<  
-.<<  !
-	MatchHost<<! *
-,<<* +"
-NumberOfPlayersInMatch== &
-===' (
-this==) -
-.==- ."
-NumberOfPlayersInMatch==. D
-,==D E
-PlayerUsername>> 
-=>>  
-this>>! %
-.>>% &
-PlayerUsername>>& 4
-,>>4 5
-Context?? 
-=?? 
-this?? 
-.?? 
-Context?? &
-}@@ 
-;@@ 
-expelPlayerViewAA 
-.AA 
-ShowAA  
-(AA  !
-)AA! "
-;AA" #
-thisBB 
-.BB 
-CloseBB 
-(BB 
-)BB 
-;BB 
-}CC 	
-privateEE 
-voidEE 
-BackButtonClickedEE &
-(EE& '
-objectEE' -
-senderEE. 4
-,EE4 5
-RoutedEventArgsEE6 E
-eEEF G
-)EEG H
-{FF 	
-thisGG 
-.GG 
-CloseGG 
-(GG 
-)GG 
-;GG 
-}HH 	
-}II 
-}JJ ó^
+Properties//  *
+.//* +
+Langs//+ 0
+.//0 1
+	Resources//1 :
+.//: ;$
+CommunicationInterrupted//; S
+)//S T
+;//T U
+}00 
+finally11 
+{22 
+this33 
+.33 
+Close33 
+(33 
+)33 
+;33 
+}44 
+}55 	
+private77 
+void77 $
+ExpelPlayerButtonClicked77 -
+(77- .
+object77. 4
+sender775 ;
+,77; <
+RoutedEventArgs77= L
+e77M N
+)77N O
+{88 	
+ExpelPlayer99 
+expelPlayerView99 '
+=99( )
+new99* -
+ExpelPlayer99. 9
+(999 :
+)99: ;
+{:: 
+	MatchHost;; 
+=;; 
+this;;  
+.;;  !
+	MatchHost;;! *
+,;;* +"
+NumberOfPlayersInMatch<< &
+=<<' (
+this<<) -
+.<<- ."
+NumberOfPlayersInMatch<<. D
+,<<D E
+PlayerUsername== 
+===  
+this==! %
+.==% &
+PlayerUsername==& 4
+,==4 5
+Context>> 
+=>> 
+this>> 
+.>> 
+Context>> &
+}?? 
+;?? 
+expelPlayerView@@ 
+.@@ 
+Show@@  
+(@@  !
+)@@! "
+;@@" #
+thisAA 
+.AA 
+CloseAA 
+(AA 
+)AA 
+;AA 
+}BB 	
+privateDD 
+voidDD 
+BackButtonClickedDD &
+(DD& '
+objectDD' -
+senderDD. 4
+,DD4 5
+RoutedEventArgsDD6 E
+eDDF G
+)DDG H
+{EE 	
+thisFF 
+.FF 
+CloseFF 
+(FF 
+)FF 
+;FF 
+}GG 	
+}HH 
+}II ÂL
 OC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\JoinGame.xaml.cs
 	namespace 	
 
@@ -5077,712 +4993,565 @@ MemoryGame
 private 
 MatchDto 
 _selectedMatch '
-;' (
-private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
+;' (
+public 
+JoinGame 
+( 
+) 
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "(
+_matchDiscoveryServiceClient (
+=) *
+new+ .
+MemoryGameService/ @
+.@ A'
+MatchDiscoveryServiceClientA \
+(\ ]
+)] ^
+;^ _
+LoadActiveMatches 
+( 
+) 
+;  
+} 	
+private 
+void 
+LoadActiveMatches &
+(& '
+)' (
+{ 	
+try 
+{ *
+PopulateTableWithActiveMatches .
+(. /
+)/ 0
+;0 1
+} 
+catch 
+( 
+TimeoutException #
+)# $
+{ 
 
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT f
-)f g
-;g h
-public 
-JoinGame 
-( 
-) 
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "(
-_matchDiscoveryServiceClient (
-=) *
-new+ .
-MemoryGameService/ @
-.@ A'
-MatchDiscoveryServiceClientA \
-(\ ]
-)] ^
-;^ _
-LoadActiveMatches 
-( 
-) 
-;  
-} 	
-private 
-void 
-LoadActiveMatches &
-(& '
-)' (
-{ 	
-try 
-{ *
-PopulateTableWithActiveMatches .
-(. /
-)/ 0
-;0 1
-} 
-catch 
-( 
-TimeoutException #
-timeoutException$ 4
-)4 5
-{   
-_logger!! 
-.!! 
-Fatal!! 
-(!! 
-timeoutException!! .
-)!!. /
-;!!/ 0
+MessageBox   
+.   
+Show   
+(    
 
-MessageBox"" 
-."" 
-Show"" 
-(""  
+Properties    *
+.  * +
+Langs  + 0
+.  0 1
+	Resources  1 :
+.  : ;
+ServerTimeoutError  ; M
+)  M N
+;  N O
+}!! 
+catch"" 
+("" %
+EndpointNotFoundException"" ,
+)"", -
+{## 
 
-Properties""  *
-.""* +
-Langs""+ 0
-.""0 1
-	Resources""1 :
-."": ;
-ServerTimeoutError""; M
-)""M N
-;""N O
-}## 
-catch$$ 
-($$ %
-EndpointNotFoundException$$ ,%
-endpointNotFoundException$$- F
-)$$F G
-{%% 
-_logger&& 
-.&& 
-Fatal&& 
-(&& %
-endpointNotFoundException&& 7
-)&&7 8
-;&&8 9
+MessageBox$$ 
+.$$ 
+Show$$ 
+($$  
 
-MessageBox'' 
-.'' 
-Show'' 
-(''  
+Properties$$  *
+.$$* +
+Langs$$+ 0
+.$$0 1
+	Resources$$1 :
+.$$: ; 
+ServerConnectionLost$$; O
+)$$O P
+;$$P Q
+}%% 
+catch&& 
+(&& "
+CommunicationException&& )
+)&&) *
+{'' 
 
-Properties''  *
-.''* +
-Langs''+ 0
-.''0 1
-	Resources''1 :
-.'': ; 
-ServerConnectionLost''; O
-)''O P
-;''P Q
-}(( 
-catch)) 
-()) "
-CommunicationException)) )"
-communicationException))* @
-)))@ A
-{** 
-_logger++ 
-.++ 
-Fatal++ 
-(++ "
-communicationException++ 4
-)++4 5
-;++5 6
+MessageBox(( 
+.(( 
+Show(( 
+(((  
 
-MessageBox,, 
-.,, 
-Show,, 
-(,,  
+Properties((  *
+.((* +
+Langs((+ 0
+.((0 1
+	Resources((1 :
+.((: ;$
+CommunicationInterrupted((; S
+)((S T
+;((T U
+})) 
+}** 	
+private,, 
+void,, *
+PopulateTableWithActiveMatches,, 3
+(,,3 4
+),,4 5
+{-- 	 
+ObservableCollection..  
+<..  !
+MatchDto..! )
+>..) *
+listOfActiveMatches..+ >
+=..? @
+new..A D 
+ObservableCollection..E Y
+<..Y Z
+MatchDto..Z b
+>..b c
+(..c d
+)..d e
+;..e f
+MatchDto// 
+[// 
+]// 
+activeMatches// $
+=//% &(
+_matchDiscoveryServiceClient//' C
+.//C D
+GetActiveMatches//D T
+(//T U
+)//U V
+;//V W
+for11 
+(11 
+int11 
+indexOfActualMatch11 '
+=11( )
+$num11* +
+;11+ ,
+indexOfActualMatch11- ?
+<11@ A
+activeMatches11B O
+.11O P
+Length11P V
+;11V W
+indexOfActualMatch11X j
+++11j l
+)11l m
+{22 
+listOfActiveMatches33 #
+.33# $
+Add33$ '
+(33' (
+activeMatches33( 5
+[335 6
+indexOfActualMatch336 H
+]33H I
+)33I J
+;33J K
+}44 
+GamesDataGrid66 
+.66 
+ItemsSource66 %
+=66& '
+listOfActiveMatches66( ;
+;66; <
+}77 	
+private99 
+void99 
+JoinButtonClicked99 &
+(99& '
+object99' -
+sender99. 4
+,994 5
+RoutedEventArgs996 E
+e99F G
+)99G H
+{:: 	
+_selectedMatch;; 
+=;; 
+(;; 
+MatchDto;; &
+);;& '
+GamesDataGrid;;' 4
+.;;4 5
+SelectedItem;;5 A
+;;;A B
+try<< 
+{== 
+	JoinMatch>> 
+(>> 
+)>> 
+;>> 
+}?? 
+catch@@ 
+(@@ 
+TimeoutException@@ #
+)@@# $
+{AA 
 
-Properties,,  *
-.,,* +
-Langs,,+ 0
-.,,0 1
-	Resources,,1 :
-.,,: ;$
-CommunicationInterrupted,,; S
-),,S T
-;,,T U
-}-- 
-}.. 	
-private00 
-void00 *
-PopulateTableWithActiveMatches00 3
-(003 4
-)004 5
-{11 	 
-ObservableCollection22  
-<22  !
-MatchDto22! )
->22) *
-listOfActiveMatches22+ >
-=22? @
-new22A D 
-ObservableCollection22E Y
-<22Y Z
-MatchDto22Z b
->22b c
-(22c d
-)22d e
-;22e f
-MatchDto33 
-[33 
-]33 
-activeMatches33 $
-=33% &(
-_matchDiscoveryServiceClient33' C
-.33C D
-GetActiveMatches33D T
-(33T U
-)33U V
-;33V W
-for55 
-(55 
-int55 
-indexOfActualMatch55 '
-=55( )
-$num55* +
-;55+ ,
-indexOfActualMatch55- ?
-<55@ A
-activeMatches55B O
-.55O P
-Length55P V
-;55V W
-indexOfActualMatch55X j
-++55j l
-)55l m
-{66 
-listOfActiveMatches77 #
-.77# $
-Add77$ '
-(77' (
-activeMatches77( 5
-[775 6
-indexOfActualMatch776 H
-]77H I
-)77I J
-;77J K
-}88 
-GamesDataGrid:: 
-.:: 
-ItemsSource:: %
-=::& '
-listOfActiveMatches::( ;
-;::; <
-};; 	
-private== 
-void== 
-JoinButtonClicked== &
-(==& '
-object==' -
-sender==. 4
-,==4 5
-RoutedEventArgs==6 E
-e==F G
-)==G H
-{>> 	
-_selectedMatch?? 
-=?? 
-(?? 
-MatchDto?? &
-)??& '
-GamesDataGrid??' 4
-.??4 5
-SelectedItem??5 A
-;??A B
-try@@ 
-{AA 
-	JoinMatchBB 
-(BB 
-)BB 
-;BB 
+MessageBoxBB 
+.BB 
+ShowBB 
+(BB  
+
+PropertiesBB  *
+.BB* +
+LangsBB+ 0
+.BB0 1
+	ResourcesBB1 :
+.BB: ;
+ServerTimeoutErrorBB; M
+)BBM N
+;BBN O
 }CC 
 catchDD 
-(DD 
-TimeoutExceptionDD #
-timeoutExceptionDD$ 4
-)DD4 5
-{EE 
-_loggerFF 
-.FF 
-FatalFF 
-(FF 
-timeoutExceptionFF .
-)FF. /
-;FF/ 0
+(DD %
+EndpointNotFoundExceptionDD ,
+)DD, -
+{EE 
 
-MessageBoxGG 
-.GG 
-ShowGG 
-(GG  
+MessageBoxFF 
+.FF 
+ShowFF 
+(FF  
 
-PropertiesGG  *
-.GG* +
-LangsGG+ 0
-.GG0 1
-	ResourcesGG1 :
-.GG: ;
-ServerTimeoutErrorGG; M
-)GGM N
-;GGN O
-}HH 
-catchII 
-(II %
-EndpointNotFoundExceptionII ,%
-endpointNotFoundExceptionII- F
-)IIF G
-{JJ 
-_loggerKK 
-.KK 
-FatalKK 
-(KK %
-endpointNotFoundExceptionKK 7
-)KK7 8
-;KK8 9
+PropertiesFF  *
+.FF* +
+LangsFF+ 0
+.FF0 1
+	ResourcesFF1 :
+.FF: ; 
+ServerConnectionLostFF; O
+)FFO P
+;FFP Q
+}GG 
+catchHH 
+(HH "
+CommunicationExceptionHH )
+)HH) *
+{II 
 
-MessageBoxLL 
-.LL 
-ShowLL 
-(LL  
+MessageBoxJJ 
+.JJ 
+ShowJJ 
+(JJ  
 
-PropertiesLL  *
-.LL* +
-LangsLL+ 0
-.LL0 1
-	ResourcesLL1 :
-.LL: ; 
-ServerConnectionLostLL; O
-)LLO P
-;LLP Q
-}MM 
-catchNN 
-(NN "
-CommunicationExceptionNN )"
-communicationExceptionNN* @
-)NN@ A
-{OO 
-_loggerPP 
-.PP 
-FatalPP 
-(PP "
-communicationExceptionPP 4
-)PP4 5
-;PP5 6
+PropertiesJJ  *
+.JJ* +
+LangsJJ+ 0
+.JJ0 1
+	ResourcesJJ1 :
+.JJ: ;$
+CommunicationInterruptedJJ; S
+)JJS T
+;JJT U
+}KK 
+}LL 	
+privateNN 
+voidNN 
+	JoinMatchNN 
+(NN 
+)NN  
+{OO 	
+ifPP 
+(PP 
+_selectedMatchPP 
+==PP !
+nullPP" &
+)PP& '
+{QQ 
 
-MessageBoxQQ 
-.QQ 
-ShowQQ 
-(QQ  
+MessageBoxRR 
+.RR 
+ShowRR 
+(RR  
 
-PropertiesQQ  *
-.QQ* +
-LangsQQ+ 0
-.QQ0 1
-	ResourcesQQ1 :
-.QQ: ;$
-CommunicationInterruptedQQ; S
-)QQS T
-;QQT U
-}RR 
-}SS 	
-privateUU 
-voidUU 
-	JoinMatchUU 
-(UU 
-)UU  
-{VV 	
-ifWW 
-(WW 
-_selectedMatchWW 
-==WW !
-nullWW" &
-)WW& '
-{XX 
+PropertiesRR  *
+.RR* +
+LangsRR+ 0
+.RR0 1
+	ResourcesRR1 :
+.RR: ;
+NoMatchWasSelectedRR; M
+)RRM N
+;RRN O
+}SS 
+elseTT 
+{UU 
+tryVV 
+{WW 
+ifXX 
+(XX 
+PlayerCanJoinToGameXX +
+(XX+ ,
+)XX, -
+)XX- .
+{YY 
+GoToWaitingRoomZZ '
+(ZZ' (
+)ZZ( )
+;ZZ) *
+}[[ 
+else\\ 
+{]] 
 
-MessageBoxYY 
-.YY 
-ShowYY 
-(YY  
+MessageBox^^ "
+.^^" #
+Show^^# '
+(^^' (
 
-PropertiesYY  *
-.YY* +
-LangsYY+ 0
-.YY0 1
-	ResourcesYY1 :
-.YY: ;
-NoMatchWasSelectedYY; M
-)YYM N
-;YYN O
-}ZZ 
-else[[ 
-{\\ 
-try]] 
-{^^ 
-bool__ 
-playerCanJoinToGame__ ,
-=__- .
-PlayerCanJoinToGame__/ B
-(__B C
-)__C D
-;__D E
-if`` 
-(`` 
-playerCanJoinToGame`` +
-)``+ ,
-{aa 
-GoToWaitingRoombb '
-(bb' (
-)bb( )
-;bb) *
-}cc 
-elsedd 
-{ee 
+Properties^^( 2
+.^^2 3
+Langs^^3 8
+.^^8 9
+	Resources^^9 B
+.^^B C
+FullGameMessage^^C R
+)^^R S
+;^^S T
+}__ 
+}`` 
+catchaa 
+(aa 
+FaultExceptionaa %
+<aa% &
 
-MessageBoxff "
-.ff" #
-Showff# '
-(ff' (
+MemoryGameaa& 0
+.aa0 1
+MemoryGameServiceaa1 B
+.aaB C
+FaultsaaC I
+.aaI J"
+MatchAccessDeniedFaultaaJ `
+>aa` a
+)aaa b
+{bb 
 
-Propertiesff( 2
-.ff2 3
-Langsff3 8
-.ff8 9
-	Resourcesff9 B
-.ffB C
-FullGameMessageffC R
-)ffR S
-;ffS T
-}gg 
+MessageBoxcc 
+.cc 
+Showcc #
+(cc# $
+
+Propertiescc$ .
+.cc. /
+Langscc/ 4
+.cc4 5
+	Resourcescc5 >
+.cc> ?)
+TriedToJoinToNonexistentMatchcc? \
+)cc\ ]
+;cc] ^
+}dd 
+catchee 
+(ee 
+TimeoutExceptionee '
+)ee' (
+{ff 
+
+MessageBoxgg 
+.gg 
+Showgg #
+(gg# $
+
+Propertiesgg$ .
+.gg. /
+Langsgg/ 4
+.gg4 5
+	Resourcesgg5 >
+.gg> ?
+ServerTimeoutErrorgg? Q
+)ggQ R
+;ggR S
 }hh 
 catchii 
-(ii 
-FaultExceptionii %
-<ii% &
+(ii %
+EndpointNotFoundExceptionii 0
+)ii0 1
+{jj 
 
-MemoryGameii& 0
-.ii0 1
-MemoryGameServiceii1 B
-.iiB C
-FaultsiiC I
-.iiI J"
-MatchAccessDeniedFaultiiJ `
->ii` a&
-matchAccessDeniedExceptioniib |
-)ii| }
-{jj 
-_loggerkk 
-.kk 
-Fatalkk !
-(kk! "&
-matchAccessDeniedExceptionkk" <
-)kk< =
-;kk= >
+MessageBoxkk 
+.kk 
+Showkk #
+(kk# $
 
-MessageBoxll 
-.ll 
-Showll #
-(ll# $
+Propertieskk$ .
+.kk. /
+Langskk/ 4
+.kk4 5
+	Resourceskk5 >
+.kk> ? 
+ServerConnectionLostkk? S
+)kkS T
+;kkT U
+}ll 
+catchmm 
+(mm "
+CommunicationExceptionmm -
+)mm- .
+{nn 
 
-Propertiesll$ .
-.ll. /
-Langsll/ 4
-.ll4 5
-	Resourcesll5 >
-.ll> ?)
-TriedToJoinToNonexistentMatchll? \
-)ll\ ]
-;ll] ^
-}mm 
-catchnn 
-(nn 
-TimeoutExceptionnn '
-timeoutExceptionnn( 8
-)nn8 9
-{oo 
-_loggerpp 
-.pp 
-Fatalpp !
-(pp! "
-timeoutExceptionpp" 2
-)pp2 3
-;pp3 4
+MessageBoxoo 
+.oo 
+Showoo #
+(oo# $
 
-MessageBoxqq 
-.qq 
-Showqq #
-(qq# $
-
-Propertiesqq$ .
-.qq. /
-Langsqq/ 4
-.qq4 5
-	Resourcesqq5 >
-.qq> ?
-ServerTimeoutErrorqq? Q
-)qqQ R
-;qqR S
-}rr 
-catchss 
-(ss %
-EndpointNotFoundExceptionss 0%
-endpointNotFoundExceptionss1 J
-)ssJ K
-{tt 
-_loggeruu 
-.uu 
-Fataluu !
-(uu! "%
-endpointNotFoundExceptionuu" ;
-)uu; <
-;uu< =
-
-MessageBoxvv 
-.vv 
-Showvv #
-(vv# $
-
-Propertiesvv$ .
-.vv. /
-Langsvv/ 4
-.vv4 5
-	Resourcesvv5 >
-.vv> ? 
-ServerConnectionLostvv? S
-)vvS T
-;vvT U
-}ww 
-catchxx 
-(xx "
-CommunicationExceptionxx -"
-communicationExceptionxx. D
-)xxD E
-{yy 
-_loggerzz 
-.zz 
-Fatalzz !
-(zz! ""
-communicationExceptionzz" 8
-)zz8 9
-;zz9 :
-
-MessageBox{{ 
-.{{ 
-Show{{ #
-({{# $
-
-Properties{{$ .
-.{{. /
-Langs{{/ 4
-.{{4 5
-	Resources{{5 >
-.{{> ?$
-CommunicationInterrupted{{? W
-){{W X
-;{{X Y
-}|| 
-}}} 
-}~~ 	
-private
-ÄÄ 
-bool
-ÄÄ !
-PlayerCanJoinToGame
-ÄÄ (
-(
-ÄÄ( )
-)
-ÄÄ) *
-{
-ÅÅ 	
-string
-ÇÇ 
-	matchHost
-ÇÇ 
-=
-ÇÇ 
-_selectedMatch
-ÇÇ -
-.
-ÇÇ- .
-Host
-ÇÇ. 2
-;
-ÇÇ2 3
-bool
-ÉÉ 
-canJoinToGame
-ÉÉ 
-=
-ÉÉ  *
-_matchDiscoveryServiceClient
-ÉÉ! =
-.
-ÉÉ= >
-CanJoin
-ÉÉ> E
-(
-ÉÉE F
-	matchHost
-ÉÉF O
-)
-ÉÉO P
-;
-ÉÉP Q
-return
-ÑÑ 
-canJoinToGame
-ÑÑ  
-;
-ÑÑ  !
+Propertiesoo$ .
+.oo. /
+Langsoo/ 4
+.oo4 5
+	Resourcesoo5 >
+.oo> ?$
+CommunicationInterruptedoo? W
+)ooW X
+;ooX Y
+}pp 
+}qq 
+}rr 	
+privatett 
+booltt 
+PlayerCanJoinToGamett (
+(tt( )
+)tt) *
+{uu 	
+stringvv 
+	matchHostvv 
+=vv 
+_selectedMatchvv -
+.vv- .
+Hostvv. 2
+;vv2 3
+boolww 
+canJoinToGameww 
+=ww  (
+_matchDiscoveryServiceClientww! =
+.ww= >
+CanJoinww> E
+(wwE F
+	matchHostwwF O
+)wwO P
+;wwP Q
+returnxx 
+canJoinToGamexx  
+;xx  !
+}yy 	
+private{{ 
+void{{ 
+GoToWaitingRoom{{ $
+({{$ %
+){{% &
+{|| 	
+WaitingRoom}} 
+waitingRoomView}} '
+=}}( )
+new}}* -
+WaitingRoom}}. 9
+(}}9 :
+)}}: ;
+{~~ 
+GameMatchDto 
+= 
+_selectedMatch -
 }
-ÖÖ 	
-private
-áá 
-void
-áá 
-GoToWaitingRoom
-áá $
-(
-áá$ %
-)
-áá% &
-{
-àà 	
-WaitingRoom
-ââ 
-waitingRoomView
-ââ '
-=
-ââ( )
-new
-ââ* -
-WaitingRoom
-ââ. 9
-(
-ââ9 :
-)
-ââ: ;
-{
-ää 
-GameMatchDto
-ãã 
-=
-ãã 
-_selectedMatch
-ãã -
-}
-åå 
+ÄÄ 
 ;
-åå 
+ÄÄ 
 waitingRoomView
-çç 
+ÅÅ 
 .
-çç 
+ÅÅ 
 Show
-çç  
+ÅÅ  
 (
-çç  !
+ÅÅ  !
 )
-çç! "
+ÅÅ! "
 ;
-çç" #
+ÅÅ" #
 this
-éé 
+ÇÇ 
 .
-éé 
+ÇÇ 
 Close
-éé 
+ÇÇ 
 (
-éé 
+ÇÇ 
 )
-éé 
+ÇÇ 
 ;
-éé 
+ÇÇ 
 }
-èè 	
+ÉÉ 	
 private
-ëë 
+ÖÖ 
 void
-ëë 
+ÖÖ 
 BackButtonClicked
-ëë &
+ÖÖ &
 (
-ëë& '
+ÖÖ& '
 object
-ëë' -
+ÖÖ' -
 sender
-ëë. 4
+ÖÖ. 4
 ,
-ëë4 5
+ÖÖ4 5
 RoutedEventArgs
-ëë6 E
+ÖÖ6 E
 e
-ëëF G
+ÖÖF G
 )
-ëëG H
+ÖÖG H
 {
-íí 	
+ÜÜ 	
 MainMenu
-ìì 
+áá 
 mainMenuView
-ìì !
+áá !
 =
-ìì" #
+áá" #
 new
-ìì$ '
+áá$ '
 MainMenu
-ìì( 0
+áá( 0
 (
-ìì0 1
+áá0 1
 )
-ìì1 2
+áá1 2
 ;
-ìì2 3
+áá2 3
 mainMenuView
-îî 
+àà 
 .
-îî 
+àà 
 Show
-îî 
+àà 
 (
-îî 
+àà 
 )
-îî 
+àà 
 ;
-îî  
+àà  
 this
-ïï 
+ââ 
 .
-ïï 
+ââ 
 Close
-ïï 
+ââ 
 (
-ïï 
+ââ 
 )
-ïï 
+ââ 
 ;
-ïï 
+ââ 
 }
-ññ 	
+ää 	
 }
-óó 
-}òò °g
+ãã 
+}åå Â[
 LC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\Login.xaml.cs
 	namespace 	
 
@@ -5807,81 +5576,74 @@ MemoryGame
 ,  !
 	_password" +
 ;+ ,
-private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
-
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT c
-)c d
-;d e
-private &
-AccessibilityServiceClient *'
-_accessibilityServiceClient+ F
-;F G
-public 
-Login 
-( 
-) 
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "'
-_accessibilityServiceClient '
-=( )
-new* -&
-AccessibilityServiceClient. H
-(H I
-)I J
-;J K
-} 	
-private 
-void 
-GetDataFromFields &
-(& '
-)' (
-{ 	
-	_username 
-= 
-TextBoxUsername '
-.' (
-Text( ,
-;, -
-	_password 
-= 
-PasswordBoxPassword +
-.+ ,
-Password, 4
-;4 5
-}   	
-private"" 
-void"" 
-SetFormValidation"" &
-(""& '
-)""' (
-{## 	
-GetDataFromFields$$ 
-($$ 
-)$$ 
-;$$  
+private &
+AccessibilityServiceClient *'
+_accessibilityServiceClient+ F
+;F G
+public 
+Login 
+( 
+) 
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "'
+_accessibilityServiceClient '
+=( )
+new* -&
+AccessibilityServiceClient. H
+(H I
+)I J
+;J K
+} 	
+private 
+void 
+GetDataFromFields &
+(& '
+)' (
+{ 	
+	_username 
+= 
+TextBoxUsername '
+.' (
+Text( ,
+;, -
+	_password 
+= 
+PasswordBoxPassword +
+.+ ,
+Password, 4
+;4 5
+} 	
+private!! 
+void!! 
+SetFormValidation!! &
+(!!& '
+)!!' (
+{"" 	
+GetDataFromFields## 
+(## 
+)## 
+;##  
+_ruleSet$$ 
+=$$ 
+new$$ 
+RuleSet$$ "
+($$" #
+)$$# $
+;$$$ %
 _ruleSet%% 
-=%% 
-new%% 
-RuleSet%% "
-(%%" #
-)%%# $
-;%%$ %
+.%% 
+AddValidationRule%% &
+(%%& '
+new%%' *#
+NonEmptyFieldValidation%%+ B
+(%%B C
+	_username%%C L
+)%%L M
+)%%M N
+;%%N O
 _ruleSet&& 
 .&& 
 AddValidationRule&& &
@@ -5889,775 +5651,673 @@ LogManager? I
 new&&' *#
 NonEmptyFieldValidation&&+ B
 (&&B C
-	_username&&C L
+	_password&&C L
 )&&L M
 )&&M N
-;&&N O
-_ruleSet'' 
-.'' 
-AddValidationRule'' &
-(''& '
-new''' *#
-NonEmptyFieldValidation''+ B
-(''B C
-	_password''C L
-)''L M
-)''M N
-;''N O
-}(( 	
-private** 
-void** 
-ShowErrorMessage** %
-(**% &
-)**& '
-{++ 	
-IList,, 
-<,,  
-ValidationRuleResult,, &
->,,& '"
-validationResultErrors,,( >
-=,,? @
-_ruleSet,,A I
-.,,I J%
-GetValidationResultErrors,,J c
-(,,c d
-),,d e
-;,,e f
-if-- 
-(-- "
-validationResultErrors-- &
-.--& '
-Count--' ,
->--- .
-$num--/ 0
-)--0 1
-{.. 
+;&&N O
+}'' 	
+private)) 
+void)) 
+ShowErrorMessage)) %
+())% &
+)))& '
+{** 	
+IList++ 
+<++  
+ValidationRuleResult++ &
+>++& '"
+validationResultErrors++( >
+=++? @
+_ruleSet++A I
+.++I J%
+GetValidationResultErrors++J c
+(++c d
+)++d e
+;++e f
+if,, 
+(,, "
+validationResultErrors,, &
+.,,& '
+Count,,' ,
+>,,- .
+$num,,/ 0
+),,0 1
+{-- 
 
-MessageBox// 
-.// 
-Show// 
-(//  "
-validationResultErrors//  6
-[//6 7
-$num//7 8
-]//8 9
-.//9 :
-Message//: A
-)//A B
-;//B C
-}00 
-}11 	
-private33 
-void33 
-LoginButtonClicked33 '
-(33' (
-object33( .
-sender33/ 5
-,335 6
-RoutedEventArgs337 F
-e33G H
-)33H I
-{44 	
-SetFormValidation55 
-(55 
-)55 
-;55  
-if66 
-(66 
-_ruleSet66 
-.66 (
-AllValidationRulesHavePassed66 5
-(665 6
-)666 7
-)667 8
-{77 
-try88 
-{99 
-	LoginUser:: 
-(:: 
-):: 
-;::  
-};; 
-catch<< 
-(<< 
-FaultException<< %
-<<<% &
-MemoryGameService<<& 7
-.<<7 8
-Faults<<8 >
-.<<> ? 
-NonExistentUserFault<<? S
-><<S T
-)<<T U
-{== 
+MessageBox.. 
+... 
+Show.. 
+(..  "
+validationResultErrors..  6
+[..6 7
+$num..7 8
+]..8 9
+...9 :
+Message..: A
+)..A B
+;..B C
+}// 
+}00 	
+private22 
+void22 
+LoginButtonClicked22 '
+(22' (
+object22( .
+sender22/ 5
+,225 6
+RoutedEventArgs227 F
+e22G H
+)22H I
+{33 	
+SetFormValidation44 
+(44 
+)44 
+;44  
+if55 
+(55 
+_ruleSet55 
+.55 (
+AllValidationRulesHavePassed55 5
+(555 6
+)556 7
+)557 8
+{66 
+try77 
+{88 
+	LoginUser99 
+(99 
+)99 
+;99  
+}:: 
+catch;; 
+(;; 
+FaultException;; %
+<;;% &
+MemoryGameService;;& 7
+.;;7 8
+Faults;;8 >
+.;;> ? 
+NonExistentUserFault;;? S
+>;;S T
+);;T U
+{<< 
 
-MessageBox>> 
-.>> 
-Show>> #
-(>># $
-$str>>$ :
-)>>: ;
-;>>; <
-}?? 
-catch@@ 
-(@@ 
-FaultException@@ %
-<@@% &
-MemoryGameService@@& 7
-.@@7 8
-Faults@@8 >
-.@@> ?'
-DatabaseConnectionLostFault@@? Z
->@@Z [
-)@@[ \
-{AA 
+MessageBox== 
+.== 
+Show== #
+(==# $
 
-MessageBoxBB 
-.BB 
-ShowBB #
-(BB# $
-$strBB$ 5
-)BB5 6
-;BB6 7
-}CC 
-catchDD 
-(DD %
-EndpointNotFoundExceptionDD 0
-)DD0 1
-{EE 
+Properties==$ .
+.==. /
+Langs==/ 4
+.==4 5
+	Resources==5 >
+.==> ?
+UserDoesNotExist==? O
+)==O P
+;==P Q
+}>> 
+catch?? 
+(?? %
+EndpointNotFoundException?? 0
+)??0 1
+{@@ 
 
-MessageBoxFF 
-.FF 
-ShowFF #
-(FF# $
+MessageBoxAA 
+.AA 
+ShowAA #
+(AA# $
 
-PropertiesFF$ .
-.FF. /
-LangsFF/ 4
-.FF4 5
-	ResourcesFF5 >
-.FF> ? 
-ServerConnectionLostFF? S
-)FFS T
-;FFT U
-}GG 
-catchHH 
-(HH 
-TimeoutExceptionHH '
-timeoutExceptionHH( 8
-)HH8 9
-{II 
-_loggerJJ 
-.JJ 
-FatalJJ !
-(JJ! "
-timeoutExceptionJJ" 2
-)JJ2 3
-;JJ3 4
+PropertiesAA$ .
+.AA. /
+LangsAA/ 4
+.AA4 5
+	ResourcesAA5 >
+.AA> ? 
+ServerConnectionLostAA? S
+)AAS T
+;AAT U
+}BB 
+catchCC 
+(CC 
+TimeoutExceptionCC '
+)CC' (
+{DD 
 
-MessageBoxKK 
-.KK 
-ShowKK #
-(KK# $
+MessageBoxEE 
+.EE 
+ShowEE #
+(EE# $
 
-PropertiesKK$ .
-.KK. /
-LangsKK/ 4
-.KK4 5
-	ResourcesKK5 >
-.KK> ?
-ServerTimeoutErrorKK? Q
-)KKQ R
-;KKR S
-}LL 
-catchMM 
-(MM "
-CommunicationExceptionMM -"
-communicationExceptionMM. D
-)MMD E
-{NN 
-_loggerOO 
-.OO 
-FatalOO !
-(OO! ""
-communicationExceptionOO" 8
-)OO8 9
-;OO9 :
+PropertiesEE$ .
+.EE. /
+LangsEE/ 4
+.EE4 5
+	ResourcesEE5 >
+.EE> ?
+ServerTimeoutErrorEE? Q
+)EEQ R
+;EER S
+}FF 
+catchGG 
+(GG "
+CommunicationExceptionGG -
+)GG- .
+{HH 
 
-MessageBoxPP 
-.PP 
-ShowPP #
-(PP# $
+MessageBoxII 
+.II 
+ShowII #
+(II# $
 
-PropertiesPP$ .
-.PP. /
-LangsPP/ 4
-.PP4 5
-	ResourcesPP5 >
-.PP> ?$
-CommunicationInterruptedPP? W
-)PPW X
-;PPX Y
-}QQ 
-}RR 
-elseSS 
-{TT 
-ShowErrorMessageUU  
-(UU  !
-)UU! "
-;UU" #
-}VV 
-}WW 	
-publicZZ 
-stringZZ 
-GetUserEmailAdressZZ (
-(ZZ( )
-)ZZ) *
-{[[ 	
-string]] 
-username]] 
-=]] 
-TextBoxUsername]] -
-.]]- .
-Text]]. 2
-;]]2 3
-string^^ 
-emailAddress^^ 
-=^^  !'
-_accessibilityServiceClient^^" =
-.^^= >
-GetUserEmailAddress^^> Q
-(^^Q R
-username^^R Z
-)^^Z [
-;^^[ \
-return__ 
-emailAddress__ 
-;__  
-}`` 	
-privatebb 
-voidbb 
-	LoginUserbb 
-(bb 
-)bb  
-{cc 	
-ifdd 
-(dd 
-LoginIsValiddd 
-(dd 
-)dd 
-)dd 
-{ee 
-ifff 
-(ff 
-EmailIsVerifiedff #
-(ff# $
-)ff$ %
-)ff% &
-{gg 
-stringhh 
-emailAddresshh '
-=hh( )
-GetUserEmailAdresshh* <
-(hh< =
-)hh= >
-;hh> ?
-Sesionii 
-playerSesionii '
-=ii( )
-Sesionii* 0
-.ii0 1
-	GetSesionii1 :
-;ii: ;
-playerSesionjj  
-.jj  !
-Usernamejj! )
-=jj* +
-	_usernamejj, 5
-;jj5 6
-playerSesionkk  
-.kk  !
-EmailAddresskk! -
-=kk. /
-emailAddresskk0 <
-;kk< =
-GoToMainMenull  
-(ll  !
-)ll! "
-;ll" #
-}mm 
-elsenn 
-{oo 
-GoToActivationTokenpp '
-(pp' (
-)pp( )
-;pp) *
-}qq 
-}rr 
-elsess 
-{tt 
+PropertiesII$ .
+.II. /
+LangsII/ 4
+.II4 5
+	ResourcesII5 >
+.II> ?$
+CommunicationInterruptedII? W
+)IIW X
+;IIX Y
+}JJ 
+}KK 
+elseLL 
+{MM 
+ShowErrorMessageNN  
+(NN  !
+)NN! "
+;NN" #
+}OO 
+}PP 	
+publicRR 
+stringRR 
+GetUserEmailAdressRR (
+(RR( )
+)RR) *
+{SS 	
+stringTT 
+usernameTT 
+=TT 
+TextBoxUsernameTT -
+.TT- .
+TextTT. 2
+;TT2 3
+stringUU 
+emailAddressUU 
+=UU  !'
+_accessibilityServiceClientUU" =
+.UU= >
+GetUserEmailAddressUU> Q
+(UUQ R
+usernameUUR Z
+)UUZ [
+;UU[ \
+returnVV 
+emailAddressVV 
+;VV  
+}WW 	
+privateYY 
+voidYY 
+	LoginUserYY 
+(YY 
+)YY  
+{ZZ 	
+if[[ 
+([[ 
+LoginIsValid[[ 
+([[ 
+)[[ 
+)[[ 
+{\\ 
+if]] 
+(]] 
+EmailIsVerified]] #
+(]]# $
+)]]$ %
+)]]% &
+{^^ 
+string__ 
+emailAddress__ '
+=__( )
+GetUserEmailAdress__* <
+(__< =
+)__= >
+;__> ?
+Sesion`` 
+playerSesion`` '
+=``( )
+Sesion``* 0
+.``0 1
+	GetSesion``1 :
+;``: ;
+playerSesionaa  
+.aa  !
+Usernameaa! )
+=aa* +
+	_usernameaa, 5
+;aa5 6
+playerSesionbb  
+.bb  !
+EmailAddressbb! -
+=bb. /
+emailAddressbb0 <
+;bb< =
+GoToMainMenucc  
+(cc  !
+)cc! "
+;cc" #
+}dd 
+elseee 
+{ff 
+GoToActivationTokengg '
+(gg' (
+)gg( )
+;gg) *
+}hh 
+}ii 
+elsejj 
+{kk 
 
-MessageBoxuu 
-.uu 
-Showuu 
-(uu  
+MessageBoxll 
+.ll 
+Showll 
+(ll  
 
-Propertiesuu  *
-.uu* +
-Langsuu+ 0
-.uu0 1
-	Resourcesuu1 :
-.uu: ;"
-NonMatchingCredentialsuu; Q
-)uuQ R
-;uuR S
-}vv 
-}ww 	
-publicyy 
-boolyy 
-LoginIsValidyy  
-(yy  !
-)yy! "
-{zz 	
-BCryptHashGenerator{{ 
-bCryptHashGenerator{{  3
-={{4 5
-new{{6 9
-BCryptHashGenerator{{: M
-({{M N
-){{N O
-;{{O P
-string|| 
+Propertiesll  *
+.ll* +
+Langsll+ 0
+.ll0 1
+	Resourcesll1 :
+.ll: ;"
+NonMatchingCredentialsll; Q
+)llQ R
+;llR S
+}mm 
+}nn 	
+publicpp 
+boolpp 
+LoginIsValidpp  
+(pp  !
+)pp! "
+{qq 	
+BCryptHashGeneratorrr 
+bCryptHashGeneratorrr  3
+=rr4 5
+newrr6 9
+BCryptHashGeneratorrr: M
+(rrM N
+)rrN O
+;rrO P
+stringss 
+saltss 
+=ss 
+GetPasswordSaltss )
+(ss) *
+)ss* +
+;ss+ ,
+stringtt 
+encryptedPasswordtt $
+=tt% &
+bCryptHashGeneratortt' :
+.tt: ;#
+GenerateEncryptedStringtt; R
+(ttR S
+	_passwordttS \
+,tt\ ]
+salttt^ b
+)ttb c
+;ttc d
+booluu 
+hasAccessRightsuu  
+=uu! "'
+_accessibilityServiceClientuu# >
+.uu> ?
+HasAccessRightsuu? N
+(uuN O
+	_usernameuuO X
+,uuX Y
+encryptedPassworduuZ k
+)uuk l
+;uul m
+returnvv 
+hasAccessRightsvv "
+;vv" #
+}ww 	
+privateyy 
+stringyy 
+GetPasswordSaltyy &
+(yy& '
+)yy' (
+{zz 	
+string{{ 
+salt{{ 
+={{ '
+_accessibilityServiceClient{{ 5
+.{{5 6
+GetSalt{{6 =
+({{= >
+	_username{{> G
+){{G H
+;{{H I
+return|| 
 salt|| 
-=|| 
-GetPasswordSalt|| )
-(||) *
-)||* +
-;||+ ,
-string}} 
-encryptedPassword}} $
-=}}% &
-bCryptHashGenerator}}' :
-.}}: ;#
-GenerateEncryptedString}}; R
-(}}R S
-	_password}}S \
-,}}\ ]
-salt}}^ b
-)}}b c
-;}}c d&
-AccessibilityServiceClient~~ &&
-accessibilityServiceClient~~' A
-=~~B C
-new~~D G&
-AccessibilityServiceClient~~H b
-(~~b c
-)~~c d
-;~~d e
-bool 
-hasAccessRights  
-=! "&
-accessibilityServiceClient# =
-.= >
-HasAccessRights> M
-(M N
-	_usernameN W
-,W X
-encryptedPasswordY j
-)j k
-;k l
-return
-ÄÄ 
-hasAccessRights
-ÄÄ "
-;
-ÄÄ" #
-}
-ÅÅ 	
-private
-ÉÉ 
-string
-ÉÉ 
-GetPasswordSalt
-ÉÉ &
-(
-ÉÉ& '
-)
-ÉÉ' (
+;|| 
+}}} 	
+public 
+bool 
+EmailIsVerified #
+(# $
+)$ %
 {
-ÑÑ 	
-MemoryGameService
-ÖÖ 
-.
-ÖÖ (
-AccessibilityServiceClient
-ÖÖ 8(
-accessibilityServiceClient
-ÖÖ9 S
-=
-ÖÖT U
-new
-ÜÜ 
-MemoryGameService
-ÜÜ %
-.
-ÜÜ% &(
-AccessibilityServiceClient
-ÜÜ& @
-(
-ÜÜ@ A
-)
-ÜÜA B
-;
-ÜÜB C
+ÄÄ 	
 string
-áá 
-salt
-áá 
-=
-áá (
-accessibilityServiceClient
-áá 4
-.
-áá4 5
-GetSalt
-áá5 <
-(
-áá< =
-	_username
-áá= F
-)
-ááF G
-;
-ááG H
-return
-àà 
-salt
-àà 
-;
-àà 
-}
-ââ 	
-public
-ãã 
-bool
-ãã 
-EmailIsVerified
-ãã #
-(
-ãã# $
-)
-ãã$ %
-{
-åå 	
-string
-çç 
+ÅÅ 
 username
-çç 
+ÅÅ 
 =
-çç 
+ÅÅ 
 TextBoxUsername
-çç -
+ÅÅ -
 .
-çç- .
+ÅÅ- .
 Text
-çç. 2
+ÅÅ. 2
 ;
-çç2 3
+ÅÅ2 3
 bool
-éé 
+ÇÇ 
 emailIsVerified
-éé  
+ÇÇ  
 =
-éé! ")
+ÇÇ! ")
 _accessibilityServiceClient
-éé# >
+ÇÇ# >
 .
-éé> ?
+ÇÇ> ?
 
 IsVerified
-éé? I
+ÇÇ? I
 (
-ééI J
+ÇÇI J
 username
-ééJ R
+ÇÇJ R
 )
-ééR S
+ÇÇR S
 ;
-ééS T
+ÇÇS T
 return
-èè 
+ÉÉ 
 emailIsVerified
-èè "
+ÉÉ "
 ;
-èè" #
+ÉÉ" #
 }
-êê 	
+ÑÑ 	
 public
-íí 
+ÜÜ 
 void
-íí 
+ÜÜ 
 GoToMainMenu
-íí  
+ÜÜ  
 (
-íí  !
+ÜÜ  !
 )
-íí! "
+ÜÜ! "
 {
-ìì 	
+áá 	
 MainMenu
-îî 
+àà 
 mainMenuView
-îî !
+àà !
 =
-îî" #
+àà" #
 new
-îî$ '
+àà$ '
 MainMenu
-îî( 0
+àà( 0
 (
-îî0 1
+àà0 1
 )
-îî1 2
+àà1 2
 ;
-îî2 3
+àà2 3
 mainMenuView
-ïï 
+ââ 
 .
-ïï 
+ââ 
 Show
-ïï 
+ââ 
 (
-ïï 
+ââ 
 )
-ïï 
+ââ 
 ;
-ïï  
+ââ  
 this
-ññ 
+ää 
 .
-ññ 
+ää 
 Close
-ññ 
+ää 
 (
-ññ 
+ää 
 )
-ññ 
+ää 
 ;
-ññ 
+ää 
 }
-óó 	
+ãã 	
 private
-ôô 
+çç 
 void
-ôô )
+çç )
 RecoverPasswordLabelClicked
-ôô 0
+çç 0
 (
-ôô0 1
+çç0 1
 object
-ôô1 7
+çç1 7
 sender
-ôô8 >
+çç8 >
 ,
-ôô> ?
+çç> ?
 RoutedEventArgs
-ôô@ O
+çç@ O
 e
-ôôP Q
+ççP Q
 )
-ôôQ R
+ççQ R
 {
-öö 	
+éé 	
 RecoverPassword
-õõ 
+èè 
 mainWindowView
-õõ *
+èè *
 =
-õõ+ ,
+èè+ ,
 new
-õõ- 0
+èè- 0
 RecoverPassword
-õõ1 @
+èè1 @
 (
-õõ@ A
+èè@ A
 )
-õõA B
+èèA B
 ;
-õõB C
+èèB C
 mainWindowView
-úú 
+êê 
 .
-úú 
+êê 
 Show
-úú 
+êê 
 (
-úú  
+êê  
 )
-úú  !
+êê  !
 ;
-úú! "
+êê! "
 this
-ùù 
+ëë 
 .
-ùù 
+ëë 
 Close
-ùù 
+ëë 
 (
-ùù 
+ëë 
 )
-ùù 
+ëë 
 ;
-ùù 
+ëë 
 }
-ûû 	
+íí 	
 private
-†† 
+îî 
 void
-†† 
+îî 
 BackButtonClicked
-†† &
+îî &
 (
-††& '
+îî& '
 object
-††' -
+îî' -
 sender
-††. 4
+îî. 4
 ,
-††4 5
+îî4 5
 RoutedEventArgs
-††6 E
+îî6 E
 e
-††F G
+îîF G
 )
-††G H
+îîG H
 {
-°° 	
+ïï 	
 
 MainWindow
-¢¢ 
+ññ 
 mainWindowView
-¢¢ %
+ññ %
 =
-¢¢& '
+ññ& '
 new
-¢¢( +
+ññ( +
 
 MainWindow
-¢¢, 6
+ññ, 6
 (
-¢¢6 7
+ññ6 7
 )
-¢¢7 8
+ññ7 8
 ;
-¢¢8 9
+ññ8 9
 mainWindowView
-££ 
+óó 
 .
-££ 
+óó 
 Show
-££ 
+óó 
 (
-££  
+óó  
 )
-££  !
+óó  !
 ;
-££! "
+óó! "
 this
-§§ 
+òò 
 .
-§§ 
+òò 
 Close
-§§ 
+òò 
 (
-§§ 
+òò 
 )
-§§ 
+òò 
 ;
-§§ 
+òò 
 }
-•• 	
+ôô 	
 private
-ßß 
+õõ 
 void
-ßß !
+õõ !
 GoToActivationToken
-ßß (
+õõ (
 (
-ßß( )
+õõ( )
 )
-ßß) *
+õõ) *
 {
-®® 	
+úú 	
 string
-©© 
+ùù 
 emailAddress
-©© 
+ùù 
 =
-©©  ! 
+ùù  ! 
 GetUserEmailAdress
-©©" 4
+ùù" 4
 (
-©©4 5
+ùù4 5
 )
-©©5 6
+ùù5 6
 ;
-©©6 7
+ùù6 7
 ActivationToken
-™™ #
+ûû #
 activationTokenWindow
-™™ 1
+ûû 1
 =
-™™2 3
+ûû2 3
 new
-´´ 
+ûû4 7
 ActivationToken
-´´ #
+ûû8 G
 (
-´´# $
+ûûG H
 emailAddress
-´´$ 0
+ûûH T
 ,
-´´0 1
+ûûT U
 TextBoxUsername
-´´2 A
+ûûV e
 .
-´´A B
+ûûe f
 Text
-´´B F
+ûûf j
 )
-´´F G
+ûûj k
 ;
-´´G H#
+ûûk l#
 activationTokenWindow
-¨¨ !
+üü !
 .
-¨¨! "
+üü! "
 Show
-¨¨" &
+üü" &
 (
-¨¨& '
+üü& '
 )
-¨¨' (
+üü' (
 ;
-¨¨( )
+üü( )
 this
-≠≠ 
+†† 
 .
-≠≠ 
+†† 
 Close
-≠≠ 
+†† 
 (
-≠≠ 
+†† 
 )
-≠≠ 
+†† 
 ;
-≠≠ 
+†† 
 }
-ÆÆ 	
+°° 	
 }
-ØØ 
-}∞∞ •
+¢¢ 
+}££ •
 OC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\MainMenu.xaml.cs
 	namespace 	
 
@@ -6843,99 +6503,99 @@ MemoryGame
 MemoryGameService) :
 .: ;!
 IMatchServiceCallback; P
-{ 
-private 
-InstanceContext 
-_context  (
-=) *
-null+ /
-;/ 0
-private 
-MatchServiceClient "
-_matchServiceClient# 6
-;6 7
-public 
-CardDeckDTO 
-CardDeck #
-{$ %
-get& )
-;) *
-set+ .
-;. /
-}0 1
-private 
-List 
-< 
-	ImageCard 
-> 
-_imageCards  +
-;+ ,
-private 
-int %
-_numberOfMovementsAllowed -
-;- .
-private 
-IList 
-< 
-	ImageCard 
->  &
-_cardsFlippedInCurrentTurn! ;
-;; <
-private 
-bool !
-_playerHasFormedAPair *
-;* +
-public 
-string 
-[ 
-] 
-Players 
-{  !
-get" %
-;% &
-set' *
-;* +
-}, -
-public 
-int 
-NumberOfPlayers "
-{# $
-get% (
-;( )
-set* -
-;- .
-}/ 0
-public 
-string 
-	MatchHost 
-{  !
-get" %
-;% &
-set' *
-;* +
-}, -
-private 
-bool 0
-$_windowIsBeingClosedByTheCloseButton 9
-;9 :
-private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
+{ 
+public 
+string 
+[ 
+] 
+Players 
+{  !
+get" %
+;% &
+set' *
+;* +
+}, -
+public 
+int 
+NumberOfPlayers "
+{# $
+get% (
+;( )
+set* -
+;- .
+}/ 0
+public 
+string 
+	MatchHost 
+{  !
+get" %
+;% &
+set' *
+;* +
+}, -
+private 
+InstanceContext 
+_context  (
+=) *
+null+ /
+;/ 0
+private 
+MatchServiceClient "
+_matchServiceClient# 6
+;6 7
+public 
+CardDeckDTO 
+CardDeck #
+{$ %
+get& )
+;) *
+set+ .
+;. /
+}0 1
+private 
+List 
+< 
+	ImageCard 
+> 
+_imageCards  +
+;+ ,
+private 
+int %
+_numberOfMovementsAllowed -
+;- .
+private 
+IList 
+< 
+	ImageCard 
+>  &
+_cardsFlippedInCurrentTurn! ;
+;; <
+private 
+bool !
+_playerHasFormedAPair *
+;* +
+private 
+bool 0
+$_windowIsBeingClosedByTheCloseButton 9
+;9 :
+private 
+static 
+readonly 
+log4net  '
+.' (
+ILog( ,
+_logger- 4
+=5 6
+log4net7 >
+.> ?
 
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT c
-)c d
-;d e
+LogManager? I
+.I J
+	GetLoggerJ S
+(S T
+$strT c
+)c d
+;d e
 public 
 Match 
 ( 
@@ -7058,19 +6718,19 @@ ImageCards:: 
 $num<<" #
 }== 
 ;== 
-gameBoardDrawer>> 
-.>> 
-Draw>>  
-(>>  !
-)>>! "
-;>>" #
-gameBoardDrawer?? 
-.?? !
-SetEventOnCardClicked?? 1
-(??1 2
-GetClickedCard??2 @
-)??@ A
-;??A B
+gameBoardDrawer>> 
+.>> 
+Draw>> #
+(>># $
+)>>$ %
+;>>% &
+gameBoardDrawer?? 
+.?? !
+SetEventOnCardClicked?? 4
+(??4 5
+GetClickedCard??5 C
+)??C D
+;??D E
 }@@ 	
 privateBB 
 voidBB 
@@ -7990,90 +7650,126 @@ LeaveMatch
 }
 …… 
 }
-ÀÀ 
+   
 }
-ÃÃ 	
+ÀÀ 	
 public
-ŒŒ 
+ÕÕ 
 void
-ŒŒ 
+ÕÕ 
 UncoverCardd
-ŒŒ  
+ÕÕ  
 (
-ŒŒ  !
+ÕÕ  !
 int
-ŒŒ! $
+ÕÕ! $
 	cardIndex
-ŒŒ% .
+ÕÕ% .
 )
-ŒŒ. /
+ÕÕ. /
 {
-œœ 	
+ŒŒ 	
 _imageCards
-–– 
+œœ 
 [
-–– 
+œœ 
 	cardIndex
-–– !
+œœ !
 ]
-––! "
+œœ! "
 .
-––" #
+œœ" #
 Source
-––# )
+œœ# )
 =
-––* +
+œœ* +
 _imageCards
-––, 7
+œœ, 7
 [
-––7 8
+œœ7 8
 	cardIndex
-––8 A
+œœ8 A
 ]
-––A B
+œœA B
 .
-––B C
+œœB C
 
 FrontImage
-––C M
+œœC M
 ;
-––M N
+œœM N
 }
-—— 	
+–– 	
 private
-”” 
+““ 
 async
-”” 
+““ 
 void
-””  
+““  
 FlipBothCardsAgain
-”” -
+““ -
 (
-””- .
+““- .
 CardPairDto
-””. 9
+““. 9
 cardPairDto
-””: E
+““: E
 )
-””E F
+““E F
 {
-‘‘ 	
+”” 	
 await
-’’ 
+‘‘ 
 Task
-’’ 
+‘‘ 
 .
-’’ 
+‘‘ 
 Delay
-’’ 
+‘‘ 
 (
-’’ 
+‘‘ 
 $num
-’’ !
+‘‘ !
 )
-’’! "
+‘‘! "
 ;
-’’" #
+‘‘" #
+_imageCards
+’’ 
+[
+’’ 
+cardPairDto
+’’ #
+.
+’’# $
+IndexOfCard1
+’’$ 0
+]
+’’0 1
+.
+’’1 2
+Source
+’’2 8
+=
+’’9 :
+_imageCards
+’’; F
+[
+’’F G
+cardPairDto
+’’G R
+.
+’’R S
+IndexOfCard1
+’’S _
+]
+’’_ `
+.
+’’` a
+	BackImage
+’’a j
+;
+’’j k
 _imageCards
 ÷÷ 
 [
@@ -8082,7 +7778,7 @@ FrontImage
 ÷÷ #
 .
 ÷÷# $
-IndexOfCard1
+IndexOfCard2
 ÷÷$ 0
 ]
 ÷÷0 1
@@ -8100,7 +7796,7 @@ FrontImage
 ÷÷G R
 .
 ÷÷R S
-IndexOfCard1
+IndexOfCard2
 ÷÷S _
 ]
 ÷÷_ `
@@ -8109,779 +7805,743 @@ FrontImage
 	BackImage
 ÷÷a j
 ;
-÷÷j k
-_imageCards
-◊◊ 
-[
-◊◊ 
-cardPairDto
-◊◊ #
-.
-◊◊# $
-IndexOfCard2
-◊◊$ 0
-]
-◊◊0 1
-.
-◊◊1 2
-Source
-◊◊2 8
-=
-◊◊9 :
-_imageCards
-◊◊; F
-[
-◊◊F G
-cardPairDto
-◊◊G R
-.
-◊◊R S
-IndexOfCard2
-◊◊S _
-]
-◊◊_ `
-.
-◊◊` a
-	BackImage
-◊◊a j
-;
-◊◊j k
+÷÷j k
 }
-ÿÿ 	
+◊◊ 	
 public
-⁄⁄ 
+ŸŸ 
 void
-⁄⁄  
+ŸŸ  
 NotifyTurnHasEnded
-⁄⁄ &
+ŸŸ &
 (
-⁄⁄& '
+ŸŸ& '
 string
-⁄⁄' -
+ŸŸ' -
 username
-⁄⁄. 6
+ŸŸ. 6
 ,
-⁄⁄6 7
+ŸŸ6 7
 CardPairDto
-⁄⁄8 C
+ŸŸ8 C
 cardPairDto
-⁄⁄D O
+ŸŸD O
 )
-⁄⁄O P
+ŸŸO P
 {
-€€ 	
+⁄⁄ 	
 	TurnLabel
-‹‹ 
+€€ 
 .
-‹‹ 
+€€ 
 Content
-‹‹ 
+€€ 
 =
-‹‹ 
+€€ 
 
 Properties
-‹‹  *
+€€  *
 .
-‹‹* +
+€€* +
 Langs
-‹‹+ 0
+€€+ 0
 .
-‹‹0 1
+€€0 1
 	Resources
-‹‹1 :
+€€1 :
 .
-‹‹: ;
+€€: ;
 TurnMessage
-‹‹; F
+€€; F
 +
-‹‹G H
+€€G H
 $str
-‹‹I M
+€€I M
 +
-‹‹N O
+€€N O
 username
-‹‹P X
+€€P X
 ;
-‹‹X Y
+€€X Y
 if
-ﬁﬁ 
+›› 
 (
-ﬁﬁ 
+›› 
 Sesion
-ﬁﬁ 
+›› 
 .
-ﬁﬁ 
+›› 
 	GetSesion
-ﬁﬁ  
+››  
 .
-ﬁﬁ  !
+››  !
 Username
-ﬁﬁ! )
+››! )
 .
-ﬁﬁ) *
+››) *
 Equals
-ﬁﬁ* 0
+››* 0
 (
-ﬁﬁ0 1
+››0 1
 username
-ﬁﬁ1 9
+››1 9
 )
-ﬁﬁ9 :
+››9 :
 )
-ﬁﬁ: ;
+››: ;
 {
-ﬂﬂ '
+ﬁﬁ '
 _numberOfMovementsAllowed
-‡‡ )
+ﬂﬂ )
 =
-‡‡* +
+ﬂﬂ* +
 $num
-‡‡, -
+ﬂﬂ, -
 ;
-‡‡- .
+ﬂﬂ- .
 }
-·· 
+‡‡ 
 if
-„„ 
+‚‚ 
 (
-„„ 
+‚‚ 
 !
-„„ 
+‚‚ 
 cardPairDto
-„„ 
+‚‚ 
 .
-„„ 
+‚‚ 
 BothCardsAreEqual
-„„ -
+‚‚ -
 )
-„„- .
+‚‚- .
 {
-‰‰  
+„„  
 FlipBothCardsAgain
-ÂÂ "
+‰‰ "
 (
-ÂÂ" #
+‰‰" #
 cardPairDto
-ÂÂ# .
+‰‰# .
 )
-ÂÂ. /
+‰‰. /
 ;
-ÂÂ/ 0
+‰‰/ 0
 }
-ÊÊ 
+ÂÂ 
 }
-ÁÁ 	
+ÊÊ 	
 public
-ÈÈ 
+ËË 
 void
-ÈÈ 
+ËË 
 ShowWinners
-ÈÈ 
+ËË 
 (
-ÈÈ  
+ËË  
 string
-ÈÈ  &
+ËË  &
 winner
-ÈÈ' -
+ËË' -
 )
-ÈÈ- .
+ËË- .
 {
-ÍÍ 	
+ÈÈ 	
 
 MessageBox
-ÎÎ 
+ÍÍ 
 .
-ÎÎ 
+ÍÍ 
 Show
-ÎÎ 
+ÍÍ 
 (
-ÎÎ 
+ÍÍ 
 winner
-ÎÎ "
+ÍÍ "
 +
-ÎÎ# $
+ÍÍ# $
 $str
-ÎÎ% (
+ÍÍ% (
 +
-ÎÎ) *
+ÍÍ) *
 
 Properties
-ÎÎ+ 5
+ÍÍ+ 5
 .
-ÎÎ5 6
+ÍÍ5 6
 Langs
-ÎÎ6 ;
+ÍÍ6 ;
 .
-ÎÎ; <
+ÍÍ; <
 	Resources
-ÎÎ< E
+ÍÍ< E
 .
-ÎÎE F
+ÍÍE F
 
 WinMessage
-ÎÎF P
+ÍÍF P
 )
-ÎÎP Q
+ÍÍP Q
 ;
-ÎÎQ R
+ÍÍQ R
 }
-ÏÏ 	
+ÎÎ 	
 public
-ÓÓ 
+ÌÌ 
 void
-ÓÓ 
+ÌÌ 
 MatchHasEnded
-ÓÓ !
+ÌÌ !
 (
-ÓÓ! "
+ÌÌ! "
 )
-ÓÓ" #
+ÌÌ" #
 {
-ÔÔ 	
+ÓÓ 	
 GoToMainMenuView
- 
+ÔÔ 
 (
- 
+ÔÔ 
 )
- 
+ÔÔ 
 ;
- 
+ÔÔ 
 }
-ÒÒ 	
+ 	
 public
-ÛÛ 
+ÚÚ 
 void
-ÛÛ "
+ÚÚ "
 NotifyPlayerWasExpel
-ÛÛ (
+ÚÚ (
 (
-ÛÛ( )
+ÚÚ( )
 string
-ÛÛ) /!
+ÚÚ) /!
 expelPlayerUsername
-ÛÛ0 C
+ÚÚ0 C
 ,
-ÛÛC D
+ÚÚC D
 int
-ÛÛE H
+ÚÚE H
 [
-ÛÛH I
+ÚÚH I
 ]
-ÛÛI J
+ÚÚI J
 cardsUncovered
-ÛÛK Y
+ÚÚK Y
 )
-ÛÛY Z
+ÚÚY Z
 {
-ÙÙ 	
+ÛÛ 	
 if
-ıı 
+ÙÙ 
 (
-ıı 
+ÙÙ 
 Sesion
-ıı 
+ÙÙ 
 .
-ıı 
+ÙÙ 
 	GetSesion
-ıı  
+ÙÙ  
 .
-ıı  !
+ÙÙ  !
 Username
-ıı! )
+ÙÙ! )
 .
-ıı) *
+ÙÙ) *
 Equals
-ıı* 0
+ÙÙ* 0
 (
-ıı0 1!
+ÙÙ0 1!
 expelPlayerUsername
-ıı1 D
+ÙÙ1 D
 )
-ııD E
+ÙÙD E
 )
-ııE F
+ÙÙE F
 {
-ˆˆ 
+ıı 
 GoToMainMenuView
-˜˜  
+ˆˆ  
 (
-˜˜  !
+ˆˆ  !
 )
-˜˜! "
+ˆˆ! "
 ;
-˜˜" #
+ˆˆ" #
 }
-¯¯ 
+˜˜ 
 else
-˘˘ 
+¯¯ 
 {
-˙˙ 
+˘˘ 
 for
-˚˚ 
+˙˙ 
 (
-˚˚ 
+˙˙ 
 int
-˚˚ 
+˙˙ 
 index
-˚˚ 
+˙˙ 
 =
-˚˚  
+˙˙  
 $num
-˚˚! "
+˙˙! "
 ;
-˚˚" #
+˙˙" #
 index
-˚˚$ )
+˙˙$ )
 <
-˚˚* +
+˙˙* +
 cardsUncovered
-˚˚, :
+˙˙, :
 .
-˚˚: ;
+˙˙: ;
 Length
-˚˚; A
+˙˙; A
 ;
-˚˚A B
+˙˙A B
 index
-˚˚C H
+˙˙C H
 ++
-˚˚H J
+˙˙H J
 )
-˚˚J K
+˙˙J K
 {
-¸¸ 
+˚˚ 
 _imageCards
-˝˝ 
+¸¸ 
 [
-˝˝  
+¸¸  
 cardsUncovered
-˝˝  .
+¸¸  .
 [
-˝˝. /
+¸¸. /
 index
-˝˝/ 4
+¸¸/ 4
 ]
-˝˝4 5
+¸¸4 5
 ]
-˝˝5 6
+¸¸5 6
 .
-˝˝6 7
+¸¸6 7
 Source
-˝˝7 =
+¸¸7 =
 =
-˝˝> ?
+¸¸> ?
 _imageCards
-˝˝@ K
+¸¸@ K
 [
-˝˝K L
+¸¸K L
 cardsUncovered
-˝˝L Z
+¸¸L Z
 [
-˝˝Z [
+¸¸Z [
 index
-˝˝[ `
+¸¸[ `
 ]
-˝˝` a
+¸¸` a
 ]
-˝˝a b
+¸¸a b
 .
-˝˝b c
+¸¸b c
 	BackImage
-˝˝c l
+¸¸c l
 ;
-˝˝l m
+¸¸l m
 }
-˛˛ 
+˝˝ 
 
 MessageBox
-ˇˇ 
+˛˛ 
 .
-ˇˇ 
+˛˛ 
 Show
-ˇˇ 
+˛˛ 
 (
-ˇˇ  !
+˛˛  !
 expelPlayerUsername
-ˇˇ  3
+˛˛  3
 +
-ˇˇ4 5
+˛˛4 5
 $str
-ˇˇ6 9
+˛˛6 9
 +
-ˇˇ: ;
+˛˛: ;
 
 Properties
-ˇˇ< F
+˛˛< F
 .
-ˇˇF G
+˛˛F G
 Langs
-ˇˇG L
+˛˛G L
 .
-ˇˇL M
+˛˛L M
 	Resources
-ˇˇM V
+˛˛M V
 .
-ˇˇV W
+˛˛V W
 ExpelMessage
-ˇˇW c
+˛˛W c
 )
-ˇˇc d
+˛˛c d
 ;
-ˇˇd e
+˛˛d e
 NumberOfPlayers
-ÄÄ 
+ˇˇ 
 --
-ÄÄ !
+ˇˇ !
 ;
-ÄÄ! "
+ˇˇ! "
 }
-ÅÅ 
+ÄÄ 
 }
-ÇÇ 	
+ÅÅ 	
 public
-ÑÑ 
+ÉÉ 
 void
-ÑÑ $
+ÉÉ $
 NotifyPlayerLeaveMatch
-ÑÑ *
+ÉÉ *
 (
-ÑÑ* +
+ÉÉ* +
 string
-ÑÑ+ 1
+ÉÉ+ 1
 username
-ÑÑ2 :
+ÉÉ2 :
 ,
-ÑÑ: ;
+ÉÉ: ;
 int
-ÑÑ< ?
+ÉÉ< ?
 [
-ÑÑ? @
+ÉÉ? @
 ]
-ÑÑ@ A
+ÉÉ@ A
 cardsUncovered
-ÑÑB P
+ÉÉB P
 )
-ÑÑP Q
+ÉÉP Q
 {
-ÖÖ 	
+ÑÑ 	
 if
-ÜÜ 
+ÖÖ 
 (
-ÜÜ 
+ÖÖ 
 Sesion
-ÜÜ 
+ÖÖ 
 .
-ÜÜ 
+ÖÖ 
 	GetSesion
-ÜÜ  
+ÖÖ  
 .
-ÜÜ  !
+ÖÖ  !
 Username
-ÜÜ! )
+ÖÖ! )
 .
-ÜÜ) *
+ÖÖ) *
 Equals
-ÜÜ* 0
+ÖÖ* 0
 (
-ÜÜ0 1
+ÖÖ0 1
 username
-ÜÜ1 9
+ÖÖ1 9
 )
-ÜÜ9 :
+ÖÖ9 :
 )
-ÜÜ: ;
+ÖÖ: ;
 {
-áá 
+ÜÜ 
 GoToMainMenuView
-àà  
+áá  
 (
-àà  !
+áá  !
 )
-àà! "
+áá! "
 ;
-àà" #
+áá" #
 }
-ââ 
+àà 
 else
-ää 
+ââ 
 {
-ãã 
+ää 
 for
-åå 
+ãã 
 (
-åå 
+ãã 
 int
-åå 
+ãã 
 index
-åå 
+ãã 
 =
-åå  
+ãã  
 $num
-åå! "
+ãã! "
 ;
-åå" #
+ãã" #
 index
-åå$ )
+ãã$ )
 <
-åå* +
+ãã* +
 cardsUncovered
-åå, :
+ãã, :
 .
-åå: ;
+ãã: ;
 Length
-åå; A
+ãã; A
 ;
-ååA B
+ããA B
 index
-ååC H
+ããC H
 ++
-ååH J
+ããH J
 )
-ååJ K
+ããJ K
 {
-çç 
+åå 
 _imageCards
-éé 
+çç 
 [
-éé  
+çç  
 cardsUncovered
-éé  .
+çç  .
 [
-éé. /
+çç. /
 index
-éé/ 4
+çç/ 4
 ]
-éé4 5
+çç4 5
 ]
-éé5 6
+çç5 6
 .
-éé6 7
+çç6 7
 Source
-éé7 =
+çç7 =
 =
-éé> ?
+çç> ?
 _imageCards
-éé@ K
+çç@ K
 [
-ééK L
+ççK L
 cardsUncovered
-ééL Z
+ççL Z
 [
-ééZ [
+ççZ [
 index
-éé[ `
+çç[ `
 ]
-éé` a
+çç` a
 ]
-ééa b
+çça b
 .
-ééb c
+ççb c
 	BackImage
-ééc l
+ççc l
 ;
-éél m
+ççl m
 }
-èè 
+éé 
 
 MessageBox
-êê 
+èè 
 .
-êê 
+èè 
 Show
-êê 
+èè 
 (
-êê  
+èè  
 username
-êê  (
+èè  (
 +
-êê) *
+èè) *
 $str
-êê+ .
+èè+ .
 +
-êê/ 0
+èè/ 0
 
 Properties
-êê1 ;
+èè1 ;
 .
-êê; <
+èè; <
 Langs
-êê< A
+èè< A
 .
-êêA B
+èèA B
 	Resources
-êêB K
+èèB K
 .
-êêK L
+èèK L
 LeaveMatchMessage
-êêL ]
+èèL ]
 )
-êê] ^
+èè] ^
 ;
-êê^ _
+èè^ _
 NumberOfPlayers
-ëë 
+êê 
 --
-ëë !
+êê !
 ;
-ëë! "
+êê! "
 }
-íí 
+ëë 
 }
-ìì 	
+íí 	
 public
-ïï 
+îî 
 void
-ïï "
+îî "
 EndTurnOfExpelPlayer
-ïï (
+îî (
 (
-ïï( )
+îî( )
 string
-ïï) / 
+îî) / 
 nextPlayerUsername
-ïï0 B
+îî0 B
 )
-ïïB C
+îîB C
 {
-ññ 	
+ïï 	
 	TurnLabel
-óó 
+ññ 
 .
-óó 
+ññ 
 Content
-óó 
+ññ 
 =
-óó 
+ññ 
 
 Properties
-óó  *
+ññ  *
 .
-óó* +
+ññ* +
 Langs
-óó+ 0
+ññ+ 0
 .
-óó0 1
+ññ0 1
 	Resources
-óó1 :
+ññ1 :
 .
-óó: ;
+ññ: ;
 TurnMessage
-óó; F
+ññ; F
 +
-óóG H
+ññG H
 $str
-óóI M
+ññI M
 +
-óóN O 
+ññN O 
 nextPlayerUsername
-óóP b
+ññP b
 ;
-óób c
+ññb c
 if
-ôô 
+òò 
 (
-ôô 
+òò 
 Sesion
-ôô 
+òò 
 .
-ôô 
+òò 
 	GetSesion
-ôô  
+òò  
 .
-ôô  !
+òò  !
 Username
-ôô! )
+òò! )
 .
-ôô) *
+òò) *
 Equals
-ôô* 0
+òò* 0
 (
-ôô0 1 
+òò0 1 
 nextPlayerUsername
-ôô1 C
+òò1 C
 )
-ôôC D
+òòC D
 )
-ôôD E
+òòD E
 {
-öö '
+ôô '
 _numberOfMovementsAllowed
-õõ )
+öö )
 =
-õõ* +
+öö* +
 $num
-õõ, -
+öö, -
 ;
-õõ- .
+öö- .
 }
-úú 
+õõ 
 }
-ùù 	
+úú 	
 private
-üü 
+ûû 
 void
-üü 
+ûû 
 GoToMainMenuView
-üü %
+ûû %
 (
-üü% &
+ûû% &
 )
-üü& '
+ûû& '
 {
-†† 	2
+üü 	2
 $_windowIsBeingClosedByTheCloseButton
-°° 0
+†† 0
 =
-°°1 2
+††1 2
 false
-°°3 8
+††3 8
 ;
-°°8 9
+††8 9
 MainMenu
-¢¢ 
+°° 
 mainMenuView
-¢¢ !
+°° !
 =
-¢¢" #
+°°" #
 new
-¢¢$ '
+°°$ '
 MainMenu
-¢¢( 0
+°°( 0
 (
-¢¢0 1
+°°0 1
 )
-¢¢1 2
+°°1 2
 ;
-¢¢2 3
+°°2 3
 mainMenuView
-££ 
+¢¢ 
 .
-££ 
+¢¢ 
 Show
-££ 
+¢¢ 
 (
-££ 
+¢¢ 
 )
-££ 
+¢¢ 
 ;
-££  
+¢¢  
 this
-§§ 
+££ 
 .
-§§ 
+££ 
 Close
-§§ 
+££ 
 (
-§§ 
+££ 
 )
-§§ 
+££ 
 ;
-§§ 
+££ 
 }
-•• 	
+§§ 	
 }
-¶¶ 
-}ßß ¡U
+•• 
+}¶¶  R
 VC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\RecoverPassword.xaml.cs
 	namespace 	
 
@@ -9039,520 +8699,494 @@ MessageBox'' 
 )// 
 ;// 
 }00 	
-private44 
-void44 
-LoadUsername44 !
-(44! "
-)44" #
-{55 	&
-AccessibilityServiceClient66 &
-client66' -
-=66. /
-new660 3&
-AccessibilityServiceClient664 N
-(66N O
-)66O P
-;66P Q
-	_username77 
-=77 
-client77 
-.77 
-GetUsername77 *
-(77* +
-_emailAddress77+ 8
-)778 9
-;779 :
-}88 	
-private:: 
-void:: !
-SendCodeButtonClicked:: *
-(::* +
-object::+ 1
-sender::2 8
-,::8 9
-RoutedEventArgs::: I
-e::J K
-)::K L
-{;; 	
-try<< 
-{== 
-SendCodeToUser>> 
-(>> 
-)>>  
-;>>  !
-}?? 
-catch@@ 
-(@@ %
-EndpointNotFoundException@@ ,
-)@@, -
-{AA 
+private22 
+void22 !
+SendCodeButtonClicked22 *
+(22* +
+object22+ 1
+sender222 8
+,228 9
+RoutedEventArgs22: I
+e22J K
+)22K L
+{33 	
+try44 
+{55 
+SendCodeToUser66 
+(66 
+)66  
+;66  !
+}77 
+catch88 
+(88 %
+EndpointNotFoundException88 ,
+)88, -
+{99 
 
-MessageBoxBB 
-.BB 
-ShowBB 
-(BB  
+MessageBox:: 
+.:: 
+Show:: 
+(::  
 
-PropertiesBB  *
-.BB* +
-LangsBB+ 0
-.BB0 1
-	ResourcesBB1 :
-.BB: ; 
-ServerConnectionLostBB; O
-)BBO P
-;BBP Q
-}CC 
-catchDD 
-(DD 
-FaultExceptionDD !
-<DD! "
-MemoryGameServiceDD" 3
-.DD3 4
-FaultsDD4 :
-.DD: ;'
-DatabaseConnectionLostFaultDD; V
->DDV W
-)DDW X
-{EE 
-}GG 
-catchHH 
-(HH 
-FaultExceptionHH !
-<HH! "
-MemoryGameServiceHH" 3
-.HH3 4
-FaultsHH4 :
-.HH: ; 
-NonExistentUserFaultHH; O
->HHO P
-)HHP Q
-{II 
+Properties::  *
+.::* +
+Langs::+ 0
+.::0 1
+	Resources::1 :
+.::: ; 
+ServerConnectionLost::; O
+)::O P
+;::P Q
+};; 
+catch<< 
+(<< 
+TimeoutException<< #
+timeoutException<<$ 4
+)<<4 5
+{== 
+_logger>> 
+.>> 
+Fatal>> 
+(>> 
+timeoutException>> .
+)>>. /
+;>>/ 0
 
-MessageBoxJJ 
-.JJ 
-ShowJJ 
-(JJ  
-$strJJ  6
-)JJ6 7
-;JJ7 8
-}KK 
-catchLL 
-(LL 
-TimeoutExceptionLL #
-timeoutExceptionLL$ 4
-)LL4 5
-{MM 
-_loggerNN 
-.NN 
-FatalNN 
-(NN 
-timeoutExceptionNN .
-)NN. /
-;NN/ 0
+MessageBox?? 
+.?? 
+Show?? 
+(??  
 
-MessageBoxOO 
-.OO 
-ShowOO 
-(OO  
+Properties??  *
+.??* +
+Langs??+ 0
+.??0 1
+	Resources??1 :
+.??: ;
+ServerTimeoutError??; M
+)??M N
+;??N O
+}@@ 
+catchAA 
+(AA "
+CommunicationExceptionAA )"
+communicationExceptionAA* @
+)AA@ A
+{BB 
+_loggerCC 
+.CC 
+FatalCC 
+(CC "
+communicationExceptionCC 4
+)CC4 5
+;CC5 6
 
-PropertiesOO  *
-.OO* +
-LangsOO+ 0
-.OO0 1
-	ResourcesOO1 :
-.OO: ;
-ServerTimeoutErrorOO; M
-)OOM N
-;OON O
-}PP 
-catchQQ 
-(QQ "
-CommunicationExceptionQQ )"
-communicationExceptionQQ* @
-)QQ@ A
-{RR 
-_loggerSS 
-.SS 
-FatalSS 
-(SS "
-communicationExceptionSS 4
-)SS4 5
-;SS5 6
+MessageBoxDD 
+.DD 
+ShowDD 
+(DD  
 
-MessageBoxTT 
-.TT 
-ShowTT 
-(TT  
+PropertiesDD  *
+.DD* +
+LangsDD+ 0
+.DD0 1
+	ResourcesDD1 :
+.DD: ;$
+CommunicationInterruptedDD; S
+)DDS T
+;DDT U
+}EE 
+}FF 	
+privateHH 
+voidHH 
+SendCodeToUserHH #
+(HH# $
+)HH$ %
+{II 	
+_emailAddressJJ 
+=JJ 
+TextBoxEmailJJ (
+.JJ( )
+TextJJ) -
+;JJ- .
+SetFormValidationKK 
+(KK 
+)KK 
+;KK  
+ifLL 
+(LL 
+_ruleSetLL 
+.LL (
+AllValidationRulesHavePassedLL 5
+(LL5 6
+)LL6 7
+)LL7 8
+{MM 
+ifNN 
+(NN 
+EmailIsRegisteredNN %
+(NN% &
+)NN& '
+)NN' (
+{OO 
+LoadUsernamePP  
+(PP  !
+)PP! "
+;PP" #%
+GenerateVerificationTokenQQ -
+(QQ- .
+)QQ. /
+;QQ/ 0
+boolRR +
+newVerificationTokenWasAssignedRR 8
+=RR9 :"
+AssignNewRecoveryTokenRR; Q
+(RRQ R
+)RRR S
+;RRS T
+ifSS 
+(SS +
+newVerificationTokenWasAssignedSS 7
+)SS7 8
+{TT 
+SendRecoveryTokenUU )
+(UU) *
+)UU* +
+;UU+ ,
 
-PropertiesTT  *
-.TT* +
-LangsTT+ 0
-.TT0 1
-	ResourcesTT1 :
-.TT: ;$
-CommunicationInterruptedTT; S
-)TTS T
-;TTT U
-}UU 
-}VV 	
-privateXX 
-voidXX 
-SendCodeToUserXX #
-(XX# $
-)XX$ %
-{YY 	
-_emailAddressZZ 
-=ZZ 
-TextBoxEmailZZ (
-.ZZ( )
-TextZZ) -
-;ZZ- .
-SetFormValidation[[ 
-([[ 
-)[[ 
-;[[  
-if\\ 
-(\\ 
-_ruleSet\\ 
-.\\ (
-AllValidationRulesHavePassed\\ 5
-(\\5 6
-)\\6 7
-)\\7 8
-{]] 
-if^^ 
-(^^ 
-EmailIsRegistered^^ %
-(^^% &
-)^^& '
-)^^' (
-{__ 
-LoadUsername``  
-(``  !
-)``! "
-;``" #%
-GenerateVerificationTokenaa -
-(aa- .
-)aa. /
-;aa/ 0
-boolbb +
-newVerificationTokenWasAssignedbb 8
-=bb9 :&
-AssignNewVerificationTokenbb; U
-(bbU V
-)bbV W
-;bbW X 
-SendVerificationCodecc (
-(cc( )
-)cc) *
-;cc* +
-ifdd 
-(dd +
-newVerificationTokenWasAssigneddd 7
-)dd7 8
-{ee 
+MessageBoxVV "
+.VV" #
+ShowVV# '
+(VV' (
 
-MessageBoxff "
-.ff" #
-Showff# '
-(ff' (
+PropertiesVV( 2
+.VV2 3
+LangsVV3 8
+.VV8 9
+	ResourcesVV9 B
+.VVB C%
+PasswordRecoveryTokenSentVVC \
+)VV\ ]
+;VV] ^
+GoToRestorePasswordWW +
+(WW+ ,
+)WW, -
+;WW- .
+}XX 
+elseYY 
+{ZZ 
 
-Propertiesff( 2
-.ff2 3
-Langsff3 8
-.ff8 9
-	Resourcesff9 B
-.ffB C%
-PasswordRecoveryTokenSentffC \
-)ff\ ]
-;ff] ^
-GoToRestorePasswordgg +
-(gg+ ,
-)gg, -
-;gg- .
-}hh 
-elseii 
-{jj 
+MessageBox[[ "
+.[[" #
+Show[[# '
+([[' (
 
-MessageBoxkk "
-.kk" #
-Showkk# '
-(kk' (
+Properties[[( 2
+.[[2 3
+Langs[[3 8
+.[[8 9
+	Resources[[9 B
+.[[B C%
+RecoveryTokenSendingError[[C \
+)[[\ ]
+;[[] ^
+}\\ 
+}]] 
+else^^ 
+{__ 
 
-Propertieskk( 2
-.kk2 3
-Langskk3 8
-.kk8 9
-	Resourceskk9 B
-.kkB C%
-RecoveryTokenSendingErrorkkC \
-)kk\ ]
-;kk] ^
-}ll 
-}nn 
-elseoo 
-{pp 
+MessageBox`` 
+.`` 
+Show`` #
+(``# $
 
-MessageBoxqq 
-.qq 
-Showqq #
-(qq# $
-
-Propertiesqq$ .
-.qq. /
-Langsqq/ 4
-.qq4 5
-	Resourcesqq5 >
-.qq> ?
-NonRegisteredEmailqq? Q
-)qqQ R
-;qqR S
-}rr 
-}ss 
-elsett 
-{uu 
-ShowErrorMessagevv  
-(vv  !
-)vv! "
-;vv" #
-}ww 
-}xx 	
-privatezz 
-boolzz 
-EmailIsRegisteredzz &
-(zz& '
-)zz' (
-{{{ 	&
-AccessibilityServiceClient|| &
-client||' -
-=||. /
-new||0 3&
-AccessibilityServiceClient||4 N
-(||N O
-)||O P
-;||P Q
-return}} 
-client}} 
-.}} 
-ItsRegistered}} '
-(}}' (
-_emailAddress}}( 5
-)}}5 6
-;}}6 7
-}~~ 	
-private
-ÄÄ 
-void
-ÄÄ '
-GenerateVerificationToken
-ÄÄ .
-(
-ÄÄ. /
-)
-ÄÄ/ 0
-{
-ÅÅ 	 
-_verificationToken
-ÇÇ 
+Properties``$ .
+.``. /
+Langs``/ 4
+.``4 5
+	Resources``5 >
+.``> ?
+NonRegisteredEmail``? Q
+)``Q R
+;``R S
+}aa 
+}bb 
+elsecc 
+{dd 
+ShowErrorMessageee  
+(ee  !
+)ee! "
+;ee" #
+}ff 
+}gg 	
+privateii 
+boolii 
+EmailIsRegisteredii &
+(ii& '
+)ii' (
+{jj 	&
+AccessibilityServiceClientkk &
+clientkk' -
+=kk. /
+newkk0 3&
+AccessibilityServiceClientkk4 N
+(kkN O
+)kkO P
+;kkP Q
+returnll 
+clientll 
+.ll 
+ItsRegisteredll '
+(ll' (
+_emailAddressll( 5
+)ll5 6
+;ll6 7
+}mm 	
+privateoo 
+voidoo %
+GenerateVerificationTokenoo .
+(oo. /
+)oo/ 0
+{pp 	
+_verificationTokenqq 
+=qq  
+TokenManagerqq! -
+.qq- .
+GenerateTokenqq. ;
+(qq; <
+)qq< =
+;qq= >
+}rr 	
+privatett 
+booltt "
+AssignNewRecoveryTokentt +
+(tt+ ,
+)tt, -
+{uu 	,
+ AccountVerificationServiceClientvv ,,
+ accountVerificationServiceClientvv- M
+=vvN O
+newww ,
+ AccountVerificationServiceClientww 4
+(ww4 5
+)ww5 6
+;ww6 7
+returnxx ,
+ accountVerificationServiceClientxx 3
+.xx3 4"
+AssignNewRecoveryTokenxx4 J
+(xxJ K
+_emailAddressxxK X
+,xxX Y
+_verificationTokenxxZ l
+)xxl m
+;xxm n
+}yy 	
+private{{ 
+void{{ 
+SendRecoveryToken{{ &
+({{& '
+){{' (
+{|| 	
+TokenInfoDto}} 
+recoveryToken}} &
+=}}' (
+new}}) ,
+TokenInfoDto}}- 9
+(}}9 :
+)}}: ;
+{~~ 
+Name 
+= 
+	_username  
+,  !
+EmailAddress
+ÄÄ 
 =
-ÇÇ  
-TokenManager
-ÇÇ! -
+ÄÄ 
+_emailAddress
+ÄÄ ,
+,
+ÄÄ, -
+Token
+ÅÅ 
+=
+ÅÅ  
+_verificationToken
+ÅÅ *
+,
+ÅÅ* +
+Subject
+ÇÇ 
+=
+ÇÇ 
+
+Properties
+ÇÇ $
 .
-ÇÇ- .'
-GenerateVerificationToken
-ÇÇ. G
-(
-ÇÇG H
-)
-ÇÇH I
-;
-ÇÇI J
+ÇÇ$ %
+Langs
+ÇÇ% *
+.
+ÇÇ* +
+	Resources
+ÇÇ+ 4
+.
+ÇÇ4 5
+PasswordRecovery
+ÇÇ5 E
+,
+ÇÇE F
+Body
+ÉÉ 
+=
+ÉÉ 
+
+Properties
+ÉÉ !
+.
+ÉÉ! "
+Langs
+ÉÉ" '
+.
+ÉÉ' (
+	Resources
+ÉÉ( 1
+.
+ÉÉ1 2
+RecoveryToken
+ÉÉ2 ?
 }
-ÉÉ 	
-private
-ÖÖ 
-bool
-ÖÖ (
-AssignNewVerificationToken
-ÖÖ /
+ÑÑ 
+;
+ÑÑ 
+TokenManager
+ÖÖ 
+.
+ÖÖ 
+	SendToken
+ÖÖ "
 (
-ÖÖ/ 0
+ÖÖ" #
+recoveryToken
+ÖÖ# 0
 )
 ÖÖ0 1
-{
-ÜÜ 	.
- AccountVerificationServiceClient
-áá ,.
- accountVerificationServiceClient
-áá- M
-=
-ááN O
-new
-àà .
- AccountVerificationServiceClient
-àà 4
-(
-àà4 5
-)
-àà5 6
 ;
-àà6 7
-return
-ââ .
- accountVerificationServiceClient
-ââ 3
-.
-ââ3 4(
-AssignNewVerificationToken
-ââ4 N
-(
-ââN O
-_emailAddress
-ââO \
-,
-ââ\ ] 
-_verificationToken
-ââ^ p
-)
-ââp q
-;
-ââq r
+ÖÖ1 2
 }
-ää 	
+ÜÜ 	
 private
-åå 
+ââ 
 void
-åå "
-SendVerificationCode
-åå )
+ââ 
+LoadUsername
+ââ !
 (
-åå) *
+ââ! "
 )
-åå* +
+ââ" #
 {
-çç 	&
-VerificationTokenInfoDto
-éé $#
-verificationTokenInfo
-éé% :
+ää 	(
+AccessibilityServiceClient
+ãã &
+client
+ãã' -
 =
-éé; <
+ãã. /
 new
-éé= @&
-VerificationTokenInfoDto
-ééA Y
+ãã0 3(
+AccessibilityServiceClient
+ãã4 N
 (
-ééY Z
+ããN O
 )
-ééZ [
-{
-èè 
-Name
-êê 
-=
-êê 
+ããO P
+;
+ããP Q
 	_username
-êê  
-,
-êê  !
-EmailAddress
-ëë 
+åå 
 =
-ëë 
-_emailAddress
-ëë ,
-,
-ëë, -
-VerificationToken
-íí !
-=
-íí" # 
-_verificationToken
-íí$ 6
-}
-ìì 
-;
-ìì 
-TokenManager
-ïï 
+åå 
+client
+åå 
 .
-ïï #
-SendVerificationToken
-ïï .
+åå 
+GetUsername
+åå *
 (
-ïï. /#
-verificationTokenInfo
-ïï/ D
+åå* +
+_emailAddress
+åå+ 8
 )
-ïïD E
+åå8 9
 ;
-ïïE F
+åå9 :
 }
-ññ 	
+çç 	
 private
-òò 
+êê 
 void
-òò !
+êê !
 GoToRestorePassword
-òò (
+êê (
 (
-òò( )
+êê( )
 )
-òò) *
+êê) *
 {
-ôô 	
+ëë 	
 RestorePassword
-öö #
+íí #
 restorePasswordWindow
-öö 1
+íí 1
 =
-öö2 3
+íí2 3
 new
-õõ 
+ìì 
 RestorePassword
-õõ #
+ìì #
 (
-õõ# $
+ìì# $
 _emailAddress
-õõ$ 1
+ìì$ 1
 ,
-õõ1 2
+ìì1 2
 	_username
-õõ3 <
+ìì3 <
 )
-õõ< =
+ìì< =
 ;
-õõ= >#
+ìì= >#
 restorePasswordWindow
-úú !
+îî !
 .
-úú! "
+îî! "
 Show
-úú" &
+îî" &
 (
-úú& '
+îî& '
 )
-úú' (
+îî' (
 ;
-úú( )
+îî( )
 this
-ùù 
+ïï 
 .
-ùù 
+ïï 
 Close
-ùù 
+ïï 
 (
-ùù 
+ïï 
 )
-ùù 
+ïï 
 ;
-ùù 
+ïï 
 }
-ûû 	
+ññ 	
 }
-†† 
-}°° §n
+òò 
+}ôô Òc
 OC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\Register.xaml.cs
 	namespace 	
 
@@ -9568,943 +9202,841 @@ MemoryGame
 Window$ *
 { 
 private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
-
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT f
-)f g
-;g h
-private 
-string 
-	_username  
-,  !
-_emailAddress" /
-,/ 0
-_verificationToken1 C
-,C D
-	_passwordE N
-;N O
-private 
-RuleSet 
-_ruleSet  
-;  !
-private 
-MemoryGameService !
-.! "'
-PlayerRegistryServiceClient" =(
-_playerRegistryServiceClient> Z
-;Z [
-public 
-Register 
-( 
-) 
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "(
-_playerRegistryServiceClient (
-=) *
-new 
-MemoryGameService %
-.% &'
-PlayerRegistryServiceClient& A
-(A B
-)B C
-;C D
-} 	
-private 
-void 
-SetFormValidation &
-(& '
-)' (
-{   	
+string 
+	_username  
+,  !
+_emailAddress" /
+,/ 0
+_verificationToken1 C
+,C D
+	_passwordE N
+;N O
+private 
+RuleSet 
+_ruleSet  
+;  !
+private 
+MemoryGameService !
+.! "'
+PlayerRegistryServiceClient" =(
+_playerRegistryServiceClient> Z
+;Z [
+public 
+Register 
+( 
+) 
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "(
+_playerRegistryServiceClient (
+=) *
+new 
+MemoryGameService %
+.% &'
+PlayerRegistryServiceClient& A
+(A B
+)B C
+;C D
+} 	
+private 
+void 
+SetFormValidation &
+(& '
+)' (
+{ 	
+_ruleSet   
+=   
+new   
+RuleSet   "
+(  " #
+)  # $
+;  $ %
 _ruleSet!! 
-=!! 
-new!! 
-RuleSet!! "
-(!!" #
-)!!# $
-;!!$ %
+.!! 
+AddValidationRule!! &
+(!!& '
+new!!' *"
+UsernameValidationRule!!+ A
+(!!A B
+	_username!!B K
+)!!K L
+)!!L M
+;!!M N
 _ruleSet"" 
 ."" 
 AddValidationRule"" &
 (""& '
-new""' *"
-UsernameValidationRule""+ A
-(""A B
-	_username""B K
-)""K L
-)""L M
-;""M N
+new""' *&
+EmailAddressValidationRule""+ E
+(""E F
+_emailAddress""F S
+)""S T
+)""T U
+;""U V
 _ruleSet## 
 .## 
 AddValidationRule## &
 (##& '
-new##' *&
-EmailAddressValidationRule##+ E
-(##E F
-_emailAddress##F S
-)##S T
-)##T U
-;##U V
-_ruleSet$$ 
-.$$ 
-AddValidationRule$$ &
-($$& '
-new$$' *"
-PasswordValidationRule$$+ A
-($$A B
-	_password$$B K
-)$$K L
-)$$L M
-;$$M N
-}%% 	
-private'' 
-void'' 
-ShowErrorMessage'' %
-(''% &
-)''& '
-{(( 	
-IList)) 
-<))  
-ValidationRuleResult)) &
->))& '"
-validationResultErrors))( >
-=))? @
-_ruleSet))A I
-.))I J%
-GetValidationResultErrors))J c
-())c d
-)))d e
-;))e f
-if** 
-(** "
-validationResultErrors** &
-.**& '
-Count**' ,
->**- .
-$num**/ 0
-)**0 1
-{++ 
+new##' *"
+PasswordValidationRule##+ A
+(##A B
+	_password##B K
+)##K L
+)##L M
+;##M N
+}$$ 	
+private&& 
+void&& 
+ShowErrorMessage&& %
+(&&% &
+)&&& '
+{'' 	
+IList(( 
+<((  
+ValidationRuleResult(( &
+>((& '"
+validationResultErrors((( >
+=((? @
+_ruleSet((A I
+.((I J%
+GetValidationResultErrors((J c
+(((c d
+)((d e
+;((e f
+if)) 
+()) "
+validationResultErrors)) &
+.))& '
+Count))' ,
+>))- .
+$num))/ 0
+)))0 1
+{** 
 
-MessageBox,, 
-.,, 
-Show,, 
-(,,  "
-validationResultErrors,,  6
-[,,6 7
-$num,,7 8
-],,8 9
-.,,9 :
-Message,,: A
-),,A B
-;,,B C
-}-- 
-}.. 	
-private00 
-void00 
-GetValuesFromFields00 (
-(00( )
-)00) *
-{11 	
-_emailAddress22 
-=22 
-TextBoxEmail22 (
-.22( )
-Text22) -
-;22- .
-	_username33 
-=33 
-TextBoxUsername33 '
-.33' (
-Text33( ,
-;33, -
-	_password44 
-=44 
-PasswordBoxPassword44 +
-.44+ ,
-Password44, 4
-;444 5
-}55 	
-private77 
-void77 
-GenerateToken77 "
-(77" #
-)77# $
-{88 	
-_verificationToken99 
-=99  
-TokenManager99! -
-.99- .%
-GenerateVerificationToken99. G
-(99G H
-)99H I
-;99I J
-}:: 	
-private<< 
-void<< !
-RegisterButtonClicked<< *
-(<<* +
-object<<+ 1
-sender<<2 8
-,<<8 9
-RoutedEventArgs<<: I
-e<<J K
-)<<K L
-{== 	
-GetValuesFromFields>> 
-(>>  
-)>>  !
-;>>! "
-SetFormValidation?? 
-(?? 
-)?? 
-;??  
-if@@ 
-(@@ (
-AllValidationRulesHavePassed@@ ,
-(@@, -
-)@@- .
-)@@. /
-{AA 
-tryBB 
-{CC 
-RegisterPlayerDD "
-(DD" #
-)DD# $
-;DD$ %
-}EE 
-catchFF 
-(FF 
-TimeoutExceptionFF '
-timeoutExceptionFF( 8
-)FF8 9
-{GG 
-_loggerHH 
-.HH 
-FatalHH !
-(HH! "
-timeoutExceptionHH" 2
-)HH2 3
-;HH3 4
+MessageBox++ 
+.++ 
+Show++ 
+(++  "
+validationResultErrors++  6
+[++6 7
+$num++7 8
+]++8 9
+.++9 :
+Message++: A
+)++A B
+;++B C
+},, 
+}-- 	
+private// 
+void// 
+GetValuesFromFields// (
+(//( )
+)//) *
+{00 	
+_emailAddress11 
+=11 
+TextBoxEmail11 (
+.11( )
+Text11) -
+;11- .
+	_username22 
+=22 
+TextBoxUsername22 '
+.22' (
+Text22( ,
+;22, -
+	_password33 
+=33 
+PasswordBoxPassword33 +
+.33+ ,
+Password33, 4
+;334 5
+}44 	
+private66 
+void66 
+GenerateToken66 "
+(66" #
+)66# $
+{77 	
+_verificationToken88 
+=88  
+TokenManager88! -
+.88- .
+GenerateToken88. ;
+(88; <
+)88< =
+;88= >
+}99 	
+private;; 
+void;; !
+RegisterButtonClicked;; *
+(;;* +
+object;;+ 1
+sender;;2 8
+,;;8 9
+RoutedEventArgs;;: I
+e;;J K
+);;K L
+{<< 	
+GetValuesFromFields== 
+(==  
+)==  !
+;==! "
+SetFormValidation>> 
+(>> 
+)>> 
+;>>  
+if?? 
+(?? (
+AllValidationRulesHavePassed?? ,
+(??, -
+)??- .
+)??. /
+{@@ 
+tryAA 
+{BB 
+RegisterPlayerCC "
+(CC" #
+)CC# $
+;CC$ %
+}DD 
+catchEE 
+(EE 
+TimeoutExceptionEE '
+)EE' (
+{FF 
 
-MessageBoxII 
-.II 
-ShowII #
-(II# $
+MessageBoxGG 
+.GG 
+ShowGG #
+(GG# $
 
-PropertiesII$ .
-.II. /
-LangsII/ 4
-.II4 5
-	ResourcesII5 >
-.II> ?
-ServerTimeoutErrorII? Q
-)IIQ R
-;IIR S
-}JJ 
-catchKK 
-(KK %
-EndpointNotFoundExceptionKK 0%
-endpointNotFoundExceptionKK1 J
-)KKJ K
-{LL 
-_loggerMM 
-.MM 
-FatalMM !
-(MM! "%
-endpointNotFoundExceptionMM" ;
-)MM; <
-;MM< =
+PropertiesGG$ .
+.GG. /
+LangsGG/ 4
+.GG4 5
+	ResourcesGG5 >
+.GG> ?
+ServerTimeoutErrorGG? Q
+)GGQ R
+;GGR S
+}HH 
+catchII 
+(II %
+EndpointNotFoundExceptionII 0
+)II0 1
+{JJ 
 
-MessageBoxNN 
-.NN 
-ShowNN #
-(NN# $
+MessageBoxKK 
+.KK 
+ShowKK #
+(KK# $
 
-PropertiesNN$ .
-.NN. /
-LangsNN/ 4
-.NN4 5
-	ResourcesNN5 >
-.NN> ? 
-ServerConnectionLostNN? S
-)NNS T
-;NNT U
-}OO 
-catchPP 
-(PP "
-CommunicationExceptionPP -"
-communicationExceptionPP. D
-)PPD E
-{QQ 
-_loggerRR 
-.RR 
-FatalRR !
-(RR! ""
-communicationExceptionRR" 8
-)RR8 9
-;RR9 :
+PropertiesKK$ .
+.KK. /
+LangsKK/ 4
+.KK4 5
+	ResourcesKK5 >
+.KK> ? 
+ServerConnectionLostKK? S
+)KKS T
+;KKT U
+}LL 
+catchMM 
+(MM "
+CommunicationExceptionMM -
+)MM- .
+{NN 
 
-MessageBoxSS 
-.SS 
-ShowSS #
-(SS# $
+MessageBoxOO 
+.OO 
+ShowOO #
+(OO# $
 
-PropertiesSS$ .
-.SS. /
-LangsSS/ 4
-.SS4 5
-	ResourcesSS5 >
-.SS> ?$
-CommunicationInterruptedSS? W
-)SSW X
-;SSX Y
-}TT 
-}UU 
-elseVV 
-{WW 
-ShowErrorMessageXX  
-(XX  !
-)XX! "
-;XX" #
-}YY 
-}ZZ 	
-private\\ 
-void\\ 
-RegisterPlayer\\ #
-(\\# $
-)\\$ %
-{]] 	
-bool^^ #
-emailAddressIsAvailable^^ (
-=^^) *
-false^^+ 0
-;^^0 1
-bool__ 
-usernameIsAvailable__ $
-=__% &
-false__' ,
-;__, -
-ifaa 
-(aa #
-EmailAddressIsAvailableaa '
-(aa' (
-)aa( )
-)aa) *
-{bb #
-emailAddressIsAvailablecc '
-=cc( )
-truecc* .
-;cc. /
-}dd 
-elseee 
-{ff 
+PropertiesOO$ .
+.OO. /
+LangsOO/ 4
+.OO4 5
+	ResourcesOO5 >
+.OO> ?$
+CommunicationInterruptedOO? W
+)OOW X
+;OOX Y
+}PP 
+}QQ 
+elseRR 
+{SS 
+ShowErrorMessageTT  
+(TT  !
+)TT! "
+;TT" #
+}UU 
+}VV 	
+privateXX 
+voidXX 
+RegisterPlayerXX #
+(XX# $
+)XX$ %
+{YY 	
+ifZZ 
+(ZZ 
+!ZZ #
+EmailAddressIsAvailableZZ (
+(ZZ( )
+)ZZ) *
+)ZZ* +
+{[[ 
 
-MessageBoxgg 
-.gg 
-Showgg 
-(gg  
+MessageBox\\ 
+.\\ 
+Show\\ 
+(\\  
 
-Propertiesgg  *
-.gg* +
-Langsgg+ 0
-.gg0 1
-	Resourcesgg1 :
-.gg: ;
-EmailAddressIsTakengg; N
-)ggN O
-;ggO P
-}hh 
-ifjj 
-(jj 
-UsernameIsAvailablejj #
-(jj# $
-)jj$ %
-)jj% &
-{kk 
-usernameIsAvailablell #
-=ll$ %
-truell& *
-;ll* +
-}mm 
-elsenn 
-{oo 
+Properties\\  *
+.\\* +
+Langs\\+ 0
+.\\0 1
+	Resources\\1 :
+.\\: ;
+EmailAddressIsTaken\\; N
+)\\N O
+;\\O P
+}]] 
+else^^ 
+if^^ 
+(^^ 
+!^^ 
+UsernameIsAvailable^^ )
+(^^) *
+)^^* +
+)^^+ ,
+{__ 
 
-MessageBoxpp 
-.pp 
-Showpp 
-(pp  
+MessageBox`` 
+.`` 
+Show`` 
+(``  
 
-Propertiespp  *
-.pp* +
-Langspp+ 0
-.pp0 1
-	Resourcespp1 :
-.pp: ;
-UsernameIsTakenpp; J
-)ppJ K
-;ppK L
-}qq 
-ifss 
-(ss #
-emailAddressIsAvailabless &
-&&ss' )
-usernameIsAvailabless* =
-)ss= >
-{tt 
-GenerateTokenuu 
-(uu 
-)uu 
-;uu  
-ifvv 
-(vv +
-PlayerWasSuccessfullyRegisteredvv 3
-(vv3 4
-)vv4 5
-)vv5 6
-{ww !
-SendVerificationTokenxx )
-(xx) *
-)xx* +
-;xx+ ,%
-GoToActivationTokenWindowyy -
-(yy- .
-)yy. /
-;yy/ 0
-}zz 
-else{{ 
-{|| 
+Properties``  *
+.``* +
+Langs``+ 0
+.``0 1
+	Resources``1 :
+.``: ;
+UsernameIsTaken``; J
+)``J K
+;``K L
+}aa 
+elsebb 
+{cc 
+GenerateTokendd 
+(dd 
+)dd 
+;dd  
+ifee 
+(ee +
+PlayerWasSuccessfullyRegisteredee 3
+(ee3 4
+)ee4 5
+)ee5 6
+{ff 
+SendActivationTokengg '
+(gg' (
+)gg( )
+;gg) *%
+GoToActivationTokenWindowhh -
+(hh- .
+)hh. /
+;hh/ 0
+}ii 
+elsejj 
+{kk 
 
-MessageBox}} 
-.}} 
-Show}} #
-(}}# $
+MessageBoxll 
+.ll 
+Showll #
+(ll# $
 
-Properties}}$ .
-.}}. /
-Langs}}/ 4
-.}}4 5
-	Resources}}5 >
-.}}> ?
-RegistryError}}? L
-)}}L M
-;}}M N
-}~~ 
-} 
+Propertiesll$ .
+.ll. /
+Langsll/ 4
+.ll4 5
+	Resourcesll5 >
+.ll> ?
+RegistryErrorll? L
+)llL M
+;llM N
+}mm 
+}nn 
+}pp 	
+privaterr 
+boolrr (
+AllValidationRulesHavePassedrr 1
+(rr1 2
+)rr2 3
+{ss 	
+returntt 
+_ruleSettt 
+.tt (
+AllValidationRulesHavePassedtt 8
+(tt8 9
+)tt9 :
+;tt: ;
+}uu 	
+privateww 
+voidww 
+SendActivationTokenww (
+(ww( )
+)ww) *
+{xx 	
+TokenInfoDtoyy !
+verificationTokenInfoyy .
+=yy/ 0
+newyy1 4
+TokenInfoDtoyy5 A
+(yyA B
+)yyB C
+{zz 
+Name{{ 
+={{ 
+	_username{{  
+,{{  !
+EmailAddress|| 
+=|| 
+_emailAddress|| ,
+,||, -
+Token}} 
+=}} 
+_verificationToken}} *
+,}}* +
+Subject~~ 
+=~~ 
+
+Properties~~ $
+.~~$ %
+Langs~~% *
+.~~* +
+	Resources~~+ 4
+.~~4 5
+Welcome~~5 <
+,~~< =
+Body 
+= 
+
+Properties !
+.! "
+Langs" '
+.' (
+	Resources( 1
+.1 2
+VerificationToken2 C
 }
-ÅÅ 	
-private
-ÉÉ 
-bool
-ÉÉ *
-AllValidationRulesHavePassed
-ÉÉ 1
-(
-ÉÉ1 2
-)
-ÉÉ2 3
-{
-ÑÑ 	
-return
-ÖÖ 
-_ruleSet
-ÖÖ 
-.
-ÖÖ *
-AllValidationRulesHavePassed
-ÖÖ 8
-(
-ÖÖ8 9
-)
-ÖÖ9 :
+ÄÄ 
 ;
-ÖÖ: ;
-}
-ÜÜ 	
-private
-àà 
-void
-àà #
-SendVerificationToken
-àà *
-(
-àà* +
-)
-àà+ ,
-{
-ââ 	&
-VerificationTokenInfoDto
-ãã $#
-verificationTokenInfo
-ãã% :
-=
-ãã; <
-new
-ãã= @&
-VerificationTokenInfoDto
-ããA Y
-(
-ããY Z
-)
-ããZ [
-{
-åå 
-Name
-çç 
-=
-çç 
-	_username
-çç  
-,
-çç  !
-EmailAddress
-éé 
-=
-éé 
-_emailAddress
-éé ,
-,
-éé, -
-VerificationToken
-èè !
-=
-èè" # 
-_verificationToken
-èè$ 6
-}
-êê 
-;
-êê 
+ÄÄ 
 TokenManager
-íí 
+ÇÇ 
 .
-íí #
-SendVerificationToken
-íí .
+ÇÇ 
+	SendToken
+ÇÇ "
 (
-íí. /#
+ÇÇ" ##
 verificationTokenInfo
-íí/ D
+ÇÇ# 8
 )
-ííD E
+ÇÇ8 9
 ;
-ííE F
+ÇÇ9 :
 }
-ìì 	
+ÉÉ 	
 private
-ïï 
+ÖÖ 
 void
-ïï !
+ÖÖ !
 CancelButtonClicked
-ïï (
+ÖÖ (
 (
-ïï( )
+ÖÖ( )
 object
-ïï) /
+ÖÖ) /
 sender
-ïï0 6
+ÖÖ0 6
 ,
-ïï6 7
+ÖÖ6 7
 RoutedEventArgs
-ïï8 G
+ÖÖ8 G
 e
-ïïH I
+ÖÖH I
 )
-ïïI J
+ÖÖI J
 {
-ññ 	
+ÜÜ 	
 
 MainWindow
-óó 
+áá 
 mainWindowView
-óó %
+áá %
 =
-óó& '
+áá& '
 new
-óó( +
+áá( +
 
 MainWindow
-óó, 6
+áá, 6
 (
-óó6 7
+áá6 7
 )
-óó7 8
+áá7 8
 ;
-óó8 9
+áá8 9
 mainWindowView
-òò 
+àà 
 .
-òò 
+àà 
 Show
-òò 
+àà 
 (
-òò  
+àà  
 )
-òò  !
+àà  !
 ;
-òò! "
+àà! "
 this
-ôô 
+ââ 
 .
-ôô 
+ââ 
 Close
-ôô 
+ââ 
 (
-ôô 
+ââ 
 )
-ôô 
+ââ 
 ;
-ôô 
+ââ 
 }
-öö 	
+ää 	
 private
-úú 
+åå 
 bool
-úú %
+åå %
 EmailAddressIsAvailable
-úú ,
+åå ,
 (
-úú, -
+åå, -
 )
-úú- .
+åå- .
 {
-ùù 	
+çç 	
 bool
-ûû %
+éé %
 emailAddressIsAvailable
-ûû (
+éé (
 =
-ûû) **
+éé) **
 _playerRegistryServiceClient
-ûû+ G
+éé+ G
 .
-ûûG H%
+ééG H%
 EmailAddressIsAvailable
-ûûH _
+ééH _
 (
-ûû_ `
+éé_ `
 _emailAddress
-ûû` m
+éé` m
 )
-ûûm n
+éém n
 ;
-ûûn o
+één o
 return
-üü %
+èè %
 emailAddressIsAvailable
-üü *
+èè *
 ;
-üü* +
+èè* +
 }
-†† 	
+êê 	
 private
-¢¢ 
+íí 
 bool
-¢¢ !
+íí !
 UsernameIsAvailable
-¢¢ (
+íí (
 (
-¢¢( )
+íí( )
 )
-¢¢) *
+íí) *
 {
-££ 	
+ìì 	
 bool
-•• !
+ïï !
 usernameIsAvailable
-•• $
+ïï $
 =
-••% &*
+ïï% &*
 _playerRegistryServiceClient
-••' C
+ïï' C
 .
-••C D!
+ïïC D!
 UserNameIsAvailable
-••D W
+ïïD W
 (
-••W X
+ïïW X
 	_username
-••X a
+ïïX a
 )
-••a b
+ïïa b
 ;
-••b c
+ïïb c
 return
-¶¶ !
+ññ !
 usernameIsAvailable
-¶¶ &
+ññ &
 ;
-¶¶& '
+ññ& '
 }
-ßß 	
+óó 	
 private
-©© 
+ôô 
 bool
-©© -
+ôô -
 PlayerWasSuccessfullyRegistered
-©© 4
+ôô 4
 (
-©©4 5
+ôô4 5
 )
-©©5 6
+ôô5 6
 {
-™™ 	!
+öö 	!
 BCryptHashGenerator
-´´ 
+õõ 
 hashGenerator
-´´  -
+õõ  -
 =
-´´. /
+õõ. /
 new
-´´0 3!
+õõ0 3!
 BCryptHashGenerator
-´´4 G
+õõ4 G
 (
-´´G H
+õõG H
 )
-´´H I
+õõH I
 ;
-´´I J
+õõI J
 string
-¨¨ 
+úú 
 salt
-¨¨ 
+úú 
 =
-¨¨ 
+úú 
 hashGenerator
-¨¨ '
+úú '
 .
-¨¨' (
+úú' (
 GenerateSalt
-¨¨( 4
+úú( 4
 (
-¨¨4 5
+úú4 5
 )
-¨¨5 6
+úú5 6
 ;
-¨¨6 7
+úú6 7
 string
-≠≠ 
+ùù 
 encryptedPassword
-≠≠ $
+ùù $
 =
-≠≠% &
+ùù% &
 hashGenerator
-≠≠' 4
+ùù' 4
 .
-≠≠4 5%
+ùù4 5%
 GenerateEncryptedString
-≠≠5 L
+ùù5 L
 (
-≠≠L M
+ùùL M
 	_password
-≠≠M V
+ùùM V
 ,
-≠≠V W
+ùùV W
 salt
-≠≠X \
+ùùX \
 )
-≠≠\ ]
+ùù\ ]
 ;
-≠≠] ^
+ùù] ^
 MemoryGameService
-ÆÆ 
+ûû 
 .
-ÆÆ )
+ûû )
 PlayerRegistryServiceClient
-ÆÆ 9)
+ûû 9)
 playerRegistryServiceClient
-ÆÆ: U
+ûû: U
 =
-ÆÆV W
+ûûV W
 new
-ØØ 
+üü 
 MemoryGameService
-ØØ %
+üü %
 .
-ØØ% &)
+üü% &)
 PlayerRegistryServiceClient
-ØØ& A
+üü& A
 (
-ØØA B
+üüA B
 )
-ØØB C
+üüB C
 ;
-ØØC D
-MemoryGameService
-±± 
-.
-±± !
-DataTransferObjects
-±± 1
-.
-±±1 2
+üüC D
 	PlayerDTO
-±±2 ;
+°° 
 	playerDTO
-±±< E
+°° 
 =
-±±F G
+°°  !
 new
-≤≤ 
-MemoryGameService
-≤≤ %
-.
-≤≤% &!
-DataTransferObjects
-≤≤& 9
-.
-≤≤9 :
+°°" %
 	PlayerDTO
-≤≤: C
+°°& /
 (
-≤≤C D
+°°/ 0
 )
-≤≤D E
+°°0 1
 {
-≥≥ 
+¢¢ 
 Username
-¥¥ 
+££ 
 =
-¥¥ 
+££ 
 	_username
-¥¥ (
+££ $
 ,
-¥¥( )
+££$ %
 EmailAddress
-µµ  
+§§ 
 =
-µµ! "
+§§ 
 _emailAddress
-µµ# 0
+§§ ,
 ,
-µµ0 1
+§§, -
 Password
-∂∂ 
+•• 
 =
-∂∂ 
+•• 
 encryptedPassword
-∂∂ 0
+•• ,
 ,
-∂∂0 1
+••, -
 VerificationToken
-∑∑ %
+¶¶ !
 =
-∑∑& ' 
+¶¶" # 
 _verificationToken
-∑∑( :
+¶¶$ 6
 }
-∏∏ 
+ßß 
 ;
-∏∏ 
+ßß 
 bool
-∫∫ -
+©© -
 playerWasSuccessfullyRegistered
-∫∫ 0
+©© 0
 =
-∫∫1 2)
+©©1 2)
 playerRegistryServiceClient
-∫∫3 N
+©©3 N
 .
-∫∫N O
+©©N O
 RegisterNewPlayer
-∫∫O `
+©©O `
 (
-∫∫` a
+©©` a
 	playerDTO
-∫∫a j
+©©a j
 ,
-∫∫j k
+©©j k
 salt
-∫∫l p
+©©l p
 )
-∫∫p q
+©©p q
 ;
-∫∫q r
+©©q r
 return
-ªª -
+™™ -
 playerWasSuccessfullyRegistered
-ªª 2
+™™ 2
 ;
-ªª2 3
+™™2 3
 }
-ºº 	
+´´ 	
 private
-ææ 
+≠≠ 
 void
-ææ '
+≠≠ '
 GoToActivationTokenWindow
-ææ .
+≠≠ .
 (
-ææ. /
+≠≠. /
 )
-ææ/ 0
+≠≠/ 0
 {
-øø 	
+ÆÆ 	
 ActivationToken
-¿¿ #
+ØØ #
 activationTokenWindow
-¿¿ 1
+ØØ 1
 =
-¿¿2 3
+ØØ2 3
 new
-¡¡ 
+∞∞ 
 ActivationToken
-¡¡ #
+∞∞ #
 (
-¡¡# $
+∞∞# $
 _emailAddress
-¡¡$ 1
+∞∞$ 1
 ,
-¡¡1 2
+∞∞1 2
 	_username
-¡¡3 <
+∞∞3 <
 )
-¡¡< =
+∞∞< =
 ;
-¡¡= >#
+∞∞= >#
 activationTokenWindow
-¬¬ !
+±± !
 .
-¬¬! "
+±±! "
 Show
-¬¬" &
+±±" &
 (
-¬¬& '
+±±& '
 )
-¬¬' (
+±±' (
 ;
-¬¬( )
+±±( )
 this
-√√ 
+≤≤ 
 .
-√√ 
+≤≤ 
 Close
-√√ 
+≤≤ 
 (
-√√ 
+≤≤ 
 )
-√√ 
+≤≤ 
 ;
-√√ 
+≤≤ 
 }
-ƒƒ 	
+≥≥ 	
 }
-≈≈ 
-}∆∆ ıq
+¥¥ 
+}µµ ù\
 VC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\RestorePassword.xaml.cs
 	namespace		 	
 
@@ -10528,979 +10060,752 @@ MemoryGame		
 private 
 string 
 	_username  
-;  !
-private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
+;  !
+public 
+RestorePassword 
+( 
+)  
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "
+} 	
+public 
+RestorePassword 
+( 
+string %
+emailAddress& 2
+,2 3
+string4 :
+username; C
+)C D
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "
+_emailAddress 
+= 
+emailAddress (
+;( )
+	_username 
+= 
+username  
+;  !
+} 	
+private   
+void   
+RestoreUserPassword   (
+(  ( )
+)  ) *
+{!! 	
+string"" 
+newPassword"" 
+=""  
+NewPasswordBox""! /
+.""/ 0
+Password""0 8
+;""8 9
+if$$ 
+($$ 
+newPassword$$ 
+==$$ 
+$str$$ !
+)$$! "
+{%% 
 
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT m
-)m n
-;n o
-public 
-RestorePassword 
-( 
-)  
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "
-} 	
-public 
-RestorePassword 
-( 
-string %
-emailAddress& 2
-,2 3
-string4 :
-username; C
-)C D
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "
-_emailAddress 
-= 
-emailAddress (
-;( )
-	_username 
-= 
-username  
-;  !
-} 	
-private!! 
-void!! 
-RestoreUserPassword!! (
-(!!( )
-)!!) *
-{"" 	
-string## 
-newPassword## 
-=##  
-NewPasswordBox##! /
-.##/ 0
-Password##0 8
-;##8 9
-if%% 
-(%% 
-newPassword%% 
-==%% 
-$str%% !
-)%%! "
-{&& 
+MessageBox&& 
+.&& 
+Show&& 
+(&&  
 
-MessageBox'' 
-.'' 
-Show'' 
-(''  
+Properties&&  *
+.&&* +
+Langs&&+ 0
+.&&0 1
+	Resources&&1 :
+.&&: ;
+PasswordIsInvalid&&; L
+)&&L M
+;&&M N
+}'' 
+else(( 
+{)) 
+if** 
+(** 
+TokenIsCorrect** "
+(**" #
+)**# $
+)**$ %
+{++ 
+if,, 
+(,, 
+SetNewPassword,, &
+(,,& '
+),,' (
+),,( )
+{-- 
 
-Properties''  *
-.''* +
-Langs''+ 0
-.''0 1
-	Resources''1 :
-.'': ;
-PasswordIsInvalid''; L
-)''L M
-;''M N
-}(( 
-else)) 
-{** 
-bool++ 
-tokenIsCorrect++ #
-=++$ %
-TokenIsCorrect++& 4
-(++4 5
-)++5 6
-;++6 7
-if,, 
-(,, 
-tokenIsCorrect,, "
-),," #
-{-- 
-bool.. 
-newPasswordWasSet.. *
-=..+ ,
-SetNewPassword..- ;
-(..; <
-)..< =
-;..= >
-if// 
-(// 
-newPasswordWasSet// )
-)//) *
-{00 
+MessageBox.. "
+..." #
+Show..# '
+(..' (
 
-MessageBox11 "
-.11" #
-Show11# '
-(11' (
+Properties..( 2
+...2 3
+Langs..3 8
+...8 9
+	Resources..9 B
+...B C
+PasswordReset..C P
+)..P Q
+;..Q R
+	GoToLogin// !
+(//! "
+)//" #
+;//# $
+}00 
+else11 
+{22 
 
-Properties11( 2
-.112 3
-Langs113 8
-.118 9
-	Resources119 B
-.11B C
-PasswordReset11C P
-)11P Q
-;11Q R
-Login22 
-	loginView22 '
-=22( )
-new22* -
-Login22. 3
-(223 4
-)224 5
-;225 6
-	loginView33 !
-.33! "
-Show33" &
-(33& '
-)33' (
-;33( )
-this44 
-.44 
-Close44 "
-(44" #
-)44# $
-;44$ %
-}55 
-else66 
-{77 
+MessageBox33 "
+.33" #
+Show33# '
+(33' (
 
-MessageBox88 "
-.88" #
-Show88# '
-(88' (
+Properties33( 2
+.332 3
+Langs333 8
+.338 9
+	Resources339 B
+.33B C!
+PasswordRecoveryError33C X
+)33X Y
+;33Y Z
+}44 
+}55 
+else66 
+{77 
 
-Properties88( 2
-.882 3
-Langs883 8
-.888 9
-	Resources889 B
-.88B C!
-PasswordRecoveryError88C X
-)88X Y
-;88Y Z
-}99 
-}:: 
-else;; 
-{<< 
+MessageBox88 
+.88 
+Show88 #
+(88# $
 
-MessageBox== 
-.== 
-Show== #
-(==# $
+Properties88$ .
+.88. /
+Langs88/ 4
+.884 5
+	Resources885 >
+.88> ?'
+NonMatchingVerificationCode88? Z
+)88Z [
+;88[ \
+}99 
+}:: 
+};; 	
+private== 
+bool== 
+TokenIsCorrect== #
+(==# $
+)==$ %
+{>> 	
+string?? 
+token?? 
+=?? 
+TextBoxToken?? '
+.??' (
+Text??( ,
+;??, -
+if@@ 
+(@@ 
+token@@ 
+==@@ 
+$str@@ 
+)@@ 
+{AA 
+returnBB 
+falseBB 
+;BB 
+}CC ,
+ AccountVerificationServiceClientDD ,,
+ accountVerificationServiceClientDD- M
+=DDN O
+newEE ,
+ AccountVerificationServiceClientEE 4
+(EE4 5
+)EE5 6
+;EE6 7
+returnFF ,
+ accountVerificationServiceClientFF 3
+.FF3 4
+VerifyRecoveryTokenFF4 G
+(FFG H
+_emailAddressFFH U
+,FFU V
+tokenFFW \
+)FF\ ]
+;FF] ^
+}GG 	
+publicII 
+boolII 
+SetNewPasswordII "
+(II" #
+)II# $
+{JJ 	
+IEncryptionKK 
+bCryptHashGeneratorKK +
+=KK, -
+newKK. 1
+BCryptHashGeneratorKK2 E
+(KKE F
+)KKF G
+;KKG H
+stringLL 
+newPasswordLL 
+=LL  
+NewPasswordBoxLL! /
+.LL/ 0
+PasswordLL0 8
+;LL8 9
+ifMM 
+(MM 
+newPasswordMM 
+==MM 
+$strMM !
+)MM! "
+{NN 
+returnOO 
+falseOO 
+;OO 
+}PP 
+stringQQ 
+saltQQ 
+=QQ 
+bCryptHashGeneratorQQ -
+.QQ- .
+GenerateSaltQQ. :
+(QQ: ;
+)QQ; <
+;QQ< =
+stringRR  
+encryptedNewPasswordRR '
+=RR( )
+bCryptHashGeneratorRR* =
+.RR= >#
+GenerateEncryptedStringRR> U
+(RRU V
+newPasswordRRV a
+,RRa b
+saltRRc g
+)RRg h
+;RRh i-
+!AccountModifiabilityServiceClientSS --
+!accountModifiabilityServiceClientSS. O
+=SSP Q
+newSSR U-
+!AccountModifiabilityServiceClientSSV w
+(SSw x
+)SSx y
+;SSy z.
+"PasswordModificationCredentialsDtoTT .+
+passwordModificationCredentialsTT/ N
+=TTO P
+newTTQ T.
+"PasswordModificationCredentialsDtoTTU w
+(TTw x
+)TTx y
+{UU 
+EmailAddressVV 
+=VV 
+_emailAddressVV ,
+,VV, -
+SaltWW 
+=WW 
+saltWW 
+,WW 
+NewPasswordXX 
+=XX  
+encryptedNewPasswordXX 2
+}YY 
+;YY 
+boolZZ "
+newPasswordWasAssignedZZ '
+=ZZ( )-
+!accountModifiabilityServiceClientZZ* K
+.ZZK L
+SetNewPasswordZZL Z
+(ZZZ [+
+passwordModificationCredentialsZZ[ z
+)ZZz {
+;ZZ{ |
+return[[ "
+newPasswordWasAssigned[[ )
+;[[) *
+}\\ 	
+private^^ 
+void^^ 
+OkButtonClicked^^ $
+(^^$ %
+object^^% +
+sender^^, 2
+,^^2 3
+RoutedEventArgs^^4 C
+e^^D E
+)^^E F
+{__ 	
+try`` 
+{aa 
+RestoreUserPasswordbb #
+(bb# $
+)bb$ %
+;bb% &
+}cc 
+catchdd 
+(dd %
+EndpointNotFoundExceptiondd ,
+)dd, -
+{ee 
 
-Properties==$ .
-.==. /
-Langs==/ 4
-.==4 5
-	Resources==5 >
-.==> ?'
-NonMatchingVerificationCode==? Z
-)==Z [
-;==[ \
-}>> 
-}?? 
-}@@ 	
-privateBB 
-boolBB 
-TokenIsCorrectBB #
-(BB# $
-)BB$ %
-{CC 	
-stringDD 
-tokenDD 
-=DD 
-TextBoxTokenDD '
-.DD' (
-TextDD( ,
-;DD, -
-ifEE 
-(EE 
-tokenEE 
-==EE 
-$strEE 
-)EE 
-{FF 
-returnGG 
-falseGG 
-;GG 
-}HH ,
- AccountVerificationServiceClientII ,,
- accountVerificationServiceClientII- M
-=IIN O
-newJJ ,
- AccountVerificationServiceClientJJ 4
-(JJ4 5
-)JJ5 6
-;JJ6 7
-returnKK ,
- accountVerificationServiceClientKK 3
-.KK3 4
-VerifyTokenKK4 ?
-(KK? @
-_emailAddressKK@ M
-,KKM N
-tokenKKO T
-)KKT U
-;KKU V
-}LL 	
-publicNN 
-boolNN 
-SetNewPasswordNN "
-(NN" #
-)NN# $
-{OO 	
-IEncryptionPP 
-bCryptHashGeneratorPP +
-=PP, -
-newPP. 1
-BCryptHashGeneratorPP2 E
-(PPE F
-)PPF G
-;PPG H
-stringQQ 
-newPasswordQQ 
-=QQ  
-NewPasswordBoxQQ! /
-.QQ/ 0
-PasswordQQ0 8
-;QQ8 9
-ifRR 
-(RR 
-newPasswordRR 
-==RR 
-$strRR !
-)RR! "
-{SS 
-returnTT 
-falseTT 
-;TT 
-}UU 
-stringVV 
-saltVV 
-=VV 
-bCryptHashGeneratorVV -
-.VV- .
-GenerateSaltVV. :
-(VV: ;
-)VV; <
-;VV< =
-stringWW  
-encryptedNewPasswordWW '
-=WW( )
-bCryptHashGeneratorWW* =
-.WW= >#
-GenerateEncryptedStringWW> U
-(WWU V
-newPasswordWWV a
-,WWa b
-saltWWc g
-)WWg h
-;WWh i-
-!AccountModifiabilityServiceClientXX --
-!accountModifiabilityServiceClientXX. O
-=XXP Q
-newXXR U-
-!AccountModifiabilityServiceClientXXV w
-(XXw x
-)XXx y
-;XXy z.
-"PasswordModificationCredentialsDtoYY .+
-passwordModificationCredentialsYY/ N
-=YYO P
-newYYQ T.
-"PasswordModificationCredentialsDtoYYU w
-(YYw x
-)YYx y
-{ZZ 
-EmailAddress[[ 
-=[[ 
-_emailAddress[[ ,
-,[[, -
-Salt\\ 
-=\\ 
-salt\\ 
-,\\ 
-NewPassword]] 
-=]]  
-encryptedNewPassword]] 2
-}^^ 
-;^^ 
-bool__ "
-newPasswordWasAssigned__ '
-=__( )-
-!accountModifiabilityServiceClient__* K
-.__K L
-SetNewPassword__L Z
-(__Z [+
-passwordModificationCredentials__[ z
-)__z {
-;__{ |
-return`` "
-newPasswordWasAssigned`` )
-;``) *
-}aa 	
-privatecc 
-voidcc 
-OkButtonClickedcc $
-(cc$ %
-objectcc% +
-sendercc, 2
-,cc2 3
-RoutedEventArgscc4 C
-eccD E
-)ccE F
-{dd 	
-tryee 
-{ff 
-RestoreUserPasswordgg #
-(gg# $
-)gg$ %
-;gg% &
-}hh 
-catchii 
-(ii %
-EndpointNotFoundExceptionii ,
-)ii, -
-{jj 
+MessageBoxff 
+.ff 
+Showff 
+(ff  
 
-MessageBoxkk 
-.kk 
-Showkk 
-(kk  
+Propertiesff  *
+.ff* +
+Langsff+ 0
+.ff0 1
+	Resourcesff1 :
+.ff: ; 
+ServerConnectionLostff; O
+)ffO P
+;ffP Q
+}gg 
+catchhh 
+(hh 
+TimeoutExceptionhh #
+)hh# $
+{ii 
 
-Propertieskk  *
-.kk* +
-Langskk+ 0
-.kk0 1
-	Resourceskk1 :
-.kk: ; 
-ServerConnectionLostkk; O
-)kkO P
-;kkP Q
-}ll 
-catchmm 
-(mm 
-FaultExceptionmm !
-<mm! "
-MemoryGameServicemm" 3
-.mm3 4
-Faultsmm4 :
-.mm: ;'
-DatabaseConnectionLostFaultmm; V
->mmV W
-)mmW X
-{nn 
-}pp 
-catchqq 
-(qq 
-FaultExceptionqq !
-<qq! "
-MemoryGameServiceqq" 3
-.qq3 4
-Faultsqq4 :
-.qq: ; 
-NonExistentUserFaultqq; O
->qqO P
-)qqP Q
-{rr 
+MessageBoxjj 
+.jj 
+Showjj 
+(jj  
 
-MessageBoxss 
-.ss 
-Showss 
-(ss  
-$strss  6
-)ss6 7
-;ss7 8
-}tt 
-catchuu 
-(uu 
-TimeoutExceptionuu #
-timeoutExceptionuu$ 4
-)uu4 5
-{vv 
-_loggerww 
-.ww 
-Fatalww 
-(ww 
-timeoutExceptionww .
-)ww. /
-;ww/ 0
+Propertiesjj  *
+.jj* +
+Langsjj+ 0
+.jj0 1
+	Resourcesjj1 :
+.jj: ;
+ServerTimeoutErrorjj; M
+)jjM N
+;jjN O
+}kk 
+catchll 
+(ll "
+CommunicationExceptionll )
+)ll) *
+{mm 
 
-MessageBoxxx 
-.xx 
-Showxx 
-(xx  
+MessageBoxnn 
+.nn 
+Shownn 
+(nn  
 
-Propertiesxx  *
-.xx* +
-Langsxx+ 0
-.xx0 1
-	Resourcesxx1 :
-.xx: ;
-ServerTimeoutErrorxx; M
-)xxM N
-;xxN O
-}yy 
-catchzz 
-(zz "
-CommunicationExceptionzz )"
-communicationExceptionzz* @
-)zz@ A
-{{{ 
-_logger|| 
-.|| 
-Fatal|| 
-(|| "
-communicationException|| 4
-)||4 5
-;||5 6
+Propertiesnn  *
+.nn* +
+Langsnn+ 0
+.nn0 1
+	Resourcesnn1 :
+.nn: ;$
+CommunicationInterruptednn; S
+)nnS T
+;nnT U
+}oo 
+}pp 	
+privaterr 
+voidrr $
+SendNewCodeButtonClickedrr -
+(rr- .
+objectrr. 4
+senderrr5 ;
+,rr; <
+RoutedEventArgsrr= L
+errM N
+)rrN O
+{ss 	
+trytt 
+{uu 
+SendNewCodevv 
+(vv 
+)vv 
+;vv 
+}ww 
+catchxx 
+(xx %
+EndpointNotFoundExceptionxx ,
+)xx, -
+{yy 
 
-MessageBox}} 
-.}} 
-Show}} 
-(}}  
+MessageBoxzz 
+.zz 
+Showzz 
+(zz  
 
-Properties}}  *
-.}}* +
-Langs}}+ 0
-.}}0 1
-	Resources}}1 :
-.}}: ;$
-CommunicationInterrupted}}; S
-)}}S T
-;}}T U
-}~~ 
-} 	
-private
-ÅÅ 
-void
-ÅÅ &
-SendNewCodeButtonClicked
-ÅÅ -
-(
-ÅÅ- .
-object
-ÅÅ. 4
-sender
-ÅÅ5 ;
-,
-ÅÅ; <
-RoutedEventArgs
-ÅÅ= L
-e
-ÅÅM N
-)
-ÅÅN O
-{
-ÇÇ 	
-try
-ÉÉ 
-{
-ÑÑ 
-SendNewCode
-ÖÖ 
-(
-ÖÖ 
-)
-ÖÖ 
-;
-ÖÖ 
-}
-ÜÜ 
+Propertieszz  *
+.zz* +
+Langszz+ 0
+.zz0 1
+	Resourceszz1 :
+.zz: ; 
+ServerConnectionLostzz; O
+)zzO P
+;zzP Q
+}{{ 
+catch|| 
+(|| 
+TimeoutException|| #
+)||# $
+{}} 
+
+MessageBox~~ 
+.~~ 
+Show~~ 
+(~~  
+
+Properties~~  *
+.~~* +
+Langs~~+ 0
+.~~0 1
+	Resources~~1 :
+.~~: ;
+ServerTimeoutError~~; M
+)~~M N
+;~~N O
+} 
 catch
-áá 
+ÄÄ 
 (
-áá '
-EndpointNotFoundException
-áá ,
-)
-áá, -
-{
-àà 
-
-MessageBox
-ââ 
-.
-ââ 
-Show
-ââ 
-(
-ââ  
-
-Properties
-ââ  *
-.
-ââ* +
-Langs
-ââ+ 0
-.
-ââ0 1
-	Resources
-ââ1 :
-.
-ââ: ;"
-ServerConnectionLost
-ââ; O
-)
-ââO P
-;
-ââP Q
-}
-ää 
-catch
-ãã 
-(
-ãã 
-FaultException
-ãã !
-<
-ãã! "
-MemoryGameService
-ãã" 3
-.
-ãã3 4
-Faults
-ãã4 :
-.
-ãã: ;)
-DatabaseConnectionLostFault
-ãã; V
->
-ããV W
-)
-ããW X
-{
-åå 
-}
-éé 
-catch
-èè 
-(
-èè 
-FaultException
-èè !
-<
-èè! "
-MemoryGameService
-èè" 3
-.
-èè3 4
-Faults
-èè4 :
-.
-èè: ;"
-NonExistentUserFault
-èè; O
->
-èèO P
-)
-èèP Q
-{
-êê 
-
-MessageBox
-ëë 
-.
-ëë 
-Show
-ëë 
-(
-ëë  
-$str
-ëë  6
-)
-ëë6 7
-;
-ëë7 8
-}
-íí 
-catch
-ìì 
-(
-ìì 
-TimeoutException
-ìì #
-timeoutException
-ìì$ 4
-)
-ìì4 5
-{
-îî 
-_logger
-ïï 
-.
-ïï 
-Fatal
-ïï 
-(
-ïï 
-timeoutException
-ïï .
-)
-ïï. /
-;
-ïï/ 0
-
-MessageBox
-ññ 
-.
-ññ 
-Show
-ññ 
-(
-ññ  
-
-Properties
-ññ  *
-.
-ññ* +
-Langs
-ññ+ 0
-.
-ññ0 1
-	Resources
-ññ1 :
-.
-ññ: ; 
-ServerTimeoutError
-ññ; M
-)
-ññM N
-;
-ññN O
-}
-óó 
-catch
-òò 
-(
-òò $
+ÄÄ $
 CommunicationException
-òò )$
-communicationException
-òò* @
+ÄÄ )
 )
-òò@ A
+ÄÄ) *
 {
-ôô 
-_logger
-öö 
-.
-öö 
-Fatal
-öö 
-(
-öö $
-communicationException
-öö 4
-)
-öö4 5
-;
-öö5 6
+ÅÅ 
 
 MessageBox
-õõ 
+ÇÇ 
 .
-õõ 
+ÇÇ 
 Show
-õõ 
+ÇÇ 
 (
-õõ  
+ÇÇ  
 
 Properties
-õõ  *
+ÇÇ  *
 .
-õõ* +
+ÇÇ* +
 Langs
-õõ+ 0
+ÇÇ+ 0
 .
-õõ0 1
+ÇÇ0 1
 	Resources
-õõ1 :
+ÇÇ1 :
 .
-õõ: ;&
+ÇÇ: ;&
 CommunicationInterrupted
-õõ; S
+ÇÇ; S
 )
-õõS T
+ÇÇS T
 ;
-õõT U
+ÇÇT U
 }
-úú 
+ÉÉ 
 }
-üü 	
+ÜÜ 	
 private
-°° 
+àà 
 void
-°° 
+àà 
 SendNewCode
-°°  
+àà  
 (
-°°  !
+àà  !
 )
-°°! "
+àà! "
 {
-¢¢ 	
+ââ 	
 string
-££ 
+ää 
 newToken
-££ 
+ää 
 =
-££ 
+ää 
 TokenManager
-££ *
+ää *
 .
-££* +'
-GenerateVerificationToken
-££+ D
+ää* +
+GenerateToken
+ää+ 8
 (
-££D E
+ää8 9
 )
-££E F
+ää9 :
 ;
-££F G
+ää: ;
 bool
-§§ -
+ãã -
 newVerificationTokenWasAssigned
-§§ 0
+ãã 0
 =
-§§1 2
+ãã1 2
 false
-§§3 8
+ãã3 8
 ;
-§§8 9
+ãã8 9
 if
-•• 
+åå 
 (
-•• 
+åå 
 newToken
-•• 
+åå 
 !=
-•• 
+åå 
 $str
-•• 
+åå 
 )
-•• 
+åå 
 {
-¶¶ .
+çç .
  AccountVerificationServiceClient
-ßß 0.
+éé 0.
  accountVerificationServiceClient
-ßß1 Q
+éé1 Q
 =
-ßßR S
+ééR S
 new
-®® .
+èè .
  AccountVerificationServiceClient
-®® 8
+èè 8
 (
-®®8 9
+èè8 9
 )
-®®9 :
+èè9 :
 ;
-®®: ;-
+èè: ;-
 newVerificationTokenWasAssigned
-©© /
+êê /
 =
-©©0 1.
+êê0 1.
  accountVerificationServiceClient
-©©2 R
+êê2 R
 .
-©©R S(
-AssignNewVerificationToken
-©©S m
+êêR S$
+AssignNewRecoveryToken
+êêS i
 (
-©©m n
+êêi j
 _emailAddress
-©©n {
+êêj w
 ,
-©©{ |
-newToken©©} Ö
-)©©Ö Ü
-;©©Ü á
+êêw x
+newTokenêêy Å
+)êêÅ Ç
+;êêÇ É
 }
-™™ 
+ëë 
 if
-¨¨ 
+ìì 
 (
-¨¨ -
+ìì -
 newVerificationTokenWasAssigned
-¨¨ /
+ìì /
 )
-¨¨/ 0
+ìì/ 0
 {
-≠≠ &
-VerificationTokenInfoDto
-ÆÆ (#
+îî 
+TokenInfoDto
+ïï #
 verificationTokenInfo
-ÆÆ) >
+ïï 2
 =
-ÆÆ? @
+ïï3 4
 new
-ÆÆA D&
-VerificationTokenInfoDto
-ÆÆE ]
+ïï5 8
+TokenInfoDto
+ïï9 E
 (
-ÆÆ] ^
+ïïE F
 )
-ÆÆ^ _
+ïïF G
 {
-ØØ 
+ññ 
 Name
-∞∞ 
+óó 
 =
-∞∞ 
+óó 
 	_username
-∞∞ $
+óó $
 ,
-∞∞$ %
+óó$ %
 EmailAddress
-±±  
+òò  
 =
-±±! "
+òò! "
 _emailAddress
-±±# 0
+òò# 0
 ,
-±±0 1
-VerificationToken
-≤≤ %
+òò0 1
+Token
+ôô 
 =
-≤≤& '
+ôô 
 newToken
-≤≤( 0
+ôô $
 }
-≥≥ 
+öö 
 ;
-≥≥ 
+öö 
 TokenManager
-¥¥ 
+õõ 
 .
-¥¥ #
-SendVerificationToken
-¥¥ 2
+õõ 
+	SendToken
+õõ &
 (
-¥¥2 3#
+õõ& '#
 verificationTokenInfo
-¥¥3 H
+õõ' <
 )
-¥¥H I
+õõ< =
 ;
-¥¥I J
+õõ= >
 
 MessageBox
-µµ 
+úú 
 .
-µµ 
+úú 
 Show
-µµ 
+úú 
 (
-µµ  
+úú  
 
 Properties
-µµ  *
+úú  *
 .
-µµ* +
+úú* +
 Langs
-µµ+ 0
+úú+ 0
 .
-µµ0 1
+úú0 1
 	Resources
-µµ1 :
+úú1 :
 .
-µµ: ; 
+úú: ; 
 NewCodeSentMessage
-µµ; M
+úú; M
 )
-µµM N
+úúM N
 ;
-µµN O
+úúN O
 }
-∂∂ 
+ùù 
 }
-∑∑ 	
+ûû 	
 private
-ªª 
+†† 
 void
-ªª 
+†† 
 BackButtonClicked
-ªª &
+†† &
 (
-ªª& '
+††& '
 object
-ªª' -
+††' -
 sender
-ªª. 4
+††. 4
 ,
-ªª4 5
+††4 5
 RoutedEventArgs
-ªª6 E
+††6 E
 e
-ªªF G
+††F G
 )
-ªªG H
+††G H
 {
-ºº 	
+°° 	
+	GoToLogin
+¢¢ 
+(
+¢¢ 
+)
+¢¢ 
+;
+¢¢ 
+}
+££ 	
+private
+•• 
+void
+•• 
+	GoToLogin
+•• 
+(
+•• 
+)
+••  
+{
+¶¶ 	
 Login
-ΩΩ 
+ßß 
 	loginView
-ΩΩ 
+ßß 
 =
-ΩΩ 
+ßß 
 new
-ΩΩ !
+ßß !
 Login
-ΩΩ" '
+ßß" '
 (
-ΩΩ' (
+ßß' (
 )
-ΩΩ( )
+ßß( )
 ;
-ΩΩ) *
+ßß) *
 	loginView
-ææ 
+®® 
 .
-ææ 
+®® 
 Show
-ææ 
+®® 
 (
-ææ 
+®® 
 )
-ææ 
+®® 
 ;
-ææ 
+®® 
 this
-øø 
+©© 
 .
-øø 
+©© 
 Close
-øø 
+©© 
 (
-øø 
+©© 
 )
-øø 
+©© 
 ;
-øø 
+©© 
 }
-¿¿ 	
+™™ 	
 }
-¡¡ 
-}¬¬ ¯%
+´´ 
+}¨¨ ¿
 QC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\ScoreTable.xaml.cs
 	namespace 	
 
@@ -11537,244 +10842,202 @@ ScoreTable
 [D E
 ]E F
 _bestScoresG R
-;R S
-private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
+;R S
+public 
 
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT h
-)h i
-;i j
-public 
+ScoreTable 
+( 
+) 
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "'
+PopulateTableWithBestScores '
+(' (
+)( )
+;) *
+} 	
+private 
+void '
+PopulateTableWithBestScores 0
+(0 1
+)1 2
+{ 	
+try 
+{ 
+LoadBestScores 
+( 
+)  
+;  !
+for 
+( 
+int 
+indexOfActualPlayer +
+=, -
+$num. /
+;/ 0
+indexOfActualPlayer1 D
+<E F
+_bestScoresG R
+.R S
+LengthS Y
+;Y Z
+indexOfActualPlayer[ n
+++n p
+)p q
+{ 
+if 
+( 
+_bestScores "
+[" #
+indexOfActualPlayer# 6
+]6 7
+!=8 :
+null; ?
+)? @
+{ 
+ScoreDataGrid %
+.% &
+Items& +
+.+ ,
+Add, /
+(/ 0
+_bestScores0 ;
+[; <
+indexOfActualPlayer< O
+]O P
+)P Q
+;Q R
+} 
+} 
+} 
+catch   
+(   
+TimeoutException   #
+)  # $
+{!! 
 
-ScoreTable 
-( 
-) 
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "'
-PopulateTableWithBestScores '
-(' (
-)( )
-;) *
-} 	
-private 
-void '
-PopulateTableWithBestScores 0
-(0 1
-)1 2
-{ 	
-try 
-{ 
-LoadBestScores 
-( 
-)  
-;  !
-for 
-( 
-int 
-indexOfActualPlayer +
-=, -
-$num. /
-;/ 0
-indexOfActualPlayer1 D
-<E F
-_bestScoresG R
-.R S
-LengthS Y
-;Y Z
-indexOfActualPlayer[ n
-++n p
-)p q
-{ 
-if 
-( 
-_bestScores "
-[" #
-indexOfActualPlayer# 6
-]6 7
-!=8 :
-null; ?
-)? @
-{ 
-ScoreDataGrid %
-.% &
-Items& +
-.+ ,
-Add, /
-(/ 0
-_bestScores0 ;
-[; <
-indexOfActualPlayer< O
-]O P
-)P Q
-;Q R
-} 
-} 
-}   
-catch!! 
-(!! 
-TimeoutException!! #
-timeoutException!!$ 4
-)!!4 5
-{"" 
-_logger## 
-.## 
-Fatal## 
-(## 
-timeoutException## .
-)##. /
-;##/ 0
+MessageBox"" 
+."" 
+Show"" 
+(""  
 
-MessageBox$$ 
-.$$ 
-Show$$ 
-($$  
+Properties""  *
+.""* +
+Langs""+ 0
+.""0 1
+	Resources""1 :
+."": ;
+ServerTimeoutError""; M
+)""M N
+;""N O
+}## 
+catch$$ 
+($$ %
+EndpointNotFoundException$$ ,
+)$$, -
+{%% 
 
-Properties$$  *
-.$$* +
-Langs$$+ 0
-.$$0 1
-	Resources$$1 :
-.$$: ;
-ServerTimeoutError$$; M
-)$$M N
-;$$N O
-}%% 
-catch&& 
-(&& %
-EndpointNotFoundException&& ,%
-endpointNotFoundException&&- F
-)&&F G
-{'' 
-_logger(( 
-.(( 
-Fatal(( 
-((( %
-endpointNotFoundException(( 7
-)((7 8
-;((8 9
+MessageBox&& 
+.&& 
+Show&& 
+(&&  
 
-MessageBox)) 
-.)) 
-Show)) 
-())  
+Properties&&  *
+.&&* +
+Langs&&+ 0
+.&&0 1
+	Resources&&1 :
+.&&: ; 
+ServerConnectionLost&&; O
+)&&O P
+;&&P Q
+}'' 
+catch(( 
+((( "
+CommunicationException(( )
+)(() *
+{)) 
 
-Properties))  *
-.))* +
-Langs))+ 0
-.))0 1
-	Resources))1 :
-.)): ; 
-ServerConnectionLost)); O
-)))O P
-;))P Q
-}** 
-catch++ 
-(++ "
-CommunicationException++ )"
-communicationException++* @
-)++@ A
-{,, 
-_logger-- 
-.-- 
-Fatal-- 
-(-- "
-communicationException-- 4
-)--4 5
-;--5 6
+MessageBox** 
+.** 
+Show** 
+(**  
 
-MessageBox.. 
-... 
-Show.. 
-(..  
-
-Properties..  *
-...* +
-Langs..+ 0
-...0 1
-	Resources..1 :
-...: ;$
-CommunicationInterrupted..; S
-)..S T
-;..T U
-}// 
-}00 	
-private22 
-void22 
-LoadBestScores22 #
-(22# $
-)22$ %
-{33 	
-MemoryGameService44 
-.44 
-ScoreServiceClient44 0
-client441 7
-=448 9
-new44: =
-MemoryGameService44> O
-.44O P
-ScoreServiceClient44P b
-(44b c
-)44c d
-;44d e
-_bestScores55 
-=55 
-client55  
-.55  !#
-GetPlayersWithBestScore55! 8
-(558 9
-$num559 ;
-)55; <
-;55< =
-}66 	
-private88 
-void88 
-BackButtonClicked88 &
-(88& '
-object88' -
-sender88. 4
-,884 5
-RoutedEventArgs886 E
-e88F G
-)88G H
-{99 	
-MainMenu:: 
-mainMenuView:: !
-=::" #
-new::$ '
-MainMenu::( 0
-(::0 1
-)::1 2
-;::2 3
-mainMenuView;; 
-.;; 
-Show;; 
-(;; 
-);; 
-;;;  
-this<< 
-.<< 
-Close<< 
-(<< 
-)<< 
-;<< 
-}== 	
-}>> 
-}BB •
+Properties**  *
+.*** +
+Langs**+ 0
+.**0 1
+	Resources**1 :
+.**: ;$
+CommunicationInterrupted**; S
+)**S T
+;**T U
+}++ 
+},, 	
+private.. 
+void.. 
+LoadBestScores.. #
+(..# $
+)..$ %
+{// 	
+MemoryGameService00 
+.00 
+ScoreServiceClient00 0
+client001 7
+=008 9
+new00: =
+MemoryGameService00> O
+.00O P
+ScoreServiceClient00P b
+(00b c
+)00c d
+;00d e
+_bestScores11 
+=11 
+client11  
+.11  !#
+GetPlayersWithBestScore11! 8
+(118 9
+$num119 ;
+)11; <
+;11< =
+}22 	
+private44 
+void44 
+BackButtonClicked44 &
+(44& '
+object44' -
+sender44. 4
+,444 5
+RoutedEventArgs446 E
+e44F G
+)44G H
+{55 	
+MainMenu66 
+mainMenuView66 !
+=66" #
+new66$ '
+MainMenu66( 0
+(660 1
+)661 2
+;662 3
+mainMenuView77 
+.77 
+Show77 
+(77 
+)77 
+;77  
+this88 
+.88 
+Close88 
+(88 
+)88 
+;88 
+}99 	
+}:: 
+}>> •
 OC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\Settings.xaml.cs
 	namespace 	
 
@@ -11970,7 +11233,7 @@ mainWindow// 
 ;00 
 }11 	
 }22 
-}33 ƒÄ
+}33 ›p
 RC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\WaitingRoom.xaml.cs
 	namespace 	
 
@@ -12030,733 +11293,697 @@ MemoryGame
 private 
 bool 0
 $_windowIsBeingClosedByTheCloseButton 9
-;9 :
-private 
-static 
-readonly 
-log4net  '
-.' (
-ILog( ,
-_logger- 4
-=5 6
-log4net7 >
-.> ?
+;9 :
+public 
+WaitingRoom 
+( 
+) 
+{ 	
+InitializeComponent 
+(  
+)  !
+;! "
+_context 
+= 
+new 
+InstanceContext *
+(* +
+this+ /
+)/ 0
+;0 1
+_lobbyServiceClient 
+=  !
+new" %
+MemoryGameService& 7
+.7 8
+LobbyServiceClient8 J
+(J K
+_contextK S
+)S T
+;T U
+	_username 
+= 
+Sesion 
+. 
+	GetSesion (
+.( )
+Username) 1
+;1 20
+$_windowIsBeingClosedByTheCloseButton 0
+=1 2
+true3 7
+;7 8
+_players 
+= 
+new  
+ObservableCollection /
+</ 0
+string0 6
+>6 7
+(7 8
+)8 9
+;9 :
+} 	
+private!! 
+void!! 
+Window_Loaded!! "
+(!!" #
+object!!# )
+sender!!* 0
+,!!0 1
+RoutedEventArgs!!2 A
+e!!B C
+)!!C D
+{"" 	#
+DetermineIfPlayerIsHost## #
+(### $
+)##$ %
+;##% &
+if$$ 
+($$ 
+!$$ 
+_thisPlayerIsHost$$ "
+)$$" #
+{%% 
 
-LogManager? I
-.I J
-	GetLoggerJ S
-(S T
-$strT i
-)i j
-;j k
-public 
-WaitingRoom 
-( 
-) 
-{ 	
-InitializeComponent 
-(  
-)  !
-;! "
-_context 
-= 
-new 
-InstanceContext *
-(* +
-this+ /
-)/ 0
-;0 1
-_lobbyServiceClient 
-=  !
-new" %
-MemoryGameService& 7
-.7 8
-LobbyServiceClient8 J
-(J K
-_contextK S
-)S T
-;T U
-	_username 
-= 
-Sesion 
-. 
-	GetSesion (
-.( )
-Username) 1
-;1 20
-$_windowIsBeingClosedByTheCloseButton 0
-=1 2
-true3 7
-;7 8
-_players 
-= 
-new  
-ObservableCollection /
-</ 0
-string0 6
->6 7
-(7 8
-)8 9
-;9 :
-}   	
-private"" 
-void"" 
-Window_Loaded"" "
-(""" #
-object""# )
-sender""* 0
-,""0 1
-RoutedEventArgs""2 A
-e""B C
-)""C D
-{## 	#
-DetermineIfPlayerIsHost$$ #
-($$# $
-)$$$ %
-;$$% &
-if%% 
-(%% 
-!%% 
-_thisPlayerIsHost%% "
-)%%" #
-{&& 
+StarButton&& 
+.&& 
 
-StarButton'' 
-.'' 
+Visibility&& %
+=&&& '
 
-Visibility'' %
-=''& '
-System''( .
-.''. /
-Windows''/ 6
-.''6 7
+Visibility&&( 2
+.&&2 3
+	Collapsed&&3 <
+;&&< =
+}'' 
+try)) 
+{** $
+LoadActivePlayersInLobby++ (
+(++( )
+)++) *
+;++* + 
+CallJoinLobbyService,, $
+(,,$ %
+),,% &
+;,,& '
+}-- 
+catch.. 
+(.. 
+TimeoutException.. #
+)..# $
+{// 
 
-Visibility''7 A
-.''A B
-	Collapsed''B K
-;''K L
-}(( 
-try** 
-{++ $
-LoadActivePlayersInLobby,, (
-(,,( )
-),,) *
-;,,* + 
-CallJoinLobbyService-- $
-(--$ %
-)--% &
-;--& '
-}.. 
-catch// 
-(// 
-TimeoutException// #
-timeoutException//$ 4
-)//4 5
-{00 
-_logger11 
-.11 
-Fatal11 
-(11 
-timeoutException11 .
-)11. /
-;11/ 0
+MessageBox00 
+.00 
+Show00 
+(00  
 
-MessageBox22 
-.22 
-Show22 
-(22  
+Properties00  *
+.00* +
+Langs00+ 0
+.000 1
+	Resources001 :
+.00: ;
+ServerTimeoutError00; M
+)00M N
+;00N O
+}11 
+catch22 
+(22 %
+EndpointNotFoundException22 ,
+)22, -
+{33 
 
-Properties22  *
-.22* +
-Langs22+ 0
-.220 1
-	Resources221 :
-.22: ;
-ServerTimeoutError22; M
-)22M N
-;22N O
-}33 
-catch44 
-(44 %
-EndpointNotFoundException44 ,%
-endpointNotFoundException44- F
-)44F G
-{55 
-_logger66 
-.66 
-Fatal66 
-(66 %
-endpointNotFoundException66 7
-)667 8
-;668 9
+MessageBox44 
+.44 
+Show44 
+(44  
 
-MessageBox77 
-.77 
-Show77 
-(77  
+Properties44  *
+.44* +
+Langs44+ 0
+.440 1
+	Resources441 :
+.44: ; 
+ServerConnectionLost44; O
+)44O P
+;44P Q
+}55 
+catch66 
+(66 "
+CommunicationException66 )
+)66) *
+{77 
 
-Properties77  *
-.77* +
-Langs77+ 0
-.770 1
-	Resources771 :
-.77: ; 
-ServerConnectionLost77; O
-)77O P
-;77P Q
-}88 
-catch99 
-(99 "
-CommunicationException99 )"
-communicationException99* @
-)99@ A
-{:: 
-_logger;; 
-.;; 
-Fatal;; 
-(;; "
-communicationException;; 4
-);;4 5
-;;;5 6
+MessageBox88 
+.88 
+Show88 
+(88  
 
-MessageBox<< 
-.<< 
-Show<< 
-(<<  
-
-Properties<<  *
-.<<* +
-Langs<<+ 0
-.<<0 1
-	Resources<<1 :
-.<<: ;$
-CommunicationInterrupted<<; S
-)<<S T
-;<<T U
-}== 
-}?? 	
-privateAA 
-voidAA #
-DetermineIfPlayerIsHostAA ,
-(AA, -
-)AA- .
-{BB 	
-ifCC 
-(CC 
-	_usernameCC 
-.CC 
-EqualsCC  
-(CC  !
-GameMatchDtoCC! -
-.CC- .
-HostCC. 2
-)CC2 3
-)CC3 4
+Properties88  *
+.88* +
+Langs88+ 0
+.880 1
+	Resources881 :
+.88: ;$
+CommunicationInterrupted88; S
+)88S T
+;88T U
+}99 
+};; 	
+private== 
+void== #
+DetermineIfPlayerIsHost== ,
+(==, -
+)==- .
+{>> 	
+if?? 
+(?? 
+	_username?? 
+.?? 
+Equals??  
+(??  !
+GameMatchDto??! -
+.??- .
+Host??. 2
+)??2 3
+)??3 4
+{@@ 
+_thisPlayerIsHostAA !
+=AA" #
+trueAA$ (
+;AA( )
+}BB 
+elseCC 
 {DD 
 _thisPlayerIsHostEE !
-=EE" #
-trueEE$ (
-;EE( )
-}FF 
-elseGG 
-{HH 
-_thisPlayerIsHostII !
-=II" #
-falseII$ )
-;II) *
-}JJ 
-}KK 	
-privateMM 
-voidMM $
-LoadActivePlayersInLobbyMM -
-(MM- .
-)MM. /
-{NN 	
-IListOO 
-<OO 
-stringOO 
->OO 
-activePlayersOO '
-=OO( )
-_lobbyServiceClientOO* =
-.OO= >#
-GetActivePlayersInLobbyOO> U
-(OOU V
-GameMatchDtoOOV b
-.OOb c
-HostOOc g
-)OOg h
-;OOh i
-foreachPP 
-(PP 
-varPP 
-oneActivePlayerPP '
-inPP( *
-activePlayersPP+ 8
-)PP8 9
-{QQ 
-_playersRR 
-.RR 
-AddRR 
-(RR 
-oneActivePlayerRR ,
-)RR, -
-;RR- .
-}SS 
-WaitingRoomDataGridTT 
-.TT  
-ItemsSourceTT  +
-=TT, -
-_playersTT. 6
-;TT6 7
-}UU 	
-privateWW 
-voidWW  
-CallJoinLobbyServiceWW )
-(WW) *
-)WW* +
-{XX 	
-_lobbyServiceClientYY 
-.YY  
-	JoinLobbyYY  )
-(YY) *
-GameMatchDtoYY* 6
-.YY6 7
-HostYY7 ;
-,YY; <
-	_usernameYY= F
-)YYF G
-;YYG H
-}ZZ 	
-public\\ 
-void\\ 
-LeaveButtonClicked\\ &
-(\\& '
-object\\' -
-sender\\. 4
-,\\4 5
-RoutedEventArgs\\6 E
-e\\F G
-)\\G H
-{]] 	
-try^^ 
-{__ !
-CallLeaveLobbyService`` %
-(``% &
-)``& '
-;``' (
+=EE" #
+falseEE$ )
+;EE) *
+}FF 
+}GG 	
+privateII 
+voidII $
+LoadActivePlayersInLobbyII -
+(II- .
+)II. /
+{JJ 	
+IListKK 
+<KK 
+stringKK 
+>KK 
+activePlayersKK '
+=KK( )
+_lobbyServiceClientKK* =
+.KK= >#
+GetActivePlayersInLobbyKK> U
+(KKU V
+GameMatchDtoKKV b
+.KKb c
+HostKKc g
+)KKg h
+;KKh i
+foreachLL 
+(LL 
+varLL 
+oneActivePlayerLL '
+inLL( *
+activePlayersLL+ 8
+)LL8 9
+{MM 
+_playersNN 
+.NN 
+AddNN 
+(NN 
+oneActivePlayerNN ,
+)NN, -
+;NN- .
+}OO 
+WaitingRoomDataGridPP 
+.PP  
+ItemsSourcePP  +
+=PP, -
+_playersPP. 6
+;PP6 7
+}QQ 	
+privateSS 
+voidSS  
+CallJoinLobbyServiceSS )
+(SS) *
+)SS* +
+{TT 	
+_lobbyServiceClientUU 
+.UU  
+	JoinLobbyUU  )
+(UU) *
+GameMatchDtoUU* 6
+.UU6 7
+HostUU7 ;
+,UU; <
+	_usernameUU= F
+)UUF G
+;UUG H
+}VV 	
+publicXX 
+voidXX 
+LeaveButtonClickedXX &
+(XX& '
+objectXX' -
+senderXX. 4
+,XX4 5
+RoutedEventArgsXX6 E
+eXXF G
+)XXG H
+{YY 	
+tryZZ 
+{[[ !
+CallLeaveLobbyService\\ %
+(\\% &
+)\\& '
+;\\' (
+}]] 
+catch^^ 
+(^^ 
+TimeoutException^^ #
+)^^# $
+{__ 
+
+MessageBox`` 
+.`` 
+Show`` 
+(``  
+
+Properties``  *
+.``* +
+Langs``+ 0
+.``0 1
+	Resources``1 :
+.``: ;
+ServerTimeoutError``; M
+)``M N
+;``N O
 }aa 
 catchbb 
-(bb 
-TimeoutExceptionbb #
-timeoutExceptionbb$ 4
-)bb4 5
-{cc 
-_loggerdd 
-.dd 
-Fataldd 
-(dd 
-timeoutExceptiondd .
-)dd. /
-;dd/ 0
+(bb %
+EndpointNotFoundExceptionbb ,
+)bb, -
+{cc 
 
-MessageBoxee 
-.ee 
-Showee 
-(ee  
+MessageBoxdd 
+.dd 
+Showdd 
+(dd  
 
-Propertiesee  *
-.ee* +
-Langsee+ 0
-.ee0 1
-	Resourcesee1 :
-.ee: ;
-ServerTimeoutErroree; M
-)eeM N
-;eeN O
-}ff 
-catchgg 
-(gg %
-EndpointNotFoundExceptiongg ,%
-endpointNotFoundExceptiongg- F
-)ggF G
-{hh 
-_loggerii 
-.ii 
-Fatalii 
-(ii %
-endpointNotFoundExceptionii 7
-)ii7 8
-;ii8 9
+Propertiesdd  *
+.dd* +
+Langsdd+ 0
+.dd0 1
+	Resourcesdd1 :
+.dd: ; 
+ServerConnectionLostdd; O
+)ddO P
+;ddP Q
+}ee 
+catchff 
+(ff "
+CommunicationExceptionff )
+)ff) *
+{gg 
 
-MessageBoxjj 
-.jj 
-Showjj 
-(jj  
+MessageBoxhh 
+.hh 
+Showhh 
+(hh  
 
-Propertiesjj  *
-.jj* +
-Langsjj+ 0
-.jj0 1
-	Resourcesjj1 :
-.jj: ; 
-ServerConnectionLostjj; O
-)jjO P
-;jjP Q
-}kk 
-catchll 
-(ll "
-CommunicationExceptionll )"
-communicationExceptionll* @
-)ll@ A
-{mm 
-_loggernn 
-.nn 
-Fatalnn 
-(nn "
-communicationExceptionnn 4
-)nn4 5
-;nn5 6
-
-MessageBoxoo 
-.oo 
-Showoo 
-(oo  
-
-Propertiesoo  *
-.oo* +
-Langsoo+ 0
-.oo0 1
-	Resourcesoo1 :
-.oo: ;$
-CommunicationInterruptedoo; S
-)ooS T
-;ooT U
-}pp 
-finallyqq 
-{rr 
-ifss 
-(ss 
-_thisPlayerIsHostss %
-)ss% &
-{tt 
-GoToMainMenuViewuu $
-(uu$ %
-)uu% &
-;uu& '
-}vv 
-elseww 
-{xx 
-GoToJoinGameViewyy $
-(yy$ %
-)yy% &
-;yy& '
-}zz 
-}{{ 
-}|| 	
-private~~ 
-void~~ 
-GoToJoinGameView~~ %
-(~~% &
-)~~& '
-{ 	2
-$_windowIsBeingClosedByTheCloseButton
-ÄÄ 0
-=
-ÄÄ1 2
-false
-ÄÄ3 8
-;
-ÄÄ8 9
-JoinGame
-ÅÅ 
-joinGameView
-ÅÅ !
-=
-ÅÅ" #
-new
-ÅÅ$ '
-JoinGame
-ÅÅ( 0
-(
-ÅÅ0 1
-)
-ÅÅ1 2
-;
-ÅÅ2 3
-joinGameView
-ÇÇ 
-.
-ÇÇ 
-Show
-ÇÇ 
-(
-ÇÇ 
-)
-ÇÇ 
-;
-ÇÇ  
-this
-ÉÉ 
-.
-ÉÉ 
-Close
-ÉÉ 
-(
-ÉÉ 
-)
-ÉÉ 
-;
-ÉÉ 
-}
-ÑÑ 	
-private
-ÜÜ 
-void
-ÜÜ 
-GoToMainMenuView
-ÜÜ %
-(
-ÜÜ% &
-)
-ÜÜ& '
+Propertieshh  *
+.hh* +
+Langshh+ 0
+.hh0 1
+	Resourceshh1 :
+.hh: ;$
+CommunicationInterruptedhh; S
+)hhS T
+;hhT U
+}ii 
+finallyjj 
+{kk 
+ifll 
+(ll 
+_thisPlayerIsHostll %
+)ll% &
+{mm 
+GoToMainMenuViewnn $
+(nn$ %
+)nn% &
+;nn& '
+}oo 
+elsepp 
+{qq 
+GoToJoinGameViewrr $
+(rr$ %
+)rr% &
+;rr& '
+}ss 
+}tt 
+}uu 	
+privateww 
+voidww 
+GoToJoinGameViewww %
+(ww% &
+)ww& '
+{xx 	0
+$_windowIsBeingClosedByTheCloseButtonyy 0
+=yy1 2
+falseyy3 8
+;yy8 9
+JoinGamezz 
+joinGameViewzz !
+=zz" #
+newzz$ '
+JoinGamezz( 0
+(zz0 1
+)zz1 2
+;zz2 3
+joinGameView{{ 
+.{{ 
+Show{{ 
+({{ 
+){{ 
+;{{  
+this|| 
+.|| 
+Close|| 
+(|| 
+)|| 
+;|| 
+}}} 	
+private 
+void 
+GoToMainMenuView %
+(% &
+)& '
 {
-áá 	2
+ÄÄ 	2
 $_windowIsBeingClosedByTheCloseButton
-àà 0
+ÅÅ 0
 =
-àà1 2
+ÅÅ1 2
 false
-àà3 8
+ÅÅ3 8
 ;
-àà8 9
+ÅÅ8 9
 MainMenu
-ââ 
+ÇÇ 
 mainMenuView
-ââ !
+ÇÇ !
 =
-ââ" #
+ÇÇ" #
 new
-ââ$ '
+ÇÇ$ '
 MainMenu
-ââ( 0
+ÇÇ( 0
 (
-ââ0 1
+ÇÇ0 1
 )
-ââ1 2
+ÇÇ1 2
 ;
-ââ2 3
+ÇÇ2 3
 mainMenuView
-ää 
+ÉÉ 
 .
-ää 
+ÉÉ 
 Show
-ää 
+ÉÉ 
 (
-ää 
+ÉÉ 
 )
-ää 
+ÉÉ 
 ;
-ää  
+ÉÉ  
 this
-ãã 
+ÑÑ 
 .
-ãã 
+ÑÑ 
 Close
-ãã 
+ÑÑ 
 (
-ãã 
+ÑÑ 
 )
-ãã 
+ÑÑ 
 ;
-ãã 
+ÑÑ 
 }
-åå 	
+ÖÖ 	
 private
-éé 
+áá 
 void
-éé #
+áá #
 CallLeaveLobbyService
-éé *
+áá *
 (
-éé* +
+áá* +
 )
-éé+ ,
+áá+ ,
 {
-èè 	!
+àà 	!
 _lobbyServiceClient
-êê 
+ââ 
 .
-êê  
+ââ  
 
 LeaveLobby
-êê  *
+ââ  *
 (
-êê* +
+ââ* +
 GameMatchDto
-êê+ 7
+ââ+ 7
 .
-êê7 8
+ââ7 8
 Host
-êê8 <
+ââ8 <
 ,
-êê< =
+ââ< =
 	_username
-êê> G
+ââ> G
 )
-êêG H
+ââG H
 ;
-êêH I
+ââH I
 }
-ëë 	
+ää 	
 public
-ìì 
+åå 
 void
-ìì  
+åå  
 StartButtonClicked
-ìì &
+åå &
 (
-ìì& '
+åå& '
 object
-ìì' -
+åå' -
 sender
-ìì. 4
+åå. 4
 ,
-ìì4 5
+åå4 5
 RoutedEventArgs
-ìì6 E
+åå6 E
 e
-ììF G
+ååF G
 )
-ììG H
+ååG H
 {
-îî 	
+çç 	
 if
-ïï 
+éé 
 (
-ïï 
+éé 
 _players
-ïï 
+éé 
 .
-ïï 
+éé 
 Count
-ïï 
+éé 
 <
-ïï 
+éé 
 $num
-ïï  !
+éé  !
 )
-ïï! "
+éé! "
 {
-ññ 
+èè 
 
 MessageBox
-óó 
+êê 
 .
-óó 
+êê 
 Show
-óó 
+êê 
 (
-óó  
+êê  
 
 Properties
-óó  *
+êê  *
 .
-óó* +
+êê* +
 Langs
-óó+ 0
+êê+ 0
 .
-óó0 1
+êê0 1
 	Resources
-óó1 :
+êê1 :
 .
-óó: ;)
+êê: ;)
 InsufficientNumberOfPlayers
-óó; V
+êê; V
 )
-óóV W
+êêV W
 ;
-óóW X
+êêW X
 }
-òò 
+ëë 
 else
-ôô 
+íí 
 {
-öö 
+ìì 
 	StartGame
-õõ 
+îî 
 (
-õõ 
+îî 
 )
-õõ 
+îî 
 ;
-õõ 
+îî 
 }
-úú 
+ïï 
 }
-ùù 	
+ññ 	
 private
-üü 
+òò 
 void
-üü 
+òò 
 	StartGame
-üü 
+òò 
 (
-üü 
+òò 
 )
-üü  
+òò  
 {
-†† 	
+ôô 	
 try
-°° 
+öö 
 {
-¢¢ !
+õõ !
 _lobbyServiceClient
-££ #
+úú #
 .
-££# $
+úú# $
 	StartGame
-££$ -
+úú$ -
 (
-££- .
+úú- .
 GameMatchDto
-££. :
+úú. :
 .
-££: ;
+úú: ;
 Host
-££; ?
+úú; ?
 )
-££? @
+úú? @
 ;
-££@ A
+úú@ A
 }
-§§ 
+ùù 
 catch
-•• 
+ûû 
 (
-•• 
+ûû 
 TimeoutException
-•• #
-timeoutException
-••$ 4
+ûû #
 )
-••4 5
+ûû# $
 {
-¶¶ 
-_logger
-ßß 
+üü 
+
+MessageBox
+†† 
 .
-ßß 
-Fatal
-ßß 
+†† 
+Show
+†† 
 (
-ßß 
-timeoutException
-ßß .
+††  
+
+Properties
+††  *
+.
+††* +
+Langs
+††+ 0
+.
+††0 1
+	Resources
+††1 :
+.
+††: ; 
+ServerTimeoutError
+††; M
 )
-ßß. /
+††M N
 ;
-ßß/ 0
+††N O
+}
+°° 
+catch
+¢¢ 
+(
+¢¢ '
+EndpointNotFoundException
+¢¢ ,
+)
+¢¢, -
+{
+££ 
+
+MessageBox
+§§ 
+.
+§§ 
+Show
+§§ 
+(
+§§  
+
+Properties
+§§  *
+.
+§§* +
+Langs
+§§+ 0
+.
+§§0 1
+	Resources
+§§1 :
+.
+§§: ;"
+ServerConnectionLost
+§§; O
+)
+§§O P
+;
+§§P Q
+}
+•• 
+catch
+¶¶ 
+(
+¶¶ $
+CommunicationException
+¶¶ )
+)
+¶¶) *
+{
+ßß 
 
 MessageBox
 ®® 
@@ -12778,394 +12005,282 @@ Properties
 	Resources
 ®®1 :
 .
-®®: ; 
-ServerTimeoutError
-®®; M
-)
-®®M N
-;
-®®N O
-}
-©© 
-catch
-™™ 
-(
-™™ '
-EndpointNotFoundException
-™™ ,'
-endpointNotFoundException
-™™- F
-)
-™™F G
-{
-´´ 
-_logger
-¨¨ 
-.
-¨¨ 
-Fatal
-¨¨ 
-(
-¨¨ '
-endpointNotFoundException
-¨¨ 7
-)
-¨¨7 8
-;
-¨¨8 9
-
-MessageBox
-≠≠ 
-.
-≠≠ 
-Show
-≠≠ 
-(
-≠≠  
-
-Properties
-≠≠  *
-.
-≠≠* +
-Langs
-≠≠+ 0
-.
-≠≠0 1
-	Resources
-≠≠1 :
-.
-≠≠: ;"
-ServerConnectionLost
-≠≠; O
-)
-≠≠O P
-;
-≠≠P Q
-}
-ÆÆ 
-catch
-ØØ 
-(
-ØØ $
-CommunicationException
-ØØ )$
-communicationException
-ØØ* @
-)
-ØØ@ A
-{
-∞∞ 
-_logger
-±± 
-.
-±± 
-Fatal
-±± 
-(
-±± $
-communicationException
-±± 4
-)
-±±4 5
-;
-±±5 6
-
-MessageBox
-≤≤ 
-.
-≤≤ 
-Show
-≤≤ 
-(
-≤≤  
-
-Properties
-≤≤  *
-.
-≤≤* +
-Langs
-≤≤+ 0
-.
-≤≤0 1
-	Resources
-≤≤1 :
-.
-≤≤: ;&
+®®: ;&
 CommunicationInterrupted
-≤≤; S
+®®; S
 )
-≤≤S T
+®®S T
 ;
-≤≤T U
+®®T U
 }
-≥≥ 
+©© 
 }
-µµ 	
+´´ 	
 public
-∑∑ 
+≠≠ 
 void
-∑∑ $
+≠≠ $
 NotifyNewPlayerEntered
-∑∑ *
+≠≠ *
 (
-∑∑* +
+≠≠* +
 string
-∑∑+ 1
+≠≠+ 1
 username
-∑∑2 :
+≠≠2 :
 )
-∑∑: ;
+≠≠: ;
 {
-∏∏ 	
+ÆÆ 	
 if
-ππ 
+ØØ 
 (
-ππ 
+ØØ 
 username
-ππ 
+ØØ 
 !=
-ππ 
+ØØ 
 null
-ππ 
+ØØ 
 )
-ππ  
+ØØ  
 {
-∫∫ 
+∞∞ 
 _players
-ªª 
+±± 
 .
-ªª 
+±± 
 Add
-ªª 
+±± 
 (
-ªª 
+±± 
 username
-ªª %
+±± %
 )
-ªª% &
+±±% &
 ;
-ªª& '
+±±& '
 }
-ºº 
+≤≤ 
 }
-ΩΩ 	
+≥≥ 	
 public
-øø 
+µµ 
 void
-øø 
+µµ 
 NotifyPlayerLeft
-øø $
+µµ $
 (
-øø$ %
+µµ$ %
 string
-øø% +
+µµ% +
 username
-øø, 4
+µµ, 4
 )
-øø4 5
+µµ4 5
 {
-¿¿ 	
+∂∂ 	
 _players
-¡¡ 
+∑∑ 
 .
-¡¡ 
+∑∑ 
 Remove
-¡¡ 
+∑∑ 
 (
-¡¡ 
+∑∑ 
 username
-¡¡ $
+∑∑ $
 )
-¡¡$ %
+∑∑$ %
 ;
-¡¡% &
+∑∑% &
 }
-¬¬ 	
+∏∏ 	
 public
-ƒƒ 
+∫∫ 
 void
-ƒƒ $
+∫∫ $
 TakePlayersToMatchView
-ƒƒ *
+∫∫ *
 (
-ƒƒ* +
+∫∫* +
 string
-ƒƒ+ 1
+∫∫+ 1
 [
-ƒƒ1 2
+∫∫1 2
 ]
-ƒƒ2 3
+∫∫2 3
 playersInMatch
-ƒƒ4 B
+∫∫4 B
 )
-ƒƒB C
+∫∫B C
 {
-≈≈ 	2
+ªª 	2
 $_windowIsBeingClosedByTheCloseButton
-∆∆ 0
+ºº 0
 =
-∆∆1 2
+ºº1 2
 false
-∆∆3 8
+ºº3 8
 ;
-∆∆8 9
+ºº8 9
 Views
-«« 
+ΩΩ 
 .
-«« 
+ΩΩ 
 Match
-«« 
+ΩΩ 
 	matchView
-«« !
+ΩΩ !
 =
-««" #
+ΩΩ" #
 new
-««$ '
+ΩΩ$ '
 Views
-««( -
+ΩΩ( -
 .
-««- .
+ΩΩ- .
 Match
-««. 3
+ΩΩ. 3
 (
-««3 4
+ΩΩ3 4
 )
-««4 5
+ΩΩ4 5
 {
-»» 
+ææ 
 Players
-…… 
+øø 
 =
-…… 
+øø 
 playersInMatch
-…… (
+øø (
 ,
-……( )
+øø( )
 	MatchHost
-   
+¿¿ 
 =
-   
+¿¿ 
 GameMatchDto
-   (
+¿¿ (
 .
-  ( )
+¿¿( )
 Host
-  ) -
+¿¿) -
 ,
-  - .
+¿¿- .
 CardDeck
-ÀÀ 
+¡¡ 
 =
-ÀÀ 
+¡¡ 
 GameMatchDto
-ÀÀ '
+¡¡ '
 .
-ÀÀ' (
+¡¡' (
 CardDeckDto
-ÀÀ( 3
+¡¡( 3
 }
-ÃÃ 
+¬¬ 
 ;
-ÃÃ 
+¬¬ 
 	matchView
-ÕÕ 
+√√ 
 .
-ÕÕ 
+√√ 
 Show
-ÕÕ 
+√√ 
 (
-ÕÕ 
+√√ 
 )
-ÕÕ 
+√√ 
 ;
-ÕÕ 
+√√ 
 this
-ŒŒ 
+ƒƒ 
 .
-ŒŒ 
+ƒƒ 
 Close
-ŒŒ 
+ƒƒ 
 (
-ŒŒ 
+ƒƒ 
 )
-ŒŒ 
+ƒƒ 
 ;
-ŒŒ 
+ƒƒ 
 }
-œœ 	
+≈≈ 	
 public
-—— 
+«« 
 void
-—— #
+«« #
 TakePlayersOutOfLobby
-—— )
+«« )
 (
-——) *
+««) *
 )
-——* +
+««* +
 {
-““ 	
+»» 	
 GoToJoinGameView
-”” 
+…… 
 (
-”” 
+…… 
 )
-”” 
+…… 
 ;
-”” 
+…… 
 }
-‘‘ 	
+   	
 private
-÷÷ 
+ÃÃ 
 void
-÷÷ 
+ÃÃ 
 Window_Closed
-÷÷ "
+ÃÃ "
 (
-÷÷" #
+ÃÃ" #
 object
-÷÷# )
+ÃÃ# )
 sender
-÷÷* 0
+ÃÃ* 0
 ,
-÷÷0 1
+ÃÃ0 1
 System
-÷÷2 8
+ÃÃ2 8
 .
-÷÷8 9
+ÃÃ8 9
 	EventArgs
-÷÷9 B
+ÃÃ9 B
 e
-÷÷C D
+ÃÃC D
 )
-÷÷D E
+ÃÃD E
 {
-◊◊ 	
+ÕÕ 	
 if
-ÿÿ 
+ŒŒ 
 (
-ÿÿ 2
+ŒŒ 2
 $_windowIsBeingClosedByTheCloseButton
-ÿÿ 4
+ŒŒ 4
 )
-ÿÿ4 5
+ŒŒ4 5
 {
-ŸŸ #
+œœ #
 CallLeaveLobbyService
-⁄⁄ %
+–– %
 (
-⁄⁄% &
+––% &
 )
-⁄⁄& '
+––& '
 ;
-⁄⁄' (
+––' (
 }
-€€ 
+—— 
 }
-‹‹ 	
+““ 	
 }
-›› 
-}ﬁﬁ ó
+”” 
+}‘‘ ó
 DC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\App.xaml.cs
 [ 
 assembly 	
@@ -13208,170 +12323,209 @@ MemoryGame
  *
 { 
 } 
-} ≠
+} €
 QC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Views\MainWindow.xaml.cs
-	namespace 	
+	namespace 	
 
-MemoryGame
+MemoryGame
  
-{ 
-public 
+{ 
+public		 
 
-partial 
-class 
+partial		 
+class		 
 
-MainWindow #
-:$ %
-Window& ,
-{		 
-public
+MainWindow		 #
+:		$ %
+Window		& ,
+{
 
- 
+ 
+private 
+static 
+readonly 
+log4net  '
+.' (
+ILog( ,
+_logger- 4
+=5 6
+log4net7 >
+.> ?
 
-MainWindow
-
- 
-(
-
- 
-)
-
- 
-{ 	
-System 
-. 
-	Threading 
-. 
-Thread #
-.# $
-CurrentThread$ 1
-.1 2
-CurrentUICulture2 B
-=C D
-newE H
-SystemI O
-.O P
-GlobalizationP ]
-.] ^
-CultureInfo^ i
-(i j
+LogManager? I
+.I J
+	GetLoggerJ S
+(S T
+$strT h
+)h i
+;i j
+public 
 
-Propertiesj t
-.t u
-Settingsu }
-.} ~
-Default	~ Ö
-.
-Ö Ü
-LanguageSettings
-Ü ñ
+MainWindow 
+( 
+) 
+{ 	
+LoadCultureInfo 
+( 
+) 
+; 
+InitializeComponent 
+(  
+)  !
+;! "
+} 	
+private 
+void 
+LoadCultureInfo $
+($ %
+)% &
+{ 	
+try 
+{ 
+System 
+. 
+	Threading  
+.  !
+Thread! '
+.' (
+CurrentThread( 5
+.5 6
+CurrentUICulture6 F
+=G H
+newI L
+CultureInfoM X
+(X Y
+
+PropertiesY c
+.c d
+Settingsd l
+.l m
+Defaultm t
+.t u
+LanguageSettings	u Ö
 )
-ñ ó
+Ö Ü
 ;
-ó ò
-InitializeComponent 
-(  
-)  !
-;! "
-} 	
-private 
-void &
-GetRegisteredButtonClicked /
-(/ 0
-object0 6
-sender7 =
-,= >
-RoutedEventArgs? N
-eO P
-)P Q
-{ 	
-Register 
-registerView !
-=" #
-new$ '
-Register( 0
-(0 1
-)1 2
-;2 3
-registerView 
-. 
-Show 
-( 
-) 
-;  
-this 
-. 
-Close 
-( 
-) 
-; 
-} 	
-private 
-void &
-ConfigurationButtonClicked /
-(/ 0
-object0 6
-sender7 =
-,= >
-RoutedEventArgs? N
-eO P
-)P Q
-{ 	
-Settings 
-settingsView !
-=" #
-new$ '
-Settings( 0
-(0 1
-)1 2
-;2 3
-settingsView 
-. 
-Show 
-( 
-) 
-;  
-this 
-. 
-Close 
-( 
-) 
-; 
+Ü á
+} 
+catch 
+( $
+CultureNotFoundException +
+)+ ,
+{ 
+_logger 
+. 
+Fatal 
+( 
+$str W
+)W X
+;X Y
+this 
+. 
+Close 
+( 
+) 
+; 
+} 
 } 	
 private   
-void   
-LoginButtonClicked   '
-(  ' (
-object  ( .
-sender  / 5
-,  5 6
-RoutedEventArgs  7 F
-e  G H
-)  H I
-{!! 	
-Login"" 
-	loginView"" 
-="" 
-new"" !
-Login""" '
-(""' (
-)""( )
-;"") *
-	loginView## 
-.## 
-Show## 
-(## 
-)## 
-;## 
+void   &
+GetRegisteredButtonClicked   /
+(  / 0
+object  0 6
+sender  7 =
+,  = >
+RoutedEventArgs  ? N
+e  O P
+)  P Q
+{!! 	
+Register"" 
+registerView"" !
+=""" #
+new""$ '
+Register""( 0
+(""0 1
+)""1 2
+;""2 3
+registerView## 
+.## 
+Show## 
+(## 
+)## 
+;##  
 this$$ 
 .$$ 
 Close$$ 
 ($$ 
 )$$ 
 ;$$ 
-}%% 	
-}&& 
-}'' ö
+}%% 	
+private'' 
+void'' &
+ConfigurationButtonClicked'' /
+(''/ 0
+object''0 6
+sender''7 =
+,''= >
+RoutedEventArgs''? N
+e''O P
+)''P Q
+{(( 	
+Settings)) 
+settingsView)) !
+=))" #
+new))$ '
+Settings))( 0
+())0 1
+)))1 2
+;))2 3
+settingsView** 
+.** 
+Show** 
+(** 
+)** 
+;**  
+this++ 
+.++ 
+Close++ 
+(++ 
+)++ 
+;++ 
+},, 	
+private.. 
+void.. 
+LoginButtonClicked.. '
+(..' (
+object..( .
+sender../ 5
+,..5 6
+RoutedEventArgs..7 F
+e..G H
+)..H I
+{// 	
+Login00 
+	loginView00 
+=00 
+new00 !
+Login00" '
+(00' (
+)00( )
+;00) *
+	loginView11 
+.11 
+Show11 
+(11 
+)11 
+;11 
+this22 
+.22 
+Close22 
+(22 
+)22 
+;22 
+}33 	
+}44 
+}55 ö
 SC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGame\Properties\AssemblyInfo.cs
 [
 

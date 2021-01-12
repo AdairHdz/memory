@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="DatabaseConnectionLostFault">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:TypedFault">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="DatabaseConnectionLostFault" nillable="true" type="tns:DatabaseConnectionLostFault" />
-  <xs:complexType name="TypedFault">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Details" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="TypedFault" nillable="true" type="tns:TypedFault" />
   <xs:complexType name="NonExistentUserFault">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:TypedFault">
@@ -23,14 +8,13 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="NonExistentUserFault" nillable="true" type="tns:NonExistentUserFault" />
-  <xs:complexType name="CardDeckRetrievingFault">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:TypedFault">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
+  <xs:complexType name="TypedFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Details" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
+    </xs:sequence>
   </xs:complexType>
-  <xs:element name="CardDeckRetrievingFault" nillable="true" type="tns:CardDeckRetrievingFault" />
+  <xs:element name="TypedFault" nillable="true" type="tns:TypedFault" />
   <xs:complexType name="MatchAccessDeniedFault">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:TypedFault">

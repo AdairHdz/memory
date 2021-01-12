@@ -19,7 +19,6 @@ namespace MemoryGame
         private string _username;        
         private bool _thisPlayerIsHost;
         private bool _windowIsBeingClosedByTheCloseButton;
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("WaitingRoom.xaml.cs");
 
         public WaitingRoom()
         {
@@ -36,7 +35,7 @@ namespace MemoryGame
             DetermineIfPlayerIsHost();
             if (!_thisPlayerIsHost)
             {
-                StarButton.Visibility = System.Windows.Visibility.Collapsed;
+                StarButton.Visibility = Visibility.Collapsed;
             }
 
             try
@@ -44,19 +43,16 @@ namespace MemoryGame
                 LoadActivePlayersInLobby();
                 CallJoinLobbyService();
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (EndpointNotFoundException endpointNotFoundException)
+            catch (EndpointNotFoundException)
             {
-                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
 
@@ -95,19 +91,16 @@ namespace MemoryGame
             {
                 CallLeaveLobbyService();
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (EndpointNotFoundException endpointNotFoundException)
+            catch (EndpointNotFoundException)
             {
-                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
             finally
@@ -162,19 +155,16 @@ namespace MemoryGame
             {
                 _lobbyServiceClient.StartGame(GameMatchDto.Host);
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (EndpointNotFoundException endpointNotFoundException)
+            catch (EndpointNotFoundException)
             {
-                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
 

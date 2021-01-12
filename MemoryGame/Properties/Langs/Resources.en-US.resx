@@ -276,6 +276,9 @@
   <data name="PasswordIsInvalid" xml:space="preserve">
     <value>The password you have entered is too weak. Please make sure that your password contains at least one capital letter, one lowercase letter, a number and an special character. Also make your that your password's lenght is between 8 and 25 characters long</value>
   </data>
+  <data name="PasswordRecovery" xml:space="preserve">
+    <value>Password recovery</value>
+  </data>
   <data name="PasswordRecoveryError" xml:space="preserve">
     <value>An error has occured. We were not able to change your password. Please try again later</value>
   </data>
@@ -296,6 +299,9 @@
   </data>
   <data name="RecoverPasswordMessage" xml:space="preserve">
     <value>Enter the email you signed up with; a verification code will be provided to reset your password</value>
+  </data>
+  <data name="RecoveryToken" xml:space="preserve">
+    <value>Here is your recovery token</value>
   </data>
   <data name="RecoveryTokenSendingError" xml:space="preserve">
     <value>An error occured while trying to assign a new verification code to you. Please try again later</value>
@@ -320,6 +326,9 @@
   </data>
   <data name="ScoreTable" xml:space="preserve">
     <value>Score table</value>
+  </data>
+  <data name="SelectPlayerToBeExpeled" xml:space="preserve">
+    <value>Please select a player to vote</value>
   </data>
   <data name="SendCode" xml:space="preserve">
     <value>Send code</value>
@@ -353,6 +362,9 @@
   </data>
   <data name="TwoPlayers" xml:space="preserve">
     <value>2 players</value>
+  </data>
+  <data name="UserDoesNotExist" xml:space="preserve">
+    <value>User not found. Please make sure that the username and password you entered are correct.</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>

@@ -1,4 +1,4 @@
-Ë	
+Ñ
 iC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAccountModifiabilityService.cs
 	namespace 	
 MemoryGameService
@@ -16,90 +16,50 @@ iC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAcco
 {		 
 [
 
- 	
-FaultContract
+ 	
+OperationContract
 
-	 
-(
-
- 
-typeof
-
- 
-(
-
- '
-DatabaseConnectionLostFault
-
- 9
-)
-
-9 :
-)
-
-: ;
+	 
 ]
 
-; <
-[ 	
-OperationContract	 
-] 
-bool 
-SetNewPassword 
-( .
-"PasswordModificationCredentialsDto >+
-passwordModificationCredentials? ^
-)^ _
-;_ `
-[ 	
-FaultContract	 
-( 
-typeof 
-( '
-DatabaseConnectionLostFault 9
-)9 :
-): ;
-]; <
-[ 	
-OperationContract	 
-] 
-bool 
-ChangeUsername 
-( 
-string "
-emailAddress# /
-,/ 0
-string1 7
-newUsername8 C
-)C D
-;D E
-} 
-} 
+ 
+bool 
+SetNewPassword 
+( .
+"PasswordModificationCredentialsDto >+
+passwordModificationCredentials? ^
+)^ _
+;_ `
+[ 	
+OperationContract	 
+] 
+bool 
+ChangeUsername 
+( 
+string "
+emailAddress# /
+,/ 0
+string1 7
+newUsername8 C
+)C D
+;D E
+} 
+} ã
 hC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAccountVerificationService.cs
-	namespace 	
-MemoryGameService
+	namespace 	
+MemoryGameService
  
-. 
-	Contracts %
-{ 
-[ 
-ServiceContract 
-] 
-public 
+. 
+	Contracts %
+{ 
+[ 
+ServiceContract 
+] 
+public 
 
-	interface '
-IAccountVerificationService 0
-{ 
-[ 	
-OperationContract	 
-] 
-bool		  
-SetAccountAsVerified		 !
-(		! "
-string		" (
-emailAddress		) 5
-)		5 6
-;		6 7
+	interface '
+IAccountVerificationService 0
+{		 
 [
 
  	
@@ -109,31 +69,67 @@ hC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAcco
 ]
 
  
-bool &
-AssignNewVerificationToken '
-(' (
-string( .
-emailAddress/ ;
-,; <
-string= C
-verificationTokenD U
-)U V
-;V W
+bool  
+SetAccountAsVerified !
+(! "
+string" (
+emailAddress) 5
+)5 6
+;6 7
 [ 	
 OperationContract	 
 ] 
-bool 
-VerifyToken 
-( 
-string 
-emailAddress  ,
-,, -
-string. 4
-verificationToken5 F
-)F G
-;G H
-} 
-} ÿ
+bool $
+AssignNewActivationToken %
+(% &
+string& ,
+emailAddress- 9
+,9 :
+string; A
+activationTokenB Q
+)Q R
+;R S
+[ 	
+OperationContract	 
+] 
+bool "
+AssignNewRecoveryToken #
+(# $
+string$ *
+emailAddress+ 7
+,7 8
+string9 ?
+recoveryToken@ M
+)M N
+;N O
+[ 	
+OperationContract	 
+] 
+bool !
+VerifyActivationToken "
+(" #
+string# )
+emailAddress* 6
+,6 7
+string8 >
+activationToken? N
+)N O
+;O P
+[ 	
+OperationContract	 
+] 
+bool 
+VerifyRecoveryToken  
+(  !
+string! '
+emailAddress( 4
+,4 5
+string6 <
+activationToken= L
+)L M
+;M N
+} 
+} ™
 fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\ICardDeckRetrieverService.cs
 	namespace 	
 MemoryGameService
@@ -151,39 +147,30 @@ fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\ICard
 {
 
  
-[ 	
-FaultContract	 
-( 
-typeof 
-( #
-CardDeckRetrievingFault 5
-)5 6
-)6 7
-]7 8
-[ 	
-OperationContract	 
-] 
-CardDeckDTO 
-GetCardDeckAndCards '
-(' (
-int( +
+[ 	
+OperationContract	 
+] 
+CardDeckDTO 
+GetCardDeckAndCards '
+(' (
+int( +
 
-cardDeckId, 6
-)6 7
-;7 8
-[ 	
-OperationContract	 
-] 
-IList 
-< 
-CardDeckInfoDto 
-> 
-GetCardDecksInfo /
-(/ 0
-)0 1
-;1 2
-} 
-} ƒ
+cardDeckId, 6
+)6 7
+;7 8
+[ 	
+OperationContract	 
+] 
+IList 
+< 
+CardDeckInfoDto 
+> 
+GetCardDecksInfo /
+(/ 0
+)0 1
+;1 2
+} 
+} ƒ
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\ILobbyService.cs
 	namespace 	
 MemoryGameService
@@ -530,232 +517,7 @@ cC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IPlay
 )0 1
 ;1 2
 } 
-} ˝
-kC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjectMappers\CardDeckMapper.cs
-	namespace 	
-MemoryGameService
- 
-. %
-DataTransferObjectMappers 5
-{ 
-public 
-
-static 
-class 
-CardDeckMapper &
-{ 
-public		 
-static		 
-CardDeckDTO		 !
-	CreateDTO		" +
-(		+ ,
-CardDeck		, 4
-cardDeckEntity		5 C
-)		C D
-{
-
- 	
-CardDeckDTO 
-cardDeckDTO #
-=$ %
-new& )
-CardDeckDTO* 5
-(5 6
-)6 7
-{ 
-
-CardDeckId 
-= 
-cardDeckEntity +
-.+ ,
-
-CardDeckId, 6
-,6 7
-Name 
-= 
-cardDeckEntity %
-.% &
-Name& *
-,* +
-	BackImage 
-= 
-cardDeckEntity *
-.* +
-	BackImage+ 4
-,4 5
-NumberOfPairs 
-= 
-cardDeckEntity  .
-.. /
-NumberOfPairs/ <
-,< =
-Cards 
-= 
-new 
-List  
-<  !
-CardDto! (
->( )
-() *
-)* +
-} 
-; 
-return 
-cardDeckDTO 
-; 
-} 	
-public 
-static 
-CardDeck 
-CreateEntity +
-(+ ,
-CardDeckDTO, 7
-cardDeckDTO8 C
-)C D
-{ 	
-CardDeck 
-cardDeck 
-= 
-new  #
-CardDeck$ ,
-(, -
-)- .
-{ 
-
-CardDeckId 
-= 
-cardDeckDTO (
-.( )
-
-CardDeckId) 3
-,3 4
-Name 
-= 
-cardDeckDTO "
-." #
-Name# '
-,' (
-	BackImage 
-= 
-cardDeckDTO '
-.' (
-	BackImage( 1
-,1 2
-NumberOfPairs 
-= 
-cardDeckDTO  +
-.+ ,
-NumberOfPairs, 9
-} 
-; 
-return   
-cardDeck   
-;   
-}!! 	
-}"" 
-}## ò
-gC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjectMappers\CardMapper.cs
-	namespace 	
-MemoryGameService
- 
-. %
-DataTransferObjectMappers 5
-{ 
-public 
-
-static 
-class 
-
-CardMapper "
-{ 
-public 
-static 
-CardDto 
-	CreateDTO '
-(' (
-Card( ,
-card- 1
-)1 2
-{		 	
-CardDto
-
- 
-cardDto
-
- 
-=
-
- 
-new
-
- !
-CardDto
-
-" )
-(
-
-) *
-)
-
-* +
-{ 
-CardId 
-= 
-card 
-. 
-CardId $
-,$ %
-
-FrontImage 
-= 
-card !
-.! "
-
-FrontImage" ,
-} 
-; 
-return 
-cardDto 
-; 
-} 	
-public 
-static 
-Card 
-CreateEntity '
-(' (
-CardDto( /
-cardDto0 7
-)7 8
-{ 	
-Card 
-card 
-= 
-new 
-Card  
-(  !
-)! "
-{ 
-CardId 
-= 
-cardDto  
-.  !
-CardId! '
-,' (
-
-FrontImage 
-= 
-cardDto $
-.$ %
-
-FrontImage% /
-} 
-; 
-return 
-card 
-; 
-} 	
-} 
-} Ê
+} Ê
 bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\CardDeckDTO.cs
 	namespace 	
 
@@ -766,103 +528,91 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-[ 
-DataContract 
-] 
-public 
+[
+
+ 
+DataContract
+
+ 
+]
+
+ 
+public 
 
-class 
-CardDeckDTO 
-{ 
-[		 	
+class 
+CardDeckDTO 
+{ 
+[ 	
 
-DataMember			 
-]		 
-public
-
- 
-int
-
- 
+DataMember	 
+] 
+public 
+int 
 
-CardDeckId
-
- 
-{
-
- 
-get
-
-  #
-;
-
-# $
-set
-
-% (
-;
-
-( )
-}
-
-* +
-[ 	
+CardDeckId 
+{ 
+get  #
+;# $
+set% (
+;( )
+}* +
+[ 	
 
-DataMember	 
-] 
-public 
-string 
-Name 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
-[ 	
+DataMember	 
+] 
+public 
+string 
+Name 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+[ 	
 
-DataMember	 
-] 
-public 
-string 
-	BackImage 
-{  !
-get" %
-;% &
-set' *
-;* +
-}, -
-[ 	
+DataMember	 
+] 
+public 
+string 
+	BackImage 
+{  !
+get" %
+;% &
+set' *
+;* +
+}, -
+[ 	
 
-DataMember	 
-] 
-public 
-int 
-NumberOfPairs  
-{! "
-get# &
-;& '
-set( +
-;+ ,
-}- .
-[ 	
+DataMember	 
+] 
+public   
+int   
+NumberOfPairs    
+{  ! "
+get  # &
+;  & '
+set  ( +
+;  + ,
+}  - .
+[$$ 	
 
-DataMember	 
-] 
-public 
-IList 
-< 
-CardDto 
-> 
-Cards #
-{$ %
-get& )
-;) *
-set+ .
-;. /
-}0 1
-} 
-} Œ
+DataMember$$	 
+]$$ 
+public%% 
+IList%% 
+<%% 
+CardDto%% 
+>%% 
+Cards%% #
+{%%$ %
+get%%& )
+;%%) *
+set%%+ .
+;%%. /
+}%%0 1
+}&& 
+}'' Œ
 fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\CardDeckInfoDto.cs
 	namespace 	
 
@@ -873,49 +623,49 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-[ 
-DataContract 
-] 
-public 
+[		 
+DataContract		 
+]		 
+public
+
+ 
 
-class 
-CardDeckInfoDto  
-{ 
-[ 	
-
-DataMember	 
-] 
-public		 
-int		 
-
-CardDeckId		 
-{		 
-get		  #
-;		# $
-set		% (
-;		( )
-}		* +
-[
+class
 
- 	
+ 
+CardDeckInfoDto
+
+  
+{ 
+[ 	
 
-DataMember
-
-	 
-]
-
- 
-public 
-string 
-CardDeckName "
-{# $
-get% (
-;( )
-set* -
-;- .
-}/ 0
-} 
-} ∏
+DataMember	 
+] 
+public 
+int 
+
+CardDeckId 
+{ 
+get  #
+;# $
+set% (
+;( )
+}* +
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+CardDeckName "
+{# $
+get% (
+;( )
+set* -
+;- .
+}/ 0
+} 
+} ∏
 ^C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\CardDto.cs
 	namespace 	
 
@@ -926,49 +676,49 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-[ 
-DataContract 
-] 
-public 
+[		 
+DataContract		 
+]		 
+public
+
+ 
 
-class 
-CardDto 
-{ 
-[ 	
-
-DataMember	 
-] 
-public		 
-int		 
-CardId		 
-{		 
-get		 
-;		  
-set		! $
-;		$ %
-}		& '
-[
+class
 
- 	
-
-DataMember
+ 
+CardDto
 
-	 
-]
-
- 
-public 
-string 
+ 
+{ 
+[ 	
 
-FrontImage  
-{! "
-get# &
-;& '
-set( +
-;+ ,
-}- .
-} 
-} û
+DataMember	 
+] 
+public 
+int 
+CardId 
+{ 
+get 
+;  
+set! $
+;$ %
+}& '
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+
+FrontImage  
+{! "
+get# &
+;& '
+set( +
+;+ ,
+}- .
+} 
+} û
 bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\CardPairDto.cs
 	namespace 	
 
@@ -979,61 +729,61 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-[ 
-DataContract 
-] 
-public 
+[		 
+DataContract		 
+]		 
+public
+
+ 
 
-class 
-CardPairDto 
-{ 
-[ 	
-
-DataMember	 
-] 
-public		 
-int		 
-IndexOfCard1		 
-{		  !
-get		" %
-;		% &
-set		' *
-;		* +
-}		, -
-[
+class
 
- 	
-
-DataMember
+ 
+CardPairDto
 
-	 
-]
-
- 
-public 
-int 
-IndexOfCard2 
-{  !
-get" %
-;% &
-set' *
-;* +
-}, -
-[ 	
+ 
+{ 
+[ 	
 
-DataMember	 
-] 
-public 
-bool 
-BothCardsAreEqual %
-{& '
-get( +
-;+ ,
-set- 0
-;0 1
-}2 3
-} 
-} ≠
+DataMember	 
+] 
+public 
+int 
+IndexOfCard1 
+{  !
+get" %
+;% &
+set' *
+;* +
+}, -
+[ 	
+
+DataMember	 
+] 
+public 
+int 
+IndexOfCard2 
+{  !
+get" %
+;% &
+set' *
+;* +
+}, -
+[ 	
+
+DataMember	 
+] 
+public 
+bool 
+BothCardsAreEqual %
+{& '
+get( +
+;+ ,
+set- 0
+;0 1
+}2 3
+} 
+} ≠
 cC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\ExpelVoteDto.cs
 	namespace 	
 
@@ -1044,61 +794,61 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-[ 
-DataContract 
-] 
-public 
+[		 
+DataContract		 
+]		 
+public
+
+ 
 
-class 
-ExpelVoteDto 
-{ 
-[ 	
-
-DataMember	 
-] 
-public		 
-string		 
-Host		 
-{		 
-get		  
-;		  !
-set		" %
-;		% &
-}		' (
-[
+class
 
- 	
-
-DataMember
+ 
+ExpelVoteDto
 
-	 
-]
-
- 
-public 
-string !
-UsernameOfExpelPlayer +
-{, -
-get. 1
-;1 2
-set3 6
-;6 7
-}8 9
-[ 	
+ 
+{ 
+[ 	
 
-DataMember	 
-] 
-public 
-string !
-UsernameOfVoterPlayer +
-{, -
-get. 1
-;1 2
-set3 6
-;6 7
-}8 9
-} 
-} œB
+DataMember	 
+] 
+public 
+string 
+Host 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+[ 	
+
+DataMember	 
+] 
+public 
+string !
+UsernameOfExpelPlayer +
+{, -
+get. 1
+;1 2
+set3 6
+;6 7
+}8 9
+[ 	
+
+DataMember	 
+] 
+public 
+string !
+UsernameOfVoterPlayer +
+{, -
+get. 1
+;1 2
+set3 6
+;6 7
+}8 9
+} 
+} ÌF
 _C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\MatchDto.cs
 	namespace 	
 
@@ -1109,470 +859,722 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-public 
+public22 
 
-class 
-MatchDto 
-{ 
-public 
-int 
-MaxNumberOfPlayers %
-{& '
-get( +
-;+ ,
-set- 0
-;0 1
-}2 3
-public		 
-CardDeckDTO		 
-CardDeckDto		 &
-{		' (
-get		) ,
-;		, -
-set		. 1
-;		1 2
-}		3 4
-public
-
- 
-string
-
- 
-Host
-
- 
-{
-
- 
-get
-
-  
-;
-
-  !
-set
-
-" %
-;
-
-% &
-}
-
-' (
-public 
-bool 
+class22 
+MatchDto22 
+{33 
+public77 
+int77 
+MaxNumberOfPlayers77 %
+{77& '
+get77( +
+;77+ ,
+set77- 0
+;770 1
+}772 3
+public;; 
+CardDeckDTO;; 
+CardDeckDto;; &
+{;;' (
+get;;) ,
+;;;, -
+set;;. 1
+;;;1 2
+};;3 4
+public?? 
+string?? 
+Host?? 
+{?? 
+get??  
+;??  !
+set??" %
+;??% &
+}??' (
+publicCC 
+boolCC 
 
-HasStarted 
-{  
-get! $
-;$ %
-set& )
-;) *
-}+ ,
-public 
-Lobby 
-Lobby 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
-private 
-IList 
-< 
-PlayerInMatch #
-># $
-_players% -
-;- .
-public 
-int 
+HasStartedCC 
+{CC  
+getCC! $
+;CC$ %
+setCC& )
+;CC) *
+}CC+ ,
+publicGG 
+LobbyGG 
+LobbyGG 
+{GG 
+getGG  
+;GG  !
+setGG" %
+;GG% &
+}GG' (
+privateKK 
+IListKK 
+<KK 
+PlayerInMatchKK #
+>KK# $
+_playersKK% -
+;KK- .
+publicOO 
+intOO 
 
-TotalPairs 
-{ 
-get  #
-;# $
-set% (
-;( )
-}* +
-public 
-MatchDto 
-( 
-) 
-{ 	
-Lobby 
-= 
-new 
-Lobby 
-( 
-) 
-;  
-_players 
-= 
-new 
-List 
-<  
-PlayerInMatch  -
->- .
-(. /
-)/ 0
-;0 1
-} 	
-public 
-IList 
-< 
-PlayerInMatch "
->" #&
-GetPlayersConnectedToMatch$ >
-(> ?
-)? @
-{ 	
-return 
-_players 
-; 
-} 	
-public 
-IList 
-< 
-string 
-> 1
-%GetUsernamesOfPlayersConnectedToMatch B
-(B C
-)C D
-{ 	
-IList 
-< 
-string 
-> .
-"usernamesOfPlayersConnectedToMatch <
-== >
-new? B
-ListC G
-<G H
-stringH N
->N O
-(O P
-)P Q
-;Q R
-foreach 
-( 
-var 
-player 
-in !
-_players" *
-)* +
-{ .
-"usernamesOfPlayersConnectedToMatch   2
-.  2 3
-Add  3 6
-(  6 7
-player  7 =
-.  = >
-Username  > F
-)  F G
-;  G H
-}!! 
-return"" .
-"usernamesOfPlayersConnectedToMatch"" 5
-;""5 6
-}## 	
-public%% 
-void%% 
-	AddPlayer%% 
-(%% 
-PlayerInMatch%% +
-player%%, 2
-)%%2 3
-{&& 	
-_players'' 
-.'' 
-Add'' 
-('' 
-player'' 
-)''  
-;''  !
-}(( 	
-public** 
-PlayerInMatch** 
-	GetPlayer** &
-(**& '
-string**' -
-username**. 6
-)**6 7
-{++ 	
-PlayerInMatch,, 
-playerRetrieved,, )
-=,,* +
-null,,, 0
-;,,0 1
-foreach-- 
-(-- 
-var-- 
-player-- 
-in-- !
-_players--" *
-)--* +
-{.. 
-if// 
-(// 
-player// 
-.// 
-Username// #
-.//# $
-Equals//$ *
-(//* +
-username//+ 3
-)//3 4
-)//4 5
-{00 
-return11 
-player11 !
-;11! "
-}22 
-}33 
-return44 
-playerRetrieved44 "
-;44" #
-}55 	
-public88 
-void88 
-
-StartMatch88 
-(88 
-)88  
-{99 	
-IList:: 
-<:: 
-PlayerInLobby:: 
->::  #
-playersConnectedToLobby::! 8
-=::9 :
-Lobby::; @
-.::@ A&
-GetPlayersConnectedToLobby::A [
-(::[ \
-)::\ ]
-;::] ^
-IList;; 
-<;; 
-string;; 
->;; .
-"usernamesOfPlayersConnectedToLobby;; <
-=;;= >
-Lobby;;? D
-.;;D E1
-%GetUsernamesOfPlayersConnectedToLobby;;E j
-(;;j k
-);;k l
-;;;l m
-foreach<< 
-(<< 
-var<< 
-playerInLobby<< &
-in<<' )#
-playersConnectedToLobby<<* A
-)<<A B
-{== 
-var>> 
-channel>> 
-=>> 
-playerInLobby>> +
-.>>+ ,
-
-Connection>>, 6
-;>>6 7
-channel?? 
-.?? "
-TakePlayersToMatchView?? .
-(??. /.
-"usernamesOfPlayersConnectedToLobby??/ Q
-)??Q R
-;??R S
-}@@ 
-
-HasStartedAA 
-=AA 
-trueAA 
-;AA 
-}BB 	
-publicDD 
-PlayerInMatchDD "
-GetPlayerWithBestScoreDD 3
-(DD3 4
-)DD4 5
-{EE 	
-PlayerInMatchFF 
-playerWithBestScoreFF -
-=FF. /
-_playersFF0 8
-[FF8 9
-$numFF9 :
-]FF: ;
-;FF; <
-forHH 
-(HH 
-intHH 
-currentIndexHH  
-=HH! "
-$numHH# $
-;HH$ %
-currentIndexHH& 2
-<HH3 4
-_playersHH5 =
-.HH= >
-CountHH> C
--HHD E
-$numHHF G
-;HHG H
-currentIndexHHI U
-++HHU W
-)HHW X
-{II 
-ifJJ 
-(JJ 
-playerWithBestScoreJJ &
-.JJ& '
-ScoreJJ' ,
-<JJ- .
-_playersJJ/ 7
-[JJ7 8
-currentIndexJJ8 D
-+JJE F
-$numJJG H
-]JJH I
-.JJI J
-ScoreJJJ O
-)JJO P
-{KK 
-playerWithBestScoreLL '
-=LL( )
-_playersLL* 2
-[LL2 3
-currentIndexLL3 ?
-+LL@ A
-$numLLB C
-]LLC D
-;LLD E
-}MM 
-}NN 
-returnOO 
-playerWithBestScoreOO &
-;OO& '
-}PP 	
-publicRR 
-intRR 
-AddExpelVoteRR 
-(RR  
-stringRR  &
-playerUsernameRR' 5
-)RR5 6
-{SS 	
-intTT 
-playerExpelVotesTT  
-=TT! "
-$numTT# $
-;TT$ %
-foreachUU 
-(UU 
-varUU 
-playerUU 
-inUU  "
-_playersUU# +
-)UU+ ,
-{VV 
-ifWW 
-(WW 
-playerWW 
-.WW 
-UsernameWW #
-.WW# $
-EqualsWW$ *
-(WW* +
-playerUsernameWW+ 9
-)WW9 :
-)WW: ;
-{XX 
-playerYY 
-.YY 
-ExpulsionVotesYY )
-++YY) +
-;YY+ ,
-playerExpelVotesZZ $
-=ZZ% &
-playerZZ' -
-.ZZ- .
-ExpulsionVotesZZ. <
-;ZZ< =
-}[[ 
-}\\ 
-return^^ 
-playerExpelVotes^^ #
-;^^# $
-}__ 	
-publicaa 
-voidaa 
-RemovePlayeraa  
-(aa  !
-stringaa! '
-playerUsernameaa( 6
-)aa6 7
-{bb 	
-PlayerInMatchcc 
-playerToRemovecc (
-=cc) *
-thiscc+ /
-.cc/ 0
-	GetPlayercc0 9
-(cc9 :
-playerUsernamecc: H
-)ccH I
-;ccI J
-_playersdd 
-.dd 
-Removedd 
-(dd 
-playerToRemovedd *
-)dd* +
-;dd+ ,
-}ee 	
-publicgg 
-PlayerInMatchgg "
-GetPlyerWithActiveTurngg 3
-(gg3 4
-)gg4 5
-{hh 	
-PlayerInMatchii  
-playerWithActiveTurnii .
-=ii/ 0
-nullii1 5
-;ii5 6
+TotalPairsOO 
+{OO 
+getOO  #
+;OO# $
+setOO% (
+;OO( )
+}OO* +
+publicTT 
+MatchDtoTT 
+(TT 
+)TT 
+{UU 	
+LobbyVV 
+=VV 
+newVV 
+LobbyVV 
+(VV 
+)VV 
+;VV  
+_playersWW 
+=WW 
+newWW 
+ListWW 
+<WW  
+PlayerInMatchWW  -
+>WW- .
+(WW. /
+)WW/ 0
+;WW0 1
+}XX 	
+public^^ 
+IList^^ 
+<^^ 
+PlayerInMatch^^ "
+>^^" #&
+GetPlayersConnectedToMatch^^$ >
+(^^> ?
+)^^? @
+{__ 	
+return`` 
+_players`` 
+;`` 
+}aa 	
+publicgg 
+IListgg 
+<gg 
+stringgg 
+>gg 1
+%GetUsernamesOfPlayersConnectedToMatchgg B
+(ggB C
+)ggC D
+{hh 	
+IListii 
+<ii 
+stringii 
+>ii .
+"usernamesOfPlayersConnectedToMatchii <
+=ii= >
+newii? B
+ListiiC G
+<iiG H
+stringiiH N
+>iiN O
+(iiO P
+)iiP Q
+;iiQ R
 foreachjj 
-(jj 
-varjj 
-playerjj 
-injj  "
-_playersjj# +
-)jj+ ,
-{kk 
-ifll 
-(ll 
-playerll 
-.ll 
-HasActiveTurnll (
-)ll( )
-{mm  
-playerWithActiveTurnnn (
-=nn) *
-playernn+ 1
-;nn1 2
-}oo 
-}pp 
-returnrr  
-playerWithActiveTurnrr '
-;rr' (
-}ss 	
-}uu 
-}vv ∆
+(jj 
+varjj 
+playerjj 
+injj !
+_playersjj" *
+)jj* +
+{kk .
+"usernamesOfPlayersConnectedToMatchll 2
+.ll2 3
+Addll3 6
+(ll6 7
+playerll7 =
+.ll= >
+Usernamell> F
+)llF G
+;llG H
+}mm 
+returnnn .
+"usernamesOfPlayersConnectedToMatchnn 5
+;nn5 6
+}oo 	
+publicuu 
+voiduu 
+	AddPlayeruu 
+(uu 
+PlayerInMatchuu +
+playeruu, 2
+)uu2 3
+{vv 	
+_playersww 
+.ww 
+Addww 
+(ww 
+playerww 
+)ww  
+;ww  !
+}xx 	
+public 
+PlayerInMatch 
+	GetPlayer &
+(& '
+string' -
+username. 6
+)6 7
+{
+ÄÄ 	
+PlayerInMatch
+ÅÅ 
+playerRetrieved
+ÅÅ )
+=
+ÅÅ* +
+null
+ÅÅ, 0
+;
+ÅÅ0 1
+foreach
+ÇÇ 
+(
+ÇÇ 
+var
+ÇÇ 
+player
+ÇÇ 
+in
+ÇÇ !
+_players
+ÇÇ" *
+)
+ÇÇ* +
+{
+ÉÉ 
+if
+ÑÑ 
+(
+ÑÑ 
+player
+ÑÑ 
+.
+ÑÑ 
+Username
+ÑÑ #
+.
+ÑÑ# $
+Equals
+ÑÑ$ *
+(
+ÑÑ* +
+username
+ÑÑ+ 3
+)
+ÑÑ3 4
+)
+ÑÑ4 5
+{
+ÖÖ 
+return
+ÜÜ 
+player
+ÜÜ !
+;
+ÜÜ! "
+}
+áá 
+}
+àà 
+return
+ââ 
+playerRetrieved
+ââ "
+;
+ââ" #
+}
+ää 	
+public
+èè 
+void
+èè 
+
+StartMatch
+èè 
+(
+èè 
+)
+èè  
+{
+êê 	
+IList
+ëë 
+<
+ëë 
+PlayerInLobby
+ëë 
+>
+ëë  %
+playersConnectedToLobby
+ëë! 8
+=
+ëë9 :
+Lobby
+ëë; @
+.
+ëë@ A(
+GetPlayersConnectedToLobby
+ëëA [
+(
+ëë[ \
+)
+ëë\ ]
+;
+ëë] ^
+IList
+íí 
+<
+íí 
+string
+íí 
+>
+íí 0
+"usernamesOfPlayersConnectedToLobby
+íí <
+=
+íí= >
+Lobby
+íí? D
+.
+ííD E3
+%GetUsernamesOfPlayersConnectedToLobby
+ííE j
+(
+ííj k
+)
+íík l
+;
+ííl m
+foreach
+ìì 
+(
+ìì 
+var
+ìì 
+playerInLobby
+ìì &
+in
+ìì' )%
+playersConnectedToLobby
+ìì* A
+)
+ììA B
+{
+îî 
+var
+ïï 
+channel
+ïï 
+=
+ïï 
+playerInLobby
+ïï +
+.
+ïï+ ,
+
+Connection
+ïï, 6
+;
+ïï6 7
+channel
+ññ 
+.
+ññ $
+TakePlayersToMatchView
+ññ .
+(
+ññ. /0
+"usernamesOfPlayersConnectedToLobby
+ññ/ Q
+)
+ññQ R
+;
+ññR S
+}
+óó 
+
+HasStarted
+òò 
+=
+òò 
+true
+òò 
+;
+òò 
+}
+ôô 	
+public
+üü 
+PlayerInMatch
+üü $
+GetPlayerWithBestScore
+üü 3
+(
+üü3 4
+)
+üü4 5
+{
+†† 	
+PlayerInMatch
+°° !
+playerWithBestScore
+°° -
+=
+°°. /
+_players
+°°0 8
+[
+°°8 9
+$num
+°°9 :
+]
+°°: ;
+;
+°°; <
+for
+££ 
+(
+££ 
+int
+££ 
+currentIndex
+££  
+=
+££! "
+$num
+££# $
+;
+££$ %
+currentIndex
+££& 2
+<
+££3 4
+_players
+££5 =
+.
+££= >
+Count
+££> C
+-
+££D E
+$num
+££F G
+;
+££G H
+currentIndex
+££I U
+++
+££U W
+)
+££W X
+{
+§§ 
+if
+•• 
+(
+•• !
+playerWithBestScore
+•• &
+.
+••& '
+Score
+••' ,
+<
+••- .
+_players
+••/ 7
+[
+••7 8
+currentIndex
+••8 D
++
+••E F
+$num
+••G H
+]
+••H I
+.
+••I J
+Score
+••J O
+)
+••O P
+{
+¶¶ !
+playerWithBestScore
+ßß '
+=
+ßß( )
+_players
+ßß* 2
+[
+ßß2 3
+currentIndex
+ßß3 ?
++
+ßß@ A
+$num
+ßßB C
+]
+ßßC D
+;
+ßßD E
+}
+®® 
+}
+©© 
+return
+™™ !
+playerWithBestScore
+™™ &
+;
+™™& '
+}
+´´ 	
+public
+≤≤ 
+int
+≤≤ 
+AddExpelVote
+≤≤ 
+(
+≤≤  
+string
+≤≤  &
+playerUsername
+≤≤' 5
+)
+≤≤5 6
+{
+≥≥ 	
+int
+¥¥ 
+playerExpelVotes
+¥¥  
+=
+¥¥! "
+$num
+¥¥# $
+;
+¥¥$ %
+foreach
+µµ 
+(
+µµ 
+var
+µµ 
+player
+µµ 
+in
+µµ  "
+_players
+µµ# +
+)
+µµ+ ,
+{
+∂∂ 
+if
+∑∑ 
+(
+∑∑ 
+player
+∑∑ 
+.
+∑∑ 
+Username
+∑∑ #
+.
+∑∑# $
+Equals
+∑∑$ *
+(
+∑∑* +
+playerUsername
+∑∑+ 9
+)
+∑∑9 :
+)
+∑∑: ;
+{
+∏∏ 
+player
+ππ 
+.
+ππ 
+ExpulsionVotes
+ππ )
+++
+ππ) +
+;
+ππ+ ,
+playerExpelVotes
+∫∫ $
+=
+∫∫% &
+player
+∫∫' -
+.
+∫∫- .
+ExpulsionVotes
+∫∫. <
+;
+∫∫< =
+}
+ªª 
+}
+ºº 
+return
+ææ 
+playerExpelVotes
+ææ #
+;
+ææ# $
+}
+øø 	
+public
+≈≈ 
+void
+≈≈ 
+RemovePlayer
+≈≈  
+(
+≈≈  !
+string
+≈≈! '
+playerUsername
+≈≈( 6
+)
+≈≈6 7
+{
+∆∆ 	
+PlayerInMatch
+«« 
+playerToRemove
+«« (
+=
+««) *
+this
+««+ /
+.
+««/ 0
+	GetPlayer
+««0 9
+(
+««9 :
+playerUsername
+««: H
+)
+««H I
+;
+««I J
+_players
+»» 
+.
+»» 
+Remove
+»» 
+(
+»» 
+playerToRemove
+»» *
+)
+»»* +
+;
+»»+ ,
+}
+…… 	
+public
+œœ 
+PlayerInMatch
+œœ $
+GetPlyerWithActiveTurn
+œœ 3
+(
+œœ3 4
+)
+œœ4 5
+{
+–– 	
+PlayerInMatch
+—— "
+playerWithActiveTurn
+—— .
+=
+——/ 0
+null
+——1 5
+;
+——5 6
+foreach
+““ 
+(
+““ 
+var
+““ 
+player
+““ 
+in
+““  "
+_players
+““# +
+)
+““+ ,
+{
+”” 
+if
+‘‘ 
+(
+‘‘ 
+player
+‘‘ 
+.
+‘‘ 
+HasActiveTurn
+‘‘ (
+)
+‘‘( )
+{
+’’ "
+playerWithActiveTurn
+÷÷ (
+=
+÷÷) *
+player
+÷÷+ 1
+;
+÷÷1 2
+}
+◊◊ 
+}
+ÿÿ 
+return
+⁄⁄ "
+playerWithActiveTurn
+⁄⁄ '
+;
+⁄⁄' (
+}
+€€ 	
+}
+›› 
+}ﬁﬁ ∆
 yC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\PasswordModificationCredentialsDto.cs
 	namespace 	
 
@@ -1583,61 +1585,61 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-[ 
-DataContract 
-] 
-public 
+[		 
+DataContract		 
+]		 
+public
+
+ 
 
-class .
-"PasswordModificationCredentialsDto 3
-{ 
-[ 	
-
-DataMember	 
-] 
-public		 
-string		 
-EmailAddress		 "
-{		# $
-get		% (
-;		( )
-set		* -
-;		- .
-}		/ 0
-[
+class
 
- 	
-
-DataMember
+ .
+"PasswordModificationCredentialsDto
 
-	 
-]
-
- 
-public 
-string 
-NewPassword !
-{" #
-get$ '
-;' (
-set) ,
-;, -
-}. /
-[ 	
+ 3
+{ 
+[ 	
 
-DataMember	 
-] 
-public 
-string 
-Salt 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
-} 
-} Ã
+DataMember	 
+] 
+public 
+string 
+EmailAddress "
+{# $
+get% (
+;( )
+set* -
+;- .
+}/ 0
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+NewPassword !
+{" #
+get$ '
+;' (
+set) ,
+;, -
+}. /
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+Salt 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+} 
+} Ã
 dC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerInLobby.cs
 	namespace 	
 
@@ -1648,43 +1650,43 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-public 
+public		 
 
-class 
-PlayerInLobby 
-{ 
-public 
-string 
-Host 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
-public 
-string 
-Username 
-{  
-get! $
-;$ %
-set& )
-;) *
-}+ ,
-public		 !
-ILobbyServiceCallback		 $
-
-Connection		% /
-{		0 1
-get		2 5
-;		5 6
-set		7 :
-;		: ;
-}		< =
-}
+class		 
+PlayerInLobby		 
+{
 
- 
-} ∂+
+ 
+public 
+string 
+Host 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+public 
+string 
+Username 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
+public !
+ILobbyServiceCallback $
+
+Connection% /
+{0 1
+get2 5
+;5 6
+set7 :
+;: ;
+}< =
+} 
+} ú,
 \C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\Lobby.cs
 	namespace 	
 
@@ -1695,280 +1697,330 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-public 
+public** 
 
-class 
-Lobby 
-{ 
-private		 
-IList		 
-<		 
-PlayerInLobby		 #
->		# $$
-_playersConnectedToLobby		% =
-;		= >
-public 
-Lobby 
-( 
-) 
-{ 	$
-_playersConnectedToLobby $
-=% &
-new' *
-List+ /
-</ 0
-PlayerInLobby0 =
->= >
-(> ?
-)? @
-;@ A
-} 	
-public 
-void 
-AddPlayerToLobby $
-($ %
-string% +
-host, 0
-,0 1
-string2 8
-username9 A
-)A B
-{ 	
-PlayerInLobby 
-lobbyRequestDto )
-=* +
-new, /
-PlayerInLobby0 =
-(= >
-)> ?
-{ 
-Host 
-= 
-host 
-, 
-Username 
-= 
-username #
-,# $
-
-Connection 
-= 
-OperationContext -
-.- .
-Current. 5
-.5 6
-GetCallbackChannel6 H
-<H I!
-ILobbyServiceCallbackI ^
->^ _
-(_ `
-)` a
-} 
-; $
-_playersConnectedToLobby $
-.$ %
-Add% (
-(( )
-lobbyRequestDto) 8
-)8 9
-;9 :
-} 	
-public 
-void !
-RemovePlayerFromLobby )
-() *
-string* 0'
-usernameOfPlayerToBeRemoved1 L
-)L M
-{ 	
-foreach 
-( 
-var 
-playerInLobby %
-in& ($
-_playersConnectedToLobby) A
-)A B
-{ 
-if 
-( '
-usernameOfPlayerToBeRemoved /
-./ 0
-Equals0 6
-(6 7
-playerInLobby7 D
-.D E
-UsernameE M
-)M N
-)N O
-{   $
-_playersConnectedToLobby!! ,
-.!!, -
-Remove!!- 3
-(!!3 4
-playerInLobby!!4 A
-)!!A B
-;!!B C
-break"" 
-;"" 
-}## 
-}$$ 
-}%% 	
-public'' 
-IList'' 
-<'' 
-PlayerInLobby'' "
->''" #&
-GetPlayersConnectedToLobby''$ >
-(''> ?
-)''? @
-{(( 	
-return)) $
-_playersConnectedToLobby)) +
-;))+ ,
-}** 	
-public,, 
-IList,, 
-<,, 
-string,, 
->,, 1
-%GetUsernamesOfPlayersConnectedToLobby,, B
-(,,B C
-),,C D
-{-- 	
-IList.. 
-<.. 
-string.. 
->.. .
-"usernamesOfPlayersConnectedToLobby.. <
-=..= >
-new..? B
-List..C G
-<..G H
-string..H N
->..N O
-(..O P
-)..P Q
-;..Q R
-foreach// 
-(// 
-var// "
-playerConnectedToLobby// /
-in//0 2$
-_playersConnectedToLobby//3 K
-)//K L
-{00 .
-"usernamesOfPlayersConnectedToLobby11 2
-.112 3
-Add113 6
-(116 7"
-playerConnectedToLobby117 M
-.11M N
-Username11N V
-)11V W
-;11W X
-}22 
-return33 .
-"usernamesOfPlayersConnectedToLobby33 5
-;335 6
+class** 
+Lobby** 
+{++ 
+private,, 
+IList,, 
+<,, 
+PlayerInLobby,, #
+>,,# $$
+_playersConnectedToLobby,,% =
+;,,= >
+public11 
+Lobby11 
+(11 
+)11 
+{22 	$
+_playersConnectedToLobby33 $
+=33% &
+new33' *
+List33+ /
+<33/ 0
+PlayerInLobby330 =
+>33= >
+(33> ?
+)33? @
+;33@ A
 }44 	
-public66 
-void66 ,
- NotifyPlayersMatchHasBeenDeleted66 4
-(664 5
-)665 6
-{77 	
-foreach88 
-(88 
-var88 
-playerInLobby88 &
-in88' )$
-_playersConnectedToLobby88* B
-)88B C
-{99 
-var:: 
-channel:: 
-=:: 
-playerInLobby:: +
-.::+ ,
+public;; 
+void;; 
+AddPlayerToLobby;; $
+(;;$ %
+string;;% +
+host;;, 0
+,;;0 1
+string;;2 8
+username;;9 A
+);;A B
+{<< 	
+PlayerInLobby== 
+lobbyRequestDto== )
+===* +
+new==, /
+PlayerInLobby==0 =
+(=== >
+)==> ?
+{>> 
+Host?? 
+=?? 
+host?? 
+,?? 
+Username@@ 
+=@@ 
+username@@ #
+,@@# $
 
-Connection::, 6
-;::6 7
-channel;; 
-.;; !
-TakePlayersOutOfLobby;; -
-(;;- .
-);;. /
-;;;/ 0
-}<< 
-}== 	
-public?? 
-void?? $
-NotifyOnePlayerLeftLobby?? ,
-(??, -
-string??- 3
-username??4 <
-)??< =
-{@@ 	
-foreachAA 
-(AA 
-varAA 
-playerInLobbyAA &
-inAA' )$
-_playersConnectedToLobbyAA* B
-)AAB C
-{BB 
-varCC 
-channelCC 
-=CC 
-playerInLobbyCC +
-.CC+ ,
+ConnectionAA 
+=AA 
+OperationContextAA -
+.AA- .
+CurrentAA. 5
+.AA5 6
+GetCallbackChannelAA6 H
+<AAH I!
+ILobbyServiceCallbackAAI ^
+>AA^ _
+(AA_ `
+)AA` a
+}BB 
+;BB $
+_playersConnectedToLobbyCC $
+.CC$ %
+AddCC% (
+(CC( )
+lobbyRequestDtoCC) 8
+)CC8 9
+;CC9 :
+}DD 	
+publicJJ 
+voidJJ !
+RemovePlayerFromLobbyJJ )
+(JJ) *
+stringJJ* 0'
+usernameOfPlayerToBeRemovedJJ1 L
+)JJL M
+{KK 	
+foreachLL 
+(LL 
+varLL 
+playerInLobbyLL %
+inLL& ($
+_playersConnectedToLobbyLL) A
+)LLA B
+{MM 
+ifNN 
+(NN '
+usernameOfPlayerToBeRemovedNN /
+.NN/ 0
+EqualsNN0 6
+(NN6 7
+playerInLobbyNN7 D
+.NND E
+UsernameNNE M
+)NNM N
+)NNN O
+{OO $
+_playersConnectedToLobbyPP ,
+.PP, -
+RemovePP- 3
+(PP3 4
+playerInLobbyPP4 A
+)PPA B
+;PPB C
+breakQQ 
+;QQ 
+}RR 
+}SS 
+}TT 	
+publicZZ 
+IListZZ 
+<ZZ 
+PlayerInLobbyZZ "
+>ZZ" #&
+GetPlayersConnectedToLobbyZZ$ >
+(ZZ> ?
+)ZZ? @
+{[[ 	
+return\\ $
+_playersConnectedToLobby\\ +
+;\\+ ,
+}]] 	
+publiccc 
+IListcc 
+<cc 
+stringcc 
+>cc 1
+%GetUsernamesOfPlayersConnectedToLobbycc B
+(ccB C
+)ccC D
+{dd 	
+IListee 
+<ee 
+stringee 
+>ee .
+"usernamesOfPlayersConnectedToLobbyee <
+=ee= >
+newee? B
+ListeeC G
+<eeG H
+stringeeH N
+>eeN O
+(eeO P
+)eeP Q
+;eeQ R
+foreachff 
+(ff 
+varff "
+playerConnectedToLobbyff /
+inff0 2$
+_playersConnectedToLobbyff3 K
+)ffK L
+{gg .
+"usernamesOfPlayersConnectedToLobbyhh 2
+.hh2 3
+Addhh3 6
+(hh6 7"
+playerConnectedToLobbyhh7 M
+.hhM N
+UsernamehhN V
+)hhV W
+;hhW X
+}ii 
+returnjj .
+"usernamesOfPlayersConnectedToLobbyjj 5
+;jj5 6
+}kk 	
+publicpp 
+voidpp ,
+ NotifyPlayersMatchHasBeenDeletedpp 4
+(pp4 5
+)pp5 6
+{qq 	
+foreachrr 
+(rr 
+varrr 
+playerInLobbyrr &
+inrr' )$
+_playersConnectedToLobbyrr* B
+)rrB C
+{ss 
+vartt 
+channeltt 
+=tt 
+playerInLobbytt +
+.tt+ ,
 
-ConnectionCC, 6
-;CC6 7
-channelDD 
-.DD 
-NotifyPlayerLeftDD (
-(DD( )
-usernameDD) 1
-)DD1 2
-;DD2 3
-}EE 
-}FF 	
-publicHH 
-voidHH '
-NotifyNewPlayerEnteredLobbyHH /
-(HH/ 0
-stringHH0 6
-usernameHH7 ?
-)HH? @
-{II 	
-foreachJJ 
-(JJ 
-varJJ 
-playerInLobbyJJ &
-inJJ' )$
-_playersConnectedToLobbyJJ* B
-)JJB C
-{KK 
-varLL 
-channelLL 
-=LL 
-playerInLobbyLL +
-.LL+ ,
+Connectiontt, 6
+;tt6 7
+channeluu 
+.uu !
+TakePlayersOutOfLobbyuu -
+(uu- .
+)uu. /
+;uu/ 0
+}vv 
+}ww 	
+public}} 
+void}} $
+NotifyOnePlayerLeftLobby}} ,
+(}}, -
+string}}- 3
+username}}4 <
+)}}< =
+{~~ 	
+foreach 
+( 
+var 
+playerInLobby &
+in' )$
+_playersConnectedToLobby* B
+)B C
+{
+ÄÄ 
+var
+ÅÅ 
+channel
+ÅÅ 
+=
+ÅÅ 
+playerInLobby
+ÅÅ +
+.
+ÅÅ+ ,
 
-ConnectionLL, 6
-;LL6 7
-channelMM 
-.MM "
-NotifyNewPlayerEnteredMM .
-(MM. /
-usernameMM/ 7
-)MM7 8
-;MM8 9
-}NN 
-}OO 	
-}QQ 
-}RR ´
+Connection
+ÅÅ, 6
+;
+ÅÅ6 7
+channel
+ÇÇ 
+.
+ÇÇ 
+NotifyPlayerLeft
+ÇÇ (
+(
+ÇÇ( )
+username
+ÇÇ) 1
+)
+ÇÇ1 2
+;
+ÇÇ2 3
+}
+ÉÉ 
+}
+ÑÑ 	
+public
+ää 
+void
+ää )
+NotifyNewPlayerEnteredLobby
+ää /
+(
+ää/ 0
+string
+ää0 6
+username
+ää7 ?
+)
+ää? @
+{
+ãã 	
+foreach
+åå 
+(
+åå 
+var
+åå 
+playerInLobby
+åå &
+in
+åå' )&
+_playersConnectedToLobby
+åå* B
+)
+ååB C
+{
+çç 
+var
+éé 
+channel
+éé 
+=
+éé 
+playerInLobby
+éé +
+.
+éé+ ,
+
+Connection
+éé, 6
+;
+éé6 7
+channel
+èè 
+.
+èè $
+NotifyNewPlayerEntered
+èè .
+(
+èè. /
+username
+èè/ 7
+)
+èè7 8
+;
+èè8 9
+}
+êê 
+}
+ëë 	
+}
+ìì 
+}îî ´
 kC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerCredentialsDTO.cs
 	namespace 	
 
@@ -1979,61 +2031,61 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-[ 
-DataContract 
-] 
-public 
+[		 
+DataContract		 
+]		 
+public
+
+ 
 
-class  
-PlayerCredentialsDTO %
-{ 
-[ 	
-
-DataMember	 
-] 
-public		 
-string		 
-Username		 
-{		  
-get		! $
-;		$ %
-set		& )
-;		) *
-}		+ ,
-[
+class
 
- 	
-
-DataMember
+  
+PlayerCredentialsDTO
 
-	 
-]
-
- 
-public 
-string 
-EmailAddress "
-{# $
-get% (
-;( )
-set* -
-;- .
-}/ 0
-[ 	
+ %
+{ 
+[ 	
 
-DataMember	 
-] 
-public 
-string 
-Password 
-{  
-get! $
-;$ %
-set& )
-;) *
-}+ ,
-} 
-} 	
+DataMember	 
+] 
+public 
+string 
+Username 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+EmailAddress "
+{# $
+get% (
+;( )
+set* -
+;- .
+}/ 0
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+Password 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
+} 
+} 	
 `C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerDTO.cs
 	namespace 	
 
@@ -2044,74 +2096,74 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-[ 
-DataContract 
-] 
-public 
+[		 
+DataContract		 
+]		 
+public
+
+ 
 
-class 
-	PlayerDTO 
-{ 
-[ 	
-
-DataMember	 
-] 
-public		 
-string		 
-Username		 
-{		  
-get		! $
-;		$ %
-set		& )
-;		) *
-}		+ ,
-[
+class
 
- 	
-
-DataMember
+ 
+	PlayerDTO
 
-	 
-]
-
- 
-public 
-string 
-EmailAddress "
-{# $
-get% (
-;( )
-set* -
-;- .
-}/ 0
-[ 	
+ 
+{ 
+[ 	
 
-DataMember	 
-] 
-public 
-string 
-Password 
-{  
-get! $
-;$ %
-set& )
-;) *
-}+ ,
-[ 	
+DataMember	 
+] 
+public 
+string 
+Username 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
+[ 	
 
-DataMember	 
-] 
-public 
-string 
-VerificationToken '
-{( )
-get* -
-;- .
-set/ 2
-;2 3
-}4 5
-} 
-} æ
+DataMember	 
+] 
+public 
+string 
+EmailAddress "
+{# $
+get% (
+;( )
+set* -
+;- .
+}/ 0
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+Password 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+VerificationToken '
+{( )
+get* -
+;- .
+set/ 2
+;2 3
+}4 5
+}   
+}!! æ
 dC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerInMatch.cs
 	namespace 	
 
@@ -2122,209 +2174,185 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-public 
+public!! 
 
-class 
-PlayerInMatch 
-{ 
-public 
-string 
-Username 
-{  
-get! $
-;$ %
-set& )
-;) *
-}+ ,
-public		 
-int		 
-Score		 
-{		 
-get		 
-;		 
-set		  #
-;		# $
-}		% &
-public
-
- 
-bool
-
- 
-HasActiveTurn
-
- !
-{
-
-" #
-get
-
-$ '
-;
-
-' (
-set
-
-) ,
-;
-
-, -
-}
-
-. /
-=
-
-0 1
-false
-
-2 7
-;
-
-7 8
-public !
-IMatchServiceCallback $"
-MatchServiceConnection% ;
-{< =
-get> A
-;A B
-setC F
-;F G
-}H I
-public 
-int 
-ExpulsionVotes !
-{" #
-get$ '
-;' (
-set) ,
-;, -
-}. /
-private 
-IList 
-< 
-string 
-> 
-_playersVoted +
-;+ ,
-private 
-IList 
-< 
-int 
-> 
-_uncoveredCards *
-;* +
-public 
-PlayerInMatch 
-( 
-) 
-{ 	
-_playersVoted 
-= 
-new 
-List  $
-<$ %
-string% +
->+ ,
-(, -
-)- .
-;. /
-_uncoveredCards 
-= 
-new !
-List" &
-<& '
-int' *
->* +
-(+ ,
-), -
-;- .
-} 	
-public 
-IList 
-< 
-string 
-> 
-GetPlayersVoted ,
-(, -
-)- .
-{ 	
-return 
-_playersVoted  
-;  !
-} 	
-public 
-void 
-AddPlayerVoted "
-(" #
-string# )
-playerUsername* 8
-)8 9
-{ 	
-_playersVoted 
-. 
-Add 
-( 
-playerUsername ,
-), -
-;- .
-} 	
-public   
-IList   
-<   
-int   
->   
-GetUncoveredCards   +
-(  + ,
-)  , -
-{!! 	
-return"" 
-_uncoveredCards"" "
-;""" #
-}## 	
-public%% 
-void%% 
-AddUncoveredCard%% $
-(%%$ %
-int%%% (
-	cardIndex%%) 2
-)%%2 3
-{&& 	
-_uncoveredCards'' 
-.'' 
-Add'' 
-(''  
-	cardIndex''  )
-)'') *
-;''* +
-}(( 	
-public** 
-void** 
-RemoveUncoveredCard** '
-(**' (
-)**( )
-{++ 	
-int,, 
-indexOfLastCard,, 
-=,,  !
-_uncoveredCards,," 1
-.,,1 2
-Count,,2 7
--,,8 9
-$num,,: ;
-;,,; <
-_uncoveredCards-- 
-.-- 
-Remove-- "
-(--" #
-_uncoveredCards--# 2
-[--2 3
-indexOfLastCard--3 B
-]--B C
-)--C D
-;--D E
-}.. 	
-}// 
-}00 §
+class!! 
+PlayerInMatch!! 
+{"" 
+public&& 
+string&& 
+Username&& 
+{&&  
+get&&! $
+;&&$ %
+set&&& )
+;&&) *
+}&&+ ,
+public** 
+int** 
+Score** 
+{** 
+get** 
+;** 
+set**  #
+;**# $
+}**% &
+public.. 
+bool.. 
+HasActiveTurn.. !
+{.." #
+get..$ '
+;..' (
+set..) ,
+;.., -
+}... /
+=..0 1
+false..2 7
+;..7 8
+public22 !
+IMatchServiceCallback22 $"
+MatchServiceConnection22% ;
+{22< =
+get22> A
+;22A B
+set22C F
+;22F G
+}22H I
+public66 
+int66 
+ExpulsionVotes66 !
+{66" #
+get66$ '
+;66' (
+set66) ,
+;66, -
+}66. /
+private:: 
+IList:: 
+<:: 
+string:: 
+>:: 
+_playersVoted:: +
+;::+ ,
+private>> 
+IList>> 
+<>> 
+int>> 
+>>> 
+_uncoveredCards>> *
+;>>* +
+publicCC 
+PlayerInMatchCC 
+(CC 
+)CC 
+{DD 	
+_playersVotedEE 
+=EE 
+newEE 
+ListEE  $
+<EE$ %
+stringEE% +
+>EE+ ,
+(EE, -
+)EE- .
+;EE. /
+_uncoveredCardsFF 
+=FF 
+newFF !
+ListFF" &
+<FF& '
+intFF' *
+>FF* +
+(FF+ ,
+)FF, -
+;FF- .
+}GG 	
+publicMM 
+IListMM 
+<MM 
+stringMM 
+>MM 
+GetPlayersVotedMM ,
+(MM, -
+)MM- .
+{NN 	
+returnOO 
+_playersVotedOO  
+;OO  !
+}PP 	
+publicVV 
+voidVV 
+AddPlayerVotedVV "
+(VV" #
+stringVV# )
+playerUsernameVV* 8
+)VV8 9
+{WW 	
+_playersVotedXX 
+.XX 
+AddXX 
+(XX 
+playerUsernameXX ,
+)XX, -
+;XX- .
+}YY 	
+public__ 
+IList__ 
+<__ 
+int__ 
+>__ 
+GetUncoveredCards__ +
+(__+ ,
+)__, -
+{`` 	
+returnaa 
+_uncoveredCardsaa "
+;aa" #
+}bb 	
+publichh 
+voidhh 
+AddUncoveredCardhh $
+(hh$ %
+inthh% (
+	cardIndexhh) 2
+)hh2 3
+{ii 	
+_uncoveredCardsjj 
+.jj 
+Addjj 
+(jj  
+	cardIndexjj  )
+)jj) *
+;jj* +
+}kk 	
+publicpp 
+voidpp 
+RemoveUncoveredCardpp '
+(pp' (
+)pp( )
+{qq 	
+intrr 
+indexOfLastCardrr 
+=rr  !
+_uncoveredCardsrr" 1
+.rr1 2
+Countrr2 7
+-rr8 9
+$numrr: ;
+;rr; <
+_uncoveredCardsss 
+.ss 
+Removess "
+(ss" #
+_uncoveredCardsss# 2
+[ss2 3
+indexOfLastCardss3 B
+]ssB C
+)ssC D
+;ssD E
+}tt 	
+}uu 
+}vv §
 eC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerScoreDTO.cs
 	namespace 	
 
@@ -2335,32 +2363,32 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-public 
+public 
 
-class 
-PlayerScoreDTO 
-{ 
-public 
-string 
-Username 
-{  
-get! $
-;$ %
-set& )
-;) *
-}+ ,
-public 
-int 
+class 
+PlayerScoreDTO 
+{ 
+public 
+string 
+Username 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
+public 
+int 
 
-TotalScore 
-{ 
-get  #
-;# $
-set% (
-;( )
-}* +
-} 
-} ˇ
+TotalScore 
+{ 
+get  #
+;# $
+set% (
+;( )
+}* +
+} 
+} ˇ
 hC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\PlayerMovementDto.cs
 	namespace 	
 
@@ -2371,61 +2399,59 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-public 
+public 
 
-class 
-PlayerMovementDto "
-{ 
-public 
-string 
-Host 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
-public 
-string 
-Username 
-{  
-get! $
-;$ %
-set& )
-;) *
-}+ ,
-public 
-bool 
-HasFormedAPair "
-{# $
-get% (
-;( )
-set* -
-;- .
-}/ 0
-public 
-int 
-	CardIndex 
-{ 
-get "
-;" #
-set$ '
-;' (
-}) *
-public		 
-int		 
-MovementsLeft		  
-{		! "
-get		# &
-;		& '
-set		( +
-;		+ ,
-}		- .
-}
-
- 
-} ﬁ
-oC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\VerificationTokenInfoDto.cs
+class 
+PlayerMovementDto "
+{ 
+public 
+string 
+Host 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+public 
+string 
+Username 
+{  
+get! $
+;$ %
+set& )
+;) *
+}+ ,
+public 
+bool 
+HasFormedAPair "
+{# $
+get% (
+;( )
+set* -
+;- .
+}/ 0
+public 
+int 
+	CardIndex 
+{ 
+get "
+;" #
+set$ '
+;' (
+}) *
+public 
+int 
+MovementsLeft  
+{! "
+get# &
+;& '
+set( +
+;+ ,
+}- .
+} 
+} Ì
+cC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\DataTransferObjects\TokenInfoDto.cs
 	namespace 	
 
 MemoryGame
@@ -2435,221 +2461,148 @@ MemoryGame
 .& '
 DataTransferObjects' :
 { 
-public 
+public 
 
-class $
-VerificationTokenInfoDto )
-{ 
-public 
-string 
-Name 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
-public 
-string 
-EmailAddress "
-{# $
-get% (
-;( )
-set* -
-;- .
-}/ 0
-public 
-string 
-VerificationToken '
-{( )
-get* -
-;- .
-set/ 2
-;2 3
-}4 5
-} 
-}		 ú
+class 
+TokenInfoDto 
+{ 
+public 
+string 
+Name 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+public 
+string 
+EmailAddress "
+{# $
+get% (
+;( )
+set* -
+;- .
+}/ 0
+public 
+string 
+Token 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+public 
+string 
+Subject 
+{ 
+get  #
+;# $
+set% (
+;( )
+}* +
+public 
+string 
+Body 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+} 
+} Ù
 bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IAccessibilityService.cs
-	namespace 	
-MemoryGameService
+	namespace 	
+MemoryGameService
  
-. 
-	Contracts %
-{ 
-[ 
-ServiceContract 
-] 
-public 
+. 
+	Contracts %
+{ 
+[++ 
+ServiceContract++ 
+]++ 
+public,, 
 
-	interface !
-IAccessibilityService *
-{		 
-[
-
- 	
-FaultContract
-
-	 
-(
-
- 
-typeof
-
- 
-(
-
- '
-DatabaseConnectionLostFault
-
- 9
-)
-
-9 :
-)
-
-: ;
-]
-
-; <
-[ 	
-OperationContract	 
-] 
-bool 
+	interface,, !
+IAccessibilityService,, *
+{-- 
+[55 	
+OperationContract55	 
+]55 
+bool66 
 
-IsVerified 
-( 
-string 
-username '
-)' (
-;( )
-[ 	
-FaultContract	 
-( 
-typeof 
-( '
-DatabaseConnectionLostFault 9
-)9 :
-): ;
-]; <
-[ 	
-OperationContract	 
-] 
-bool 
-ItsRegistered 
-( 
-string !
-emailAddress" .
-). /
-;/ 0
-[ 	
-FaultContract	 
-( 
-typeof 
-(  
-NonExistentUserFault 2
-)2 3
-)3 4
-]4 5
-[ 	
-FaultContract	 
-( 
-typeof 
-( '
-DatabaseConnectionLostFault 9
-)9 :
-): ;
-]; <
-[ 	
-OperationContract	 
-] 
-string 
-GetUserEmailAddress "
-(" #
-string# )
-username* 2
-)2 3
-;3 4
-[ 	
-FaultContract	 
-( 
-typeof 
-(  
-NonExistentUserFault 2
-)2 3
-)3 4
-]4 5
-[ 	
-FaultContract	 
-( 
-typeof 
-( '
-DatabaseConnectionLostFault 9
-)9 :
-): ;
-]; <
-[ 	
-OperationContract	 
-] 
-string 
-GetUsername 
-( 
-string !
-emailAddress" .
-). /
-;/ 0
-[ 	
-FaultContract	 
-( 
-typeof 
-(  
-NonExistentUserFault 2
-)2 3
-)3 4
-]4 5
-[ 	
-FaultContract	 
-( 
-typeof 
-( '
-DatabaseConnectionLostFault 9
-)9 :
-): ;
-]; <
-[ 	
-OperationContract	 
-]  
-PlayerCredentialsDTO  
-GetPlayerCredentials 1
-(1 2
-string2 8
-username9 A
-)A B
-;B C
-["" 	
-OperationContract""	 
-]"" 
-string## 
-GetSalt## 
-(## 
-string## 
-username## &
-)##& '
-;##' (
-[%% 	
-OperationContract%%	 
-]%% 
-bool&& 
-HasAccessRights&& 
-(&& 
-string&& #
-username&&$ ,
-,&&, -
-string&&. 4
-password&&5 =
-)&&= >
-;&&> ?
-}'' 
-}(( »
+IsVerified66 
+(66 
+string66 
+username66 '
+)66' (
+;66( )
+[?? 	
+OperationContract??	 
+]?? 
+bool@@ 
+ItsRegistered@@ 
+(@@ 
+string@@ !
+emailAddress@@" .
+)@@. /
+;@@/ 0
+[II 	
+OperationContractII	 
+]II 
+stringJJ 
+GetUserEmailAddressJJ "
+(JJ" #
+stringJJ# )
+usernameJJ* 2
+)JJ2 3
+;JJ3 4
+[TT 	
+FaultContractTT	 
+(TT 
+typeofTT 
+(TT  
+NonExistentUserFaultTT 2
+)TT2 3
+)TT3 4
+]TT4 5
+[UU 	
+OperationContractUU	 
+]UU 
+stringVV 
+GetSaltVV 
+(VV 
+stringVV 
+usernameVV &
+)VV& '
+;VV' (
+[`` 	
+OperationContract``	 
+]`` 
+boolaa 
+HasAccessRightsaa 
+(aa 
+stringaa #
+usernameaa$ ,
+,aa, -
+stringaa. 4
+passwordaa5 =
+)aa= >
+;aa> ?
+[hh 	
+OperationContracthh	 
+]hh 
+stringii 
+GetUsernameii 
+(ii 
+stringii !
+emailAddressii" .
+)ii. /
+;ii/ 0
+}jj 
+}kk »
 bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\ICommunicationService.cs
 	namespace 	
 MemoryGameService
@@ -2800,7 +2753,7 @@ bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IComm
 )8 9
 ;9 :
 } 
-} €
+} œ
 \C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IMailingService.cs
 	namespace 	
 MemoryGameService
@@ -2827,19 +2780,19 @@ bC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IComm
  "
 (
 
-" #$
-VerificationTokenInfoDto
+" #
+TokenInfoDto
 
-# ;!
+# /!
 verificationTokenInfo
 
-< Q
+0 E
 )
 
-Q R
+E F
 ;
 
-R S
+F G
 } 
 } ü,
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IMatchService.cs
@@ -3220,130 +3173,7 @@ ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Contracts\IScor
 }
 
  
-} ¸
-aC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Faults\CardDeckRetrievingFault.cs
-	namespace 	
-
-MemoryGame
- 
-. 
-MemoryGameService &
-.& '
-Faults' -
-{ 
-[ 
-DataContract 
-] 
-public 
-
-class #
-CardDeckRetrievingFault (
-:) *
-
-TypedFault+ 5
-{ 
-public #
-CardDeckRetrievingFault &
-(& '
-)' (
-{		 	
-Error
-
- 
-=
-
- 
-$str
-
- a
-;
-
-a b
-} 	
-} 
-} à
-eC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Faults\DatabaseConnectionLostFault.cs
-	namespace 	
-
-MemoryGame
- 
-. 
-MemoryGameService &
-.& '
-Faults' -
-{ 
-[ 
-DataContract 
-] 
-public 
-
-class '
-DatabaseConnectionLostFault ,
-:- .
-
-TypedFault/ 9
-{ 
-public '
-DatabaseConnectionLostFault *
-(* +
-)+ ,
-{		 	
-Error
-
- 
-=
-
- 
-$str
-
- B
-;
-
-B C
-} 	
-} 
-} Á
-ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Faults\DataStorageFault.cs
-	namespace 	
-
-MemoryGame
- 
-. 
-MemoryGameService &
-.& '
-Faults' -
-{ 
-[ 
-DataContract 
-] 
-public 
-
-class 
-DataStorageFault !
-:" #
-
-TypedFault$ .
-{ 
-public 
-DataStorageFault 
-(  
-)  !
-{		 	
-Error
-
- 
-=
-
- 
-$str
-
- X
-;
-
-X Y
-} 	
-} 
-} ˘
+} ˘
 `C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Faults\MatchAccessDeniedFault.cs
 	namespace 	
 
@@ -3354,37 +3184,39 @@ MemoryGame
 .& '
 Faults' -
 { 
-[ 
-DataContract 
-] 
-public 
+[		 
+DataContract		 
+]		 
+public
+
+ 
 
-class "
-MatchAccessDeniedFault '
-:( )
+class
+
+ "
+MatchAccessDeniedFault
+
+ '
+:
+
+( )
 
-TypedFault* 4
-{ 
-public "
-MatchAccessDeniedFault %
-(% &
-)& '
-{		 	
-Error
+TypedFault
 
- 
-=
-
- 
-$str
-
- Z
-;
-
-Z [
-} 	
-} 
-} Û
+* 4
+{ 
+public "
+MatchAccessDeniedFault %
+(% &
+)& '
+{ 	
+Error 
+= 
+$str Z
+;Z [
+} 	
+} 
+} Û
 ^C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Faults\NonExistentUserFault.cs
 	namespace 	
 
@@ -3395,37 +3227,39 @@ MemoryGame
 .& '
 Faults' -
 { 
-[ 
-DataContract 
-] 
-public 
+[		 
+DataContract		 
+]		 
+public
+
+ 
 
-class  
-NonExistentUserFault %
-:& '
+class
+
+  
+NonExistentUserFault
+
+ %
+:
+
+& '
 
-TypedFault( 2
-{ 
-public  
-NonExistentUserFault #
-(# $
-)$ %
-{		 	
-Error
+TypedFault
 
- 
-=
-
- 
-$str
-
- [
-;
-
-[ \
-} 	
-} 
-} ˙	
+( 2
+{ 
+public  
+NonExistentUserFault #
+(# $
+)$ %
+{ 	
+Error 
+= 
+$str [
+;[ \
+} 	
+} 
+} ˙	
 TC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Faults\TypedFault.cs
 	namespace 	
 
@@ -3436,311 +3270,79 @@ MemoryGame
 .& '
 Faults' -
 { 
-[ 
-DataContract 
-] 
-public 
-
-abstract 
-class 
-
-TypedFault $
-{ 
-[ 	
-
-DataMember	 
-] 
-public		 
-string		 
-Error		 
-{		 
-get		 !
-;		! "
-set		# &
-;		& '
-}		( )
-[
-
- 	
-
-DataMember
-
-	 
-]
-
- 
-public 
-string 
-Details 
-{ 
-get  #
-;# $
-set% (
-;( )
-}* +
-	protected 
-
-TypedFault 
-( 
-) 
-{  
-}! "
-	protected 
-
-TypedFault 
-( 
-string #
-error$ )
-,) *
-string+ 1
-details2 9
-)9 :
-{ 	
-Error 
-= 
-error 
-; 
-Details 
-= 
-details 
-; 
-} 	
-} 
-} ó
-UC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\GlobalErrorHandler.cs
-	namespace 	
-MemoryGameService
- 
-{ 
-public 
-
-class 
-GlobalErrorHandler #
-:$ %
-IErrorHandler& 3
-{		 
-public
-
- 
-bool
-
- 
-HandleError
-
- 
-(
-
-  
-	Exception
-
-  )
-error
-
-* /
-)
-
-/ 0
-{ 	
-return 
-true 
-; 
-} 	
-public 
-void 
-ProvideFault  
-(  !
-	Exception! *
-error+ 0
-,0 1
-MessageVersion2 @
-versionA H
-,H I
-refJ M
-MessageN U
-faultV [
-)[ \
-{ 	
-FaultException 
-faultException )
-=* +
-new, /
-FaultException0 >
-(> ?
-$str? `
-)` a
-;a b
-MessageFault 
-messageFault %
-=& '
-faultException( 6
-.6 7
-CreateMessageFault7 I
-(I J
-)J K
-;K L
-fault 
-= 
-Message 
-. 
-CreateMessage )
-() *
-version* 1
-,1 2
-messageFault3 ?
-,? @
-nullA E
-)E F
-;F G
-} 	
-} 
-} Õ
-fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\GlobalErrorHandlerBehaviorAttribute.cs
-	namespace 	
-MemoryGameService
- 
-{		 
+[		 
+DataContract		 
+]		 
 public
 
  
-
+
+abstract
+
+ 
 class
 
- /
-#GlobalErrorHandlerBehaviorAttribute
-
- 4
-:
-
-5 6
-	Attribute
-
-7 @
-,
-
-@ A
-IServiceBehavior
-
-B R
-{ 
-private 
-readonly 
-Type 
-_errorHandlerType /
-;/ 0
-public /
-#GlobalErrorHandlerBehaviorAttribute 2
-(2 3
-Type3 7
-errorHandlerType8 H
-)H I
-{ 	
-_errorHandlerType 
-= 
-errorHandlerType  0
-;0 1
-} 	
-public 
-void  
-AddBindingParameters (
-(( )
-ServiceDescription) ;
-serviceDescription< N
-,N O
-ServiceHostBaseP _
-serviceHostBase` o
-,o p
+ 
 
-Collectionq {
-<{ |
-ServiceEndpoint	| ã
->
-ã å
-	endpoints
-ç ñ
-,
-ñ ó(
-BindingParameterCollection
-ò ≤
-bindingParameters
-≥ ƒ
-)
-ƒ ≈
-{ 	
-} 	
-public 
-void !
-ApplyDispatchBehavior )
-() *
-ServiceDescription* <
-serviceDescription= O
-,O P
-ServiceHostBaseQ `
-serviceHostBasea p
-)p q
-{ 	
-IErrorHandler 
-handler !
-=" #
-($ %
-IErrorHandler% 2
-)2 3
-	Activator3 <
-.< =
-CreateInstance= K
-(K L
-_errorHandlerTypeL ]
-)] ^
-;^ _
-foreach 
-( !
-ChannelDispatcherBase )!
-channelDispatcherBase* ?
-in@ B
-serviceHostBaseC R
-.R S
-ChannelDispatchersS e
-)e f
-{ 
-ChannelDispatcher !
-channelDispatcher" 3
-=4 5!
-channelDispatcherBase6 K
-asL N
-ChannelDispatcherO `
-;` a
-if   
-(   
-channelDispatcher   $
-!=  % '
-null  ( ,
-)  , -
-{!! 
-channelDispatcher"" %
-.""% &
-ErrorHandlers""& 3
-.""3 4
-Add""4 7
-(""7 8
-handler""8 ?
-)""? @
-;""@ A
-}## 
-}$$ 
-}%% 	
-public'' 
-void'' 
-Validate'' 
-('' 
-ServiceDescription'' /
-serviceDescription''0 B
-,''B C
-ServiceHostBase''D S
-serviceHostBase''T c
-)''c d
-{(( 	
-}** 	
-}++ 
-},, ƒ
+TypedFault
+
+ $
+{ 
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+Error 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+[ 	
+
+DataMember	 
+] 
+public 
+string 
+Details 
+{ 
+get  #
+;# $
+set% (
+;( )
+}* +
+	protected 
+
+TypedFault 
+( 
+) 
+{  
+}! "
+	protected"" 
+
+TypedFault"" 
+("" 
+string"" #
+error""$ )
+,"") *
+string""+ 1
+details""2 9
+)""9 :
+{## 	
+Error$$ 
+=$$ 
+error$$ 
+;$$ 
+Details%% 
+=%% 
+details%% 
+;%% 
+}&& 	
+}'' 
+}(( ƒ
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Properties\AssemblyInfo.cs
 [ 
 assembly 	
@@ -3886,7 +3488,7 @@ ComVisible 
 ($$ 
 $str$$ (
 )$$( )
-]$$) *∫á
+]$$) *‹g
 _C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccesibilityService.cs
 	namespace 	
 MemoryGameService
@@ -3894,1463 +3496,994 @@ _C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\Accesi
 . 
 Services $
 { 
-public 
+public 
 
-partial 
-class 
-MemoryGameService *
-:+ ,!
-IAccessibilityService- B
-{ 
-private 
-readonly 
-log4net  
-.  !
-ILog! %
-_logger& -
-=. /
-log4net0 7
-.7 8
+partial 
+class 
+MemoryGameService *
+:+ ,!
+IAccessibilityService- B
+{ 
+private 
+readonly 
+log4net  
+.  !
+ILog! %
+_logger& -
+=. /
+log4net0 7
+.7 8
 
-LogManager8 B
-.B C
-	GetLoggerC L
-(L M
-$strM e
-)e f
-;f g
-public 
-string 
-GetUserEmailAddress )
-() *
-string* 0
-username1 9
-)9 :
-{ 	
-var 
+LogManager8 B
+.B C
+	GetLoggerC L
+(L M
+$strM e
+)e f
+;f g
+public 
+string 
+GetUserEmailAddress )
+() *
+string* 0
+username1 9
+)9 :
+{ 	
+var 
 
-unitOfWork 
-= 
-new  
+unitOfWork 
+= 
+new  
 
-UnitOfWork! +
-(+ ,
-new, /
-MemoryGameContext0 A
-(A B
-)B C
-)C D
-;D E
-try 
-{ 
-Account 
-accountRetrieved (
-=) *
+UnitOfWork! +
+(+ ,
+new, /
+MemoryGameContext0 A
+(A B
+)B C
+)C D
+;D E
+try 
+{ 
+Account 
+accountRetrieved (
+=) *
 
-unitOfWork+ 5
-.5 6
-Accounts6 >
-.> ?
-FindFirstOccurence? Q
-(Q R
-accountR Y
-=>Z \
-account] d
-.d e
-Usernamee m
-==n p
-usernameq y
-)y z
-;z {
-if 
-( 
-accountRetrieved $
-!=% '
-null( ,
-), -
-{ 
-string 
-emailAddress '
-=( )
-accountRetrieved* :
-.: ;
-EmailAddress; G
-;G H
-return 
-emailAddress '
-;' (
-}  
-NonExistentUserFault $ 
-nonExistentUserFault% 9
-=: ;
-new< ? 
-NonExistentUserFault@ T
-(T U
-)U V
-;V W
-throw 
-new 
-FaultException (
-<( ) 
-NonExistentUserFault) =
->= >
-(> ? 
-nonExistentUserFault? S
-)S T
-;T U
-} 
-catch 
-( 
-SqlException 
-sqlException  ,
-), -
-{ 
-_logger   
-.   
-Fatal   
-(   
-sqlException   *
-)  * +
-;  + ,'
-DatabaseConnectionLostFault!! +'
-databaseConnectionLostFault!!, G
-=!!H I
-new!!J M'
-DatabaseConnectionLostFault!!N i
-(!!i j
-)!!j k
-;!!k l
-throw"" 
-new"" 
-FaultException"" (
-<""( )'
-DatabaseConnectionLostFault"") D
->""D E
-(""E F'
-databaseConnectionLostFault""F a
-)""a b
-;""b c
-}## 
-finally$$ 
-{%% 
-
-unitOfWork&& 
-.&& 
-Dispose&& "
-(&&" #
-)&&# $
-;&&$ %
-}'' 
-}(( 	
-public** 
-string** 
-GetUsername** !
-(**! "
-string**" (
-emailAddress**) 5
-)**5 6
-{++ 	
-var,, 
-
-unitOfWork,, 
-=,, 
-new,,  
-
-UnitOfWork,,! +
-(,,+ ,
-new,,, /
-MemoryGameContext,,0 A
-(,,A B
-),,B C
-),,C D
-;,,D E
-try-- 
-{.. 
-Account// 
-accountRetrieved// (
-=//) *
-
-unitOfWork//+ 5
-.//5 6
-Accounts//6 >
-.//> ?
-Get//? B
-(//B C
-emailAddress//C O
-)//O P
-;//P Q
-if00 
-(00 
-accountRetrieved00 #
-!=00$ &
-null00' +
-)00+ ,
-{11 
-return22 
-accountRetrieved22 +
-.22+ ,
-Username22, 4
-;224 5
-}33  
-NonExistentUserFault44 $ 
-nonExistentUserFault44% 9
-=44: ;
-new44< ? 
-NonExistentUserFault44@ T
-(44T U
-)44U V
-;44V W
-throw55 
-new55 
-FaultException55 (
-<55( ) 
-NonExistentUserFault55) =
->55= >
-(55> ? 
-nonExistentUserFault55? S
-)55S T
-;55T U
-}66 
-catch77 
-(77 
-SqlException77 
-sqlException77  ,
-)77, -
-{88 
-_logger99 
-.99 
-Fatal99 
-(99 
-sqlException99 *
-)99* +
-;99+ ,'
-DatabaseConnectionLostFault:: +'
-databaseConnectionLostFault::, G
-=::H I
-new::J M'
-DatabaseConnectionLostFault::N i
-(::i j
-)::j k
-;::k l
-throw;; 
-new;; 
-FaultException;; (
-<;;( )'
-DatabaseConnectionLostFault;;) D
->;;D E
-(;;E F'
-databaseConnectionLostFault;;F a
-);;a b
-;;;b c
-}<< 
-finally== 
-{>> 
-
-unitOfWork?? 
-.?? 
-Dispose?? "
-(??" #
-)??# $
-;??$ %
-}@@ 
-}AA 	
-publicCC 
-boolCC 
-
-IsVerifiedCC 
-(CC 
-stringCC %
-usernameCC& .
-)CC. /
-{DD 	
-varEE 
-
-unitOfWorkEE 
-=EE 
-newEE  
-
-UnitOfWorkEE! +
-(EE+ ,
-newEE, /
-MemoryGameContextEE0 A
-(EEA B
-)EEB C
-)EEC D
-;EED E
-tryFF 
-{GG 
-AccountHH 
-accountRetrievedHH (
-=HH) *
-
-unitOfWorkHH+ 5
-.HH5 6
-AccountsHH6 >
-.HH> ?
-FindFirstOccurenceHH? Q
-(HHQ R
-accountHHR Y
-=>HHZ \
-accountHH] d
-.HHd e
-UsernameHHe m
-==HHn p
-usernameHHq y
-&&HHz |
-account	HH} Ñ
-.
-HHÑ Ö
-EmailWasVerified
-HHÖ ï
-)
-HHï ñ
-;
-HHñ ó
-ifII 
-(II 
-accountRetrievedII $
-!=II% '
-nullII( ,
-)II, -
-{JJ 
-returnKK 
-trueKK 
-;KK  
-}LL 
-returnMM 
-falseMM 
-;MM 
-}NN 
-catchOO 
-(OO 
-SqlExceptionOO 
-sqlExceptionOO +
-)OO+ ,
-{PP 
-_loggerQQ 
-.QQ 
-FatalQQ 
-(QQ 
-sqlExceptionQQ *
-)QQ* +
-;QQ+ ,'
-DatabaseConnectionLostFaultRR +'
-databaseConnectionLostFaultRR, G
-=RRH I
-newRRJ M'
-DatabaseConnectionLostFaultRRN i
-(RRi j
-)RRj k
-;RRk l
-throwSS 
-newSS 
-FaultExceptionSS (
-<SS( )'
-DatabaseConnectionLostFaultSS) D
->SSD E
-(SSE F'
-databaseConnectionLostFaultSSF a
-)SSa b
-;SSb c
-}TT 
-finallyUU 
-{VV 
-
-unitOfWorkWW 
-.WW 
-DisposeWW "
-(WW" #
-)WW# $
-;WW$ %
-}XX 
-}YY 	
-public[[ 
-bool[[ 
-ItsRegistered[[ !
-([[! "
-string[[" (
-emailAddress[[) 5
-)[[5 6
-{\\ 	
-var]] 
-
-unitOfWork]] 
-=]] 
-new]]  
-
-UnitOfWork]]! +
-(]]+ ,
-new]], /
-MemoryGameContext]]0 A
-(]]A B
-)]]B C
-)]]C D
-;]]D E
-try^^ 
-{__ 
-Account`` 
-accountRetrieved`` (
-=``) *
-
-unitOfWork``+ 5
-.``5 6
-Accounts``6 >
-.``> ?
-Get``? B
-(``B C
-emailAddress``C O
-)``O P
-;``P Q
-ifaa 
-(aa 
-accountRetrievedaa $
-!=aa% '
-nullaa( ,
-)aa, -
-{bb 
-returncc 
-truecc 
-;cc  
-}dd 
-returnee 
-falseee 
-;ee 
-}ff 
-catchgg 
-(gg 
-SqlExceptiongg 
-sqlExceptiongg  ,
-)gg, -
-{hh 
-_loggerii 
-.ii 
-Fatalii 
-(ii 
-sqlExceptionii *
-)ii* +
-;ii+ ,'
-DatabaseConnectionLostFaultjj +'
-databaseConnectionLostFaultjj, G
-=jjH I
-newjjJ M'
-DatabaseConnectionLostFaultjjN i
-(jji j
-)jjj k
-;jjk l
-throwkk 
-newkk 
-FaultExceptionkk (
-<kk( )'
-DatabaseConnectionLostFaultkk) D
->kkD E
-(kkE F'
-databaseConnectionLostFaultkkF a
-)kka b
-;kkb c
-}ll 
-finallymm 
-{nn 
-
-unitOfWorkoo 
-.oo 
-Disposeoo "
-(oo" #
-)oo# $
-;oo$ %
-}pp 
-}qq 	
-publicss  
-PlayerCredentialsDTOss # 
-GetPlayerCredentialsss$ 8
-(ss8 9
-stringss9 ?
-usernamess@ H
-)ssH I
-{tt 	
-varuu 
-
-unitOfWorkuu 
-=uu 
-newuu  
-
-UnitOfWorkuu! +
-(uu+ ,
-newuu, /
-MemoryGameContextuu0 A
-(uuA B
-)uuB C
-)uuC D
-;uuD E
-tryvv 
-{ww 
-Accountxx 
-accountRetrievedxx (
-=xx) *
-
-unitOfWorkxx+ 5
-.xx5 6
-Accountsxx6 >
-.xx> ?
-FindFirstOccurencexx? Q
-(xxQ R
-accountxxR Y
-=>xxZ \
-accountxx] d
-.xxd e
-Usernamexxe m
-==xxn p
-usernamexxq y
-)xxy z
-;xxz {
-ifyy 
-(yy 
-accountRetrievedyy $
-!=yy% '
-nullyy( ,
-)yy, -
-{zz  
-PlayerCredentialsDTO{{ (
-playerCredentials{{) :
-={{; <
-new{{= @ 
-PlayerCredentialsDTO{{A U
-({{U V
-){{V W
-{|| 
-EmailAddress}} $
-=}}% &
-accountRetrieved}}' 7
-.}}7 8
-EmailAddress}}8 D
-,}}D E
-Username~~  
-=~~! "
-accountRetrieved~~# 3
-.~~3 4
-Username~~4 <
-,~~< =
-Password  
-=! "
-accountRetrieved# 3
-.3 4
-Password4 <
-}
-ÄÄ 
-;
-ÄÄ 
-return
-ÅÅ 
-playerCredentials
-ÅÅ ,
-;
-ÅÅ, -
-}
-ÇÇ "
-NonExistentUserFault
-ÉÉ $"
-nonExistentUserFault
-ÉÉ% 9
-=
-ÉÉ: ;
-new
-ÉÉ< ?"
-NonExistentUserFault
-ÉÉ@ T
-(
-ÉÉT U
-)
-ÉÉU V
-;
-ÉÉV W
-throw
-ÑÑ 
-new
-ÑÑ 
-FaultException
-ÑÑ (
-<
-ÑÑ( )"
-NonExistentUserFault
-ÑÑ) =
->
-ÑÑ= >
-(
-ÑÑ> ?"
-nonExistentUserFault
-ÑÑ? S
-)
-ÑÑS T
-;
-ÑÑT U
-}
-ÖÖ 
-catch
-ÜÜ 
-(
-ÜÜ 
-SqlException
-ÜÜ 
-sqlException
-ÜÜ  ,
-)
-ÜÜ, -
-{
-áá 
-_logger
-àà 
-.
-àà 
-Fatal
-àà 
-(
-àà 
-sqlException
-àà *
-)
-àà* +
-;
-àà+ ,)
-DatabaseConnectionLostFault
-ââ +)
-databaseConnectionLostFault
-ââ, G
-=
-ââH I
-new
-ââJ M)
-DatabaseConnectionLostFault
-ââN i
-(
-ââi j
-)
-ââj k
-;
-ââk l
-throw
-ää 
-new
-ää 
-FaultException
-ää (
-<
-ää( ))
-DatabaseConnectionLostFault
-ää) D
->
-ääD E
-(
-ääE F)
-databaseConnectionLostFault
-ääF a
-)
-ääa b
-;
-ääb c
-}
-ãã 
-finally
-åå 
-{
-çç 
-
-unitOfWork
-éé 
-.
-éé 
-Dispose
-éé "
-(
-éé" #
-)
-éé# $
-;
-éé$ %
-}
-èè 
-}
-êê 	
-public
-íí 
-string
-íí 
-GetSalt
-íí 
-(
-íí 
-string
-íí $
-username
-íí% -
-)
-íí- .
-{
-ìì 	
-
-UnitOfWork
-îî 
-
-unitOfWork
-îî !
-=
-îî" #
-new
-îî$ '
-
-UnitOfWork
-îî( 2
-(
-îî2 3
-new
-îî3 6
-MemoryGameContext
-îî7 H
-(
-îîH I
-)
-îîI J
-)
-îîJ K
-;
-îîK L
-try
-ïï 
-{
-ññ 
-Account
-óó 
-retrievedAccount
-óó (
-=
-óó) *
-
-unitOfWork
-óó+ 5
-.
-óó5 6
-Accounts
-óó6 >
-.
-óó> ? 
-FindFirstOccurence
-óó? Q
-(
-óóQ R
-account
-óóR Y
-=>
-óóZ \
-account
-óó] d
-.
-óód e
-Username
-óóe m
-==
-óón p
-username
-óóq y
-)
-óóy z
-;
-óóz {
-if
-òò 
-(
-òò 
-retrievedAccount
-òò $
-!=
-òò% '
-null
-òò( ,
-)
-òò, -
-{
-ôô 
-return
-öö 
-retrievedAccount
-öö +
-.
-öö+ ,
-Salt
-öö, 0
-;
-öö0 1
-}
-õõ "
-NonExistentUserFault
-úú $"
-nonExistentUserFault
-úú% 9
-=
-úú: ;
-new
-úú< ?"
-NonExistentUserFault
-úú@ T
-(
-úúT U
-)
-úúU V
-;
-úúV W
-throw
-ùù 
-new
-ùù 
-FaultException
-ùù (
-<
-ùù( )"
-NonExistentUserFault
-ùù) =
->
-ùù= >
-(
-ùù> ?"
-nonExistentUserFault
-ùù? S
-)
-ùùS T
-;
-ùùT U
-}
-ûû 
-catch
-üü 
-(
-üü 
-SqlException
-üü 
-sqlException
-üü  ,
-)
-üü, -
-{
-†† 
-_logger
-°° 
-.
-°° 
-Fatal
-°° 
-(
-°° 
-sqlException
-°° *
-.
-°°* +
-Message
-°°+ 2
-)
-°°2 3
-;
-°°3 4)
-DatabaseConnectionLostFault
-¢¢ +)
-databaseConnectionLostFault
-¢¢, G
-=
-¢¢H I
-new
-¢¢J M)
-DatabaseConnectionLostFault
-¢¢N i
-(
-¢¢i j
-)
-¢¢j k
-;
-¢¢k l
-throw
-££ 
-new
-££ 
-FaultException
-££ (
-<
-££( ))
-DatabaseConnectionLostFault
-££) D
->
-££D E
-(
-££E F)
-databaseConnectionLostFault
-££F a
-)
-££a b
-;
-££b c
-}
-§§ 
-catch
-•• 
-(
-•• 
-EntityException
-•• !
-entityException
-••" 1
-)
-••1 2
-{
-¶¶ 
-_logger
-ßß 
-.
-ßß 
-Fatal
-ßß 
-(
-ßß 
-entityException
-ßß -
-)
-ßß- .
-;
-ßß. /)
-DatabaseConnectionLostFault
-®® +)
-databaseConnectionLostFault
-®®, G
-=
-®®H I
-new
-®®J M)
-DatabaseConnectionLostFault
-®®N i
-(
-®®i j
-)
-®®j k
-;
-®®k l
-throw
-©© 
-new
-©© 
-FaultException
-©© (
-<
-©©( ))
-DatabaseConnectionLostFault
-©©) D
->
-©©D E
-(
-©©E F)
-databaseConnectionLostFault
-©©F a
-)
-©©a b
-;
-©©b c
-}
-™™ 
-finally
-´´ 
-{
-¨¨ 
-
-unitOfWork
-≠≠ 
-.
-≠≠ 
-Dispose
-≠≠ "
-(
-≠≠" #
-)
-≠≠# $
-;
-≠≠$ %
-}
-ÆÆ 
-}
-ØØ 	
-public
-±± 
-bool
-±± 
-HasAccessRights
-±± #
-(
-±±# $
-string
-±±$ *
-username
-±±+ 3
-,
-±±3 4
-string
-±±5 ;
-password
-±±< D
-)
-±±D E
-{
-≤≤ 	
-
-UnitOfWork
-≥≥ 
-
-unitOfWork
-≥≥ !
-=
-≥≥" #
-new
-≥≥$ '
-
-UnitOfWork
-≥≥( 2
-(
-≥≥2 3
-new
-≥≥3 6
-MemoryGameContext
-≥≥7 H
-(
-≥≥H I
-)
-≥≥I J
-)
-≥≥J K
-;
-≥≥K L
-try
-¥¥ 
-{
-µµ 
-Account
-∂∂ 
-retrievedAccount
-∂∂ (
-=
-∂∂) *
-
-unitOfWork
-∂∂+ 5
-.
-∂∂5 6
-Accounts
-∂∂6 >
-.
-∂∂> ? 
-FindFirstOccurence
-∂∂? Q
-(
-∂∂Q R
-account
-∂∂R Y
-=>
-∂∂Z \
-account
-∂∂] d
-.
-∂∂d e
-Username
-∂∂e m
-==
-∂∂n p
-username
-∂∂q y
-&&
-∂∂z |
-account∂∂} Ñ
-.∂∂Ñ Ö
-Password∂∂Ö ç
-==∂∂é ê
-password∂∂ë ô
-)∂∂ô ö
-;∂∂ö õ
-if
-∑∑ 
-(
-∑∑ 
-retrievedAccount
-∑∑ #
-!=
-∑∑$ &
-null
-∑∑' +
-)
-∑∑+ ,
-{
-∏∏ 
-return
-ππ 
-true
-ππ 
-;
-ππ  
-}
-∫∫ 
-return
-ªª 
-false
-ªª 
-;
-ªª 
-}
-ºº 
-catch
-ΩΩ 
-(
-ΩΩ 
-SqlException
-ΩΩ 
-sqlException
-ΩΩ  ,
-)
-ΩΩ, -
-{
-ææ 
-_logger
-øø 
-.
-øø 
-Fatal
-øø 
-(
-øø 
-sqlException
-øø *
-)
-øø* +
-;
-øø+ ,)
-DatabaseConnectionLostFault
-¿¿ +)
-databaseConnectionLostFault
-¿¿, G
-=
-¿¿H I
-new
-¿¿J M)
-DatabaseConnectionLostFault
-¿¿N i
-(
-¿¿i j
-)
-¿¿j k
-;
-¿¿k l
-throw
-¡¡ 
-new
-¡¡ 
-FaultException
-¡¡ (
-<
-¡¡( ))
-DatabaseConnectionLostFault
-¡¡) D
->
-¡¡D E
-(
-¡¡E F)
-databaseConnectionLostFault
-¡¡F a
-)
-¡¡a b
-;
-¡¡b c
-}
-¬¬ 
-finally
-√√ 
-{
-ƒƒ 
-
-unitOfWork
-≈≈ 
-.
-≈≈ 
-Dispose
-≈≈ "
-(
-≈≈" #
-)
-≈≈# $
-;
-≈≈$ %
-}
-∆∆ 
-}
-«« 	
-}
-»» 
-}…… ó&
-gC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccountModifiabilityService.cs
-	namespace
-
- 	
-MemoryGameService
-
-
- 
-.
-
- 
-Services
-
- $
-{ 
-public 
-
-partial 
-class 
-MemoryGameService *
-:+ ,(
-IAccountModifiabilityService- I
-{ 
-public 
-bool 
-ChangeUsername "
-(" #
-string# )
-emailAddress* 6
-,6 7
-string8 >
-newUsername? J
-)J K
-{ 	
-
-UnitOfWork 
-
-unitOfWork !
-=" #
-new$ '
-
-UnitOfWork( 2
-(2 3
-new3 6
-MemoryGameContext7 H
-(H I
-)I J
-)J K
-;K L
-try 
-{ 
-Account 
-account 
-=  !
-
-unitOfWork" ,
-., -
-Accounts- 5
-.5 6
-Get6 9
-(9 :
-emailAddress: F
-)F G
-;G H
-if 
-( 
-account 
-!= 
-null "
-)" #
-{ 
-account 
-. 
-Username $
-=% &
-newUsername' 2
-;2 3
-int 
-rowsModified $
-=% &
-
-unitOfWork' 1
-.1 2
-Complete2 :
-(: ;
-); <
-;< =
-return 
-rowsModified '
-==( *
-$num+ ,
-;, -
-} 
-return 
-false 
-; 
+unitOfWork+ 5
+.5 6
+Accounts6 >
+.> ?
+FindFirstOccurence? Q
+(Q R
+accountR Y
+=>Z \
+account] d
+.d e
+Usernamee m
+==n p
+usernameq y
+)y z
+;z {
+string 
+emailAddress #
+=$ %
+accountRetrieved& 6
+.6 7
+EmailAddress7 C
+;C D
+return 
+emailAddress #
+;# $
 } 
 catch 
 ( 
-SqlException 
-)  
-{ '
-DatabaseConnectionLostFault +'
-databaseConnectionLostFault, G
-=H I
-newJ M'
-DatabaseConnectionLostFaultN i
-(i j
-)j k
-;k l
-throw 
-new 
-FaultException (
-<( )'
-DatabaseConnectionLostFault) D
->D E
-(E F'
-databaseConnectionLostFaultF a
-)a b
-;b c
-}   
-finally!! 
-{"" 
+SqlException 
+sqlException  ,
+), -
+{ 
+_logger 
+. 
+Fatal 
+( 
+$str ]
++^ _
+$str F
++G H
+$str   )
+,  ) *
+sqlException  + 7
+)  7 8
+;  8 9
+throw!! 
+;!! 
+}"" 
+catch## 
+(## 
+EntityException## "
+entityException### 2
+)##2 3
+{$$ 
+_logger%% 
+.%% 
+Fatal%% 
+(%% 
+$str%% k
++%%l m
+$str&& j
++&&k l
+$str'' 9
+,''9 :
+entityException''; J
+)''J K
+;''K L
+throw(( 
+;(( 
+})) 
+finally** 
+{++ 
 
-unitOfWork## 
-.## 
-Dispose## "
-(##" #
-)### $
-;##$ %
-}$$ 
-}%% 	
-public'' 
-bool'' 
-SetNewPassword'' "
-(''" #.
-"PasswordModificationCredentialsDto''# E+
-passwordModificationCredentials''F e
-)''e f
-{(( 	
+unitOfWork,, 
+.,, 
+Dispose,, "
+(,," #
+),,# $
+;,,$ %
+}-- 
+}.. 	
+public11 
+string11 
+GetUsername11 !
+(11! "
+string11" (
+emailAddress11) 5
+)115 6
+{22 	
+var33 
 
-UnitOfWork)) 
+unitOfWork33 
+=33 
+new33  
 
-unitOfWork)) !
-=))" #
-new))$ '
+UnitOfWork33! +
+(33+ ,
+new33, /
+MemoryGameContext330 A
+(33A B
+)33B C
+)33C D
+;33D E
+try44 
+{55 
+Account66 
+accountRetrieved66 (
+=66) *
 
-UnitOfWork))( 2
-())2 3
-new))3 6
-MemoryGameContext))7 H
-())H I
-)))I J
-)))J K
-;))K L
-string** 
-emailAddress** 
-=**  !+
-passwordModificationCredentials**" A
-.**A B
-EmailAddress**B N
-;**N O
-string++ 
-salt++ 
-=++ +
-passwordModificationCredentials++ 9
-.++9 :
-Salt++: >
-;++> ?
-string,, 
-newPassword,, 
-=,,  +
-passwordModificationCredentials,,! @
-.,,@ A
-NewPassword,,A L
-;,,L M
-try-- 
-{.. 
-Account// 
-account// 
-=//  !
-
-unitOfWork//" ,
-.//, -
-Accounts//- 5
-.//5 6
-Get//6 9
-(//9 :
-emailAddress//: F
-)//F G
-;//G H
-if00 
-(00 
-account00 
-!=00 
-null00 "
-)00" #
-{11 
-account22 
-.22 
-Password22 $
-=22% &
-newPassword22' 2
-;222 3
-account33 
-.33 
-Salt33  
-=33! "
-salt33# '
-;33' (
-int44 
-rowsModified44 $
-=44% &
-
-unitOfWork44' 1
-.441 2
-Complete442 :
-(44: ;
-)44; <
-;44< =
-return55 
-rowsModified55 '
-==55( *
-$num55+ ,
-;55, -
-}66 
-return77 
-false77 
-;77 
+unitOfWork66+ 5
+.665 6
+Accounts666 >
+.66> ?
+Get66? B
+(66B C
+emailAddress66C O
+)66O P
+;66P Q
+return77 
+accountRetrieved77 '
+.77' (
+Username77( 0
+;770 1
 }88 
 catch99 
 (99 
-SqlException99 
-)99  
-{:: '
-DatabaseConnectionLostFault;; +'
-databaseConnectionLostFault;;, G
-=;;H I
-new;;J M'
-DatabaseConnectionLostFault;;N i
-(;;i j
-);;j k
-;;;k l
-throw<< 
-new<< 
-FaultException<< (
-<<<( )'
-DatabaseConnectionLostFault<<) D
-><<D E
-(<<E F'
-databaseConnectionLostFault<<F a
-)<<a b
-;<<b c
-}== 
-finally>> 
-{?? 
+SqlException99 
+sqlException99  ,
+)99, -
+{:: 
+_logger;; 
+.;; 
+Fatal;; 
+(;; 
+$str;; ]
++;;^ _
+$str<< _
++<<` a
+$str== F
+,==F G
+sqlException==H T
+)==T U
+;==U V
+throw>> 
+;>> 
+}?? 
+catch@@ 
+(@@ 
+EntityException@@ "
+entityException@@# 2
+)@@2 3
+{AA 
+_loggerBB 
+.BB 
+FatalBB 
+(BB 
+$strBB k
++BBl m
+$strCC j
++CCk l
+$strDD 1
+,DD1 2
+entityExceptionDD3 B
+)DDB C
+;DDC D
+throwEE 
+;EE 
+}FF 
+finallyGG 
+{HH 
 
-unitOfWork@@ 
-.@@ 
-Dispose@@ "
-(@@" #
-)@@# $
-;@@$ %
-}AA 
-}CC 	
-}DD 
-}EE ü1
-fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccountVerificationService.cs
+unitOfWorkII 
+.II 
+DisposeII "
+(II" #
+)II# $
+;II$ %
+}JJ 
+}KK 	
+publicOO 
+boolOO 
+
+IsVerifiedOO 
+(OO 
+stringOO %
+usernameOO& .
+)OO. /
+{PP 	
+varQQ 
+
+unitOfWorkQQ 
+=QQ 
+newQQ  
+
+UnitOfWorkQQ! +
+(QQ+ ,
+newQQ, /
+MemoryGameContextQQ0 A
+(QQA B
+)QQB C
+)QQC D
+;QQD E
+tryRR 
+{SS 
+AccountTT 
+accountRetrievedTT (
+=TT) *
+
+unitOfWorkTT+ 5
+.TT5 6
+AccountsTT6 >
+.TT> ?
+FindFirstOccurenceTT? Q
+(TTQ R
+accountTTR Y
+=>TTZ \
+accountTT] d
+.TTd e
+UsernameTTe m
+==TTn p
+usernameTTq y
+&&TTz |
+account	TT} Ñ
+.
+TTÑ Ö
+EmailWasVerified
+TTÖ ï
+)
+TTï ñ
+;
+TTñ ó
+ifUU 
+(UU 
+accountRetrievedUU $
+!=UU% '
+nullUU( ,
+)UU, -
+{VV 
+returnWW 
+trueWW 
+;WW  
+}XX 
+returnYY 
+falseYY 
+;YY 
+}ZZ 
+catch[[ 
+([[ 
+SqlException[[ 
+sqlException[[  ,
+)[[, -
+{\\ 
+_logger]] 
+.]] 
+Fatal]] 
+(]] 
+$str]] o
++]]p q
+$str^^ p
++^^q r
+$str__ 4
+,__4 5
+sqlException__6 B
+)__B C
+;__C D
+throw`` 
+;`` 
+}aa 
+catchbb 
+(bb 
+EntityExceptionbb "
+entityExceptionbb# 2
+)bb2 3
+{cc 
+_loggerdd 
+.dd 
+Fataldd 
+(dd 
+$strdd u
++ddv w
+$stree _
++ee` a
+$strff 0
+,ff0 1
+entityExceptionff2 A
+)ffA B
+;ffB C
+throwgg 
+;gg 
+}hh 
+finallyii 
+{jj 
+
+unitOfWorkkk 
+.kk 
+Disposekk "
+(kk" #
+)kk# $
+;kk$ %
+}ll 
+}mm 	
+publicpp 
+boolpp 
+ItsRegisteredpp !
+(pp! "
+stringpp" (
+emailAddresspp) 5
+)pp5 6
+{qq 	
+varrr 
+
+unitOfWorkrr 
+=rr 
+newrr  
+
+UnitOfWorkrr! +
+(rr+ ,
+newrr, /
+MemoryGameContextrr0 A
+(rrA B
+)rrB C
+)rrC D
+;rrD E
+tryss 
+{tt 
+Accountuu 
+accountRetrieveduu (
+=uu) *
+
+unitOfWorkuu+ 5
+.uu5 6
+Accountsuu6 >
+.uu> ?
+Getuu? B
+(uuB C
+emailAddressuuC O
+)uuO P
+;uuP Q
+ifvv 
+(vv 
+accountRetrievedvv $
+!=vv% '
+nullvv( ,
+)vv, -
+{ww 
+returnxx 
+truexx 
+;xx  
+}yy 
+returnzz 
+falsezz 
+;zz 
+}{{ 
+catch|| 
+(|| 
+SqlException|| 
+sqlException||  ,
+)||, -
+{}} 
+_logger~~ 
+.~~ 
+Fatal~~ 
+(~~ 
+$str~~ o
++~~p q
+$str e
+,e f
+sqlExceptiong s
+)s t
+;t u
+throw
+ÄÄ 
+;
+ÄÄ 
+}
+ÅÅ 
+catch
+ÇÇ 
+(
+ÇÇ 
+EntityException
+ÇÇ "
+entityException
+ÇÇ# 2
+)
+ÇÇ2 3
+{
+ÉÉ 
+_logger
+ÑÑ 
+.
+ÑÑ 
+Fatal
+ÑÑ 
+(
+ÑÑ 
+$str
+ÑÑ u
++
+ÑÑv w
+$str
+ÖÖ _
++
+ÖÖ` a
+$str
+ÜÜ 3
+,
+ÜÜ3 4
+entityException
+ÜÜ5 D
+)
+ÜÜD E
+;
+ÜÜE F
+throw
+áá 
+;
+áá 
+}
+àà 
+finally
+ââ 
+{
+ää 
+
+unitOfWork
+ãã 
+.
+ãã 
+Dispose
+ãã "
+(
+ãã" #
+)
+ãã# $
+;
+ãã$ %
+}
+åå 
+}
+çç 	
+public
+êê 
+string
+êê 
+GetSalt
+êê 
+(
+êê 
+string
+êê $
+username
+êê% -
+)
+êê- .
+{
+ëë 	
+
+UnitOfWork
+íí 
+
+unitOfWork
+íí !
+=
+íí" #
+new
+íí$ '
+
+UnitOfWork
+íí( 2
+(
+íí2 3
+new
+íí3 6
+MemoryGameContext
+íí7 H
+(
+ííH I
+)
+ííI J
+)
+ííJ K
+;
+ííK L
+try
+ìì 
+{
+îî 
+Account
+ïï 
+retrievedAccount
+ïï (
+=
+ïï) *
+
+unitOfWork
+ïï+ 5
+.
+ïï5 6
+Accounts
+ïï6 >
+.
+ïï> ? 
+FindFirstOccurence
+ïï? Q
+(
+ïïQ R
+account
+ïïR Y
+=>
+ïïZ \
+account
+ïï] d
+.
+ïïd e
+Username
+ïïe m
+==
+ïïn p
+username
+ïïq y
+)
+ïïy z
+;
+ïïz {
+if
+ññ 
+(
+ññ 
+retrievedAccount
+ññ $
+!=
+ññ% '
+null
+ññ( ,
+)
+ññ, -
+{
+óó 
+return
+òò 
+retrievedAccount
+òò +
+.
+òò+ ,
+Salt
+òò, 0
+;
+òò0 1
+}
+ôô 
+throw
+öö 
+new
+öö 
+FaultException
+öö (
+<
+öö( )"
+NonExistentUserFault
+öö) =
+>
+öö= >
+(
+öö> ?
+new
+öö? B"
+NonExistentUserFault
+ööC W
+(
+ööW X
+)
+ööX Y
+{
+õõ 
+Error
+úú 
+=
+úú 
+$str
+úú [
+,
+úú[ \
+Details
+ùù 
+=
+ùù 
+$str
+ùù _
+}
+ûû 
+)
+ûû 
+;
+ûû 
+}
+üü 
+catch
+†† 
+(
+†† 
+SqlException
+†† 
+sqlException
+††  ,
+)
+††, -
+{
+°° 
+_logger
+¢¢ 
+.
+¢¢ 
+Fatal
+¢¢ 
+(
+¢¢ 
+$str
+¢¢ n
++
+¢¢o p
+$str
+££ `
+,
+££` a
+sqlException
+££b n
+)
+££n o
+;
+££o p
+throw
+§§ 
+;
+§§ 
+}
+•• 
+catch
+¶¶ 
+(
+¶¶ 
+EntityException
+¶¶ !
+entityException
+¶¶" 1
+)
+¶¶1 2
+{
+ßß 
+_logger
+®® 
+.
+®® 
+Fatal
+®® 
+(
+®® 
+$str
+®® u
++
+®®v w
+$str
+©© _
++
+©©` a
+$str
+™™ .
+,
+™™. /
+entityException
+™™0 ?
+)
+™™? @
+;
+™™@ A
+throw
+´´ 
+;
+´´ 
+}
+¨¨ 
+finally
+≠≠ 
+{
+ÆÆ 
+
+unitOfWork
+ØØ 
+.
+ØØ 
+Dispose
+ØØ "
+(
+ØØ" #
+)
+ØØ# $
+;
+ØØ$ %
+}
+∞∞ 
+}
+±± 	
+public
+µµ 
+bool
+µµ 
+HasAccessRights
+µµ #
+(
+µµ# $
+string
+µµ$ *
+username
+µµ+ 3
+,
+µµ3 4
+string
+µµ5 ;
+password
+µµ< D
+)
+µµD E
+{
+∂∂ 	
+
+UnitOfWork
+∑∑ 
+
+unitOfWork
+∑∑ !
+=
+∑∑" #
+new
+∑∑$ '
+
+UnitOfWork
+∑∑( 2
+(
+∑∑2 3
+new
+∑∑3 6
+MemoryGameContext
+∑∑7 H
+(
+∑∑H I
+)
+∑∑I J
+)
+∑∑J K
+;
+∑∑K L
+try
+∏∏ 
+{
+ππ 
+Account
+∫∫ 
+retrievedAccount
+∫∫ (
+=
+∫∫) *
+
+unitOfWork
+∫∫+ 5
+.
+∫∫5 6
+Accounts
+∫∫6 >
+.
+∫∫> ? 
+FindFirstOccurence
+∫∫? Q
+(
+∫∫Q R
+account
+∫∫R Y
+=>
+∫∫Z \
+account
+∫∫] d
+.
+∫∫d e
+Username
+∫∫e m
+==
+∫∫n p
+username
+∫∫q y
+&&
+∫∫z |
+account∫∫} Ñ
+.∫∫Ñ Ö
+Password∫∫Ö ç
+==∫∫é ê
+password∫∫ë ô
+)∫∫ô ö
+;∫∫ö õ
+if
+ªª 
+(
+ªª 
+retrievedAccount
+ªª #
+!=
+ªª$ &
+null
+ªª' +
+)
+ªª+ ,
+{
+ºº 
+return
+ΩΩ 
+true
+ΩΩ 
+;
+ΩΩ  
+}
+ææ 
+return
+øø 
+false
+øø 
+;
+øø 
+}
+¿¿ 
+catch
+¡¡ 
+(
+¡¡ 
+SqlException
+¡¡ 
+sqlException
+¡¡  ,
+)
+¡¡, -
+{
+¬¬ 
+_logger
+√√ 
+.
+√√ 
+Fatal
+√√ 
+(
+√√ 
+$str
+√√ 
++√√Ä Å
+$str
+ƒƒ Z
+,
+ƒƒZ [
+sqlException
+ƒƒ\ h
+)
+ƒƒh i
+;
+ƒƒi j
+throw
+≈≈ 
+;
+≈≈ 
+}
+∆∆ 
+catch
+«« 
+(
+«« 
+EntityException
+«« "
+entityException
+««# 2
+)
+««2 3
+{
+»» 
+_logger
+…… 
+.
+…… 
+Fatal
+…… 
+(
+…… 
+$str
+…… u
++
+……v w
+$str
+   _
++
+  ` a
+$str
+ÀÀ 6
+,
+ÀÀ6 7
+entityException
+ÀÀ8 G
+)
+ÀÀG H
+;
+ÀÀH I
+throw
+ÃÃ 
+;
+ÃÃ 
+}
+ÕÕ 
+finally
+ŒŒ 
+{
+œœ 
+
+unitOfWork
+–– 
+.
+–– 
+Dispose
+–– "
+(
+––" #
+)
+––# $
+;
+––$ %
+}
+—— 
+}
+““ 	
+}
+”” 
+}‘‘ Ï(
+gC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccountModifiabilityService.cs
 	namespace		 	
 MemoryGameService		
  
@@ -5359,130 +4492,309 @@ fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\Accoun
 {
 
  
-public 
+public 
 
-partial 
-class 
-MemoryGameService *
-:+ ,'
-IAccountVerificationService- H
-{ 
-public 
-bool  
-SetAccountAsVerified (
-(( )
-string) /
-emailAddress0 <
-)< =
-{ 	
+partial 
+class 
+MemoryGameService *
+:+ ,(
+IAccountModifiabilityService- I
+{ 
+public$$ 
+bool$$ 
+ChangeUsername$$ "
+($$" #
+string$$# )
+emailAddress$$* 6
+,$$6 7
+string$$8 >
+newUsername$$? J
+)$$J K
+{%% 	
 
-UnitOfWork 
+UnitOfWork&& 
 
-unitOfWork !
-=" #
-new$ '
+unitOfWork&& !
+=&&" #
+new&&$ '
 
-UnitOfWork( 2
-(2 3
-new3 6
-MemoryGameContext7 H
-(H I
-)I J
-)J K
-;K L
-try 
-{ 
-Account 
-retrievedAccount (
-=) *
+UnitOfWork&&( 2
+(&&2 3
+new&&3 6
+MemoryGameContext&&7 H
+(&&H I
+)&&I J
+)&&J K
+;&&K L
+try'' 
+{(( 
+Account)) 
+account)) 
+=))  !
 
-unitOfWork+ 5
-.5 6
-Accounts6 >
-.> ?
-Get? B
-(B C
-emailAddressC O
-)O P
-;P Q
-if 
-( 
-retrievedAccount #
-!=$ &
-null' +
-)+ ,
-{ 
-retrievedAccount $
-.$ %
-EmailWasVerified% 5
-=6 7
-true8 <
-;< =
-int 
-rowsModified $
-=% &
+unitOfWork))" ,
+.)), -
+Accounts))- 5
+.))5 6
+Get))6 9
+())9 :
+emailAddress)): F
+)))F G
+;))G H
+if** 
+(** 
+account** 
+!=** 
+null** "
+)**" #
+{++ 
+account,, 
+.,, 
+Username,, $
+=,,% &
+newUsername,,' 2
+;,,2 3
+int-- 
+rowsModified-- $
+=--% &
 
-unitOfWork' 1
-.1 2
-Complete2 :
-(: ;
-); <
-;< =
-return 
-rowsModified '
-==( *
-$num+ ,
-;, -
-} 
-return 
-false 
-; 
-} 
-catch 
-( 
-SqlException 
-)  
-{ '
-DatabaseConnectionLostFault +'
-databaseConnectionLostFault, G
-=H I
-newJ M'
-DatabaseConnectionLostFaultN i
-(i j
-)j k
-;k l
-throw 
-new 
-FaultException (
-<( )'
-DatabaseConnectionLostFault) D
->D E
-(E F'
-databaseConnectionLostFaultF a
-)a b
-;b c
-} 
-finally   
-{!! 
+unitOfWork--' 1
+.--1 2
+Complete--2 :
+(--: ;
+)--; <
+;--< =
+return.. 
+rowsModified.. '
+==..( *
+$num..+ ,
+;.., -
+}// 
+return00 
+false00 
+;00 
+}11 
+catch22 
+(22 
+SqlException22 
+sqlException22  ,
+)22, -
+{33 
+_logger44 
+.44 
+Fatal44 
+(44 
+$str44 |
++44} ~
+$str55 ^
++55_ `
+$str66 )
+,66) *
+sqlException66+ 7
+)667 8
+;668 9
+throw77 
+;77 
+}88 
+catch99 
+(99 
+EntityException99 "
+entityException99# 2
+)992 3
+{:: 
+_logger;; 
+.;; 
+Fatal;; 
+(;; 
+$str;; v
++;;w x
+$str<< _
++<<` a
+$str== 4
+,==4 5
+entityException==6 E
+)==E F
+;==F G
+throw>> 
+;>> 
+}?? 
+finally@@ 
+{AA 
 
-unitOfWork"" 
-."" 
-Dispose"" "
-(""" #
-)""# $
-;""$ %
-}## 
-}%% 	
+unitOfWorkBB 
+.BB 
+DisposeBB "
+(BB" #
+)BB# $
+;BB$ %
+}CC 
+}DD 	
+publicNN 
+boolNN 
+SetNewPasswordNN "
+(NN" #.
+"PasswordModificationCredentialsDtoNN# E+
+passwordModificationCredentialsNNF e
+)NNe f
+{OO 	
+
+UnitOfWorkPP 
+
+unitOfWorkPP !
+=PP" #
+newPP$ '
+
+UnitOfWorkPP( 2
+(PP2 3
+newPP3 6
+MemoryGameContextPP7 H
+(PPH I
+)PPI J
+)PPJ K
+;PPK L
+stringQQ 
+emailAddressQQ 
+=QQ  !+
+passwordModificationCredentialsQQ" A
+.QQA B
+EmailAddressQQB N
+;QQN O
+stringRR 
+saltRR 
+=RR +
+passwordModificationCredentialsRR 9
+.RR9 :
+SaltRR: >
+;RR> ?
+stringSS 
+newPasswordSS 
+=SS  +
+passwordModificationCredentialsSS! @
+.SS@ A
+NewPasswordSSA L
+;SSL M
+tryTT 
+{UU 
+AccountVV 
+accountVV 
+=VV  !
+
+unitOfWorkVV" ,
+.VV, -
+AccountsVV- 5
+.VV5 6
+GetVV6 9
+(VV9 :
+emailAddressVV: F
+)VVF G
+;VVG H
+accountWW 
+.WW 
+PasswordWW  
+=WW! "
+newPasswordWW# .
+;WW. /
+accountXX 
+.XX 
+SaltXX 
+=XX 
+saltXX #
+;XX# $
+intYY 
+rowsModifiedYY  
+=YY! "
+
+unitOfWorkYY# -
+.YY- .
+CompleteYY. 6
+(YY6 7
+)YY7 8
+;YY8 9
+returnZZ 
+rowsModifiedZZ #
+==ZZ$ &
+$numZZ' (
+;ZZ( )
+}[[ 
+catch\\ 
+(\\ 
+SqlException\\ 
+sqlException\\  ,
+)\\, -
+{]] 
+_logger^^ 
+.^^ 
+Fatal^^ 
+(^^ 
+$str^^ |
++^^} ~
+$str__ ?
++__@ A
+$str`` G
+,``G H
+sqlException``I U
+)``U V
+;``V W
+throwaa 
+;aa 
+}bb 
+catchcc 
+(cc 
+EntityExceptioncc "
+entityExceptioncc# 2
+)cc2 3
+{dd 
+_loggeree 
+.ee 
+Fatalee 
+(ee 
+$stree v
++eew x
+$strff _
++ff` a
+$strgg 4
+,gg4 5
+entityExceptiongg6 E
+)ggE F
+;ggF G
+throwhh 
+;hh 
+}ii 
+finallyjj 
+{kk 
+
+unitOfWorkll 
+.ll 
+Disposell "
+(ll" #
+)ll# $
+;ll$ %
+}mm 
+}oo 	
+}pp 
+}qq â_
+fC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\AccountVerificationService.cs
+	namespace 	
+MemoryGameService
+ 
+. 
+Services $
+{		 
+public 
+
+partial 
+class 
+MemoryGameService *
+:+ ,'
+IAccountVerificationService- H
+{ 
 public'' 
-bool'' &
-AssignNewVerificationToken'' .
-(''. /
-string''/ 5
-emailAddress''6 B
-,''B C
-string''D J
-verificationToken''K \
-)''\ ]
+bool''  
+SetAccountAsVerified'' (
+(''( )
+string'') /
+emailAddress''0 <
+)''< =
 {(( 	
 
 UnitOfWork)) 
@@ -5515,18 +4827,18 @@ unitOfWork,,+ 5
 ),,O P
 ;,,P Q
 if-- 
-(-- 
-retrievedAccount-- $
-!=--% '
-null--( ,
-)--, -
+(-- 
+retrievedAccount-- #
+!=--$ &
+null--' +
+)--+ ,
 {.. 
 retrievedAccount// $
-.//$ %
-ActivationToken//% 4
-=//5 6
-verificationToken//7 H
-;//H I
+.//$ %
+EmailWasVerified//% 5
+=//6 7
+true//8 <
+;//< =
 int00 
 rowsModified00 $
 =00% &
@@ -5549,506 +4861,1353 @@ unitOfWork00' 1
 }44 
 catch55 
 (55 
-SqlException55 
-)55  
-{66 '
-DatabaseConnectionLostFault77 +'
-databaseConnectionLostFault77, G
-=77H I
-new77J M'
-DatabaseConnectionLostFault77N i
-(77i j
-)77j k
-;77k l
-throw88 
-new88 
-FaultException88 (
-<88( )'
-DatabaseConnectionLostFault88) D
->88D E
-(88E F'
-databaseConnectionLostFault88F a
-)88a b
-;88b c
-}99 
-finally:: 
-{;; 
+SqlException55 
+sqlException55  ,
+)55, -
+{66 
+_logger77 
+.77 
+Fatal77 
+(77 
+$str77 k
++77l m
+$str88 V
++88W X
+$str99 M
+,99M N
+sqlException99O [
+)99[ \
+;99\ ]
+throw:: 
+;:: 
+};; 
+catch<< 
+(<< 
+EntityException<< "
+entityException<<# 2
+)<<2 3
+{== 
+_logger>> 
+.>> 
+Fatal>> 
+(>> 
+$str>> |
++>>} ~
+$str?? _
++??` a
+$str@@ :
+,@@: ;
+entityException@@< K
+)@@K L
+;@@L M
+throwAA 
+;AA 
+}BB 
+finallyCC 
+{DD 
 
-unitOfWork<< 
-.<< 
-Dispose<< "
-(<<" #
-)<<# $
-;<<$ %
-}== 
-}?? 	
-publicAA 
-boolAA 
-VerifyTokenAA 
-(AA  
-stringAA  &
-emailAddressAA' 3
-,AA3 4
-stringAA5 ;
-verificationTokenAA< M
-)AAM N
-{BB 	
+unitOfWorkEE 
+.EE 
+DisposeEE "
+(EE" #
+)EE# $
+;EE$ %
+}FF 
+}GG 	
+publicQQ 
+boolQQ $
+AssignNewActivationTokenQQ ,
+(QQ, -
+stringQQ- 3
+emailAddressQQ4 @
+,QQ@ A
+stringQQB H
+verificationTokenQQI Z
+)QQZ [
+{RR 	
 
-UnitOfWorkCC 
+UnitOfWorkSS 
 
-unitOfWorkCC !
-=CC" #
-newCC$ '
+unitOfWorkSS !
+=SS" #
+newSS$ '
 
-UnitOfWorkCC( 2
-(CC2 3
-newCC3 6
-MemoryGameContextCC7 H
-(CCH I
-)CCI J
-)CCJ K
-;CCK L
-tryDD 
-{EE 
-AccountFF 
-retrievedAccountFF (
-=FF) *
+UnitOfWorkSS( 2
+(SS2 3
+newSS3 6
+MemoryGameContextSS7 H
+(SSH I
+)SSI J
+)SSJ K
+;SSK L
+tryTT 
+{UU 
+AccountVV 
+retrievedAccountVV (
+=VV) *
 
-unitOfWorkFF+ 5
-.FF5 6
-AccountsFF6 >
-.FF> ?
-FindFirstOccurenceFF? Q
-(FFQ R
-accountFFR Y
-=>FFZ \
-accountFF] d
-.FFd e
-EmailAddressFFe q
-==FFr t
-emailAddress	FFu Å
-&&
-FFÇ Ñ
-account
-FFÖ å
-.
-FFå ç
-ActivationToken
-FFç ú
-==
-FFù ü
-verificationToken
-FF† ±
-)
-FF± ≤
+unitOfWorkVV+ 5
+.VV5 6
+AccountsVV6 >
+.VV> ?
+GetVV? B
+(VVB C
+emailAddressVVC O
+)VVO P
+;VVP Q
+ifWW 
+(WW 
+retrievedAccountWW $
+!=WW% '
+nullWW( ,
+)WW, -
+{XX 
+retrievedAccountYY $
+.YY$ %
+ActivationTokenYY% 4
+=YY5 6
+verificationTokenYY7 H
+;YYH I
+intZZ 
+rowsModifiedZZ $
+=ZZ% &
+
+unitOfWorkZZ' 1
+.ZZ1 2
+CompleteZZ2 :
+(ZZ: ;
+)ZZ; <
+;ZZ< =
+return[[ 
+rowsModified[[ '
+==[[( *
+$num[[+ ,
+;[[, -
+}\\ 
+return]] 
+false]] 
+;]] 
+}^^ 
+catch__ 
+(__ 
+SqlException__ 
+sqlException__  ,
+)__, -
+{`` 
+_loggeraa 
+.aa 
+Fatalaa 
+(aa 
+$straa g
++aah i
+$strbb G
++bbH I
+$strcc >
+,cc> ?
+sqlExceptioncc@ L
+)ccL M
+;ccM N
+throwdd 
+;dd 
+}ee 
+catchff 
+(ff 
+EntityExceptionff "
+entityExceptionff# 2
+)ff2 3
+{gg 
+_loggerhh 
+.hh 
+Fatalhh 
+(hh 
+$strhh |
++hh} ~
+$strii _
++ii` a
+$strjj >
+,jj> ?
+entityExceptionjj@ O
+)jjO P
+;jjP Q
+throwkk 
+;kk 
+}ll 
+finallymm 
+{nn 
+
+unitOfWorkoo 
+.oo 
+Disposeoo "
+(oo" #
+)oo# $
+;oo$ %
+}pp 
+}qq 	
+publictt 
+booltt "
+AssignNewRecoveryTokentt *
+(tt* +
+stringtt+ 1
+emailAddresstt2 >
+,tt> ?
+stringtt@ F
+recoveryTokenttG T
+)ttT U
+{uu 	
+
+UnitOfWorkvv 
+
+unitOfWorkvv !
+=vv" #
+newvv$ '
+
+UnitOfWorkvv( 2
+(vv2 3
+newvv3 6
+MemoryGameContextvv7 H
+(vvH I
+)vvI J
+)vvJ K
+;vvK L
+tryww 
+{xx 
+Accountyy 
+retrievedAccountyy (
+=yy) *
+
+unitOfWorkyy+ 5
+.yy5 6
+Accountsyy6 >
+.yy> ?
+Getyy? B
+(yyB C
+emailAddressyyC O
+)yyO P
+;yyP Q
+ifzz 
+(zz 
+retrievedAccountzz $
+!=zz% '
+nullzz( ,
+)zz, -
+{{{ 
+retrievedAccount|| $
+.||$ %
+RecoveryToken||% 2
+=||3 4
+recoveryToken||5 B
+;||B C
+int}} 
+rowsModified}} $
+=}}% &
+
+unitOfWork}}' 1
+.}}1 2
+Complete}}2 :
+(}}: ;
+)}}; <
+;}}< =
+return~~ 
+rowsModified~~ '
+==~~( *
+$num~~+ ,
+;~~, -
+} 
+return
+ÄÄ 
+false
+ÄÄ 
 ;
-FF≤ ≥
-ifGG 
-(GG 
-retrievedAccountGG #
-!=GG$ &
-nullGG' +
-)GG+ ,
-{HH 
-returnII 
-trueII 
-;II  
-}JJ 
-returnKK 
-falseKK 
-;KK 
-}LL 
-catchMM 
-(MM 
-SqlExceptionMM 
-)MM  
-{NN '
-DatabaseConnectionLostFaultOO +'
-databaseConnectionLostFaultOO, G
-=OOH I
-newOOJ M'
-DatabaseConnectionLostFaultOON i
-(OOi j
-)OOj k
-;OOk l
-throwPP 
-newPP 
-FaultExceptionPP (
-<PP( )'
-DatabaseConnectionLostFaultPP) D
->PPD E
-(PPE F'
-databaseConnectionLostFaultPPF a
-)PPa b
-;PPb c
-}QQ 
-finallyRR 
-{SS 
+ÄÄ 
+}
+ÅÅ 
+catch
+ÇÇ 
+(
+ÇÇ 
+SqlException
+ÇÇ 
+sqlException
+ÇÇ  ,
+)
+ÇÇ, -
+{
+ÉÉ 
+_logger
+ÑÑ 
+.
+ÑÑ 
+Fatal
+ÑÑ 
+(
+ÑÑ 
+$str
+ÑÑ g
++
+ÑÑh i
+$str
+ÖÖ G
++
+ÖÖH I
+$str
+ÜÜ <
+,
+ÜÜ< =
+sqlException
+ÜÜ> J
+)
+ÜÜJ K
+;
+ÜÜK L
+throw
+áá 
+;
+áá 
+}
+àà 
+catch
+ââ 
+(
+ââ 
+EntityException
+ââ "
+entityException
+ââ# 2
+)
+ââ2 3
+{
+ää 
+_logger
+ãã 
+.
+ãã 
+Fatal
+ãã 
+(
+ãã 
+$str
+ãã |
++
+ãã} ~
+$str
+åå _
++
+åå` a
+$str
+çç <
+,
+çç< =
+entityException
+çç> M
+)
+ççM N
+;
+ççN O
+throw
+éé 
+;
+éé 
+}
+èè 
+finally
+êê 
+{
+ëë 
 
-unitOfWorkTT 
-.TT 
-DisposeTT "
-(TT" #
-)TT# $
-;TT$ %
-}UU 
-}VV 	
-}WW 
-}XX ˛3
+unitOfWork
+íí 
+.
+íí 
+Dispose
+íí "
+(
+íí" #
+)
+íí# $
+;
+íí$ %
+}
+ìì 
+}
+îî 	
+public
+ûû 
+bool
+ûû #
+VerifyActivationToken
+ûû )
+(
+ûû) *
+string
+ûû* 0
+emailAddress
+ûû1 =
+,
+ûû= >
+string
+ûû? E
+activationToken
+ûûF U
+)
+ûûU V
+{
+üü 	
+
+UnitOfWork
+†† 
+
+unitOfWork
+†† !
+=
+††" #
+new
+††$ '
+
+UnitOfWork
+††( 2
+(
+††2 3
+new
+††3 6
+MemoryGameContext
+††7 H
+(
+††H I
+)
+††I J
+)
+††J K
+;
+††K L
+try
+°° 
+{
+¢¢ 
+Account
+££ 
+retrievedAccount
+££ (
+=
+££) *
+
+unitOfWork
+££+ 5
+.
+££5 6
+Accounts
+££6 >
+.
+££> ? 
+FindFirstOccurence
+££? Q
+(
+££Q R
+account
+££R Y
+=>
+££Z \
+account
+££] d
+.
+££d e
+EmailAddress
+££e q
+==
+££r t
+emailAddress££u Å
+&&££Ç Ñ
+account££Ö å
+.££å ç
+ActivationToken££ç ú
+==££ù ü
+activationToken££† Ø
+)££Ø ∞
+;££∞ ±
+if
+§§ 
+(
+§§ 
+retrievedAccount
+§§ #
+!=
+§§$ &
+null
+§§' +
+)
+§§+ ,
+{
+•• 
+return
+¶¶ 
+true
+¶¶ 
+;
+¶¶  
+}
+ßß 
+return
+®® 
+false
+®® 
+;
+®® 
+}
+©© 
+catch
+™™ 
+(
+™™ 
+SqlException
+™™ 
+sqlException
+™™  ,
+)
+™™, -
+{
+´´ 
+_logger
+¨¨ 
+.
+¨¨ 
+Fatal
+¨¨ 
+(
+¨¨ 
+$str
+¨¨ 
++¨¨Ä Å
+$str
+≠≠ T
++
+≠≠U V
+$str
+ÆÆ T
+,
+ÆÆT U
+sqlException
+ÆÆV b
+)
+ÆÆb c
+;
+ÆÆc d
+throw
+ØØ 
+;
+ØØ 
+}
+∞∞ 
+catch
+±± 
+(
+±± 
+EntityException
+±± "
+entityException
+±±# 2
+)
+±±2 3
+{
+≤≤ 
+_logger
+≥≥ 
+.
+≥≥ 
+Fatal
+≥≥ 
+(
+≥≥ 
+$str
+≥≥ |
++
+≥≥} ~
+$str
+¥¥ _
++
+¥¥` a
+$str
+µµ <
+,
+µµ< =
+entityException
+µµ> M
+)
+µµM N
+;
+µµN O
+throw
+∂∂ 
+;
+∂∂ 
+}
+∑∑ 
+finally
+∏∏ 
+{
+ππ 
+
+unitOfWork
+∫∫ 
+.
+∫∫ 
+Dispose
+∫∫ "
+(
+∫∫" #
+)
+∫∫# $
+;
+∫∫$ %
+}
+ªª 
+}
+ºº 	
+public
+ææ 
+bool
+ææ !
+VerifyRecoveryToken
+ææ '
+(
+ææ' (
+string
+ææ( .
+emailAddress
+ææ/ ;
+,
+ææ; <
+string
+ææ= C
+recoveryToken
+ææD Q
+)
+ææQ R
+{
+øø 	
+
+UnitOfWork
+¿¿ 
+
+unitOfWork
+¿¿ !
+=
+¿¿" #
+new
+¿¿$ '
+
+UnitOfWork
+¿¿( 2
+(
+¿¿2 3
+new
+¿¿3 6
+MemoryGameContext
+¿¿7 H
+(
+¿¿H I
+)
+¿¿I J
+)
+¿¿J K
+;
+¿¿K L
+try
+¡¡ 
+{
+¬¬ 
+Account
+√√ 
+retrievedAccount
+√√ (
+=
+√√) *
+
+unitOfWork
+√√+ 5
+.
+√√5 6
+Accounts
+√√6 >
+.
+√√> ? 
+FindFirstOccurence
+√√? Q
+(
+√√Q R
+account
+√√R Y
+=>
+√√Z \
+account
+√√] d
+.
+√√d e
+EmailAddress
+√√e q
+==
+√√r t
+emailAddress√√u Å
+&&√√Ç Ñ
+account√√Ö å
+.√√å ç
+RecoveryToken√√ç ö
+==√√õ ù
+recoveryToken√√û ´
+)√√´ ¨
+;√√¨ ≠
+if
+ƒƒ 
+(
+ƒƒ 
+retrievedAccount
+ƒƒ $
+!=
+ƒƒ% '
+null
+ƒƒ( ,
+)
+ƒƒ, -
+{
+≈≈ 
+return
+∆∆ 
+true
+∆∆ 
+;
+∆∆  
+}
+«« 
+return
+»» 
+false
+»» 
+;
+»» 
+}
+…… 
+catch
+   
+(
+   
+SqlException
+   
+sqlException
+    ,
+)
+  , -
+{
+ÀÀ 
+_logger
+ÃÃ 
+.
+ÃÃ 
+Fatal
+ÃÃ 
+(
+ÃÃ 
+$str
+ÃÃ 
++ÃÃÄ Å
+$str
+ÕÕ T
++
+ÕÕU V
+$str
+ŒŒ P
+,
+ŒŒP Q
+sqlException
+ŒŒR ^
+)
+ŒŒ^ _
+;
+ŒŒ_ `
+throw
+œœ 
+;
+œœ 
+}
+–– 
+catch
+—— 
+(
+—— 
+EntityException
+—— "
+entityException
+——# 2
+)
+——2 3
+{
+““ 
+_logger
+”” 
+.
+”” 
+Fatal
+”” 
+(
+”” 
+$str
+”” |
++
+””} ~
+$str
+‘‘ _
++
+‘‘` a
+$str
+’’ :
+,
+’’: ;
+entityException
+’’< K
+)
+’’K L
+;
+’’L M
+throw
+÷÷ 
+;
+÷÷ 
+}
+◊◊ 
+finally
+ÿÿ 
+{
+ŸŸ 
+
+unitOfWork
+⁄⁄ 
+.
+⁄⁄ 
+Dispose
+⁄⁄ "
+(
+⁄⁄" #
+)
+⁄⁄# $
+;
+⁄⁄$ %
+}
+€€ 
+}
+‹‹ 	
+}
+›› 
+}ﬁﬁ ñ<
 dC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\CardDeckRetrieverService.cs
-	namespace 	
-MemoryGameService
+	namespace 	
+MemoryGameService
  
-. 
-Services $
-{ 
-public 
+. 
+Services $
+{ 
+public$$ 
 
-partial 
-class 
-MemoryGameService *
-:+ ,%
-ICardDeckRetrieverService- F
-{ 
-private 
-CardDeckDTO 
-_cardDeckDTO (
-;( )
-private 
-IEnumerable 
-< 
-Card  
->  !
-_cards" (
-;( )
-public 
-CardDeckDTO 
-GetCardDeckAndCards .
-(. /
-int/ 2
+partial$$ 
+class$$ 
+MemoryGameService$$ *
+:$$+ ,%
+ICardDeckRetrieverService$$- F
+{%% 
+private&& 
+CardDeckDTO&& 
+_cardDeckDTO&& (
+=&&) *
+new&&+ .
+CardDeckDTO&&/ :
+(&&: ;
+)&&; <
+;&&< =
+private'' 
+IEnumerable'' 
+<'' 
+Card''  
+>''  !
+_cards''" (
+;''( )
+public00 
+CardDeckDTO00 
+GetCardDeckAndCards00 .
+(00. /
+int00/ 2
 
-cardDeckId3 =
-)= >
-{ 	
+cardDeckId003 =
+)00= >
+{11 	
 
-UnitOfWork 
+UnitOfWork22 
 
-unitOfWork !
-=" #
-new$ '
+unitOfWork22 !
+=22" #
+new22$ '
 
-UnitOfWork( 2
-(2 3
-new3 6
-MemoryGameContext7 H
-(H I
-)I J
-)J K
-;K L
-try 
-{ 
-CardDeck 
-cardDeck !
-=" #
+UnitOfWork22( 2
+(222 3
+new223 6
+MemoryGameContext227 H
+(22H I
+)22I J
+)22J K
+;22K L
+try33 
+{44 
+CardDeck55 
+cardDeck55 !
+=55" #
 
-unitOfWork$ .
-.. /
-	CardDecks/ 8
-.8 9
-GetCardDeckAndCards9 L
-(L M
+unitOfWork55$ .
+.55. /
+	CardDecks55/ 8
+.558 9
+GetCardDeckAndCards559 L
+(55L M
 
-cardDeckIdM W
-)W X
-;X Y
-if 
-( 
-cardDeck 
-!= 
-null #
-)# $
-{ 
-_cardDeckDTO  
-=! "
-CardDeckMapper# 1
-.1 2
-	CreateDTO2 ;
-(; <
-cardDeck< D
-)D E
-;E F
-_cards 
-= 
-cardDeck %
-.% &
-Cards& +
-;+ ,(
-PopulateCardDeckDtoWithCards## 0
-(##0 1
-)##1 2
-;##2 3(
-PopulateCardDeckDtoWithCards$$ 0
-($$0 1
-)$$1 2
-;$$2 3
-ShuffleCards&&  
-(&&  !
-)&&! "
-;&&" #
-return'' 
-_cardDeckDTO'' '
-;''' (
-}(( #
-CardDeckRetrievingFault)) '#
-cardDeckRetrievingFault))( ?
-=))@ A
-new))B E#
-CardDeckRetrievingFault))F ]
-())] ^
-)))^ _
-{** 
-Error++ 
-=++ 
-$str++ 6
-,++6 7
-Details,, 
-=,, 
-$str,, o
-}-- 
-;-- 
-throw.. 
-new.. 
-FaultException.. (
-<..( )#
-CardDeckRetrievingFault..) @
->..@ A
-(..A B#
-cardDeckRetrievingFault..B Y
-)..Y Z
-;..Z [
-}// 
-catch00 
-(00 
-SqlException00 
-)00  
-{11 '
-DatabaseConnectionLostFault22 +'
-databaseConnectionLostFault22, G
-=22H I
-new22J M'
-DatabaseConnectionLostFault22N i
-(22i j
-)22j k
-;22k l
-throw33 
-new33 
-FaultException33 (
-<33( )'
-DatabaseConnectionLostFault33) D
->33D E
-(33E F'
-databaseConnectionLostFault33F a
-)33a b
-;33b c
-}44 
-finally55 
-{66 
+cardDeckId55M W
+)55W X
+;55X Y
+_cardDeckDTO66 
+=66 
+new66 "
+CardDeckDTO66# .
+(66. /
+)66/ 0
+{77 
 
-unitOfWork77 
-.77 
-Dispose77 "
-(77" #
-)77# $
-;77$ %
-}88 
-}99 	
-public;; 
-IList;; 
-<;; 
-CardDeckInfoDto;; $
->;;$ %
-GetCardDecksInfo;;& 6
-(;;6 7
-);;7 8
-{<< 	
+CardDeckId88 
+=88  
+cardDeck88! )
+.88) *
 
-UnitOfWork== 
+CardDeckId88* 4
+,884 5
+Name99 
+=99 
+cardDeck99 #
+.99# $
+Name99$ (
+,99( )
+	BackImage:: 
+=:: 
+cardDeck::  (
+.::( )
+	BackImage::) 2
+,::2 3
+NumberOfPairs;; !
+=;;" #
+cardDeck;;$ ,
+.;;, -
+NumberOfPairs;;- :
+,;;: ;
+Cards<< 
+=<< 
+new<< 
+List<<  $
+<<<$ %
+CardDto<<% ,
+><<, -
+(<<- .
+)<<. /
+}== 
+;== 
+_cards>> 
+=>> 
+cardDeck>> !
+.>>! "
+Cards>>" '
+;>>' ((
+PopulateCardDeckDtoWithCardsCC ,
+(CC, -
+)CC- .
+;CC. /(
+PopulateCardDeckDtoWithCardsDD ,
+(DD, -
+)DD- .
+;DD. /
+ShuffleCardsFF 
+(FF 
+)FF 
+;FF 
+returnGG 
+_cardDeckDTOGG #
+;GG# $
+}HH 
+catchII 
+(II 
+SqlExceptionII 
+sqlExceptionII  ,
+)II, -
+{JJ 
+_loggerKK 
+.KK 
+FatalKK 
+(KK 
+$strKK |
++KK} ~
+$strLL =
++LL> ?
+$strMM L
+,MML M
+sqlExceptionMMN Z
+)MMZ [
+;MM[ \
+throwNN 
+;NN 
+}OO 
+catchPP 
+(PP 
+EntityExceptionPP "
+entityExceptionPP# 2
+)PP2 3
+{QQ 
+_loggerRR 
+.RR 
+FatalRR 
+(RR 
+$strRR z
++RR{ |
+$strSS _
++SS` a
+$strTT 9
+,TT9 :
+entityExceptionTT; J
+)TTJ K
+;TTK L
+throwUU 
+;UU 
+}VV 
+finallyWW 
+{XX 
 
-unitOfWork== !
-===" #
-new==$ '
-
-UnitOfWork==( 2
-(==2 3
-new==3 6
-MemoryGameContext==7 H
-(==H I
-)==I J
-)==J K
-;==K L
-try>> 
-{?? 
-IEnumerable@@ 
-<@@ 
-CardDeck@@ $
->@@$ %
-	cardDecks@@& /
-=@@0 1
-
-unitOfWork@@2 <
-.@@< =
-	CardDecks@@= F
-.@@F G
-GetAll@@G M
-(@@M N
-)@@N O
-;@@O P
-IListAA 
-<AA 
-CardDeckInfoDtoAA %
->AA% &
-listOfCardDecksInfoAA' :
-=AA; <
-newAA= @
-ListAAA E
-<AAE F
-CardDeckInfoDtoAAF U
->AAU V
-(AAV W
-)AAW X
-;AAX Y
-foreachBB 
-(BB 
-varBB 
-individualCardDeckBB /
-inBB0 2
-	cardDecksBB3 <
-)BB< =
-{CC 
-CardDeckInfoDtoDD #
-cardDeckInfoDD$ 0
-=DD1 2
-newDD3 6
-CardDeckInfoDtoDD7 F
-(DDF G
-)DDG H
-{EE 
-
-CardDeckIdFF "
-=FF# $
-individualCardDeckFF% 7
-.FF7 8
-
-CardDeckIdFF8 B
-,FFB C
-CardDeckNameGG $
-=GG% &
-individualCardDeckGG' 9
-.GG9 :
-NameGG: >
-}HH 
-;HH 
-listOfCardDecksInfoII '
-.II' (
-AddII( +
-(II+ ,
-cardDeckInfoII, 8
-)II8 9
-;II9 :
-}JJ 
-returnKK 
-listOfCardDecksInfoKK *
-;KK* +
-}LL 
-catchMM 
-(MM 
-SqlExceptionMM 
-)MM  
-{NN '
-DatabaseConnectionLostFaultOO +'
-databaseConnectionLostFaultOO, G
-=OOH I
-newOOJ M'
-DatabaseConnectionLostFaultOON i
-(OOi j
-)OOj k
-;OOk l
-throwPP 
-newPP 
-FaultExceptionPP (
-<PP( )'
-DatabaseConnectionLostFaultPP) D
->PPD E
-(PPE F'
-databaseConnectionLostFaultPPF a
-)PPa b
-;PPb c
-}QQ 
-}RR 	
-privateTT 
-voidTT (
-PopulateCardDeckDtoWithCardsTT 1
-(TT1 2
-)TT2 3
-{UU 	
-foreachVV 
-(VV 
-CardVV 
-
-actualCardVV $
-inVV% '
-_cardsVV( .
-)VV. /
-{WW 
-CardDtoXX 
-cardDTOXX 
-=XX  !
-
-CardMapperXX" ,
-.XX, -
-	CreateDTOXX- 6
-(XX6 7
-
-actualCardXX7 A
-)XXA B
-;XXB C
-_cardDeckDTOYY 
-.YY 
-CardsYY "
-.YY" #
-AddYY# &
-(YY& '
-cardDTOYY' .
-)YY. /
-;YY/ 0
+unitOfWorkYY 
+.YY 
+DisposeYY "
+(YY" #
+)YY# $
+;YY$ %
 }ZZ 
-}[[ 	
-private]] 
-void]] 
-ShuffleCards]] !
-(]]! "
-)]]" #
-{^^ 	
-CardShuffler__ 
-cardShuffler__ %
-=__& '
-new__( +
-CardShuffler__, 8
-(__8 9
-)__9 :
-;__: ;
-cardShuffler`` 
-.`` 
-ShuffleCards`` %
-(``% &
-_cardDeckDTO``& 2
-.``2 3
-Cards``3 8
-)``8 9
-;``9 :
-}aa 	
-}bb 
-}cc Ú
+}[[ 	
+publicdd 
+IListdd 
+<dd 
+CardDeckInfoDtodd $
+>dd$ %
+GetCardDecksInfodd& 6
+(dd6 7
+)dd7 8
+{ee 	
+
+UnitOfWorkff 
+
+unitOfWorkff !
+=ff" #
+newff$ '
+
+UnitOfWorkff( 2
+(ff2 3
+newff3 6
+MemoryGameContextff7 H
+(ffH I
+)ffI J
+)ffJ K
+;ffK L
+trygg 
+{hh 
+IEnumerableii 
+<ii 
+CardDeckii $
+>ii$ %
+	cardDecksii& /
+=ii0 1
+
+unitOfWorkii2 <
+.ii< =
+	CardDecksii= F
+.iiF G
+GetAlliiG M
+(iiM N
+)iiN O
+;iiO P
+IListjj 
+<jj 
+CardDeckInfoDtojj %
+>jj% &
+listOfCardDecksInfojj' :
+=jj; <
+newjj= @
+ListjjA E
+<jjE F
+CardDeckInfoDtojjF U
+>jjU V
+(jjV W
+)jjW X
+;jjX Y
+foreachkk 
+(kk 
+varkk 
+individualCardDeckkk /
+inkk0 2
+	cardDeckskk3 <
+)kk< =
+{ll 
+CardDeckInfoDtomm #
+cardDeckInfomm$ 0
+=mm1 2
+newmm3 6
+CardDeckInfoDtomm7 F
+(mmF G
+)mmG H
+{nn 
+
+CardDeckIdoo "
+=oo# $
+individualCardDeckoo% 7
+.oo7 8
+
+CardDeckIdoo8 B
+,ooB C
+CardDeckNamepp $
+=pp% &
+individualCardDeckpp' 9
+.pp9 :
+Namepp: >
+}qq 
+;qq 
+listOfCardDecksInforr '
+.rr' (
+Addrr( +
+(rr+ ,
+cardDeckInforr, 8
+)rr8 9
+;rr9 :
+}ss 
+returntt 
+listOfCardDecksInfott *
+;tt* +
+}uu 
+catchvv 
+(vv 
+SqlExceptionvv 
+sqlExceptionvv  ,
+)vv, -
+{ww 
+_loggerxx 
+.xx 
+Fatalxx 
+(xx 
+$strxx m
++xxn o
+$stryy U
++yyV W
+$strzz 7
+,zz7 8
+sqlExceptionzz9 E
+)zzE F
+;zzF G
+throw{{ 
+;{{ 
+}|| 
+catch}} 
+(}} 
+EntityException}} "
+entityException}}# 2
+)}}2 3
+{~~ 
+_logger 
+. 
+Fatal 
+( 
+$str b
++c d
+$str
+ÄÄ x
++
+ÄÄy z
+$str
+ÅÅ 7
+,
+ÅÅ7 8
+entityException
+ÅÅ9 H
+)
+ÅÅH I
+;
+ÅÅI J
+throw
+ÇÇ 
+;
+ÇÇ 
+}
+ÉÉ 
+finally
+ÑÑ 
+{
+ÖÖ 
+
+unitOfWork
+ÜÜ 
+.
+ÜÜ 
+Dispose
+ÜÜ "
+(
+ÜÜ" #
+)
+ÜÜ# $
+;
+ÜÜ$ %
+}
+áá 
+}
+àà 	
+private
+çç 
+void
+çç *
+PopulateCardDeckDtoWithCards
+çç 1
+(
+çç1 2
+)
+çç2 3
+{
+éé 	
+foreach
+èè 
+(
+èè 
+Card
+èè 
+
+actualCard
+èè $
+in
+èè% '
+_cards
+èè( .
+)
+èè. /
+{
+êê 
+CardDto
+ëë 
+cardDto
+ëë 
+=
+ëë  !
+new
+ëë" %
+CardDto
+ëë& -
+(
+ëë- .
+)
+ëë. /
+{
+íí 
+CardId
+ìì 
+=
+ìì 
+
+actualCard
+ìì '
+.
+ìì' (
+CardId
+ìì( .
+,
+ìì. /
+
+FrontImage
+îî 
+=
+îî  
+
+actualCard
+îî! +
+.
+îî+ ,
+
+FrontImage
+îî, 6
+}
+ïï 
+;
+ïï 
+_cardDeckDTO
+ññ 
+.
+ññ 
+Cards
+ññ "
+.
+ññ" #
+Add
+ññ# &
+(
+ññ& '
+cardDto
+ññ' .
+)
+ññ. /
+;
+ññ/ 0
+}
+óó 
+}
+òò 	
+private
+ùù 
+void
+ùù 
+ShuffleCards
+ùù !
+(
+ùù! "
+)
+ùù" #
+{
+ûû 	
+CardShuffler
+üü 
+cardShuffler
+üü %
+=
+üü& '
+new
+üü( +
+CardShuffler
+üü, 8
+(
+üü8 9
+)
+üü9 :
+;
+üü: ;
+cardShuffler
+†† 
+.
+†† 
+ShuffleCards
+†† %
+(
+††% &
+_cardDeckDTO
+††& 2
+.
+††2 3
+Cards
+††3 8
+)
+††8 9
+;
+††9 :
+}
+°° 	
+}
+¢¢ 
+}££ Ú
 `C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\CommunicationService.cs
 	namespace 	
 MemoryGameService
@@ -6225,7 +6384,7 @@ actualCardXX7 A
 ;00/ 0
 }11 	
 }33 
-}44 ÿ'
+}44 ®'
 XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\LobbyService.cs
 	namespace 	
 MemoryGameService
@@ -6233,368 +6392,420 @@ XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\LobbyS
 . 
 Services $
 { 
-public 
+public"" 
 
-partial 
-class 
-MemoryGameService *
-:+ ,
-ILobbyService- :
-{ 
-public		 
-IList		 
-<		 
-string		 
->		 #
-GetActivePlayersInLobby		 4
-(		4 5
-string		5 ;
-host		< @
-)		@ A
-{
-
- 	
-MatchDto 
-match 
-= 
-GetMatch %
-(% &
-host& *
-)* +
-;+ ,
-if 
-( 
-match 
-!= 
-null 
-) 
-{ 
-Lobby 
-lobby 
-= 
-match #
-.# $
-Lobby$ )
-;) *
-IList 
-< 
-string 
-> "
-activePlayersFromMatch 4
-=5 6
-lobby7 <
-.< =1
-%GetUsernamesOfPlayersConnectedToLobby= b
-(b c
-)c d
-;d e
-return "
-activePlayersFromMatch -
-;- .
-} 
-throw 
-new 
-System 
-. 
-	Exception &
-(& '
-)' (
-;( )
-} 	
-public 
-void 
-	JoinLobby 
-( 
-string $
-host% )
-,) *
-string+ 1
-username2 :
-): ;
-{ 	
-MatchDto 
-match 
-= 
-GetMatch %
-(% &
-host& *
-)* +
-;+ ,
-if 
-( 
-match 
-!= 
-null 
-) 
-{ 
-Lobby 
-lobby 
-= 
-match #
-.# $
-Lobby$ )
-;) *
-lobby 
-. 
-AddPlayerToLobby &
-(& '
-host' +
-,+ ,
-username- 5
-)5 6
-;6 7
-lobby 
-. '
-NotifyNewPlayerEnteredLobby 1
-(1 2
-username2 :
-): ;
-;; <
-} 
-else 
-{   
-}"" 
-}## 	
-public%% 
-void%% 
+partial"" 
+class"" 
+MemoryGameService"" *
+:""+ ,
+ILobbyService""- :
+{## 
+public)) 
+IList)) 
+<)) 
+string)) 
+>)) #
+GetActivePlayersInLobby)) 4
+())4 5
+string))5 ;
+host))< @
+)))@ A
+{** 	
+MatchDto++ 
+match++ 
+=++ 
+GetMatch++ %
+(++% &
+host++& *
+)++* +
+;+++ ,
+if,, 
+(,, 
+match,, 
+!=,, 
+null,, 
+),, 
+{-- 
+Lobby.. 
+lobby.. 
+=.. 
+match.. #
+...# $
+Lobby..$ )
+;..) *
+IList// 
+<// 
+string// 
+>// "
+activePlayersFromMatch// 4
+=//5 6
+lobby//7 <
+.//< =1
+%GetUsernamesOfPlayersConnectedToLobby//= b
+(//b c
+)//c d
+;//d e
+return00 "
+activePlayersFromMatch00 -
+;00- .
+}11 
+throw33 
+new33 
+System33 
+.33 
+	Exception33 &
+(33& '
+)33' (
+;33( )
+}44 	
+public;; 
+void;; 
+	JoinLobby;; 
+(;; 
+string;; $
+host;;% )
+,;;) *
+string;;+ 1
+username;;2 :
+);;: ;
+{<< 	
+MatchDto== 
+match== 
+=== 
+GetMatch== %
+(==% &
+host==& *
+)==* +
+;==+ ,
+if>> 
+(>> 
+match>> 
+!=>> 
+null>> 
+)>> 
+{?? 
+Lobby@@ 
+lobby@@ 
+=@@ 
+match@@ #
+.@@# $
+Lobby@@$ )
+;@@) *
+lobbyAA 
+.AA 
+AddPlayerToLobbyAA &
+(AA& '
+hostAA' +
+,AA+ ,
+usernameAA- 5
+)AA5 6
+;AA6 7
+lobbyBB 
+.BB '
+NotifyNewPlayerEnteredLobbyBB 1
+(BB1 2
+usernameBB2 :
+)BB: ;
+;BB; <
+}CC 
+}DD 	
+publicKK 
+voidKK 
 
-LeaveLobby%% 
-(%% 
-string%% %
-host%%& *
-,%%* +
-string%%, 2
-username%%3 ;
-)%%; <
-{&& 	
-MatchDto'' 
-match'' 
-='' 
-GetMatch'' %
-(''% &
-host''& *
-)''* +
-;''+ ,
-if(( 
-((( 
-match(( 
-!=(( 
-null(( 
-)(( 
-{)) 
-Lobby** 
-lobby** 
-=** 
-match** #
-.**# $
-Lobby**$ )
-;**) *
-lobby++ 
-.++ !
-RemovePlayerFromLobby++ +
-(+++ ,
-username++, 4
-)++4 5
-;++5 6
-if,, 
-(,, 
-host,, 
-.,, 
-Equals,, 
-(,,  
-username,,  (
-),,( )
-),,) *
-{-- 
-lobby.. 
-... ,
- NotifyPlayersMatchHasBeenDeleted.. :
-(..: ;
-)..; <
-;..< =
-_matches// 
-.// 
-Remove// #
-(//# $
-match//$ )
-)//) *
-;//* +
-}00 
-else11 
-{22 
-lobby33 
-.33 $
-NotifyOnePlayerLeftLobby33 2
-(332 3
-username333 ;
-)33; <
-;33< =
-}44 
-}55 
-}66 	
-public88 
-void88 
-	StartGame88 
-(88 
-string88 $
-host88% )
-)88) *
-{99 	
-MatchDto:: 
-match:: 
-=:: 
-GetMatch:: %
-(::% &
-host::& *
-)::* +
-;::+ ,
-if;; 
-(;; 
-match;; 
-!=;; 
-null;; 
-);; 
-{<< 
-match== 
-.== 
+LeaveLobbyKK 
+(KK 
+stringKK %
+hostKK& *
+,KK* +
+stringKK, 2
+usernameKK3 ;
+)KK; <
+{LL 	
+MatchDtoMM 
+matchMM 
+=MM 
+GetMatchMM %
+(MM% &
+hostMM& *
+)MM* +
+;MM+ ,
+ifNN 
+(NN 
+matchNN 
+!=NN 
+nullNN 
+)NN 
+{OO 
+LobbyPP 
+lobbyPP 
+=PP 
+matchPP #
+.PP# $
+LobbyPP$ )
+;PP) *
+lobbyQQ 
+.QQ !
+RemovePlayerFromLobbyQQ +
+(QQ+ ,
+usernameQQ, 4
+)QQ4 5
+;QQ5 6
+ifRR 
+(RR 
+hostRR 
+.RR 
+EqualsRR 
+(RR  
+usernameRR  (
+)RR( )
+)RR) *
+{SS 
+lobbyTT 
+.TT ,
+ NotifyPlayersMatchHasBeenDeletedTT :
+(TT: ;
+)TT; <
+;TT< =
+_matchesUU 
+.UU 
+RemoveUU #
+(UU# $
+matchUU$ )
+)UU) *
+;UU* +
+}VV 
+elseWW 
+{XX 
+lobbyYY 
+.YY $
+NotifyOnePlayerLeftLobbyYY 2
+(YY2 3
+usernameYY3 ;
+)YY; <
+;YY< =
+}ZZ 
+}[[ 
+}\\ 	
+publicbb 
+voidbb 
+	StartGamebb 
+(bb 
+stringbb $
+hostbb% )
+)bb) *
+{cc 	
+MatchDtodd 
+matchdd 
+=dd 
+GetMatchdd %
+(dd% &
+hostdd& *
+)dd* +
+;dd+ ,
+ifee 
+(ee 
+matchee 
+!=ee 
+nullee 
+)ee 
+{ff 
+matchgg 
+.gg 
 
-StartMatch==  
-(==  !
-)==! "
-;==" #
-}>> 
-}@@ 	
-privateBB 
-MatchDtoBB 
-GetMatchBB !
-(BB! "
-stringBB" (
-hostBB) -
-)BB- .
-{CC 	
-MatchDtoDD 
-	gameMatchDD 
-=DD  
-nullDD! %
-;DD% &
-foreachEE 
-(EE 
-varEE 
-matchEE 
-inEE !
-_matchesEE" *
-)EE* +
-{FF 
-ifGG 
-(GG 
-matchGG 
-.GG 
-HostGG 
-.GG 
-EqualsGG %
-(GG% &
-hostGG& *
-)GG* +
-)GG+ ,
-{HH 
-	gameMatchII 
-=II 
-matchII  %
-;II% &
-breakJJ 
-;JJ 
-}KK 
-}LL 
-returnMM 
-	gameMatchMM 
-;MM 
-}NN 	
-}OO 
-}PP ÿ
+StartMatchgg  
+(gg  !
+)gg! "
+;gg" #
+}hh 
+}jj 	
+privateqq 
+MatchDtoqq 
+GetMatchqq !
+(qq! "
+stringqq" (
+hostqq) -
+)qq- .
+{rr 	
+MatchDtoss 
+	gameMatchss 
+=ss  
+nullss! %
+;ss% &
+foreachtt 
+(tt 
+vartt 
+matchtt 
+intt !
+_matchestt" *
+)tt* +
+{uu 
+ifvv 
+(vv 
+matchvv 
+.vv 
+Hostvv 
+.vv 
+Equalsvv %
+(vv% &
+hostvv& *
+)vv* +
+)vv+ ,
+{ww 
+	gameMatchxx 
+=xx 
+matchxx  %
+;xx% &
+breakyy 
+;yy 
+}zz 
+}{{ 
+return|| 
+	gameMatch|| 
+;|| 
+}}} 	
+}~~ 
+} π
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MailingService.cs
-	namespace 	
-MemoryGameService
+	namespace 	
+MemoryGameService
  
-. 
-Services $
-{ 
-public 
+. 
+Services $
+{		 
+public 
 
-partial 
-class 
-MemoryGameService *
-:+ ,
-IMailingService- <
-{ 
-public		 
-void		 !
-SendVerificationToken		 )
-(		) *$
-VerificationTokenInfoDto		* B!
-verificationTokenInfo		C X
-)		X Y
-{
-
- 	
-string 
-name 
-= !
-verificationTokenInfo /
-./ 0
-Name0 4
-;4 5
-string 
-emailAddress 
-=  !!
-verificationTokenInfo" 7
-.7 8
-EmailAddress8 D
-;D E
-string 
-verificationToken $
-=% &!
-verificationTokenInfo' <
-.< =
-VerificationToken= N
-;N O
-MailTemplate 
-mt 
-= 
-new !
-MailTemplate" .
-(. /
-)/ 0
-;0 1
-mt 
-. 
-SetReceiver 
-( 
-name 
-,  
-emailAddress! -
-)- .
-;. /
-mt 
-. 
+partial 
+class 
+MemoryGameService *
+:+ ,
+IMailingService- <
+{ 
+public 
+void !
+SendVerificationToken )
+() *
+TokenInfoDto* 6!
+verificationTokenInfo7 L
+)L M
+{ 	
+string 
+name 
+= !
+verificationTokenInfo /
+./ 0
+Name0 4
+;4 5
+string 
+emailAddress 
+=  !!
+verificationTokenInfo" 7
+.7 8
+EmailAddress8 D
+;D E
+string   
+verificationToken   $
+=  % &!
+verificationTokenInfo  ' <
+.  < =
+Token  = B
+;  B C
+string!! 
+subjectOfTheMessage!! &
+=!!' (!
+verificationTokenInfo!!) >
+.!!> ?
+Subject!!? F
+;!!F G
+string"" 
+bodyOfTheMessage"" #
+=""$ %!
+verificationTokenInfo""& ;
+.""; <
+Body""< @
+;""@ A
+MailTemplate## 
+mt## 
+=## 
+new## !
+MailTemplate##" .
+(##. /
+)##/ 0
+;##0 1
+mt$$ 
+.$$ 
+SetReceiver$$ 
+($$ 
+name$$ 
+,$$  
+emailAddress$$! -
+)$$- .
+;$$. /
+mt%% 
+.%% 
 
-SetMessage 
-( 
-$str &
-,& '
-$str 9
-+: ;
-verificationToken< M
-)M N
-;N O
-mt 
-. 
-Send 
-( 
-) 
-; 
-} 	
-} 
-} ´
+SetMessage%% 
+(%% 
+subjectOfTheMessage%% -
+,%%- .
+bodyOfTheMessage%%/ ?
++%%@ A
+$str%%B F
++%%G H
+verificationToken%%I Z
+)%%Z [
+;%%[ \
+try&& 
+{'' 
+mt(( 
+.(( 
+Send(( 
+((( 
+)(( 
+;(( 
+})) 
+catch** 
+(** 
+SocketException** "
+socketException**# 2
+)**2 3
+{++ 
+_logger,, 
+.,, 
+Fatal,, 
+(,, 
+$str,, `
++,,a b
+$str-- J
++--K L
+$str.. =
+,..= >
+socketException..? N
+)..N O
+;..O P
+}// 
+catch00 
+(00 
+ProtocolException00 $
+protocolException00% 6
+)006 7
+{11 
+_logger22 
+.22 
+Fatal22 
+(22 
+$str22 d
++22e f
+$str33 Q
++33R S
+$str44 6
+,446 7
+protocolException448 I
+)44I J
+;44J K
+}55 
+}77 	
+}88 
+}99 ´
 `C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MatchCreationService.cs
 	namespace 	
 MemoryGameService
@@ -6602,46 +6813,32 @@ SetMessage 
 . 
 Services $
 { 
-public 
+public 
 
-partial 
-class 
-MemoryGameService *
-:+ ,!
-IMatchCreationService- B
-{ 
-public 
-void 
-CreateNewMatch "
-(" #
-MatchDto# +
-gameMatchDto, 8
-)8 9
-{		 	
-_matches
-
- 
-.
-
- 
-Add
-
- 
-(
-
- 
-gameMatchDto
-
- %
-)
-
-% &
-;
-
-& '
-} 	
-} 
-} «
+partial 
+class 
+MemoryGameService *
+:+ ,!
+IMatchCreationService- B
+{ 
+public 
+void 
+CreateNewMatch "
+(" #
+MatchDto# +
+gameMatchDto, 8
+)8 9
+{ 	
+_matches 
+. 
+Add 
+( 
+gameMatchDto %
+)% &
+;& '
+} 	
+} 
+} «
 aC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MatchDiscoveryService.cs
 	namespace 	
 MemoryGameService
@@ -6649,1912 +6846,1324 @@ aC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MatchD
 . 
 Services $
 { 
-public		 
+public 
 
-partial		 
-class		 
-MemoryGameService		 *
-:		+ ,"
-IMatchDiscoveryService		- C
-{
-
- 
-public 
-bool 
-CanJoin 
-( 
-string "
-	matchHost# ,
-), -
-{ 	
-MatchDto 
-	gameMatch 
-=  
-GetMatch! )
-() *
-	matchHost* 3
-)3 4
-;4 5
-if 
-( 
-	gameMatch 
-== 
-null !
-)! "
-{ "
-MatchAccessDeniedFault &"
-matchAccessDeniedFault' =
-=> ?
-new@ C"
-MatchAccessDeniedFaultD Z
-(Z [
-)[ \
-{ 
-Details 
-= 
-$str j
-} 
-; 
-throw 
-new 
-FaultException (
-<( )"
-MatchAccessDeniedFault) ?
->? @
-(@ A"
-matchAccessDeniedFaultA W
-)W X
-;X Y
-} 
-else 
-{ 
-Lobby 
-lobby 
-= 
-	gameMatch '
-.' (
-Lobby( -
-;- .
-IList 
-< 
-PlayerInLobby #
-># $#
-playersConnectedToLobby% <
-== >
-lobby? D
-.D E&
-GetPlayersConnectedToLobbyE _
-(_ `
-)` a
-;a b
-int +
-numberOfPlayersConnectedToMatch 3
-=4 5#
-playersConnectedToLobby6 M
-.M N
-CountN S
-;S T
-int #
-numberOfPlayersRequired +
-=, -
-	gameMatch. 7
-.7 8
-MaxNumberOfPlayers8 J
-;J K
-bool 
-matchHasStarted $
-=% &
-	gameMatch' 0
-.0 1
+partial 
+class 
+MemoryGameService *
+:+ ,"
+IMatchDiscoveryService- C
+{ 
+public&& 
+bool&& 
+CanJoin&& 
+(&& 
+string&& "
+	matchHost&&# ,
+)&&, -
+{'' 	
+MatchDto(( 
+	gameMatch(( 
+=((  
+GetMatch((! )
+((() *
+	matchHost((* 3
+)((3 4
+;((4 5
+if)) 
+()) 
+	gameMatch)) 
+==)) 
+null)) !
+)))! "
+{** "
+MatchAccessDeniedFault++ &"
+matchAccessDeniedFault++' =
+=++> ?
+new++@ C"
+MatchAccessDeniedFault++D Z
+(++Z [
+)++[ \
+{,, 
+Details-- 
+=-- 
+$str-- 9
+}.. 
+;.. 
+throw// 
+new// 
+FaultException// (
+<//( )"
+MatchAccessDeniedFault//) ?
+>//? @
+(//@ A"
+matchAccessDeniedFault//A W
+)//W X
+;//X Y
+}00 
+else11 
+{22 
+Lobby33 
+lobby33 
+=33 
+	gameMatch33 '
+.33' (
+Lobby33( -
+;33- .
+IList44 
+<44 
+PlayerInLobby44 #
+>44# $#
+playersConnectedToLobby44% <
+=44= >
+lobby44? D
+.44D E&
+GetPlayersConnectedToLobby44E _
+(44_ `
+)44` a
+;44a b
+int55 +
+numberOfPlayersConnectedToLobby55 3
+=554 5#
+playersConnectedToLobby556 M
+.55M N
+Count55N S
+;55S T
+int66 #
+numberOfPlayersRequired66 +
+=66, -
+	gameMatch66. 7
+.667 8
+MaxNumberOfPlayers668 J
+;66J K
+bool77 
+matchHasStarted77 $
+=77% &
+	gameMatch77' 0
+.770 1
 
-HasStarted1 ;
-;; <
-bool (
-ThereIsSpaceForAnotherPlayer 1
-=2 3
-false4 9
-;9 :
-if 
-( +
-numberOfPlayersConnectedToMatch 3
-<4 5#
-numberOfPlayersRequired6 M
-)M N
-{   (
-ThereIsSpaceForAnotherPlayer!! 0
-=!!1 2
-true!!3 7
-;!!7 8
-}"" 
-if$$ 
-($$ (
-ThereIsSpaceForAnotherPlayer$$ 0
-&&$$1 3
-!$$4 5
-matchHasStarted$$5 D
-)$$D E
-{%% 
-return&& 
-true&& 
-;&&  
-}'' 
-return(( 
-false(( 
-;(( 
-})) 
-},, 	
-public.. 
-IList.. 
-<.. 
-MatchDto.. 
->.. 
-GetActiveMatches.. /
-(../ 0
-)..0 1
-{// 	
-IList00 
-<00 
-MatchDto00 
->00 !
-matchesWaitingToStart00 1
-=002 3
-new004 7
-List008 <
-<00< =
-MatchDto00= E
->00E F
-(00F G
-)00G H
-;00H I
-foreach11 
-(11 
-var11 
-match11 
-in11 !
-_matches11" *
-)11* +
-{22 
-if33 
-(33 
-!33 
-match33 
-.33 
+HasStarted771 ;
+;77; <
+bool88 (
+ThereIsSpaceForAnotherPlayer88 1
+=882 3
+false884 9
+;889 :
+if:: 
+(:: +
+numberOfPlayersConnectedToLobby:: 3
+<::4 5#
+numberOfPlayersRequired::6 M
+)::M N
+{;; (
+ThereIsSpaceForAnotherPlayer<< 0
+=<<1 2
+true<<3 7
+;<<7 8
+}== 
+if?? 
+(?? (
+ThereIsSpaceForAnotherPlayer?? 0
+&&??1 3
+!??4 5
+matchHasStarted??5 D
+)??D E
+{@@ 
+returnAA 
+trueAA 
+;AA  
+}BB 
+returnCC 
+falseCC 
+;CC 
+}DD 
+}EE 	
+publicKK 
+IListKK 
+<KK 
+MatchDtoKK 
+>KK 
+GetActiveMatchesKK /
+(KK/ 0
+)KK0 1
+{LL 	
+IListMM 
+<MM 
+MatchDtoMM 
+>MM !
+matchesWaitingToStartMM 1
+=MM2 3
+newMM4 7
+ListMM8 <
+<MM< =
+MatchDtoMM= E
+>MME F
+(MMF G
+)MMG H
+;MMH I
+foreachNN 
+(NN 
+varNN 
+matchNN 
+inNN !
+_matchesNN" *
+)NN* +
+{OO 
+ifPP 
+(PP 
+!PP 
+matchPP 
+.PP 
 
-HasStarted33 %
-)33% &
-{44 !
-matchesWaitingToStart55 )
-.55) *
-Add55* -
-(55- .
-match55. 3
-)553 4
-;554 5
-}66 
-}77 
-return88 !
-matchesWaitingToStart88 (
-;88( )
-}99 	
-}:: 
-};; ¢œ
+HasStartedPP %
+)PP% &
+{QQ !
+matchesWaitingToStartRR )
+.RR) *
+AddRR* -
+(RR- .
+matchRR. 3
+)RR3 4
+;RR4 5
+}SS 
+}TT 
+returnUU !
+matchesWaitingToStartUU (
+;UU( )
+}VV 	
+}WW 
+}XX °ÿ
 XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MatchService.cs
-	namespace
-
- 	
-MemoryGameService
-
-
+	namespace 	
+MemoryGameService
  
-.
-
- 
-Services
-
- $
-{ 
-public 
+. 
+Services $
+{ 
+publicAA 
 
-partial 
-class 
-MemoryGameService *
-:+ ,
-IMatchService- :
-{ 
-public 
-void 
+partialAA 
+classAA 
+MemoryGameServiceAA *
+:AA+ ,
+IMatchServiceAA- :
+{BB 
+publicHH 
+voidHH 
 
-EnterMatch 
-( 
-string %
-host& *
-,* +
-string, 2
-username3 ;
-); <
-{ 	
-MatchDto 
-	gameMatch 
-=  
-GetMatch! )
-() *
-host* .
-). /
-;/ 0
-bool 
-hasActiveTurn 
-=  
-false! &
-;& '
-if 
-( 
-host 
-. 
-Equals 
-( 
-username $
-)$ %
-)% &
-{ 
-hasActiveTurn 
-= 
-true  $
-;$ %
-} 
-PlayerInMatch 
-player  
-=! "
-new# &
-PlayerInMatch' 4
-(4 5
-)5 6
-{ 
-Username 
-= 
-username #
-,# $
-Score 
-= 
-$num 
-, 
-HasActiveTurn 
-= 
-hasActiveTurn  -
-,- ."
-MatchServiceConnection &
-=' (
-OperationContext) 9
-.9 :
-Current: A
-.A B
-GetCallbackChannelB T
-<T U!
-IMatchServiceCallbackU j
->j k
-(k l
-)l m
-,m n
-ExpulsionVotes 
-=  
-$num! "
-} 
-; 
-	gameMatch   
-.   
-	AddPlayer   
-(    
-player    &
-)  & '
-;  ' (
-}!! 	
-public## 
-IList## 
-<## 
-PlayerInMatch## "
->##" #&
-GetPlayersConnectedToMatch##$ >
-(##> ?
-string##? E
-host##F J
-)##J K
-{$$ 	
-MatchDto%% 
-match%% 
-=%% 
-GetMatch%% %
-(%%% &
-host%%& *
-)%%* +
-;%%+ ,
-return&& 
-match&& 
-.&& &
-GetPlayersConnectedToMatch&& 3
-(&&3 4
-)&&4 5
-;&&5 6
-}'' 	
-public)) 
-void)) #
-NotifyCardWasUncoveredd)) +
-())+ ,
-PlayerMovementDto)), =
-playerMovementDto))> O
-)))O P
-{** 	
-string++ 
-host++ 
-=++ 
-playerMovementDto++ +
-.+++ ,
-Host++, 0
-;++0 1
-MatchDto,, 
-	gameMatch,, 
-=,,  
-GetMatch,,! )
-(,,) *
-host,,* .
-),,. /
-;,,/ 0
-PlayerInMatch.. 
-player..  
-=..! "
-	gameMatch..# ,
-..., -
-	GetPlayer..- 6
-(..6 7
-playerMovementDto..7 H
-...H I
-Username..I Q
-)..Q R
-;..R S
-if// 
-(// 
-playerMovementDto// !
-.//! "
-HasFormedAPair//" 0
-)//0 1
-{00 
-player11 
-.11 
-AddUncoveredCard11 '
-(11' (
-playerMovementDto11( 9
-.119 :
-	CardIndex11: C
-)11C D
-;11D E
-	gameMatch22 
-.22 
-
-TotalPairs22 $
-++22$ &
-;22& '
-}33 
-else44 
-{55 
-if66 
-(66 
-playerMovementDto66 %
-.66% &
-MovementsLeft66& 3
-==664 6
-$num667 8
-)668 9
-{77 
-player88 
-.88 
-RemoveUncoveredCard88 .
-(88. /
-)88/ 0
-;880 1
-}99 
-else:: 
-{;; 
-player<< 
-.<< 
-AddUncoveredCard<< +
-(<<+ ,
-playerMovementDto<<, =
-.<<= >
-	CardIndex<<> G
-)<<G H
-;<<H I
-}== 
-}>> 
-IList@@ 
-<@@ 
-PlayerInMatch@@ 
->@@  
-playersInMatch@@! /
-=@@0 1
-	gameMatch@@2 ;
-.@@; <&
-GetPlayersConnectedToMatch@@< V
-(@@V W
-)@@W X
-;@@X Y
-foreachBB 
-(BB 
-varBB 
-playerInMatchBB %
-inBB& (
-playersInMatchBB) 7
-)BB7 8
-{CC 
-playerInMatchDD 
-.DD "
-MatchServiceConnectionDD 4
-.DD4 5
-UncoverCarddDD5 A
-(DDA B
-playerMovementDtoDDB S
-.DDS T
-	CardIndexDDT ]
-)DD] ^
-;DD^ _
-}EE 
-}GG 	
-publicII 
-voidII 
-NotifyMatchHasEndedII '
-(II' (
-stringII( .
-hostII/ 3
-)II3 4
-{JJ 	
-MatchDtoLL 
-	gameMatchLL 
-=LL  
-GetMatchLL! )
-(LL) *
-hostLL* .
-)LL. /
-;LL/ 0
+EnterMatchHH 
+(HH 
+stringHH %
+hostHH& *
+,HH* +
+stringHH, 2
+usernameHH3 ;
+)HH; <
+{II 	
+MatchDtoJJ 
+	gameMatchJJ 
+=JJ  
+GetMatchJJ! )
+(JJ) *
+hostJJ* .
+)JJ. /
+;JJ/ 0
+boolLL 
+hasActiveTurnLL 
+=LL  
+falseLL! &
+;LL& '
 ifMM 
-(MM 
-hostMM 
-!=MM 
-nullMM 
-)MM 
+(MM 
+hostMM 
+.MM 
+EqualsMM 
+(MM 
+usernameMM $
+)MM$ %
+)MM% &
 {NN 
-PlayerInMatchOO 
-playerWithBestScoreOO 1
-=OO2 3
-	gameMatchOO4 =
-.OO= >"
-GetPlayerWithBestScoreOO> T
-(OOT U
-)OOU V
-;OOV W
-stringPP )
-usernameOfPlayerWithBestScorePP 4
-=PP5 6
-playerWithBestScorePP7 J
-.PPJ K
-UsernamePPK S
-;PPS T
-IListQQ 
-<QQ 
-PlayerInMatchQQ #
->QQ# $#
-playersConnectedToMatchQQ% <
-=QQ= >
-	gameMatchQQ? H
-.QQH I&
-GetPlayersConnectedToMatchQQI c
-(QQc d
-)QQd e
-;QQe f
-foreachRR 
-(RR 
-varRR 
-playerConnectedRR ,
-inRR- /#
-playersConnectedToMatchRR0 G
-)RRG H
-{SS 
-varTT 
-channelTT 
-=TT  !
-playerConnectedTT" 1
-.TT1 2"
-MatchServiceConnectionTT2 H
-;TTH I
-channelUU 
-.UU 
-ShowWinnersUU '
-(UU' ()
-usernameOfPlayerWithBestScoreUU( E
-)UUE F
-;UUF G
-channelVV 
-.VV 
-MatchHasEndedVV )
-(VV) *
-)VV* +
-;VV+ ,
-}WW 
+hasActiveTurnOO 
+=OO 
+trueOO  $
+;OO$ %
+}PP 
+PlayerInMatchRR 
+playerRR  
+=RR! "
+newRR# &
+PlayerInMatchRR' 4
+(RR4 5
+)RR5 6
+{SS 
+UsernameTT 
+=TT 
+usernameTT #
+,TT# $
+ScoreUU 
+=UU 
+$numUU 
+,UU 
+HasActiveTurnVV 
+=VV 
+hasActiveTurnVV  -
+,VV- ."
+MatchServiceConnectionWW &
+=WW' (
+OperationContextWW) 9
+.WW9 :
+CurrentWW: A
+.WWA B
+GetCallbackChannelWWB T
+<WWT U!
+IMatchServiceCallbackWWU j
+>WWj k
+(WWk l
+)WWl m
+,WWm n
+ExpulsionVotesXX 
+=XX  
+$numXX! "
+}YY 
+;YY 
+	gameMatchZZ 
+.ZZ 
+	AddPlayerZZ 
+(ZZ  
+playerZZ  &
+)ZZ& '
+;ZZ' (
+}[[ 	
+publicbb 
+IListbb 
+<bb 
+PlayerInMatchbb "
+>bb" #&
+GetPlayersConnectedToMatchbb$ >
+(bb> ?
+stringbb? E
+hostbbF J
+)bbJ K
+{cc 	
+MatchDtodd 
+matchdd 
+=dd 
+GetMatchdd %
+(dd% &
+hostdd& *
+)dd* +
+;dd+ ,
+returnee 
+matchee 
+.ee &
+GetPlayersConnectedToMatchee 3
+(ee3 4
+)ee4 5
+;ee5 6
+}ff 	
+publicll 
+voidll #
+NotifyCardWasUncovereddll +
+(ll+ ,
+PlayerMovementDtoll, =
+playerMovementDtoll> O
+)llO P
+{mm 	
+stringnn 
+hostnn 
+=nn 
+playerMovementDtonn +
+.nn+ ,
+Hostnn, 0
+;nn0 1
+MatchDtooo 
+	gameMatchoo 
+=oo  
+GetMatchoo! )
+(oo) *
+hostoo* .
+)oo. /
+;oo/ 0
+PlayerInMatchqq 
+playerqq  
+=qq! "
+	gameMatchqq# ,
+.qq, -
+	GetPlayerqq- 6
+(qq6 7
+playerMovementDtoqq7 H
+.qqH I
+UsernameqqI Q
+)qqQ R
+;qqR S
+ifrr 
+(rr 
+playerMovementDtorr !
+.rr! "
+HasFormedAPairrr" 0
+)rr0 1
+{ss 
+playertt 
+.tt 
+AddUncoveredCardtt '
+(tt' (
+playerMovementDtott( 9
+.tt9 :
+	CardIndextt: C
+)ttC D
+;ttD E
+	gameMatchuu 
+.uu 
 
-UnitOfWorkYY 
-
-unitOfWorkYY %
-=YY& '
-newYY( +
-
-UnitOfWorkYY, 6
-(YY6 7
-newYY7 :
-MemoryGameContextYY; L
-(YYL M
-)YYM N
-)YYN O
-;YYO P
-tryZZ 
-{[[ 
-foreach\\ 
-(\\ 
-var\\  
-playerInMatch\\! .
-in\\/ 1
-	gameMatch\\2 ;
-.\\; <&
-GetPlayersConnectedToMatch\\< V
-(\\V W
-)\\W X
-)\\X Y
-{]] 
-
-unitOfWork^^ "
-.^^" #
-Players^^# *
-.^^* +*
-UpdateScoreOfPlayersAfterMatch^^+ I
-(^^I J
-playerInMatch^^J W
-.^^W X
-Username^^X `
-,^^` a
-playerInMatch^^b o
-.^^o p
-Score^^p u
-)^^u v
-;^^v w
-}__ 
-Playeraa 
-winneraa !
-=aa" #
-
-unitOfWorkaa$ .
-.aa. /
-Playersaa/ 6
-.aa6 7 
-FindPlayerByUsernameaa7 K
-(aaK L)
-usernameOfPlayerWithBestScoreaaL i
-)aai j
-;aaj k
-CardDeckbb 
-cardDeckbb %
-=bb& '
-
-unitOfWorkbb( 2
-.bb2 3
-	CardDecksbb3 <
-.bb< =
-Getbb= @
-(bb@ A
-	gameMatchbbA J
-.bbJ K
-CardDeckDtobbK V
-.bbV W
-
-CardDeckIdbbW a
-)bba b
-;bbb c
-Matchdd 
-matchToBeSaveddd (
-=dd) *
-newdd+ .
-Matchdd/ 4
-(dd4 5
-)dd5 6
-{ee 
-CardDeckff  
-=ff! "
-cardDeckff# +
-,ff+ ,
-Winnergg 
-=gg  
-winnergg! '
-,gg' (
-Datehh 
-=hh 
-DateTimehh '
-.hh' (
-Nowhh( +
-}ii 
-;ii 
-
-unitOfWorkjj 
-.jj 
-Matchesjj &
-.jj& '
-Addjj' *
-(jj* +
-matchToBeSavedjj+ 9
-)jj9 :
-;jj: ;
-
-unitOfWorkkk 
-.kk 
-Completekk '
-(kk' (
-)kk( )
-;kk) *
-}ll 
-catchmm 
-(mm 
-	Exceptionmm  
-emm! "
-)mm" #
-{nn 
-Consoleoo 
-.oo 
-	WriteLineoo %
-(oo% &
-eoo& '
-)oo' (
-;oo( )
-Consolepp 
-.pp 
-ReadLinepp $
-(pp$ %
-)pp% &
-;pp& '
-}qq 
-finallyrr 
-{ss 
-
-unitOfWorktt 
-.tt 
-Disposett &
-(tt& '
-)tt' (
-;tt( )
-}uu 
-_matchesww 
-.ww 
-Removeww 
-(ww  
-	gameMatchww  )
-)ww) *
-;ww* +
-}xx 
-}yy 	
-public{{ 
-void{{ 
-EndTurn{{ 
-({{ 
-string{{ "
-host{{# '
-,{{' (
-string{{) /
-username{{0 8
-,{{8 9
-CardPairDto{{: E
-cardPairDto{{F Q
-){{Q R
-{|| 	
-MatchDto}} 
-	gameMatch}} 
-=}}  
-GetMatch}}! )
-(}}) *
-host}}* .
-)}}. /
-;}}/ 0
-PlayerInMatch~~ 
-player~~  
-=~~! "
-	gameMatch~~# ,
-.~~, -
-	GetPlayer~~- 6
-(~~6 7
-username~~7 ?
-)~~? @
-;~~@ A
-int (
-indexOfPlayerWithCurrentTurn ,
-=- .
-	gameMatch/ 8
-.8 9&
-GetPlayersConnectedToMatch9 S
-(S T
-)T U
-.U V
-IndexOfV ]
-(] ^
-player^ d
-)d e
-;e f
-if
-ÅÅ 
-(
-ÅÅ 
-cardPairDto
-ÅÅ 
-.
-ÅÅ 
-BothCardsAreEqual
-ÅÅ -
-)
-ÅÅ- .
-{
-ÇÇ 
-player
-ÉÉ 
-.
-ÉÉ 
-Score
-ÉÉ 
-+=
-ÉÉ 
-$num
-ÉÉ  #
-;
-ÉÉ# $
+TotalPairsuu $
+++uu$ &
+;uu& '
+}vv 
+elseww 
+{xx 
+ifyy 
+(yy 
+playerMovementDtoyy %
+.yy% &
+MovementsLeftyy& 3
+==yy4 6
+$numyy7 8
+)yy8 9
+{zz 
+player{{ 
+.{{ 
+RemoveUncoveredCard{{ .
+({{. /
+){{/ 0
+;{{0 1
+}|| 
+else}} 
+{~~ 
+player 
+. 
+AddUncoveredCard +
+(+ ,
+playerMovementDto, =
+.= >
+	CardIndex> G
+)G H
+;H I
 }
-ÑÑ 
-else
-ÖÖ 
-{
-ÜÜ *
-indexOfPlayerWithCurrentTurn
-áá ,
+ÄÄ 
+}
+ÅÅ 
+IList
+ÉÉ 
+<
+ÉÉ 
+PlayerInMatch
+ÉÉ 
+>
+ÉÉ  
+playersInMatch
+ÉÉ! /
 =
-áá- .
+ÉÉ0 1
+	gameMatch
+ÉÉ2 ;
+.
+ÉÉ; <(
+GetPlayersConnectedToMatch
+ÉÉ< V
+(
+ÉÉV W
+)
+ÉÉW X
+;
+ÉÉX Y
+foreach
+ÖÖ 
+(
+ÖÖ 
+var
+ÖÖ 
+playerInMatch
+ÖÖ %
+in
+ÖÖ& (
+playersInMatch
+ÖÖ) 7
+)
+ÖÖ7 8
+{
+ÜÜ 
+playerInMatch
+áá 
+.
+áá $
+MatchServiceConnection
+áá 4
+.
+áá4 5
+UncoverCardd
+áá5 A
+(
+ááA B
+playerMovementDto
+ááB S
+.
+ááS T
+	CardIndex
+ááT ]
+)
+áá] ^
+;
+áá^ _
+}
+àà 
+}
+ää 	
+public
+êê 
+void
+êê !
+NotifyMatchHasEnded
+êê '
+(
+êê' (
+string
+êê( .
+host
+êê/ 3
+)
+êê3 4
+{
+ëë 	
+MatchDto
+ìì 
+	gameMatch
+ìì 
+=
+ìì  
+GetMatch
+ìì! )
+(
+ìì) *
+host
+ìì* .
+)
+ìì. /
+;
+ìì/ 0
+if
+îî 
+(
+îî 
+host
+îî 
+!=
+îî 
+null
+îî 
+)
+îî 
+{
+ïï 
+PlayerInMatch
+ññ !
+playerWithBestScore
+ññ 1
+=
+ññ2 3
+	gameMatch
+ññ4 =
+.
+ññ= >$
+GetPlayerWithBestScore
+ññ> T
+(
+ññT U
+)
+ññU V
+;
+ññV W
+string
+óó +
+usernameOfPlayerWithBestScore
+óó 4
+=
+óó5 6!
+playerWithBestScore
+óó7 J
+.
+óóJ K
+Username
+óóK S
+;
+óóS T
+IList
+òò 
+<
+òò 
+PlayerInMatch
+òò #
+>
+òò# $%
+playersConnectedToMatch
+òò% <
+=
+òò= >
+	gameMatch
+òò? H
+.
+òòH I(
+GetPlayersConnectedToMatch
+òòI c
+(
+òòc d
+)
+òòd e
+;
+òòe f
+foreach
+ôô 
+(
+ôô 
+var
+ôô 
+playerConnected
+ôô ,
+in
+ôô- /%
+playersConnectedToMatch
+ôô0 G
+)
+ôôG H
+{
+öö 
+var
+õõ 
+channel
+õõ 
+=
+õõ  !
+playerConnected
+õõ" 1
+.
+õõ1 2$
+MatchServiceConnection
+õõ2 H
+;
+õõH I
+channel
+úú 
+.
+úú 
+ShowWinners
+úú '
+(
+úú' (+
+usernameOfPlayerWithBestScore
+úú( E
+)
+úúE F
+;
+úúF G
+channel
+ùù 
+.
+ùù 
+MatchHasEnded
+ùù )
+(
+ùù) *
+)
+ùù* +
+;
+ùù+ ,
+}
+ûû 
+
+UnitOfWork
+†† 
+
+unitOfWork
+†† %
+=
+††& '
+new
+††( +
+
+UnitOfWork
+††, 6
+(
+††6 7
+new
+††7 :
+MemoryGameContext
+††; L
+(
+††L M
+)
+††M N
+)
+††N O
+;
+††O P
+try
+°° 
+{
+¢¢ 
+foreach
+££ 
+(
+££ 
+var
+££  
+playerInMatch
+££! .
+in
+££/ 1
+	gameMatch
+££2 ;
+.
+££; <(
+GetPlayersConnectedToMatch
+££< V
+(
+££V W
+)
+££W X
+)
+££X Y
+{
+§§ 
+
+unitOfWork
+•• "
+.
+••" #
+Players
+••# *
+.
+••* +,
+UpdateScoreOfPlayersAfterMatch
+••+ I
+(
+••I J
+playerInMatch
+••J W
+.
+••W X
+Username
+••X `
+,
+••` a
+playerInMatch
+••b o
+.
+••o p
+Score
+••p u
+)
+••u v
+;
+••v w
+}
+¶¶ 
+Player
+®® 
+winner
+®® !
+=
+®®" #
+
+unitOfWork
+®®$ .
+.
+®®. /
+Players
+®®/ 6
+.
+®®6 7"
+FindPlayerByUsername
+®®7 K
+(
+®®K L+
+usernameOfPlayerWithBestScore
+®®L i
+)
+®®i j
+;
+®®j k
+CardDeck
+©© 
+cardDeck
+©© %
+=
+©©& '
+
+unitOfWork
+©©( 2
+.
+©©2 3
+	CardDecks
+©©3 <
+.
+©©< =
+Get
+©©= @
+(
+©©@ A
+	gameMatch
+©©A J
+.
+©©J K
+CardDeckDto
+©©K V
+.
+©©V W
+
+CardDeckId
+©©W a
+)
+©©a b
+;
+©©b c
+Match
+´´ 
+matchToBeSaved
+´´ (
+=
+´´) *
+new
+´´+ .
+Match
+´´/ 4
+(
+´´4 5
+)
+´´5 6
+{
+¨¨ 
+CardDeck
+≠≠  
+=
+≠≠! "
+cardDeck
+≠≠# +
+,
+≠≠+ ,
+Winner
+ÆÆ 
+=
+ÆÆ  
+winner
+ÆÆ! '
+,
+ÆÆ' (
+Date
+ØØ 
+=
+ØØ 
+DateTime
+ØØ '
+.
+ØØ' (
+Now
+ØØ( +
+}
+∞∞ 
+;
+∞∞ 
+
+unitOfWork
+±± 
+.
+±± 
+Matches
+±± &
+.
+±±& '
+Add
+±±' *
+(
+±±* +
+matchToBeSaved
+±±+ 9
+)
+±±9 :
+;
+±±: ;
+
+unitOfWork
+≤≤ 
+.
+≤≤ 
+Complete
+≤≤ '
+(
+≤≤' (
+)
+≤≤( )
+;
+≤≤) *
+}
+≥≥ 
+catch
+¥¥ 
+(
+¥¥ 
+SqlException
+¥¥ #
+sqlException
+¥¥$ 0
+)
+¥¥0 1
+{
+µµ 
+_logger
+∂∂ 
+.
+∂∂ 
+Fatal
+∂∂ !
+(
+∂∂! "
+$str
+∂∂" Z
++
+∂∂[ \
+$str
+∑∑ Y
++
+∑∑Z [
+$str
+∏∏ N
++
+∏∏O P
+$str
+ππ >
+,
+ππ> ?
+sqlException
+ππ@ L
+)
+ππL M
+;
+ππM N
+throw
+∫∫ 
+;
+∫∫ 
+}
+ªª 
+catch
+ºº 
+(
+ºº 
+EntityException
+ºº &
+entityException
+ºº' 6
+)
+ºº6 7
+{
+ΩΩ 
+_logger
+ææ 
+.
+ææ 
+Fatal
+ææ !
+(
+ææ! "
+$str
+ææ" h
++
+ææi j
+$str
+øø n
++
+øøo p
+$str
+¿¿ >
+,
+¿¿> ?
+entityException
+¿¿@ O
+)
+¿¿O P
+;
+¿¿P Q
+throw
+¡¡ 
+;
+¡¡ 
+}
+¬¬ 
+finally
+√√ 
+{
+ƒƒ 
+
+unitOfWork
+≈≈ 
+.
+≈≈ 
+Dispose
+≈≈ &
+(
+≈≈& '
+)
+≈≈' (
+;
+≈≈( )
+}
+∆∆ 
+_matches
+»» 
+.
+»» 
+Remove
+»» 
+(
+»»  
+	gameMatch
+»»  )
+)
+»») *
+;
+»»* +
+}
+…… 
+}
+   	
+public
+““ 
+void
+““ 
+EndTurn
+““ 
+(
+““ 
+string
+““ "
+host
+““# '
+,
+““' (
+string
+““) /
+username
+““0 8
+,
+““8 9
+CardPairDto
+““: E
+cardPairDto
+““F Q
+)
+““Q R
+{
+”” 	
+MatchDto
+‘‘ 
+	gameMatch
+‘‘ 
+=
+‘‘  
+GetMatch
+‘‘! )
+(
+‘‘) *
+host
+‘‘* .
+)
+‘‘. /
+;
+‘‘/ 0
+PlayerInMatch
+’’ 
+player
+’’  
+=
+’’! "
+	gameMatch
+’’# ,
+.
+’’, -
+	GetPlayer
+’’- 6
+(
+’’6 7
+username
+’’7 ?
+)
+’’? @
+;
+’’@ A
+int
+÷÷ *
+indexOfPlayerWithCurrentTurn
+÷÷ ,
+=
+÷÷- .
+	gameMatch
+÷÷/ 8
+.
+÷÷8 9(
+GetPlayersConnectedToMatch
+÷÷9 S
+(
+÷÷S T
+)
+÷÷T U
+.
+÷÷U V
+IndexOf
+÷÷V ]
+(
+÷÷] ^
+player
+÷÷^ d
+)
+÷÷d e
+;
+÷÷e f
+if
+ÿÿ 
+(
+ÿÿ 
+cardPairDto
+ÿÿ 
+.
+ÿÿ 
+BothCardsAreEqual
+ÿÿ -
+)
+ÿÿ- .
+{
+ŸŸ 
+player
+⁄⁄ 
+.
+⁄⁄ 
+Score
+⁄⁄ 
++=
+⁄⁄ 
+$num
+⁄⁄  #
+;
+⁄⁄# $
+}
+€€ 
+else
+‹‹ 
+{
+›› *
+indexOfPlayerWithCurrentTurn
+ﬁﬁ ,
+=
+ﬁﬁ- .
 
 ChangeTurn
-áá/ 9
+ﬁﬁ/ 9
 (
-áá9 :
+ﬁﬁ9 :
 	gameMatch
-áá: C
+ﬁﬁ: C
 ,
-ááC D*
+ﬁﬁC D*
 indexOfPlayerWithCurrentTurn
-ááE a
+ﬁﬁE a
 )
-ááa b
+ﬁﬁa b
 ;
-ááb c
+ﬁﬁb c
 }
-àà 
+ﬂﬂ 
 PlayerInMatch
-ää 
+·· 
 
 nextPlayer
-ää $
+·· $
 =
-ää% &
+··% &
 	gameMatch
-ää' 0
+··' 0
 .
-ää0 1(
+··0 1(
 GetPlayersConnectedToMatch
-ää1 K
+··1 K
 (
-ääK L
+··K L
 )
-ääL M
+··L M
 [
-ääM N*
+··M N*
 indexOfPlayerWithCurrentTurn
-ääN j
+··N j
 ]
-ääj k
+··j k
 ;
-ääk l
+··k l
 player
-ãã 
+‚‚ 
 .
-ãã 
+‚‚ 
 HasActiveTurn
-ãã  
+‚‚  
 =
-ãã! "
+‚‚! "
 false
-ãã# (
+‚‚# (
 ;
-ãã( )
+‚‚( )
 
 nextPlayer
-åå 
+„„ 
 .
-åå 
+„„ 
 HasActiveTurn
-åå $
+„„ $
 =
-åå% &
+„„% &
 true
-åå' +
+„„' +
 ;
-åå+ ,
+„„+ ,
 IList
-éé 
+ÂÂ 
 <
-éé 
+ÂÂ 
 PlayerInMatch
-éé 
+ÂÂ 
 >
-éé  
+ÂÂ  
 playersInMatch
-éé! /
+ÂÂ! /
 =
-éé0 1
+ÂÂ0 1
 	gameMatch
-éé2 ;
+ÂÂ2 ;
 .
-éé; <(
+ÂÂ; <(
 GetPlayersConnectedToMatch
-éé< V
+ÂÂ< V
 (
-ééV W
+ÂÂV W
 )
-ééW X
+ÂÂW X
 ;
-ééX Y
+ÂÂX Y
 foreach
-êê 
+ÁÁ 
 (
-êê 
+ÁÁ 
 var
-êê 
+ÁÁ 
 playerInMatch
-êê &
+ÁÁ &
 in
-êê' )
+ÁÁ' )
 playersInMatch
-êê* 8
+ÁÁ* 8
 )
-êê8 9
+ÁÁ8 9
 {
-ëë 
+ËË 
 playerInMatch
-íí 
+ÈÈ 
 .
-íí $
+ÈÈ $
 MatchServiceConnection
-íí 4
+ÈÈ 4
 .
-íí4 5 
+ÈÈ4 5 
 NotifyTurnHasEnded
-íí5 G
+ÈÈ5 G
 (
-ííG H
+ÈÈG H
 
 nextPlayer
-ííH R
+ÈÈH R
 .
-ííR S
+ÈÈR S
 Username
-ííS [
+ÈÈS [
 ,
-íí[ \
+ÈÈ[ \
 cardPairDto
-íí] h
+ÈÈ] h
 )
-ííh i
+ÈÈh i
 ;
-ííi j
+ÈÈi j
 }
-ìì 
+ÍÍ 
 if
-ïï 
+ÏÏ 
 (
-ïï 
+ÏÏ 
 	gameMatch
-ïï 
+ÏÏ 
 .
-ïï 
+ÏÏ 
 
 TotalPairs
-ïï $
+ÏÏ $
 ==
-ïï% '
+ÏÏ% '
 	gameMatch
-ïï( 1
+ÏÏ( 1
 .
-ïï1 2
+ÏÏ1 2
 CardDeckDto
-ïï2 =
+ÏÏ2 =
 .
-ïï= >
+ÏÏ= >
 NumberOfPairs
-ïï> K
+ÏÏ> K
 )
-ïïK L
+ÏÏK L
 {
-ññ 
+ÌÌ 
 this
-óó 
+ÓÓ 
 .
-óó !
+ÓÓ !
 NotifyMatchHasEnded
-óó (
+ÓÓ (
 (
-óó( )
+ÓÓ( )
 host
-óó) -
+ÓÓ) -
 )
-óó- .
+ÓÓ- .
 ;
-óó. /
+ÓÓ. /
 }
-òò 
+ÔÔ 
 }
-öö 	
+ÒÒ 	
 public
-úú 
+¯¯ 
 void
-úú 
+¯¯ 
 
 LeaveMatch
-úú 
+¯¯ 
 (
-úú 
+¯¯ 
 string
-úú %
+¯¯ %
 host
-úú& *
+¯¯& *
 ,
-úú* +
+¯¯* +
 string
-úú, 2
+¯¯, 2
 username
-úú3 ;
+¯¯3 ;
 )
-úú; <
-{
-ùù 	
-MatchDto
-ûû 
-	gameMatch
-ûû 
-=
-ûû  
-GetMatch
-ûû! )
-(
-ûû) *
-host
-ûû* .
-)
-ûû. /
-;
-ûû/ 0
-IList
-†† 
-<
-†† 
-PlayerInMatch
-†† 
->
-††  
-playersInMatch
-††! /
-=
-††0 1
-	gameMatch
-††2 ;
-.
-††; <(
-GetPlayersConnectedToMatch
-††< V
-(
-††V W
-)
-††W X
-;
-††X Y
-PlayerInMatch
-°° "
-playerWithActiveTurn
-°° .
-=
-°°/ 0
-	gameMatch
-°°1 :
-.
-°°: ;$
-GetPlyerWithActiveTurn
-°°; Q
-(
-°°Q R
-)
-°°R S
-;
-°°S T
-PlayerInMatch
-¢¢ 
-leavePlayer
-¢¢ %
-=
-¢¢& '
-	gameMatch
-¢¢( 1
-.
-¢¢1 2
-	GetPlayer
-¢¢2 ;
-(
-¢¢; <
-username
-¢¢< D
-)
-¢¢D E
-;
-¢¢E F
-if
-§§ 
-(
-§§ "
-playerWithActiveTurn
-§§ $
-.
-§§$ %
-Username
-§§% -
-.
-§§- .
-Equals
-§§. 4
-(
-§§4 5
-username
-§§5 =
-)
-§§= >
-)
-§§> ?
-{
-•• 
-leavePlayer
-¶¶ 
-=
-¶¶ "
-playerWithActiveTurn
-¶¶ 2
-;
-¶¶2 3
-int
-ßß *
-indexOfPlayerWithCurrentTurn
-ßß 0
-=
-ßß1 2
-	gameMatch
-ßß3 <
-.
-ßß< =(
-GetPlayersConnectedToMatch
-ßß= W
-(
-ßßW X
-)
-ßßX Y
-.
-ßßY Z
-IndexOf
-ßßZ a
-(
-ßßa b"
-playerWithActiveTurn
-ßßb v
-)
-ßßv w
-;
-ßßw x*
-indexOfPlayerWithCurrentTurn
-®® ,
-=
-®®- .
-
-ChangeTurn
-®®/ 9
-(
-®®9 :
-	gameMatch
-®®: C
-,
-®®C D*
-indexOfPlayerWithCurrentTurn
-®®E a
-)
-®®a b
-;
-®®b c
-PlayerInMatch
-™™ 
-
-nextPlayer
-™™ (
-=
-™™) *
-	gameMatch
-™™+ 4
-.
-™™4 5(
-GetPlayersConnectedToMatch
-™™5 O
-(
-™™O P
-)
-™™P Q
-[
-™™Q R*
-indexOfPlayerWithCurrentTurn
-™™R n
-]
-™™n o
-;
-™™o p"
-playerWithActiveTurn
-´´ $
-.
-´´$ %
-HasActiveTurn
-´´% 2
-=
-´´3 4
-false
-´´5 :
-;
-´´: ;
-
-nextPlayer
-¨¨ 
-.
-¨¨ 
-HasActiveTurn
-¨¨ (
-=
-¨¨) *
-true
-¨¨+ /
-;
-¨¨/ 0
-foreach
-ÆÆ 
-(
-ÆÆ 
-var
-ÆÆ 
-playerInMatch
-ÆÆ *
-in
-ÆÆ+ -
-playersInMatch
-ÆÆ. <
-)
-ÆÆ< =
-{
-ØØ 
-playerInMatch
-∞∞ !
-.
-∞∞! "$
-MatchServiceConnection
-∞∞" 8
-.
-∞∞8 9"
-EndTurnOfExpelPlayer
-∞∞9 M
-(
-∞∞M N
-
-nextPlayer
-∞∞N X
-.
-∞∞X Y
-Username
-∞∞Y a
-)
-∞∞a b
-;
-∞∞b c
-}
-±± 
-}
-≤≤ 
-IList
-¥¥ 
-<
-¥¥ 
-int
-¥¥ 
->
-¥¥ 
-cardsUncovered
-¥¥ %
-=
-¥¥& '
-leavePlayer
-¥¥( 3
-.
-¥¥3 4
-GetUncoveredCards
-¥¥4 E
-(
-¥¥E F
-)
-¥¥F G
-;
-¥¥G H
-foreach
-µµ 
-(
-µµ 
-var
-µµ 
-playerConnected
-µµ (
-in
-µµ) +
-playersInMatch
-µµ, :
-)
-µµ: ;
-{
-∂∂ 
-var
-∑∑ 
-channel
-∑∑ 
-=
-∑∑ 
-playerConnected
-∑∑ -
-.
-∑∑- .$
-MatchServiceConnection
-∑∑. D
-;
-∑∑D E
-channel
-∏∏ 
-.
-∏∏ $
-NotifyPlayerLeaveMatch
-∏∏ .
-(
-∏∏. /
-username
-∏∏/ 7
-,
-∏∏7 8
-cardsUncovered
-∏∏9 G
-)
-∏∏G H
-;
-∏∏H I
-}
-ππ 
-RemovePairs
-ªª 
-(
-ªª 
-	gameMatch
-ªª !
-,
-ªª! "
-cardsUncovered
-ªª# 1
-)
-ªª1 2
-;
-ªª2 3
-	gameMatch
-ºº 
-.
-ºº 
-RemovePlayer
-ºº "
-(
-ºº" #
-username
-ºº# +
-)
-ºº+ ,
-;
-ºº, -
-if
-ææ 
-(
-ææ 
-playersInMatch
-ææ 
-.
-ææ 
-Count
-ææ $
-==
-ææ% '
-$num
-ææ( )
-)
-ææ) *
-{
-øø 
-this
-¿¿ 
-.
-¿¿ !
-NotifyMatchHasEnded
-¿¿ (
-(
-¿¿( )
-host
-¿¿) -
-)
-¿¿- .
-;
-¿¿. /
-}
-¡¡ 
-}
-¬¬ 	
-public
-ƒƒ 
-void
-ƒƒ 
-ExpelPlayer
-ƒƒ 
-(
-ƒƒ  
-ExpelVoteDto
-ƒƒ  ,
-	expelVote
-ƒƒ- 6
-)
-ƒƒ6 7
-{
-≈≈ 	
-string
-∆∆ 
-host
-∆∆ 
-=
-∆∆ 
-	expelVote
-∆∆ #
-.
-∆∆# $
-Host
-∆∆$ (
-;
-∆∆( )
-MatchDto
-«« 
-	gameMatch
-«« 
-=
-««  
-GetMatch
-««! )
-(
-««) *
-host
-««* .
-)
-««. /
-;
-««/ 0
-string
-»» #
-usernameOfExpelPlayer
-»» (
-=
-»») *
-	expelVote
-»»+ 4
-.
-»»4 5#
-UsernameOfExpelPlayer
-»»5 J
-;
-»»J K
-int
-   
-playerExpelVotes
-    
-=
-  ! "
-	gameMatch
-  # ,
-.
-  , -
-AddExpelVote
-  - 9
-(
-  9 :#
-usernameOfExpelPlayer
-  : O
-)
-  O P
-;
-  P Q
-PlayerInMatch
-ÀÀ 
-voterPlayer
-ÀÀ %
-=
-ÀÀ& '
-	gameMatch
-ÀÀ( 1
-.
-ÀÀ1 2
-	GetPlayer
-ÀÀ2 ;
-(
-ÀÀ; <
-	expelVote
-ÀÀ< E
-.
-ÀÀE F#
-UsernameOfVoterPlayer
-ÀÀF [
-)
-ÀÀ[ \
-;
-ÀÀ\ ]
-voterPlayer
-ÃÃ 
-.
-ÃÃ 
-AddPlayerVoted
-ÃÃ &
-(
-ÃÃ& '#
-usernameOfExpelPlayer
-ÃÃ' <
-)
-ÃÃ< =
-;
-ÃÃ= >
-IList
-ŒŒ 
-<
-ŒŒ 
-PlayerInMatch
-ŒŒ 
->
-ŒŒ  
-playersInMatch
-ŒŒ! /
-=
-ŒŒ0 1
-	gameMatch
-ŒŒ2 ;
-.
-ŒŒ; <(
-GetPlayersConnectedToMatch
-ŒŒ< V
-(
-ŒŒV W
-)
-ŒŒW X
-;
-ŒŒX Y
-int
-œœ 
-numOfPlayers
-œœ 
-=
-œœ 
-playersInMatch
-œœ -
-.
-œœ- .
-Count
-œœ. 3
-;
-œœ3 4
-if
-—— 
-(
-—— 
-playerExpelVotes
-——  
->
-——! "
-(
-——# $
-numOfPlayers
-——$ 0
-/
-——1 2
-$num
-——3 4
-)
-——4 5
-)
-——5 6
-{
-““ 
-PlayerInMatch
-”” "
-playerWithActiveTurn
-”” 2
-=
-””3 4
-	gameMatch
-””5 >
-.
-””> ?$
-GetPlyerWithActiveTurn
-””? U
-(
-””U V
-)
-””V W
-;
-””W X
-PlayerInMatch
-‘‘ 
-expelPlayer
-‘‘ )
-=
-‘‘* +
-	gameMatch
-‘‘, 5
-.
-‘‘5 6
-	GetPlayer
-‘‘6 ?
-(
-‘‘? @#
-usernameOfExpelPlayer
-‘‘@ U
-)
-‘‘U V
-;
-‘‘V W
-if
-÷÷ 
-(
-÷÷ "
-playerWithActiveTurn
-÷÷ (
-.
-÷÷( )
-Username
-÷÷) 1
-.
-÷÷1 2
-Equals
-÷÷2 8
-(
-÷÷8 9#
-usernameOfExpelPlayer
-÷÷9 N
-)
-÷÷N O
-)
-÷÷O P
-{
-◊◊ 
-expelPlayer
-ÿÿ 
-=
-ÿÿ  !"
-playerWithActiveTurn
-ÿÿ" 6
-;
-ÿÿ6 7
-int
-ŸŸ *
-indexOfPlayerWithCurrentTurn
-ŸŸ 4
-=
-ŸŸ5 6
-	gameMatch
-ŸŸ7 @
-.
-ŸŸ@ A(
-GetPlayersConnectedToMatch
-ŸŸA [
-(
-ŸŸ[ \
-)
-ŸŸ\ ]
-.
-ŸŸ] ^
-IndexOf
-ŸŸ^ e
-(
-ŸŸe f"
-playerWithActiveTurn
-ŸŸf z
-)
-ŸŸz {
-;
-ŸŸ{ |*
-indexOfPlayerWithCurrentTurn
-⁄⁄ 0
-=
-⁄⁄1 2
-
-ChangeTurn
-⁄⁄3 =
-(
-⁄⁄= >
-	gameMatch
-⁄⁄> G
-,
-⁄⁄G H*
-indexOfPlayerWithCurrentTurn
-⁄⁄I e
-)
-⁄⁄e f
-;
-⁄⁄f g
-PlayerInMatch
-‹‹ !
-
-nextPlayer
-‹‹" ,
-=
-‹‹- .
-	gameMatch
-‹‹/ 8
-.
-‹‹8 9(
-GetPlayersConnectedToMatch
-‹‹9 S
-(
-‹‹S T
-)
-‹‹T U
-[
-‹‹U V*
-indexOfPlayerWithCurrentTurn
-‹‹V r
-]
-‹‹r s
-;
-‹‹s t"
-playerWithActiveTurn
-›› (
-.
-››( )
-HasActiveTurn
-››) 6
-=
-››7 8
-false
-››9 >
-;
-››> ?
-
-nextPlayer
-ﬁﬁ 
-.
-ﬁﬁ 
-HasActiveTurn
-ﬁﬁ ,
-=
-ﬁﬁ- .
-true
-ﬁﬁ/ 3
-;
-ﬁﬁ3 4
-foreach
-‡‡ 
-(
-‡‡ 
-var
-‡‡  
-playerInMatch
-‡‡! .
-in
-‡‡/ 1
-playersInMatch
-‡‡2 @
-)
-‡‡@ A
-{
-·· 
-playerInMatch
-‚‚ %
-.
-‚‚% &$
-MatchServiceConnection
-‚‚& <
-.
-‚‚< ="
-EndTurnOfExpelPlayer
-‚‚= Q
-(
-‚‚Q R
-
-nextPlayer
-‚‚R \
-.
-‚‚\ ]
-Username
-‚‚] e
-)
-‚‚e f
-;
-‚‚f g
-}
-„„ 
-}
-‰‰ 
-IList
-ÊÊ 
-<
-ÊÊ 
-int
-ÊÊ 
->
-ÊÊ 
-cardsUncovered
-ÊÊ )
-=
-ÊÊ* +
-expelPlayer
-ÊÊ, 7
-.
-ÊÊ7 8
-GetUncoveredCards
-ÊÊ8 I
-(
-ÊÊI J
-)
-ÊÊJ K
-;
-ÊÊK L
-foreach
-ÁÁ 
-(
-ÁÁ 
-var
-ÁÁ 
-playerConnected
-ÁÁ ,
-in
-ÁÁ- /
-playersInMatch
-ÁÁ0 >
-)
-ÁÁ> ?
-{
-ËË 
-var
-ÈÈ 
-channel
-ÈÈ 
-=
-ÈÈ  !
-playerConnected
-ÈÈ" 1
-.
-ÈÈ1 2$
-MatchServiceConnection
-ÈÈ2 H
-;
-ÈÈH I
-channel
-ÍÍ 
-.
-ÍÍ "
-NotifyPlayerWasExpel
-ÍÍ 0
-(
-ÍÍ0 1#
-usernameOfExpelPlayer
-ÍÍ1 F
-,
-ÍÍF G
-cardsUncovered
-ÍÍH V
-)
-ÍÍV W
-;
-ÍÍW X
-}
-ÎÎ 
-RemovePairs
-ÌÌ 
-(
-ÌÌ 
-	gameMatch
-ÌÌ %
-,
-ÌÌ% &
-cardsUncovered
-ÌÌ' 5
-)
-ÌÌ5 6
-;
-ÌÌ6 7
-	gameMatch
-ÓÓ 
-.
-ÓÓ 
-RemovePlayer
-ÓÓ &
-(
-ÓÓ& '#
-usernameOfExpelPlayer
-ÓÓ' <
-)
-ÓÓ< =
-;
-ÓÓ= >
-if
- 
-(
- 
-playersInMatch
- "
-.
-" #
-Count
-# (
-==
-) +
-$num
-, -
-)
-- .
-{
-ÒÒ 
-this
-ÚÚ 
-.
-ÚÚ !
-NotifyMatchHasEnded
-ÚÚ ,
-(
-ÚÚ, -
-host
-ÚÚ- 1
-)
-ÚÚ1 2
-;
-ÚÚ2 3
-}
-ÛÛ 
-}
-ıı 
-}
-ˆˆ 	
-public
-¯¯ 
-IList
-¯¯ 
-<
-¯¯ 
-string
-¯¯ 
->
-¯¯ 3
-%GetUsernamesOfPlayersConnectedToMatch
-¯¯ B
-(
-¯¯B C
-string
-¯¯C I
-host
-¯¯J N
-)
-¯¯N O
+¯¯; <
 {
 ˘˘ 	
 MatchDto
@@ -8576,361 +8185,1299 @@ nextPlayer
 IList
 ¸¸ 
 <
-¸¸ 
-string
-¸¸ 
->
-¸¸ 
-playerUsername
-¸¸ (
-=
-¸¸) *
-	gameMatch
-¸¸+ 4
-.
-¸¸4 53
-%GetUsernamesOfPlayersConnectedToMatch
-¸¸5 Z
-(
-¸¸Z [
-)
-¸¸[ \
-;
-¸¸\ ]
-return
-˛˛ 
-playerUsername
-˛˛ !
-;
-˛˛! "
-}
-ˇˇ 	
-public
-ÅÅ 
-IList
-ÅÅ 
-<
-ÅÅ 
-string
-ÅÅ 
->
-ÅÅ 
-GetPlayersVoted
-ÅÅ ,
-(
-ÅÅ, -
-string
-ÅÅ- 3
-host
-ÅÅ4 8
-,
-ÅÅ8 9
-string
-ÅÅ: @
-username
-ÅÅA I
-)
-ÅÅI J
-{
-ÇÇ 	
-MatchDto
-ÉÉ 
-	gameMatch
-ÉÉ 
-=
-ÉÉ  
-GetMatch
-ÉÉ! )
-(
-ÉÉ) *
-host
-ÉÉ* .
-)
-ÉÉ. /
-;
-ÉÉ/ 0
+¸¸ 
 PlayerInMatch
-ÖÖ 
-player
-ÖÖ  
-=
-ÖÖ! "
-	gameMatch
-ÖÖ# ,
-.
-ÖÖ, -
-	GetPlayer
-ÖÖ- 6
-(
-ÖÖ6 7
-username
-ÖÖ7 ?
-)
-ÖÖ? @
-;
-ÖÖ@ A
-IList
-ÜÜ 
-<
-ÜÜ 
-string
-ÜÜ 
+¸¸ 
 >
-ÜÜ 
-playersVoted
-ÜÜ &
+¸¸  
+playersInMatch
+¸¸! /
 =
-ÜÜ' (
-player
-ÜÜ) /
+¸¸0 1
+	gameMatch
+¸¸2 ;
 .
-ÜÜ/ 0
-GetPlayersVoted
-ÜÜ0 ?
+¸¸; <(
+GetPlayersConnectedToMatch
+¸¸< V
 (
-ÜÜ? @
+¸¸V W
 )
-ÜÜ@ A
+¸¸W X
 ;
-ÜÜA B
-return
-àà 
-playersVoted
-àà 
+¸¸X Y
+PlayerInMatch
+˝˝ "
+playerWithActiveTurn
+˝˝ .
+=
+˝˝/ 0
+	gameMatch
+˝˝1 :
+.
+˝˝: ;$
+GetPlyerWithActiveTurn
+˝˝; Q
+(
+˝˝Q R
+)
+˝˝R S
 ;
-àà  
-}
-ââ 	
-public
-ãã 
+˝˝S T
+PlayerInMatch
+˛˛ 
+leavePlayer
+˛˛ %
+=
+˛˛& '
+	gameMatch
+˛˛( 1
+.
+˛˛1 2
+	GetPlayer
+˛˛2 ;
+(
+˛˛; <
+username
+˛˛< D
+)
+˛˛D E
+;
+˛˛E F
+if
+ÄÄ 
+(
+ÄÄ "
+playerWithActiveTurn
+ÄÄ $
+.
+ÄÄ$ %
+Username
+ÄÄ% -
+.
+ÄÄ- .
+Equals
+ÄÄ. 4
+(
+ÄÄ4 5
+username
+ÄÄ5 =
+)
+ÄÄ= >
+)
+ÄÄ> ?
+{
+ÅÅ 
+leavePlayer
+ÇÇ 
+=
+ÇÇ "
+playerWithActiveTurn
+ÇÇ 2
+;
+ÇÇ2 3
 int
-ãã 
+ÉÉ *
+indexOfPlayerWithCurrentTurn
+ÉÉ 0
+=
+ÉÉ1 2
+	gameMatch
+ÉÉ3 <
+.
+ÉÉ< =(
+GetPlayersConnectedToMatch
+ÉÉ= W
+(
+ÉÉW X
+)
+ÉÉX Y
+.
+ÉÉY Z
+IndexOf
+ÉÉZ a
+(
+ÉÉa b"
+playerWithActiveTurn
+ÉÉb v
+)
+ÉÉv w
+;
+ÉÉw x*
+indexOfPlayerWithCurrentTurn
+ÑÑ ,
+=
+ÑÑ- .
 
 ChangeTurn
-ãã 
+ÑÑ/ 9
 (
-ãã 
-MatchDto
-ãã &
+ÑÑ9 :
 	gameMatch
-ãã' 0
+ÑÑ: C
 ,
-ãã0 1
-int
-ãã2 5*
+ÑÑC D*
 indexOfPlayerWithCurrentTurn
-ãã6 R
+ÑÑE a
 )
-ããR S
-{
-åå 	
-if
-çç 
-(
-çç *
-indexOfPlayerWithCurrentTurn
-çç ,
-==
-çç- /
-(
-çç0 1
+ÑÑa b
+;
+ÑÑb c
+PlayerInMatch
+ÜÜ 
+
+nextPlayer
+ÜÜ (
+=
+ÜÜ) *
 	gameMatch
-çç1 :
+ÜÜ+ 4
 .
-çç: ;(
+ÜÜ4 5(
 GetPlayersConnectedToMatch
-çç; U
+ÜÜ5 O
 (
-ççU V
+ÜÜO P
 )
-ççV W
+ÜÜP Q
+[
+ÜÜQ R*
+indexOfPlayerWithCurrentTurn
+ÜÜR n
+]
+ÜÜn o
+;
+ÜÜo p"
+playerWithActiveTurn
+áá $
 .
-ççW X
-Count
-ççX ]
--
-çç^ _
-$num
-çç` a
-)
-çça b
-)
-ççb c
-{
-éé *
-indexOfPlayerWithCurrentTurn
-èè ,
+áá$ %
+HasActiveTurn
+áá% 2
 =
-èè- .
-$num
-èè/ 0
+áá3 4
+false
+áá5 :
 ;
-èè0 1
-}
-êê 
-else
-ëë 
-{
-íí *
-indexOfPlayerWithCurrentTurn
-ìì ,
-++
-ìì, .
+áá: ;
+
+nextPlayer
+àà 
+.
+àà 
+HasActiveTurn
+àà (
+=
+àà) *
+true
+àà+ /
 ;
-ìì. /
-}
-îî 
-return
-ññ *
-indexOfPlayerWithCurrentTurn
-ññ /
-;
-ññ/ 0
-}
-óó 	
-public
-ôô 
-void
-ôô 
-RemovePairs
-ôô 
+àà/ 0
+foreach
+ää 
 (
-ôô  
-MatchDto
-ôô  (
-	gameMatch
-ôô) 2
-,
-ôô2 3
+ää 
+var
+ää 
+playerInMatch
+ää *
+in
+ää+ -
+playersInMatch
+ää. <
+)
+ää< =
+{
+ãã 
+playerInMatch
+åå !
+.
+åå! "$
+MatchServiceConnection
+åå" 8
+.
+åå8 9"
+EndTurnOfExpelPlayer
+åå9 M
+(
+ååM N
+
+nextPlayer
+ååN X
+.
+ååX Y
+Username
+ååY a
+)
+ååa b
+;
+ååb c
+}
+çç 
+}
+éé 
 IList
-ôô4 9
+êê 
 <
-ôô9 :
+êê 
 int
-ôô: =
+êê 
 >
-ôô= >
+êê 
 cardsUncovered
-ôô? M
+êê %
+=
+êê& '
+leavePlayer
+êê( 3
+.
+êê3 4
+GetUncoveredCards
+êê4 E
+(
+êêE F
 )
-ôôM N
+êêF G
+;
+êêG H
+foreach
+ëë 
+(
+ëë 
+var
+ëë 
+playerConnected
+ëë (
+in
+ëë) +
+playersInMatch
+ëë, :
+)
+ëë: ;
 {
-öö 	
+íí 
+var
+ìì 
+channel
+ìì 
+=
+ìì 
+playerConnected
+ìì -
+.
+ìì- .$
+MatchServiceConnection
+ìì. D
+;
+ììD E
+channel
+îî 
+.
+îî $
+NotifyPlayerLeaveMatch
+îî .
+(
+îî. /
+username
+îî/ 7
+,
+îî7 8
+cardsUncovered
+îî9 G
+)
+îîG H
+;
+îîH I
+}
+ïï 
+RemovePairs
+óó 
+(
+óó 
+	gameMatch
+óó !
+,
+óó! "
+cardsUncovered
+óó# 1
+)
+óó1 2
+;
+óó2 3
+	gameMatch
+òò 
+.
+òò 
+RemovePlayer
+òò "
+(
+òò" #
+username
+òò# +
+)
+òò+ ,
+;
+òò, -
 if
-õõ 
+öö 
 (
-õõ 
-(
-õõ 
-cardsUncovered
-õõ 
+öö 
+playersInMatch
+öö 
 .
-õõ  
+öö 
 Count
-õõ  %
-%
-õõ& '
-$num
-õõ( )
-)
-õõ) *
+öö $
 ==
-õõ+ -
+öö% '
 $num
-õõ. /
+öö( )
 )
-õõ/ 0
+öö) *
 {
-úú 
-	gameMatch
-ùù 
+õõ 
+this
+úú 
 .
-ùù 
-
-TotalPairs
-ùù $
-=
-ùù% &
-	gameMatch
-ùù' 0
-.
-ùù0 1
-
-TotalPairs
-ùù1 ;
--
-ùù< =
+úú !
+NotifyMatchHasEnded
+úú (
 (
-ùù> ?
-cardsUncovered
-ùù? M
-.
-ùùM N
-Count
-ùùN S
-/
-ùùT U
-$num
-ùùV W
+úú( )
+host
+úú) -
 )
-ùùW X
+úú- .
 ;
-ùùX Y
+úú. /
 }
-ûû 
+ùù 
+}
+ûû 	
+public
+¶¶ 
+void
+¶¶ 
+ExpelPlayer
+¶¶ 
+(
+¶¶  
+ExpelVoteDto
+¶¶  ,
+	expelVote
+¶¶- 6
+)
+¶¶6 7
+{
+ßß 	
+string
+®® 
+host
+®® 
+=
+®® 
+	expelVote
+®® #
+.
+®®# $
+Host
+®®$ (
+;
+®®( )
+MatchDto
+©© 
+	gameMatch
+©© 
+=
+©©  
+GetMatch
+©©! )
+(
+©©) *
+host
+©©* .
+)
+©©. /
+;
+©©/ 0
+string
+™™ #
+usernameOfExpelPlayer
+™™ (
+=
+™™) *
+	expelVote
+™™+ 4
+.
+™™4 5#
+UsernameOfExpelPlayer
+™™5 J
+;
+™™J K
+int
+¨¨ 
+playerExpelVotes
+¨¨  
+=
+¨¨! "
+	gameMatch
+¨¨# ,
+.
+¨¨, -
+AddExpelVote
+¨¨- 9
+(
+¨¨9 :#
+usernameOfExpelPlayer
+¨¨: O
+)
+¨¨O P
+;
+¨¨P Q
+PlayerInMatch
+≠≠ 
+voterPlayer
+≠≠ %
+=
+≠≠& '
+	gameMatch
+≠≠( 1
+.
+≠≠1 2
+	GetPlayer
+≠≠2 ;
+(
+≠≠; <
+	expelVote
+≠≠< E
+.
+≠≠E F#
+UsernameOfVoterPlayer
+≠≠F [
+)
+≠≠[ \
+;
+≠≠\ ]
+voterPlayer
+ÆÆ 
+.
+ÆÆ 
+AddPlayerVoted
+ÆÆ &
+(
+ÆÆ& '#
+usernameOfExpelPlayer
+ÆÆ' <
+)
+ÆÆ< =
+;
+ÆÆ= >
+IList
+∞∞ 
+<
+∞∞ 
+PlayerInMatch
+∞∞ 
+>
+∞∞  
+playersInMatch
+∞∞! /
+=
+∞∞0 1
+	gameMatch
+∞∞2 ;
+.
+∞∞; <(
+GetPlayersConnectedToMatch
+∞∞< V
+(
+∞∞V W
+)
+∞∞W X
+;
+∞∞X Y
+int
+±± 
+numOfPlayers
+±± 
+=
+±± 
+playersInMatch
+±± -
+.
+±±- .
+Count
+±±. 3
+;
+±±3 4
+if
+≥≥ 
+(
+≥≥ 
+playerExpelVotes
+≥≥  
+>
+≥≥! "
+(
+≥≥# $
+numOfPlayers
+≥≥$ 0
+/
+≥≥1 2
+$num
+≥≥3 4
+)
+≥≥4 5
+)
+≥≥5 6
+{
+¥¥ 
+PlayerInMatch
+µµ "
+playerWithActiveTurn
+µµ 2
+=
+µµ3 4
+	gameMatch
+µµ5 >
+.
+µµ> ?$
+GetPlyerWithActiveTurn
+µµ? U
+(
+µµU V
+)
+µµV W
+;
+µµW X
+PlayerInMatch
+∂∂ 
+expelPlayer
+∂∂ )
+=
+∂∂* +
+	gameMatch
+∂∂, 5
+.
+∂∂5 6
+	GetPlayer
+∂∂6 ?
+(
+∂∂? @#
+usernameOfExpelPlayer
+∂∂@ U
+)
+∂∂U V
+;
+∂∂V W
+if
+∏∏ 
+(
+∏∏ "
+playerWithActiveTurn
+∏∏ (
+.
+∏∏( )
+Username
+∏∏) 1
+.
+∏∏1 2
+Equals
+∏∏2 8
+(
+∏∏8 9#
+usernameOfExpelPlayer
+∏∏9 N
+)
+∏∏N O
+)
+∏∏O P
+{
+ππ 
+expelPlayer
+∫∫ 
+=
+∫∫  !"
+playerWithActiveTurn
+∫∫" 6
+;
+∫∫6 7
+int
+ªª *
+indexOfPlayerWithCurrentTurn
+ªª 4
+=
+ªª5 6
+	gameMatch
+ªª7 @
+.
+ªª@ A(
+GetPlayersConnectedToMatch
+ªªA [
+(
+ªª[ \
+)
+ªª\ ]
+.
+ªª] ^
+IndexOf
+ªª^ e
+(
+ªªe f"
+playerWithActiveTurn
+ªªf z
+)
+ªªz {
+;
+ªª{ |*
+indexOfPlayerWithCurrentTurn
+ºº 0
+=
+ºº1 2
+
+ChangeTurn
+ºº3 =
+(
+ºº= >
+	gameMatch
+ºº> G
+,
+ººG H*
+indexOfPlayerWithCurrentTurn
+ººI e
+)
+ººe f
+;
+ººf g
+PlayerInMatch
+ææ !
+
+nextPlayer
+ææ" ,
+=
+ææ- .
+	gameMatch
+ææ/ 8
+.
+ææ8 9(
+GetPlayersConnectedToMatch
+ææ9 S
+(
+ææS T
+)
+ææT U
+[
+ææU V*
+indexOfPlayerWithCurrentTurn
+ææV r
+]
+æær s
+;
+ææs t"
+playerWithActiveTurn
+øø (
+.
+øø( )
+HasActiveTurn
+øø) 6
+=
+øø7 8
+false
+øø9 >
+;
+øø> ?
+
+nextPlayer
+¿¿ 
+.
+¿¿ 
+HasActiveTurn
+¿¿ ,
+=
+¿¿- .
+true
+¿¿/ 3
+;
+¿¿3 4
+foreach
+¬¬ 
+(
+¬¬ 
+var
+¬¬  
+playerInMatch
+¬¬! .
+in
+¬¬/ 1
+playersInMatch
+¬¬2 @
+)
+¬¬@ A
+{
+√√ 
+playerInMatch
+ƒƒ %
+.
+ƒƒ% &$
+MatchServiceConnection
+ƒƒ& <
+.
+ƒƒ< ="
+EndTurnOfExpelPlayer
+ƒƒ= Q
+(
+ƒƒQ R
+
+nextPlayer
+ƒƒR \
+.
+ƒƒ\ ]
+Username
+ƒƒ] e
+)
+ƒƒe f
+;
+ƒƒf g
+}
+≈≈ 
+}
+∆∆ 
+IList
+»» 
+<
+»» 
+int
+»» 
+>
+»» 
+cardsUncovered
+»» )
+=
+»»* +
+expelPlayer
+»», 7
+.
+»»7 8
+GetUncoveredCards
+»»8 I
+(
+»»I J
+)
+»»J K
+;
+»»K L
+foreach
+…… 
+(
+…… 
+var
+…… 
+playerConnected
+…… ,
+in
+……- /
+playersInMatch
+……0 >
+)
+……> ?
+{
+   
+var
+ÀÀ 
+channel
+ÀÀ 
+=
+ÀÀ  !
+playerConnected
+ÀÀ" 1
+.
+ÀÀ1 2$
+MatchServiceConnection
+ÀÀ2 H
+;
+ÀÀH I
+channel
+ÃÃ 
+.
+ÃÃ "
+NotifyPlayerWasExpel
+ÃÃ 0
+(
+ÃÃ0 1#
+usernameOfExpelPlayer
+ÃÃ1 F
+,
+ÃÃF G
+cardsUncovered
+ÃÃH V
+)
+ÃÃV W
+;
+ÃÃW X
+}
+ÕÕ 
+RemovePairs
+œœ 
+(
+œœ 
+	gameMatch
+œœ %
+,
+œœ% &
+cardsUncovered
+œœ' 5
+)
+œœ5 6
+;
+œœ6 7
+	gameMatch
+–– 
+.
+–– 
+RemovePlayer
+–– &
+(
+––& '#
+usernameOfExpelPlayer
+––' <
+)
+––< =
+;
+––= >
+if
+““ 
+(
+““ 
+playersInMatch
+““ "
+.
+““" #
+Count
+““# (
+==
+““) +
+$num
+““, -
+)
+““- .
+{
+”” 
+this
+‘‘ 
+.
+‘‘ !
+NotifyMatchHasEnded
+‘‘ ,
+(
+‘‘, -
+host
+‘‘- 1
+)
+‘‘1 2
+;
+‘‘2 3
+}
+’’ 
+}
+◊◊ 
+}
+ÿÿ 	
+public
+ﬂﬂ 
+IList
+ﬂﬂ 
+<
+ﬂﬂ 
+string
+ﬂﬂ 
+>
+ﬂﬂ 3
+%GetUsernamesOfPlayersConnectedToMatch
+ﬂﬂ B
+(
+ﬂﬂB C
+string
+ﬂﬂC I
+host
+ﬂﬂJ N
+)
+ﬂﬂN O
+{
+‡‡ 	
+MatchDto
+·· 
+	gameMatch
+·· 
+=
+··  
+GetMatch
+··! )
+(
+··) *
+host
+··* .
+)
+··. /
+;
+··/ 0
+IList
+„„ 
+<
+„„ 
+string
+„„ 
+>
+„„ 
+playerUsername
+„„ (
+=
+„„) *
+	gameMatch
+„„+ 4
+.
+„„4 53
+%GetUsernamesOfPlayersConnectedToMatch
+„„5 Z
+(
+„„Z [
+)
+„„[ \
+;
+„„\ ]
+return
+ÂÂ 
+playerUsername
+ÂÂ !
+;
+ÂÂ! "
+}
+ÊÊ 	
+public
+ÓÓ 
+IList
+ÓÓ 
+<
+ÓÓ 
+string
+ÓÓ 
+>
+ÓÓ 
+GetPlayersVoted
+ÓÓ ,
+(
+ÓÓ, -
+string
+ÓÓ- 3
+host
+ÓÓ4 8
+,
+ÓÓ8 9
+string
+ÓÓ: @
+username
+ÓÓA I
+)
+ÓÓI J
+{
+ÔÔ 	
+MatchDto
+ 
+	gameMatch
+ 
+=
+  
+GetMatch
+! )
+(
+) *
+host
+* .
+)
+. /
+;
+/ 0
+PlayerInMatch
+ÚÚ 
+player
+ÚÚ  
+=
+ÚÚ! "
+	gameMatch
+ÚÚ# ,
+.
+ÚÚ, -
+	GetPlayer
+ÚÚ- 6
+(
+ÚÚ6 7
+username
+ÚÚ7 ?
+)
+ÚÚ? @
+;
+ÚÚ@ A
+IList
+ÛÛ 
+<
+ÛÛ 
+string
+ÛÛ 
+>
+ÛÛ 
+playersVoted
+ÛÛ &
+=
+ÛÛ' (
+player
+ÛÛ) /
+.
+ÛÛ/ 0
+GetPlayersVoted
+ÛÛ0 ?
+(
+ÛÛ? @
+)
+ÛÛ@ A
+;
+ÛÛA B
+return
+ıı 
+playersVoted
+ıı 
+;
+ıı  
+}
+ˆˆ 	
+public
+˛˛ 
+int
+˛˛ 
+
+ChangeTurn
+˛˛ 
+(
+˛˛ 
+MatchDto
+˛˛ &
+	gameMatch
+˛˛' 0
+,
+˛˛0 1
+int
+˛˛2 5*
+indexOfPlayerWithCurrentTurn
+˛˛6 R
+)
+˛˛R S
+{
+ˇˇ 	
+if
+ÄÄ 
+(
+ÄÄ *
+indexOfPlayerWithCurrentTurn
+ÄÄ ,
+==
+ÄÄ- /
+(
+ÄÄ0 1
+	gameMatch
+ÄÄ1 :
+.
+ÄÄ: ;(
+GetPlayersConnectedToMatch
+ÄÄ; U
+(
+ÄÄU V
+)
+ÄÄV W
+.
+ÄÄW X
+Count
+ÄÄX ]
+-
+ÄÄ^ _
+$num
+ÄÄ` a
+)
+ÄÄa b
+)
+ÄÄb c
+{
+ÅÅ *
+indexOfPlayerWithCurrentTurn
+ÇÇ ,
+=
+ÇÇ- .
+$num
+ÇÇ/ 0
+;
+ÇÇ0 1
+}
+ÉÉ 
 else
-üü 
+ÑÑ 
 {
-†† 
-	gameMatch
-°° 
-.
-°° 
-
-TotalPairs
-°° $
-=
-°°% &
-	gameMatch
-°°' 0
-.
-°°0 1
-
-TotalPairs
-°°1 ;
--
-°°< =
-(
-°°> ?
-(
-°°? @
-cardsUncovered
-°°@ N
-.
-°°N O
-Count
-°°O T
--
-°°U V
-$num
-°°W X
-)
-°°X Y
-/
-°°Z [
-$num
-°°\ ]
-)
-°°] ^
+ÖÖ *
+indexOfPlayerWithCurrentTurn
+ÜÜ ,
+++
+ÜÜ, .
 ;
-°°^ _
+ÜÜ. /
 }
-¢¢ 
+áá 
+return
+ââ *
+indexOfPlayerWithCurrentTurn
+ââ /
+;
+ââ/ 0
 }
-££ 	
+ää 	
+public
+íí 
+void
+íí 
+RemovePairs
+íí 
+(
+íí  
+MatchDto
+íí  (
+	gameMatch
+íí) 2
+,
+íí2 3
+IList
+íí4 9
+<
+íí9 :
+int
+íí: =
+>
+íí= >
+cardsUncovered
+íí? M
+)
+ííM N
+{
+ìì 	
+if
+îî 
+(
+îî 
+(
+îî 
+cardsUncovered
+îî 
+.
+îî  
+Count
+îî  %
+%
+îî& '
+$num
+îî( )
+)
+îî) *
+==
+îî+ -
+$num
+îî. /
+)
+îî/ 0
+{
+ïï 
+	gameMatch
+ññ 
+.
+ññ 
+
+TotalPairs
+ññ $
+=
+ññ% &
+	gameMatch
+ññ' 0
+.
+ññ0 1
+
+TotalPairs
+ññ1 ;
+-
+ññ< =
+(
+ññ> ?
+cardsUncovered
+ññ? M
+.
+ññM N
+Count
+ññN S
+/
+ññT U
+$num
+ññV W
+)
+ññW X
+;
+ññX Y
 }
-§§ 
-}•• ü
+óó 
+else
+òò 
+{
+ôô 
+	gameMatch
+öö 
+.
+öö 
+
+TotalPairs
+öö $
+=
+öö% &
+	gameMatch
+öö' 0
+.
+öö0 1
+
+TotalPairs
+öö1 ;
+-
+öö< =
+(
+öö> ?
+(
+öö? @
+cardsUncovered
+öö@ N
+.
+ööN O
+Count
+ööO T
+-
+ööU V
+$num
+ööW X
+)
+ööX Y
+/
+ööZ [
+$num
+öö\ ]
+)
+öö] ^
+;
+öö^ _
+}
+õõ 
+}
+úú 	
+}
+ùù 
+}ûû ü
 ]C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\MemoryGameService.cs
 	namespace 	
 MemoryGameService
@@ -8938,151 +9485,639 @@ TotalPairs
 . 
 Services $
 { 
-[ 
-ServiceBehavior 
-( 
-InstanceContextMode (
-=) *
-InstanceContextMode+ >
-.> ?
-
-PerSession? I
-,I J
-ConcurrencyMode 
-= 
-ConcurrencyMode )
-.) *
-Single* 0
-)0 1
-]1 2
-public		 
-
-partial		 
-class		 
-MemoryGameService		 *
-{
+[
 
- 
-private 
-static 
-IList 
-< 
-MatchDto %
->% &
-_matches' /
-=0 1
-new2 5
-List6 :
-<: ;
-MatchDto; C
->C D
-(D E
-)E F
-;F G
-public 
-MemoryGameService  
-(  !
-)! "
-{# $
-}% &
-} 
-} Ã:
-aC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\PlayerRegistryService.cs
-	namespace 	
-MemoryGameService
- 
-. 
-Services $
-{ 
-public 
+ 
+ServiceBehavior
+
+ 
+(
+
+ 
+InstanceContextMode
+
+ (
+=
+
+) *
+InstanceContextMode
+
++ >
+.
+
+> ?
+
+PerSession
+
+? I
+,
+
+I J
+ConcurrencyMode 
+= 
+ConcurrencyMode )
+.) *
+Single* 0
+)0 1
+]1 2
+public 
 
-partial 
-class 
-MemoryGameService *
-:+ ,"
-IPlayerRegistryService- C
-{ 
-public 
-bool 
-RegisterNewPlayer %
-(% &
-	PlayerDTO& /
-	playerDTO0 9
-,9 :
-string; A
-saltB F
-)F G
-{ 	
-Account 
+partial 
+class 
+MemoryGameService *
+{ 
+private 
+static 
+IList 
+< 
+MatchDto %
+>% &
+_matches' /
+=0 1
+new2 5
+List6 :
+<: ;
+MatchDto; C
+>C D
+(D E
+)E F
+;F G
+public 
+MemoryGameService  
+(  !
+)! "
+{# $
+}% &
+} 
+} ä=
+aC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\PlayerRegistryService.cs
+	namespace 	
+MemoryGameService
+ 
+. 
+Services $
+{ 
+public!! 
+
+partial!! 
+class!! 
+MemoryGameService!! *
+:!!+ ,"
+IPlayerRegistryService!!- C
+{"" 
+public++ 
+bool++ 
+RegisterNewPlayer++ %
+(++% &
+	PlayerDTO++& /
+	playerDTO++0 9
+,++9 :
+string++; A
+salt++B F
+)++F G
+{,, 	
+Account.. 
 
-newAccount 
-=  
-new! $
-Account% ,
-(, -
-)- .
-{ 
-EmailAddress 
-= 
-	playerDTO (
-.( )
-EmailAddress) 5
-,5 6
-Username 
-= 
-	playerDTO $
-.$ %
-Username% -
-,- .
-Password 
-= 
-	playerDTO $
-.$ %
-Password% -
-,- .
-Salt 
-= 
-salt 
-, 
-EmailWasVerified  
-=! "
-false# (
-,( )
-ActivationToken 
-=  !
-	playerDTO" +
-.+ ,
-VerificationToken, =
-} 
-; 
-Player 
-	newPlayer 
-= 
-new "
-Player# )
-() *
-)* +
-{ 
-EmailAddress 
-= 
+newAccount.. 
+=..  
+new..! $
+Account..% ,
+(.., -
+)..- .
+{// 
+EmailAddress00 
+=00 
+	playerDTO00 (
+.00( )
+EmailAddress00) 5
+,005 6
+Username11 
+=11 
+	playerDTO11 $
+.11$ %
+Username11% -
+,11- .
+Password22 
+=22 
+	playerDTO22 $
+.22$ %
+Password22% -
+,22- .
+Salt33 
+=33 
+salt33 
+,33 
+EmailWasVerified44  
+=44! "
+false44# (
+,44( )
+ActivationToken55 
+=55  !
+	playerDTO55" +
+.55+ ,
+VerificationToken55, =
+}66 
+;66 
+Player88 
+	newPlayer88 
+=88 
+new88 "
+Player88# )
+(88) *
+)88* +
+{99 
+EmailAddress:: 
+=:: 
 
-newAccount )
-.) *
-EmailAddress* 6
-,6 7
-Score 
-= 
-$num 
-}   
-;   
-MemoryGameContext!! 
-memoryGameContext!! /
-=!!0 1
-new!!2 5
-MemoryGameContext!!6 G
-(!!G H
-)!!H I
-;!!I J
+newAccount:: )
+.::) *
+EmailAddress::* 6
+,::6 7
+Score;; 
+=;; 
+$num;; 
+}<< 
+;<< 
+MemoryGameContext== 
+memoryGameContext== /
+===0 1
+new==2 5
+MemoryGameContext==6 G
+(==G H
+)==H I
+;==I J
+
+UnitOfWork>> 
+
+unitOfWork>> !
+=>>" #
+new>>$ '
+
+UnitOfWork>>( 2
+(>>2 3
+memoryGameContext>>3 D
+)>>D E
+;>>E F
+try?? 
+{@@ 
+
+unitOfWorkAA 
+.AA 
+AccountsAA #
+.AA# $
+AddAA$ '
+(AA' (
+
+newAccountAA( 2
+)AA2 3
+;AA3 4
+
+unitOfWorkBB 
+.BB 
+PlayersBB "
+.BB" #
+AddBB# &
+(BB& '
+	newPlayerBB' 0
+)BB0 1
+;BB1 2
+intCC 
+rowsAffectedCC  
+=CC! "
+
+unitOfWorkCC# -
+.CC- .
+CompleteCC. 6
+(CC6 7
+)CC7 8
+;CC8 9
+returnDD 
+rowsAffectedDD #
+>DD$ %
+$numDD& '
+;DD' (
+}EE 
+catchFF 
+(FF 
+SqlExceptionFF 
+sqlExceptionFF  ,
+)FF, -
+{GG 
+_loggerHH 
+.HH 
+FatalHH 
+(HH 
+$strHH p
++HHq r
+$strII 3
++II4 5
+$strJJ 8
+,JJ8 9
+sqlExceptionJJ: F
+)JJF G
+;JJG H
+throwKK 
+;KK 
+}LL 
+catchMM 
+(MM 
+EntityExceptionMM "
+entityExceptionMM# 2
+)MM2 3
+{NN 
+_loggerOO 
+.OO 
+FatalOO 
+(OO 
+$strOO w
++OOx y
+$strPP _
++PP` a
+$strQQ 8
+,QQ8 9
+entityExceptionQQ: I
+)QQI J
+;QQJ K
+throwRR 
+;RR 
+}SS 
+finallyTT 
+{UU 
+
+unitOfWorkVV 
+.VV 
+DisposeVV "
+(VV" #
+)VV# $
+;VV$ %
+}WW 
+}XX 	
+public`` 
+bool`` #
+EmailAddressIsAvailable`` +
+(``+ ,
+string``, 2
+emailAddress``3 ?
+)``? @
+{aa 	
+
+UnitOfWorkbb 
+
+unitOfWorkbb !
+=bb" #
+newbb$ '
+
+UnitOfWorkbb( 2
+(bb2 3
+newbb3 6
+MemoryGameContextbb7 H
+(bbH I
+)bbI J
+)bbJ K
+;bbK L
+trycc 
+{dd 
+Accountee /
+#accountWithTheSpecifiedEmailAddressee ;
+=ee< =
+
+unitOfWorkee> H
+.eeH I
+AccountseeI Q
+.eeQ R
+GeteeR U
+(eeU V
+emailAddresseeV b
+)eeb c
+;eec d
+ifff 
+(ff /
+#accountWithTheSpecifiedEmailAddressff 7
+==ff8 :
+nullff; ?
+)ff? @
+{gg 
+returnhh 
+truehh 
+;hh  
+}ii 
+returnjj 
+falsejj 
+;jj 
+}kk 
+catchll 
+(ll 
+SqlExceptionll 
+sqlExceptionll  ,
+)ll, -
+{mm 
+_loggernn 
+.nn 
+Fatalnn 
+(nn 
+$strnn f
++nng h
+$stroo G
++ooH I
+$strpp ?
+,pp? @
+sqlExceptionppA M
+)ppM N
+;ppN O
+throwqq 
+;qq 
+}rr 
+catchss 
+(ss 
+EntityExceptionss "
+entityExceptionss# 2
+)ss2 3
+{tt 
+_loggeruu 
+.uu 
+Fataluu 
+(uu 
+$struu ]
++uu^ _
+$strvv _
++vv` a
+$strww >
+,ww> ?
+entityExceptionww@ O
+)wwO P
+;wwP Q
+throwxx 
+;xx 
+}yy 
+finallyzz 
+{{{ 
+
+unitOfWork|| 
+.|| 
+Dispose|| "
+(||" #
+)||# $
+;||$ %
+}}} 
+}~~ 	
+public
+ÜÜ 
+bool
+ÜÜ !
+UserNameIsAvailable
+ÜÜ '
+(
+ÜÜ' (
+string
+ÜÜ( .
+username
+ÜÜ/ 7
+)
+ÜÜ7 8
+{
+áá 	
+
+UnitOfWork
+àà 
+
+unitOfWork
+àà !
+=
+àà" #
+new
+àà$ '
+
+UnitOfWork
+àà( 2
+(
+àà2 3
+new
+àà3 6
+MemoryGameContext
+àà7 H
+(
+ààH I
+)
+ààI J
+)
+ààJ K
+;
+ààK L
+try
+ââ 
+{
+ää 
+Account
+ãã -
+accountWithTheSpecifiedUsername
+ãã 7
+=
+ãã8 9
+
+unitOfWork
+ãã: D
+.
+ããD E
+Accounts
+ããE M
+.
+ããM N 
+FindFirstOccurence
+ããN `
+(
+ãã` a
+account
+ããa h
+=>
+ããi k
+account
+ããl s
+.
+ããs t
+Username
+ããt |
+==
+ãã} 
+usernameããÄ à
+)ããà â
+;ããâ ä
+if
+åå 
+(
+åå -
+accountWithTheSpecifiedUsername
+åå 3
+==
+åå4 6
+null
+åå7 ;
+)
+åå; <
+{
+çç 
+return
+éé 
+true
+éé 
+;
+éé  
+}
+èè 
+return
+êê 
+false
+êê 
+;
+êê 
+}
+ëë 
+catch
+íí 
+(
+íí 
+SqlException
+íí 
+sqlException
+íí  ,
+)
+íí, -
+{
+ìì 
+_logger
+îî 
+.
+îî 
+Fatal
+îî 
+(
+îî 
+$str
+îî b
++
+îîc d
+$str
+ïï Y
++
+ïïZ [
+$str
+ññ ;
+,
+ññ; <
+sqlException
+ññ= I
+)
+ññI J
+;
+ññJ K
+throw
+óó 
+;
+óó 
+}
+òò 
+catch
+ôô 
+(
+ôô 
+EntityException
+ôô "
+entityException
+ôô# 2
+)
+ôô2 3
+{
+öö 
+_logger
+õõ 
+.
+õõ 
+Fatal
+õõ 
+(
+õõ 
+$str
+õõ ]
++
+õõ^ _
+$str
+úú _
++
+úú` a
+$str
+ùù :
+,
+ùù: ;
+entityException
+ùù< K
+)
+ùùK L
+;
+ùùL M
+throw
+ûû 
+;
+ûû 
+}
+üü 
+finally
+†† 
+{
+°° 
+
+unitOfWork
+¢¢ 
+.
+¢¢ 
+Dispose
+¢¢ "
+(
+¢¢" #
+)
+¢¢# $
+;
+¢¢$ %
+}
+££ 
+}
+§§ 	
+}
+ßß 
+}®® ∫
+XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\ScoreService.cs
+	namespace
+
+ 	
+MemoryGameService
+
+
+ 
+.
+
+ 
+Services
+
+ $
+{ 
+public 
+
+partial 
+class 
+MemoryGameService *
+:+ ,
+IScoreService- :
+{ 
+List   
+<   
+PlayerScoreDTO   
+>   
+IScoreService   *
+.  * +#
+GetPlayersWithBestScore  + B
+(  B C
+int  C F(
+numberOfPlayersToBeRetrieved  G c
+)  c d
+{!! 	
 
 UnitOfWork"" 
 
@@ -9091,481 +10126,148 @@ unitOfWork"" !
 new""$ '
 
 UnitOfWork""( 2
-(""2 3
-memoryGameContext""3 D
-)""D E
-;""E F
+(""2 3
+new""3 6
+MemoryGameContext""7 H
+(""H I
+)""I J
+)""J K
+;""K L
 try## 
-{$$ 
-var%% 
-transaction%% 
-=%%  !
-memoryGameContext%%" 3
-.%%3 4
-Database%%4 <
-.%%< =
-BeginTransaction%%= M
-(%%M N
-)%%N O
-;%%O P
+{$$ 
+IEnumerable%% 
+<%% 
+Account%% #
+>%%# $
+accountEntities%%% 4
+=%%5 6
 
-unitOfWork&& 
-.&& 
-Accounts&& #
-.&&# $
-Add&&$ '
-(&&' (
-
-newAccount&&( 2
-)&&2 3
-;&&3 4
-
-unitOfWork'' 
-.'' 
-Players'' "
-.''" #
-Add''# &
-(''& '
-	newPlayer''' 0
-)''0 1
-;''1 2
-int(( 
-rowsAffected((  
-=((! "
-
-unitOfWork((# -
-.((- .
-Complete((. 6
-(((6 7
-)((7 8
-;((8 9
-transaction)) 
-.)) 
-Commit)) "
-())" #
-)))# $
-;))$ %
-return** 
-rowsAffected** #
->**$ %
-$num**& '
-;**' (
-}++ 
-catch,, 
-(,, 
-SqlException,, 
-),,  
-{-- '
-DatabaseConnectionLostFault.. +'
-databaseConnectionLostFault.., G
-=..H I
-new..J M'
-DatabaseConnectionLostFault..N i
-(..i j
-)..j k
-;..k l
-throw// 
-new// 
-FaultException// (
-<//( )'
-DatabaseConnectionLostFault//) D
->//D E
-(//E F'
-databaseConnectionLostFault//F a
-)//a b
-;//b c
-}00 
-catch11 
-(11 
-	Exception11 
-e11 
-)11 
-{22 
-Console33 
-.33 
-	WriteLine33 !
-(33! "
-e33" #
-)33# $
-;33$ %
-Console44 
-.44 
-ReadLine44  
-(44  !
-)44! "
-;44" #
-throw55 
-;55 
-}66 
-finally77 
-{88 
-
-unitOfWork99 
-.99 
-Dispose99 "
-(99" #
-)99# $
-;99$ %
-}:: 
-};; 	
-public== 
-bool== #
-EmailAddressIsAvailable== +
-(==+ ,
-string==, 2
-emailAddress==3 ?
-)==? @
-{>> 	
-
-UnitOfWork?? 
-
-unitOfWork?? !
-=??" #
-new??$ '
-
-UnitOfWork??( 2
-(??2 3
-new??3 6
-MemoryGameContext??7 H
-(??H I
-)??I J
-)??J K
-;??K L
-try@@ 
-{AA 
-AccountBB /
-#accountWithTheSpecifiedEmailAddressBB ;
-=BB< =
-
-unitOfWorkBB> H
-.BBH I
-AccountsBBI Q
-.BBQ R
-GetBBR U
-(BBU V
-emailAddressBBV b
-)BBb c
-;BBc d
-ifCC 
-(CC /
-#accountWithTheSpecifiedEmailAddressCC 7
-==CC8 :
-nullCC; ?
-)CC? @
-{DD 
-returnEE 
-trueEE 
-;EE  
-}FF 
-returnGG 
-falseGG 
-;GG 
-}HH 
-catchII 
-(II 
-SqlExceptionII 
-)II 
-{JJ '
-DatabaseConnectionLostFaultKK +'
-databaseConnectionLostFaultKK, G
-=KKH I
-newKKJ M'
-DatabaseConnectionLostFaultKKN i
-(KKi j
-)KKj k
-;KKk l
-throwLL 
-newLL 
-FaultExceptionLL (
-<LL( )'
-DatabaseConnectionLostFaultLL) D
->LLD E
-(LLE F'
-databaseConnectionLostFaultLLF a
-)LLa b
-;LLb c
-}MM 
-finallyNN 
-{OO 
-
-unitOfWorkPP 
-.PP 
-DisposePP "
-(PP" #
-)PP# $
-;PP$ %
-}QQ 
-}RR 	
-publicTT 
-boolTT 
-UserNameIsAvailableTT '
-(TT' (
-stringTT( .
-usernameTT/ 7
-)TT7 8
-{UU 	
-
-UnitOfWorkVV 
-
-unitOfWorkVV !
-=VV" #
-newVV$ '
-
-UnitOfWorkVV( 2
-(VV2 3
-newVV3 6
-MemoryGameContextVV7 H
-(VVH I
-)VVI J
-)VVJ K
-;VVK L
-tryWW 
-{XX 
-AccountYY +
-accountWithTheSpecifiedUsernameYY 7
-=YY8 9
-
-unitOfWorkYY: D
-.YYD E
-AccountsYYE M
-.YYM N
-FindFirstOccurenceYYN `
-(YY` a
-accountYYa h
-=>YYi k
-accountYYl s
-.YYs t
-UsernameYYt |
-==YY} 
-username
-YYÄ à
+unitOfWork%%7 A
+.%%A B
+Accounts%%B J
+.%%J K-
+!GetNumberOfAccountsWithPlayerInfo%%K l
+(%%l m)
+numberOfPlayersToBeRetrieved	%%m â
 )
-YYà â
+%%â ä
 ;
-YYâ ä
-ifZZ 
-(ZZ +
-accountWithTheSpecifiedUsernameZZ 3
-==ZZ4 6
-nullZZ7 ;
-)ZZ; <
-{[[ 
-return\\ 
-true\\ 
-;\\  
-}]] 
-return^^ 
-false^^ 
-;^^ 
-}__ 
-catch`` 
-(`` 
-SqlException`` 
-)``  
-{aa '
-DatabaseConnectionLostFaultbb +'
-databaseConnectionLostFaultbb, G
-=bbH I
-newbbJ M'
-DatabaseConnectionLostFaultbbN i
-(bbi j
-)bbj k
-;bbk l
-throwcc 
-newcc 
-FaultExceptioncc (
-<cc( )'
-DatabaseConnectionLostFaultcc) D
->ccD E
-(ccE F'
-databaseConnectionLostFaultccF a
-)cca b
-;ccb c
-}dd 
-finallyee 
-{ff 
+%%ä ã
+List&& 
+<&& 
+PlayerScoreDTO&& #
+>&&# $!
+playersWithBestScores&&% :
+=&&; <
+new&&= @
+List&&A E
+<&&E F
+PlayerScoreDTO&&F T
+>&&T U
+(&&U V
+)&&V W
+;&&W X
+foreach(( 
+((( 
+var(( 
+account(( #
+in(($ &
+accountEntities((' 6
+)((6 7
+{)) 
+PlayerScoreDTO** "
+playerScore**# .
+=**/ 0
+new**1 4
+PlayerScoreDTO**5 C
+(**C D
+)**D E
+{++ 
+Username,,  
+=,,! "
+account,,# *
+.,,* +
+Username,,+ 3
+,,,3 4
 
-unitOfWorkgg 
-.gg 
-Disposegg "
-(gg" #
-)gg# $
-;gg$ %
-}hh 
-}ii 	
-}ll 
-}mm ù
-XC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\ScoreService.cs
-	namespace 	
-MemoryGameService
- 
-. 
-Services $
-{ 
-public 
-
-partial 
-class 
-MemoryGameService *
-:+ ,
-IScoreService- :
-{ 
-List 
-< 
-PlayerScoreDTO 
-> 
-IScoreService *
-.* +#
-GetPlayersWithBestScore+ B
-(B C
-intC F(
-numberOfPlayersToBeRetrievedG c
-)c d
-{ 	
+TotalScore-- "
+=--# $
+account--% ,
+.--, -
+Player--- 3
+.--3 4
+Score--4 9
+}.. 
+;.. !
+playersWithBestScores// )
+.//) *
+Add//* -
+(//- .
+playerScore//. 9
+)//9 :
+;//: ;
+}00 
+return22 !
+playersWithBestScores22 ,
+;22, -
+}33 
+catch44 
+(44 
+SqlException44 
+sqlException44  ,
+)44, -
+{55 
+_logger66 
+.66 
+Fatal66 
+(66 
+$str66 d
++66e f
+$str77 ;
++77< =
+$str88 =
+,88= >
+sqlException88? K
+)88K L
+;88L M
+throw99 
+;99 
+}:: 
+catch;; 
+(;; 
+EntityException;; "
+entityException;;# 2
+);;2 3
+{<< 
+_logger== 
+.== 
+Fatal== 
+(== 
+$str== ]
++==^ _
+$str>> _
++>>` a
+$str?? =
+,??= >
+entityException??? N
+)??N O
+;??O P
+throw@@ 
+;@@ 
+}AA 
+finallyBB 
+{CC 
 
-UnitOfWork 
-
-unitOfWork !
-=" #
-new$ '
-
-UnitOfWork( 2
-(2 3
-new3 6
-MemoryGameContext7 H
-(H I
-)I J
-)J K
-;K L
-try 
-{ 
-IEnumerable 
-< 
-Account #
-># $
-accountEntities% 4
-=5 6
-
-unitOfWork7 A
-.A B
-AccountsB J
-.J K-
-!GetNumberOfAccountsWithPlayerInfoK l
-(l m)
-numberOfPlayersToBeRetrieved	m â
-)
-â ä
-;
-ä ã
-List 
-< 
-PlayerScoreDTO #
-># $!
-playersWithBestScores% :
-=; <
-new= @
-ListA E
-<E F
-PlayerScoreDTOF T
->T U
-(U V
-)V W
-;W X
-foreach 
-( 
-var 
-account #
-in$ &
-accountEntities' 6
-)6 7
-{ 
-PlayerScoreDTO "
-playerScore# .
-=/ 0
-new1 4
-PlayerScoreDTO5 C
-(C D
-)D E
-{ 
-Username  
-=! "
-account# *
-.* +
-Username+ 3
-,3 4
-
-TotalScore "
-=# $
-account% ,
-., -
-Player- 3
-.3 4
-Score4 9
-} 
-; !
-playersWithBestScores )
-.) *
-Add* -
-(- .
-playerScore. 9
-)9 :
-;: ;
-} 
-return!! !
-playersWithBestScores!! ,
-;!!, -
-}"" 
-catch## 
-(## 
-	Exception## 
-e## 
-)## 
-{$$ 
-Console%% 
-.%% 
-	WriteLine%% !
-(%%! "
-e%%" #
-)%%# $
-;%%$ %
-Console&& 
-.&& 
-ReadLine&&  
-(&&  !
-)&&! "
-;&&" #'
-DatabaseConnectionLostFault'' +'
-databaseConnectionLostFault'', G
-=''H I
-new''J M'
-DatabaseConnectionLostFault''N i
-(''i j
-)''j k
-;''k l
-throw(( 
-new(( 
-FaultException(( (
-<((( )'
-DatabaseConnectionLostFault(() D
->((D E
-(((E F'
-databaseConnectionLostFault((F a
-)((a b
-;((b c
-})) 
-finally** 
-{++ 
-
-unitOfWork,, 
-.,, 
-Dispose,, "
-(,," #
-),,# $
-;,,$ %
-}-- 
-}.. 	
-}// 
-}00 †	
+unitOfWorkDD 
+.DD 
+DisposeDD "
+(DD" #
+)DD# $
+;DD$ %
+}EE 
+}FF 	
+}GG 
+}HH †	
 ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\TokenGenerator.cs
 	namespace 	
 MemoryGameService
@@ -9573,89 +10275,63 @@ ZC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Services\TokenG
 . 
 Services $
 { 
-public 
+public 
 
-partial 
-class 
-MemoryGameService *
-:+ ,
-ITokenGenerator- <
-{ 
-public 
-string 
-GenerateToken #
-(# $
-int$ '
-length( .
-). /
-{		 	
-string
-
- 
-token
-
- 
-=
-
- 
-Guid
-
- 
-.
-
-  
-NewGuid
-
-  '
-(
-
-' (
-)
-
-( )
-.
-
-) *
-ToString
-
-* 2
-(
-
-2 3
-)
-
-3 4
-;
-
-4 5
-token 
-= 
-token 
-. 
-Replace !
-(! "
-$str" %
-,% &
-$str' )
-)) *
-;* +
-token 
-= 
-token 
-. 
-	Substring #
-(# $
-$num$ %
-,% &
-length' -
-)- .
-;. /
-return 
-token 
-; 
-} 	
-} 
-} ∆
+partial 
+class 
+MemoryGameService *
+:+ ,
+ITokenGenerator- <
+{ 
+public 
+string 
+GenerateToken #
+(# $
+int$ '
+length( .
+). /
+{ 	
+string 
+token 
+= 
+Guid 
+.  
+NewGuid  '
+(' (
+)( )
+.) *
+ToString* 2
+(2 3
+)3 4
+;4 5
+token 
+= 
+token 
+. 
+Replace !
+(! "
+$str" %
+,% &
+$str' )
+)) *
+;* +
+token 
+= 
+token 
+. 
+	Substring #
+(# $
+$num$ %
+,% &
+length' -
+)- .
+;. /
+return 
+token 
+; 
+} 	
+} 
+}   ∆
 YC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Utilities\CardShuffler.cs
 	namespace 	
 MemoryGameService
@@ -9663,63 +10339,61 @@ YC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Utilities\CardS
 . 
 	Utilities %
 { 
-public 
-
-class 
-CardShuffler 
-{ 
-private 
-	IShuffler 
-< 
-CardDto !
->! "
-_shufflerAlgorithm# 5
-;5 6
 public
 
- 
+ 
+
+class
+
+ 
 CardShuffler
 
- 
-(
-
- 
-)
-
- 
-{ 	
-_shufflerAlgorithm 
-=  
-new! $
-FisherYatesShuffler% 8
-<8 9
-CardDto9 @
->@ A
-(A B
-)B C
-;C D
-} 	
-public 
-void 
-ShuffleCards  
-(  !
-IList! &
-<& '
-CardDto' .
->. /
-cardDeck0 8
-)8 9
-{ 	
-_shufflerAlgorithm 
-. 
-Shuffle &
-(& '
-cardDeck' /
-)/ 0
-;0 1
-} 	
-} 
-} ˛
+ 
+{ 
+private 
+	IShuffler 
+< 
+CardDto !
+>! "
+_shufflerAlgorithm# 5
+;5 6
+public 
+CardShuffler 
+( 
+) 
+{ 	
+_shufflerAlgorithm 
+=  
+new! $
+FisherYatesShuffler% 8
+<8 9
+CardDto9 @
+>@ A
+(A B
+)B C
+;C D
+} 	
+public 
+void 
+ShuffleCards  
+(  !
+IList! &
+<& '
+CardDto' .
+>. /
+cardDeck0 8
+)8 9
+{ 	
+_shufflerAlgorithm 
+. 
+Shuffle &
+(& '
+cardDeck' /
+)/ 0
+;0 1
+} 	
+} 
+}   ˛
 `C:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Utilities\FisherYatesShuffler.cs
 	namespace 	
 MemoryGameService
@@ -9727,145 +10401,127 @@ YC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Utilities\CardS
 . 
 	Utilities %
 { 
-public 
+public 
 
-class 
-FisherYatesShuffler $
-<$ %
-ShufflingCollection% 8
->8 9
-:: ;
-	IShuffler< E
-<E F
-ShufflingCollectionF Y
->Y Z
-where[ `
-ShufflingCollectiona t
-:u v
-classw |
-{ 
-public 
-void 
-Shuffle 
-( 
-IList !
-<! "
-ShufflingCollection" 5
->5 6
-collectionToShuffle7 J
-)J K
-{		 	
-int
-
- 
-	lastIndex
-
- 
-=
-
- 
-collectionToShuffle
-
- /
-.
-
-/ 0
-Count
-
-0 5
--
-
-6 7
-$num
-
-8 9
-;
-
-9 :
-while 
-( 
-	lastIndex 
-> 
-$num  
-)  !
-{ 
-int 
-randomIndex 
-=  !,
- GenerateRandomNumberBetweenRange" B
-(B C
-$numC D
-,D E
-	lastIndexF O
-)O P
-;P Q
-var 
-auxiliaryContainer &
-=' (
-collectionToShuffle) <
-[< =
-	lastIndex= F
-]F G
-;G H
-collectionToShuffle #
-[# $
-	lastIndex$ -
-]- .
-=/ 0
-collectionToShuffle1 D
-[D E
-randomIndexE P
-]P Q
-;Q R
-collectionToShuffle #
-[# $
-randomIndex$ /
-]/ 0
-=1 2
-auxiliaryContainer3 E
-;E F
-	lastIndex 
--- 
-; 
-} 
-} 	
-private 
-int ,
- GenerateRandomNumberBetweenRange 4
-(4 5
-int5 8
-minimum9 @
-,@ A
-intB E
-maximumF M
-)M N
-{ 	
-Random !
-randomNumberGenerator (
-=) *
-new+ .
-Random/ 5
-(5 6
-)6 7
-;7 8
-int 
-randomNumber 
-= !
-randomNumberGenerator 4
-.4 5
-Next5 9
-(9 :
-minimum: A
-,A B
-maximumC J
-)J K
-;K L
-return 
-randomNumber 
-;  
-} 	
-} 
-} à
+class 
+FisherYatesShuffler $
+<$ %
+ShufflingCollection% 8
+>8 9
+:: ;
+	IShuffler< E
+<E F
+ShufflingCollectionF Y
+>Y Z
+where[ `
+ShufflingCollectiona t
+:u v
+classw |
+{ 
+public 
+void 
+Shuffle 
+( 
+IList !
+<! "
+ShufflingCollection" 5
+>5 6
+collectionToShuffle7 J
+)J K
+{ 	
+int 
+	lastIndex 
+= 
+collectionToShuffle /
+./ 0
+Count0 5
+-6 7
+$num8 9
+;9 :
+while 
+( 
+	lastIndex 
+> 
+$num  
+)  !
+{ 
+int 
+randomIndex 
+=  !,
+ GenerateRandomNumberBetweenRange" B
+(B C
+$numC D
+,D E
+	lastIndexF O
+)O P
+;P Q
+var 
+auxiliaryContainer &
+=' (
+collectionToShuffle) <
+[< =
+	lastIndex= F
+]F G
+;G H
+collectionToShuffle #
+[# $
+	lastIndex$ -
+]- .
+=/ 0
+collectionToShuffle1 D
+[D E
+randomIndexE P
+]P Q
+;Q R
+collectionToShuffle #
+[# $
+randomIndex$ /
+]/ 0
+=1 2
+auxiliaryContainer3 E
+;E F
+	lastIndex 
+-- 
+; 
+} 
+} 	
+private 
+int ,
+ GenerateRandomNumberBetweenRange 4
+(4 5
+int5 8
+minimum9 @
+,@ A
+intB E
+maximumF M
+)M N
+{ 	
+Random   !
+randomNumberGenerator   (
+=  ) *
+new  + .
+Random  / 5
+(  5 6
+)  6 7
+;  7 8
+int!! 
+randomNumber!! 
+=!! !
+randomNumberGenerator!! 4
+.!!4 5
+Next!!5 9
+(!!9 :
+minimum!!: A
+,!!A B
+maximum!!C J
+)!!J K
+;!!K L
+return"" 
+randomNumber"" 
+;""  
+}## 	
+}$$ 
+}%% à
 VC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Utilities\IShuffler.cs
 	namespace 	
 MemoryGameService
@@ -9873,30 +10529,50 @@ VC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Utilities\IShuf
 . 
 	Utilities %
 { 
-public 
+public
+
+ 
 
-	interface 
-	IShuffler 
-< 
-ShufflingCollection 2
->2 3
-where4 9
-ShufflingCollection: M
-:N O
-classP U
-{ 
-void 
-Shuffle 
-( 
-IList 
-< 
-ShufflingCollection .
->. /
-collectionToShuffle0 C
-)C D
-;D E
-} 
-}		 Ä
+	interface
+
+ 
+	IShuffler
+
+ 
+<
+
+ 
+ShufflingCollection
+
+ 2
+>
+
+2 3
+where
+
+4 9
+ShufflingCollection
+
+: M
+:
+
+N O
+class
+
+P U
+{ 
+void 
+Shuffle 
+( 
+IList 
+< 
+ShufflingCollection .
+>. /
+collectionToShuffle0 C
+)C D
+;D E
+} 
+} ¶
 YC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Utilities\MailTemplate.cs
 	namespace 	
 MemoryGameService
@@ -9904,213 +10580,226 @@ YC:\Users\Adair Hern√°ndez\source\repos\memory\MemoryGameService\Utilities\MailT
 . 
 	Utilities %
 { 
-public 
+public
+
+ 
 
-class 
-MailTemplate 
-{ 
-private 
-TextPart 
-_message !
-;! "
-private		 
-MimeMessage		 
-_content		 $
-;		$ %
-private
+class
 
- 
-readonly
+ 
+MailTemplate
 
- 
-MailboxAddress
-
- '
-_sender
-
-( /
-;
-
-/ 0
-private 
-MailboxAddress 
-	_receiver (
-;( )
-private 
-string 
-_subject 
-;  
-private 
+ 
+{ 
+private 
+TextPart 
+_message !
+;! "
+private 
+MimeMessage 
+_content $
+;$ %
+private 
+readonly 
+MailboxAddress '
+_sender( /
+;/ 0
+private 
+MailboxAddress 
+	_receiver (
+;( )
+private 
+string 
+_subject 
+;  
+private 
 
-SmtpClient 
-_client "
-;" #
-public 
-MailTemplate 
-( 
-) 
-{ 	
-_message 
-= 
-new 
-TextPart #
-(# $
-$str$ +
-)+ ,
-;, -
-_content 
-= 
-new 
-MimeMessage &
-(& '
-)' (
-;( )
-_client 
-= 
-new 
+SmtpClient 
+_client "
+;" #
+private 
+readonly 
+log4net  
+.  !
+ILog! %
+_logger& -
+=. /
+log4net0 7
+.7 8
 
-SmtpClient $
-($ %
-)% &
-;& '
-_client 
-. 
-Connect 
-( 
-$str ,
-,, -
-$num. 1
-,1 2
-false3 8
-)8 9
-;9 :
-var 
-sender 
-= 
-new 
-MailboxAddress +
-(+ ,
-$str, G
-,G H
-$strI [
-)[ \
-;\ ]
-_content 
-. 
-From 
-. 
-Add 
-( 
-sender $
-)$ %
-;% &
-_sender 
-= 
-new 
-MailboxAddress (
-(( )
-$str) 9
-,9 :
-$str; V
-)V W
-;W X
-_client 
-. 
-Authenticate  
-(  !
-$str! <
-,< =
-$str> P
-)P Q
-;Q R
-} 	
-public 
-void 
-SetReceiver 
-(  
-string  &
-name' +
-,+ ,
-string- 3
-emailAddress4 @
-)@ A
-{ 	
-	_receiver 
-= 
-new 
-MailboxAddress *
-(* +
-name+ /
-,/ 0
-emailAddress1 =
-)= >
-;> ?
-_content 
-. 
-To 
-. 
-Add 
-( 
-	_receiver %
-)% &
-;& '
-} 	
-public!! 
-void!! 
+LogManager8 B
+.B C
+	GetLoggerC L
+(L M
+$strM ^
+)^ _
+;_ `
+public 
+MailTemplate 
+( 
+) 
+{ 	
+_message 
+= 
+new 
+TextPart #
+(# $
+$str$ +
+)+ ,
+;, -
+_content 
+= 
+new 
+MimeMessage &
+(& '
+)' (
+;( )
+_client 
+= 
+new 
 
-SetMessage!! 
-(!! 
-string!! %
-subject!!& -
-,!!- .
-string!!/ 5
-message!!6 =
-)!!= >
-{"" 	
-_message## 
-.## 
-Text## 
-=## 
-message## #
-;### $
-_subject$$ 
-=$$ 
-subject$$ 
-;$$ 
-_content%% 
-.%% 
-Body%% 
-=%% 
-_message%% $
-;%%$ %
-_content&& 
-.&& 
-Subject&& 
-=&& 
-subject&& &
-;&&& '
-}'' 	
-public)) 
-void)) 
-Send)) 
-()) 
-))) 
-{** 	
-_client++ 
-.++ 
-Send++ 
-(++ 
-_content++ !
-)++! "
-;++" #
-_client,, 
-.,, 
+SmtpClient $
+($ %
+)% &
+;& '
+var 
+sender 
+= 
+new 
+MailboxAddress +
+(+ ,
+$str, G
+,G H
+$strI [
+)[ \
+;\ ]
+_content 
+. 
+From 
+. 
+Add 
+( 
+sender $
+)$ %
+;% &
+_sender 
+= 
+new 
+MailboxAddress (
+(( )
+$str) 9
+,9 :
+$str; V
+)V W
+;W X
+} 	
+public%% 
+void%% 
+SetReceiver%% 
+(%%  
+string%%  &
+name%%' +
+,%%+ ,
+string%%- 3
+emailAddress%%4 @
+)%%@ A
+{&& 	
+	_receiver'' 
+='' 
+new'' 
+MailboxAddress'' *
+(''* +
+name''+ /
+,''/ 0
+emailAddress''1 =
+)''= >
+;''> ?
+_content(( 
+.(( 
+To(( 
+.(( 
+Add(( 
+((( 
+	_receiver(( %
+)((% &
+;((& '
+})) 	
+public00 
+void00 
 
-Disconnect,, 
-(,, 
-true,, #
-),,# $
-;,,$ %
-}-- 	
-}.. 
-}// 
+SetMessage00 
+(00 
+string00 %
+subject00& -
+,00- .
+string00/ 5
+message006 =
+)00= >
+{11 	
+_message22 
+.22 
+Text22 
+=22 
+message22 #
+;22# $
+_subject33 
+=33 
+subject33 
+;33 
+_content44 
+.44 
+Body44 
+=44 
+_message44 $
+;44$ %
+_content55 
+.55 
+Subject55 
+=55 
+subject55 &
+;55& '
+}66 	
+public;; 
+void;; 
+Send;; 
+(;; 
+);; 
+{<< 	
+_client== 
+.== 
+Connect== 
+(== 
+$str== ,
+,==, -
+$num==. 1
+,==1 2
+false==3 8
+)==8 9
+;==9 :
+_client>> 
+.>> 
+Authenticate>>  
+(>>  !
+$str>>! <
+,>>< =
+$str>>> P
+)>>P Q
+;>>Q R
+_client?? 
+.?? 
+Send?? 
+(?? 
+_content?? !
+)??! "
+;??" #
+_client@@ 
+.@@ 
+
+Disconnect@@ 
+(@@ 
+true@@ #
+)@@# $
+;@@$ %
+}AA 	
+}BB 
+}CC 

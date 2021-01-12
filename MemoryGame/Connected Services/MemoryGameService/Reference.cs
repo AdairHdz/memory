@@ -16,51 +16,25 @@ namespace MemoryGame.MemoryGameService {
     public interface IAccessibilityService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/IsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/IsVerifiedResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/IsVerifiedDatabaseConnectionLostFaultFau" +
-            "lt", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool IsVerified(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/IsVerified", ReplyAction="http://tempuri.org/IAccessibilityService/IsVerifiedResponse")]
         System.Threading.Tasks.Task<bool> IsVerifiedAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ItsRegistered", ReplyAction="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/ItsRegisteredDatabaseConnectionLostFault" +
-            "Fault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool ItsRegistered(string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/ItsRegistered", ReplyAction="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse")]
         System.Threading.Tasks.Task<bool> ItsRegisteredAsync(string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress", ReplyAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressNonExistentUserFaultF" +
-            "ault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressDatabaseConnectionLos" +
-            "tFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         string GetUserEmailAddress(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress", ReplyAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse")]
         System.Threading.Tasks.Task<string> GetUserEmailAddressAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetUsernameNonExistentUserFaultFault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/GetUsernameDatabaseConnectionLostFaultFa" +
-            "ult", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
-        string GetUsername(string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
-        System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsNonExistentUserFault" +
-            "Fault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsDatabaseConnectionLo" +
-            "stFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
-        MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO GetPlayerCredentials(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials", ReplyAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse")]
-        System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO> GetPlayerCredentialsAsync(string username);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetSalt", ReplyAction="http://tempuri.org/IAccessibilityService/GetSaltResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.NonExistentUserFault), Action="http://tempuri.org/IAccessibilityService/GetSaltNonExistentUserFaultFault", Name="NonExistentUserFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         string GetSalt(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetSalt", ReplyAction="http://tempuri.org/IAccessibilityService/GetSaltResponse")]
@@ -71,6 +45,12 @@ namespace MemoryGame.MemoryGameService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/HasAccessRights", ReplyAction="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse")]
         System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
+        string GetUsername(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccessibilityService/GetUsername", ReplyAction="http://tempuri.org/IAccessibilityService/GetUsernameResponse")]
+        System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -124,22 +104,6 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.GetUserEmailAddressAsync(username);
         }
         
-        public string GetUsername(string emailAddress) {
-            return base.Channel.GetUsername(emailAddress);
-        }
-        
-        public System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress) {
-            return base.Channel.GetUsernameAsync(emailAddress);
-        }
-        
-        public MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO GetPlayerCredentials(string username) {
-            return base.Channel.GetPlayerCredentials(username);
-        }
-        
-        public System.Threading.Tasks.Task<MemoryGame.MemoryGameService.DataTransferObjects.PlayerCredentialsDTO> GetPlayerCredentialsAsync(string username) {
-            return base.Channel.GetPlayerCredentialsAsync(username);
-        }
-        
         public string GetSalt(string username) {
             return base.Channel.GetSalt(username);
         }
@@ -155,6 +119,14 @@ namespace MemoryGame.MemoryGameService {
         public System.Threading.Tasks.Task<bool> HasAccessRightsAsync(string username, string password) {
             return base.Channel.HasAccessRightsAsync(username, password);
         }
+        
+        public string GetUsername(string emailAddress) {
+            return base.Channel.GetUsername(emailAddress);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetUsernameAsync(string emailAddress) {
+            return base.Channel.GetUsernameAsync(emailAddress);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -162,8 +134,6 @@ namespace MemoryGame.MemoryGameService {
     public interface ICardDeckRetrieverService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.CardDeckRetrievingFault), Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsCardDeckRetrievin" +
-            "gFaultFault", Name="CardDeckRetrievingFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         MemoryGame.MemoryGameService.DataTransferObjects.CardDeckDTO GetCardDeckAndCards(int cardDeckId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards", ReplyAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse")]
@@ -225,16 +195,12 @@ namespace MemoryGame.MemoryGameService {
     public interface IAccountModifiabilityService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordDatabaseConnectionL" +
-            "ostFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool SetNewPassword(MemoryGame.MemoryGameService.DataTransferObjects.PasswordModificationCredentialsDto passwordModificationCredentials);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword", ReplyAction="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse")]
         System.Threading.Tasks.Task<bool> SetNewPasswordAsync(MemoryGame.MemoryGameService.DataTransferObjects.PasswordModificationCredentialsDto passwordModificationCredentials);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MemoryGame.MemoryGameService.Faults.DatabaseConnectionLostFault), Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameDatabaseConnectionL" +
-            "ostFaultFault", Name="DatabaseConnectionLostFault", Namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults")]
         bool ChangeUsername(string emailAddress, string newUsername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername", ReplyAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse")]
@@ -295,19 +261,29 @@ namespace MemoryGame.MemoryGameService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/SetAccountAsVerified", ReplyAction="http://tempuri.org/IAccountVerificationService/SetAccountAsVerifiedResponse")]
         System.Threading.Tasks.Task<bool> SetAccountAsVerifiedAsync(string emailAddress);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/AssignNewVerificationToken", ReplyAction="http://tempuri.org/IAccountVerificationService/AssignNewVerificationTokenResponse" +
-            "")]
-        bool AssignNewVerificationToken(string emailAddress, string verificationToken);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/AssignNewActivationToken", ReplyAction="http://tempuri.org/IAccountVerificationService/AssignNewActivationTokenResponse")]
+        bool AssignNewActivationToken(string emailAddress, string activationToken);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/AssignNewVerificationToken", ReplyAction="http://tempuri.org/IAccountVerificationService/AssignNewVerificationTokenResponse" +
-            "")]
-        System.Threading.Tasks.Task<bool> AssignNewVerificationTokenAsync(string emailAddress, string verificationToken);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/AssignNewActivationToken", ReplyAction="http://tempuri.org/IAccountVerificationService/AssignNewActivationTokenResponse")]
+        System.Threading.Tasks.Task<bool> AssignNewActivationTokenAsync(string emailAddress, string activationToken);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/VerifyToken", ReplyAction="http://tempuri.org/IAccountVerificationService/VerifyTokenResponse")]
-        bool VerifyToken(string emailAddress, string verificationToken);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/AssignNewRecoveryToken", ReplyAction="http://tempuri.org/IAccountVerificationService/AssignNewRecoveryTokenResponse")]
+        bool AssignNewRecoveryToken(string emailAddress, string recoveryToken);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/VerifyToken", ReplyAction="http://tempuri.org/IAccountVerificationService/VerifyTokenResponse")]
-        System.Threading.Tasks.Task<bool> VerifyTokenAsync(string emailAddress, string verificationToken);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/AssignNewRecoveryToken", ReplyAction="http://tempuri.org/IAccountVerificationService/AssignNewRecoveryTokenResponse")]
+        System.Threading.Tasks.Task<bool> AssignNewRecoveryTokenAsync(string emailAddress, string recoveryToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/VerifyActivationToken", ReplyAction="http://tempuri.org/IAccountVerificationService/VerifyActivationTokenResponse")]
+        bool VerifyActivationToken(string emailAddress, string activationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/VerifyActivationToken", ReplyAction="http://tempuri.org/IAccountVerificationService/VerifyActivationTokenResponse")]
+        System.Threading.Tasks.Task<bool> VerifyActivationTokenAsync(string emailAddress, string activationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/VerifyRecoveryToken", ReplyAction="http://tempuri.org/IAccountVerificationService/VerifyRecoveryTokenResponse")]
+        bool VerifyRecoveryToken(string emailAddress, string activationToken);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountVerificationService/VerifyRecoveryToken", ReplyAction="http://tempuri.org/IAccountVerificationService/VerifyRecoveryTokenResponse")]
+        System.Threading.Tasks.Task<bool> VerifyRecoveryTokenAsync(string emailAddress, string activationToken);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -345,20 +321,36 @@ namespace MemoryGame.MemoryGameService {
             return base.Channel.SetAccountAsVerifiedAsync(emailAddress);
         }
         
-        public bool AssignNewVerificationToken(string emailAddress, string verificationToken) {
-            return base.Channel.AssignNewVerificationToken(emailAddress, verificationToken);
+        public bool AssignNewActivationToken(string emailAddress, string activationToken) {
+            return base.Channel.AssignNewActivationToken(emailAddress, activationToken);
         }
         
-        public System.Threading.Tasks.Task<bool> AssignNewVerificationTokenAsync(string emailAddress, string verificationToken) {
-            return base.Channel.AssignNewVerificationTokenAsync(emailAddress, verificationToken);
+        public System.Threading.Tasks.Task<bool> AssignNewActivationTokenAsync(string emailAddress, string activationToken) {
+            return base.Channel.AssignNewActivationTokenAsync(emailAddress, activationToken);
         }
         
-        public bool VerifyToken(string emailAddress, string verificationToken) {
-            return base.Channel.VerifyToken(emailAddress, verificationToken);
+        public bool AssignNewRecoveryToken(string emailAddress, string recoveryToken) {
+            return base.Channel.AssignNewRecoveryToken(emailAddress, recoveryToken);
         }
         
-        public System.Threading.Tasks.Task<bool> VerifyTokenAsync(string emailAddress, string verificationToken) {
-            return base.Channel.VerifyTokenAsync(emailAddress, verificationToken);
+        public System.Threading.Tasks.Task<bool> AssignNewRecoveryTokenAsync(string emailAddress, string recoveryToken) {
+            return base.Channel.AssignNewRecoveryTokenAsync(emailAddress, recoveryToken);
+        }
+        
+        public bool VerifyActivationToken(string emailAddress, string activationToken) {
+            return base.Channel.VerifyActivationToken(emailAddress, activationToken);
+        }
+        
+        public System.Threading.Tasks.Task<bool> VerifyActivationTokenAsync(string emailAddress, string activationToken) {
+            return base.Channel.VerifyActivationTokenAsync(emailAddress, activationToken);
+        }
+        
+        public bool VerifyRecoveryToken(string emailAddress, string activationToken) {
+            return base.Channel.VerifyRecoveryToken(emailAddress, activationToken);
+        }
+        
+        public System.Threading.Tasks.Task<bool> VerifyRecoveryTokenAsync(string emailAddress, string activationToken) {
+            return base.Channel.VerifyRecoveryTokenAsync(emailAddress, activationToken);
         }
     }
     
@@ -561,10 +553,10 @@ namespace MemoryGame.MemoryGameService {
     public interface IMailingService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendVerificationToken", ReplyAction="http://tempuri.org/IMailingService/SendVerificationTokenResponse")]
-        void SendVerificationToken(MemoryGame.MemoryGameService.DataTransferObjects.VerificationTokenInfoDto verificationTokenInfo);
+        void SendVerificationToken(MemoryGame.MemoryGameService.DataTransferObjects.TokenInfoDto verificationTokenInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMailingService/SendVerificationToken", ReplyAction="http://tempuri.org/IMailingService/SendVerificationTokenResponse")]
-        System.Threading.Tasks.Task SendVerificationTokenAsync(MemoryGame.MemoryGameService.DataTransferObjects.VerificationTokenInfoDto verificationTokenInfo);
+        System.Threading.Tasks.Task SendVerificationTokenAsync(MemoryGame.MemoryGameService.DataTransferObjects.TokenInfoDto verificationTokenInfo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -594,11 +586,11 @@ namespace MemoryGame.MemoryGameService {
                 base(binding, remoteAddress) {
         }
         
-        public void SendVerificationToken(MemoryGame.MemoryGameService.DataTransferObjects.VerificationTokenInfoDto verificationTokenInfo) {
+        public void SendVerificationToken(MemoryGame.MemoryGameService.DataTransferObjects.TokenInfoDto verificationTokenInfo) {
             base.Channel.SendVerificationToken(verificationTokenInfo);
         }
         
-        public System.Threading.Tasks.Task SendVerificationTokenAsync(MemoryGame.MemoryGameService.DataTransferObjects.VerificationTokenInfoDto verificationTokenInfo) {
+        public System.Threading.Tasks.Task SendVerificationTokenAsync(MemoryGame.MemoryGameService.DataTransferObjects.TokenInfoDto verificationTokenInfo) {
             return base.Channel.SendVerificationTokenAsync(verificationTokenInfo);
         }
     }

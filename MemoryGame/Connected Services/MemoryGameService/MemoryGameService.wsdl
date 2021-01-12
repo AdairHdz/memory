@@ -380,8 +380,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
@@ -392,17 +392,11 @@
   <wsdl:message name="IAccessibilityService_IsVerified_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsVerifiedResponse" />
   </wsdl:message>
-  <wsdl:message name="IAccessibilityService_IsVerified_DatabaseConnectionLostFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q1:DatabaseConnectionLostFault" />
-  </wsdl:message>
   <wsdl:message name="IAccessibilityService_ItsRegistered_InputMessage">
     <wsdl:part name="parameters" element="tns:ItsRegistered" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_ItsRegistered_OutputMessage">
     <wsdl:part name="parameters" element="tns:ItsRegisteredResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_ItsRegistered_DatabaseConnectionLostFaultFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q2:DatabaseConnectionLostFault" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetUserEmailAddress_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUserEmailAddress" />
@@ -410,41 +404,14 @@
   <wsdl:message name="IAccessibilityService_GetUserEmailAddress_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserEmailAddressResponse" />
   </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetUserEmailAddress_NonExistentUserFaultFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q3:NonExistentUserFault" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetUserEmailAddress_DatabaseConnectionLostFaultFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q4:DatabaseConnectionLostFault" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetUsername_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetUsername" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetUsername_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetUsernameResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetUsername_NonExistentUserFaultFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q5:NonExistentUserFault" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetUsername_DatabaseConnectionLostFaultFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q6:DatabaseConnectionLostFault" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetPlayerCredentials_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayerCredentials" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetPlayerCredentials_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayerCredentialsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetPlayerCredentials_NonExistentUserFaultFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q7:NonExistentUserFault" />
-  </wsdl:message>
-  <wsdl:message name="IAccessibilityService_GetPlayerCredentials_DatabaseConnectionLostFaultFault_FaultMessage">
-    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q8:DatabaseConnectionLostFault" />
-  </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetSalt_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSalt" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_GetSalt_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSaltResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetSalt_NonExistentUserFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q1:NonExistentUserFault" />
   </wsdl:message>
   <wsdl:message name="IAccessibilityService_HasAccessRights_InputMessage">
     <wsdl:part name="parameters" element="tns:HasAccessRights" />
@@ -452,14 +419,17 @@
   <wsdl:message name="IAccessibilityService_HasAccessRights_OutputMessage">
     <wsdl:part name="parameters" element="tns:HasAccessRightsResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsername" />
+  </wsdl:message>
+  <wsdl:message name="IAccessibilityService_GetUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsernameResponse" />
+  </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDeckAndCards" />
   </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDeckAndCardsResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICardDeckRetrieverService_GetCardDeckAndCards_CardDeckRetrievingFaultFault_FaultMessage">
-    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q9:CardDeckRetrievingFault" />
   </wsdl:message>
   <wsdl:message name="ICardDeckRetrieverService_GetCardDecksInfo_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCardDecksInfo" />
@@ -473,17 +443,11 @@
   <wsdl:message name="IAccountModifiabilityService_SetNewPassword_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetNewPasswordResponse" />
   </wsdl:message>
-  <wsdl:message name="IAccountModifiabilityService_SetNewPassword_DatabaseConnectionLostFaultFault_FaultMessage">
-    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q10:DatabaseConnectionLostFault" />
-  </wsdl:message>
   <wsdl:message name="IAccountModifiabilityService_ChangeUsername_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangeUsername" />
   </wsdl:message>
   <wsdl:message name="IAccountModifiabilityService_ChangeUsername_OutputMessage">
     <wsdl:part name="parameters" element="tns:ChangeUsernameResponse" />
-  </wsdl:message>
-  <wsdl:message name="IAccountModifiabilityService_ChangeUsername_DatabaseConnectionLostFaultFault_FaultMessage">
-    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q11:DatabaseConnectionLostFault" />
   </wsdl:message>
   <wsdl:message name="IAccountVerificationService_SetAccountAsVerified_InputMessage">
     <wsdl:part name="parameters" element="tns:SetAccountAsVerified" />
@@ -491,17 +455,29 @@
   <wsdl:message name="IAccountVerificationService_SetAccountAsVerified_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetAccountAsVerifiedResponse" />
   </wsdl:message>
-  <wsdl:message name="IAccountVerificationService_AssignNewVerificationToken_InputMessage">
-    <wsdl:part name="parameters" element="tns:AssignNewVerificationToken" />
+  <wsdl:message name="IAccountVerificationService_AssignNewActivationToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssignNewActivationToken" />
   </wsdl:message>
-  <wsdl:message name="IAccountVerificationService_AssignNewVerificationToken_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AssignNewVerificationTokenResponse" />
+  <wsdl:message name="IAccountVerificationService_AssignNewActivationToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssignNewActivationTokenResponse" />
   </wsdl:message>
-  <wsdl:message name="IAccountVerificationService_VerifyToken_InputMessage">
-    <wsdl:part name="parameters" element="tns:VerifyToken" />
+  <wsdl:message name="IAccountVerificationService_AssignNewRecoveryToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssignNewRecoveryToken" />
   </wsdl:message>
-  <wsdl:message name="IAccountVerificationService_VerifyToken_OutputMessage">
-    <wsdl:part name="parameters" element="tns:VerifyTokenResponse" />
+  <wsdl:message name="IAccountVerificationService_AssignNewRecoveryToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssignNewRecoveryTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_VerifyActivationToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyActivationToken" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_VerifyActivationToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyActivationTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_VerifyRecoveryToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyRecoveryToken" />
+  </wsdl:message>
+  <wsdl:message name="IAccountVerificationService_VerifyRecoveryToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyRecoveryTokenResponse" />
   </wsdl:message>
   <wsdl:message name="ICommunicationService_SubscribeToCommunicationService_InputMessage">
     <wsdl:part name="parameters" element="tns:SubscribeToCommunicationService" />
@@ -573,7 +549,7 @@
     <wsdl:part name="parameters" element="tns:CanJoinResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchDiscoveryService_CanJoin_MatchAccessDeniedFaultFault_FaultMessage">
-    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q12:MatchAccessDeniedFault" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.Faults" name="detail" element="q2:MatchAccessDeniedFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_NotifyCardWasUncoveredd_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyCardWasUncoveredd" />
@@ -666,45 +642,33 @@
     <wsdl:operation name="IsVerified">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerified" message="tns:IAccessibilityService_IsVerified_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerifiedResponse" message="tns:IAccessibilityService_IsVerified_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/IsVerifiedDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_IsVerified_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ItsRegistered">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegistered" message="tns:IAccessibilityService_ItsRegistered_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegisteredResponse" message="tns:IAccessibilityService_ItsRegistered_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/ItsRegisteredDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_ItsRegistered_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUserEmailAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddress" message="tns:IAccessibilityService_GetUserEmailAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressResponse" message="tns:IAccessibilityService_GetUserEmailAddress_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetUserEmailAddress_NonExistentUserFaultFault_FaultMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetUserEmailAddressDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_GetUserEmailAddress_DatabaseConnectionLostFaultFault_FaultMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetUsername">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsername" message="tns:IAccessibilityService_GetUsername_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameResponse" message="tns:IAccessibilityService_GetUsername_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetUsername_NonExistentUserFaultFault_FaultMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_GetUsername_DatabaseConnectionLostFaultFault_FaultMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetPlayerCredentials">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentials" message="tns:IAccessibilityService_GetPlayerCredentials_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsResponse" message="tns:IAccessibilityService_GetPlayerCredentials_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetPlayerCredentials_NonExistentUserFaultFault_FaultMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetPlayerCredentialsDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccessibilityService_GetPlayerCredentials_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetSalt">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetSalt" message="tns:IAccessibilityService_GetSalt_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetSaltResponse" message="tns:IAccessibilityService_GetSalt_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAccessibilityService/GetSaltNonExistentUserFaultFault" name="NonExistentUserFaultFault" message="tns:IAccessibilityService_GetSalt_NonExistentUserFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="HasAccessRights">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRights" message="tns:IAccessibilityService_HasAccessRights_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/HasAccessRightsResponse" message="tns:IAccessibilityService_HasAccessRights_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsername" message="tns:IAccessibilityService_GetUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccessibilityService/GetUsernameResponse" message="tns:IAccessibilityService_GetUsername_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICardDeckRetrieverService">
     <wsdl:operation name="GetCardDeckAndCards">
       <wsdl:input wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCards" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsResponse" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDeckAndCardsCardDeckRetrievingFaultFault" name="CardDeckRetrievingFaultFault" message="tns:ICardDeckRetrieverService_GetCardDeckAndCards_CardDeckRetrievingFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCardDecksInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/ICardDeckRetrieverService/GetCardDecksInfo" message="tns:ICardDeckRetrieverService_GetCardDecksInfo_InputMessage" />
@@ -715,12 +679,10 @@
     <wsdl:operation name="SetNewPassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountModifiabilityService/SetNewPassword" message="tns:IAccountModifiabilityService_SetNewPassword_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordResponse" message="tns:IAccountModifiabilityService_SetNewPassword_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccountModifiabilityService/SetNewPasswordDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccountModifiabilityService_SetNewPassword_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ChangeUsername">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsername" message="tns:IAccountModifiabilityService_ChangeUsername_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameResponse" message="tns:IAccountModifiabilityService_ChangeUsername_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IAccountModifiabilityService/ChangeUsernameDatabaseConnectionLostFaultFault" name="DatabaseConnectionLostFaultFault" message="tns:IAccountModifiabilityService_ChangeUsername_DatabaseConnectionLostFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAccountVerificationService">
@@ -728,13 +690,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/SetAccountAsVerified" message="tns:IAccountVerificationService_SetAccountAsVerified_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/SetAccountAsVerifiedResponse" message="tns:IAccountVerificationService_SetAccountAsVerified_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AssignNewVerificationToken">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/AssignNewVerificationToken" message="tns:IAccountVerificationService_AssignNewVerificationToken_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/AssignNewVerificationTokenResponse" message="tns:IAccountVerificationService_AssignNewVerificationToken_OutputMessage" />
+    <wsdl:operation name="AssignNewActivationToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/AssignNewActivationToken" message="tns:IAccountVerificationService_AssignNewActivationToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/AssignNewActivationTokenResponse" message="tns:IAccountVerificationService_AssignNewActivationToken_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="VerifyToken">
-      <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyToken" message="tns:IAccountVerificationService_VerifyToken_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyTokenResponse" message="tns:IAccountVerificationService_VerifyToken_OutputMessage" />
+    <wsdl:operation name="AssignNewRecoveryToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/AssignNewRecoveryToken" message="tns:IAccountVerificationService_AssignNewRecoveryToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/AssignNewRecoveryTokenResponse" message="tns:IAccountVerificationService_AssignNewRecoveryToken_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyActivationToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyActivationToken" message="tns:IAccountVerificationService_VerifyActivationToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyActivationTokenResponse" message="tns:IAccountVerificationService_VerifyActivationToken_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRecoveryToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyRecoveryToken" message="tns:IAccountVerificationService_VerifyRecoveryToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountVerificationService/VerifyRecoveryTokenResponse" message="tns:IAccountVerificationService_VerifyRecoveryToken_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType msc:usingSession="true" name="ICommunicationService">
@@ -895,9 +865,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="DatabaseConnectionLostFaultFault">
-        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ItsRegistered">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/ItsRegistered" style="document" />
@@ -907,9 +874,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="DatabaseConnectionLostFaultFault">
-        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetUserEmailAddress">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetUserEmailAddress" style="document" />
@@ -919,42 +883,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="NonExistentUserFaultFault">
-        <soap12:fault use="literal" name="NonExistentUserFaultFault" namespace="" />
-      </wsdl:fault>
-      <wsdl:fault name="DatabaseConnectionLostFaultFault">
-        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="GetUsername">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetUsername" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="NonExistentUserFaultFault">
-        <soap12:fault use="literal" name="NonExistentUserFaultFault" namespace="" />
-      </wsdl:fault>
-      <wsdl:fault name="DatabaseConnectionLostFaultFault">
-        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="GetPlayerCredentials">
-      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetPlayerCredentials" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="NonExistentUserFaultFault">
-        <soap12:fault use="literal" name="NonExistentUserFaultFault" namespace="" />
-      </wsdl:fault>
-      <wsdl:fault name="DatabaseConnectionLostFaultFault">
-        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetSalt">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetSalt" style="document" />
@@ -964,9 +892,21 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="NonExistentUserFaultFault">
+        <soap12:fault use="literal" name="NonExistentUserFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="HasAccessRights">
       <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/HasAccessRights" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsername">
+      <soap12:operation soapAction="http://tempuri.org/IAccessibilityService/GetUsername" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -986,9 +926,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="CardDeckRetrievingFaultFault">
-        <soap12:fault use="literal" name="CardDeckRetrievingFaultFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetCardDecksInfo">
       <soap12:operation soapAction="http://tempuri.org/ICardDeckRetrieverService/GetCardDecksInfo" style="document" />
@@ -1011,9 +948,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="DatabaseConnectionLostFaultFault">
-        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ChangeUsername">
       <soap12:operation soapAction="http://tempuri.org/IAccountModifiabilityService/ChangeUsername" style="document" />
@@ -1023,9 +957,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="DatabaseConnectionLostFaultFault">
-        <soap12:fault use="literal" name="DatabaseConnectionLostFaultFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IAccountVerificationService" type="tns:IAccountVerificationService">
@@ -1040,8 +971,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AssignNewVerificationToken">
-      <soap12:operation soapAction="http://tempuri.org/IAccountVerificationService/AssignNewVerificationToken" style="document" />
+    <wsdl:operation name="AssignNewActivationToken">
+      <soap12:operation soapAction="http://tempuri.org/IAccountVerificationService/AssignNewActivationToken" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1049,8 +980,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="VerifyToken">
-      <soap12:operation soapAction="http://tempuri.org/IAccountVerificationService/VerifyToken" style="document" />
+    <wsdl:operation name="AssignNewRecoveryToken">
+      <soap12:operation soapAction="http://tempuri.org/IAccountVerificationService/AssignNewRecoveryToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyActivationToken">
+      <soap12:operation soapAction="http://tempuri.org/IAccountVerificationService/VerifyActivationToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyRecoveryToken">
+      <soap12:operation soapAction="http://tempuri.org/IAccountVerificationService/VerifyRecoveryToken" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

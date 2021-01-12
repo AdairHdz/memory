@@ -15,7 +15,6 @@ namespace MemoryGame
         private string _username;
         private string _newToken;
         private MemoryGameService.AccountVerificationServiceClient _accountVerificationServiceClient;
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("ActivationToken.xaml.cs");
 
         public ActivationToken(string emailAddress, string username)
         {
@@ -31,19 +30,16 @@ namespace MemoryGame
             {
                 VerifyAccount();
             }
-            catch (TimeoutException timeoutException)
+            catch (TimeoutException)
             {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (EndpointNotFoundException endpointNotFoundException)
+            catch (EndpointNotFoundException)
             {
-                _logger.Fatal(endpointNotFoundException);
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
@@ -82,9 +78,8 @@ namespace MemoryGame
             if (token == "")
             {
                 return false;
-            }
-            
-            return _accountVerificationServiceClient.VerifyToken(_emailAddress, token);
+            }            
+            return _accountVerificationServiceClient.VerifyActivationToken(_emailAddress, token);
         }
 
         private bool AccountWasSuccessfullyVerified()
@@ -97,9 +92,8 @@ namespace MemoryGame
             try
             {
                 GenerateNewToken();
-                bool newTokenWasAssigned = AssignNewVerificationToken();
-
-                if (newTokenWasAssigned)
+                
+                if (AssignNewVerificationToken())
                 {
                     SendNewVerificationToken();
                     MessageBox.Show(Properties.Langs.Resources.NewCodeSentMessage);
@@ -121,36 +115,33 @@ namespace MemoryGame
 
         private void GenerateNewToken()
         {
-            string newToken = TokenManager.GenerateVerificationToken();
+            string newToken = TokenManager.GenerateToken();
             _newToken = newToken;
         }
 
         private bool AssignNewVerificationToken()
         {
             bool newVerificationTokenWasAssignedSuccessfully =
-                _accountVerificationServiceClient.AssignNewVerificationToken(_emailAddress, _newToken);
+                _accountVerificationServiceClient.AssignNewActivationToken(_emailAddress, _newToken);
 
             return newVerificationTokenWasAssignedSuccessfully;
         }
 
         private void SendNewVerificationToken()
         {
-            VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+            TokenInfoDto verificationTokenInfo = new TokenInfoDto()
             {
                 Name = _username,
                 EmailAddress = _emailAddress,
-                VerificationToken = _newToken
+                Token = _newToken,
+                Subject = Properties.Langs.Resources.Welcome,
+                Body = Properties.Langs.Resources.VerificationToken
             };
 
-            TokenManager.SendVerificationToken(verificationTokenInfo);            
+            TokenManager.SendToken(verificationTokenInfo);            
         }
 
         private void BackButtonClicked(object sender, RoutedEventArgs e)
-        {
-            GoToMainWindow();
-        }
-
-        private void GoToMainWindow()
         {
             MainWindow mainWindowView = new MainWindow();
             mainWindowView.Show();

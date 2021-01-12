@@ -7,6 +7,7 @@ namespace MemoryGameService.Services
     /// <summary>
     /// The <c>MemoryGame</c> service.
     /// Is the main service class and contains the list with all the matches in the game.
+    /// </summary>
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
         ConcurrencyMode = ConcurrencyMode.Single)]
     public partial class MemoryGameService

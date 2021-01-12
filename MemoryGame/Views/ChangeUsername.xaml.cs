@@ -18,7 +18,6 @@ namespace MemoryGame
         private string _newUsername;
         private string _oldUsername;
         private RuleSet _ruleSet;
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("ChangeUsername.xaml.cs");
         public ChangeUsername()
         {
             InitializeComponent();
@@ -38,15 +37,15 @@ namespace MemoryGame
         {
             if (string.IsNullOrEmpty(TextBoxNewUsername.Text))
             {
-                TextBoxNewUsername.Visibility = System.Windows.Visibility.Collapsed;
-                waterMarkText.Visibility = System.Windows.Visibility.Visible;
+                TextBoxNewUsername.Visibility = Visibility.Collapsed;
+                waterMarkText.Visibility = Visibility.Visible;
             }
         }
 
         private void waterMarkText_GotFocus(object sender, RoutedEventArgs e)
         {
-            waterMarkText.Visibility = System.Windows.Visibility.Collapsed;
-            TextBoxNewUsername.Visibility = System.Windows.Visibility.Visible;
+            waterMarkText.Visibility = Visibility.Collapsed;
+            TextBoxNewUsername.Visibility = Visibility.Visible;
             TextBoxNewUsername.Focus();
         }
 
@@ -68,19 +67,16 @@ namespace MemoryGame
                     SetNewUsername();
 
                 }
-                catch (TimeoutException timeoutException)
+                catch (TimeoutException)
                 {
-                    _logger.Fatal(timeoutException);
                     MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
                 }
-                catch (EndpointNotFoundException endpointNotFoundException)
+                catch (EndpointNotFoundException)
                 {
-                    _logger.Fatal(endpointNotFoundException);
                     MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
                 }
-                catch (CommunicationException communicationException)
+                catch (CommunicationException)
                 {
-                    _logger.Fatal(communicationException);
                     MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
                 }
             }
@@ -128,9 +124,9 @@ namespace MemoryGame
         }
 
         private bool UserNameWasChangedSuccessfully()
-        {            
-            MemoryGameService.AccountModifiabilityServiceClient accountModifiabilityServiceClient =
-                new MemoryGameService.AccountModifiabilityServiceClient();
+        {
+            AccountModifiabilityServiceClient accountModifiabilityServiceClient =
+                new AccountModifiabilityServiceClient();
 
             return accountModifiabilityServiceClient.ChangeUsername(_userEmailAddress, _newUsername);            
         }

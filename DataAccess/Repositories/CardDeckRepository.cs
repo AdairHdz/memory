@@ -29,11 +29,7 @@ namespace DataAccess.Repositories
         /// <param name="context">The DbContext that the <c>CardDeckRepository</c> will work with.</param>
         public CardDeckRepository(DbContext context) : base(context) { }
 
-        /// <summary>
-        /// Retrieves the <c>CardDeck</c> entity with the specified cardDeckId and its associated <c>Card</c> entities.
-        /// </summary>
-        /// <param name="cardDeckId">The primary key of the card deck that you want to get.</param>
-        /// <returns>The <c>CardDeck</c> entity with the specified cardDeckId and its associated <c>Card</c> entities</returns>
+        /// <inheritdoc/>
         public CardDeck GetCardDeckAndCards(int cardDeckId)
         {
             IEnumerable<CardDeck> cardDecksRetrieved = MemoryGameContext.CardDecks.Include("Cards")

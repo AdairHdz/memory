@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
-    // <summary>
+    /// <summary>
     /// The <c>Match</c> class
     /// It is an entity that stores data of a Match in the database.
     /// </summary>
@@ -34,6 +34,10 @@ namespace DataAccess.Entities
         /// Associated CardDeck identifier.
         /// </summary>
         public int CardDeckId { get; set; }
+
+        /// <summary>
+        /// Navegability attribute to CarDeck.
+        /// </summary>
         [ForeignKey("CardDeckId")]
         public virtual CardDeck CardDeck { get; set; }
 
@@ -41,6 +45,10 @@ namespace DataAccess.Entities
         /// Winning player identifier.
         /// </summary>
         public string EmailAddress { get; set; }
+
+        /// <summary>
+        /// Navegability attribute to Player.
+        /// </summary>
         [ForeignKey("EmailAddress")]
         public virtual Player Winner { get; set; }
     }

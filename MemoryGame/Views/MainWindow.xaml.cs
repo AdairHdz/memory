@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 
 namespace MemoryGame
 {
@@ -7,10 +8,25 @@ namespace MemoryGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("MainWindow.xaml.cs");
         public MainWindow()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Properties.Settings.Default.LanguageSettings);
+            LoadCultureInfo();
             InitializeComponent();
+        }
+
+        private void LoadCultureInfo()
+        {
+            try
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.LanguageSettings);
+            }
+            catch (CultureNotFoundException)
+            {
+                _logger.Fatal("There was a problem while loading the culture resources");
+                this.Close();
+            }
+            
         }
 
         private void GetRegisteredButtonClicked(object sender, RoutedEventArgs e)
@@ -19,8 +35,6 @@ namespace MemoryGame
             registerView.Show();
             this.Close();
         }
-
-
 
         private void ConfigurationButtonClicked(object sender, RoutedEventArgs e)
         {

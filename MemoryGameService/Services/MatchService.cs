@@ -5,71 +5,16 @@ using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
+using System.Data.SqlClient;
 using System.ServiceModel;
 
 namespace MemoryGameService.Services
 {
-    /// <summary>
-    /// The <c>Match</c> service.
-    /// Is used to register a new player in the database of the game.
-    /// The operations it contains are:
-    /// <list type="bullet">
-    /// <item>
-    /// <term>EnterMatch</term>
-    /// <description>Add the players to a list of coneccted players.</description>
-    /// </item>
-    /// <item>
-    /// <term>GetPlayersConnectedToMatch</term>
-    /// <description>Gets a list of the players connected in the game.</description>
-    /// </item>
-    /// <item>
-    /// <term>NotifyCardWasUncoveredd</term>
-    /// <description>Flips a card clicked by the player.</description>
-    /// </item>
-    /// <item>
-    /// <term>NotifyMatchHasEnded</term>
-    /// <description>Notifies players that the match has ended.</description>
-    /// </item>
-    /// <item>
-    /// <term>EndTurn</term>
-    /// <description>Ends one player's turn to pass it on to the next.</description>
-    /// </item>
-    /// <item>
-    /// <term>LeaveMatch</term>
-    /// <description>Remove a player from the list of connected players.</description>
-    /// </item>
-    /// <item>
-    /// <term>ExpelPlayer</term>
-    /// <description>Expels a player from the list of connected players according to the votes.</description>
-    /// </item>
-    /// <item>
-    /// <term>GetUsernamesOfPlayersConnectedToMatch</term>
-    /// <description>Gets a list of the names of the players connected to the match.</description>
-    /// </item>
-    /// </list>
-    /// <item>
-    /// <term>GetPlayersVoted</term>
-    /// <description>Get a list of the names of the players a player has already voted for.</description>
-    /// </item>
-    /// </list>
-    /// <item>
-    /// <term>ChangeTurn</term>
-    /// <description>Make a turn assignment for a new player.</description>
-    /// </item>
-    /// </list>
-    /// <item>
-    /// <term>RemovePairs</term>
-    /// <description>Subtract an amount from the total pairs formed in the match.</description>
-    /// </item>
-    /// </list>
-    /// </summary>
+    /// <inheritdoc/>
     public partial class MemoryGameService : IMatchService
     {
-        /// <summary>
-        /// Create a list of connected players in the match mapping players on PlayerInMatch type objects.
-        /// </summary>
-        /// <param name="host">Name of the player who created the match.</param>
-        /// <param name="username">Name of the player to be added to the list.</param>
+        /// <inheritdoc/>
         public void EnterMatch(string host, string username)
         {
             MatchDto gameMatch = GetMatch(host);
@@ -91,21 +36,14 @@ namespace MemoryGameService.Services
             gameMatch.AddPlayer(player);
         }
 
-        /// <summary>
-        /// Gets a list of PlayerInMatch objects of the players connected to the game.
-        /// </summary>
-        /// <param name="host">Name of the player who created the match.</param>
-        /// <returns>A list of PlayerInMatch objects.</returns>
+        /// <inheritdoc/>
         public IList<PlayerInMatch> GetPlayersConnectedToMatch(string host)
         {
             MatchDto match = GetMatch(host);
             return match.GetPlayersConnectedToMatch();
         }
 
-        /// <summary>
-        /// Flips a card clicked by the player and and notifies all connected players.
-        /// </summary>
-        /// <param name="playerMovementDto">Contains the data about the player's turn.</param>
+        /// <inheritdoc/>
         public void NotifyCardWasUncoveredd(PlayerMovementDto playerMovementDto)
         {
             string host = playerMovementDto.Host;
@@ -138,10 +76,7 @@ namespace MemoryGameService.Services
 
         }
 
-        /// <summary>
-        /// Notifies all connected players that the game is over and the player who has won.
-        /// </summary>
-        /// <param name="host">Name of the player who created the match.</param>
+        /// <inheritdoc/>
         public void NotifyMatchHasEnded(string host)
         {
 
@@ -178,10 +113,20 @@ namespace MemoryGameService.Services
                     unitOfWork.Matches.Add(matchToBeSaved);
                     unitOfWork.Complete();
                 }
-                catch (Exception e)
+                catch (SqlException sqlException)
                 {
-                    Console.WriteLine(e);
-                    Console.ReadLine();
+                    _logger.Fatal("MatchService.cs: An exception was thrown while trying " +
+                        "to update the score of the players or while trying to register " +
+                        " the match. The transaction could not be completed. " +
+                        "Method NotifyMatchHasEnded, line 181", sqlException);
+                    throw;
+                }
+                catch (EntityException entityException)
+                {
+                    _logger.Fatal("MatchService.cs: An exception was thrown while trying to access the " +
+                        " database. It is possible that the database is corrupted or that it does not exist. " +
+                        "Method NotifyMatchHasEnded, line 181", entityException);
+                    throw;
                 }
                 finally
                 {
@@ -192,12 +137,7 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Ends the turn taken by a player and checks if he has formed a pair of cards.
-        /// </summary>
-        /// <param name="host">Name of the player who created the match.</param>
-        /// <param name="username">Name of the player who has taken the turn.</param>
-        /// <param name="cardPairDto">The pair of cards he has flipped.</param>
+        /// <inheritdoc/>
         public void EndTurn(string host, string username, CardPairDto cardPairDto)
         {
             MatchDto gameMatch = GetMatch(host);
@@ -231,11 +171,7 @@ namespace MemoryGameService.Services
 
         }
 
-        /// <summary>
-        /// Allows a player to leave the game and removes him from the list of connected players.
-        /// </summary>
-        /// <param name="host">Name of the player who created the match.</param>
-        /// <param name="username">Name of the player who leaves the match.</param>
+        /// <inheritdoc/>
         public void LeaveMatch(string host, string username)
         {
             MatchDto gameMatch = GetMatch(host);
@@ -276,12 +212,7 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Allows a player to vote for the expulsion of another player, who will be 
-        /// voted out by collecting a majority of votes.
-        /// </summary>
-        /// <param name="expelVote">It contains the expulsion data: Name of the player to 
-        /// be expelled, name of the player voting and the host name of the game</param>
+        /// <inheritdoc/>
         public void ExpelPlayer(ExpelVoteDto expelVote)
         {
             string host = expelVote.Host;
@@ -334,11 +265,7 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Gets a list of usernames of the players connected to the game.
-        /// </summary>
-        /// <param name="host">Name of the player who created the match.</param>
-        /// <returns>A list of strings.</returns>
+        /// <inheritdoc/>
         public IList<string> GetUsernamesOfPlayersConnectedToMatch(string host)
         {
             MatchDto gameMatch = GetMatch(host);
@@ -348,12 +275,7 @@ namespace MemoryGameService.Services
             return playerUsername;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="host">Name of the player who created the match.</param>
-        /// <param name="username">Name of the player associated to the list to be retriev.</param>
-        /// <returns>A list of strings of the user names for which the player has voted.</returns>
+        /// <inheritdoc/>
         public IList<string> GetPlayersVoted(string host, string username)
         {
             MatchDto gameMatch = GetMatch(host);

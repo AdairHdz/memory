@@ -15,7 +15,6 @@ namespace MemoryGame
     {
         private string _emailAddress;
         private string _username;        
-        private static readonly log4net.ILog _logger = log4net.LogManager.GetLogger("RestorePassword.xaml.cs");
         public RestorePassword()
         {
             InitializeComponent();
@@ -39,17 +38,13 @@ namespace MemoryGame
                 MessageBox.Show(Properties.Langs.Resources.PasswordIsInvalid);
             }
             else
-            {
-                bool tokenIsCorrect = TokenIsCorrect();
-                if (tokenIsCorrect)
+            {                
+                if (TokenIsCorrect())
                 {
-                    bool newPasswordWasSet = SetNewPassword();
-                    if (newPasswordWasSet)
+                    if (SetNewPassword())
                     {
                         MessageBox.Show(Properties.Langs.Resources.PasswordReset);
-                        Login loginView = new Login();
-                        loginView.Show();
-                        this.Close();
+                        GoToLogin();
                     }
                     else
                     {
@@ -72,7 +67,7 @@ namespace MemoryGame
             }
             AccountVerificationServiceClient accountVerificationServiceClient =
                 new AccountVerificationServiceClient();
-            return accountVerificationServiceClient.VerifyToken(_emailAddress, token);
+            return accountVerificationServiceClient.VerifyRecoveryToken(_emailAddress, token);
         }
 
         public bool SetNewPassword()
@@ -106,22 +101,12 @@ namespace MemoryGame
             {
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (FaultException<MemoryGameService.Faults.DatabaseConnectionLostFault>)
+            catch (TimeoutException)
             {
-                //MessageBox.Show(Properties.Langs.Resources.);
-            }
-            catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
-            {
-                MessageBox.Show("El usuario no existe");
-            }
-            catch (TimeoutException timeoutException)
-            {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
         }
@@ -136,22 +121,12 @@ namespace MemoryGame
             {
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
             }
-            catch (FaultException<MemoryGameService.Faults.DatabaseConnectionLostFault>)
+            catch (TimeoutException)
             {
-                //MessageBox.Show(Properties.Langs.Resources.);
-            }
-            catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
-            {
-                MessageBox.Show("El usuario no existe");
-            }
-            catch (TimeoutException timeoutException)
-            {
-                _logger.Fatal(timeoutException);
                 MessageBox.Show(Properties.Langs.Resources.ServerTimeoutError);
             }
-            catch (CommunicationException communicationException)
+            catch (CommunicationException)
             {
-                _logger.Fatal(communicationException);
                 MessageBox.Show(Properties.Langs.Resources.CommunicationInterrupted);
             }
 
@@ -160,31 +135,34 @@ namespace MemoryGame
 
         private void SendNewCode()
         {            
-            string newToken = TokenManager.GenerateVerificationToken();            
+            string newToken = TokenManager.GenerateToken();            
             bool newVerificationTokenWasAssigned = false;
             if(newToken != "")
             {
                 AccountVerificationServiceClient accountVerificationServiceClient =
                     new AccountVerificationServiceClient();
-                newVerificationTokenWasAssigned = accountVerificationServiceClient.AssignNewVerificationToken(_emailAddress, newToken);
+                newVerificationTokenWasAssigned = accountVerificationServiceClient.AssignNewRecoveryToken(_emailAddress, newToken);
             }
 
             if (newVerificationTokenWasAssigned)
             {
-                VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+                TokenInfoDto verificationTokenInfo = new TokenInfoDto()
                 {
                     Name = _username,
                     EmailAddress = _emailAddress,
-                    VerificationToken = newToken
+                    Token = newToken
                 };
-                TokenManager.SendVerificationToken(verificationTokenInfo);
+                TokenManager.SendToken(verificationTokenInfo);
                 MessageBox.Show(Properties.Langs.Resources.NewCodeSentMessage);
             }                
         }
 
-
-
         private void BackButtonClicked(object sender, RoutedEventArgs e)
+        {
+            GoToLogin();
+        }
+
+        private void GoToLogin()
         {
             Login loginView = new Login();
             loginView.Show();

@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MemoryGame.MemoryGameService.DataTransferObjects" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="PlayerCredentialsDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="PlayerCredentialsDTO" nillable="true" type="tns:PlayerCredentialsDTO" />
   <xs:complexType name="CardDeckDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="BackImage" nillable="true" type="xs:string" />
@@ -52,14 +44,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PasswordModificationCredentialsDto" nillable="true" type="tns:PasswordModificationCredentialsDto" />
-  <xs:complexType name="VerificationTokenInfoDto">
+  <xs:complexType name="TokenInfoDto">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Body" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="VerificationToken" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Token" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="VerificationTokenInfoDto" nillable="true" type="tns:VerificationTokenInfoDto" />
+  <xs:element name="TokenInfoDto" nillable="true" type="tns:TokenInfoDto" />
   <xs:complexType name="MatchDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="CardDeckDto" nillable="true" type="tns:CardDeckDTO" />

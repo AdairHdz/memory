@@ -21,7 +21,6 @@ namespace MemoryGame.MemoryGameService.DataTransferObjects
     /// <description>Gets a specific player connected in the match.</description>
     /// </item>
     /// <item>
-    /// <item>
     /// <term>AddPlayer</term>
     /// <description>Adds a player to the list of connected players in the match.</description>
     /// </item>

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Entities
 {
-    // <summary>
+    /// <summary>
     /// The <c>Player</c> class
     /// It is an entity that stores data of a Player in the database.
     /// </summary>

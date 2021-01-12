@@ -47,14 +47,6 @@ namespace MemoryGame
             this.Close();
         }
 
-
-
-        private void LoadUsername()
-        {
-            AccessibilityServiceClient client = new AccessibilityServiceClient();
-            _username = client.GetUsername(_emailAddress);
-        }
-
         private void SendCodeButtonClicked(object sender, RoutedEventArgs e)
         {
             try
@@ -64,14 +56,6 @@ namespace MemoryGame
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show(Properties.Langs.Resources.ServerConnectionLost);
-            }
-            catch (FaultException<MemoryGameService.Faults.DatabaseConnectionLostFault>)
-            {
-                //MessageBox.Show(Properties.Langs.Resources.);
-            }
-            catch (FaultException<MemoryGameService.Faults.NonExistentUserFault>)
-            {
-                MessageBox.Show("El usuario no existe");
             }
             catch (TimeoutException timeoutException)
             {
@@ -95,18 +79,17 @@ namespace MemoryGame
                 {
                     LoadUsername();
                     GenerateVerificationToken();
-                    bool newVerificationTokenWasAssigned = AssignNewVerificationToken();
-                    SendVerificationCode();
+                    bool newVerificationTokenWasAssigned = AssignNewRecoveryToken();                    
                     if (newVerificationTokenWasAssigned)
                     {
+                        SendRecoveryToken();
                         MessageBox.Show(Properties.Langs.Resources.PasswordRecoveryTokenSent);
                         GoToRestorePassword();
                     }
                     else
                     {
                         MessageBox.Show(Properties.Langs.Resources.RecoveryTokenSendingError);
-                    }
-                    
+                    }                    
                 }
                 else
                 {
@@ -127,27 +110,36 @@ namespace MemoryGame
 
         private void GenerateVerificationToken()
         {
-            _verificationToken = TokenManager.GenerateVerificationToken();
+            _verificationToken = TokenManager.GenerateToken();
         }
 
-        private bool AssignNewVerificationToken()
+        private bool AssignNewRecoveryToken()
         {
             AccountVerificationServiceClient accountVerificationServiceClient =
                 new AccountVerificationServiceClient();
-            return accountVerificationServiceClient.AssignNewVerificationToken(_emailAddress, _verificationToken);
+            return accountVerificationServiceClient.AssignNewRecoveryToken(_emailAddress, _verificationToken);
         }
 
-        private void SendVerificationCode()
+        private void SendRecoveryToken()
         {
-            VerificationTokenInfoDto verificationTokenInfo = new VerificationTokenInfoDto()
+            TokenInfoDto recoveryToken = new TokenInfoDto()
             {
                 Name = _username,
                 EmailAddress = _emailAddress,
-                VerificationToken = _verificationToken
+                Token = _verificationToken,
+                Subject = Properties.Langs.Resources.PasswordRecovery,
+                Body = Properties.Langs.Resources.RecoveryToken
             };
-
-            TokenManager.SendVerificationToken(verificationTokenInfo);
+            TokenManager.SendToken(recoveryToken);
         }
+
+
+        private void LoadUsername()
+        {
+            AccessibilityServiceClient client = new AccessibilityServiceClient();
+            _username = client.GetUsername(_emailAddress);
+        }
+
 
         private void GoToRestorePassword()
         {

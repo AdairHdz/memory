@@ -5,9 +5,45 @@ namespace DataAccess.Repositories
 {
     /// <summary>
     /// The <c>IRepository</c> interface.
-    /// Defines the operations that the implementer of this interface will need to address.
+    /// Defines the basic operations for working with the entities from
+    /// the persistence layer.
+    /// This basic operations are:
+    /// <list type="bullet">
+    /// <item>
+    /// <term>Get</term>
+    /// <description>Retrieves the entity that possess the specified primary key.</description>
+    /// </item>
+    /// <item>
+    /// <term>GetAll</term>
+    /// <description>Retrieves all the entities from the database.</description>
+    /// </item>
+    /// <item>
+    /// <term>Find</term>
+    /// <description>Retrieves all the entities that meet the given condition.</description>
+    /// </item>
+    /// <item>
+    /// <term>FindFirsOccurence</term>
+    /// <description>Retrieves the first entity that meets the given condition.</description>
+    /// </item>
+    /// <item>
+    /// <term>Add</term>
+    /// <description>Adds the given entity.</description>
+    /// </item>
+    /// <item>
+    /// <term>AddRange</term>
+    /// <description>Adds the given entities.</description>
+    /// </item>
+    /// <item>
+    /// <term>Remove</term>
+    /// <description>Removes the given entity.</description>
+    /// </item>
+    /// <item>
+    /// <term>RemoveRange</term>
+    /// <description>Removes the given entities.</description>
+    /// </item>
+    /// </list>
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TEntity">The entity the repository will work with.</typeparam>
     public interface IRepository<TEntity> where TEntity : class
     {
         /// <summary>

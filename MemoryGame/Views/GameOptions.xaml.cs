@@ -10,7 +10,6 @@ namespace MemoryGame
     public partial class GameOptions : Window
     {
         public InstanceContext Context { get; set; }
-        private MemoryGameService.MatchServiceClient _matchServiceClient;
         public string MatchHost { get; set; }
         public int NumberOfPlayersInMatch { get; set; }
         public string PlayerUsername { get; set; }
@@ -21,8 +20,7 @@ namespace MemoryGame
         }
 
         private void WindowLoaded(object sender, EventArgs e)
-        {
-            _matchServiceClient = new MemoryGameService.MatchServiceClient(Context);
+        {            
             if (NumberOfPlayersInMatch < 3)
             {
                 ExpelPlayerButton.Visibility = Visibility.Collapsed;
@@ -33,7 +31,8 @@ namespace MemoryGame
         {
             try
             {
-                _matchServiceClient.LeaveMatch(MatchHost, PlayerUsername);
+                MemoryGameService.MatchServiceClient matchServiceClient = new MemoryGameService.MatchServiceClient(Context);
+                matchServiceClient.LeaveMatch(MatchHost, PlayerUsername);
             }
             catch (EndpointNotFoundException)
             {

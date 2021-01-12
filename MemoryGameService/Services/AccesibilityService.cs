@@ -1,78 +1,43 @@
 ﻿using DataAccess;
 using DataAccess.Units_of_work;
-using MemoryGame.MemoryGameService.DataTransferObjects;
 using MemoryGameService.Contracts;
 using System.ServiceModel;
 using MemoryGame.MemoryGameService.Faults;
 using DataAccess.Entities;
 using System.Data.SqlClient;
 using System.Data.Entity.Core;
+using System;
 
 namespace MemoryGameService.Services
 {
-    /// <summary>
-    /// The <c>Accesibility</c> service.
-    /// Is used to verify a player that tries to enter to the game.
-    /// The operations it contains are:
-    /// <list type="bullet">
-    /// <item>
-    /// <term>GetUserEmailAddress</term>
-    /// <description>Registers the new player.</description>
-    /// </item>
-    /// <item>
-    /// <term>GetUsername</term>
-    /// <description>Verifies the email provided.</description>
-    /// </item>
-    /// <item>
-    /// <term>IsVerified</term>
-    /// <description>Verifies the username provided.</description>
-    /// </item>
-    /// <item>
-    /// <term>ItsRegistered</term>
-    /// <description>Verifies the username provided.</description>
-    /// </item>
-    /// <item>
-    /// <term>GetPlayerCredentials</term>
-    /// <description>Verifies the username provided.</description>
-    /// </item>
-    /// <item>
-    /// <term>GetSalt</term>
-    /// <description>Verifies the username provided.</description>
-    /// </item>
-    /// <item>
-    /// <term>HasAccessRights</term>
-    /// <description>Verifies the username provided.</description>
-    /// </item>
-    /// </list>
-    /// </summary>
+    /// <inheritdoc/>
     public partial class MemoryGameService : IAccessibilityService
     {
         private readonly log4net.ILog _logger = log4net.LogManager.GetLogger("AccesibilityService.cs");
 
-        /// <summary>
-        /// Gets the email address of a resitered player.
-        /// </summary>
-        /// <param name="username">Username of the player.</param>
-        /// <returns>A string of the email address.</returns>
+        /// <inheritdoc/>
         public string GetUserEmailAddress(string username)
         {            
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Account accountRetrieved = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);                                
-                if (accountRetrieved != null)
-                {                    
-                    string emailAddress = accountRetrieved.EmailAddress;
-                    return emailAddress;
-                }
-                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
-                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+                Account accountRetrieved = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);
+                string emailAddress = accountRetrieved.EmailAddress;
+                return emailAddress;
             }
             catch (SqlException sqlException)
             {
-                _logger.Fatal(sqlException);
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying " +
+                    "to get the first occurence of an Account entity " +
+                    "from the database. ", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to access the " +
+                    " database. It is possible that the database is corrupted or that it does not exist. " +
+                    "Method GetUserEmailAddress, line 23", entityException);
+                throw;
             }
             finally
             {
@@ -80,29 +45,28 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Gets the username of a registered players.
-        /// </summary>
-        /// <param name="emailAddress">Email of the player.</param>
-        /// <returns>A string of the username.</returns>
+        /// <inheritdoc/>
         public string GetUsername(string emailAddress)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
             try
             {
-                Account accountRetrieved = unitOfWork.Accounts.Get(emailAddress);               
-                if(accountRetrieved != null)
-                {
-                    return accountRetrieved.Username;
-                }
-                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
-                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+                Account accountRetrieved = unitOfWork.Accounts.Get(emailAddress);
+                return accountRetrieved.Username;
             }
             catch (SqlException sqlException)
             {
-                _logger.Fatal(sqlException);
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying " +
+                     "to get the account entity with the specified primary key (email address)" +
+                     "from the database. Method GetUsername, line 54 ", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to access the " +
+                    " database. It is possible that the database is corrupted or that it does not exist. " +
+                    "Method GetUsername, line 54", entityException);
+                throw;
             }
             finally
             {
@@ -110,11 +74,8 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Verifies if the player account has been verified to acces or not.
-        /// </summary>
-        /// <param name="username">Username associated with the account.</param>
-        /// <returns>True if the account has been verified or flase if not.</returns>
+
+        /// <inheritdoc/>
         public bool IsVerified(string username)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -127,23 +88,27 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-            catch(SqlException sqlException)
+            catch (SqlException sqlException)
             {
-                _logger.Fatal(sqlException);
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to get the first  " +
+                    "occurence of an Account entity with the specified username and with a verified account in " +
+                    "the IsVerified method. Line 92", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method IsVerified, line 92", entityException);
+                throw;
             }
             finally
             {
                 unitOfWork.Dispose();
             }
         }
-
-        /// <summary>
-        /// Verifies if a player has been registered or not.
-        /// </summary>
-        /// <param name="emailAddress">Email address of the player to verigy.</param>
-        /// <returns>True if the player is already registered or flase if not.</returns>
+        
+        /// <inheritdoc/>
         public bool ItsRegistered(string emailAddress)
         {
             var unitOfWork = new UnitOfWork(new MemoryGameContext());            
@@ -158,9 +123,16 @@ namespace MemoryGameService.Services
             }
             catch (SqlException sqlException)
             {
-                _logger.Fatal(sqlException);
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to get an Account " +
+                    "entity from its primary key (emailAddress) in the ItsRegistered method. Line 82", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method ItsRegistered, line 82", entityException);
+                throw;
             }
             finally
             {
@@ -168,50 +140,7 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Gets the player credentials in a maped PlayerCredentialsDto object.
-        /// </summary>
-        /// <param name="username">Username of the player to get.</param>
-        /// <returns>A PlayerCredentialsDtoObject.</returns>
-        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
-        public PlayerCredentialsDTO GetPlayerCredentials(string username)
-        {
-            var unitOfWork = new UnitOfWork(new MemoryGameContext());
-            try
-            {
-                Account accountRetrieved = unitOfWork.Accounts.FindFirstOccurence(account => account.Username == username);
-                if (accountRetrieved != null)
-                {
-                    PlayerCredentialsDTO playerCredentials = new PlayerCredentialsDTO()
-                    {
-                        EmailAddress = accountRetrieved.EmailAddress,
-                        Username = accountRetrieved.Username,
-                        Password = accountRetrieved.Password
-                    };
-                    return playerCredentials;
-                }
-                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
-                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
-            }
-            catch (SqlException sqlException)
-            {
-                _logger.Fatal(sqlException);
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
-            }
-            finally
-            {
-                unitOfWork.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// Gets the salt with which the password has been encrypted.
-        /// </summary>
-        /// <param name="username">Player's username to consult.</param>
-        /// <returns>A stirng of the salt.</returns>
-        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
-        /// <exception cref="EntityException">Thrown when there is no database.</exception>
+        /// <inheritdoc/>
         public string GetSalt(string username)
         {            
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -222,20 +151,24 @@ namespace MemoryGameService.Services
                 {
                     return retrievedAccount.Salt;
                 }
-                NonExistentUserFault nonExistentUserFault = new NonExistentUserFault();
-                throw new FaultException<NonExistentUserFault>(nonExistentUserFault);
+                throw new FaultException<NonExistentUserFault>(new NonExistentUserFault()
+                {
+                    Error = "No user with those credentials is registered int the database",
+                    Details = "The username entered does not match any of our registered users"
+                });
             }
             catch (SqlException sqlException)
             {
-                _logger.Fatal(sqlException.Message);
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);                
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to get the first " +
+                    "occurence of an Account entity his occured in the GetSalt method. Line 117", sqlException);
+                throw;
             }
             catch(EntityException entityException)
             {
-                _logger.Fatal(entityException);
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method GetSalt, line 117", entityException);
+                throw;
             }
             finally
             {
@@ -243,13 +176,8 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Verifies if the player has an account and acces to the game or not.
-        /// </summary>
-        /// <param name="username">Username of the player associated with the account.</param>
-        /// <param name="password">Password of the player associated with the account.</param>
-        /// <returns>True if the player has acces or false if not.</returns>
-        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
+
+        /// <inheritdoc/>
         public bool HasAccessRights(string username, string password)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -264,9 +192,16 @@ namespace MemoryGameService.Services
             }
             catch (SqlException sqlException)
             {
-                _logger.Fatal(sqlException);
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to get the first occurence of an  " +
+                    "Account entity. This occured in the HasAccessRights method. Line 150", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("AccesibilityService.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method HasAccessRights, line 150", entityException);
+                throw;
             }
             finally
             {

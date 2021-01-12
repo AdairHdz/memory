@@ -4,41 +4,14 @@ using DataAccess.Units_of_work;
 using MemoryGameService.Contracts;
 using MemoryGame.MemoryGameService.DataTransferObjects;
 using System.Data.SqlClient;
-using MemoryGame.MemoryGameService.Faults;
-using System.ServiceModel;
-using System;
+using System.Data.Entity.Core;
 
 namespace MemoryGameService.Services
 {
-    /// <summary>
-    /// The <c>PlayerRegistry</c> service.
-    /// Is used to register a new player in the database of the game.
-    /// The operations it contains are:
-    /// <list type="bullet">
-    /// <item>
-    /// <term>RegistryNewPlayer</term>
-    /// <description>Registers the new player.</description>
-    /// </item>
-    /// <item>
-    /// <term>EmailAddressIsAvailable</term>
-    /// <description>Verifies the email provided.</description>
-    /// </item>
-    /// <item>
-    /// <term>UserNameIsAvailable</term>
-    /// <description>Verifies the username provided.</description>
-    /// </item>
-    /// </list>
-    /// </summary>
+    /// <inheritdoc/>
     public partial class MemoryGameService : IPlayerRegistryService
     {
-        /// <summary>
-        /// Registers the new players in the game database.
-        /// </summary>
-        /// <param name="playerDTO">Contains basic player data.</param>
-        /// <param name="salt">The binary salt to hash with the password.</param>
-        /// <returns>True if the player is registered and false if not.</returns>
-        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
-        /// <exception cref="Exception">Thrown when a default exception is catched.</exception>
+        /// <inheritdoc/>
         public bool RegisterNewPlayer(PlayerDTO playerDTO, string salt)
         {
 
@@ -61,22 +34,23 @@ namespace MemoryGameService.Services
             UnitOfWork unitOfWork = new UnitOfWork(memoryGameContext);
             try
             {
-                var transaction = memoryGameContext.Database.BeginTransaction();
                 unitOfWork.Accounts.Add(newAccount);
                 unitOfWork.Players.Add(newPlayer);
                 int rowsAffected = unitOfWork.Complete();
-                transaction.Commit();
                 return rowsAffected > 0;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("PlayerRegistryService.cs: An exception was thrown while trying to register both " +
+                    "Account and Player entities. " +
+                     "Method RegisterNewPlayer, line 67", sqlException);
+                throw;
             }
-            catch (Exception e)
+            catch (EntityException entityException)
             {
-                Console.WriteLine(e);
-                Console.ReadLine();
+                _logger.Fatal("PlayerRegistryService.cs: An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method  RegisterNewPlayer, line 67", entityException);
                 throw;
             }
             finally
@@ -85,12 +59,7 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Verify that the email provided is not already registered in the database.
-        /// </summary>
-        /// <param name="emailAddress">The email provided by the user.</param>
-        /// <returns>True if the email is available and false if not.</returns>
-        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
+        /// <inheritdoc/>
         public bool EmailAddressIsAvailable(string emailAddress)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -103,10 +72,19 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-            catch(SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("PlayerRegistryService.cs: An exception was thrown while trying to get " +
+                    "an Account using its primary key (emailAddress). " +
+                     "Method EmailAddressIsAvailable, line 101", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method EmailAddressIsAvailable, line 101", entityException);
+                throw;
             }
             finally
             {
@@ -114,12 +92,7 @@ namespace MemoryGameService.Services
             }
         }
 
-        /// <summary>
-        /// Verify that the username provided is not already registered in the database.
-        /// </summary>
-        /// <param name="username">The username provided by the user.</param>
-        /// <returns>True if the email is available and false if not.</returns>
-        /// <exception cref="SqlException">Thrown when there is not connection with the data base.</exception>
+        /// <inheritdoc/>
         public bool UserNameIsAvailable(string username)
         {
             UnitOfWork unitOfWork = new UnitOfWork(new MemoryGameContext());
@@ -132,10 +105,19 @@ namespace MemoryGameService.Services
                 }
                 return false;
             }
-            catch (SqlException)
+            catch (SqlException sqlException)
             {
-                DatabaseConnectionLostFault databaseConnectionLostFault = new DatabaseConnectionLostFault();
-                throw new FaultException<DatabaseConnectionLostFault>(databaseConnectionLostFault);
+                _logger.Fatal("PlayerRegistryService.cs: An exception was thrown while trying to " +
+                    "find the first occurence of an Account with the username provided. " +
+                     "Method UsernameIsAvailable, line 139", sqlException);
+                throw;
+            }
+            catch (EntityException entityException)
+            {
+                _logger.Fatal("An exception was thrown while trying to access the database. " +
+                    "It is possible that the database is corrupted or that it does not exist. " +
+                    "Method UsernameIsAvailable, line 139", entityException);
+                throw;
             }
             finally
             {
